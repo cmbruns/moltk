@@ -17,6 +17,7 @@
 
 using namespace std;
 using namespace boost::iostreams;
+using namespace moltk;
 
 int main(int argc, char* argv[])
 {
@@ -29,7 +30,11 @@ int main(int argc, char* argv[])
 	filtering_streambuf<input> in;
 	in.push(gzip_decompressor());
 	in.push(pdbFile);
-	boost::iostreams::copy(in, cout);
+    std::istream inStream(&in);
+
+    pdb::Structure pdbStructure(inStream);
+	// boost::iostreams::copy(in, cout);
+
     // TODO - parse pdb file
     return 0;
 }

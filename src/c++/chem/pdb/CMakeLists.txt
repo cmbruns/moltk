@@ -1,1 +1,1 @@
-add_library(chempdb Structure.h Structure.cpp)
+add_library(chempdb Structure.cpp)
