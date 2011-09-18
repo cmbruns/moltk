@@ -18,11 +18,18 @@
 using namespace std;
 using namespace boost::iostreams;
 
-int main()
+int main(int argc, char* argv[])
 {
-    ifstream pdbFile("structures/1FND.pdb.gz", ios_base::in | ios_base::binary);
+    if (argc < 2) 
+        return 1; // file name argument missing
+    const char* pdbFileName = argv[1];
+    ifstream pdbFile(pdbFileName, ios_base::in | ios_base::binary);
+    if (! pdbFile.good())
+        return 1;
 	filtering_streambuf<input> in;
 	in.push(gzip_decompressor());
 	in.push(pdbFile);
 	boost::iostreams::copy(in, cout);
+    // TODO - parse pdb file
+    return 0;
 }
