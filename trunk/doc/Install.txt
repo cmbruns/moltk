@@ -1,9 +1,15 @@
 Prerequisites for building moltk:
 
-1) Boost, including iostreams library.  On windows get it from http://www.boostpro.com/download/.
+1) Boost, including iostreams library.  
+    On windows get it from http://www.boostpro.com/download/.
+    On Mac, I like to build fat binaries supporting both 32-bit and 64-bit architectures.  So I build boost like:
+        ./bootstrap.sh --prefix=/usr/local
+        sudo ./bjam address-model=32_64 architecture=x86 variant=release link=shared,static install
 
 2) CMake
 
 3) C++ compiler.  On windows, use Visual Studio 2008, if you intend to use python.
 
 4) Python
+
+
