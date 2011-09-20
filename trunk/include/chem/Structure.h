@@ -10,7 +10,12 @@ namespace moltk { namespace pdb {
 class Structure
 {
 public:
-    Structure(std::istream&);
+    Structure();
+    explicit Structure(std::istream&);
+    explicit Structure(const char* fileName);
+
+    void loadFromStream(std::istream&);
+    void loadFromFile(const char* fileName);
 
     std::vector<Atom> atoms;
 };
