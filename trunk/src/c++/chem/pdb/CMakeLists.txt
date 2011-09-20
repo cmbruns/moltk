@@ -1,1 +1,3 @@
-add_library(chempdb Structure.cpp)
+
+file(GLOB SRCS "*.cpp")
+add_library(chempdb ${SRCS})
