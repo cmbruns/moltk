@@ -1,4 +1,4 @@
-#include "chem/Structure.h"
+#include "pdb/Structure.h"
 #include <string>
 #include <fstream>
 #include <iostream>
