@@ -24,16 +24,16 @@ namespace moltk { namespace pdb {
 /* explicit */
 Structure::Structure(const std::string& fileName)
 {
-    loadFromFile(fileName);
+    loadFile(fileName);
 }
 
 /* explicit */
 Structure::Structure(std::istream& istream)
 {
-    loadFromStream(istream);
+    loadStream(istream);
 }
 
-bool Structure::loadFromFile(const std::string& fileName)
+bool Structure::loadFile(const std::string& fileName)
 {
     ifstream pdbFile(fileName.c_str(), ios_base::in | ios_base::binary);
     if (! pdbFile.good()) {
@@ -48,11 +48,11 @@ bool Structure::loadFromFile(const std::string& fileName)
     }
 	in.push(pdbFile);
     std::istream inStream(&in);
-    return loadFromStream(inStream);
+    return loadStream(inStream);
 }
 
 /* explicit */
-bool Structure::loadFromStream(std::istream& istream)
+bool Structure::loadStream(std::istream& istream)
 {
     if (!istream.good())
         return false;

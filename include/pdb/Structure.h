@@ -15,8 +15,8 @@ public:
     explicit Structure(std::istream&);
     explicit Structure(const std::string& fileName);
 
-    bool loadFromStream(std::istream&);
-    bool loadFromFile(const std::string& fileName);
+    bool loadStream(std::istream&);
+    bool loadFile(const std::string& fileName);
 
     std::vector<Atom> atoms;
 };
