@@ -1,4 +1,4 @@
-#include "chem/pdb.h"
+#include "pdb.h"
 
 using namespace std;
 using namespace moltk;
@@ -15,3 +15,4 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+

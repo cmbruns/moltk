@@ -14,7 +14,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_definitions(${Boost_LIB_DIAGNOSTIC_DEFINITIONS})
 link_directories(${Boost_LIBRARY_DIRS})
 
-add_subdirectory(src/c++/chem/pdb)
+add_subdirectory(src/c++/pdb)
 
 enable_testing()
 add_subdirectory(test)
