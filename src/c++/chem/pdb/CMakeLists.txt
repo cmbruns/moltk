@@ -1,3 +1,4 @@
 
 file(GLOB SRCS "*.cpp")
-add_library(chempdb ${SRCS})
+file(GLOB HEADERS "${CMAKE_SOURCE_DIR}/include/chem/*.h")
+add_library(chempdb ${SRCS} ${HEADERS})
