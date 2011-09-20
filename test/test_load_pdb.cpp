@@ -36,8 +36,8 @@ int main(int argc, char* argv[])
 	in.push(pdbFile);
     std::istream inStream(&in);
 
-     cerr << "Printing file contents..." << endl;
-	boost::iostreams::copy(in, cout);
+    cerr << "Printing file contents..." << endl;
+	// boost::iostreams::copy(in, cout);
 
     pdb::Structure pdbStructure(inStream);
     // TODO - parse pdb file
