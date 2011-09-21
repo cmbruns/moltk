@@ -20,7 +20,14 @@ public:
 
     std::vector<Atom> atoms;
 };
-	
+
 }}
+
+static std::istream& operator>>(std::istream& is, moltk::pdb::Structure& structure)
+{
+    structure.loadStream(is);
+    return is;
+}
+
 
 #endif // MOLTK_PDB_STRUCTURE_H
