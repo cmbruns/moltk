@@ -26,6 +26,11 @@ struct bit_base_unit : public boost::units::base_unit<bit_base_unit, information
 typedef bit_base_unit::unit_type bit_t;
 BOOST_UNITS_STATIC_CONSTANT(bit, bit_t);
 
+typedef boost::units::make_system<
+    bit_base_unit>::type unit_system;
+
+typedef boost::units::quantity<bit_t> Information;
+
 }} // namespace moltk::units
 
 #endif // MOLTK_UNITS_H

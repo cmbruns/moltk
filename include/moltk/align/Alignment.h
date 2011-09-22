@@ -9,7 +9,7 @@
 namespace moltk {
 
 // TODO use boost::units for information
-typedef double Information;
+typedef moltk::units::Information Information;
 
 class Alignment {
 public:
