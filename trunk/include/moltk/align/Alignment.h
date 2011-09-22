@@ -9,6 +9,7 @@ namespace moltk {
 class Alignment {
 public:
     Alignment(const Sequence&, const Sequence&);
+    void align();
 };
 
 } // namespace moltk
