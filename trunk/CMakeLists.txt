@@ -15,6 +15,7 @@ add_definitions(${Boost_LIB_DIAGNOSTIC_DEFINITIONS})
 link_directories(${Boost_LIBRARY_DIRS})
 
 add_subdirectory(src/c++/pdb)
+add_subdirectory(src/c++/align)
 
 enable_testing()
 add_subdirectory(test)
