@@ -26,9 +26,9 @@ protected:
     class Cell
     {
         // Gusfield nomenclature
-        Information v;
-        Information g;
-        Information e;
+        Information v; // best score through this cell
+        Information g; // best ungapped score through this cell
+        Information e; // 
         Information f;
     };
 
