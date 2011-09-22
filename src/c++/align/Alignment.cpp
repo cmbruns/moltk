@@ -12,7 +12,7 @@ Alignment::Alignment(const Sequence&, const Sequence&)
 
 void Alignment::align()
 {
-    // TODO
+    // TODO - start on page 244 of Gusfield
 }
 
 } // namespace moltk
