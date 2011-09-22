@@ -17,6 +17,11 @@ public:
     void align();
 
 protected:
+    void allocate_dp_table();
+    void initialize_dp_table();
+    void compute_recurrence();
+    void compute_traceback();
+
     Information gapOpenPenalty;
     Information gapExtensionPenalty;
     bool bEndGapsFree;
