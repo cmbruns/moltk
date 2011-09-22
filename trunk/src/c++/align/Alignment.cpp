@@ -1,6 +1,7 @@
 #include "moltk/align/Alignment.h"
 
-namespace moltk {
+using namespace std;
+using namespace moltk;
 
 ///////////////////////
 // Alignment methods //
@@ -14,8 +15,6 @@ void Alignment::align()
 {
     // TODO - start on page 244 of Gusfield
 }
-
-} // namespace moltk
 
 
 ////////////////////

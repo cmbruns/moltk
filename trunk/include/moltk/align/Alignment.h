@@ -1,9 +1,10 @@
 #ifndef MOLTK_ALIGN_ALIGNMENT_H
 #define MOLTK_ALIGN_ALIGNMENT_H
 
-#include "Sequence.h"
 #include <iostream>
 #include <vector>
+#include "Sequence.h"
+#include "moltk/units.h"
 
 namespace moltk {
 
