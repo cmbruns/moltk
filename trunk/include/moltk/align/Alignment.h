@@ -26,15 +26,16 @@ protected:
     class Cell
     {
         // Gusfield nomenclature
-        Information s; // score of aligning position S1(i) with S2(j)
-        Information v; // best score through this cell
-        Information g; // best ungapped score through this cell
-        Information e; // 
-        Information f;
+        Information pairScore; // Wm, score of aligning position S1(i) with S2(j)
+        Information pathScore; // V, best score through this cell
+        Information g; // G, best ungapped score through this cell
+        Information e; // E, 
+        Information f; // F, 
     };
 
 
-    typedef std::vector<std::vector<Cell> > DpTable;
+    typedef std::vector<Cell> DpRow;
+    typedef std::vector<DpRow> DpTable;
 };
 
 } // namespace moltk
