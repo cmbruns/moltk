@@ -1,4 +1,4 @@
-#include "pdb/Structure.h"
+#include "moltk/pdb/Structure.h"
 #include <string>
 #include <fstream>
 #include <iostream>
