@@ -1,4 +1,5 @@
 #include "moltk/align.h"
+#include <iostream>
 
 using namespace std;
 using namespace moltk;
