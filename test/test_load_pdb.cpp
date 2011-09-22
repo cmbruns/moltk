@@ -1,4 +1,4 @@
-#include "pdb.h"
+#include "moltk/pdb.h"
 
 using namespace std;
 using namespace moltk;
