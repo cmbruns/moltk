@@ -5,6 +5,7 @@
 #include <vector>
 #include "Sequence.h"
 #include "moltk/units.h"
+#include "moltk/fasta.h"
 
 namespace moltk { namespace align {
 
@@ -13,7 +14,9 @@ class Alignment
 public:
     typedef moltk::units::Information Information;
 
+    Alignment();
     Alignment(const Sequence&, const Sequence&);
+    Alignment(const moltk::FastaSequence&, const moltk::FastaSequence&);
     void align();
 
     class Cell
@@ -31,6 +34,7 @@ public:
 
 
 protected:
+    void init(const Sequence& seq1Param, const Sequence& seq2Param);
     void allocate_dp_table();
     void initialize_dp_table();
     void initialize_dp_row(size_t rowIndex, DpRow& row);

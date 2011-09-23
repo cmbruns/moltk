@@ -11,6 +11,7 @@ namespace moltk { namespace align {
 class Sequence : public std::vector<Position*>
 {
 public:
+    Sequence() {}
     Sequence(const Sequence& rhs);
     virtual ~Sequence();
     Sequence& operator=(const Sequence& rhs);
