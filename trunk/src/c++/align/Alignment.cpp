@@ -11,11 +11,23 @@ using moltk::units::bit;
 // Alignment methods //
 ///////////////////////
 
+Alignment::Alignment()
+    : gapOpenPenalty(1.0 * bit), gapExtensionPenalty(0.5 * bit)
+    , m(0), n(0)
+{}
+
 Alignment::Alignment(const Sequence& seq1Param, const Sequence& seq2Param)
-    : m(seq1Param.size()), n(seq2Param.size())
-    , gapOpenPenalty(1.0 * bit), gapExtensionPenalty(0.5 * bit)
-    , seq1(seq1Param), seq2(seq2Param)
+    : gapOpenPenalty(1.0 * bit), gapExtensionPenalty(0.5 * bit)
 {
+    init(seq1Param, seq2Param);
+}
+
+void Alignment::init(const Sequence& seq1Param, const Sequence& seq2Param)
+{
+    seq1 = seq1Param;
+    seq2 = seq2Param;
+    m = seq1.size();
+    n = seq2.size();
 }
 
 void Alignment::align()
