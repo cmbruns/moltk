@@ -16,9 +16,25 @@ public:
     Alignment(const Sequence&, const Sequence&);
     void align();
 
+
+    class Cell
+    {
+    public:
+        // Gusfield nomenclature
+        Information s; // Wm, score of aligning position S1(i) with S2(j)
+        Information v; // V, best score through this cell
+        Information g; // G, best ungapped score through this cell
+        Information e; // E, 
+        Information f; // F, 
+    };
+    typedef std::vector<Cell> DpRow;
+    typedef std::vector<DpRow> DpTable;
+
+
 protected:
     void allocate_dp_table();
     void initialize_dp_table();
+    void initialize_dp_row(size_t rowIndex, DpRow& row);
     void compute_recurrence();
     void compute_traceback();
 
@@ -26,21 +42,9 @@ protected:
     Information gapExtensionPenalty;
     bool bEndGapsFree;
     bool bLocalAlignment;
-
-
-    class Cell
-    {
-        // Gusfield nomenclature
-        Information pairScore; // Wm, score of aligning position S1(i) with S2(j)
-        Information pathScore; // V, best score through this cell
-        Information g; // G, best ungapped score through this cell
-        Information e; // E, 
-        Information f; // F, 
-    };
-
-
-    typedef std::vector<Cell> DpRow;
-    typedef std::vector<DpRow> DpTable;
+    size_t m; // length of sequence 1
+    size_t n; // length of sequence 2
+    DpTable dpTable;
 };
 
 } // namespace moltk

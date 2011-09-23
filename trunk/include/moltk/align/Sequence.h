@@ -3,12 +3,20 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 namespace moltk {
 
-class Sequence
+class SequencePosition
+{
+};
+
+
+class Sequence : public std::vector<SequencePosition*>
 {
 public:
+    typedef SequencePosition Position;
+
     Sequence(const std::string&);
 };
 
