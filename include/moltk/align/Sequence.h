@@ -4,20 +4,16 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "moltk/align/Position.h"
 
-namespace moltk {
+namespace moltk { namespace align {
 
-class SequencePosition
-{
-};
-
-
-class Sequence : public std::vector<SequencePosition*>
+class Sequence : public std::vector<Position*>
 {
 public:
-    typedef SequencePosition Position;
-
-    Sequence(const std::string&);
+    Sequence(const Sequence& rhs);
+    virtual ~Sequence();
+    Sequence& operator=(const Sequence& rhs);
 };
 
 } // namespace moltk
