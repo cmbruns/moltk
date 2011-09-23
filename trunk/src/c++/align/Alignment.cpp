@@ -11,9 +11,10 @@ using moltk::units::bit;
 // Alignment methods //
 ///////////////////////
 
-Alignment::Alignment(const Sequence& seq1, const Sequence& seq2)
-    : m(seq1.size()), n(seq2.size())
+Alignment::Alignment(const Sequence& seq1Param, const Sequence& seq2Param)
+    : m(seq1Param.size()), n(seq2Param.size())
     , gapOpenPenalty(1.0 * bit), gapExtensionPenalty(0.5 * bit)
+    , seq1(seq1Param), seq2(seq2Param)
 {
 }
 
@@ -63,23 +64,25 @@ void Alignment::initialize_dp_row(size_t rowIndex, DpRow& row)
 void Alignment::compute_recurrence()
 {
     for (size_t i = 1; i <= m; ++i)
-        Position& p1 = seq1[i-1];
+    {
+        Position& p1 = *seq1[i-1];
         for (size_t j = 1; j <= n; ++j)
         {
-            Position& p2 = seq2[j-1];
+            Position& p2 = *seq2[j-1];
             Information s = p1.score(p2);
             Cell& cell = dpTable[i][j];
-            cell.g = dpTable[i-1][j-1] + s;// score...
-            cell.e = std::max(dpTable[i, j-1].e
-                            , dpTable[i, j-1].v - gapOpeningPenalty)
+            cell.g = dpTable[i-1][j-1].v + s;// score...
+            cell.e = std::max(dpTable[i][j-1].e
+                            , dpTable[i][j-1].v - gapOpenPenalty)
                             - gapExtensionPenalty;
-            cell.f = std::max(dpTable[i-1, j].f
-                            , dpTable[i-1, j].v - gapOpeningPenalty)
+            cell.f = std::max(dpTable[i-1][j].f
+                            , dpTable[i-1][j].v - gapOpenPenalty)
                             - gapExtensionPenalty;
             cell.v = std::max(cell.g
-                            , cell.e
-                            , cell.f);
+                   , std::max(cell.e
+                            , cell.f));
         }
+    }
 }
 
 void Alignment::compute_traceback()
@@ -90,7 +93,7 @@ void Alignment::compute_traceback()
 // global methods //
 ////////////////////
 
-std::ostream& operator<<(std::ostream& os, const moltk::Alignment&)
+std::ostream& operator<<(std::ostream& os, const moltk::align::Alignment&)
 {
     os << "sequence";
     return os;

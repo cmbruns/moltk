@@ -1,12 +1,10 @@
 #include "moltk/align/Sequence.h"
 
-namespace moltk {
+namespace moltk { namespace align {
 
-Sequence::Sequence(const std::string&) {}
+}} // namespace moltk::align
 
-} // namespace moltk
-
-std::ostream& operator<<(std::ostream& os, const moltk::Sequence&)
+std::ostream& operator<<(std::ostream& os, const moltk::align::Sequence&)
 {
     os << "sequence";
     return os;

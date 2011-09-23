@@ -16,9 +16,9 @@ public:
     Sequence& operator=(const Sequence& rhs);
 };
 
-} // namespace moltk
+}} // namespace moltk::align
 
-std::ostream& operator<<(std::ostream&, const moltk::Sequence&);
+std::ostream& operator<<(std::ostream&, const moltk::align::Sequence&);
 
 #endif MOLTK_ALIGN_SEQUENCE_H
 
