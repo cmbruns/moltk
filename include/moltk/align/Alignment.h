@@ -6,16 +6,15 @@
 #include "Sequence.h"
 #include "moltk/units.h"
 
-namespace moltk {
+namespace moltk { namespace align {
 
-// TODO use boost::units for information
-typedef moltk::units::Information Information;
-
-class Alignment {
+class Alignment 
+{
 public:
+    typedef moltk::units::Information Information;
+
     Alignment(const Sequence&, const Sequence&);
     void align();
-
 
     class Cell
     {
@@ -38,17 +37,19 @@ protected:
     void compute_recurrence();
     void compute_traceback();
 
-    Information gapOpenPenalty;
-    Information gapExtensionPenalty;
+    Information gapOpenPenalty; // positive penalty (will be subtracted at gaps)
+    Information gapExtensionPenalty; // positive penalty (will be subtracted on extension)
     bool bEndGapsFree;
     bool bLocalAlignment;
     size_t m; // length of sequence 1
     size_t n; // length of sequence 2
     DpTable dpTable;
+    Sequence seq1;
+    Sequence seq2;
 };
 
-} // namespace moltk
+}} // namespace moltk::align
 
-std::ostream& operator<<(std::ostream&, const moltk::Alignment&);
+std::ostream& operator<<(std::ostream&, const moltk::align::Alignment&);
 
 #endif // MOLTK_ALIGN_ALIGNMENT_H

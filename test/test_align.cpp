@@ -2,7 +2,7 @@
 #include <iostream>
 
 using namespace std;
-using namespace moltk;
+using namespace moltk::align;
 
 int main()
 {
