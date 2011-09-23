@@ -6,6 +6,7 @@ namespace moltk { namespace align {
 class Position
 {
 public:
+    virtual ~Position();
     virtual Information score(const Position& rhs) const;
 };
 
