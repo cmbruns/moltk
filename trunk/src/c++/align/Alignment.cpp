@@ -1,5 +1,6 @@
 #include "moltk/align/Alignment.h"
 #include "moltk/align/Position.h"
+#include "moltk/align/MatrixScorer.h"
 
 using namespace std;
 using namespace moltk;
@@ -12,14 +13,21 @@ using moltk::units::bit;
 ///////////////////////
 
 Alignment::Alignment()
-    : gapOpenPenalty(1.0 * bit), gapExtensionPenalty(0.5 * bit)
-    , m(0), n(0)
-{}
+{init();}
 
 Alignment::Alignment(const Sequence& seq1Param, const Sequence& seq2Param)
     : gapOpenPenalty(1.0 * bit), gapExtensionPenalty(0.5 * bit)
 {
+    init();
     init(seq1Param, seq2Param);
+}
+
+void Alignment::init()
+{
+    gapOpenPenalty = 1.0 * bit; 
+    gapExtensionPenalty = 0.5 * bit;
+    m = seq1.size();
+    n = seq2.size();
 }
 
 void Alignment::init(const Sequence& seq1Param, const Sequence& seq2Param)
@@ -32,7 +40,6 @@ void Alignment::init(const Sequence& seq1Param, const Sequence& seq2Param)
 
 void Alignment::align()
 {
-    // TODO - start on page 244 of Gusfield
     allocate_dp_table();
     initialize_dp_table();
     compute_recurrence();
@@ -81,9 +88,9 @@ void Alignment::compute_recurrence()
         for (size_t j = 1; j <= n; ++j)
         {
             Position& p2 = *seq2[j-1];
-            Information s = p1.score(p2);
             Cell& cell = dpTable[i][j];
-            cell.g = dpTable[i-1][j-1].v + s;// score...
+            cell.s = p1.score(p2);
+            cell.g = dpTable[i-1][j-1].v + cell.s; // score...
             cell.e = std::max(dpTable[i][j-1].e
                             , dpTable[i][j-1].v - gapOpenPenalty)
                             - gapExtensionPenalty;
@@ -99,7 +106,22 @@ void Alignment::compute_recurrence()
 
 void Alignment::compute_traceback()
 {
+    // TODO
 }
+
+Alignment::Alignment(
+          const moltk::FastaSequence& s1, 
+          const moltk::FastaSequence& s2,
+          const Scorer& scorer /* = getDefaultScorer() */)
+{
+    init(scorer.getSequence(s1), scorer.getSequence(s2));
+}
+
+/* static */
+const Scorer& Alignment::getDefaultScorer() {
+    return MatrixScorer::getBlosum62Scorer();
+}
+
 
 ////////////////////
 // global methods //

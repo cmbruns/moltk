@@ -5,15 +5,14 @@
 
 namespace moltk {
 
-class FastaSequence
+    class FastaSequence : public std::string
 {
 public:
-    FastaSequence(const std::string& s) : sequence(s)
+    FastaSequence(const std::string& s) : std::string(s)
     {}
 
 protected:
     std::string header;
-    std::string sequence;
 };
 
 } // namespace moltk

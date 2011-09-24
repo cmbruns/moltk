@@ -6,6 +6,7 @@
 #include "Sequence.h"
 #include "moltk/units.h"
 #include "moltk/fasta.h"
+#include "Scorer.h"
 
 namespace moltk { namespace align {
 
@@ -16,8 +17,12 @@ public:
 
     Alignment();
     Alignment(const Sequence&, const Sequence&);
-    Alignment(const moltk::FastaSequence&, const moltk::FastaSequence&);
+    Alignment(const moltk::FastaSequence&, 
+              const moltk::FastaSequence&,
+              const Scorer& scorer = getDefaultScorer());
     void align();
+
+    static const Scorer& getDefaultScorer();
 
     class Cell
     {
@@ -32,8 +37,17 @@ public:
     typedef std::vector<Cell> DpRow;
     typedef std::vector<DpRow> DpTable;
 
+    enum Stage {
+        EMPTY_STAGE,
+        SEQUENCE_STAGE, // have sequences
+        ALLOCATED_STAGE, // have dynamic programming table
+        TABLE_INITIALIZED_STAGE, // first edge of table initialized
+        RECURRENCE_COMPUTED_STAGE, // recurrence computed
+        TRACED_STAGE // alignment computed
+    };
 
 protected:
+    void init();
     void init(const Sequence& seq1Param, const Sequence& seq2Param);
     void allocate_dp_table();
     void initialize_dp_table();
@@ -50,6 +64,7 @@ protected:
     DpTable dpTable;
     Sequence seq1;
     Sequence seq2;
+    Scorer* scorer;
 };
 
 }} // namespace moltk::align

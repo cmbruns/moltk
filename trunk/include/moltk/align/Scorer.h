@@ -1,6 +1,9 @@
 #ifndef MOLTK_ALIGN_SCORER_H
 #define MOLTK_ALIGN_SCORER_H
 
+#include "moltk/align/Sequence.h"
+#include "moltk/fasta.h"
+
 namespace moltk { namespace align {
 
 // align::Scorer is an abstract base class for objects
@@ -13,7 +16,7 @@ namespace moltk { namespace align {
 class Scorer
 {
 public:
-    virtual moltk::align::Sequence getSequence() const = 0;
+    virtual Sequence getSequence(const FastaSequence&) const = 0;
 };
 
 }} // namespace moltk::align
