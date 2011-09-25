@@ -1,13 +1,13 @@
-#include "moltk/align/Sequence.h"
+#include "moltk/align/Alignable.h"
 
 namespace moltk { namespace align {
 
-Sequence::Sequence(const Sequence& rhs)
+Alignable::Alignable(const Alignable& rhs)
 {
     *this = rhs;
 }
 
-Sequence& Sequence::operator=(const Sequence& rhs)
+Alignable& Alignable::operator=(const Alignable& rhs)
 {
     if (this == &rhs) return *this;
     this->assign(rhs.size(), NULL);
@@ -18,7 +18,7 @@ Sequence& Sequence::operator=(const Sequence& rhs)
 }
 
 /* virtual */
-Sequence::~Sequence()
+Alignable::~Alignable()
 {
     for (size_t i = 0; i < this->size(); ++i) {
         delete (*this)[i];
@@ -28,8 +28,8 @@ Sequence::~Sequence()
 
 }} // namespace moltk::align
 
-std::ostream& operator<<(std::ostream& os, const moltk::align::Sequence&)
+std::ostream& operator<<(std::ostream& os, const moltk::align::Alignable&)
 {
-    os << "sequence";
+    os << "alignable";
     return os;
 }

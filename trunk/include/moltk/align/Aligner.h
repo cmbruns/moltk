@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include "Sequence.h"
+#include "Alignable.h"
 #include "moltk/units.h"
 #include "moltk/fasta.h"
 #include "Scorer.h"
@@ -16,7 +16,7 @@ public:
     typedef moltk::units::Information Information;
 
     Aligner();
-    Aligner(const Sequence&, const Sequence&);
+    Aligner(const Alignable&, const Alignable&);
     Aligner(const moltk::FastaSequence&, 
               const moltk::FastaSequence&,
               const Scorer& scorer = getDefaultScorer());
@@ -48,7 +48,7 @@ public:
 
 protected:
     void init();
-    void init(const Sequence& seq1Param, const Sequence& seq2Param);
+    void init(const Alignable& seq1Param, const Alignable& seq2Param);
     void allocate_dp_table();
     void initialize_dp_table();
     void initialize_dp_row(size_t rowIndex, DpRow& row);
@@ -62,8 +62,8 @@ protected:
     size_t m; // length of sequence 1
     size_t n; // length of sequence 2
     DpTable dpTable;
-    Sequence seq1;
-    Sequence seq2;
+    Alignable seq1;
+    Alignable seq2;
     Scorer* scorer;
 };
 
