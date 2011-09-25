@@ -17,6 +17,11 @@ class Scorer
 {
 public:
     virtual Alignable getSequence(const FastaSequence&) const = 0;
+
+
+    class Position
+    {
+    };
 };
 
 }} // namespace moltk::align

@@ -52,7 +52,7 @@ protected:
     void initialize_dp_table();
     void initialize_dp_row(size_t rowIndex, DpRow& row);
     void compute_recurrence();
-    void compute_traceback();
+    Alignment compute_traceback();
 
     Information gapOpenPenalty; // positive penalty (will be subtracted at gaps)
     Information gapExtensionPenalty; // positive penalty (will be subtracted on extension)
@@ -64,10 +64,9 @@ protected:
     Alignable seq1;
     Alignable seq2;
     Scorer* scorer;
+    Alignment alignment;
 };
 
 }} // namespace moltk::align
-
-std::ostream& operator<<(std::ostream&, const moltk::align::Aligner&);
 
 #endif // MOLTK_ALIGN_ALIGNER_H

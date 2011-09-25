@@ -19,7 +19,5 @@ public:
 
 }} // namespace moltk::align
 
-std::ostream& operator<<(std::ostream&, const moltk::align::Alignable&);
-
 #endif MOLTK_ALIGN_ALIGNABLE_H
 
