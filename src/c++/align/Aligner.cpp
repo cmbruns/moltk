@@ -15,25 +15,10 @@ using moltk::units::bit;
 Aligner::Aligner()
 {init();}
 
-Aligner::Aligner(const Sequence& seq1Param, const Sequence& seq2Param)
-    : gapOpenPenalty(1.0 * bit), gapExtensionPenalty(0.5 * bit)
-{
-    init();
-    init(seq1Param, seq2Param);
-}
-
 void Aligner::init()
 {
     gapOpenPenalty = 1.0 * bit; 
     gapExtensionPenalty = 0.5 * bit;
-    m = seq1.size();
-    n = seq2.size();
-}
-
-void Aligner::init(const Sequence& seq1Param, const Sequence& seq2Param)
-{
-    seq1 = seq1Param;
-    seq2 = seq2Param;
     m = seq1.size();
     n = seq2.size();
 }
@@ -105,17 +90,11 @@ void Aligner::compute_recurrence()
     }
 }
 
-void Aligner::compute_traceback()
+Alignment Aligner::compute_traceback()
 {
+    assert(false);
     // TODO
-}
-
-Aligner::Aligner(
-          const moltk::FastaSequence& s1, 
-          const moltk::FastaSequence& s2,
-          const Scorer& scorer /* = getDefaultScorer() */)
-{
-    init(scorer.getSequence(s1), scorer.getSequence(s2));
+    return Alignment();
 }
 
 /* static */
@@ -128,8 +107,3 @@ const Scorer& Aligner::getDefaultScorer() {
 // global methods //
 ////////////////////
 
-std::ostream& operator<<(std::ostream& os, const moltk::align::Aligner&)
-{
-    os << "sequence";
-    return os;
-}

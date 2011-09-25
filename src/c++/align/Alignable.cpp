@@ -28,8 +28,3 @@ Alignable::~Alignable()
 
 }} // namespace moltk::align
 
-std::ostream& operator<<(std::ostream& os, const moltk::align::Alignable&)
-{
-    os << "alignable";
-    return os;
-}

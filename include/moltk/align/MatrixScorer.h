@@ -2,7 +2,9 @@
 #define MOLTK_ALIGN_MATRIX_SCORER_H
 
 #include "moltk/align/Scorer.h"
+#include "moltk/units.h"
 #include <iostream>
+#include <vector>
 
 namespace moltk { namespace align {
 
@@ -11,12 +13,28 @@ namespace moltk { namespace align {
 class MatrixScorer : public Scorer
 {
 public:
+    typedef moltk::units::Information Information;
+
     explicit MatrixScorer(const std::string& matrixString);
     explicit MatrixScorer(std::istream& matrixStream);
     virtual Alignable getSequence(const FastaSequence&) const;
     std::istream& loadStream(std::istream&);
 
     static const MatrixScorer& getBlosum62Scorer();
+
+
+    class MatrixPosition : public Scorer::Position
+    {
+    public:
+        // cache values for quick score lookup
+        double scoreWeight;
+        int columnIndex;
+        Information* rowPtr;
+    };
+
+protected:
+    std::vector<int> characterIndices; // maps letters to matrix indices
+    std::vector< std::vector<Information> > matrix;
 };
 
 }} // namespace moltk::align
