@@ -6,6 +6,7 @@
 #include "Alignable.h"
 #include "moltk/units.h"
 #include "moltk/fasta.h"
+#include "Alignment.h"
 #include "Scorer.h"
 
 namespace moltk { namespace align {
@@ -16,11 +17,9 @@ public:
     typedef moltk::units::Information Information;
 
     Aligner();
-    Aligner(const Alignable&, const Alignable&);
-    Aligner(const moltk::FastaSequence&, 
-              const moltk::FastaSequence&,
-              const Scorer& scorer = getDefaultScorer());
-    void align();
+    Alignment& align(const FastaSequence&);
+    Alignment& align(const Alignment&);
+    Alignment& align(const FastaSequence&, const FastaSequence&);
 
     static const Scorer& getDefaultScorer();
 
