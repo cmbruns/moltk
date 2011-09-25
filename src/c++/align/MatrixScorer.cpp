@@ -66,16 +66,6 @@ istream& MatrixScorer::loadStream(istream& is)
     return is;
 }
 
-/* virtual */
-Alignable MatrixScorer::getSequence(const FastaSequence& fs) const
-{
-    // TODO - perhaps Scorer generates Positions, not Sequences...
-    Alignable result;
-    for (size_t i = 0; i < fs.size(); ++i)
-        result.push_back(new MatrixPosition(*this, fs[i]));
-    return result;
-}
-
 
 ////////////////////
 // Global methods //

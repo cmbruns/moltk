@@ -38,12 +38,13 @@ void Aligner::init(const Sequence& seq1Param, const Sequence& seq2Param)
     n = seq2.size();
 }
 
-void Aligner::align()
+Alignment& Aligner::align(const FastaSequence&, const FastaSequence&)
 {
     allocate_dp_table();
     initialize_dp_table();
     compute_recurrence();
-    compute_traceback();
+    alignment = compute_traceback();
+    return alignment;
 }
 
 void Aligner::allocate_dp_table()
