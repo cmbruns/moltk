@@ -10,8 +10,8 @@ int main()
 {
     FastaSequence seq1("AACDEF");
     FastaSequence seq2("ACEFG");
-    Alignment alignment(seq1, seq2);
-    alignment.align();
+    Aligner aligner();
+    Alignment alignment = aligner.align(seq1, seq2);
     cout << alignment;
 
     return 0;

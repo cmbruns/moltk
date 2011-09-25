@@ -1,5 +1,5 @@
-#ifndef MOLTK_ALIGN_ALIGNMENT_H
-#define MOLTK_ALIGN_ALIGNMENT_H
+#ifndef MOLTK_ALIGN_ALIGNER_H
+#define MOLTK_ALIGN_ALIGNER_H
 
 #include <iostream>
 #include <vector>
@@ -10,14 +10,14 @@
 
 namespace moltk { namespace align {
 
-class Alignment 
+class Aligner 
 {
 public:
     typedef moltk::units::Information Information;
 
-    Alignment();
-    Alignment(const Sequence&, const Sequence&);
-    Alignment(const moltk::FastaSequence&, 
+    Aligner();
+    Aligner(const Sequence&, const Sequence&);
+    Aligner(const moltk::FastaSequence&, 
               const moltk::FastaSequence&,
               const Scorer& scorer = getDefaultScorer());
     void align();
@@ -58,7 +58,7 @@ protected:
     Information gapOpenPenalty; // positive penalty (will be subtracted at gaps)
     Information gapExtensionPenalty; // positive penalty (will be subtracted on extension)
     bool bEndGapsFree;
-    bool bLocalAlignment;
+    bool bLocalAligner;
     size_t m; // length of sequence 1
     size_t n; // length of sequence 2
     DpTable dpTable;
@@ -69,6 +69,6 @@ protected:
 
 }} // namespace moltk::align
 
-std::ostream& operator<<(std::ostream&, const moltk::align::Alignment&);
+std::ostream& operator<<(std::ostream&, const moltk::align::Aligner&);
 
-#endif // MOLTK_ALIGN_ALIGNMENT_H
+#endif // MOLTK_ALIGN_ALIGNER_H
