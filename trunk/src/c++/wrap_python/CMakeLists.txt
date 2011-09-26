@@ -22,7 +22,11 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
     find_program(GCCXML_EXECUTABLE # needed by wrap_moltk.py.in
         NAMES gccxml)
     set(MOLTK_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include") # needed by wrap_moltk.py.in
-    configure_file(wrap_moltk.py.in "${WRAP_MOLTK_PY}")
+    set(MOLTK_WRAP_INCLUDE_FILES "${CMAKE_SOURCE_DIR}/include/moltk/pdb/Atom.h")
+    configure_file(wrap_moltk.py.in "${WRAP_MOLTK_PY}" @ONLY)
+    configure_file(doxygen_doc_extractor.py
+        ${CMAKE_CURRENT_BINARY_DIR}/doxygen_doc_extractor.py
+        COPYONLY)
     find_package(PythonInterp REQUIRED)
     set(MOLTK_GEN_STAMP "${CMAKE_CURRENT_SOURCE_DIR}/generated_code/generate_v3d.stamp")
     add_custom_command(
