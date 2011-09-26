@@ -1,15 +1,66 @@
-Prerequisites for building moltk:
+How to install moltk:
 
-1) Boost, including iostreams library.  
-    On windows get it from http://www.boostpro.com/download/.
-    On Mac, I like to build fat binaries supporting both 32-bit and 64-bit architectures.  So I build boost like:
-        ./bootstrap.sh --prefix=/usr/local
-        sudo ./bjam address-model=32_64 architecture=x86 variant=release link=shared,static install
+A) The easy way - get a binary installer.
 
-2) CMake
+    Avoid the hassle of building from source by getting a binary distribution, if you can.
 
-3) C++ compiler.  On windows, use Visual Studio 2008, if you intend to use python.
+    Prerequisites:
+    
+    1) Python version 2.x
+        http://www.python.org
+        http://www.python.org/download/releases/2.7/
 
-4) Python
 
+B) The hard way - build from source.
+
+    Build from source if you cannot get a binary installer for your system.
+
+    Additional prerequisites for building moltk from source:
+
+    1) A C++ compiler.  
+        On windows, use Visual Studio 9 (2008), if you intend to use the standard python 2.7 install.
+            http://www.microsoft.com/express/downloads/
+        On linux and Mac, use gcc
+        On Mac you might need to install XCode developer tools to get gcc.
+
+    2) Boost, including iostreams and python libraries.
+        On windows get it from http://www.boostpro.com/download/ to get prebuilt binary libraries.
+            Be sure to select the iostream and python libraries, and to select Visual Studio 9.  It might take
+            several tries for the install to complete successfully.
+        On Mac, I like to build fat binaries supporting both 32-bit and 64-bit architectures.  So I build boost like:
+            ./bootstrap.sh --prefix=/usr/local
+            sudo ./bjam address-model=32_64 architecture=x86 variant=release link=shared,static install
+
+    3) CMake
+        http://www.cmake.org
+
+
+
+C) Even harder - also regenerate python bindings.
+
+    Only regenerate python bindings if you have changed the moltk API.
+
+    Additional prerequisites for regenerating python bindings:
+     * gccxml
+        (you might need to install cvs first)
+        cvs -d :pserver:anonymous@www.gccxml.org:/cvsroot/GCC_XML login
+            (respond with password gccxml) 
+        cvs -d :pserver:anonymous@www.gccxml.org:/cvsroot/GCC_XML co gccxml
+        (install using cmake)
+        (add location of gccxml.exe to your PATH)
+        (on windows: run gccxml_vcconfig.bat from install area)
+
+     * pygccxml
+        svn checkout https://pygccxml.svn.sourceforge.net/svnroot/pygccxml/pygccxml_dev pygccxml
+        cd pygccxml
+        python setup.py build
+        python setup.py install
+
+     * pyplusplus
+        svn checkout https://pygccxml.svn.sourceforge.net/svnroot/pygccxml/pyplusplus_dev pyplusplus
+        cd pyplusplus
+        python setup.py build
+        python setup.py install
+        
+    * epydoc (for generating documentation)
 
