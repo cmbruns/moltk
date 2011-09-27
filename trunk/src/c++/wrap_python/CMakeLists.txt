@@ -10,11 +10,11 @@ find_package(Boost COMPONENTS python REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
 file(GLOB PYPLUSPLUS_SRCS "generated_code/*.cpp")
+file(GLOB PYPLUSPLUS_HEADERS "generated_code/*.hpp")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/generated_code")
 
-add_library(moltk_module SHARED ${PYPLUSPLUS_SRCS})
+add_library(moltk_module SHARED ${PYPLUSPLUS_SRCS} ${PYPLUSPLUS_HEADERS})
 target_link_libraries(moltk_module
-    # ${Boost_PYTHON_LIBRARY}
     ${PYTHON_LIBRARY})
 set_target_properties(moltk_module PROPERTIES
     OUTPUT_NAME moltk
@@ -24,9 +24,18 @@ if(WIN32)
         SUFFIX ".pyd"
         PREFIX "../" # move out of Release/Debug
     )
+else()
+    # Windows seems to auto-link boost-python, and has trouble with explicit link. So only explicitly link on Mac/Linux
+    target_link_libraries(moltk_module
+        ${Boost_PYTHON_LIBRARY})
+    set_target_properties(moltk_module PROPERTIES
+        SUFFIX ".so" # even on Mac! (i.e. not .dylib)
+    )
 endif()
 
+
 # (optionally) regenerate python binding source code
+# TODO - consider doing this at configure time, with EXEC_PROGRAM()
 
 set(MOLTK_REGENERATE_PYTHON_BINDINGS OFF CACHE BOOL "Whether to (re)generated C++ code for moltk python bindings")
 if(MOLTK_REGENERATE_PYTHON_BINDINGS)
@@ -45,7 +54,7 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
     add_custom_command(
         COMMAND "${PYTHON_EXECUTABLE}" "${WRAP_MOLTK_PY}"
             > "${CMAKE_CURRENT_BINARY_DIR}/wrap_moltk.log"
-            >2 "${CMAKE_CURRENT_BINARY_DIR}/wrap_moltk.err"
+            2> "${CMAKE_CURRENT_BINARY_DIR}/wrap_moltk.err"
         COMMAND ${CMAKE_COMMAND} -E touch "${MOLTK_GEN_STAMP}"
         OUTPUT "${MOLTK_GEN_STAMP}"
         DEPENDS
@@ -61,4 +70,6 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
             doxygen_doc_extractor.py
         COMMENT "Generating python wrapper source code"
     )
+    add_dependencies(moltk_module GenerateWrapperSources)
 endif()
+
