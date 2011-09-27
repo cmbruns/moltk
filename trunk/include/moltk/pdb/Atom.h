@@ -4,6 +4,8 @@
 namespace moltk { namespace pdb {
 class Atom
 {
+public:
+    int foo() const {return 5;}
 };
 
 }} // namespace moltk::pdb

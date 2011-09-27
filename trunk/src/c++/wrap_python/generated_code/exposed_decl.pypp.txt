@@ -1,0 +1,10 @@
++@destructor_t@~Atom@ ( ::moltk::pdb::Atom::* )(  )  ( ::moltk::pdb::Atom::* )(  ) 
++@member_function_t@foo@int ( ::moltk::pdb::Atom::* )(  ) constint ( ::moltk::pdb::Atom::* )(  ) const
++@namespace_t@std@::std
++@namespace_t@__cxxabiv1@::__cxxabiv1
++@namespace_t@pdb@::moltk::pdb
++@namespace_t@moltk@::moltk
++@class_t@Atom@::moltk::pdb::Atom
++@constructor_t@Atom@ ( ::moltk::pdb::Atom::* )( ::moltk::pdb::Atom const & )  ( ::moltk::pdb::Atom::* )( ::moltk::pdb::Atom const & ) 
++@constructor_t@Atom@ ( ::moltk::pdb::Atom::* )(  )  ( ::moltk::pdb::Atom::* )(  ) 
++@member_operator_t@operator=@::moltk::pdb::Atom & ( ::moltk::pdb::Atom::* )( ::moltk::pdb::Atom const & ) ::moltk::pdb::Atom & ( ::moltk::pdb::Atom::* )( ::moltk::pdb::Atom const & ) 

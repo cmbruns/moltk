@@ -49,12 +49,14 @@ C) Even harder - also regenerate python bindings.
         (install using cmake)
         (add location of gccxml.exe to your PATH)
         (on windows: run gccxml_vcconfig.bat from install area)
+        On Windows, install to a directory without any space characters, i.e. NOT c:/Program Files/whatever
 
      * pygccxml
         svn checkout https://pygccxml.svn.sourceforge.net/svnroot/pygccxml/pygccxml_dev pygccxml
         cd pygccxml
         python setup.py build
         python setup.py install
+        On windows, patch pygccxml/parser/source_reader.py method __create_command_line to NOT wrap command with double quotes.
 
      * pyplusplus
         svn checkout https://pygccxml.svn.sourceforge.net/svnroot/pygccxml/pyplusplus_dev pyplusplus
