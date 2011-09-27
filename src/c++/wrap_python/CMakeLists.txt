@@ -50,7 +50,7 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
         ${CMAKE_CURRENT_BINARY_DIR}/doxygen_doc_extractor.py
         COPYONLY)
     find_package(PythonInterp REQUIRED)
-    set(MOLTK_GEN_STAMP "${CMAKE_CURRENT_SOURCE_DIR}/generated_code/generate_v3d.stamp")
+    set(MOLTK_GEN_STAMP "${CMAKE_CURRENT_SOURCE_DIR}/generated_code/generate_moltk.stamp")
     add_custom_command(
         COMMAND "${PYTHON_EXECUTABLE}" "${WRAP_MOLTK_PY}"
             > "${CMAKE_CURRENT_BINARY_DIR}/wrap_moltk.log"
