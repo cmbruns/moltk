@@ -16,5 +16,7 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 add_subdirectory(src/c++)
 
+add_subdirectory(doc)
+
 enable_testing()
 add_subdirectory(test)
