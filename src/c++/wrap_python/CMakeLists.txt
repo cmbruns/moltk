@@ -27,7 +27,8 @@ if(WIN32)
 else()
     # Windows seems to auto-link boost-python, and has trouble with explicit link. So only explicitly link on Mac/Linux
     target_link_libraries(moltk_module
-        ${Boost_PYTHON_LIBRARY})
+        ${Boost_PYTHON_LIBRARY}
+        moltk_pdb)
     set_target_properties(moltk_module PROPERTIES
         SUFFIX ".so" # even on Mac! (i.e. not .dylib)
     )
@@ -51,6 +52,7 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
         COPYONLY)
     find_package(PythonInterp REQUIRED)
     set(MOLTK_GEN_STAMP "${CMAKE_CURRENT_SOURCE_DIR}/generated_code/generate_moltk.stamp")
+    file(GLOB_RECURSE MOLTK_HEADERS "${CMAKE_SOURCE_DIR}/include/*.h")
     add_custom_command(
         COMMAND "${PYTHON_EXECUTABLE}" "${WRAP_MOLTK_PY}"
             > "${CMAKE_CURRENT_BINARY_DIR}/wrap_moltk.log"
@@ -60,6 +62,7 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
         DEPENDS
             "${WRAP_MOLTK_PY}"
             doxygen_doc_extractor.py
+            ${MOLTK_HEADERS}
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
         COMMENT "Creating moltk wrapper source files.  Examine wrap_moltk.err for details."
     )
