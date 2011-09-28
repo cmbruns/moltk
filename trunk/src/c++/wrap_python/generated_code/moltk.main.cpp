@@ -2,9 +2,9 @@
 
 #include "boost/python.hpp"
 
-#include "/Users/brunsc/svn/moltk/include/moltk/pdb/Atom.h"
+#include "c:/users/cmbruns/svn/moltk/include/moltk/pdb/atom.h"
 
-#include "generated_code/Atom.pypp.hpp"
+#include "generated_code/atom.pypp.hpp"
 
 namespace bp = boost::python;
 
