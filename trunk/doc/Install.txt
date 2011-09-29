@@ -13,7 +13,7 @@ A) The easy way - get a binary installer.
 
 B) The hard way - build from source.
 
-    Build from source if you cannot get a binary installer for your system.
+    Build from source if you cannot find a binary installer for your system.
 
     Additional prerequisites for building moltk from source:
 
@@ -65,4 +65,5 @@ C) Even harder - also regenerate python bindings.
         python setup.py install
         
     * epydoc (for generating documentation)
+        http://sourceforge.net/projects/epydoc/files/epydoc/
 
