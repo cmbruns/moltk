@@ -1,4 +1,6 @@
+# This file, doc/CMakeLists.txt, is used to help build the documenation for the moltk project.
 
+# Doxygen is a program for generating API documentation files from source code comments.
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
     set(dfound TRUE)
@@ -11,7 +13,7 @@ if(MOLTK_CREATE_API_DOCS)
     find_package(Doxygen REQUIRED)
     mark_as_advanced(CLEAR DOXYGEN_EXECUTABLE)
     set(DOXY_CONFIG "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile")
-    set(CPP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/include/moltk")
+    set(CPP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/include/moltk/pdb/Atom.h")
     configure_file(Doxyfile.in ${DOXY_CONFIG} @ONLY )
     add_custom_target(GenerateDoxygenApiDocs ALL
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXY_CONFIG}
