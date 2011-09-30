@@ -2,8 +2,8 @@
 
 # python API documentation generated with epydoc
 set(PYTHON_API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/api")
-file(MAKE_DIRECTORY ${PYTHON_API_DIR}/api/python)
-install(DIRECTORY "${PYTHON_API_DIR}/api/python"
+file(MAKE_DIRECTORY ${PYTHON_API_DIR}/python)
+install(DIRECTORY "${PYTHON_API_DIR}/python"
         DESTINATION "doc/api/python")
 # python_api.html is just a shortcut to the Doxygen index.html.
 install(FILES "python_api.html" DESTINATION "doc")
