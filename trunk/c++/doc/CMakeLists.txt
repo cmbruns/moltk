@@ -1,10 +1,10 @@
 # This file, doc/CMakeLists.txt, is used to help build the documenation for the moltk project.
 
 # C++ API documentation generated with doxygen
-set(DOXYGEN_API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/api/cxx")
-file(MAKE_DIRECTORY ${DOXYGEN_API_DIR}/html)
-install(DIRECTORY "${DOXYGEN_API_DIR}/html"
-        DESTINATION "doc/api/cxx/html")
+set(DOXYGEN_API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/api")
+file(MAKE_DIRECTORY ${DOXYGEN_API_DIR}/cxx)
+install(DIRECTORY "${DOXYGEN_API_DIR}/cxx"
+        DESTINATION "doc/api/cxx")
 # cxx_api.html is just a shortcut to the Doxygen index.html.
 install(FILES "cxx_api.html" DESTINATION "doc")
 
@@ -14,7 +14,7 @@ if(MOLTK_REGENERATE_CPP_API_DOCS)
     find_package(Doxygen REQUIRED)
     mark_as_advanced(CLEAR DOXYGEN_EXECUTABLE)
     set(DOXY_CONFIG "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile")
-    set(CPP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/include/moltk/pdb/Atom.h")
+    set(CPP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/c++/include")
     configure_file(Doxyfile.in ${DOXY_CONFIG} @ONLY )
     add_custom_target(GenerateDoxygenApiDocs ALL
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXY_CONFIG}
