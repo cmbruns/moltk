@@ -1,6 +1,7 @@
 
 # Set up build environment for moltk binary python extension module
 
+include_directories(${CMAKE_SOURCE_DIR}/c++/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}) # To find headers under generated code
 
 find_package(PythonLibs REQUIRED)
@@ -19,23 +20,24 @@ file(GLOB PYPLUSPLUS_SRCS "${GENERATED_CODE_DIR}/*.cpp")
 file(GLOB PYPLUSPLUS_HEADERS "${GENERATED_CODE_DIR}/*.hpp")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/${GENERATED_CODE_DIR}")
 
-add_library(moltk_module SHARED ${PYPLUSPLUS_SRCS} ${PYPLUSPLUS_HEADERS})
-target_link_libraries(moltk_module
-    ${PYTHON_LIBRARY})
-set_target_properties(moltk_module PROPERTIES
+add_library(MoltkPythonModule SHARED ${PYPLUSPLUS_SRCS} ${PYPLUSPLUS_HEADERS})
+target_link_libraries(MoltkPythonModule
+    ${PYTHON_LIBRARY}
+    MoltkLibrary)
+set_target_properties(MoltkPythonModule PROPERTIES
     OUTPUT_NAME moltk
     PREFIX "")
 if(WIN32)
-    set_target_properties(moltk_module PROPERTIES
+    set_target_properties(MoltkPythonModule PROPERTIES
         SUFFIX ".pyd"
         PREFIX "../" # move out of Release/Debug
     )
 else()
     # Windows seems to auto-link boost-python, and has trouble with explicit link. So only explicitly link on Mac/Linux
-    target_link_libraries(moltk_module
+    target_link_libraries(MoltkPythonModule
         ${Boost_PYTHON_LIBRARY}
         moltk_pdb)
-    set_target_properties(moltk_module PROPERTIES
+    set_target_properties(MoltkPythonModule PROPERTIES
         SUFFIX ".so" # even on Mac! (i.e. not .dylib)
     )
 endif()
@@ -79,6 +81,6 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
             doxygen_doc_extractor.py
         COMMENT "Generating python wrapper source code"
     )
-    add_dependencies(moltk_module GenerateWrapperSources)
+    add_dependencies(MoltkPythonModule GenerateWrapperSources)
 endif()
 
