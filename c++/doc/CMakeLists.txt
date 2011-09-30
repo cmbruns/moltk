@@ -16,7 +16,7 @@ if(MOLTK_REGENERATE_CPP_API_DOCS)
     set(DOXY_CONFIG "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile")
     set(CPP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/c++/include")
     configure_file(Doxyfile.in ${DOXY_CONFIG} @ONLY )
-    add_custom_target(GenerateDoxygenApiDocs ALL
+    add_custom_target(MoltkCxxApiDocs ALL
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXY_CONFIG}
         COMMENT "Generating C++ API html documentation using doxygen"
         WORKING_DIRECTORY ${DOXYGEN_API_DIR}
