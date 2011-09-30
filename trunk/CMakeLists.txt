@@ -1,6 +1,7 @@
 project(MolTK)
 cmake_minimum_required(VERSION 2.8)
 set(PROJECT_NAME MolTK)
+set(MolTK_VERSION 0.2.0)
 
 include_directories(include)
 
