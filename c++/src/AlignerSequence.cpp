@@ -7,12 +7,12 @@ Aligner::Sequence::Sequence(const Sequence& rhs)
     *this = rhs;
 }
 
-Sequence& Aligner::Sequence::operator=(const Sequence& rhs)
+Aligner::Sequence& Aligner::Sequence::operator=(const Sequence& rhs)
 {
     if (this == &rhs) return *this;
-    positions.assign(rhs.positions.size(), NULL);
-    for (size_t i = 0; i < positions.size(); ++i) {
-        positions[i] = rhs.positions[i]->clone();
+    assign(rhs.size(), NULL);
+    for (size_t i = 0; i < size(); ++i) {
+        (*this)[i] = rhs[i]->clone();
     }
     return *this;
 }
@@ -20,9 +20,9 @@ Sequence& Aligner::Sequence::operator=(const Sequence& rhs)
 /* virtual */
 Aligner::Sequence::~Sequence()
 {
-    for (size_t i = 0; i < positions.size(); ++i) {
-        delete positions[i];
-        positions[i] = NULL;
+    for (size_t i = 0; i < size(); ++i) {
+        delete (*this)[i];
+        (*this)[i] = NULL;
     }
 }
 

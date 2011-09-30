@@ -30,7 +30,7 @@ public:
 
     /// Aligner::Sequence is a special sequence containing Aligner::Positions,
     /// which know how to score themselves.
-    class Sequence : public std::vector<Position>
+    class Sequence : public std::vector<Position*>
     {
     public:
         Sequence() {}

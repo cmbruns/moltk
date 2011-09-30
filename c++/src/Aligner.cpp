@@ -68,10 +68,10 @@ void Aligner::compute_recurrence()
 {
     for (size_t i = 1; i <= m; ++i)
     {
-        Alignable::Position& p1 = seq1[i-1];
+        Position& p1 = *seq1[i-1];
         for (size_t j = 1; j <= n; ++j)
         {
-            Alignable::Position& p2 = seq2[j-1];
+            Position& p2 = *seq2[j-1];
             Cell& cell = dpTable[i][j];
             cell.s = p1.score(p2);
             cell.g = dpTable[i-1][j-1].v + cell.s; // score...
@@ -96,7 +96,7 @@ Alignment Aligner::compute_traceback()
 }
 
 /* static */
-const Scorer& Aligner::getDefaultScorer() {
+const Aligner::Scorer& Aligner::getDefaultScorer() {
     return MatrixScorer::getBlosum62Scorer();
 }
 
