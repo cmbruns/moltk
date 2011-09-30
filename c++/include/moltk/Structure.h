@@ -45,7 +45,7 @@ public:
 
 } // namespace moltk
 
-static std::istream& operator>>(std::istream& is, moltk::pdb::Structure& structure)
+static std::istream& operator>>(std::istream& is, moltk::Structure& structure)
 {
     structure.loadStream(is);
     return is;

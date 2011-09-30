@@ -1,13 +1,13 @@
-#include "moltk/Alignable.h"
+#include "moltk/Aligner.h"
 
 namespace moltk {
 
-Alignable::Alignable(const Alignable& rhs)
+Aligner::Sequence::Sequence(const Sequence& rhs)
 {
     *this = rhs;
 }
 
-Alignable& Alignable::operator=(const Alignable& rhs)
+Sequence& Aligner::Sequence::operator=(const Sequence& rhs)
 {
     if (this == &rhs) return *this;
     positions.assign(rhs.positions.size(), NULL);
@@ -18,7 +18,7 @@ Alignable& Alignable::operator=(const Alignable& rhs)
 }
 
 /* virtual */
-Alignable::~Alignable()
+Aligner::Sequence::~Sequence()
 {
     for (size_t i = 0; i < positions.size(); ++i) {
         delete positions[i];

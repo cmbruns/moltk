@@ -1,7 +1,7 @@
 #ifndef MOLTK_ALIGN_MATRIX_SCORER_H
 #define MOLTK_ALIGN_MATRIX_SCORER_H
 
-#include "moltk/Scorer.h"
+#include "moltk/Aligner.h"
 #include "moltk/units.h"
 #include <iostream>
 #include <vector>
@@ -10,7 +10,7 @@ namespace moltk {
 
 // MatrixScorer knows how to lookup residue alignment scores from 
 // a matrix such as BLOSUM62
-class MatrixScorer : public Scorer
+class MatrixScorer : public Aligner::Scorer
 {
 public:
     typedef moltk::units::Information Information;
@@ -23,7 +23,7 @@ public:
     static const MatrixScorer& getBlosum62Scorer();
 
 
-    class MatrixPosition : public Scorer::Position
+    class MatrixPosition : public Aligner::Position
     {
     public:
         // cache values for quick score lookup

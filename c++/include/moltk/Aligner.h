@@ -5,7 +5,7 @@
 #include <vector>
 #include "Alignment.h"
 #include "moltk/units.h"
-#include "moltk/fasta.h"
+#include "moltk/FastaSequence.h"
 
 namespace moltk {
 
@@ -45,7 +45,7 @@ public:
     class Scorer
     {
     public:
-        virtual Alignable getSequence(const FastaSequence&) const = 0;
+        virtual Sequence getSequence(const FastaSequence&) const = 0;
     };
 
 
