@@ -1,14 +1,1 @@
 
-add_executable(test_load_pdb test_load_pdb.cpp)
-target_link_libraries(test_load_pdb 
-    ${Boost_IOSTREAMS_LIBRARY}
-    moltk_pdb)
-add_test(test_load_pdb 
-    test_load_pdb
-    "${CMAKE_CURRENT_SOURCE_DIR}/structures/1FND.pdb.gz")
-
-add_executable(test_align test_align.cpp)
-target_link_libraries(test_align
-    moltk_align)
-add_test(test_align
-    test_align)

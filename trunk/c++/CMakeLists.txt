@@ -1,7 +1,3 @@
-project(MolTK)
-cmake_minimum_required(VERSION 2.8)
-set(PROJECT_NAME MolTK)
-set(MolTK_VERSION 0.2.0)
 
 include_directories(include)
 
@@ -16,9 +12,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_definitions(${Boost_LIB_DIAGNOSTIC_DEFINITIONS})
 link_directories(${Boost_LIBRARY_DIRS})
 
-add_subdirectory(src/c++)
-
+add_subdirectory(src)
+add_subdirectory(test)
 add_subdirectory(doc)
 
-enable_testing()
-add_subdirectory(test)
