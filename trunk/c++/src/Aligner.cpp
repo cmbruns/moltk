@@ -1,10 +1,8 @@
-#include "moltk/align/Aligner.h"
-#include "moltk/align/Position.h"
-#include "moltk/align/MatrixScorer.h"
+#include "moltk/Aligner.h"
+#include "moltk/MatrixScorer.h"
 
 using namespace std;
 using namespace moltk;
-using namespace moltk::align;
 using moltk::units::bit;
 
 
@@ -70,10 +68,10 @@ void Aligner::compute_recurrence()
 {
     for (size_t i = 1; i <= m; ++i)
     {
-        Position& p1 = *seq1[i-1];
+        Alignable::Position& p1 = seq1[i-1];
         for (size_t j = 1; j <= n; ++j)
         {
-            Position& p2 = *seq2[j-1];
+            Alignable::Position& p2 = seq2[j-1];
             Cell& cell = dpTable[i][j];
             cell.s = p1.score(p2);
             cell.g = dpTable[i-1][j-1].v + cell.s; // score...

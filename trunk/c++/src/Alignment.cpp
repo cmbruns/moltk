@@ -1,10 +1,11 @@
-#include "moltk/align/Alignment.h"
+#include "moltk/Alignment.h"
 
-using namespace moltk::align;
+using namespace moltk;
 using namespace std;
 
-std::ostream& operator<<(std::ostream& os, const moltk::align::Alignment& alignment)
+std::ostream& operator<<(std::ostream& os, const moltk::Alignment& alignment)
 {
     os << "alignment";
     return os;
 }
+

@@ -3,30 +3,58 @@
 
 #include <iostream>
 #include <vector>
-#include "Alignable.h"
+#include "Alignment.h"
 #include "moltk/units.h"
 #include "moltk/fasta.h"
-#include "Alignment.h"
-#include "Scorer.h"
 
-namespace moltk { namespace align {
+namespace moltk {
 
+/// Aligner is the class that creates sequence or structure alignments.
 class Aligner 
 {
 public:
+    // Inner classes and typedefs first, then Aligner methods.
+
     typedef moltk::units::Information Information;
 
-    Aligner();
-    Alignment& align(const FastaSequence&);
-    Alignment& align(const Alignment&);
-    Alignment& align(const FastaSequence&, const FastaSequence&);
 
-    static const Scorer& getDefaultScorer();
+    /// Aligner::Position represents a special biosequence residue that knows how to score itself during alignment.
+    class Position
+    {
+        public:
+            virtual Position* clone() const = 0;
+            virtual ~Position() {}
+            virtual moltk::units::Information score(const Position& rhs) const;
+    };
 
+
+    /// Aligner::Sequence is a special sequence containing Aligner::Positions,
+    /// which know how to score themselves.
+    class Sequence : public std::vector<Position>
+    {
+    public:
+        Sequence() {}
+        Sequence(const Sequence& rhs);
+        virtual ~Sequence();
+        Sequence& operator=(const Sequence& rhs);
+    };
+
+
+    /// Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which
+    /// know how to quickly score themselves with other AlignerPositions.
+    class Scorer
+    {
+    public:
+        virtual Alignable getSequence(const FastaSequence&) const = 0;
+    };
+
+
+    // An Aligner::Cell is one node in the dynamic programming table
     class Cell
     {
     public:
         // Gusfield nomenclature
+        // TODO - remove s, which does not need to be stored
         Information s; // Wm, score of aligning position S1(i) with S2(j)
         Information v; // V, best score through this cell
         Information g; // G, best ungapped score through this cell
@@ -36,8 +64,11 @@ public:
     typedef std::vector<Cell> DpRow;
     typedef std::vector<DpRow> DpTable;
 
+
+    // Aligner::Stage represents current state of an incomplete alignment
     enum Stage {
-        EMPTY_STAGE,
+        EMPTY_STAGE, // have nothing
+        SCORER_STAGE, // have a scorer
         SEQUENCE_STAGE, // have sequences
         ALLOCATED_STAGE, // have dynamic programming table
         TABLE_INITIALIZED_STAGE, // first edge of table initialized
@@ -45,9 +76,19 @@ public:
         TRACED_STAGE // alignment computed
     };
 
+
+public:
+    // Finally, the actual Aligner methods
+    Aligner();
+    Alignment& align(const FastaSequence&);
+    Alignment& align(const Alignment&);
+    Alignment& align(const FastaSequence&, const FastaSequence&);
+
+    static const Scorer& getDefaultScorer();
+
 protected:
     void init();
-    void init(const Alignable& seq1Param, const Alignable& seq2Param);
+    void init(const Sequence& seq1Param, const Sequence& seq2Param);
     void allocate_dp_table();
     void initialize_dp_table();
     void initialize_dp_row(size_t rowIndex, DpRow& row);
@@ -61,12 +102,13 @@ protected:
     size_t m; // length of sequence 1
     size_t n; // length of sequence 2
     DpTable dpTable;
-    Alignable seq1;
-    Alignable seq2;
+    Sequence seq1;
+    Sequence seq2;
     Scorer* scorer;
     Alignment alignment;
 };
 
-}} // namespace moltk::align
+} // namespace moltk
 
 #endif // MOLTK_ALIGN_ALIGNER_H
+

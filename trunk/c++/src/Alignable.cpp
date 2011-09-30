@@ -1,6 +1,6 @@
-#include "moltk/align/Alignable.h"
+#include "moltk/Alignable.h"
 
-namespace moltk { namespace align {
+namespace moltk {
 
 Alignable::Alignable(const Alignable& rhs)
 {
@@ -10,9 +10,9 @@ Alignable::Alignable(const Alignable& rhs)
 Alignable& Alignable::operator=(const Alignable& rhs)
 {
     if (this == &rhs) return *this;
-    this->assign(rhs.size(), NULL);
-    for (size_t i = 0; i < this->size(); ++i) {
-        (*this)[i] = rhs[i]->clone();
+    positions.assign(rhs.positions.size(), NULL);
+    for (size_t i = 0; i < positions.size(); ++i) {
+        positions[i] = rhs.positions[i]->clone();
     }
     return *this;
 }
@@ -20,11 +20,11 @@ Alignable& Alignable::operator=(const Alignable& rhs)
 /* virtual */
 Alignable::~Alignable()
 {
-    for (size_t i = 0; i < this->size(); ++i) {
-        delete (*this)[i];
-        (*this)[i] = NULL;
+    for (size_t i = 0; i < positions.size(); ++i) {
+        delete positions[i];
+        positions[i] = NULL;
     }
 }
 
-}} // namespace moltk::align
+} // namespace moltk
 

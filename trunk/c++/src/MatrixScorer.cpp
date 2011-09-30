@@ -1,8 +1,7 @@
-#include "moltk/align/MatrixScorer.h"
+#include "moltk/MatrixScorer.h"
 #include <sstream>
 
 using namespace std;
-using namespace moltk::align;
 using namespace moltk;
 
 static const char* blosum62Text = "\
