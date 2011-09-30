@@ -35,13 +35,13 @@ if(MOLTK_REGENERATE_PYTHON_API_DOCS)
         COMMAND ${CMAKE_COMMAND} ARGS -P "${DOCSCRIPT}"
         COMMAND ${CMAKE_COMMAND} ARGS -E touch "${PYTHON_API_DIR}/doc/index.html"
         DEPENDS "${DOCSCRIPT}" InstallMolTKLocally ${PURE_PYTHON_SRCS})
-    add_custom_target(GeneratePythonApiDocs ALL
-        DEPENDS "${PYTHON_API_DIR}/doc/index.html" InstallMolTKLocally ${PURE_PYTHON_SRCS}
+    add_custom_target(MoltkPythonApiDocs ALL
+        DEPENDS "${PYTHON_API_DIR}/doc/index.html" LocalPyMolTKInstallation ${PURE_PYTHON_SRCS}
         SOURCES "${DOCSCRIPT}")
 endif()
 
 # TODO
-#   InstallMolTKLocally target
+#   LocalPyMolTKInstallation target
 #   PURE_PYTHON_SRCS variable
 #   NATIVE_LOCAL_PYTHONPATH variable
 
