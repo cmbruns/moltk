@@ -49,7 +49,7 @@ if(MOLTK_REGENERATE_PYTHON_API_DOCS)
         execute_process(
         COMMAND \"${PYTHON_EXECUTABLE}\" \"${EPYDOC_SCRIPT}\"
           --html -o doc moltk
-          --name \"MolTK API v${MolTK_VERSION} Documentation\"
+          --name \"MolTK API v${MOLTK_VERSION} Documentation\"
           --url http://code.google.com/p/moltk/
         WORKING_DIRECTORY \"${PYTHON_API_DIR}\")
     ")
@@ -63,3 +63,8 @@ if(MOLTK_REGENERATE_PYTHON_API_DOCS)
         DEPENDS "${PYTHON_API_DIR}/doc/index.html" InstallMolTKLocally ${PURE_PYTHON_SRCS}
         SOURCES "${DOCSCRIPT}")
 endif()
+
+# TODO
+#   InstallMolTKLocally target
+#   PURE_PYTHON_SRCS variable
+#   NATIVE_LOCAL_PYTHONPATH variable
