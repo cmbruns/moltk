@@ -53,7 +53,7 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
     find_program(GCCXML_EXECUTABLE # needed by wrap_moltk.py.in
         NAMES gccxml)
     set(MOLTK_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/c++/include") # needed by wrap_moltk.py.in
-    set(MOLTK_WRAP_INCLUDE_FILES "${MOLTK_INCLUDE_DIR}/moltk/Atom.h")
+    set(MOLTK_WRAP_INCLUDE_FILES "${MOLTK_INCLUDE_DIR}/moltk/Structure.h")
     configure_file(wrap_moltk.py.in "${WRAP_MOLTK_PY}" @ONLY)
     configure_file(doxygen_doc_extractor.py
         ${CMAKE_CURRENT_BINARY_DIR}/doxygen_doc_extractor.py
