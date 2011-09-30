@@ -2,19 +2,13 @@
 
 #include "boost/python.hpp"
 
-#include "boost/python/suite/indexing/vector_indexing_suite.hpp"
-
-#include "/Users/brunsc/svn/moltk/c++/include/moltk/Structure.h"
+#include "wrap_moltk.h"
 
 #include "generated_code_gcc/Structure.pypp.hpp"
-
-#include "generated_code_gcc/vector_less__moltk_scope_Structure_scope_Atom__greater_.pypp.hpp"
 
 namespace bp = boost::python;
 
 BOOST_PYTHON_MODULE(moltk){
-    register_vector_less__moltk_scope_Structure_scope_Atom__greater__class();
-
     register_Structure_class();
 }
 

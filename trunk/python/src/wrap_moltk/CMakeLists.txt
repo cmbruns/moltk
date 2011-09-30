@@ -36,7 +36,7 @@ else()
     # Windows seems to auto-link boost-python, and has trouble with explicit link. So only explicitly link on Mac/Linux
     target_link_libraries(MoltkPythonModule
         ${Boost_PYTHON_LIBRARY}
-        moltk_pdb)
+        MoltkLibrary)
     set_target_properties(MoltkPythonModule PROPERTIES
         SUFFIX ".so" # even on Mac! (i.e. not .dylib)
     )
@@ -53,7 +53,7 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
     find_program(GCCXML_EXECUTABLE # needed by wrap_moltk.py.in
         NAMES gccxml)
     set(MOLTK_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/c++/include") # needed by wrap_moltk.py.in
-    set(MOLTK_WRAP_INCLUDE_FILES "${MOLTK_INCLUDE_DIR}/moltk/Structure.h")
+    set(MOLTK_WRAP_INCLUDE_FILES wrap_moltk.h)
     configure_file(wrap_moltk.py.in "${WRAP_MOLTK_PY}" @ONLY)
     configure_file(doxygen_doc_extractor.py
         ${CMAKE_CURRENT_BINARY_DIR}/doxygen_doc_extractor.py
