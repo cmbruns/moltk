@@ -40,6 +40,7 @@ public:
     bool loadStream(std::istream&);
     bool loadFile(const std::string& fileName);
 
+protected:
     std::vector<Atom> atoms;
 };
 
