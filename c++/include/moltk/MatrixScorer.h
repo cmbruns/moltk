@@ -1,12 +1,12 @@
 #ifndef MOLTK_ALIGN_MATRIX_SCORER_H
 #define MOLTK_ALIGN_MATRIX_SCORER_H
 
-#include "moltk/align/Scorer.h"
+#include "moltk/Scorer.h"
 #include "moltk/units.h"
 #include <iostream>
 #include <vector>
 
-namespace moltk { namespace align {
+namespace moltk {
 
 // MatrixScorer knows how to lookup residue alignment scores from 
 // a matrix such as BLOSUM62
@@ -37,8 +37,9 @@ protected:
     std::vector< std::vector<Information> > matrix;
 };
 
-}} // namespace moltk::align
+} // namespace moltk
 
-std::istream& operator>>(std::istream&, moltk::align::MatrixScorer&);
+std::istream& operator>>(std::istream&, moltk::MatrixScorer&);
 
 #endif // MOLTK_ALIGN_MATRIX_SCORER_H
+

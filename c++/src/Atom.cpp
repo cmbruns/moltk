@@ -1,2 +1,2 @@
-#include "moltk/pdb/Atom.h"
+#include "moltk/Atom.h"
 

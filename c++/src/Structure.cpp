@@ -1,4 +1,4 @@
-#include "moltk/pdb/Structure.h"
+#include "moltk/Structure.h"
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -19,7 +19,7 @@
 using namespace std;
 using namespace boost::iostreams;
 
-namespace moltk { namespace pdb {
+namespace moltk {
 
 /* explicit */
 Structure::Structure(const std::string& fileName)
@@ -71,4 +71,5 @@ bool Structure::loadStream(std::istream& istream)
     return true;
 }
 
-}} // namespace moltk::pdb
+} // namespace moltk
+
