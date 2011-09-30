@@ -9,6 +9,9 @@ mb = module_builder.module_builder_t(
     # , indexing_suite_version = 2
     , define_symbols = ["_HAS_TR1=0"])
 
+ns_moltk = mb.namespace('moltk')
+ns_moltk.class_('Structure').include()
+
 extractor = doxygen_doc_extractor()
 mb.build_code_creator(module_name = 'moltk', doc_extractor = extractor)
 mb.split_module('@GENERATED_CODE_DIR@')

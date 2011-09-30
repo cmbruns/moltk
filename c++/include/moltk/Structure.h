@@ -30,10 +30,11 @@ public:
     protected:
         RecordType recordType;
     };
+    typedef std::vector<Atom> AtomList;
 
 
 public:
-    Structure();
+    Structure() {}
     explicit Structure(std::istream&);
     explicit Structure(const std::string& fileName);
 
@@ -41,7 +42,7 @@ public:
     bool loadFile(const std::string& fileName);
 
 protected:
-    std::vector<Atom> atoms;
+    AtomList atoms;
 };
 
 } // namespace moltk
