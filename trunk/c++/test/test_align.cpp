@@ -1,9 +1,7 @@
-#include "moltk/align.h"
-#include "moltk/fasta.h"
+#include "moltk.h"
 #include <iostream>
 
 using namespace std;
-using namespace moltk::align;
 using namespace moltk;
 
 int main()
@@ -16,3 +14,4 @@ int main()
 
     return 0;
 }
+
