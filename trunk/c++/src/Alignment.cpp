@@ -5,7 +5,11 @@ using namespace std;
 
 std::ostream& operator<<(std::ostream& os, const moltk::Alignment& alignment)
 {
-    os << "alignment";
+    moltk::Alignment::const_iterator i = alignment.begin();
+    while (i != alignment.end()) {
+        os << *i << endl;
+        ++i;
+    }
     return os;
 }
 

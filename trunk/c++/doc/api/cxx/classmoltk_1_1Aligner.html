@@ -105,6 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html">Cell</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html" title="An Aligner::Cell is one node in the dynamic programming table.">Aligner::Cell</a> is one node in the dynamic programming table.  <a href="classmoltk_1_1Aligner_1_1Cell.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html" title="Aligner::Position represents a special biosequence residue that knows how to score itself during alig...">Aligner::Position</a> represents a special biosequence residue that knows how to score itself during alignment.  <a href="classmoltk_1_1Aligner_1_1Position.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a></td></tr>
@@ -113,6 +114,16 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html" title="Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions.">Aligner::Scorer</a> converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions.  <a href="classmoltk_1_1Aligner_1_1Scorer.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55b">TracebackPointer</a> { <br/>
+&#160;&#160;<a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55ba6da2cb4f6502904671847ec848503045">TRACEBACK_UP</a>, 
+<a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55bae1838f55d1bd7835d79ffee07b42467e">TRACEBACK_UPLEFT</a>, 
+<a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55bab5353821ddae5b7ea5c6ce44d2d62d81">TRACEBACK_LEFT</a>, 
+<a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55baed40c1c6e565bbbee48d601aaafe0812">TRACEBACK_DONE</a>, 
+<br/>
+&#160;&#160;<a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55ba4de2c99df6a5314ce86b8d850734d220">TRACEBACK_NOT_INITIALIZED</a>
+<br/>
+ }</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TracebackPointer is an <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html" title="An Aligner::Cell is one node in the dynamic programming table.">Aligner::Cell</a> attribute that helps reconstruct the final alignment.  <a href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55b">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a87bd8e86052f19040ae6de8de844f208">Stage</a> { <br/>
 &#160;&#160;<a class="el" href="classmoltk_1_1Aligner.html#a87bd8e86052f19040ae6de8de844f208a7253e4f0fe5c7b9e10c0f4c2cfa44a37">EMPTY_STAGE</a>, 
 <a class="el" href="classmoltk_1_1Aligner.html#a87bd8e86052f19040ae6de8de844f208abe28a2050abcd2402e7b5cb421fdad12">SCORER_STAGE</a>, 
@@ -226,6 +237,35 @@ Protected Attributes</h2></td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a87bd8e86052f19040ae6de8de844f208a17726bca901d203d6ed01e5ff0072a6e"></a><!-- doxytag: member="RECURRENCE_COMPUTED_STAGE" ref="a87bd8e86052f19040ae6de8de844f208a17726bca901d203d6ed01e5ff0072a6e" args="" -->RECURRENCE_COMPUTED_STAGE</em>&nbsp;</td><td>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a87bd8e86052f19040ae6de8de844f208af3f1f98ed3b0cf9c314f1baacfb7ce33"></a><!-- doxytag: member="TRACED_STAGE" ref="a87bd8e86052f19040ae6de8de844f208af3f1f98ed3b0cf9c314f1baacfb7ce33" args="" -->TRACED_STAGE</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="adad98d3ee1780ac2f782bf87b466b55b"></a><!-- doxytag: member="moltk::Aligner::TracebackPointer" ref="adad98d3ee1780ac2f782bf87b466b55b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55b">moltk::Aligner::TracebackPointer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>TracebackPointer is an <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html" title="An Aligner::Cell is one node in the dynamic programming table.">Aligner::Cell</a> attribute that helps reconstruct the final alignment. </p>
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="adad98d3ee1780ac2f782bf87b466b55ba6da2cb4f6502904671847ec848503045"></a><!-- doxytag: member="TRACEBACK_UP" ref="adad98d3ee1780ac2f782bf87b466b55ba6da2cb4f6502904671847ec848503045" args="" -->TRACEBACK_UP</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="adad98d3ee1780ac2f782bf87b466b55bae1838f55d1bd7835d79ffee07b42467e"></a><!-- doxytag: member="TRACEBACK_UPLEFT" ref="adad98d3ee1780ac2f782bf87b466b55bae1838f55d1bd7835d79ffee07b42467e" args="" -->TRACEBACK_UPLEFT</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="adad98d3ee1780ac2f782bf87b466b55bab5353821ddae5b7ea5c6ce44d2d62d81"></a><!-- doxytag: member="TRACEBACK_LEFT" ref="adad98d3ee1780ac2f782bf87b466b55bab5353821ddae5b7ea5c6ce44d2d62d81" args="" -->TRACEBACK_LEFT</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="adad98d3ee1780ac2f782bf87b466b55baed40c1c6e565bbbee48d601aaafe0812"></a><!-- doxytag: member="TRACEBACK_DONE" ref="adad98d3ee1780ac2f782bf87b466b55baed40c1c6e565bbbee48d601aaafe0812" args="" -->TRACEBACK_DONE</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="adad98d3ee1780ac2f782bf87b466b55ba4de2c99df6a5314ce86b8d850734d220"></a><!-- doxytag: member="TRACEBACK_NOT_INITIALIZED" ref="adad98d3ee1780ac2f782bf87b466b55ba4de2c99df6a5314ce86b8d850734d220" args="" -->TRACEBACK_NOT_INITIALIZED</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>

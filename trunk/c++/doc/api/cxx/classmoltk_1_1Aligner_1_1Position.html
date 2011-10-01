@@ -101,7 +101,7 @@ Inheritance diagram for moltk::Aligner::Position:</div>
  <div class="center">
   <img src="classmoltk_1_1Aligner_1_1Position.png" usemap="#moltk::Aligner::Position_map" alt=""/>
   <map id="moltk::Aligner::Position_map" name="moltk::Aligner::Position_map">
-<area href="classmoltk_1_1MatrixScorer_1_1MatrixPosition.html" alt="moltk::MatrixScorer::MatrixPosition" shape="rect" coords="0,56,205,80"/>
+<area href="classmoltk_1_1MatrixScorer_1_1Position.html" alt="moltk::MatrixScorer::Position" shape="rect" coords="0,56,170,80"/>
 </map>
  </div></div>
 
@@ -111,7 +111,7 @@ Inheritance diagram for moltk::Aligner::Position:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#a34f4a85b4fd078f833f1c091fd629b2c">clone</a> () const =0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#a71e3fa5525ce82fc0a501d7ae2ce5803">~Position</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#ad821a592c44f7e0adf4aa65c17dd9260">score</a> (const <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a> &amp;rhs) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#abee26ee88b3c4b037a19c4f1dff749a4">score</a> (const <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a> &amp;rhs) const =0</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classmoltk_1_1Aligner_1_1Position.html" title="Aligner::Position represents a special biosequence residue that knows how to score itself during alig...">Aligner::Position</a> represents a special biosequence residue that knows how to score itself during alignment. </p>
@@ -147,9 +147,11 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Implemented in <a class="el" href="classmoltk_1_1MatrixScorer_1_1Position.html#ab0852e36f23a3640a814d2a0639c6d73">moltk::MatrixScorer::Position</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="ad821a592c44f7e0adf4aa65c17dd9260"></a><!-- doxytag: member="moltk::Aligner::Position::score" ref="ad821a592c44f7e0adf4aa65c17dd9260" args="(const Position &amp;rhs) const " -->
+<a class="anchor" id="abee26ee88b3c4b037a19c4f1dff749a4"></a><!-- doxytag: member="moltk::Aligner::Position::score" ref="abee26ee88b3c4b037a19c4f1dff749a4" args="(const Position &amp;rhs) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -158,11 +160,13 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a> &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td> const<code> [virtual]</code></td>
+          <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Implemented in <a class="el" href="classmoltk_1_1MatrixScorer_1_1Position.html#acd79aecf16ed94660d810af613a35c9c">moltk::MatrixScorer::Position</a>.</p>
 
 </div>
 </div>

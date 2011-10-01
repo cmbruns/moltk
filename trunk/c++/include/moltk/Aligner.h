@@ -24,7 +24,8 @@ public:
         public:
             virtual Position* clone() const = 0;
             virtual ~Position() {}
-            virtual moltk::units::Information score(const Position& rhs) const;
+            virtual moltk::units::Information score(const Position& rhs) const = 0;
+            virtual char getOneLetterCode() const = 0;
     };
 
 
@@ -45,21 +46,33 @@ public:
     class Scorer
     {
     public:
-        virtual Aligner::Position* createPosition(const FastaSequence&, int index) const = 0;
+        virtual Aligner::Position* createPosition(char sequenceLetter) const = 0;
+    };
+
+    /// TracebackPointer is an Aligner::Cell attribute that helps reconstruct the final alignment.
+    enum TracebackPointer
+    {
+        TRACEBACK_UP,
+        TRACEBACK_UPLEFT,
+        TRACEBACK_LEFT,
+        TRACEBACK_DONE,
+        TRACEBACK_NOT_INITIALIZED
     };
 
 
-    // An Aligner::Cell is one node in the dynamic programming table
+    /// An Aligner::Cell is one node in the dynamic programming table
     class Cell
     {
     public:
         // Gusfield nomenclature
         // TODO - remove s, which does not need to be stored
-        Information s; // Wm, score of aligning position S1(i) with S2(j)
-        Information v; // V, best score through this cell
-        Information g; // G, best ungapped score through this cell
-        Information e; // E, 
-        Information f; // F, 
+        /// s is the score of aligning position S1(i) with S2(j); (Wm in Gusfield's nomenclature.)
+        Information s; ///< Wm, score of aligning position S1(i) with S2(j)
+        Information v; ///< V, best score through this cell
+        Information g; ///< G, best ungapped score through this cell
+        Information e; ///< E, best score with gap in sequence 1
+        Information f; ///< F, best score with gap in sequence 2
+        TracebackPointer tracebackPointer; ///< breadcrumb to help reconstruct the final alignment
     };
     typedef std::vector<Cell> DpRow;
     typedef std::vector<DpRow> DpTable;
