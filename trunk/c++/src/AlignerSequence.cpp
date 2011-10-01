@@ -2,12 +2,12 @@
 
 namespace moltk {
 
-Aligner::Sequence::Sequence(const Sequence& rhs)
+Aligner::PositionList::PositionList(const PositionList& rhs)
 {
     *this = rhs;
 }
 
-Aligner::Sequence& Aligner::Sequence::operator=(const Sequence& rhs)
+Aligner::PositionList& Aligner::PositionList::operator=(const PositionList& rhs)
 {
     if (this == &rhs) return *this;
     assign(rhs.size(), NULL);
@@ -18,7 +18,7 @@ Aligner::Sequence& Aligner::Sequence::operator=(const Sequence& rhs)
 }
 
 /* virtual */
-Aligner::Sequence::~Sequence()
+Aligner::PositionList::~PositionList()
 {
     for (size_t i = 0; i < size(); ++i) {
         delete (*this)[i];
