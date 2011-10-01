@@ -81,56 +81,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="units_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef MOLTK_UNITS_H</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define MOLTK_UNITS_H</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="comment">/*</span>
-<a name="l00005"></a>00005 <span class="comment">#include &lt;boost/units/base_dimension.hpp&gt; // cannot include in MSVC 9</span>
-<a name="l00006"></a>00006 <span class="comment">#include &lt;string&gt;</span>
-<a name="l00007"></a>00007 <span class="comment">#include &lt;boost/units/io.hpp&gt;</span>
-<a name="l00008"></a>00008 <span class="comment">#include &lt;boost/units/systems/si/length.hpp&gt;</span>
-<a name="l00009"></a>00009 <span class="comment">#include &lt;boost/units/make_system.hpp&gt;</span>
-<a name="l00010"></a>00010 <span class="comment">#include &lt;boost/units/quantity.hpp&gt;</span>
-<a name="l00011"></a>00011 <span class="comment">#include &lt;boost/units/base_unit.hpp&gt;</span>
-<a name="l00012"></a>00012 <span class="comment">#include &lt;boost/units/derived_dimension.hpp&gt;</span>
-<a name="l00013"></a>00013 <span class="comment">*/</span>
-<a name="l00014"></a>00014 
-<a name="l00015"></a><a class="code" href="namespaceboost_1_1units.html">00015</a> <span class="keyword">namespace </span>boost { <span class="keyword">namespace </span>units {
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017     <span class="comment">/*</span>
-<a name="l00018"></a>00018 <span class="comment">    struct information_base_dimension </span>
-<a name="l00019"></a>00019 <span class="comment">        : boost::units::base_dimension&lt;information_base_dimension, 1342&gt;</span>
-<a name="l00020"></a>00020 <span class="comment">    { };</span>
-<a name="l00021"></a>00021 <span class="comment">    */</span>
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 }} <span class="comment">// namespace boost::units</span>
+<a name="l00004"></a>00004 <span class="comment">// Boost::units does not play well with gcc-xml and msvc 9</span>
+<a name="l00005"></a>00005 <span class="comment">// so I decided to roll my own.</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a><a class="code" href="namespacemoltk_1_1units.html">00007</a> <span class="keyword">namespace </span>moltk { <span class="keyword">namespace </span>units {
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 
+<a name="l00010"></a>00010 <span class="comment">// typedef double Information;</span>
+<a name="l00011"></a>00011 <span class="comment">// static const Information bit;</span>
+<a name="l00012"></a><a class="code" href="structmoltk_1_1units_1_1Information.html">00012</a>     <span class="keyword">struct </span><a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a> 
+<a name="l00013"></a>00013     {
+<a name="l00014"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#aa94185da2ab021e287eb05a2ef5e1099">00014</a>         <a class="code" href="structmoltk_1_1units_1_1Information.html#aa94185da2ab021e287eb05a2ef5e1099">Information</a>() {}
+<a name="l00015"></a>00015 
+<a name="l00016"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a19e93992458df59116737bd92d330c6a">00016</a>         <a class="code" href="structmoltk_1_1units_1_1Information.html#a19e93992458df59116737bd92d330c6a">Information</a>(<span class="keywordtype">double</span> d) : <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>(d) {}
+<a name="l00017"></a>00017 
+<a name="l00018"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a4c8f038b253cd72946ad7872bbc56e21">00018</a>         <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a> <a class="code" href="structmoltk_1_1units_1_1Information.html#a4c8f038b253cd72946ad7872bbc56e21">operator+</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a>&amp; rhs)<span class="keyword"> const </span>{
+<a name="l00019"></a>00019             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#aa94185da2ab021e287eb05a2ef5e1099">Information</a>(<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a> + rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>);
+<a name="l00020"></a>00020         }
+<a name="l00021"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a71bc6d59c83e5368dce5a4e08efc43dc">00021</a>         <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a> <a class="code" href="structmoltk_1_1units_1_1Information.html#a71bc6d59c83e5368dce5a4e08efc43dc">operator-</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a>&amp; rhs)<span class="keyword"> const </span>{
+<a name="l00022"></a>00022             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#aa94185da2ab021e287eb05a2ef5e1099">Information</a>(<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a> - rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>);
+<a name="l00023"></a>00023         }
 <a name="l00024"></a>00024 
-<a name="l00025"></a>00025 
-<a name="l00026"></a><a class="code" href="namespacemoltk_1_1units.html">00026</a> <span class="keyword">namespace </span>moltk { <span class="keyword">namespace </span>units {
-<a name="l00027"></a>00027 
+<a name="l00025"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#ac2bc180babd26699c12d2873dd36b9d0">00025</a>         <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a> <a class="code" href="structmoltk_1_1units_1_1Information.html#ac2bc180babd26699c12d2873dd36b9d0">operator-</a>()<span class="keyword"> const </span>{
+<a name="l00026"></a>00026             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#aa94185da2ab021e287eb05a2ef5e1099">Information</a>(-<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>);
+<a name="l00027"></a>00027         }
 <a name="l00028"></a>00028 
-<a name="l00029"></a>00029 <span class="comment">/*</span>
-<a name="l00030"></a>00030 <span class="comment">typedef information_base_dimension::dimension_type information_dimension;</span>
-<a name="l00031"></a>00031 <span class="comment"></span>
-<a name="l00032"></a>00032 <span class="comment">struct bit_base_unit : public boost::units::base_unit&lt;bit_base_unit, information_dimension, 1&gt;</span>
-<a name="l00033"></a>00033 <span class="comment">{</span>
-<a name="l00034"></a>00034 <span class="comment">    static std::string name() {return (&quot;bit&quot;);}</span>
-<a name="l00035"></a>00035 <span class="comment">    static std::string symbol() {return (&quot;bit&quot;);}</span>
-<a name="l00036"></a>00036 <span class="comment">};</span>
-<a name="l00037"></a>00037 <span class="comment"></span>
-<a name="l00038"></a>00038 <span class="comment">typedef bit_base_unit::unit_type bit_t;</span>
-<a name="l00039"></a>00039 <span class="comment">BOOST_UNITS_STATIC_CONSTANT(bit, bit_t);</span>
-<a name="l00040"></a>00040 <span class="comment"></span>
-<a name="l00041"></a>00041 <span class="comment">typedef boost::units::make_system&lt;</span>
-<a name="l00042"></a>00042 <span class="comment">    bit_base_unit&gt;::type unit_system;</span>
-<a name="l00043"></a>00043 <span class="comment"></span>
-<a name="l00044"></a>00044 <span class="comment">typedef boost::units::quantity&lt;bit_t&gt; Information;</span>
-<a name="l00045"></a>00045 <span class="comment">*/</span>
+<a name="l00029"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a4aa5f4bbc1e17a71c3bc8c3dd9afe86a">00029</a>         <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a> <a class="code" href="structmoltk_1_1units_1_1Information.html#a4aa5f4bbc1e17a71c3bc8c3dd9afe86a">operator*</a>(<span class="keywordtype">double</span> rhs)<span class="keyword"> const </span>{
+<a name="l00030"></a>00030             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#aa94185da2ab021e287eb05a2ef5e1099">moltk::units::Information</a>(<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a> * rhs);
+<a name="l00031"></a>00031         }
+<a name="l00032"></a>00032 
+<a name="l00033"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a9df141b04882d35690c06beaf51c89c2">00033</a>         <span class="keywordtype">bool</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a9df141b04882d35690c06beaf51c89c2">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a>&amp; rhs)<span class="keyword"> const </span>{
+<a name="l00034"></a>00034             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a> &lt; rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>;
+<a name="l00035"></a>00035         }
+<a name="l00036"></a>00036 
+<a name="l00037"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#aeb70de8ea146c13977caff0ffb7b283e">00037</a>         <span class="keywordtype">bool</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#aeb70de8ea146c13977caff0ffb7b283e">operator&gt;</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a>&amp; rhs)<span class="keyword"> const </span>{
+<a name="l00038"></a>00038             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a> &gt; rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>;
+<a name="l00039"></a>00039         }
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">00041</a>         <span class="keywordtype">double</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>;
+<a name="l00042"></a>00042     };
+<a name="l00043"></a>00043 
+<a name="l00044"></a><a class="code" href="structmoltk_1_1units_1_1bit__unit.html">00044</a>     <span class="keyword">struct </span><a class="code" href="structmoltk_1_1units_1_1bit__unit.html">bit_unit</a> {
+<a name="l00045"></a>00045     };
 <a name="l00046"></a>00046 
-<a name="l00047"></a><a class="code" href="namespacemoltk_1_1units.html#afa99b2cef8f3dc967c1f81e68a4a33cf">00047</a> <span class="keyword">typedef</span> <span class="keywordtype">double</span> <a class="code" href="namespacemoltk_1_1units.html#afa99b2cef8f3dc967c1f81e68a4a33cf">Information</a>;
-<a name="l00048"></a><a class="code" href="namespacemoltk_1_1units.html#aa85a8add4430c4f6fcc42229e579c7e3">00048</a> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespacemoltk_1_1units.html#afa99b2cef8f3dc967c1f81e68a4a33cf">Information</a> <a class="code" href="namespacemoltk_1_1units.html#aa85a8add4430c4f6fcc42229e579c7e3">bit</a>;
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050 }} <span class="comment">// namespace moltk::units</span>
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="preprocessor">#endif // MOLTK_UNITS_H</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span>
+<a name="l00047"></a><a class="code" href="namespacemoltk_1_1units.html#a70c71ab45afba6f550bf4ffc534c8baa">00047</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1bit__unit.html">bit_unit</a> <a class="code" href="namespacemoltk_1_1units.html#a70c71ab45afba6f550bf4ffc534c8baa">bit</a> = <a class="code" href="structmoltk_1_1units_1_1bit__unit.html">bit_unit</a>();
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 }} <span class="comment">// namespace moltk::units</span>
+<a name="l00050"></a>00050 
+<a name="l00051"></a><a class="code" href="units_8h.html#a737ea266296745c480265e6c665caea5">00051</a> <span class="keyword">inline</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> <a class="code" href="units_8h.html#a737ea266296745c480265e6c665caea5">operator*</a>(<span class="keywordtype">double</span> lhs, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1bit__unit.html">moltk::units::bit_unit</a>&amp; rhs) {
+<a name="l00052"></a>00052     <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>(lhs);
+<a name="l00053"></a>00053 }
+<a name="l00054"></a>00054 
+<a name="l00055"></a><a class="code" href="units_8h.html#acb36bee2e8ca2f4dd46b0594322c5493">00055</a> <span class="keyword">inline</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> <a class="code" href="units_8h.html#a737ea266296745c480265e6c665caea5">operator*</a>(<span class="keywordtype">double</span> lhs, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>&amp; rhs) {
+<a name="l00056"></a>00056     <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>(lhs * rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>);
+<a name="l00057"></a>00057 }
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059 <span class="preprocessor">#endif // MOLTK_UNITS_H</span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->

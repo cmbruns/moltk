@@ -1,53 +1,60 @@
 #ifndef MOLTK_UNITS_H
 #define MOLTK_UNITS_H
 
-/*
-#include <boost/units/base_dimension.hpp> // cannot include in MSVC 9
-#include <string>
-#include <boost/units/io.hpp>
-#include <boost/units/systems/si/length.hpp>
-#include <boost/units/make_system.hpp>
-#include <boost/units/quantity.hpp>
-#include <boost/units/base_unit.hpp>
-#include <boost/units/derived_dimension.hpp>
-*/
-
-namespace boost { namespace units {
-
-    /*
-    struct information_base_dimension 
-        : boost::units::base_dimension<information_base_dimension, 1342>
-    { };
-    */
-
-}} // namespace boost::units
-
+// Boost::units does not play well with gcc-xml and msvc 9
+// so I decided to roll my own.
 
 namespace moltk { namespace units {
 
 
-/*
-typedef information_base_dimension::dimension_type information_dimension;
+// typedef double Information;
+// static const Information bit;
+    struct Information 
+    {
+        Information() {}
 
-struct bit_base_unit : public boost::units::base_unit<bit_base_unit, information_dimension, 1>
-{
-    static std::string name() {return ("bit");}
-    static std::string symbol() {return ("bit");}
-};
+        Information(double d) : value(d) {}
 
-typedef bit_base_unit::unit_type bit_t;
-BOOST_UNITS_STATIC_CONSTANT(bit, bit_t);
+        Information operator+(const Information& rhs) const {
+            return Information(value + rhs.value);
+        }
+        Information operator-(const Information& rhs) const {
+            return Information(value - rhs.value);
+        }
 
-typedef boost::units::make_system<
-    bit_base_unit>::type unit_system;
+        Information operator-() const {
+            return Information(-value);
+        }
 
-typedef boost::units::quantity<bit_t> Information;
-*/
+        Information operator*(double rhs) const {
+            return moltk::units::Information(value * rhs);
+        }
 
-typedef double Information;
-static const Information bit;
+        bool operator<(const Information& rhs) const {
+            return value < rhs.value;
+        }
+
+        bool operator>(const Information& rhs) const {
+            return value > rhs.value;
+        }
+
+        double value;
+    };
+
+    struct bit_unit {
+    };
+
+    static const bit_unit bit = bit_unit();
 
 }} // namespace moltk::units
+
+inline moltk::units::Information operator*(double lhs, const moltk::units::bit_unit& rhs) {
+    return moltk::units::Information(lhs);
+}
+
+inline moltk::units::Information operator*(double lhs, const moltk::units::Information& rhs) {
+    return moltk::units::Information(lhs * rhs.value);
+}
 
 #endif // MOLTK_UNITS_H
 
