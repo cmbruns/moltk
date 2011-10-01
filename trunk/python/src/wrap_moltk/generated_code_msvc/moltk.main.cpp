@@ -2,13 +2,13 @@
 
 #include "boost/python.hpp"
 
-#include "moltk/pdb/atom.h"
+#include "wrap_moltk.h"
 
-#include "generated_code_msvc/atom.pypp.hpp"
+#include "generated_code_msvc/structure.pypp.hpp"
 
 namespace bp = boost::python;
 
 BOOST_PYTHON_MODULE(moltk){
-    register_Atom_class();
+    register_Structure_class();
 }
 

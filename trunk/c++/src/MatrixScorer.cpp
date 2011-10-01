@@ -1,5 +1,6 @@
 #include "moltk/MatrixScorer.h"
 #include <sstream>
+#include <cassert>
 
 using namespace std;
 using namespace moltk;

@@ -1,6 +1,11 @@
 #ifndef WRAP_MOLTK_PYPLUSPLUS_H
 #define WRAP_MOLTK_PYPLUSPLUS_H
 
+// Try to avoid a boost include problem on Windows
+#ifdef _MSC_VER
+#define BOOST_MSVC _MSC_VER
+#endif
+
 #include "moltk.h"
 #include <vector>
 

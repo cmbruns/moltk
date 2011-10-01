@@ -1,4 +1,4 @@
-#include "moltk/pdb.h"
+#include "moltk.h"
 
 using namespace std;
 using namespace moltk;
@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
     }
     std::string pdbFileName(argv[1]);
 
-    pdb::Structure pdbStructure(pdbFileName);
+    Structure pdbStructure(pdbFileName);
 
     return 0;
 }
