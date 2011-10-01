@@ -2,10 +2,12 @@
 #define MOLTK_ALIGN_ALIGNMENT_H
 
 #include <iostream>
+#include <string>
+#include <vector>
 
 namespace moltk {
 
-class Alignment
+class Alignment : public std::vector< std::string >
 {
 };
 

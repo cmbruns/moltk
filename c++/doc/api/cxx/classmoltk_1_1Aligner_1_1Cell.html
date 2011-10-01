@@ -91,6 +91,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="moltk::Aligner::Cell" -->
+<p>An <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html" title="An Aligner::Cell is one node in the dynamic programming table.">Aligner::Cell</a> is one node in the dynamic programming table.  
+ <a href="classmoltk_1_1Aligner_1_1Cell.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Aligner_8h_source.html">Aligner.h</a>&gt;</code></p>
 
 <p><a href="classmoltk_1_1Aligner_1_1Cell-members.html">List of all members.</a></p>
@@ -98,12 +101,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a03a7a56b79f7ce7c3f714d520d508309">s</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">s is the score of aligning position S1(i) with S2(j); (Wm in Gusfield's nomenclature.)  <a href="#a03a7a56b79f7ce7c3f714d520d508309"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a967f02740eae5a328ceb32258f4d21ac">v</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">V, best score through this cell.  <a href="#a967f02740eae5a328ceb32258f4d21ac"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a921184c8186d6b807e1ccc0d1c1c1146">g</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">G, best ungapped score through this cell.  <a href="#a921184c8186d6b807e1ccc0d1c1c1146"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#ae6664ca3b6f5ad5d7030f24ec5bd2b11">e</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">E, best score with gap in sequence 1.  <a href="#ae6664ca3b6f5ad5d7030f24ec5bd2b11"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a2deb43ad184b117f41de5f4224d93513">f</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">F, best score with gap in sequence 2.  <a href="#a2deb43ad184b117f41de5f4224d93513"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55b">TracebackPointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a67ff15b61646a1ec1200f5e5874d4f61">tracebackPointer</a></td></tr>
 </table>
-<hr/><h2>Member Data Documentation</h2>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>An <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html" title="An Aligner::Cell is one node in the dynamic programming table.">Aligner::Cell</a> is one node in the dynamic programming table. </p>
+</div><hr/><h2>Member Data Documentation</h2>
 <a class="anchor" id="ae6664ca3b6f5ad5d7030f24ec5bd2b11"></a><!-- doxytag: member="moltk::Aligner::Cell::e" ref="ae6664ca3b6f5ad5d7030f24ec5bd2b11" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -114,6 +125,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>E, best score with gap in sequence 1. </p>
 
 </div>
 </div>
@@ -128,6 +141,8 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>F, best score with gap in sequence 2. </p>
+
 </div>
 </div>
 <a class="anchor" id="a921184c8186d6b807e1ccc0d1c1c1146"></a><!-- doxytag: member="moltk::Aligner::Cell::g" ref="a921184c8186d6b807e1ccc0d1c1c1146" args="" -->
@@ -141,6 +156,8 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>G, best ungapped score through this cell. </p>
+
 </div>
 </div>
 <a class="anchor" id="a03a7a56b79f7ce7c3f714d520d508309"></a><!-- doxytag: member="moltk::Aligner::Cell::s" ref="a03a7a56b79f7ce7c3f714d520d508309" args="" -->
@@ -149,6 +166,22 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a03a7a56b79f7ce7c3f714d520d508309">moltk::Aligner::Cell::s</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>s is the score of aligning position S1(i) with S2(j); (Wm in Gusfield's nomenclature.) </p>
+<p>Wm, score of aligning position S1(i) with S2(j) </p>
+
+</div>
+</div>
+<a class="anchor" id="a67ff15b61646a1ec1200f5e5874d4f61"></a><!-- doxytag: member="moltk::Aligner::Cell::tracebackPointer" ref="a67ff15b61646a1ec1200f5e5874d4f61" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55b">TracebackPointer</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a67ff15b61646a1ec1200f5e5874d4f61">moltk::Aligner::Cell::tracebackPointer</a></td>
         </tr>
       </table>
 </div>
@@ -166,6 +199,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>V, best score through this cell. </p>
 
 </div>
 </div>

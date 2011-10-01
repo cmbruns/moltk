@@ -38,6 +38,19 @@ namespace moltk { namespace units {
             return value > rhs.value;
         }
 
+        bool operator<=(const Information& rhs) const {
+            return value <= rhs.value;
+        }
+
+        bool operator>=(const Information& rhs) const {
+            return value >= rhs.value;
+        }
+
+        std::ostream& print(std::ostream& os) const {
+            os << value << " bits"; // TODO
+            return os;
+        }
+
         double value;
     };
 
@@ -47,6 +60,10 @@ namespace moltk { namespace units {
     static const bit_unit bit = bit_unit();
 
 }} // namespace moltk::units
+
+inline std::ostream& operator<<(std::ostream& os, const moltk::units::Information& info) {
+    return info.print(os);
+}
 
 inline moltk::units::Information operator*(double lhs, const moltk::units::bit_unit& rhs) {
     return moltk::units::Information(lhs);

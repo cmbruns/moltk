@@ -17,19 +17,23 @@ public:
 
     explicit MatrixScorer(const std::string& matrixString);
     explicit MatrixScorer(std::istream& matrixStream);
-    virtual Aligner::Position* createPosition(const FastaSequence&, int index) const;
+    virtual Aligner::Position* createPosition(char sequenceLetter) const;
     std::istream& loadStream(std::istream&);
 
     static const MatrixScorer& getBlosum62Scorer();
 
 
-    class MatrixPosition : public Aligner::Position
+    class Position : public Aligner::Position
     {
     public:
+        virtual Position* clone() const;
+        virtual moltk::units::Information score(const Aligner::Position& rhs) const;
+        virtual char getOneLetterCode() const {return oneLetterCode;}
         // cache values for quick score lookup
         double scoreWeight;
         int columnIndex;
-        Information* rowPtr;
+        const Information* rowPtr;
+        char oneLetterCode;
     };
 
 protected:
