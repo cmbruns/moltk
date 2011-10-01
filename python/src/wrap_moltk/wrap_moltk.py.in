@@ -5,7 +5,8 @@ from doxygen_doc_extractor import doxygen_doc_extractor
 mb = module_builder.module_builder_t(
     files = ["@MOLTK_WRAP_INCLUDE_FILES@",]
     , gccxml_path = "@GCCXML_EXECUTABLE@"
-    , include_paths = ["@MOLTK_INCLUDE_DIR@",]
+    , include_paths = ["@MOLTK_INCLUDE_DIR@"
+                     , "@Boost_INCLUDE_DIRS@"]
     # , indexing_suite_version = 2
     , define_symbols = ["_HAS_TR1=0"])
 

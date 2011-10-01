@@ -71,14 +71,17 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
             "${WRAP_MOLTK_PY}"
             doxygen_doc_extractor.py
             ${MOLTK_HEADERS}
+            wrap_moltk.h
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
         COMMENT "Creating moltk wrapper source files.  Examine wrap_moltk.err for details."
     )
     add_custom_target(MoltkPyplusplusWrappers
-        DEPENDS "${MOLTK_GEN_STAMP}"
+        DEPENDS 
+            "${MOLTK_GEN_STAMP}"
         SOURCES
             wrap_moltk.py.in
             doxygen_doc_extractor.py
+            wrap_moltk.h
         COMMENT "Generating python wrapper source code"
     )
     add_dependencies(MoltkPythonModule MoltkPyplusplusWrappers)

@@ -1,5 +1,6 @@
 #include "moltk/Aligner.h"
 #include "moltk/MatrixScorer.h"
+#include <cassert>
 
 using namespace std;
 using namespace moltk;
