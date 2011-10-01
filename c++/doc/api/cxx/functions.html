@@ -100,6 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_m"><span>m</span></a></li>
       <li><a href="#index_n"><span>n</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_t"><span>t</span></a></li>
@@ -165,6 +166,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>compute_traceback()
 : <a class="el" href="classmoltk_1_1Aligner.html#ac6170833b8d8c742719e45186aff85b8">moltk::Aligner</a>
 </li>
+<li>createPosition()
+: <a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a149ead4564be20cf22b4d367ab3f3d69">moltk::Aligner::Scorer</a>
+, <a class="el" href="classmoltk_1_1MatrixScorer.html#a0eda33b8a2625cd27fb153abf1c990bb">moltk::MatrixScorer</a>
+</li>
 </ul>
 
 
@@ -222,10 +227,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>getRecordType()
 : <a class="el" href="classmoltk_1_1Structure_1_1Atom.html#ae332a281f07f85e306955108a210125d">moltk::Structure::Atom</a>
-</li>
-<li>getSequence()
-: <a class="el" href="classmoltk_1_1MatrixScorer.html#a8e51bccb0e64daee455a44ff1aa632ae">moltk::MatrixScorer</a>
-, <a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a699b901c8aacee2f482e5e40d3598361">moltk::Aligner::Scorer</a>
 </li>
 </ul>
 
@@ -303,10 +304,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="structmoltk_1_1units_1_1Information.html#a9df141b04882d35690c06beaf51c89c2">moltk::units::Information</a>
 </li>
 <li>operator=()
-: <a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html#af7610877ab6291a8821e00f8938f015b">moltk::Aligner::Sequence</a>
+: <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html#a23e16dfb25bddd119f7794248a0cb62d">moltk::Aligner::PositionList</a>
 </li>
 <li>operator&gt;()
 : <a class="el" href="structmoltk_1_1units_1_1Information.html#aeb70de8ea146c13977caff0ffb7b283e">moltk::units::Information</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>PositionList()
+: <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html#a7f3325aa682fd4f510b130f1b3c453ab">moltk::Aligner::PositionList</a>
 </li>
 </ul>
 
@@ -344,13 +352,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classmoltk_1_1MatrixScorer_1_1MatrixPosition.html#ab56110fb0359b314eb714b7c661badb2">moltk::MatrixScorer::MatrixPosition</a>
 </li>
 <li>seq1
-: <a class="el" href="classmoltk_1_1Aligner.html#ae769b446e4fb785cf173b48b8e48d485">moltk::Aligner</a>
+: <a class="el" href="classmoltk_1_1Aligner.html#ac285f6a9ad3b9652ef20933e54fc0d21">moltk::Aligner</a>
 </li>
 <li>seq2
-: <a class="el" href="classmoltk_1_1Aligner.html#ab96b9f2203af907a328f7b787dc92614">moltk::Aligner</a>
-</li>
-<li>Sequence()
-: <a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html#a47a7a92d5d72a278466741693da69baf">moltk::Aligner::Sequence</a>
+: <a class="el" href="classmoltk_1_1Aligner.html#a5358527ccea8ec4afca70a74abe043f9">moltk::Aligner</a>
 </li>
 <li>SEQUENCE_STAGE
 : <a class="el" href="classmoltk_1_1Aligner.html#a87bd8e86052f19040ae6de8de844f208abf5f1602c88dd0756aca9c14d86f95d1">moltk::Aligner</a>
@@ -359,7 +364,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classmoltk_1_1Aligner.html#a87bd8e86052f19040ae6de8de844f208">moltk::Aligner</a>
 </li>
 <li>Structure()
-: <a class="el" href="classmoltk_1_1Structure.html#a665ec428e70dd27665ac7c31063faf19">moltk::Structure</a>
+: <a class="el" href="classmoltk_1_1Structure.html#a4384fae0d931fcfd4ec2ce6754cd83d5">moltk::Structure</a>
 </li>
 </ul>
 
@@ -388,8 +393,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>~Position()
 : <a class="el" href="classmoltk_1_1Aligner_1_1Position.html#a71e3fa5525ce82fc0a501d7ae2ce5803">moltk::Aligner::Position</a>
 </li>
-<li>~Sequence()
-: <a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html#a327c39b82e965ea8a1b97a2509d9b747">moltk::Aligner::Sequence</a>
+<li>~PositionList()
+: <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html#a51d9dc02420d4c9b8177705feea15467">moltk::Aligner::PositionList</a>
 </li>
 </ul>
 </div>

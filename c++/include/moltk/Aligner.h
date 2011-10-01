@@ -28,15 +28,15 @@ public:
     };
 
 
-    /// Aligner::Sequence is a special sequence containing Aligner::Positions,
+    /// Aligner::PositionList is a special sequence containing Aligner::Positions,
     /// which know how to score themselves.
-    class Sequence : public std::vector<Position*>
+    class PositionList : public std::vector<Position*>
     {
     public:
-        Sequence() {}
-        Sequence(const Sequence& rhs);
-        virtual ~Sequence();
-        Sequence& operator=(const Sequence& rhs);
+        PositionList() {}
+        PositionList(const PositionList& rhs);
+        virtual ~PositionList();
+        PositionList& operator=(const PositionList& rhs);
     };
 
 
@@ -45,7 +45,7 @@ public:
     class Scorer
     {
     public:
-        virtual Sequence getSequence(const FastaSequence&) const = 0;
+        virtual Aligner::Position* createPosition(const FastaSequence&, int index) const = 0;
     };
 
 
@@ -88,7 +88,7 @@ public:
 
 protected:
     void init();
-    void init(const Sequence& seq1Param, const Sequence& seq2Param);
+    void init(const PositionList& seq1Param, const PositionList& seq2Param);
     void allocate_dp_table();
     void initialize_dp_table();
     void initialize_dp_row(size_t rowIndex, DpRow& row);
@@ -102,8 +102,8 @@ protected:
     size_t m; // length of sequence 1
     size_t n; // length of sequence 2
     DpTable dpTable;
-    Sequence seq1;
-    Sequence seq2;
+    PositionList seq1;
+    PositionList seq2;
     Scorer* scorer;
     Alignment alignment;
 };

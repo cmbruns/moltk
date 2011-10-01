@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>MolTK: moltk::Aligner::Scorer Class Reference</title>
+<title>MolTK: moltk::Aligner::PositionList Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -79,7 +79,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li class="navelem"><a class="el" href="namespacemoltk.html">moltk</a>      </li>
       <li class="navelem"><a class="el" href="classmoltk_1_1Aligner.html">Aligner</a>      </li>
-      <li class="navelem"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html">Scorer</a>      </li>
+      <li class="navelem"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a>      </li>
     </ul>
   </div>
 </div>
@@ -87,59 +87,93 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">moltk::Aligner::Scorer Class Reference</div>  </div>
+<div class="title">moltk::Aligner::PositionList Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="moltk::Aligner::Scorer" -->
-<p><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html" title="Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions.">Aligner::Scorer</a> converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions.  
- <a href="classmoltk_1_1Aligner_1_1Scorer.html#details">More...</a></p>
+<!-- doxytag: class="moltk::Aligner::PositionList" --><!-- doxytag: inherits="std::vector" -->
+<p><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html" title="Aligner::PositionList is a special sequence containing Aligner::Positions, which know how to score th...">Aligner::PositionList</a> is a special sequence containing Aligner::Positions, which know how to score themselves.  
+ <a href="classmoltk_1_1Aligner_1_1PositionList.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Aligner_8h_source.html">Aligner.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for moltk::Aligner::Scorer:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classmoltk_1_1Aligner_1_1Scorer.png" usemap="#moltk::Aligner::Scorer_map" alt=""/>
-  <map id="moltk::Aligner::Scorer_map" name="moltk::Aligner::Scorer_map">
-<area href="classmoltk_1_1MatrixScorer.html" alt="moltk::MatrixScorer" shape="rect" coords="0,56,132,80"/>
-</map>
- </div></div>
 
-<p><a href="classmoltk_1_1Aligner_1_1Scorer-members.html">List of all members.</a></p>
+<p>Inherits std::vector&lt; T &gt;.</p>
+
+<p><a href="classmoltk_1_1Aligner_1_1PositionList-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Aligner::Position</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a149ead4564be20cf22b4d367ab3f3d69">createPosition</a> (const <a class="el" href="classmoltk_1_1FastaSequence.html">FastaSequence</a> &amp;, int index) const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html#a7f3325aa682fd4f510b130f1b3c453ab">PositionList</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html#a75a1f90471fc0c93eeb1190984c4b4d4">PositionList</a> (const <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> &amp;rhs)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html#a51d9dc02420d4c9b8177705feea15467">~PositionList</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html#a23e16dfb25bddd119f7794248a0cb62d">operator=</a> (const <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> &amp;rhs)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html" title="Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions.">Aligner::Scorer</a> converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions. </p>
-</div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a149ead4564be20cf22b4d367ab3f3d69"></a><!-- doxytag: member="moltk::Aligner::Scorer::createPosition" ref="a149ead4564be20cf22b4d367ab3f3d69" args="(const FastaSequence &amp;, int index) const =0" -->
+<div class="textblock"><p><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html" title="Aligner::PositionList is a special sequence containing Aligner::Positions, which know how to score th...">Aligner::PositionList</a> is a special sequence containing Aligner::Positions, which know how to score themselves. </p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a7f3325aa682fd4f510b130f1b3c453ab"></a><!-- doxytag: member="moltk::Aligner::PositionList::PositionList" ref="a7f3325aa682fd4f510b130f1b3c453ab" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Aligner::Position</a>* moltk::Aligner::Scorer::createPosition </td>
+          <td class="memname">moltk::Aligner::PositionList::PositionList </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classmoltk_1_1FastaSequence.html">FastaSequence</a> &amp;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>index</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classmoltk_1_1MatrixScorer.html#a0eda33b8a2625cd27fb153abf1c990bb">moltk::MatrixScorer</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a75a1f90471fc0c93eeb1190984c4b4d4"></a><!-- doxytag: member="moltk::Aligner::PositionList::PositionList" ref="a75a1f90471fc0c93eeb1190984c4b4d4" args="(const PositionList &amp;rhs)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">moltk::Aligner::PositionList::PositionList </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a51d9dc02420d4c9b8177705feea15467"></a><!-- doxytag: member="moltk::Aligner::PositionList::~PositionList" ref="a51d9dc02420d4c9b8177705feea15467" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual moltk::Aligner::PositionList::~PositionList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a23e16dfb25bddd119f7794248a0cb62d"></a><!-- doxytag: member="moltk::Aligner::PositionList::operator=" ref="a23e16dfb25bddd119f7794248a0cb62d" args="(const PositionList &amp;rhs)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a>&amp; moltk::Aligner::PositionList::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>

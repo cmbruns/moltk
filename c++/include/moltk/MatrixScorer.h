@@ -17,7 +17,7 @@ public:
 
     explicit MatrixScorer(const std::string& matrixString);
     explicit MatrixScorer(std::istream& matrixStream);
-    virtual Aligner::Sequence getSequence(const FastaSequence&) const;
+    virtual Aligner::Position* createPosition(const FastaSequence&, int index) const;
     std::istream& loadStream(std::istream&);
 
     static const MatrixScorer& getBlosum62Scorer();

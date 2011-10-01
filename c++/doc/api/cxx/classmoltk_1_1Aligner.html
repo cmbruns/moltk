@@ -107,10 +107,10 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html">Cell</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html" title="Aligner::Position represents a special biosequence residue that knows how to score itself during alig...">Aligner::Position</a> represents a special biosequence residue that knows how to score itself during alignment.  <a href="classmoltk_1_1Aligner_1_1Position.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html" title="Aligner::PositionList is a special sequence containing Aligner::Positions, which know how to score th...">Aligner::PositionList</a> is a special sequence containing Aligner::Positions, which know how to score themselves.  <a href="classmoltk_1_1Aligner_1_1PositionList.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html">Scorer</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html" title="Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions.">Aligner::Scorer</a> converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions.  <a href="classmoltk_1_1Aligner_1_1Scorer.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html">Sequence</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html" title="Aligner::Sequence is a special sequence containing Aligner::Positions, which know how to score themse...">Aligner::Sequence</a> is a special sequence containing Aligner::Positions, which know how to score themselves.  <a href="classmoltk_1_1Aligner_1_1Sequence.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a87bd8e86052f19040ae6de8de844f208">Stage</a> { <br/>
@@ -139,7 +139,7 @@ Static Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a5a7bc14266d9a09c00133aeee98ae039">init</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#aeb2de6233c26e5aa5a7314222e7e2581">init</a> (const <a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html">Sequence</a> &amp;seq1Param, const <a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html">Sequence</a> &amp;seq2Param)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a91246beda65473c0de9baf34d9674602">init</a> (const <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> &amp;seq1Param, const <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> &amp;seq2Param)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#ae88d9a29786521dacbf511a8097bb063">allocate_dp_table</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a00167b2c4ea9d0e01e5ed56e8946b713">initialize_dp_table</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a47aa0cc272a3aa95d23dfec38d7883b0">initialize_dp_row</a> (size_t rowIndex, <a class="el" href="classmoltk_1_1Aligner.html#a46c1b1a9807e0b189d8eee597df4d1fe">DpRow</a> &amp;row)</td></tr>
@@ -154,8 +154,8 @@ Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#afedcb89907a4037bccb3754a6e2eb2a3">m</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a3ee7cf4bee96c010e3644615f45f7dcc">n</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a8c586048912c20d16e8446694019f412">DpTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a3e56bf282680824b74a59506f91f93d9">dpTable</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html">Sequence</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#ae769b446e4fb785cf173b48b8e48d485">seq1</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html">Sequence</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#ab96b9f2203af907a328f7b787dc92614">seq2</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#ac285f6a9ad3b9652ef20933e54fc0d21">seq1</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a5358527ccea8ec4afca70a74abe043f9">seq2</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html">Scorer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a3ef4257103af46ae12c79b088e8343ae">scorer</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#ab2cbd165a86522352756f28b0231e7a2">alignment</a></td></tr>
 </table>
@@ -392,20 +392,20 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aeb2de6233c26e5aa5a7314222e7e2581"></a><!-- doxytag: member="moltk::Aligner::init" ref="aeb2de6233c26e5aa5a7314222e7e2581" args="(const Sequence &amp;seq1Param, const Sequence &amp;seq2Param)" -->
+<a class="anchor" id="a91246beda65473c0de9baf34d9674602"></a><!-- doxytag: member="moltk::Aligner::init" ref="a91246beda65473c0de9baf34d9674602" args="(const PositionList &amp;seq1Param, const PositionList &amp;seq2Param)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void moltk::Aligner::init </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html">Sequence</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> &amp;&#160;</td>
           <td class="paramname"><em>seq1Param</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html">Sequence</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> &amp;&#160;</td>
           <td class="paramname"><em>seq2Param</em>&#160;</td>
         </tr>
         <tr>
@@ -580,12 +580,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae769b446e4fb785cf173b48b8e48d485"></a><!-- doxytag: member="moltk::Aligner::seq1" ref="ae769b446e4fb785cf173b48b8e48d485" args="" -->
+<a class="anchor" id="ac285f6a9ad3b9652ef20933e54fc0d21"></a><!-- doxytag: member="moltk::Aligner::seq1" ref="ac285f6a9ad3b9652ef20933e54fc0d21" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html">Sequence</a> <a class="el" href="classmoltk_1_1Aligner.html#ae769b446e4fb785cf173b48b8e48d485">moltk::Aligner::seq1</a><code> [protected]</code></td>
+          <td class="memname"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> <a class="el" href="classmoltk_1_1Aligner.html#ac285f6a9ad3b9652ef20933e54fc0d21">moltk::Aligner::seq1</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -593,12 +593,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab96b9f2203af907a328f7b787dc92614"></a><!-- doxytag: member="moltk::Aligner::seq2" ref="ab96b9f2203af907a328f7b787dc92614" args="" -->
+<a class="anchor" id="a5358527ccea8ec4afca70a74abe043f9"></a><!-- doxytag: member="moltk::Aligner::seq2" ref="a5358527ccea8ec4afca70a74abe043f9" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmoltk_1_1Aligner_1_1Sequence.html">Sequence</a> <a class="el" href="classmoltk_1_1Aligner.html#ab96b9f2203af907a328f7b787dc92614">moltk::Aligner::seq2</a><code> [protected]</code></td>
+          <td class="memname"><a class="el" href="classmoltk_1_1Aligner_1_1PositionList.html">PositionList</a> <a class="el" href="classmoltk_1_1Aligner.html#a5358527ccea8ec4afca70a74abe043f9">moltk::Aligner::seq2</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
