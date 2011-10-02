@@ -15,6 +15,7 @@ if(MOLTK_REGENERATE_CPP_API_DOCS)
     mark_as_advanced(CLEAR DOXYGEN_EXECUTABLE)
     set(DOXY_CONFIG "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile")
     set(CPP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/c++/include")
+    set(MOLTK_DOXYGEN_LOGO "${CMAKE_SOURCE_DIR}/doc/moltk55.png")
     configure_file(Doxyfile.in ${DOXY_CONFIG} @ONLY )
     add_custom_target(MoltkCxxApiDocs ALL
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXY_CONFIG}
