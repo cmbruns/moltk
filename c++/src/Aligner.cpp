@@ -24,7 +24,7 @@ void Aligner::init()
     n = seq2.size();
 }
 
-Alignment& Aligner::align(const FastaSequence& s1, const FastaSequence& s2)
+Alignment Aligner::align(const FastaSequence& s1, const FastaSequence& s2)
 {
 
     // Fill seq1, seq2
@@ -164,7 +164,7 @@ Alignment Aligner::compute_traceback()
     assert(i == 0);
     assert(j == 0);
     // OK, the sequences are actually backwards here
-    for (int i = 0; i < result.size(); ++i)
+    for (size_t i = 0; i < result.size(); ++i)
         std::reverse(result[i].begin(), result[i].end());
     return result;
 }

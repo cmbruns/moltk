@@ -118,26 +118,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00038"></a>00038             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a> &gt; rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>;
 <a name="l00039"></a>00039         }
 <a name="l00040"></a>00040 
-<a name="l00041"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">00041</a>         <span class="keywordtype">double</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>;
-<a name="l00042"></a>00042     };
-<a name="l00043"></a>00043 
-<a name="l00044"></a><a class="code" href="structmoltk_1_1units_1_1bit__unit.html">00044</a>     <span class="keyword">struct </span><a class="code" href="structmoltk_1_1units_1_1bit__unit.html">bit_unit</a> {
-<a name="l00045"></a>00045     };
-<a name="l00046"></a>00046 
-<a name="l00047"></a><a class="code" href="namespacemoltk_1_1units.html#a70c71ab45afba6f550bf4ffc534c8baa">00047</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1bit__unit.html">bit_unit</a> <a class="code" href="namespacemoltk_1_1units.html#a70c71ab45afba6f550bf4ffc534c8baa">bit</a> = <a class="code" href="structmoltk_1_1units_1_1bit__unit.html">bit_unit</a>();
+<a name="l00041"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a66566d1f1c495a76219094532c33d775">00041</a>         <span class="keywordtype">bool</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a66566d1f1c495a76219094532c33d775">operator&lt;=</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a>&amp; rhs)<span class="keyword"> const </span>{
+<a name="l00042"></a>00042             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a> &lt;= rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>;
+<a name="l00043"></a>00043         }
+<a name="l00044"></a>00044 
+<a name="l00045"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a70ec3d2c06a90a2664fb2591ef3dff31">00045</a>         <span class="keywordtype">bool</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a70ec3d2c06a90a2664fb2591ef3dff31">operator&gt;=</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">Information</a>&amp; rhs)<span class="keyword"> const </span>{
+<a name="l00046"></a>00046             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a> &gt;= rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>;
+<a name="l00047"></a>00047         }
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049 }} <span class="comment">// namespace moltk::units</span>
-<a name="l00050"></a>00050 
-<a name="l00051"></a><a class="code" href="units_8h.html#a737ea266296745c480265e6c665caea5">00051</a> <span class="keyword">inline</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> <a class="code" href="units_8h.html#a737ea266296745c480265e6c665caea5">operator*</a>(<span class="keywordtype">double</span> lhs, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1bit__unit.html">moltk::units::bit_unit</a>&amp; rhs) {
-<a name="l00052"></a>00052     <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>(lhs);
-<a name="l00053"></a>00053 }
-<a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="units_8h.html#acb36bee2e8ca2f4dd46b0594322c5493">00055</a> <span class="keyword">inline</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> <a class="code" href="units_8h.html#a737ea266296745c480265e6c665caea5">operator*</a>(<span class="keywordtype">double</span> lhs, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>&amp; rhs) {
-<a name="l00056"></a>00056     <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>(lhs * rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>);
-<a name="l00057"></a>00057 }
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059 <span class="preprocessor">#endif // MOLTK_UNITS_H</span>
-<a name="l00060"></a>00060 <span class="preprocessor"></span>
+<a name="l00049"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a08f385043d1454a1ad9d7c4d661c0d6a">00049</a>         std::ostream&amp; <a class="code" href="structmoltk_1_1units_1_1Information.html#a08f385043d1454a1ad9d7c4d661c0d6a">print</a>(std::ostream&amp; os)<span class="keyword"> const </span>{
+<a name="l00050"></a>00050             os &lt;&lt; <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a> &lt;&lt; <span class="stringliteral">&quot; bits&quot;</span>; <span class="comment">// TODO</span>
+<a name="l00051"></a>00051             <span class="keywordflow">return</span> os;
+<a name="l00052"></a>00052         }
+<a name="l00053"></a>00053 
+<a name="l00054"></a><a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">00054</a>         <span class="keywordtype">double</span> <a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>;
+<a name="l00055"></a>00055     };
+<a name="l00056"></a>00056 
+<a name="l00057"></a><a class="code" href="structmoltk_1_1units_1_1bit__unit.html">00057</a>     <span class="keyword">struct </span><a class="code" href="structmoltk_1_1units_1_1bit__unit.html">bit_unit</a> {
+<a name="l00058"></a>00058     };
+<a name="l00059"></a>00059 
+<a name="l00060"></a><a class="code" href="namespacemoltk_1_1units.html#a70c71ab45afba6f550bf4ffc534c8baa">00060</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1bit__unit.html">bit_unit</a> <a class="code" href="namespacemoltk_1_1units.html#a70c71ab45afba6f550bf4ffc534c8baa">bit</a> = <a class="code" href="structmoltk_1_1units_1_1bit__unit.html">bit_unit</a>();
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 }} <span class="comment">// namespace moltk::units</span>
+<a name="l00063"></a>00063 
+<a name="l00064"></a><a class="code" href="units_8h.html#a636dc0dae1963a963b4f1a700604d5f7">00064</a> <span class="keyword">inline</span> std::ostream&amp; <a class="code" href="Alignment_8h.html#adac19a9eb2cb3bac5bd748632d0b9b45">operator&lt;&lt;</a>(std::ostream&amp; os, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>&amp; info) {
+<a name="l00065"></a>00065     <span class="keywordflow">return</span> info.<a class="code" href="structmoltk_1_1units_1_1Information.html#a08f385043d1454a1ad9d7c4d661c0d6a">print</a>(os);
+<a name="l00066"></a>00066 }
+<a name="l00067"></a>00067 
+<a name="l00068"></a><a class="code" href="units_8h.html#a737ea266296745c480265e6c665caea5">00068</a> <span class="keyword">inline</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> <a class="code" href="units_8h.html#a737ea266296745c480265e6c665caea5">operator*</a>(<span class="keywordtype">double</span> lhs, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1bit__unit.html">moltk::units::bit_unit</a>&amp; rhs) {
+<a name="l00069"></a>00069     <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>(lhs);
+<a name="l00070"></a>00070 }
+<a name="l00071"></a>00071 
+<a name="l00072"></a><a class="code" href="units_8h.html#acb36bee2e8ca2f4dd46b0594322c5493">00072</a> <span class="keyword">inline</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> <a class="code" href="units_8h.html#a737ea266296745c480265e6c665caea5">operator*</a>(<span class="keywordtype">double</span> lhs, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>&amp; rhs) {
+<a name="l00073"></a>00073     <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>(lhs * rhs.<a class="code" href="structmoltk_1_1units_1_1Information.html#a50aca2be56108ffd3c3f371c556f895f">value</a>);
+<a name="l00074"></a>00074 }
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 <span class="preprocessor">#endif // MOLTK_UNITS_H</span>
+<a name="l00077"></a>00077 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
