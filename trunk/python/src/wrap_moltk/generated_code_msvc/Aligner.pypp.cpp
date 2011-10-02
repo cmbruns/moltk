@@ -90,13 +90,13 @@ void register_Aligner_class(){
             .value("TRACEBACK_NOT_INITIALIZED", moltk::Aligner::TRACEBACK_NOT_INITIALIZED)
             .export_values()
             ;
-        bp::class_< moltk::Aligner::Cell >( "Cell", "\n An Aligner::Cell is one node in the dynamic programming table\n" )    
-            .def_readwrite( "e", &moltk::Aligner::Cell::e, "\n E, best score with gap in sequence 1\n" )    
-            .def_readwrite( "f", &moltk::Aligner::Cell::f, "\n F, best score with gap in sequence 2\n" )    
-            .def_readwrite( "g", &moltk::Aligner::Cell::g, "\n G, best ungapped score through this cell\n" )    
-            .def_readwrite( "s", &moltk::Aligner::Cell::s, "\n Wm, score of aligning position S1(i) with S2(j)\n s is the score of aligning position S1(i) with S2(j); (Wm in Gusfields nomenclature.)\n" )    
-            .def_readwrite( "tracebackPointer", &moltk::Aligner::Cell::tracebackPointer, "\n breadcrumb to help reconstruct the final alignment\n" )    
-            .def_readwrite( "v", &moltk::Aligner::Cell::v, "\n V, best score through this cell\n" );
+        bp::class_< moltk::Aligner::Cell >( "Cell", " An Aligner::Cell is one node in the dynamic programming table" )    
+            .def_readwrite( "e", &moltk::Aligner::Cell::e, " E, best score with gap in sequence 1" )    
+            .def_readwrite( "f", &moltk::Aligner::Cell::f, " F, best score with gap in sequence 2" )    
+            .def_readwrite( "g", &moltk::Aligner::Cell::g, " G, best ungapped score through this cell" )    
+            .def_readwrite( "s", &moltk::Aligner::Cell::s, " Wm, score of aligning position S1(i) with S2(j)\n s is the score of aligning position S1(i) with S2(j); (Wm in Gusfields nomenclature.)" )    
+            .def_readwrite( "tracebackPointer", &moltk::Aligner::Cell::tracebackPointer, " breadcrumb to help reconstruct the final alignment" )    
+            .def_readwrite( "v", &moltk::Aligner::Cell::v, " V, best score through this cell" );
         bp::class_< Aligner_wrapper::Position_wrapper, boost::noncopyable >( "Position", "\n Aligner::Position represents a special biosequence residue that knows how to score itself during alignment.\n" )    
             .def( 
                 "clone"
@@ -112,9 +112,9 @@ void register_Aligner_class(){
                 , ( bp::arg("rhs") ) );
         { //::moltk::Aligner::PositionList
             typedef bp::class_< moltk::Aligner::PositionList > PositionList_exposer_t;
-            PositionList_exposer_t PositionList_exposer = PositionList_exposer_t( "PositionList", "\n Aligner::PositionList is a special sequence containing Aligner::Positions,\n which know how to score themselves.\n", bp::init< >("\n Aligner::PositionList is a special sequence containing Aligner::Positions,\n which know how to score themselves.\n") );
+            PositionList_exposer_t PositionList_exposer = PositionList_exposer_t( "PositionList", " Aligner::PositionList is a special sequence containing Aligner::Positions,\n which know how to score themselves.", bp::init< >(" Aligner::PositionList is a special sequence containing Aligner::Positions,\n which know how to score themselves.") );
             bp::scope PositionList_scope( PositionList_exposer );
-            PositionList_exposer.def( bp::init< moltk::Aligner::PositionList const & >(( bp::arg("rhs") ), "\n Aligner::PositionList is a special sequence containing Aligner::Positions,\n which know how to score themselves.\n") );
+            PositionList_exposer.def( bp::init< moltk::Aligner::PositionList const & >(( bp::arg("rhs") ), " Aligner::PositionList is a special sequence containing Aligner::Positions,\n which know how to score themselves.") );
             { //::moltk::Aligner::PositionList::operator=
             
                 typedef ::moltk::Aligner::PositionList & ( ::moltk::Aligner::PositionList::*assign_function_type )( ::moltk::Aligner::PositionList const & ) ;

@@ -3,13 +3,13 @@
 using namespace moltk;
 using namespace std;
 
-std::ostream& operator<<(std::ostream& os, const moltk::Alignment& alignment)
+/* virtual */
+void moltk::Alignment::print_to_stream(std::ostream& os) const 
 {
-    moltk::Alignment::const_iterator i = alignment.begin();
-    while (i != alignment.end()) {
-        os << *i << endl;
+   const_iterator i = begin();
+    while (i != end()) {
+        os << *i << std::endl;
         ++i;
     }
-    return os;
 }
 

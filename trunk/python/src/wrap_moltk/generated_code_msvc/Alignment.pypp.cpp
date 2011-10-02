@@ -6,8 +6,43 @@
 
 namespace bp = boost::python;
 
+struct Alignment_wrapper : moltk::Alignment, bp::wrapper< moltk::Alignment > {
+
+    Alignment_wrapper(moltk::Alignment const & arg )
+    : moltk::Alignment( arg )
+      , bp::wrapper< moltk::Alignment >(){
+        // copy constructor
+        
+    }
+
+    Alignment_wrapper()
+    : moltk::Alignment()
+      , bp::wrapper< moltk::Alignment >(){
+        // null constructor
+        
+    }
+
+    virtual void print_to_stream( ::std::ostream & os ) const  {
+        if( bp::override func_print_to_stream = this->get_override( "print_to_stream" ) )
+            func_print_to_stream( boost::ref(os) );
+        else{
+            this->moltk::Alignment::print_to_stream( boost::ref(os) );
+        }
+    }
+    
+    void default_print_to_stream( ::std::ostream & os ) const  {
+        moltk::Alignment::print_to_stream( boost::ref(os) );
+    }
+
+};
+
 void register_Alignment_class(){
 
-    bp::class_< moltk::Alignment >( "Alignment" );
+    bp::class_< Alignment_wrapper, bp::bases< moltk::Printable > >( "Alignment" )    
+        .def( 
+            "print_to_stream"
+            , (void ( ::moltk::Alignment::* )( ::std::ostream & ) const)(&::moltk::Alignment::print_to_stream)
+            , (void ( Alignment_wrapper::* )( ::std::ostream & ) const)(&Alignment_wrapper::default_print_to_stream)
+            , ( bp::arg("os") ) );
 
 }
