@@ -16,12 +16,16 @@
 
 #include "generated_code_msvc/moltk_global_variables.pypp.hpp"
 
+#include "generated_code_msvc/printable.pypp.hpp"
+
 #include "generated_code_msvc/structure.pypp.hpp"
 
 namespace bp = boost::python;
 
 BOOST_PYTHON_MODULE(moltk){
     register_Aligner_class();
+
+    register_Printable_class();
 
     register_Alignment_class();
 

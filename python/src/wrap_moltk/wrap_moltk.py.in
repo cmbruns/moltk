@@ -3,27 +3,35 @@ from pyplusplus.module_builder.call_policies import *
 from doxygen_doc_extractor import doxygen_doc_extractor
 from pygccxml import declarations
 
-mb = module_builder.module_builder_t(
-    files = ["@MOLTK_WRAP_INCLUDE_FILES@",]
-    , gccxml_path = "@GCCXML_EXECUTABLE@"
-    , include_paths = ["@MOLTK_INCLUDE_DIR@"
-                     , "@Boost_INCLUDE_DIRS@"]
-    # , indexing_suite_version = 2
-    , define_symbols = ["_HAS_TR1=0"])
+def wrap_moltk():
+    mb = module_builder.module_builder_t(
+        files = ["@MOLTK_WRAP_INCLUDE_FILES@",]
+        , gccxml_path = "@GCCXML_EXECUTABLE@"
+        , include_paths = ["@MOLTK_INCLUDE_DIR@"
+                         , "@Boost_INCLUDE_DIRS@"]
+        , indexing_suite_version = 2
+        , define_symbols = ["_HAS_TR1=0"])
 
-ns_moltk = mb.namespace('moltk')
-ns_moltk.include()
-# Avoid exposing non-public members
-for fn in mb.member_functions(lambda f: f.access_type != declarations.ACCESS_TYPES.PUBLIC):
-    fn.exclude()
-for fn in mb.constructors(lambda f: f.access_type != declarations.ACCESS_TYPES.PUBLIC):
-    fn.exclude()
-ns_moltk.class_('Aligner').class_('Position').member_function('clone').call_policies = \
-    return_value_policy(manage_new_object)
-ns_moltk.class_('Aligner').class_('Scorer').member_function('createPosition').call_policies = \
-    return_value_policy(manage_new_object)
-ns_moltk.class_('Information').member_function('print').exclude()
+    ns_moltk = mb.namespace('moltk')
+    ns_moltk.include()
+    # Avoid exposing non-public members
+    for fn in mb.member_functions(lambda f: f.access_type != declarations.ACCESS_TYPES.PUBLIC):
+        fn.exclude()
+    for fn in mb.constructors(lambda f: f.access_type != declarations.ACCESS_TYPES.PUBLIC):
+        fn.exclude()
+    ns_moltk.class_('Aligner').class_('Position').member_function('clone').call_policies = \
+        return_value_policy(manage_new_object)
+    ns_moltk.class_('Aligner').class_('Scorer').member_function('createPosition').call_policies = \
+        return_value_policy(manage_new_object)
+    ns_moltk.class_('Information').member_function('print').exclude()
+    # Use boost::python mechanism for wrapping ostream operator<<()
+    # mb.class_('Printable').add_registration_code(
+    #     'def( bp::self_ns::str(bp::self) )')
+    # mb.class_('Alignment').add_registration_code(
+    #     'def( bp::self_ns::str(bp::self) )')
 
-extractor = doxygen_doc_extractor()
-mb.build_code_creator(module_name = 'moltk', doc_extractor = extractor)
-mb.split_module('@GENERATED_CODE_DIR@')
+    extractor = doxygen_doc_extractor()
+    mb.build_code_creator(module_name = 'moltk', doc_extractor = extractor)
+    mb.split_module('@GENERATED_CODE_DIR@')
+
+wrap_moltk()

@@ -4,15 +4,19 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "moltk/Printable.h"
 
 namespace moltk {
 
-class Alignment : public std::vector< std::string >
+class Alignment : public std::vector< std::string > , public moltk::Printable
 {
+public:
+    virtual void print_to_stream(std::ostream& os) const;
 };
+
+// std::ostream& operator<<(std::ostream& os, const moltk::Alignment& p);
 
 } // namespace moltk
 
-std::ostream& operator<<(std::ostream&, const moltk::Alignment&);
 
 #endif // MOLTK_ALIGN_ALIGNMENT_H
