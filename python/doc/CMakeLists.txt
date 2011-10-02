@@ -5,7 +5,7 @@ set(PYTHON_API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/api")
 file(MAKE_DIRECTORY ${PYTHON_API_DIR}/python)
 install(DIRECTORY "${PYTHON_API_DIR}/python"
         DESTINATION "doc/api/python")
-# python_api.html is just a shortcut to the Doxygen index.html.
+# python_api.html is just a shortcut to the epydoc index.html.
 install(FILES "python_api.html" DESTINATION "doc")
 # Python API documentation generated with epydoc
 set(MOLTK_REGENERATE_PYTHON_API_DOCS OFF CACHE BOOL "Whether to (re)generate moltk python API html documents using epydoc")
@@ -21,9 +21,10 @@ if(MOLTK_REGENERATE_PYTHON_API_DOCS)
     set(DOCSCRIPT "${CMAKE_BINARY_DIR}/generate_epydoc_html.cmake")
     file(WRITE "${DOCSCRIPT}"
     "
-        set(ENV{PYTHONPATH} \"${NATIVE_LOCAL_PYTHONPATH}\")
+        set(ENV{PYTHONPATH} \"${MOLTK_LOCAL_PYTHON_PATH}\")
         execute_process(
         COMMAND \"${PYTHON_EXECUTABLE}\" \"${EPYDOC_SCRIPT}\"
+          # -v
           --html moltk -o python
           --name \"MolTK python API v${MOLTK_VERSION} Documentation\"
           --url http://code.google.com/p/moltk/

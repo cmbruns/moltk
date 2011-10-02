@@ -126,10 +126,12 @@ void Aligner::compute_recurrence()
 
 Alignment Aligner::compute_traceback()
 {
+    // TODO - implement end gaps free version
     Alignment result;
     result.assign(2, std::string());
 
-    // Start at lower right of dynamic programming matrix.
+    // Start at lower right of dynamic programming matrix. (TODO - only 
+    // for end gaps NOT-free.
     int i = m;
     int j = n;
     // cout << "final alignment score = " << dpTable[i][j].v << endl;
