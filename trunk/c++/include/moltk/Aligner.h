@@ -93,9 +93,9 @@ public:
 public:
     // Finally, the actual Aligner methods
     Aligner();
-    Alignment& align(const FastaSequence&);
-    Alignment& align(const Alignment&);
-    Alignment& align(const FastaSequence&, const FastaSequence&);
+    // Alignment align(const FastaSequence&);
+    // Alignment align(const Alignment&);
+    Alignment align(const FastaSequence&, const FastaSequence&);
 
     static const Scorer& getDefaultScorer();
 
