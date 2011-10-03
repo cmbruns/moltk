@@ -154,7 +154,37 @@ void register_Aligner_class(){
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
+        { //::moltk::Aligner::getEndGapsFree
+        
+            typedef bool ( ::moltk::Aligner::*getEndGapsFree_function_type )(  ) const;
+            
+            Aligner_exposer.def( 
+                "getEndGapsFree"
+                , getEndGapsFree_function_type( &::moltk::Aligner::getEndGapsFree ) );
+        
+        }
+        { //::moltk::Aligner::setEndGapsFree
+        
+            typedef void ( ::moltk::Aligner::*setEndGapsFree_function_type )( bool ) ;
+            
+            Aligner_exposer.def( 
+                "setEndGapsFree"
+                , setEndGapsFree_function_type( &::moltk::Aligner::setEndGapsFree )
+                , ( bp::arg("f") ) );
+        
+        }
         Aligner_exposer.staticmethod( "getDefaultScorer" );
+        { //property "endGapsFree"[fget=::moltk::Aligner::getEndGapsFree, fset=::moltk::Aligner::setEndGapsFree]
+        
+            typedef bool ( ::moltk::Aligner::*fget )(  ) const;
+            typedef void ( ::moltk::Aligner::*fset )( bool ) ;
+            
+            Aligner_exposer.add_property( 
+                "endGapsFree"
+                , fget( &::moltk::Aligner::getEndGapsFree )
+                , fset( &::moltk::Aligner::setEndGapsFree ) );
+        
+        }
     }
 
 }

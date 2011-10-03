@@ -8,9 +8,9 @@ using namespace moltk;
 using moltk::units::bit;
 
 
-///////////////////////
+/////////////////////
 // Aligner methods //
-///////////////////////
+/////////////////////
 
 Aligner::Aligner()
 {init();}
@@ -91,22 +91,43 @@ void Aligner::initialize_dp_row(size_t rowIndex, DpRow& row)
 
 void Aligner::compute_recurrence()
 {
+    // If end gaps are free, final row and column have zero gap penalties.
+    Information iGapOpenPenalty;
+    Information iGapExtensionPenalty;
+    Information jGapOpenPenalty;
+    Information jGapExtensionPenalty;
     for (size_t i = 1; i <= m; ++i)
     {
+        if (bEndGapsFree && (i == m)) {
+            iGapOpenPenalty = 0.0 * bit;
+            iGapExtensionPenalty = 0.0 * bit;
+        }
+        else {
+            iGapOpenPenalty = gapOpenPenalty;
+            iGapExtensionPenalty = gapExtensionPenalty;
+        }
         Position& p1 = *seq1[i-1];
         for (size_t j = 1; j <= n; ++j)
         {
+            if (bEndGapsFree && (j == n)) {
+                jGapOpenPenalty = 0.0 * bit;
+                jGapExtensionPenalty = 0.0 * bit;
+            }
+            else {
+                jGapOpenPenalty = gapOpenPenalty;
+                jGapExtensionPenalty = gapExtensionPenalty;
+            }
             Position& p2 = *seq2[j-1];
             Cell& cell = dpTable[i][j];
             cell.s = p1.score(p2);
             // This recurrence comes from Gusfield chapter 11.
             cell.g = dpTable[i-1][j-1].v + cell.s; // score...
             cell.e = std::max(dpTable[i][j-1].e
-                            , dpTable[i][j-1].v - gapOpenPenalty)
-                            - gapExtensionPenalty;
+                            , dpTable[i][j-1].v - iGapOpenPenalty)
+                            - iGapExtensionPenalty;
             cell.f = std::max(dpTable[i-1][j].f
-                            , dpTable[i-1][j].v - gapOpenPenalty)
-                            - gapExtensionPenalty;
+                            , dpTable[i-1][j].v - jGapOpenPenalty)
+                            - jGapExtensionPenalty;
             // TODO compute traceback pointer
             if ( (cell.g >= cell.e) && (cell.g >= cell.f) ) {
                 cell.v = cell.g;

@@ -11,4 +11,3 @@ add_executable(test_align test_align.cpp)
 target_link_libraries(test_align 
     MoltkLibrary)
 add_test(test_align test_align)
-

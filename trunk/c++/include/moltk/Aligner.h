@@ -98,6 +98,8 @@ public:
     Alignment align(const FastaSequence&, const FastaSequence&);
 
     static const Scorer& getDefaultScorer();
+    bool getEndGapsFree() const {return bEndGapsFree;}
+    void setEndGapsFree(bool f) {bEndGapsFree = f;}
 
 protected:
     void init();
