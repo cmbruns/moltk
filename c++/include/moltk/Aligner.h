@@ -108,6 +108,10 @@ protected:
     void initialize_dp_table();
     void initialize_dp_row(size_t rowIndex, DpRow& row);
     void compute_recurrence();
+    void compute_cell_recurrence(int i, int j);
+    void compute_cell_recurrence_freeE(int i, int j);
+    void compute_cell_recurrence_freeF(int i, int j);
+    void compute_cell_recurrence_freeEF(int i, int j);
     Alignment compute_traceback();
 
     Information gapOpenPenalty; // positive penalty (will be subtracted at gaps)
