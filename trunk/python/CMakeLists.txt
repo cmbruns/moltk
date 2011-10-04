@@ -1,8 +1,6 @@
 
 include_directories(${CMAKE_SOURCE_DIR}/c++/include)
 
-add_subdirectory(src)
-
 # Create setup.py for local install and other uses
 set(SETUP_PY "${CMAKE_SOURCE_DIR}/setup.py") # in root dir where users expect it
 configure_file(setup.py.in ${SETUP_PY} @ONLY)
@@ -22,6 +20,7 @@ file(WRITE "${RUN_SETUP_PY}"
 "
 ################
 set(ENV{BOOST_PYTHON_LIBRARY} \"${Boost_PYTHON_LIBRARY_RELEASE}\")
+set(ENV{BOOST_IOSTREAMS_LIBRARY} \"${Boost_IOSTREAMS_LIBRARY_RELEASE}\")
 set(ENV{BOOST_INCLUDE_DIR} \"${Boost_INCLUDE_DIRS}\")
 execute_process(
     COMMAND \"${PYTHON_EXECUTABLE}\" setup.py
@@ -37,7 +36,6 @@ add_custom_target(LocalPyMolTKInstallation ALL
     DEPENDS 
         "${RUN_SETUP_PY}"
         "${SETUP_PY}"
-        MoltkPyplusplusWrappers
         MoltkLibrary
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     COMMENT "Installing python MolTK to local directory ${MOLTK_LOCAL_INSTALL_DIR}"
@@ -45,8 +43,11 @@ add_custom_target(LocalPyMolTKInstallation ALL
         "${SETUP_PY}"
 )
 
+add_subdirectory(src)
+
 # local python moltk install symbols required before doc
 # (see comments in doc CMakeLists.txt)
 add_subdirectory(doc)
 
 add_subdirectory(test)
+

@@ -11,16 +11,17 @@ include_directories(c++/include)
 
 # Boost is for both C++ and python
 set(Boost_ADDITIONAL_VERSIONS 1.47)
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost COMPONENTS iostreams REQUIRED)
+add_definitions(${Boost_LIB_DIAGNOSTIC_DEFINITIONS})
 if(WIN32)
-    set(Boost_USE_STATIC_LIBS ON)
-    find_package(Boost COMPONENTS iostreams zlib REQUIRED)
-    add_definitions(${Boost_LIB_DIAGNOSTIC_DEFINITIONS})
-    # ...but shared library for boost python
-    set(Boost_USE_STATIC_LIBS OFF)
-    find_package(Boost COMPONENTS python REQUIRED)
+    find_package(Boost COMPONENTS zlib REQUIRED)
 else()
-    find_package(Boost COMPONENTS iostreams python REQUIRED)
+    find_package(ZLIB REQUIRED)
 endif()
+# Want shared library for boost python
+set(Boost_USE_STATIC_LIBS OFF)
+find_package(Boost COMPONENTS python REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
