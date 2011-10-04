@@ -4,11 +4,39 @@
 
 #include "wrap_moltk.h"
 
+#include "generated_code_gcc/Aligner.pypp.hpp"
+
+#include "generated_code_gcc/Alignment.pypp.hpp"
+
+#include "generated_code_gcc/FastaSequence.pypp.hpp"
+
+#include "generated_code_gcc/Information.pypp.hpp"
+
+#include "generated_code_gcc/Printable.pypp.hpp"
+
 #include "generated_code_gcc/Structure.pypp.hpp"
+
+#include "generated_code_gcc/bit_unit.pypp.hpp"
+
+#include "generated_code_gcc/moltk_global_variables.pypp.hpp"
 
 namespace bp = boost::python;
 
 BOOST_PYTHON_MODULE(moltk){
+    register_Aligner_class();
+
+    register_Printable_class();
+
+    register_Alignment_class();
+
+    register_FastaSequence_class();
+
     register_Structure_class();
+
+    register_Information_class();
+
+    register_bit_unit_class();
+
+    register_global_variables();
 }
 

@@ -8,5 +8,7 @@ add_library(MoltkLibrary
 set_target_properties(MoltkLibrary PROPERTIES
     OUTPUT_NAME moltk)
 target_link_libraries(MoltkLibrary
-    ${Boost_IOSTREAMS_LIBRARY})
+    ${Boost_IOSTREAMS_LIBRARY}
+    ${ZLIB_LIBRARY}
+)
 
