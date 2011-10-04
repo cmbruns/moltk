@@ -47,7 +47,7 @@ protected:
 
 } // namespace moltk
 
-static std::istream& operator>>(std::istream& is, moltk::Structure& structure)
+inline std::istream& operator>>(std::istream& is, moltk::Structure& structure)
 {
     structure.loadStream(is);
     return is;
