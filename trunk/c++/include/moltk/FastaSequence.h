@@ -2,17 +2,19 @@
 #define MOLTK_FASTA_SEQUENCE_H
 
 #include <string>
+#include "moltk/Biosequence.h"
 
 namespace moltk {
 
-    class FastaSequence : public std::string
+class FastaSequence : public Biosequence
 {
 public:
-    FastaSequence(const std::string& s) : std::string(s)
+    FastaSequence(const std::string& s) : Biosequence(s)
     {}
 
 protected:
-    std::string header;
+    // std::string sequence;
+    // std::string header;
 };
 
 } // namespace moltk
