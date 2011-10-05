@@ -26,6 +26,9 @@ find_package(Boost COMPONENTS python REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
+file(GLOB_RECURSE MOLTK_HEADERS "c++/include/*.h")
+file(GLOB_RECURSE MOLTK_SOURCES "c++/src/*.cpp")
+
 # C++ rules must precede python rules,
 # because python module depends on C++ libraries.
 add_subdirectory(c++)
