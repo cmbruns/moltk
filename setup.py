@@ -15,9 +15,10 @@ import re
 
 # Avoid compiler warning about "-Wstrict-prototypes" not being a C++ flag.
 import distutils.sysconfig
-py_cflags = distutils.sysconfig.get_config_var('PY_CFLAGS')
-py_cflags = py_cflags.replace(' -Wstrict-prototypes', '')
-distutils.sysconfig._config_vars['PY_CFLAGS'] = py_cflags
+v = distutils.sysconfig.get_config_vars()
+for key in ['PY_CFLAGS', 'CFLAGS', 'OPT']:
+    if v.has_key(key):
+        v[key] = v[key].replace(' -Wstrict-prototypes', '')
 
 def get_lib_from_env_var(env_string):
     path = os.environ.get(env_string)
