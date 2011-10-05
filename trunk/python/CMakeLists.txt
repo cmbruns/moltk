@@ -40,8 +40,13 @@ execute_process(
 #################
 "
 )
-add_custom_target(LocalPyMolTKInstallation ALL
+
+# stamp file to keep track of the last time we rebuild the python module
+set(SETUP_PY_STAMP "${CMAKE_CURRENT_BINARY_DIR}/setup_py.stamp")
+add_custom_command(
+    OUTPUT "${SETUP_PY_STAMP}"
     COMMAND "${CMAKE_COMMAND}" -P "${RUN_SETUP_PY}"
+    COMMAND "${CMAKE_COMMAND}" -E touch "${SETUP_PY_STAMP}"
     DEPENDS 
         "${RUN_SETUP_PY}"
         "${SETUP_PY}"
@@ -49,6 +54,11 @@ add_custom_target(LocalPyMolTKInstallation ALL
         ${MOLTK_SOURCES}
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     COMMENT "Installing python MolTK to local directory ${MOLTK_LOCAL_INSTALL_DIR}"
+)
+
+add_custom_target(LocalPyMolTKInstallation ALL
+    DEPENDS 
+        "${SETUP_PY_STAMP}"
     SOURCES
         "${SETUP_PY}"
 )

@@ -10,6 +10,7 @@
 
 #include "moltk/Printable.h"
 #include <vector>
+#include <string>
 
 namespace moltk
 {
@@ -48,6 +49,8 @@ public:
 public:
     virtual ~BaseBiosequence() {}
     virtual void print_to_stream(std::ostream& os) const;
+    virtual size_t getNumberOfResidues() const = 0;
+    virtual const BaseResidue& getResidue(size_t index) const = 0;
 };
 
 
@@ -73,8 +76,12 @@ public:
 
 
 public:
-    Biosequence();
-    virtual ~Biosequence();
+    /* implicit */ Biosequence(const std::string& str);
+    virtual ~Biosequence() {}
+    virtual size_t getNumberOfResidues() const {return residues.size();}
+    virtual const BaseResidue& getResidue(size_t index) const {
+        return residues[index];
+    }
 
 protected:
     std::vector<Residue> residues;

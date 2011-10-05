@@ -6,9 +6,30 @@
  */
 
 #include "moltk/Biosequence.h"
-#include <vector>
 
 namespace moltk
 {
 
+/////////////////////////////
+// BaseBiosequence methods //
+/////////////////////////////
+
+/* virtual */
+void BaseBiosequence::print_to_stream(std::ostream& os) const
+{
+    for(size_t i = 0; i < getNumberOfResidues(); ++i)
+        os << getResidue(i).getOneLetterCode();
 }
+
+
+/////////////////////////
+// Biosequence methods //
+/////////////////////////
+
+Biosequence::Biosequence(const std::string& str)
+{
+    for (size_t i = 0; i < str.length(); ++i)
+        residues.push_back( Residue(str[i], i+1) );
+}
+
+} // namespace moltk

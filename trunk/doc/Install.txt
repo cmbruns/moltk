@@ -29,7 +29,9 @@ B) The hard way - build from source.
             several tries for the install to complete successfully.
         On Mac, I like to build fat binaries supporting both 32-bit and 64-bit architectures.  So I build boost like:
             ./bootstrap.sh --prefix=/usr/local
-            sudo ./bjam address-model=32_64 architecture=x86 variant=release link=shared,static install
+            sudo ./b2 address-model=32_64 architecture=x86 variant=release link=shared,static install
+            <or to include PowerPC, which Python still does>
+            sudo ./b2 address-model=32_64 architecture=combined variant=release link=shared,static install
 
     3) CMake
         http://www.cmake.org

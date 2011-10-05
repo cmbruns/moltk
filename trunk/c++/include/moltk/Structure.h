@@ -4,10 +4,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "moltk/Biosequence.h"
 
 namespace moltk {
 	
-class Structure
+class Structure : public BaseBiosequence
 {
 public:
     /*!
@@ -33,6 +34,17 @@ public:
     typedef std::vector<Atom> AtomList;
 
 
+    class Residue : public BaseResidue
+    {
+    public:
+        virtual char getOneLetterCode() const {return oneLetterCode;}
+        virtual int getResidueNumber() const {return residueNumber;}
+
+    protected:
+        char oneLetterCode;
+        int residueNumber;
+    };
+
 public:
     Structure() {}
     explicit Structure(std::istream&);
@@ -40,9 +52,14 @@ public:
 
     bool loadStream(std::istream&);
     bool loadFile(const std::string& fileName);
+    virtual size_t getNumberOfResidues() const {return residues.size();}
+    virtual const BaseResidue& getResidue(size_t index) const {
+        return residues[index];
+    }
 
 protected:
     AtomList atoms;
+    std::vector<Residue> residues;
 };
 
 } // namespace moltk
