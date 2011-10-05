@@ -1,13 +1,17 @@
 
-add_executable(test_load_pdb test_load_pdb.cpp)
-target_link_libraries(test_load_pdb 
-    ${Boost_IOSTREAMS_LIBRARY}
-    MoltkLibrary)
-add_test(test_load_pdb
-    test_load_pdb
-    "${CMAKE_SOURCE_DIR}/data/structures/1FND.pdb.gz")
-
-add_executable(test_align test_align.cpp)
-target_link_libraries(test_align 
-    MoltkLibrary)
-add_test(test_align test_align)
+file(GLOB REGR_TESTS "test*.cpp")
+foreach(TEST_PROG ${REGR_TESTS})
+    get_filename_component(TEST_NAME_WE ${TEST_PROG} NAME_WE)
+    add_executable(${TEST_NAME_WE} ${TEST_PROG})
+    set_target_properties(${TEST_NAME_WE} PROPERTIES
+        PROJECT_LABEL "Regr - ${TEST_NAME_WE}")
+    target_link_libraries(${TEST_NAME_WE}
+        ${Boost_IOSTREAMS_LIBRARY}
+        MoltkLibrary)
+    set(TEST_ARGS "")
+    if("${TEST_NAME_WE}" STREQUAL "test_load_pdb")
+        set(TEST_ARGS "${CMAKE_SOURCE_DIR}/data/structures/1FND.pdb.gz")
+    endif()
+    add_test(${TEST_NAME_WE} 
+        ${TEST_NAME_WE} ${TEST_ARGS})
+endforeach()
