@@ -37,6 +37,11 @@ public:
     class Residue : public BaseResidue
     {
     public:
+        Residue() {}
+        Residue(const Residue& rhs)
+            : oneLetterCode(rhs.oneLetterCode)
+            , residueNumber(rhs.residueNumber)
+        {}
         virtual char getOneLetterCode() const {return oneLetterCode;}
         virtual int getResidueNumber() const {return residueNumber;}
 
@@ -49,7 +54,10 @@ public:
     Structure() {}
     explicit Structure(std::istream&);
     explicit Structure(const std::string& fileName);
-
+    Structure(const Structure& rhs)
+        : atoms(rhs.atoms)
+        , residues(rhs.residues)
+    {}
     bool loadStream(std::istream&);
     bool loadFile(const std::string& fileName);
     virtual size_t getNumberOfResidues() const {return residues.size();}

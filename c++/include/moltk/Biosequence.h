@@ -11,6 +11,7 @@
 #include "moltk/Printable.h"
 #include <vector>
 #include <string>
+#include <iterator>
 
 namespace moltk
 {
@@ -22,8 +23,13 @@ public:
     class BaseResidue
     {
     public:
+        BaseResidue() {}
         virtual char getOneLetterCode() const = 0;
         virtual int getResidueNumber() const = 0;
+        operator char() const {return getOneLetterCode();}
+
+    private:
+        BaseResidue(const BaseResidue&);
     };
 
 
@@ -47,10 +53,14 @@ public:
 
 
 public:
+    BaseBiosequence() {}
     virtual ~BaseBiosequence() {}
     virtual void print_to_stream(std::ostream& os) const;
     virtual size_t getNumberOfResidues() const = 0;
     virtual const BaseResidue& getResidue(size_t index) const = 0;
+
+private:
+    BaseBiosequence(const BaseBiosequence&);
 };
 
 
@@ -66,6 +76,10 @@ public:
             : oneLetterCode(oneLetterCodeParam)
             , residueNumber(residueNumberParam)
         {}
+        Residue(const Residue& rhs)
+            : oneLetterCode(rhs.oneLetterCode)
+            , residueNumber(rhs.residueNumber)
+        {}
         virtual char getOneLetterCode() const {return oneLetterCode;}
         virtual int getResidueNumber() const {return residueNumber;}
 
@@ -75,16 +89,29 @@ public:
     };
 
 
+    // STL-conformant iterators
+    typedef std::vector<Residue> ResidueList;
+    typedef ResidueList::iterator iterator;
+    typedef ResidueList::const_iterator const_iterator;
+
 public:
+    Biosequence() {}
     /* implicit */ Biosequence(const std::string& str);
+    Biosequence(const Biosequence& rhs)
+        : residues(rhs.residues)
+    {}
     virtual ~Biosequence() {}
     virtual size_t getNumberOfResidues() const {return residues.size();}
     virtual const BaseResidue& getResidue(size_t index) const {
         return residues[index];
     }
+    iterator begin() {return residues.begin();}
+    const_iterator begin() const {return residues.begin();}
+    iterator end() {return residues.end();}
+    const_iterator end() const {return residues.end();}
 
 protected:
-    std::vector<Residue> residues;
+    ResidueList residues;
 };
 
 } // namespace moltk
