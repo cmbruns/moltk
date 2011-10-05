@@ -1,7 +1,4 @@
 
-file(GLOB_RECURSE MOLTK_HEADERS "../include/*.h")
-file(GLOB_RECURSE MOLTK_SOURCES "*.cpp")
-
 add_library(MoltkLibrary
     ${MOLTK_SOURCES}
     ${MOLTK_HEADERS})

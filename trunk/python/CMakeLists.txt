@@ -22,6 +22,15 @@ file(WRITE "${RUN_SETUP_PY}"
 set(ENV{BOOST_PYTHON_LIBRARY} \"${Boost_PYTHON_LIBRARY_RELEASE}\")
 set(ENV{BOOST_IOSTREAMS_LIBRARY} \"${Boost_IOSTREAMS_LIBRARY_RELEASE}\")
 set(ENV{BOOST_INCLUDE_DIR} \"${Boost_INCLUDE_DIRS}\")
+# Distutils bug requires "build" command to populate build-base before clean
+# Clean first - distutils does not grok source dependencies
+execute_process(
+    COMMAND \"${PYTHON_EXECUTABLE}\" setup.py
+        build --build-base=${BUILD_BASE}
+        clean --all
+    WORKING_DIRECTORY \"${CMAKE_SOURCE_DIR}\"
+)
+# Build/install after clean
 execute_process(
     COMMAND \"${PYTHON_EXECUTABLE}\" setup.py
         build --build-base=${BUILD_BASE}
@@ -36,7 +45,8 @@ add_custom_target(LocalPyMolTKInstallation ALL
     DEPENDS 
         "${RUN_SETUP_PY}"
         "${SETUP_PY}"
-        MoltkLibrary
+        ${MOLTK_HEADERS}
+        ${MOLTK_SOURCES}
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     COMMENT "Installing python MolTK to local directory ${MOLTK_LOCAL_INSTALL_DIR}"
     SOURCES
