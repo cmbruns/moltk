@@ -60,6 +60,7 @@ add_custom_target(LocalPyMolTKInstallation ALL
     DEPENDS 
         "${SETUP_PY_STAMP}"
     SOURCES
+        setup.py.in
         "${SETUP_PY}"
 )
 

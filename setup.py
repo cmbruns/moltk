@@ -69,7 +69,9 @@ def do_setup():
           author = "Christopher Bruns",
           author_email = "cmbruns@rotatingpenguin.com",
           url = "http://code.google.com/p/moltk/",
-          ext_modules = [Extension( 'moltk', moltk_sources,
+          package_dir = {'': 'python'}, # sources are under python subdirectory
+          packages = ['moltk',],
+          ext_modules = [Extension( 'moltk._moltk', moltk_sources,
                 library_dirs = library_dirs,
                 libraries = [boost_python_library, boost_iostreams_library],
                 include_dirs = include_dirs,
