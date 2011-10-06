@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classmoltk_1_1Aligner_1_1Scorer.html" title="Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions." alt="" coords="6,5,154,32"/>
+<area shape="rect" id="node3" href="$classmoltk_1_1MatrixScorer.html" title="moltk::MatrixScorer" alt="" coords="203,5,339,32"/>
+</map>
