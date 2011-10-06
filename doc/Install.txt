@@ -66,6 +66,11 @@ C) Even harder - also regenerate python bindings.
         python setup.py build
         python setup.py install
         
-    * epydoc (for generating documentation)
+D) Generate API documentation
+    * epydoc (for generating python API documentation)
         http://sourceforge.net/projects/epydoc/files/epydoc/
 
+    * doxygen (C++ API documentation)
+    
+    * dot (graphs and figures in API documentation)
+    
