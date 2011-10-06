@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>MolTK: moltk::Aligner Class Reference</title>
+<title>MolTK C++ API: moltk::Aligner Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -28,7 +28,7 @@
   
   
   <td style="padding-left: 0.5em;">
-   <div id="projectname">MolTK
+   <div id="projectname">MolTK C++ API
    &#160;<span id="projectnumber">0.3.0</span>
    </div>
    
@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -101,6 +101,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <a href="classmoltk_1_1Aligner.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Aligner_8h_source.html">Aligner.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for moltk::Aligner:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmoltk_1_1Aligner__coll__graph.png" border="0" usemap="#moltk_1_1Aligner_coll__map" alt="Collaboration graph"/></div>
+<map name="moltk_1_1Aligner_coll__map" id="moltk_1_1Aligner_coll__map">
+<area shape="rect" id="node2" href="classmoltk_1_1Alignment.html" title="moltk::Alignment" alt="" coords="251,31,371,57"/><area shape="rect" id="node4" title="STL class." alt="" coords="6,5,170,32"/><area shape="rect" id="node6" href="classmoltk_1_1Printable.html" title="moltk::Printable is an abstract base class to help streamline string conversion in the moltk python b..." alt="" coords="31,56,145,83"/><area shape="rect" id="node8" href="structmoltk_1_1units_1_1Information.html" title="moltk::units::Information" alt="" coords="230,88,391,115"/><area shape="rect" id="node10" href="classmoltk_1_1Aligner_1_1Scorer.html" title="Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions." alt="" coords="237,139,385,165"/><area shape="rect" id="node12" href="classmoltk_1_1Aligner_1_1PositionList.html" title="Aligner::PositionList is a special sequence containing Aligner::Positions, which know how to score th..." alt="" coords="221,195,400,221"/><area shape="rect" id="node14" title="STL class." alt="" coords="7,195,169,221"/></map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classmoltk_1_1Aligner-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -144,6 +151,8 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a99008604e446e2adc4f0df7e4afd6c9e">Aligner</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a969ac803308e2aeb83eb7e9588d1965f">align</a> (const <a class="el" href="classmoltk_1_1FastaSequence.html">FastaSequence</a> &amp;, const <a class="el" href="classmoltk_1_1FastaSequence.html">FastaSequence</a> &amp;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a674defbb5c8ee8538f506201ec8322a2">getEndGapsFree</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a18de26cff90bcb2400996bea4cfa5d3b">setEndGapsFree</a> (bool f)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html">Scorer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#ae3a1f399e1088bc30da6bdb7c1cec868">getDefaultScorer</a> ()</td></tr>
@@ -155,6 +164,10 @@ Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a00167b2c4ea9d0e01e5ed56e8946b713">initialize_dp_table</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a47aa0cc272a3aa95d23dfec38d7883b0">initialize_dp_row</a> (size_t rowIndex, <a class="el" href="classmoltk_1_1Aligner.html#a46c1b1a9807e0b189d8eee597df4d1fe">DpRow</a> &amp;row)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a66756b5e61b63ee8f26b6abb7b1de02e">compute_recurrence</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a38863ca0eb76e0241abedefaa69b0048">compute_cell_recurrence</a> (int i, int j)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a5c0dfb557f1fe73f8b0b6dc6eb029ab2">compute_cell_recurrence_freeE</a> (int i, int j)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#ac1c097af307968d9caf76242977a288d">compute_cell_recurrence_freeF</a> (int i, int j)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#a8d28c9bb018c6d4913e305c36093eeb0">compute_cell_recurrence_freeEF</a> (int i, int j)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html#ac6170833b8d8c742719e45186aff85b8">compute_traceback</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -334,6 +347,114 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a38863ca0eb76e0241abedefaa69b0048"></a><!-- doxytag: member="moltk::Aligner::compute_cell_recurrence" ref="a38863ca0eb76e0241abedefaa69b0048" args="(int i, int j)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void moltk::Aligner::compute_cell_recurrence </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5c0dfb557f1fe73f8b0b6dc6eb029ab2"></a><!-- doxytag: member="moltk::Aligner::compute_cell_recurrence_freeE" ref="a5c0dfb557f1fe73f8b0b6dc6eb029ab2" args="(int i, int j)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void moltk::Aligner::compute_cell_recurrence_freeE </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8d28c9bb018c6d4913e305c36093eeb0"></a><!-- doxytag: member="moltk::Aligner::compute_cell_recurrence_freeEF" ref="a8d28c9bb018c6d4913e305c36093eeb0" args="(int i, int j)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void moltk::Aligner::compute_cell_recurrence_freeEF </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac1c097af307968d9caf76242977a288d"></a><!-- doxytag: member="moltk::Aligner::compute_cell_recurrence_freeF" ref="ac1c097af307968d9caf76242977a288d" args="(int i, int j)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void moltk::Aligner::compute_cell_recurrence_freeF </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a66756b5e61b63ee8f26b6abb7b1de02e"></a><!-- doxytag: member="moltk::Aligner::compute_recurrence" ref="a66756b5e61b63ee8f26b6abb7b1de02e" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -375,6 +496,22 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a674defbb5c8ee8538f506201ec8322a2"></a><!-- doxytag: member="moltk::Aligner::getEndGapsFree" ref="a674defbb5c8ee8538f506201ec8322a2" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool moltk::Aligner::getEndGapsFree </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -461,6 +598,23 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a18de26cff90bcb2400996bea4cfa5d3b"></a><!-- doxytag: member="moltk::Aligner::setEndGapsFree" ref="a18de26cff90bcb2400996bea4cfa5d3b" args="(bool f)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void moltk::Aligner::setEndGapsFree </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>

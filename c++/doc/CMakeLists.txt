@@ -13,9 +13,14 @@ if(MOLTK_REGENERATE_CPP_API_DOCS)
     # Doxygen is a program for generating API documentation files from source code comments.
     find_package(Doxygen REQUIRED)
     mark_as_advanced(CLEAR DOXYGEN_EXECUTABLE)
+    mark_as_advanced(CLEAR DOXYGEN_DOT_EXECUTABLE)
     set(DOXY_CONFIG "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile")
     set(CPP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/c++/include")
     set(MOLTK_DOXYGEN_LOGO "${CMAKE_SOURCE_DIR}/doc/moltk55.png")
+    set(HAVE_DOT NO)
+    if(DOXYGEN_DOT_FOUND)
+        set(HAVE_DOT YES)
+    endif()
     configure_file(Doxyfile.in ${DOXY_CONFIG} @ONLY )
     add_custom_target(MoltkCxxApiDocs ALL
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXY_CONFIG}

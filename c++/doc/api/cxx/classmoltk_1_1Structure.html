@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>MolTK: moltk::Structure Class Reference</title>
+<title>MolTK C++ API: moltk::Structure Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -28,7 +28,7 @@
   
   
   <td style="padding-left: 0.5em;">
-   <div id="projectname">MolTK
+   <div id="projectname">MolTK C++ API
    &#160;<span id="projectnumber">0.3.0</span>
    </div>
    
@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -94,8 +94,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">moltk::Structure Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="moltk::Structure" -->
+<!-- doxytag: class="moltk::Structure" --><!-- doxytag: inherits="moltk::BaseBiosequence" -->
 <p><code>#include &lt;<a class="el" href="Structure_8h_source.html">Structure.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for moltk::Structure:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmoltk_1_1Structure__inherit__graph.png" border="0" usemap="#moltk_1_1Structure_inherit__map" alt="Inheritance graph"/></div>
+<map name="moltk_1_1Structure_inherit__map" id="moltk_1_1Structure_inherit__map">
+<area shape="rect" id="node2" href="classmoltk_1_1BaseBiosequence.html" title="moltk::BaseBiosequence" alt="" coords="5,5,171,32"/></map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for moltk::Structure:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmoltk_1_1Structure__coll__graph.png" border="0" usemap="#moltk_1_1Structure_coll__map" alt="Collaboration graph"/></div>
+<map name="moltk_1_1Structure_coll__map" id="moltk_1_1Structure_coll__map">
+<area shape="rect" id="node2" href="classmoltk_1_1BaseBiosequence.html" title="moltk::BaseBiosequence" alt="" coords="5,5,171,32"/></map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classmoltk_1_1Structure-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -103,6 +117,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure_1_1Atom.html">Atom</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Structure_1_1Atom.html" title="Structure::Atom represents a chemical atom in a molecular structure.">Structure::Atom</a> represents a chemical atom in a molecular structure.  <a href="classmoltk_1_1Structure_1_1Atom.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure_1_1Residue.html">Residue</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; <a class="el" href="classmoltk_1_1Structure_1_1Atom.html">Atom</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a7687cca26873a4ba8904e089ba401f48">AtomList</a></td></tr>
@@ -111,11 +126,15 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#aeb55e033ab60c46fd4882b22e8ff9b89">Structure</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a4384fae0d931fcfd4ec2ce6754cd83d5">Structure</a> (std::istream &amp;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a665ec428e70dd27665ac7c31063faf19">Structure</a> (const std::string &amp;fileName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a6420d8e9bb348027d831d2193afe590a">Structure</a> (const <a class="el" href="classmoltk_1_1Structure.html">Structure</a> &amp;rhs)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a4010facabbb3faf58e006853ed4f0b37">loadStream</a> (std::istream &amp;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a737bc399f21d38244840d66886bd9de4">loadFile</a> (const std::string &amp;fileName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a69e8f0f7cfe55b06cae6d2a1c6d9bf63">getNumberOfResidues</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classmoltk_1_1BaseBiosequence_1_1BaseResidue.html">BaseResidue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a1d9263ce9e7e8bfe06b5399acc01976b">getResidue</a> (size_t index) const </td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Structure.html#a7687cca26873a4ba8904e089ba401f48">AtomList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a7e6711d142c60f7230d18689032f18f9">atoms</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classmoltk_1_1Structure_1_1Residue.html">Residue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Structure.html#a23f87a7889a3c306ec3def7164b09277">residues</a></td></tr>
 </table>
 <hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="a7687cca26873a4ba8904e089ba401f48"></a><!-- doxytag: member="moltk::Structure::AtomList" ref="a7687cca26873a4ba8904e089ba401f48" args="" -->
@@ -182,7 +201,61 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a6420d8e9bb348027d831d2193afe590a"></a><!-- doxytag: member="moltk::Structure::Structure" ref="a6420d8e9bb348027d831d2193afe590a" args="(const Structure &amp;rhs)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">moltk::Structure::Structure </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmoltk_1_1Structure.html">Structure</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a69e8f0f7cfe55b06cae6d2a1c6d9bf63"></a><!-- doxytag: member="moltk::Structure::getNumberOfResidues" ref="a69e8f0f7cfe55b06cae6d2a1c6d9bf63" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t moltk::Structure::getNumberOfResidues </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="classmoltk_1_1BaseBiosequence.html#a5dfd87e1a64a3cf2479142bede9baffd">moltk::BaseBiosequence</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1d9263ce9e7e8bfe06b5399acc01976b"></a><!-- doxytag: member="moltk::Structure::getResidue" ref="a1d9263ce9e7e8bfe06b5399acc01976b" args="(size_t index) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classmoltk_1_1BaseBiosequence_1_1BaseResidue.html">BaseResidue</a>&amp; moltk::Structure::getResidue </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="classmoltk_1_1BaseBiosequence.html#a8bdac042503a95bbd2579bea43e0538a">moltk::BaseBiosequence</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a737bc399f21d38244840d66886bd9de4"></a><!-- doxytag: member="moltk::Structure::loadFile" ref="a737bc399f21d38244840d66886bd9de4" args="(const std::string &amp;fileName)" -->
 <div class="memitem">
 <div class="memproto">
@@ -224,6 +297,19 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classmoltk_1_1Structure.html#a7687cca26873a4ba8904e089ba401f48">AtomList</a> <a class="el" href="classmoltk_1_1Structure.html#a7e6711d142c60f7230d18689032f18f9">moltk::Structure::atoms</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a23f87a7889a3c306ec3def7164b09277"></a><!-- doxytag: member="moltk::Structure::residues" ref="a23f87a7889a3c306ec3def7164b09277" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classmoltk_1_1Structure_1_1Residue.html">Residue</a>&gt; <a class="el" href="classmoltk_1_1Structure.html#a23f87a7889a3c306ec3def7164b09277">moltk::Structure::residues</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>

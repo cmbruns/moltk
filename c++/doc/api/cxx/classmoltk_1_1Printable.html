@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>MolTK: moltk::Printable Class Reference</title>
+<title>MolTK C++ API: moltk::Printable Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -28,7 +28,7 @@
   
   
   <td style="padding-left: 0.5em;">
-   <div id="projectname">MolTK
+   <div id="projectname">MolTK C++ API
    &#160;<span id="projectnumber">0.3.0</span>
    </div>
    
@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -99,38 +99,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for moltk::Printable:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classmoltk_1_1Printable.png" usemap="#moltk::Printable_map" alt=""/>
-  <map id="moltk::Printable_map" name="moltk::Printable_map">
-<area href="classmoltk_1_1Alignment.html" alt="moltk::Alignment" shape="rect" coords="0,56,101,80"/>
-</map>
- </div></div>
+<div class="center"><img src="classmoltk_1_1Printable__inherit__graph.png" border="0" usemap="#moltk_1_1Printable_inherit__map" alt="Inheritance graph"/></div>
+<map name="moltk_1_1Printable_inherit__map" id="moltk_1_1Printable_inherit__map">
+<area shape="rect" id="node3" href="classmoltk_1_1Alignment.html" title="moltk::Alignment" alt="" coords="5,80,125,107"/></map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classmoltk_1_1Printable-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Printable.html#a940765903f70f3324aba7f4bfaf19f7e">print</a> (std::ostream &amp;os) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Printable.html#a81c08eafda151000621107b3d3c3fa90">print_to_stream</a> (std::ostream &amp;os) const =0</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classmoltk_1_1Printable.html" title="moltk::Printable is an abstract base class to help streamline string conversion in the moltk python b...">moltk::Printable</a> is an abstract base class to help streamline string conversion in the moltk python bindings. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a940765903f70f3324aba7f4bfaf19f7e"></a><!-- doxytag: member="moltk::Printable::print" ref="a940765903f70f3324aba7f4bfaf19f7e" args="(std::ostream &amp;os) const " -->
+<a class="anchor" id="a81c08eafda151000621107b3d3c3fa90"></a><!-- doxytag: member="moltk::Printable::print_to_stream" ref="a81c08eafda151000621107b3d3c3fa90" args="(std::ostream &amp;os) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void moltk::Printable::print </td>
+          <td class="memname">virtual void moltk::Printable::print_to_stream </td>
           <td>(</td>
           <td class="paramtype">std::ostream &amp;&#160;</td>
           <td class="paramname"><em>os</em></td><td>)</td>
-          <td> const<code> [virtual]</code></td>
+          <td> const<code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classmoltk_1_1Alignment.html#a873d7712cc6684e5ed20a7ec65e1b131">moltk::Alignment</a>.</p>
+<p>Implemented in <a class="el" href="classmoltk_1_1Alignment.html#a2e94d39fcbad3289fa8d3105784e3da6">moltk::Alignment</a>.</p>
 
 </div>
 </div>
