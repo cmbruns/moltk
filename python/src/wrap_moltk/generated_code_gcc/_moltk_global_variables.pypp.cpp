@@ -2,7 +2,7 @@
 
 #include "boost/python.hpp"
 #include "wrap_moltk.h"
-#include "moltk_global_variables.pypp.hpp"
+#include "_moltk_global_variables.pypp.hpp"
 
 namespace bp = boost::python;
 
