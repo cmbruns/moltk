@@ -8,6 +8,10 @@
 
 #include "generated_code_gcc/Alignment.pypp.hpp"
 
+#include "generated_code_gcc/BaseBiosequence.pypp.hpp"
+
+#include "generated_code_gcc/Biosequence.pypp.hpp"
+
 #include "generated_code_gcc/FastaSequence.pypp.hpp"
 
 #include "generated_code_gcc/Information.pypp.hpp"
@@ -16,18 +20,22 @@
 
 #include "generated_code_gcc/Structure.pypp.hpp"
 
-#include "generated_code_gcc/bit_unit.pypp.hpp"
+#include "generated_code_gcc/_moltk_global_variables.pypp.hpp"
 
-#include "generated_code_gcc/moltk_global_variables.pypp.hpp"
+#include "generated_code_gcc/bit_unit.pypp.hpp"
 
 namespace bp = boost::python;
 
-BOOST_PYTHON_MODULE(moltk){
+BOOST_PYTHON_MODULE(_moltk){
     register_Aligner_class();
 
     register_Printable_class();
 
     register_Alignment_class();
+
+    register_BaseBiosequence_class();
+
+    register_Biosequence_class();
 
     register_FastaSequence_class();
 
