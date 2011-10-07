@@ -70,7 +70,7 @@ def do_setup():
           author_email = "cmbruns@rotatingpenguin.com",
           url = "http://code.google.com/p/moltk/",
           package_dir = {'': 'python'}, # sources are under python subdirectory
-          packages = ['moltk',],
+          packages = ['moltk', 'moltk.gui'],
           ext_modules = [Extension( 'moltk._moltk', moltk_sources,
                 library_dirs = library_dirs,
                 libraries = [boost_python_library, boost_iostreams_library],

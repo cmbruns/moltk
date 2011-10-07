@@ -66,6 +66,9 @@ add_custom_target(LocalPyMolTKInstallation ALL
 
 add_subdirectory(src)
 
+# Create gui files
+add_subdirectory(moltk/gui)
+
 # local python moltk install symbols required before doc
 # (see comments in doc CMakeLists.txt)
 add_subdirectory(doc)
