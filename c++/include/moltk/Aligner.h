@@ -5,7 +5,7 @@
 #include <vector>
 #include "Alignment.h"
 #include "moltk/units.h"
-#include "moltk/FastaSequence.h"
+#include "moltk/Biosequence.h"
 
 namespace moltk {
 
@@ -93,9 +93,8 @@ public:
 public:
     // Finally, the actual Aligner methods
     Aligner();
-    // Alignment align(const FastaSequence&);
     // Alignment align(const Alignment&);
-    Alignment align(const FastaSequence&, const FastaSequence&);
+    Alignment align(const Biosequence&, const Biosequence&);
 
     static const Scorer& getDefaultScorer();
     bool getEndGapsFree() const {return bEndGapsFree;}

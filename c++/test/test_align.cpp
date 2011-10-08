@@ -6,8 +6,8 @@ using namespace moltk;
 
 int main()
 {
-    FastaSequence seq1("AACDEF");
-    FastaSequence seq2("ACEFG");
+    Biosequence seq1("AACDEF");
+    Biosequence seq2("ACEFG");
     Aligner aligner;
     Alignment alignment = aligner.align(seq1, seq2);
     cout << alignment;

@@ -24,12 +24,12 @@ void Aligner::init()
     n = seq2.size();
 }
 
-Alignment Aligner::align(const FastaSequence& s1, const FastaSequence& s2)
+Alignment Aligner::align(const Biosequence& s1, const Biosequence& s2)
 {
 
     // Fill seq1, seq2
     seq1.clear();
-    FastaSequence::const_iterator si = s1.begin();
+    Biosequence::const_iterator si = s1.begin();
     while (si != s1.end()) {
         seq1.push_back(scorer->createPosition(*si));
         ++si;
