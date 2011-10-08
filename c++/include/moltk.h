@@ -21,6 +21,7 @@ There are three faces of MolTK; in order from easiest-to-use to most-powerful:
     - Next-generation molecular sequence/structure viewer that adheres to our user interface principles. 
 */
 
+#include "moltk/Real.h"
 #include "moltk/Biosequence.h"
 #include "moltk/Aligner.h"
 #include "moltk/Structure.h"

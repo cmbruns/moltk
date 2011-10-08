@@ -64,15 +64,15 @@ public:
     class Cell
     {
     public:
+        TracebackPointer compute_traceback_pointer() const;
+        Information compute_v() const;
+
         // Gusfield nomenclature
         // TODO - remove s, which does not need to be stored
-        /// s is the score of aligning position S1(i) with S2(j); (Wm in Gusfield's nomenclature.)
-        Information s; ///< Wm, score of aligning position S1(i) with S2(j)
         Information v; ///< V, best score through this cell
         Information g; ///< G, best ungapped score through this cell
         Information e; ///< E, best score with gap in sequence 1
         Information f; ///< F, best score with gap in sequence 2
-        TracebackPointer tracebackPointer; ///< breadcrumb to help reconstruct the final alignment
     };
     typedef std::vector<Cell> DpRow;
     typedef std::vector<DpRow> DpTable;
