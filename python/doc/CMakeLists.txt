@@ -17,6 +17,12 @@ if(MOLTK_REGENERATE_PYTHON_API_DOCS)
             /usr/local/bin
             "$ENV{HOME}/bin"
     )
+    # We might want to use the program "dot" to generate graphs for the API docs.
+    set(DOT_ARG "")
+    find_program(DOT_EXECUTABLE dot)
+    if(DOT_EXECUTABLE)
+        set(DOT_ARG "--graph all")
+    endif()
     # Create a little cmake script to generate api docs at build time
     set(DOCSCRIPT "${CMAKE_BINARY_DIR}/generate_epydoc_html.cmake")
     file(WRITE "${DOCSCRIPT}"
@@ -28,6 +34,7 @@ if(MOLTK_REGENERATE_PYTHON_API_DOCS)
           --html moltk -o python
           --name \"MolTK python API v${MOLTK_VERSION} Documentation\"
           --url http://code.google.com/p/moltk/
+          ${DOT_ARG}
         WORKING_DIRECTORY \"${PYTHON_API_DIR}\")
     ")
     # Run this script after local-install, but before install
