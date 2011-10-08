@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>MolTK C++ API: Main Page</title>
+<title>MolTK C++ API: MolTK: Python and C++ tools for protein sequence/structure alignment and visualization</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -72,10 +72,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">MolTK C++ API Documentation</div>  </div>
+<div class="title">MolTK: Python and C++ tools for protein sequence/structure alignment and visualization </div>  </div>
 </div>
 <div class="contents">
-</div>
+<div class="textblock"><h2><a class="anchor" id="whatismoltk"></a>
+What is MolTK?</h2>
+<p>There are three faces of MolTK; in order from easiest-to-use to most-powerful:</p>
+<ol type="1">
+<li>MolTK is a computer application that allows the user to view and align molecular sequences and structures.</li>
+<li>moltk is a Python programming language module that allows the user to align and otherwise compute on molecular sequences and structures.</li>
+<li>moltk is a C++ API that allow the programmer to compute with molecular sequences and structures with high efficiency.</li>
+</ol>
+<h2><a class="anchor" id="designgoals"></a>
+Design Goals of MolTK</h2>
+<ul>
+<li>Python programming language interactive environment for sequence/structure alignment that is just as easy to use as our (aging) dedicated alignment tool SEQUOIA.</li>
+<li>Flexible architecture that makes it easy to experiment with custom alignment methods and scoring systems.</li>
+<li>Consistent, well docomented API for both Python and C++ programmers.</li>
+<li>Units-aware quantity type system. Thus alignment scores are not just numbers, they are information quantities with units of "bits". Atomic coordinates are not just numbers x, y, z, but are vector quantities with units of nanometers. Units-aware quantity types are an important part of scientific computing hygiene:<ul>
+<li>Converting a "quantity" to a raw number requires a "unit" to express the quantity in. This requires the user to pay attention to units at precisely the moment when knowing the unit is most important. The rest of the time is "just works", even if you are wrong about what the current units are!</li>
+<li>This sort of type safety in scientific computing might help prevent errors such as, say, crashing $100 million orbiters into planets.</li>
+<li>Type safety: Adding a length to a volume makes no sense, and will result in an error. Dividing a length by a time results in a velocity.</li>
+</ul>
+</li>
+<li>Next-generation molecular sequence/structure viewer that adheres to our user interface principles. </li>
+</ul>
+</div></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
