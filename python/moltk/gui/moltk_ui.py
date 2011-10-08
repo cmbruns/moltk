@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'moltk.ui'
 #
-# Created: Thu Oct 06 18:02:45 2011
+# Created: Fri Oct 07 20:15:09 2011
 #      by: pyside-uic 0.2.10 running on PySide 1.0.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,6 +15,33 @@ class Ui_MoltkMainWindow(object):
         MoltkMainWindow.resize(498, 493)
         self.centralwidget = QtGui.QWidget(MoltkMainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.horizontalLayout = QtGui.QHBoxLayout(self.centralwidget)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.frame = QtGui.QFrame(self.centralwidget)
+        self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.frame)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.splitter = QtGui.QSplitter(self.frame)
+        self.splitter.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.splitter.setFrameShadow(QtGui.QFrame.Raised)
+        self.splitter.setOrientation(QtCore.Qt.Vertical)
+        self.splitter.setOpaqueResize(True)
+        self.splitter.setHandleWidth(5)
+        self.splitter.setObjectName("splitter")
+        self.frame_2 = QtGui.QFrame(self.splitter)
+        self.frame_2.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame_2.setLineWidth(5)
+        self.frame_2.setObjectName("frame_2")
+        self.frame_3 = QtGui.QFrame(self.splitter)
+        self.frame_3.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame_3.setLineWidth(5)
+        self.frame_3.setObjectName("frame_3")
+        self.horizontalLayout_2.addWidget(self.splitter)
+        self.horizontalLayout.addWidget(self.frame)
         MoltkMainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MoltkMainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 498, 21))
