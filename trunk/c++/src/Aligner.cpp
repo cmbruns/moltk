@@ -2,10 +2,40 @@
 #include "moltk/MatrixScorer.h"
 #include <cassert>
 #include <algorithm> // reverse
+#include <limits>
 
 using namespace std;
 using namespace moltk;
 using moltk::units::bit;
+
+
+///////////////////////////
+// Aligner::Cell methods //
+///////////////////////////
+
+units::Information Aligner::Cell::compute_v() const
+{
+    TracebackPointer tp = compute_traceback_pointer();
+    switch(tp)
+    {
+    case TRACEBACK_UPLEFT:
+        return g;
+    case TRACEBACK_LEFT:
+        return e;
+    default:
+        return f;
+    }
+}
+
+Aligner::TracebackPointer Aligner::Cell::compute_traceback_pointer() const
+{
+    if ( (g >= e) && (g >= f) )
+        return TRACEBACK_UPLEFT;
+    else if (e >= f)
+        return TRACEBACK_LEFT;
+    else
+        return TRACEBACK_UP;
+}
 
 
 /////////////////////
@@ -68,7 +98,7 @@ void Aligner::initialize_dp_row(size_t rowIndex, DpRow& row)
 {
     size_t i = rowIndex;
     // most rows only need the first element initialized
-    row[0].tracebackPointer = TRACEBACK_UP;
+    row[0].f = numeric_limits<Real>::infinity() * bit;
     if (bEndGapsFree)
         row[0].v = row[0].e = 0.0 * bit;
     else
@@ -79,13 +109,12 @@ void Aligner::initialize_dp_row(size_t rowIndex, DpRow& row)
         for (size_t j = 0; j < row.size(); ++j)
         {
             Cell& cell = row[j];
-            cell.tracebackPointer = TRACEBACK_LEFT;
+            cell.e = numeric_limits<Real>::infinity() * bit;
             if (bEndGapsFree)
                 cell.v = cell.f = 0.0 * bit;
             else
                 cell.v = cell.f = -gapOpenPenalty - ((double)j * gapExtensionPenalty);
         }
-        row[0].tracebackPointer = TRACEBACK_DONE; // upper left cell
     }
 }
 
@@ -94,55 +123,30 @@ void Aligner::compute_cell_recurrence(int i, int j)
     Position& p1 = *seq1[i-1];
     Position& p2 = *seq2[j-1];
     Cell& cell = dpTable[i][j];
-    cell.s = p1.score(p2);
     // This recurrence comes from Gusfield chapter 11.
-    cell.g = dpTable[i-1][j-1].v + cell.s; // score...
+    cell.g = dpTable[i-1][j-1].v + p1.score(p2); // score...
     cell.e = std::max(dpTable[i][j-1].e
                     , dpTable[i][j-1].v - gapOpenPenalty)
                     - gapExtensionPenalty;
     cell.f = std::max(dpTable[i-1][j].f
                     , dpTable[i-1][j].v - gapOpenPenalty)
                     - gapExtensionPenalty;
-    // compute traceback pointer
-    if ( (cell.g >= cell.e) && (cell.g >= cell.f) ) {
-        cell.v = cell.g;
-        cell.tracebackPointer = TRACEBACK_UPLEFT;
-    }
-    else if (cell.e >= cell.f) {
-        cell.v = cell.e;
-        cell.tracebackPointer = TRACEBACK_LEFT;
-    }
-    else {
-        cell.v = cell.f;
-        cell.tracebackPointer = TRACEBACK_UP;
-    }
+    cell.v = cell.compute_v();
 }
 void Aligner::compute_cell_recurrence_freeE(int i, int j)
 {
     Position& p1 = *seq1[i-1];
     Position& p2 = *seq2[j-1];
     Cell& cell = dpTable[i][j];
-    cell.s = p1.score(p2);
     // This recurrence comes from Gusfield chapter 11.
-    cell.g = dpTable[i-1][j-1].v + cell.s; // score...
+    cell.g = dpTable[i-1][j-1].v + p1.score(p2); // score...
     cell.e = std::max(dpTable[i][j-1].e
                     , dpTable[i][j-1].v);
     cell.f = std::max(dpTable[i-1][j].f
                     , dpTable[i-1][j].v - gapOpenPenalty)
                     - gapExtensionPenalty;
-    // compute traceback pointer
-    if ( (cell.g >= cell.e) && (cell.g >= cell.f) ) {
-        cell.v = cell.g;
-        cell.tracebackPointer = TRACEBACK_UPLEFT;
-    }
-    else if (cell.e >= cell.f) {
-        cell.v = cell.e;
-        cell.tracebackPointer = TRACEBACK_LEFT;
-    }
-    else {
-        cell.v = cell.f;
-        cell.tracebackPointer = TRACEBACK_UP;
-    }
+    cell.v = cell.compute_v();
+
 }
 
 void Aligner::compute_cell_recurrence_freeF(int i, int j)
@@ -150,27 +154,14 @@ void Aligner::compute_cell_recurrence_freeF(int i, int j)
     Position& p1 = *seq1[i-1];
     Position& p2 = *seq2[j-1];
     Cell& cell = dpTable[i][j];
-    cell.s = p1.score(p2);
     // This recurrence comes from Gusfield chapter 11.
-    cell.g = dpTable[i-1][j-1].v + cell.s; // score...
+    cell.g = dpTable[i-1][j-1].v + p1.score(p2); // score...
     cell.e = std::max(dpTable[i][j-1].e
                     , dpTable[i][j-1].v - gapOpenPenalty)
                     - gapExtensionPenalty;
     cell.f = std::max(dpTable[i-1][j].f
                     , dpTable[i-1][j].v);
-    // compute traceback pointer
-    if ( (cell.g >= cell.e) && (cell.g >= cell.f) ) {
-        cell.v = cell.g;
-        cell.tracebackPointer = TRACEBACK_UPLEFT;
-    }
-    else if (cell.e >= cell.f) {
-        cell.v = cell.e;
-        cell.tracebackPointer = TRACEBACK_LEFT;
-    }
-    else {
-        cell.v = cell.f;
-        cell.tracebackPointer = TRACEBACK_UP;
-    }
+    cell.v = cell.compute_v();
 }
 
 void Aligner::compute_cell_recurrence_freeEF(int i, int j)
@@ -178,26 +169,13 @@ void Aligner::compute_cell_recurrence_freeEF(int i, int j)
     Position& p1 = *seq1[i-1];
     Position& p2 = *seq2[j-1];
     Cell& cell = dpTable[i][j];
-    cell.s = p1.score(p2);
     // This recurrence comes from Gusfield chapter 11.
-    cell.g = dpTable[i-1][j-1].v + cell.s; // score...
+    cell.g = dpTable[i-1][j-1].v + p1.score(p2); // score...
     cell.e = std::max(dpTable[i][j-1].e
                     , dpTable[i][j-1].v);
     cell.f = std::max(dpTable[i-1][j].f
                     , dpTable[i-1][j].v);
-    // compute traceback pointer
-    if ( (cell.g >= cell.e) && (cell.g >= cell.f) ) {
-        cell.v = cell.g;
-        cell.tracebackPointer = TRACEBACK_UPLEFT;
-    }
-    else if (cell.e >= cell.f) {
-        cell.v = cell.e;
-        cell.tracebackPointer = TRACEBACK_LEFT;
-    }
-    else {
-        cell.v = cell.f;
-        cell.tracebackPointer = TRACEBACK_UP;
-    }
+    cell.v = cell.compute_v();
 }
 
 void Aligner::compute_recurrence()
@@ -235,8 +213,8 @@ Alignment Aligner::compute_traceback()
     int i = m;
     int j = n;
     // cout << "final alignment score = " << dpTable[i][j].v << endl;
-    TracebackPointer tracebackPointer = dpTable[i][j].tracebackPointer;
-    while(tracebackPointer != TRACEBACK_DONE) 
+    TracebackPointer tracebackPointer = dpTable[i][j].compute_traceback_pointer();
+    while( (i > 0) || (j > 0) )
     {
         // cout << "traceback[" << i << "][" << j << "]" << endl;
         switch(tracebackPointer)
@@ -261,7 +239,7 @@ Alignment Aligner::compute_traceback()
             assert(false);
             break;
         }
-        tracebackPointer = dpTable[i][j].tracebackPointer;
+        tracebackPointer = dpTable[i][j].compute_traceback_pointer();
     }
     assert(i == 0);
     assert(j == 0);

@@ -91,11 +91,16 @@ void register_Aligner_class(){
             .export_values()
             ;
         bp::class_< moltk::Aligner::Cell >( "Cell", " An Aligner::Cell is one node in the dynamic programming table" )    
+            .def( 
+                "compute_traceback_pointer"
+                , (::moltk::Aligner::TracebackPointer ( ::moltk::Aligner::Cell::* )(  ) const)( &::moltk::Aligner::Cell::compute_traceback_pointer )
+                , " An Aligner::Cell is one node in the dynamic programming table" )    
+            .def( 
+                "compute_v"
+                , (::moltk::units::Information ( ::moltk::Aligner::Cell::* )(  ) const)( &::moltk::Aligner::Cell::compute_v ) )    
             .def_readwrite( "e", &moltk::Aligner::Cell::e, " E, best score with gap in sequence 1" )    
             .def_readwrite( "f", &moltk::Aligner::Cell::f, " F, best score with gap in sequence 2" )    
             .def_readwrite( "g", &moltk::Aligner::Cell::g, " G, best ungapped score through this cell" )    
-            .def_readwrite( "s", &moltk::Aligner::Cell::s, " Wm, score of aligning position S1(i) with S2(j)\n s is the score of aligning position S1(i) with S2(j); (Wm in Gusfields nomenclature.)" )    
-            .def_readwrite( "tracebackPointer", &moltk::Aligner::Cell::tracebackPointer, " breadcrumb to help reconstruct the final alignment" )    
             .def_readwrite( "v", &moltk::Aligner::Cell::v, " V, best score through this cell" );
         bp::class_< Aligner_wrapper::Position_wrapper, boost::noncopyable >( "Position", "\n Aligner::Position represents a special biosequence residue that knows how to score itself during alignment.\n" )    
             .def( 

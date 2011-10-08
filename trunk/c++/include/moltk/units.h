@@ -4,16 +4,17 @@
 // Boost::units does not play well with gcc-xml and msvc 9
 // so I decided to roll my own.
 
+#include "moltk/Real.h"
+
 namespace moltk { namespace units {
 
-
-// typedef double Information;
+// typedef Real Information;
 // static const Information bit;
     struct Information 
     {
         Information() {}
 
-        Information(double d) : value(d) {}
+        Information(Real d) : value(d) {}
 
         Information operator+(const Information& rhs) const {
             return Information(value + rhs.value);
@@ -26,7 +27,7 @@ namespace moltk { namespace units {
             return Information(-value);
         }
 
-        Information operator*(double rhs) const {
+        Information operator*(Real rhs) const {
             return moltk::units::Information(value * rhs);
         }
 
@@ -51,7 +52,7 @@ namespace moltk { namespace units {
             return os;
         }
 
-        double value;
+        Real value;
     };
 
     struct bit_unit {
@@ -65,11 +66,11 @@ inline std::ostream& operator<<(std::ostream& os, const moltk::units::Informatio
     return info.print(os);
 }
 
-inline moltk::units::Information operator*(double lhs, const moltk::units::bit_unit& rhs) {
+inline moltk::units::Information operator*(moltk::Real lhs, const moltk::units::bit_unit& rhs) {
     return moltk::units::Information(lhs);
 }
 
-inline moltk::units::Information operator*(double lhs, const moltk::units::Information& rhs) {
+inline moltk::units::Information operator*(moltk::Real lhs, const moltk::units::Information& rhs) {
     return moltk::units::Information(lhs * rhs.value);
 }
 

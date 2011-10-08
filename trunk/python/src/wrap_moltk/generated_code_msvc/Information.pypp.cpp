@@ -12,9 +12,9 @@ void register_Information_class(){
         typedef bp::class_< moltk::units::Information > Information_exposer_t;
         Information_exposer_t Information_exposer = Information_exposer_t( "Information", bp::init< >() );
         bp::scope Information_scope( Information_exposer );
-        Information_exposer.def( bp::init< double >(( bp::arg("d") )) );
-        bp::implicitly_convertible< double, moltk::units::Information >();
-        Information_exposer.def( bp::self * bp::other< double >() );
+        Information_exposer.def( bp::init< moltk::Real >(( bp::arg("d") )) );
+        bp::implicitly_convertible< moltk::Real, moltk::units::Information >();
+        Information_exposer.def( bp::self * bp::other< moltk::Real >() );
         Information_exposer.def( bp::self + bp::self );
         Information_exposer.def( bp::self - bp::self );
         Information_exposer.def( -bp::self );
