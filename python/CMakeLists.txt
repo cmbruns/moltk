@@ -11,12 +11,19 @@ set(MOLTK_LOCAL_INSTALL_DIR "${CMAKE_BINARY_DIR}/py_install")
 set(MOLTK_LOCAL_PYTHON_PATH ${MOLTK_LOCAL_INSTALL_DIR}/lib/python)
 file(TO_NATIVE_PATH "${MOLTK_LOCAL_PYTHON_PATH}" NATIVE_LOCAL_PYTHONPATH)
 
-# create cmake script for running setup.py at build time
-# so we can run with env variables of our choosing.
-set(RUN_SETUP_PY "${CMAKE_CURRENT_BINARY_DIR}/RunSetupPy.cmake")
 file(RELATIVE_PATH BUILD_BASE "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/py_build")
 file(RELATIVE_PATH REL_LOCAL_INSTALL_DIR "${CMAKE_SOURCE_DIR}" "${MOLTK_LOCAL_INSTALL_DIR}")
-file(WRITE "${RUN_SETUP_PY}"
+
+add_subdirectory(src)
+
+##################
+# setup.py clean #
+##################
+
+# create cmake scripts for running setup.py at build time
+# so we can run with env variables of our choosing.
+set(RUN_SETUP_PY_CLEAN "${CMAKE_CURRENT_BINARY_DIR}/RunSetupPyClean.cmake")
+file(WRITE "${RUN_SETUP_PY_CLEAN}"
 "
 ################
 set(ENV{BOOST_PYTHON_LIBRARY} \"${Boost_PYTHON_LIBRARY_RELEASE}\")
@@ -30,7 +37,43 @@ execute_process(
         clean --all
     WORKING_DIRECTORY \"${CMAKE_SOURCE_DIR}\"
 )
-# Build/install after clean
+#################
+"
+)
+
+# stamp file to keep track of the last time we rebuild the python module
+set(SETUP_PY_CLEAN_STAMP "${CMAKE_CURRENT_BINARY_DIR}/setup_py_clean.stamp")
+add_custom_command(
+    OUTPUT "${SETUP_PY_CLEAN_STAMP}"
+    COMMAND "${CMAKE_COMMAND}" -P "${RUN_SETUP_PY_CLEAN}"
+    COMMAND "${CMAKE_COMMAND}" -E touch "${SETUP_PY_CLEAN_STAMP}"
+    DEPENDS 
+        "${RUN_SETUP_PY_CLEAN}"
+        "${SETUP_PY}"
+        ${MOLTK_HEADERS}
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    COMMENT "Cleaning python MolTK build files"
+)
+add_custom_target(SetupPyClean
+    DEPENDS 
+        "${SETUP_PY_CLEAN_STAMP}"
+    SOURCES
+        setup.py.in
+        "${SETUP_PY}"
+)
+
+
+##################
+# setup.py build #
+##################
+
+set(RUN_SETUP_PY_BUILD "${CMAKE_CURRENT_BINARY_DIR}/RunSetupPyBuild.cmake")
+file(WRITE "${RUN_SETUP_PY_BUILD}"
+"
+################
+set(ENV{BOOST_PYTHON_LIBRARY} \"${Boost_PYTHON_LIBRARY_RELEASE}\")
+set(ENV{BOOST_IOSTREAMS_LIBRARY} \"${Boost_IOSTREAMS_LIBRARY_RELEASE}\")
+set(ENV{BOOST_INCLUDE_DIR} \"${Boost_INCLUDE_DIRS}\")
 execute_process(
     COMMAND \"${PYTHON_EXECUTABLE}\" setup.py
         build --build-base=${BUILD_BASE}
@@ -42,29 +85,85 @@ execute_process(
 )
 
 # stamp file to keep track of the last time we rebuild the python module
-set(SETUP_PY_STAMP "${CMAKE_CURRENT_BINARY_DIR}/setup_py.stamp")
+set(SETUP_PY_BUILD_STAMP "${CMAKE_CURRENT_BINARY_DIR}/setup_py_build.stamp")
 add_custom_command(
-    OUTPUT "${SETUP_PY_STAMP}"
-    COMMAND "${CMAKE_COMMAND}" -P "${RUN_SETUP_PY}"
-    COMMAND "${CMAKE_COMMAND}" -E touch "${SETUP_PY_STAMP}"
+    OUTPUT "${SETUP_PY_BUILD_STAMP}"
+    COMMAND "${CMAKE_COMMAND}" -P "${RUN_SETUP_PY_BUILD}"
+    COMMAND "${CMAKE_COMMAND}" -E touch "${SETUP_PY_BUILD_STAMP}"
     DEPENDS 
-        "${RUN_SETUP_PY}"
+        "${RUN_SETUP_PY_BUILD}"
+        "${SETUP_PY_CLEAN_STAMP}"
         "${SETUP_PY}"
-        ${MOLTK_HEADERS}
         ${MOLTK_SOURCES}
+        MoltkPyplusplusWrappers
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-    COMMENT "Installing python MolTK to local directory ${MOLTK_LOCAL_INSTALL_DIR}"
+    COMMENT "Building python MolTK module/Installing to local directory ${MOLTK_LOCAL_INSTALL_DIR}"
 )
-
-add_custom_target(LocalPyMolTKInstallation ALL
+add_custom_target(SetupPyBuild
     DEPENDS 
-        "${SETUP_PY_STAMP}"
+        "${SETUP_PY_BUILD_STAMP}"
     SOURCES
         setup.py.in
         "${SETUP_PY}"
 )
 
-add_subdirectory(src)
+
+##################
+# setup.py bdist #
+##################
+
+file(RELATIVE_PATH DIST_DIR "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/py_dist")
+set(RUN_SETUP_PY_BDIST "${CMAKE_CURRENT_BINARY_DIR}/RunSetupPyBdist.cmake")
+set(BDIST_OPT "bdist")
+if(MSVC)
+    set(BDIST_OPT "bdist_msi")
+endif()
+file(WRITE "${RUN_SETUP_PY_BDIST}"
+"
+################
+set(ENV{BOOST_PYTHON_LIBRARY} \"${Boost_PYTHON_LIBRARY_RELEASE}\")
+set(ENV{BOOST_IOSTREAMS_LIBRARY} \"${Boost_IOSTREAMS_LIBRARY_RELEASE}\")
+set(ENV{BOOST_INCLUDE_DIR} \"${Boost_INCLUDE_DIRS}\")
+execute_process(
+    COMMAND \"${PYTHON_EXECUTABLE}\" setup.py
+        build --build-base=${BUILD_BASE}
+        ${BDIST_OPT} --dist-dir=${DIST_DIR}
+    WORKING_DIRECTORY \"${CMAKE_SOURCE_DIR}\"
+)
+#################
+"
+)
+
+# stamp file to keep track of the last time we rebuild the python module
+set(SETUP_PY_BDIST_STAMP "${CMAKE_CURRENT_BINARY_DIR}/setup_py_bdist.stamp")
+add_custom_command(
+    OUTPUT "${SETUP_PY_BDIST_STAMP}"
+    COMMAND "${CMAKE_COMMAND}" -P "${RUN_SETUP_PY_BDIST}"
+    COMMAND "${CMAKE_COMMAND}" -E touch "${SETUP_PY_BDIST_STAMP}"
+    DEPENDS 
+        "${RUN_SETUP_PY_BDIST}"
+        "${SETUP_PY_BUILD_STAMP}"
+        "${SETUP_PY}"
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    COMMENT "Creating python MolTK binary installer"
+)
+add_custom_target(SetupPyBdist
+    DEPENDS 
+        "${SETUP_PY_BDIST_STAMP}"
+    SOURCES
+        setup.py.in
+        "${SETUP_PY}"
+)
+
+######################
+
+add_custom_target(LocalPyMolTKInstallation ALL
+    DEPENDS 
+        SetupPyBuild
+    SOURCES
+        setup.py.in
+        "${SETUP_PY}"
+)
 
 # Create gui files
 add_subdirectory(moltk/gui)

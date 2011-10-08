@@ -61,6 +61,5 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
             wrap_moltk.h
         COMMENT "Generating python wrapper source code"
     )
-    add_dependencies(LocalPyMolTKInstallation MoltkPyplusplusWrappers)
 endif()
 
