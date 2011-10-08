@@ -20,29 +20,6 @@ file(GLOB PYPLUSPLUS_SRCS "${GENERATED_CODE_DIR}/*.cpp")
 file(GLOB PYPLUSPLUS_HEADERS "${GENERATED_CODE_DIR}/*.hpp")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/${GENERATED_CODE_DIR}")
 
-add_library(MoltkPythonModule SHARED ${PYPLUSPLUS_SRCS} ${PYPLUSPLUS_HEADERS})
-target_link_libraries(MoltkPythonModule
-    ${PYTHON_LIBRARY}
-    MoltkLibrary)
-set_target_properties(MoltkPythonModule PROPERTIES
-    OUTPUT_NAME moltk
-    PREFIX "")
-if(WIN32)
-    set_target_properties(MoltkPythonModule PROPERTIES
-        SUFFIX ".pyd"
-        PREFIX "../" # move out of Release/Debug
-    )
-else()
-    # Windows seems to auto-link boost-python, and has trouble with explicit link. So only explicitly link on Mac/Linux
-    target_link_libraries(MoltkPythonModule
-        ${Boost_PYTHON_LIBRARY}
-        MoltkLibrary)
-    set_target_properties(MoltkPythonModule PROPERTIES
-        SUFFIX ".so" # even on Mac! (i.e. not .dylib)
-    )
-endif()
-
-
 # (optionally) regenerate python binding source code
 # TODO - consider doing this at configure time, with EXEC_PROGRAM()
 
@@ -84,7 +61,6 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
             wrap_moltk.h
         COMMENT "Generating python wrapper source code"
     )
-    add_dependencies(MoltkPythonModule MoltkPyplusplusWrappers)
     add_dependencies(LocalPyMolTKInstallation MoltkPyplusplusWrappers)
 endif()
 
