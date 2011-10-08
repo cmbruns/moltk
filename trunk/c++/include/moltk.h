@@ -22,6 +22,5 @@ There are three faces of MolTK; in order from easiest-to-use to most-powerful:
 */
 
 #include "moltk/Biosequence.h"
-#include "moltk/FastaSequence.h"
 #include "moltk/Aligner.h"
 #include "moltk/Structure.h"

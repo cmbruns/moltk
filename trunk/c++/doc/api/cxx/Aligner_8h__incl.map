@@ -1,7 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node7" href="$Alignment_8h.html" title="Alignment.h" alt="" coords="111,155,201,181"/>
-<area shape="rect" id="node17" href="$units_8h.html" title="moltk/units.h" alt="" coords="277,80,373,107"/>
-<area shape="rect" id="node19" href="$FastaSequence_8h.html" title="moltk/FastaSequence.h" alt="" coords="399,80,559,107"/>
-<area shape="rect" id="node13" href="$Printable_8h.html" title="moltk/Printable.h" alt="" coords="79,229,199,256"/>
-<area shape="rect" id="node22" href="$Biosequence_8h.html" title="moltk/Biosequence.h" alt="" coords="295,155,439,181"/>
+<area shape="rect" id="node7" href="$Alignment_8h.html" title="Alignment.h" alt="" coords="135,80,225,107"/>
+<area shape="rect" id="node17" href="$units_8h.html" title="moltk/units.h" alt="" coords="250,80,347,107"/>
+<area shape="rect" id="node13" href="$Printable_8h.html" title="moltk/Printable.h" alt="" coords="208,155,328,181"/>
 </map>

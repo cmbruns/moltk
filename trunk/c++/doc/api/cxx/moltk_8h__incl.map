@@ -1,9 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$Biosequence_8h.html" title="moltk/Biosequence.h" alt="" coords="65,229,209,256"/>
-<area shape="rect" id="node16" href="$FastaSequence_8h.html" title="moltk/FastaSequence.h" alt="" coords="5,155,165,181"/>
-<area shape="rect" id="node20" href="$Aligner_8h.html" title="moltk/Aligner.h" alt="" coords="383,80,492,107"/>
-<area shape="rect" id="node33" href="$Structure_8h.html" title="moltk/Structure.h" alt="" coords="240,155,363,181"/>
-<area shape="rect" id="node5" href="$Printable_8h.html" title="moltk/Printable.h" alt="" coords="251,304,371,331"/>
-<area shape="rect" id="node24" href="$Alignment_8h.html" title="Alignment.h" alt="" coords="339,229,429,256"/>
-<area shape="rect" id="node30" href="$units_8h.html" title="moltk/units.h" alt="" coords="505,155,601,181"/>
+<area shape="rect" id="node3" href="$Biosequence_8h.html" title="moltk/Biosequence.h" alt="" coords="5,155,149,181"/>
+<area shape="rect" id="node18" href="$Aligner_8h.html" title="moltk/Aligner.h" alt="" coords="328,80,437,107"/>
+<area shape="rect" id="node32" href="$Structure_8h.html" title="moltk/Structure.h" alt="" coords="176,80,299,107"/>
+<area shape="rect" id="node5" href="$Printable_8h.html" title="moltk/Printable.h" alt="" coords="333,229,453,256"/>
+<area shape="rect" id="node22" href="$Alignment_8h.html" title="Alignment.h" alt="" coords="337,155,428,181"/>
+<area shape="rect" id="node28" href="$units_8h.html" title="moltk/units.h" alt="" coords="630,155,727,181"/>
 </map>

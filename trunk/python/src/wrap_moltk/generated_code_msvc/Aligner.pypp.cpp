@@ -136,7 +136,7 @@ void register_Aligner_class(){
                 , "\n Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which\n know how to quickly score themselves with other AlignerPositions.\n" );
         { //::moltk::Aligner::align
         
-            typedef ::moltk::Alignment ( ::moltk::Aligner::*align_function_type )( ::moltk::FastaSequence const &,::moltk::FastaSequence const & ) ;
+            typedef ::moltk::Alignment ( ::moltk::Aligner::*align_function_type )( ::moltk::Biosequence const &,::moltk::Biosequence const & ) ;
             
             Aligner_exposer.def( 
                 "align"

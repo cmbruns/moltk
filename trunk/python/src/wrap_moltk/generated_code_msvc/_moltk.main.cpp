@@ -16,8 +16,6 @@
 
 #include "generated_code_msvc/bit_unit.pypp.hpp"
 
-#include "generated_code_msvc/fastasequence.pypp.hpp"
-
 #include "generated_code_msvc/information.pypp.hpp"
 
 #include "generated_code_msvc/printable.pypp.hpp"
@@ -36,8 +34,6 @@ BOOST_PYTHON_MODULE(_moltk){
     register_BaseBiosequence_class();
 
     register_Biosequence_class();
-
-    register_FastaSequence_class();
 
     register_Structure_class();
 
