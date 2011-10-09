@@ -15,7 +15,7 @@ class Aligner
 public:
     // Inner classes and typedefs first, then Aligner methods.
 
-    // typedef moltk::units::Information Information;
+    typedef moltk::units::Information Information;
 
 
     /// Aligner::Position represents a special biosequence residue that knows how to score itself during alignment.

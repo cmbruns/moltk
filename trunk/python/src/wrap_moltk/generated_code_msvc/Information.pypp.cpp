@@ -8,12 +8,13 @@ namespace bp = boost::python;
 
 void register_Information_class(){
 
-    { //::moltk::units::Information
-        typedef bp::class_< moltk::units::Information > Information_exposer_t;
-        Information_exposer_t Information_exposer = Information_exposer_t( "Information", bp::init< >() );
+    { //::moltk::units::quantity< moltk::units::bit_unit, double >
+        typedef bp::class_< moltk::units::quantity< moltk::units::bit_unit, double > > Information_exposer_t;
+        Information_exposer_t Information_exposer = Information_exposer_t( "Information", "\n For efficiency, quantity<> should compile to a double in C++.\n This means:\n     no virtual methods\n     no data members other than value\n     unit is a class with a typedef\n These restrictions need not apply to unit class, which should do\n whatever it needs to, to be wrapped conveniently in python.\n", bp::init< >() );
         bp::scope Information_scope( Information_exposer );
-        Information_exposer.def( bp::init< moltk::Real >(( bp::arg("d") )) );
-        bp::implicitly_convertible< moltk::Real, moltk::units::Information >();
+        Information_exposer.def( bp::init< double >(( bp::arg("v") )) );
+        bp::implicitly_convertible< double, moltk::units::quantity< moltk::units::bit_unit, double > >();
+        Information_exposer.def( bp::init< moltk::units::quantity< moltk::units::bit_unit, double > const & >(( bp::arg("rhs") )) );
         Information_exposer.def( bp::self * bp::other< moltk::Real >() );
         Information_exposer.def( bp::self + bp::self );
         Information_exposer.def( bp::self - bp::self );
@@ -22,7 +23,18 @@ void register_Information_class(){
         Information_exposer.def( bp::self <= bp::self );
         Information_exposer.def( bp::self > bp::self );
         Information_exposer.def( bp::self >= bp::self );
-        Information_exposer.def_readwrite( "value", &moltk::units::Information::value );
+        { //::moltk::units::quantity< moltk::units::bit_unit, double >::print
+        
+            typedef moltk::units::quantity< moltk::units::bit_unit, double > exported_class_t;
+            typedef void ( exported_class_t::*print_function_type )( ::std::basic_ostream< char, std::char_traits< char > > & ) const;
+            
+            Information_exposer.def( 
+                "print"
+                , print_function_type( &::moltk::units::quantity< moltk::units::bit_unit, double >::print )
+                , ( bp::arg("os") ) );
+        
+        }
+        Information_exposer.def_readwrite( "value", &moltk::units::quantity< moltk::units::bit_unit, double >::value );
         Information_exposer.def( bp::other< moltk::Real >() * bp::self );
         Information_exposer.def( bp::self_ns::str( bp::self ) );
     }
