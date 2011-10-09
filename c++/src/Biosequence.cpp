@@ -32,6 +32,12 @@ Biosequence::Biosequence(const std::string& str)
         residues.push_back( Residue(str[i], i+1) );
 }
 
+Biosequence::Biosequence(const char * strParam)
+{
+    const std::string str(strParam);
+    for (size_t i = 0; i < str.length(); ++i)
+        residues.push_back( Residue(str[i], i+1) );
+}
 
 //////////////////////////////////
 // Biosequence::Residue methods //

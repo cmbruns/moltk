@@ -48,10 +48,12 @@ Aligner::Aligner()
 void Aligner::init()
 {
     scorer = new MatrixScorer(MatrixScorer::getBlosum62Scorer());
-    gapOpenPenalty = 1.0 * bit; 
-    gapExtensionPenalty = 0.5 * bit;
-    m = seq1.size();
-    n = seq2.size();
+    // gapOpenPenalty = 1.0 * bit; 
+    // gapExtensionPenalty = 0.5 * bit;
+    // m and n are lengths of input Biosequences
+    // the PositionLists (seq1,seq2) and DpTable entries are actually +1 larger.
+    m = seq1.size() - 1;
+    n = seq2.size() - 1;
 }
 
 Alignment Aligner::align(const Biosequence& s1, const Biosequence& s2)
@@ -59,20 +61,20 @@ Alignment Aligner::align(const Biosequence& s1, const Biosequence& s2)
 
     // Fill seq1, seq2
     seq1.clear();
-    Biosequence::const_iterator si = s1.begin();
-    while (si != s1.end()) {
-        seq1.push_back(scorer->createPosition(*si));
-        ++si;
-    }
-    m = seq1.size();
+    // Create an extra Aligner::position at the very beginning, to hold left end gap data
+    m = s1.size();
+    seq1.push_back(scorer->createPosition('*', true)); // position "-1"
+    for(size_t i = 0; i < m - 1; ++i)
+        seq1.push_back(scorer->createPosition(s1[i]));
+    seq1.push_back(scorer->createPosition(s1[m - 1], true));
 
     seq2.clear();
-    si = s2.begin();
-    while (si != s2.end()) {
-        seq2.push_back(scorer->createPosition(*si));
-        ++si;
-    }
-    n = seq2.size();
+    // Create an extra Aligner::position at the very beginning, to hold left end gap data
+    n = s2.size();
+    seq2.push_back(scorer->createPosition('*', true)); // position "-1"
+    for(size_t i = 0; i < n - 1; ++i)
+        seq2.push_back(scorer->createPosition(s2[i]));
+    seq2.push_back(scorer->createPosition(s2[n - 1], true));
 
     allocate_dp_table();
     initialize_dp_table();
@@ -96,13 +98,14 @@ void Aligner::initialize_dp_table()
 // single row initialization could come in handy during small memory alignment
 void Aligner::initialize_dp_row(size_t rowIndex, DpRow& row)
 {
+    Position& p1 = *seq1[0];
+    Position& p2 = *seq2[0];
+
     size_t i = rowIndex;
     // most rows only need the first element initialized
     row[0].f = numeric_limits<Real>::infinity() * bit;
-    if (bEndGapsFree)
-        row[0].v = row[0].e = 0.0 * bit;
-    else
-        row[0].v = row[0].e = -gapOpenPenalty - ((double)i * gapExtensionPenalty);
+    row[0].v = row[0].e = 
+        -p1.gapOpenPenalty() - ((double)i * p1.gapExtensionPenalty());
 
     // ...but the top row gets full treatment
     if (rowIndex == 0) {
@@ -110,96 +113,36 @@ void Aligner::initialize_dp_row(size_t rowIndex, DpRow& row)
         {
             Cell& cell = row[j];
             cell.e = numeric_limits<Real>::infinity() * bit;
-            if (bEndGapsFree)
-                cell.v = cell.f = 0.0 * bit;
-            else
-                cell.v = cell.f = -gapOpenPenalty - ((double)j * gapExtensionPenalty);
+            cell.v = cell.f = 
+                -p2.gapOpenPenalty() - ((double)j * p2.gapExtensionPenalty());
         }
     }
 }
 
 void Aligner::compute_cell_recurrence(int i, int j)
 {
-    Position& p1 = *seq1[i-1];
-    Position& p2 = *seq2[j-1];
+    const Position& p1 = *seq1[i];
+    const Position& p2 = *seq2[j];
     Cell& cell = dpTable[i][j];
+    const Cell& left = dpTable[i][j-1];
+    const Cell& up = dpTable[i-1][j];
+    const Cell& upLeft = dpTable[i-1][j-1];
     // This recurrence comes from Gusfield chapter 11.
-    cell.g = dpTable[i-1][j-1].v + p1.score(p2); // score...
-    cell.e = std::max(dpTable[i][j-1].e
-                    , dpTable[i][j-1].v - gapOpenPenalty)
-                    - gapExtensionPenalty;
-    cell.f = std::max(dpTable[i-1][j].f
-                    , dpTable[i-1][j].v - gapOpenPenalty)
-                    - gapExtensionPenalty;
-    cell.v = cell.compute_v();
-}
-void Aligner::compute_cell_recurrence_freeE(int i, int j)
-{
-    Position& p1 = *seq1[i-1];
-    Position& p2 = *seq2[j-1];
-    Cell& cell = dpTable[i][j];
-    // This recurrence comes from Gusfield chapter 11.
-    cell.g = dpTable[i-1][j-1].v + p1.score(p2); // score...
-    cell.e = std::max(dpTable[i][j-1].e
-                    , dpTable[i][j-1].v);
-    cell.f = std::max(dpTable[i-1][j].f
-                    , dpTable[i-1][j].v - gapOpenPenalty)
-                    - gapExtensionPenalty;
-    cell.v = cell.compute_v();
-
-}
-
-void Aligner::compute_cell_recurrence_freeF(int i, int j)
-{
-    Position& p1 = *seq1[i-1];
-    Position& p2 = *seq2[j-1];
-    Cell& cell = dpTable[i][j];
-    // This recurrence comes from Gusfield chapter 11.
-    cell.g = dpTable[i-1][j-1].v + p1.score(p2); // score...
-    cell.e = std::max(dpTable[i][j-1].e
-                    , dpTable[i][j-1].v - gapOpenPenalty)
-                    - gapExtensionPenalty;
-    cell.f = std::max(dpTable[i-1][j].f
-                    , dpTable[i-1][j].v);
-    cell.v = cell.compute_v();
-}
-
-void Aligner::compute_cell_recurrence_freeEF(int i, int j)
-{
-    Position& p1 = *seq1[i-1];
-    Position& p2 = *seq2[j-1];
-    Cell& cell = dpTable[i][j];
-    // This recurrence comes from Gusfield chapter 11.
-    cell.g = dpTable[i-1][j-1].v + p1.score(p2); // score...
-    cell.e = std::max(dpTable[i][j-1].e
-                    , dpTable[i][j-1].v);
-    cell.f = std::max(dpTable[i-1][j].f
-                    , dpTable[i-1][j].v);
+    cell.g = upLeft.v + p1.score(p2); // score...
+    cell.e = std::max(left.e, 
+                      left.v - p1.gapOpenPenalty())
+                 - p1.gapExtensionPenalty();
+    cell.f = std::max(up.f, 
+                      up.v - p2.gapOpenPenalty())
+                 - p2.gapExtensionPenalty();
     cell.v = cell.compute_v();
 }
 
 void Aligner::compute_recurrence()
 {
-    // If end gaps are free, final row and column have zero gap penalties.
-    if (bEndGapsFree) {
-        for (size_t i = 1; i < m; ++i)
-        {
-            for (size_t j = 1; j < n; ++j)
-                compute_cell_recurrence(i, j);
-            size_t j = n;
-                compute_cell_recurrence_freeF(i, j);
-        }
-        size_t i = m;
-        for (size_t j = 1; j < n; ++j)
-            compute_cell_recurrence_freeE(i, j);
-        size_t j = n;
-        compute_cell_recurrence_freeEF(i, j);
-    }
-    else {
-        for (size_t i = 1; i <= m; ++i)
-            for (size_t j = 1; j <= n; ++j)
-                compute_cell_recurrence(i, j);
-    }
+    for (size_t i = 1; i <= m; ++i)
+        for (size_t j = 1; j <= n; ++j)
+            compute_cell_recurrence(i, j);
 }
 
 Alignment Aligner::compute_traceback()
@@ -208,8 +151,7 @@ Alignment Aligner::compute_traceback()
     Alignment result;
     result.assign(2, std::string());
 
-    // Start at lower right of dynamic programming matrix. (TODO - only 
-    // for end gaps NOT-free.
+    // Start at lower right of dynamic programming matrix.
     int i = m;
     int j = n;
     // cout << "final alignment score = " << dpTable[i][j].v << endl;
@@ -221,18 +163,18 @@ Alignment Aligner::compute_traceback()
         {
         case TRACEBACK_UPLEFT:
             --i; --j;
-            result[0].push_back( seq1[i]->getOneLetterCode() );
-            result[1].push_back( seq2[j]->getOneLetterCode() );
+            result[0].push_back( seq1[i+1]->getOneLetterCode() );
+            result[1].push_back( seq2[j+1]->getOneLetterCode() );
             break;
         case TRACEBACK_UP:
             --i;
-            result[0].push_back( seq1[i]->getOneLetterCode() );
+            result[0].push_back( seq1[i+1]->getOneLetterCode() );
             result[1].push_back( '-' );
             break;
         case TRACEBACK_LEFT:
             --j;
             result[0].push_back( '-' );
-            result[1].push_back( seq2[j]->getOneLetterCode() );
+            result[1].push_back( seq2[j+1]->getOneLetterCode() );
             break;
         default:
             cerr << "Traceback error!" << endl;

@@ -97,6 +97,7 @@ public:
 public:
     Biosequence() {}
     /* implicit */ Biosequence(const std::string& str);
+    /* implicit */ Biosequence(const char * str);
     Biosequence(const Biosequence& rhs)
         : residues(rhs.residues)
     {}
@@ -109,6 +110,10 @@ public:
     const_iterator begin() const {return residues.begin();}
     iterator end() {return residues.end();}
     const_iterator end() const {return residues.end();}
+
+    const Residue& operator[](int ix) const {return residues[ix];}
+    Residue& operator[](int ix) {return residues[ix];}
+    size_t size() const {return residues.size();}
 
 protected:
     ResidueList residues;

@@ -23,6 +23,8 @@ void register_Information_class(){
         Information_exposer.def( bp::self > bp::self );
         Information_exposer.def( bp::self >= bp::self );
         Information_exposer.def_readwrite( "value", &moltk::units::Information::value );
+        Information_exposer.def( bp::other< moltk::Real >() * bp::self );
+        Information_exposer.def( bp::self_ns::str( bp::self ) );
     }
 
 }

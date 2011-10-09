@@ -6,9 +6,12 @@ using namespace moltk;
 
 int main()
 {
+    Aligner aligner;
+    aligner.setEndGapsFree(false);
+    cout << aligner.align("QS", "SD");
+
     Biosequence seq1("AACDEF");
     Biosequence seq2("ACEFG");
-    Aligner aligner;
     Alignment alignment = aligner.align(seq1, seq2);
     cout << alignment;
 

@@ -110,7 +110,8 @@ istream& MatrixScorer::loadStream(istream& is)
             lineStream >> value;
             // cout << "  " << value << " ";
             // cout << columnIndex << " " << row.size() << endl;
-            row[columnIndex] = value * bit;
+            // Matrices are usually in 1/2 bit units...
+            row[columnIndex] = value * 0.5 * bit;
             ++columnIndex;
         }
         // cout << "#" << endl;
@@ -119,7 +120,7 @@ istream& MatrixScorer::loadStream(istream& is)
 }
 
 /* virtual */
-Aligner::Position* MatrixScorer::createPosition(char sequenceLetter) const
+Aligner::Position* MatrixScorer::createPosition(char sequenceLetter, bool bTerminus) const
 {
     MatrixScorer::Position* result = new MatrixScorer::Position();
     char letter = std::toupper(sequenceLetter);
@@ -127,9 +128,15 @@ Aligner::Position* MatrixScorer::createPosition(char sequenceLetter) const
     result->scoreWeight = 1.0;
     result->rowPtr = &matrix[result->columnIndex][0];
     result->oneLetterCode = sequenceLetter;
+    if (endGapsFree && bTerminus) {
+        result->m_gapOpenPenalty = 0.0;
+        result->m_gapExtensionPenalty = 0.0;
+    } else {
+        result->m_gapOpenPenalty = 1.0 * bit;
+        result->m_gapExtensionPenalty = 0.5 * bit;
+    }
     return result;
 }
-
 
 ////////////////////////////////////
 // MatrixScorer::Position methods //
