@@ -31,8 +31,8 @@ def wrap_moltk():
     #     'def( bp::self_ns::str(bp::self) )')
     aligner = mb.class_('Aligner')
     aligner.add_property('endGapsFree', 
-        fget=aligner.member_function('getEndGapsFree'),
-        fset=aligner.member_function('setEndGapsFree'))
+         fget=aligner.member_functions('getEndGapsFree')[1],
+         fset=aligner.member_functions('setEndGapsFree')[1])
 
     extractor = doxygen_doc_extractor()
     mb.build_code_creator(module_name = '_moltk', doc_extractor = extractor)

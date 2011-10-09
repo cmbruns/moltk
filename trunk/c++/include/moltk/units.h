@@ -60,8 +60,6 @@ namespace moltk { namespace units {
 
     static const bit_unit bit = bit_unit();
 
-}} // namespace moltk::units
-
 inline std::ostream& operator<<(std::ostream& os, const moltk::units::Information& info) {
     return info.print(os);
 }
@@ -73,6 +71,9 @@ inline moltk::units::Information operator*(moltk::Real lhs, const moltk::units::
 inline moltk::units::Information operator*(moltk::Real lhs, const moltk::units::Information& rhs) {
     return moltk::units::Information(lhs * rhs.value);
 }
+
+}} // namespace moltk::units
+
 
 #endif // MOLTK_UNITS_H
 

@@ -8,6 +8,7 @@ namespace bp = boost::python;
 
 void register_bit_unit_class(){
 
-    bp::class_< moltk::units::bit_unit >( "bit_unit" );
+    bp::class_< moltk::units::bit_unit >( "bit_unit" )    
+        .def( bp::other< moltk::Real >() * bp::self );
 
 }
