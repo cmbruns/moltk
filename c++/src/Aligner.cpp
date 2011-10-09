@@ -130,10 +130,10 @@ void Aligner::compute_cell_recurrence(int i, int j)
     // This recurrence comes from Gusfield chapter 11.
     cell.g = upLeft.v + p1.score(p2); // score...
     cell.e = std::max(left.e, 
-                      left.v - p1.gapOpenPenalty())
+                      (Information)(left.v - p1.gapOpenPenalty()))
                  - p1.gapExtensionPenalty();
     cell.f = std::max(up.f, 
-                      up.v - p2.gapOpenPenalty())
+                      (Information)(up.v - p2.gapOpenPenalty()))
                  - p2.gapExtensionPenalty();
     cell.v = cell.compute_v();
 }

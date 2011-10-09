@@ -129,8 +129,8 @@ Aligner::Position* MatrixScorer::createPosition(char sequenceLetter, bool bTermi
     result->rowPtr = &matrix[result->columnIndex][0];
     result->oneLetterCode = sequenceLetter;
     if (endGapsFree && bTerminus) {
-        result->m_gapOpenPenalty = 0.0;
-        result->m_gapExtensionPenalty = 0.0;
+        result->m_gapOpenPenalty = 0.0 * bit;
+        result->m_gapExtensionPenalty = 0.0 * bit;
     } else {
         result->m_gapOpenPenalty = 1.0 * bit;
         result->m_gapExtensionPenalty = 0.5 * bit;

@@ -18,9 +18,19 @@
 
 #include "generated_code_msvc/information.pypp.hpp"
 
+#include "generated_code_msvc/information_dimension.pypp.hpp"
+
+#include "generated_code_msvc/length_dimension.pypp.hpp"
+
+#include "generated_code_msvc/nanometer_unit.pypp.hpp"
+
 #include "generated_code_msvc/printable.pypp.hpp"
 
 #include "generated_code_msvc/structure.pypp.hpp"
+
+#include "generated_code_msvc/unit_less__moltk_scope_units_scope_information_dimension__greater_.pypp.hpp"
+
+#include "generated_code_msvc/unit_less__moltk_scope_units_scope_length_dimension__greater_.pypp.hpp"
 
 namespace bp = boost::python;
 
@@ -37,9 +47,19 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_Structure_class();
 
-    register_Information_class();
+    register_unit_less__moltk_scope_units_scope_information_dimension__greater__class();
 
     register_bit_unit_class();
+
+    register_information_dimension_class();
+
+    register_length_dimension_class();
+
+    register_unit_less__moltk_scope_units_scope_length_dimension__greater__class();
+
+    register_nanometer_unit_class();
+
+    register_Information_class();
 
     register_global_variables();
 }

@@ -1,6 +1,18 @@
 
 include_directories(${CMAKE_SOURCE_DIR}/c++/include)
 
+# Note location of boost python wrapping code
+if(MSVC)
+    # MSVC uses wrongly lower case letters in includes.
+    set(GENERATED_CODE_DIR "generated_code_msvc")
+else()
+    set(GENERATED_CODE_DIR "generated_code_gcc")
+endif()
+file(GLOB PYPLUSPLUS_SRCS "src/wrap_moltk/${GENERATED_CODE_DIR}/*.cpp")
+file(GLOB PYPLUSPLUS_HEADERS "src/wrap_moltk/${GENERATED_CODE_DIR}/*.hpp")
+
+add_subdirectory(src)
+
 # Create setup.py for local install and other uses
 set(SETUP_PY "${CMAKE_SOURCE_DIR}/setup.py") # in root dir where users expect it
 configure_file(setup.py.in ${SETUP_PY} @ONLY)
@@ -13,8 +25,6 @@ file(TO_NATIVE_PATH "${MOLTK_LOCAL_PYTHON_PATH}" NATIVE_LOCAL_PYTHONPATH)
 
 file(RELATIVE_PATH BUILD_BASE "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/py_build")
 file(RELATIVE_PATH REL_LOCAL_INSTALL_DIR "${CMAKE_SOURCE_DIR}" "${MOLTK_LOCAL_INSTALL_DIR}")
-
-add_subdirectory(src)
 
 ##################
 # setup.py clean #
@@ -95,7 +105,8 @@ add_custom_command(
         "${SETUP_PY_CLEAN_STAMP}"
         "${SETUP_PY}"
         ${MOLTK_SOURCES}
-        MoltkPyplusplusWrappers
+        "${PYPLUSPLUS_SRCS}"
+        "${PYPLUSPLUS_HEADERS}"
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     COMMENT "Building python MolTK module/Installing to local directory ${MOLTK_LOCAL_INSTALL_DIR}"
 )
@@ -105,6 +116,10 @@ add_custom_target(SetupPyBuild
     SOURCES
         setup.py.in
         "${SETUP_PY}"
+        ${MOLTK_SOURCES}
+        ${MOLTK_HEADERS}
+        ${PYPLUSPLUS_SRCS}
+        ${PYPLUSPLUS_HEADERS}
 )
 
 

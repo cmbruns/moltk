@@ -23,7 +23,7 @@ def wrap_moltk():
         return_value_policy(manage_new_object)
     ns_moltk.class_('Aligner').class_('Scorer').member_function('createPosition').call_policies = \
         return_value_policy(manage_new_object)
-    ns_moltk.class_('Information').member_function('print').exclude()
+    # ns_moltk.class_('Information').member_function('print').exclude()
     # Use boost::python mechanism for wrapping ostream operator<<()
     # mb.class_('Printable').add_registration_code(
     #     'def( bp::self_ns::str(bp::self) )')

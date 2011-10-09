@@ -9,9 +9,15 @@
 #include "moltk.h"
 #include <vector>
 
+using namespace moltk;
+using namespace moltk::units;
+
 namespace pyplusplus { namespace aliases {
 
-    typedef std::vector<moltk::Structure::Atom> AtomList;
+    typedef std::vector<Structure::Atom> AtomList;
+    typedef unit<information_dimension> base_information_unit;
+    typedef quantity<bit_unit> Information;
+    typedef quantity<nanometer_unit> Length;
 
 }} // namespace pyplusplus::aliases
 

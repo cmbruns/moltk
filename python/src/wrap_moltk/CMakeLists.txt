@@ -10,14 +10,6 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 find_package(Boost COMPONENTS python REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
-if(MSVC)
-    # MSVC uses wrongly lower case letters in includes.
-    set(GENERATED_CODE_DIR "generated_code_msvc")
-else()
-    set(GENERATED_CODE_DIR "generated_code_gcc")
-endif()
-file(GLOB PYPLUSPLUS_SRCS "${GENERATED_CODE_DIR}/*.cpp")
-file(GLOB PYPLUSPLUS_HEADERS "${GENERATED_CODE_DIR}/*.hpp")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/${GENERATED_CODE_DIR}")
 
 # (optionally) regenerate python binding source code
@@ -43,7 +35,10 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
             > "${CMAKE_CURRENT_BINARY_DIR}/wrap_moltk.log"
             2> "${CMAKE_CURRENT_BINARY_DIR}/wrap_moltk.err"
         COMMAND ${CMAKE_COMMAND} -E touch "${MOLTK_GEN_STAMP}"
-        OUTPUT "${MOLTK_GEN_STAMP}"
+        OUTPUT 
+            "${MOLTK_GEN_STAMP}" 
+            "${PYPLUSPLUS_SRCS}"
+            "${PYPLUSPLUS_HEADERS}"
         DEPENDS
             "${WRAP_MOLTK_PY}"
             doxygen_doc_extractor.py
