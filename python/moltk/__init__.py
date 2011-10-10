@@ -17,4 +17,8 @@
 #    
 #    For questions contact: cmbruns@rotatingpenguin.com
 
+"""
+This is the docstring for the moltk module.
+"""
+
 from _moltk import *
