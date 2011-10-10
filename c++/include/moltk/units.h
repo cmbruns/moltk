@@ -33,8 +33,9 @@ namespace moltk { namespace units {
     // Dimensions //
     ////////////////
 
-    struct information_dimension {};
-    struct length_dimension {};
+    struct dimension {};
+    struct information_dimension : public dimension {};
+    struct length_dimension : public dimension {};
 
     ///////////
     // Units //
@@ -44,17 +45,22 @@ namespace moltk { namespace units {
     struct unit 
     {
         typedef D dimension_type;
+        static void print_name(std::ostream& os) {os << unit_name(singleton_pointer);}
+        static void print_symbol(std::ostream& os) {os << unit_symbol(singleton_pointer);}
+
+    private:
+        static unit* singleton_pointer;
     };
 
-    struct bit_unit : public unit<information_dimension> 
-    {
-        static void print_name(std::ostream& os) {os << "bit";}
-        static void print_symbol(std::ostream& os) {os << "b";}
-    };
-    static const bit_unit bit = bit_unit();
+    typedef unit<information_dimension> bit_t;
+    inline std::string unit_symbol(const bit_t*) {return "b";}
+    inline std::string unit_name(const bit_t*) {return "bit";}
+    static const bit_t bit = bit_t();
 
-    struct nanometer_unit : public unit<length_dimension> {};
-    static const nanometer_unit nanometer = nanometer_unit();
+    typedef unit<length_dimension> nanometer_t;
+    inline std::string unit_symbol(const nanometer_t*) {return "nm";}
+    inline std::string unit_name(const nanometer_t*) {return "nanometer";}
+    static const nanometer_t nanometer = nanometer_t();
 
     ////////////////
     // Quantities //
@@ -120,8 +126,8 @@ namespace moltk { namespace units {
 
     };
 
-    typedef quantity<bit_unit> Information;
-    typedef quantity<nanometer_unit> Length;
+    typedef quantity<bit_t> Information;
+    typedef quantity<nanometer_t> Length;
 
 template<class U, class Y>
 inline std::ostream& operator<<(std::ostream& os, const quantity<U,Y>& q) {
@@ -129,9 +135,9 @@ inline std::ostream& operator<<(std::ostream& os, const quantity<U,Y>& q) {
     return os;
 }
 
-template<class U, class Y>
-inline quantity<U,Y> operator*(const Y& lhs, const U& rhs) {
-    return quantity<U,Y>(lhs);
+template<class D, class Y>
+inline quantity<unit<D>,Y> operator*(const Y& lhs, const unit<D>& rhs) {
+    return quantity<unit<D>,Y>(lhs);
 }
 
 template<class U, class Y>

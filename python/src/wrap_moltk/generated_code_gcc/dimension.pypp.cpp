@@ -2,12 +2,12 @@
 
 #include "boost/python.hpp"
 #include "wrap_moltk.h"
-#include "bit_unit.pypp.hpp"
+#include "dimension.pypp.hpp"
 
 namespace bp = boost::python;
 
-void register_bit_unit_class(){
+void register_dimension_class(){
 
-    bp::class_< moltk::units::bit_unit >( "bit_unit" );
+    bp::class_< moltk::units::dimension >( "dimension", "\n" );
 
 }

@@ -10,4 +10,6 @@ void register_global_variables(){
 
     bp::scope().attr("bit") = moltk::units::bit;
 
+    bp::scope().attr("nanometer") = moltk::units::nanometer;
+
 }
