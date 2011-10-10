@@ -123,8 +123,8 @@ add_custom_command(
         "${SETUP_PY_CLEAN_STAMP}"
         "${SETUP_PY}"
         ${MOLTK_SOURCES}
-        "${PYPLUSPLUS_SRCS}"
-        "${PYPLUSPLUS_HEADERS}"
+        ${PYPLUSPLUS_SRCS}
+        ${PYPLUSPLUS_HEADERS}
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     COMMENT "Building python MolTK module/Installing to local directory ${MOLTK_LOCAL_INSTALL_DIR}"
 )

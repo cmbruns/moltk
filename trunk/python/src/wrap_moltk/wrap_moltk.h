@@ -36,9 +36,10 @@ using namespace moltk::units;
 namespace pyplusplus { namespace aliases {
 
     typedef std::vector<Structure::Atom> AtomList;
-    typedef unit<information_dimension> base_information_unit;
-    typedef quantity<bit_unit> Information;
-    typedef quantity<nanometer_unit> Length;
+    typedef unit<information_dimension> bit_t;
+    typedef quantity<bit_t> Information;
+    typedef unit<length_dimension> nanometer_t;
+    typedef quantity<nanometer_t> Length;
 
 }} // namespace pyplusplus::aliases
 

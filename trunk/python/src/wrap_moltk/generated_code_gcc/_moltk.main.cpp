@@ -12,17 +12,25 @@
 
 #include "generated_code_gcc/Biosequence.pypp.hpp"
 
-#include "generated_code_gcc/FastaSequence.pypp.hpp"
-
 #include "generated_code_gcc/Information.pypp.hpp"
 
 #include "generated_code_gcc/Printable.pypp.hpp"
 
 #include "generated_code_gcc/Structure.pypp.hpp"
 
+#include "generated_code_gcc/_moltk_free_functions.pypp.hpp"
+
 #include "generated_code_gcc/_moltk_global_variables.pypp.hpp"
 
-#include "generated_code_gcc/bit_unit.pypp.hpp"
+#include "generated_code_gcc/bit_t.pypp.hpp"
+
+#include "generated_code_gcc/dimension.pypp.hpp"
+
+#include "generated_code_gcc/information_dimension.pypp.hpp"
+
+#include "generated_code_gcc/length_dimension.pypp.hpp"
+
+#include "generated_code_gcc/nanometer_t.pypp.hpp"
 
 namespace bp = boost::python;
 
@@ -37,14 +45,22 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_Biosequence_class();
 
-    register_FastaSequence_class();
-
     register_Structure_class();
+
+    register_dimension_class();
+
+    register_information_dimension_class();
+
+    register_length_dimension_class();
 
     register_Information_class();
 
-    register_bit_unit_class();
+    register_bit_t_class();
+
+    register_nanometer_t_class();
 
     register_global_variables();
+
+    register_free_functions();
 }
 

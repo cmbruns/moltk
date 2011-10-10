@@ -36,9 +36,9 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
             2> "${CMAKE_CURRENT_BINARY_DIR}/wrap_moltk.err"
         COMMAND ${CMAKE_COMMAND} -E touch "${MOLTK_GEN_STAMP}"
         OUTPUT 
-            "${MOLTK_GEN_STAMP}" 
-            "${PYPLUSPLUS_SRCS}"
-            "${PYPLUSPLUS_HEADERS}"
+            "${MOLTK_GEN_STAMP}"
+            ${PYPLUSPLUS_SRCS}
+            ${PYPLUSPLUS_HEADERS}
         DEPENDS
             "${WRAP_MOLTK_PY}"
             doxygen_doc_extractor.py
