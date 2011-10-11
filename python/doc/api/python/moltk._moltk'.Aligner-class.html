@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>moltk._moltk'.Aligner</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.0 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;moltk ::
+        <a href="moltk._moltk%27-module.html">Module&nbsp;_moltk'</a> ::
+        Class&nbsp;Aligner
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="moltk._moltk%27.Aligner-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Aligner</h1><p class="nomargin-top"></p>
+<center>
+<center>  <map id="uml_class_diagram_for_moltk__m" name="uml_class_diagram_for_moltk__m">
+<area shape="rect" id="node1_21" href="moltk._moltk%27.Aligner-class.html#ALLOCATED_STAGE" title="moltk._moltk&#39;.Aligner.ALLOCATED_STAGE" alt="" coords="17,108,245,127"/>
+<area shape="rect" id="node1_22" href="moltk._moltk%27.Aligner.Cell-class.html" title="An Aligner::Cell is one node in the dynamic programming table" alt="" coords="17,127,245,145"/>
+<area shape="rect" id="node1_23" href="moltk._moltk%27.Aligner-class.html#EMPTY_STAGE" title="moltk._moltk&#39;.Aligner.EMPTY_STAGE" alt="" coords="17,145,245,164"/>
+<area shape="rect" id="node1_24" href="moltk._moltk%27.Aligner.Position-class.html" title="Aligner::Position represents a special biosequence residue that knows how &#160;to score itself during alignment." alt="" coords="17,164,245,183"/>
+<area shape="rect" id="node1_25" href="moltk._moltk%27.Aligner.PositionList-class.html" title="Aligner::PositionList is a special sequence containing Aligner::Positions, &#160;which know how to score themselves." alt="" coords="17,183,245,201"/>
+<area shape="rect" id="node1_26" href="moltk._moltk%27.Aligner-class.html#RECURRENCE_COMPUTED_STAGE" title="moltk._moltk&#39;.Aligner.RECURRENCE_COMPUTED_STAGE" alt="" coords="17,201,245,220"/>
+<area shape="rect" id="node1_27" href="moltk._moltk%27.Aligner-class.html#SCORER_STAGE" title="moltk._moltk&#39;.Aligner.SCORER_STAGE" alt="" coords="17,220,245,239"/>
+<area shape="rect" id="node1_28" href="moltk._moltk%27.Aligner-class.html#SEQUENCE_STAGE" title="moltk._moltk&#39;.Aligner.SEQUENCE_STAGE" alt="" coords="17,239,245,257"/>
+<area shape="rect" id="node1_29" href="moltk._moltk%27.Aligner.Scorer-class.html" title="Aligner::Scorer converts dumb sequence and structure residues into &#160;Aligner::Positions, which know how to quickly score themselves with other &#160;AlignerPositions." alt="" coords="17,257,245,276"/>
+<area shape="rect" id="node1_30" href="moltk._moltk%27.Aligner.Stage-class.html" title="moltk._moltk&#39;.Aligner.Stage" alt="" coords="17,276,245,295"/>
+<area shape="rect" id="node1_31" href="moltk._moltk%27.Aligner-class.html#TABLE_INITIALIZED_STAGE" title="moltk._moltk&#39;.Aligner.TABLE_INITIALIZED_STAGE" alt="" coords="17,295,245,313"/>
+<area shape="rect" id="node1_32" href="moltk._moltk%27.Aligner-class.html#TRACEBACK_DONE" title="moltk._moltk&#39;.Aligner.TRACEBACK_DONE" alt="" coords="17,313,245,332"/>
+<area shape="rect" id="node1_33" href="moltk._moltk%27.Aligner-class.html#TRACEBACK_LEFT" title="moltk._moltk&#39;.Aligner.TRACEBACK_LEFT" alt="" coords="17,332,245,351"/>
+<area shape="rect" id="node1_34" href="moltk._moltk%27.Aligner-class.html#endGapsFree" title="moltk._moltk&#39;.Aligner.endGapsFree" alt="" coords="17,369,245,388"/>
+<area shape="rect" id="node1_35" href="moltk._moltk%27.Aligner-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,391,245,409"/>
+<area shape="rect" id="node1_36" href="moltk._moltk%27.Aligner-class.html#__reduce__" title="helper for pickle" alt="" coords="17,409,245,428"/>
+<area shape="rect" id="node1_37" href="moltk._moltk%27.Aligner-class.html#align" title="align( (Aligner)arg1, (Biosequence)arg0, (Biosequence)arg1) &#45;&gt; Alignment :" alt="" coords="17,428,245,447"/>
+<area shape="rect" id="node1_38" href="moltk._moltk%27.Aligner-class.html#getDefaultScorer" title="C++ signature :..." alt="" coords="17,447,245,465"/>
+<area shape="rect" id="node1_39" href="moltk._moltk%27.Aligner-class.html#getEndGapsFree" title="getEndGapsFree( (Aligner)arg1) &#45;&gt; bool :" alt="" coords="17,465,245,484"/>
+<area shape="rect" id="node1_40" href="moltk._moltk%27.Aligner-class.html#setEndGapsFree" title="setEndGapsFree( (Aligner)arg1, (bool)f) &#45;&gt; None :" alt="" coords="17,484,245,503"/>
+<area shape="rect" id="node1" href="moltk._moltk%27.Aligner-class.html" title="Aligner is the class that creates sequence or structure alignments." alt="" coords="5,83,257,509"/>
+<area shape="rect" id="node2_41" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="73,39,189,57"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="61,6,201,63"/>
+</map>
+  <img src="uml_class_diagram_for_moltk__m.gif" alt='' usemap="#uml_class_diagram_for_moltk__m" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Aligner is the class that creates sequence or structure 
+  alignments.</p>
+
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner.Cell-class.html" class="summary-name">Cell</a><br />
+      An Aligner::Cell is one node in the dynamic programming table
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner.Position-class.html" class="summary-name">Position</a><br />
+      Aligner::Position represents a special biosequence residue that 
+        knows how to score itself during alignment.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner.PositionList-class.html" class="summary-name">PositionList</a><br />
+      Aligner::PositionList is a special sequence containing 
+        Aligner::Positions, which know how to score themselves.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner.Scorer-class.html" class="summary-name">Scorer</a><br />
+      Aligner::Scorer converts dumb sequence and structure residues into 
+        Aligner::Positions, which know how to quickly score themselves with
+        other AlignerPositions.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner.Stage-class.html" class="summary-name">Stage</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner.TracebackPointer-class.html" class="summary-name">TracebackPointer</a>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk._moltk%27.Aligner-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __init__( (object)arg1) -&gt; None :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk._moltk%27.Aligner-class.html#__reduce__" class="summary-sig-name">__reduce__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      helper for pickle</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk._moltk%27.Aligner-class.html#align" class="summary-sig-name">align</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      align( (Aligner)arg1, (Biosequence)arg0, (Biosequence)arg1) -&gt; Alignment :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk._moltk%27.Aligner-class.html#getEndGapsFree" class="summary-sig-name">getEndGapsFree</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      getEndGapsFree( (Aligner)arg1) -&gt; bool :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk._moltk%27.Aligner-class.html#setEndGapsFree" class="summary-sig-name">setEndGapsFree</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      setEndGapsFree( (Aligner)arg1, (bool)f) -&gt; None :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><i>unreachable</i>.instance</code></b>:
+      <code>__new__</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Scorer :</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk._moltk%27.Aligner-class.html#getDefaultScorer" class="summary-sig-name">getDefaultScorer</a>()</span><br />
+      C++ signature :...</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ALLOCATED_STAGE"></a><span class="summary-name">ALLOCATED_STAGE</span> = <code title="moltk._moltk.Stage.ALLOCATED_STAGE">moltk._moltk.Stage.ALLOCATED_STAGE</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="EMPTY_STAGE"></a><span class="summary-name">EMPTY_STAGE</span> = <code title="moltk._moltk.Stage.EMPTY_STAGE">moltk._moltk.Stage.EMPTY_STAGE</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner-class.html#RECURRENCE_COMPUTED_STAGE" class="summary-name">RECURRENCE_COMPUTED_STAGE</a> = <code title="moltk._moltk.Stage.RECURRENCE_COMPUTED_STAGE">moltk._moltk.Stage.RECURRENCE_COMP<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SCORER_STAGE"></a><span class="summary-name">SCORER_STAGE</span> = <code title="moltk._moltk.Stage.SCORER_STAGE">moltk._moltk.Stage.SCORER_STAGE</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SEQUENCE_STAGE"></a><span class="summary-name">SEQUENCE_STAGE</span> = <code title="moltk._moltk.Stage.SEQUENCE_STAGE">moltk._moltk.Stage.SEQUENCE_STAGE</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner-class.html#TABLE_INITIALIZED_STAGE" class="summary-name">TABLE_INITIALIZED_STAGE</a> = <code title="moltk._moltk.Stage.TABLE_INITIALIZED_STAGE">moltk._moltk.Stage.TABLE_INITIALIZED<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TRACEBACK_DONE"></a><span class="summary-name">TRACEBACK_DONE</span> = <code title="moltk._moltk.TracebackPointer.TRACEBACK_DONE">moltk._moltk.TracebackPointer.TRACEBACK_DONE</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TRACEBACK_LEFT"></a><span class="summary-name">TRACEBACK_LEFT</span> = <code title="moltk._moltk.TracebackPointer.TRACEBACK_LEFT">moltk._moltk.TracebackPointer.TRACEBACK_LEFT</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner-class.html#TRACEBACK_NOT_INITIALIZED" class="summary-name">TRACEBACK_NOT_INITIALIZED</a> = <code title="moltk._moltk.TracebackPointer.TRACEBACK_NOT_INITIALIZED">moltk._moltk.TracebackPointer.TRAC<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TRACEBACK_UP"></a><span class="summary-name">TRACEBACK_UP</span> = <code title="moltk._moltk.TracebackPointer.TRACEBACK_UP">moltk._moltk.TracebackPointer.TRACEBACK_UP</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TRACEBACK_UPLEFT"></a><span class="summary-name">TRACEBACK_UPLEFT</span> = <code title="moltk._moltk.TracebackPointer.TRACEBACK_UPLEFT">moltk._moltk.TracebackPointer.TRACEBACK_UPLEFT</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TRACED_STAGE"></a><span class="summary-name">TRACED_STAGE</span> = <code title="moltk._moltk.Stage.TRACED_STAGE">moltk._moltk.Stage.TRACED_STAGE</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__instance_size__"></a><span class="summary-name">__instance_size__</span> = <code title="136">136</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk._moltk%27.Aligner-class.html#endGapsFree" class="summary-name">endGapsFree</a>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__init__( (object)arg1) -&gt; None :
+
+    C++ signature :
+        void __init__(struct _object *)
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__reduce__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__reduce__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>helper for pickle</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__reduce__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="align"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">align</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+align( (Aligner)arg1, (Biosequence)arg0, (Biosequence)arg1) -&gt; Alignment :
+
+    C++ signature :
+        class moltk::Alignment align(class moltk::Aligner {lvalue},class moltk::Biosequence,class moltk::Biosequence)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getDefaultScorer"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getDefaultScorer</span>()</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+    C++ signature :
+        class moltk::Aligner::Scorer getDefaultScorer()
+
+</pre>
+  <dl class="fields">
+    <dt>Returns: Scorer :</dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getEndGapsFree"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getEndGapsFree</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+getEndGapsFree( (Aligner)arg1) -&gt; bool :
+
+    C++ signature :
+        bool getEndGapsFree(class moltk::Aligner {lvalue})
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="setEndGapsFree"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setEndGapsFree</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+setEndGapsFree( (Aligner)arg1, (bool)f) -&gt; None :
+
+    C++ signature :
+        void setEndGapsFree(class moltk::Aligner {lvalue},bool)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="RECURRENCE_COMPUTED_STAGE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">RECURRENCE_COMPUTED_STAGE</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+moltk._moltk.Stage.RECURRENCE_COMPUTED_STAGE
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TABLE_INITIALIZED_STAGE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TABLE_INITIALIZED_STAGE</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+moltk._moltk.Stage.TABLE_INITIALIZED_STAGE
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TRACEBACK_NOT_INITIALIZED"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TRACEBACK_NOT_INITIALIZED</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+moltk._moltk.TracebackPointer.TRACEBACK_NOT_INITIALIZED
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="endGapsFree"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">endGapsFree</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.0 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Oct 10 17:57:00 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
