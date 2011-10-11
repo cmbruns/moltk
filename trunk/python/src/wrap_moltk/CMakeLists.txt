@@ -47,7 +47,7 @@ if(MOLTK_REGENERATE_PYTHON_BINDINGS)
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
         COMMENT "Creating moltk wrapper source files.  Examine wrap_moltk.err for details."
     )
-    add_custom_target(MoltkPyplusplusWrappers
+    add_custom_target(MoltkPyplusplusWrappers ALL
         DEPENDS 
             "${MOLTK_GEN_STAMP}"
         SOURCES
