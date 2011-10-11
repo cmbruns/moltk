@@ -127,7 +127,6 @@ add_custom_command(
         ${PYPLUSPLUS_SRCS}
         ${PYPLUSPLUS_HEADERS}
         ${PURE_PYTHON_SRCS}
-        MoltkPyplusplusWrappers
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     COMMENT "Building python MolTK module/Installing to local directory ${MOLTK_LOCAL_INSTALL_DIR}"
 )
@@ -195,7 +194,7 @@ add_custom_target(SetupPyBdist
 
 add_custom_target(LocalPyMolTKInstallation ALL
     DEPENDS 
-        SetupPyBuild
+        "${SETUP_PY_BUILD_STAMP}"
     SOURCES
         setup.py.in
         "${SETUP_PY}"
