@@ -141,6 +141,7 @@ add_custom_target(SetupPyBuild
         ${PYPLUSPLUS_SRCS}
         ${PYPLUSPLUS_HEADERS}
 )
+add_dependencies(SetupPyBuild MoltkPyplusplusWrappers)
 
 
 ##################
@@ -199,6 +200,7 @@ add_custom_target(LocalPyMolTKInstallation ALL
         setup.py.in
         "${SETUP_PY}"
 )
+add_dependencies(LocalPyMolTKInstallation SetupPyBuild)
 
 # Create gui files
 add_subdirectory(moltk/gui)
