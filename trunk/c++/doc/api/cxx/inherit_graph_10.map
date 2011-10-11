@@ -1,3 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structmoltk_1_1units_1_1bit__unit.html" title="moltk::units::bit_unit" alt="" coords="6,5,146,32"/>
+<area shape="rect" id="node1" href="$structmoltk_1_1units_1_1dimension.html" title="moltk::units::dimension" alt="" coords="5,31,163,57"/>
+<area shape="rect" id="node3" href="$structmoltk_1_1units_1_1information__dimension.html" title="moltk::units::information_dimension" alt="" coords="211,5,437,32"/>
+<area shape="rect" id="node5" href="$structmoltk_1_1units_1_1length__dimension.html" title="moltk::units::length_dimension" alt="" coords="225,56,423,83"/>
 </map>

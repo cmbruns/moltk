@@ -111,8 +111,10 @@ Inheritance diagram for moltk::Aligner::Position:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#a34f4a85b4fd078f833f1c091fd629b2c">clone</a> () const =0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#a71e3fa5525ce82fc0a501d7ae2ce5803">~Position</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#abee26ee88b3c4b037a19c4f1dff749a4">score</a> (const <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a> &amp;rhs) const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#abee26ee88b3c4b037a19c4f1dff749a4">score</a> (const <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a> &amp;rhs) const =0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#adeb85b03da1c7a2101ca10548acf8e34">getOneLetterCode</a> () const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#aed5476e1cfb4623e7bb65a713141eb67">gapOpenPenalty</a> () const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Position.html#aa896a3102ef9d955b5a43b431f98a712">gapExtensionPenalty</a> () const =0</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classmoltk_1_1Aligner_1_1Position.html" title="Aligner::Position represents a special biosequence residue that knows how to score itself during alig...">Aligner::Position</a> represents a special biosequence residue that knows how to score itself during alignment. </p>
@@ -152,6 +154,42 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa896a3102ef9d955b5a43b431f98a712"></a><!-- doxytag: member="moltk::Aligner::Position::gapExtensionPenalty" ref="aa896a3102ef9d955b5a43b431f98a712" args="() const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a> moltk::Aligner::Position::gapExtensionPenalty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implemented in <a class="el" href="classmoltk_1_1MatrixScorer_1_1Position.html#ac717cf77b2048e497823460b617878eb">moltk::MatrixScorer::Position</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aed5476e1cfb4623e7bb65a713141eb67"></a><!-- doxytag: member="moltk::Aligner::Position::gapOpenPenalty" ref="aed5476e1cfb4623e7bb65a713141eb67" args="() const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a> moltk::Aligner::Position::gapOpenPenalty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implemented in <a class="el" href="classmoltk_1_1MatrixScorer_1_1Position.html#a0ddfa7b4cfc344f57bafada41b192b0d">moltk::MatrixScorer::Position</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="adeb85b03da1c7a2101ca10548acf8e34"></a><!-- doxytag: member="moltk::Aligner::Position::getOneLetterCode" ref="adeb85b03da1c7a2101ca10548acf8e34" args="() const =0" -->
 <div class="memitem">
 <div class="memproto">
@@ -175,7 +213,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> moltk::Aligner::Position::score </td>
+          <td class="memname">virtual <a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a> moltk::Aligner::Position::score </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classmoltk_1_1Aligner_1_1Position.html">Position</a> &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>

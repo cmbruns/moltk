@@ -80,13 +80,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">C:/Users/cmbruns/svn/moltk/c++/include/moltk/units.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &quot;<a class="el" href="Real_8h_source.html">moltk/Real.h</a>&quot;</code><br/>
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for units.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="units_8h__incl.png" border="0" usemap="#C_1_2Users_2cmbruns_2svn_2moltk_2c_09_09_2include_2moltk_2units_8h" alt=""/></div>
+<map name="C_1_2Users_2cmbruns_2svn_2moltk_2c_09_09_2include_2moltk_2units_8h" id="C_1_2Users_2cmbruns_2svn_2moltk_2c_09_09_2include_2moltk_2units_8h">
+<area shape="rect" id="node3" href="Real_8h.html" title="moltk/Real.h" alt="" coords="126,80,220,107"/></map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="units_8h__dep__incl.png" border="0" usemap="#C_1_2Users_2cmbruns_2svn_2moltk_2c_09_09_2include_2moltk_2units_8hdep" alt=""/></div>
@@ -98,103 +107,38 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1bit__unit.html">moltk::units::bit_unit</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1dimension.html">moltk::units::dimension</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1information__dimension.html">moltk::units::information_dimension</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1length__dimension.html">moltk::units::length_dimension</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1unit.html">moltk::units::unit&lt; D &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity&lt; U, Y &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">For efficiency, quantity&lt;&gt; should compile to a double in C++.  <a href="structmoltk_1_1units_1_1quantity.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html">moltk</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html">moltk::units</a></td></tr>
+<tr><td colspan="2"><h2><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef unit<br class="typebreak"/>
+&lt; information_dimension &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#abd2f0e7f98c17a89d168c4ceea5846b5">moltk::units::bit_t</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef unit&lt; length_dimension &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a89df1ee2fa329f269f49983df8fd2e7a">moltk::units::nanometer_t</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef quantity&lt; bit_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef quantity&lt; nanometer_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a9176b46b85649a9f074e753c21f441ea">moltk::units::Length</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="units_8h.html#a636dc0dae1963a963b4f1a700604d5f7">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> &amp;info)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="units_8h.html#a737ea266296745c480265e6c665caea5">operator*</a> (double lhs, const <a class="el" href="structmoltk_1_1units_1_1bit__unit.html">moltk::units::bit_unit</a> &amp;rhs)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="units_8h.html#acb36bee2e8ca2f4dd46b0594322c5493">operator*</a> (double lhs, const <a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> &amp;rhs)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a171e2d9b79caa174bb9321104a9e66fe">moltk::units::unit_symbol</a> (const bit_t &amp;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ad9a06c7227dae3a3383d06be8533d7c6">moltk::units::unit_name</a> (const bit_t &amp;)</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class U , class Y &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ae61ede8dfb4151568856f55f47d78077">moltk::units::operator&lt;&lt;</a> (std::ostream &amp;os, const quantity&lt; U, Y &gt; &amp;q)</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class D , class Y &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">quantity&lt; unit&lt; D &gt;, Y &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a246167f84b1b98d46fcd391cf065f20c">moltk::units::operator*</a> (const Y &amp;lhs, const unit&lt; D &gt; &amp;rhs)</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class U , class Y &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">quantity&lt; U, Y &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#aad053a6125c41400af98de53e172a796">moltk::units::operator*</a> (<a class="el" href="namespacemoltk.html#afe6fbd8f5686b34143c2742fcc97292c">moltk::Real</a> lhs, const quantity&lt; U, Y &gt; &amp;rhs)</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const bit_unit&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a70c71ab45afba6f550bf4ffc534c8baa">moltk::units::bit</a> = bit_unit()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const bit_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a02758e42619234c003e6cbc612eebcfc">moltk::units::bit</a> = bit_t::getInstance()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const nanometer_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ae6a5cb952aa94aa3cc02ad6f242d345d">moltk::units::nanometer</a> = nanometer_t::getInstance()</td></tr>
 </table>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a737ea266296745c480265e6c665caea5"></a><!-- doxytag: member="units.h::operator*" ref="a737ea266296745c480265e6c665caea5" args="(double lhs, const moltk::units::bit_unit &amp;rhs)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> operator* </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lhs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1bit__unit.html">moltk::units::bit_unit</a> &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acb36bee2e8ca2f4dd46b0594322c5493"></a><!-- doxytag: member="units.h::operator*" ref="acb36bee2e8ca2f4dd46b0594322c5493" args="(double lhs, const moltk::units::Information &amp;rhs)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> operator* </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lhs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a636dc0dae1963a963b4f1a700604d5f7"></a><!-- doxytag: member="units.h::operator&lt;&lt;" ref="a636dc0dae1963a963b4f1a700604d5f7" args="(std::ostream &amp;os, const moltk::units::Information &amp;info)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>os</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1Information.html">moltk::units::Information</a> &amp;&#160;</td>
-          <td class="paramname"><em>info</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
