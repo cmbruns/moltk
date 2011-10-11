@@ -87,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">moltk::Aligner::Cell Class Reference</div>  </div>
@@ -97,40 +98,66 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <a href="classmoltk_1_1Aligner_1_1Cell.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Aligner_8h_source.html">Aligner.h</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for moltk::Aligner::Cell:</div>
-<div class="dyncontent">
-<div class="center"><img src="classmoltk_1_1Aligner_1_1Cell__coll__graph.png" border="0" usemap="#moltk_1_1Aligner_1_1Cell_coll__map" alt="Collaboration graph"/></div>
-<map name="moltk_1_1Aligner_1_1Cell_coll__map" id="moltk_1_1Aligner_1_1Cell_coll__map">
-<area shape="rect" id="node2" href="structmoltk_1_1units_1_1Information.html" title="moltk::units::Information" alt="" coords="5,5,165,32"/></map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classmoltk_1_1Aligner_1_1Cell-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55b">TracebackPointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a46afa907bfe05f49dec3a49ec22cb9ef">compute_traceback_pointer</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#ad8b6f514f6420389c670370687518fb4">compute_v</a> () const </td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a03a7a56b79f7ce7c3f714d520d508309">s</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">s is the score of aligning position S1(i) with S2(j); (Wm in Gusfield's nomenclature.)  <a href="#a03a7a56b79f7ce7c3f714d520d508309"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a967f02740eae5a328ceb32258f4d21ac">v</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">V, best score through this cell.  <a href="#a967f02740eae5a328ceb32258f4d21ac"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a921184c8186d6b807e1ccc0d1c1c1146">g</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">G, best ungapped score through this cell.  <a href="#a921184c8186d6b807e1ccc0d1c1c1146"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#ae6664ca3b6f5ad5d7030f24ec5bd2b11">e</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">E, best score with gap in sequence 1.  <a href="#ae6664ca3b6f5ad5d7030f24ec5bd2b11"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a2deb43ad184b117f41de5f4224d93513">f</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">F, best score with gap in sequence 2.  <a href="#a2deb43ad184b117f41de5f4224d93513"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55b">TracebackPointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a67ff15b61646a1ec1200f5e5874d4f61">tracebackPointer</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">breadcrumb to help reconstruct the final alignment  <a href="#a67ff15b61646a1ec1200f5e5874d4f61"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#aa766a462abc1caa6199a66ca3a37ca68">v</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">V, best score through this cell.  <a href="#aa766a462abc1caa6199a66ca3a37ca68"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#ac66f132d15e84f948a4b041d78c56f03">g</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">G, best ungapped score through this cell.  <a href="#ac66f132d15e84f948a4b041d78c56f03"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#abc2eef27dee7e7042069ea25c049dd5f">e</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">E, best score with gap in sequence 1.  <a href="#abc2eef27dee7e7042069ea25c049dd5f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#adbf73e205dd0a1ba60a232987058da50">f</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">F, best score with gap in sequence 2.  <a href="#adbf73e205dd0a1ba60a232987058da50"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>An <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html" title="An Aligner::Cell is one node in the dynamic programming table.">Aligner::Cell</a> is one node in the dynamic programming table. </p>
-</div><hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="ae6664ca3b6f5ad5d7030f24ec5bd2b11"></a><!-- doxytag: member="moltk::Aligner::Cell::e" ref="ae6664ca3b6f5ad5d7030f24ec5bd2b11" args="" -->
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a46afa907bfe05f49dec3a49ec22cb9ef"></a><!-- doxytag: member="moltk::Aligner::Cell::compute_traceback_pointer" ref="a46afa907bfe05f49dec3a49ec22cb9ef" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#ae6664ca3b6f5ad5d7030f24ec5bd2b11">moltk::Aligner::Cell::e</a></td>
+          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55b">TracebackPointer</a> moltk::Aligner::Cell::compute_traceback_pointer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad8b6f514f6420389c670370687518fb4"></a><!-- doxytag: member="moltk::Aligner::Cell::compute_v" ref="ad8b6f514f6420389c670370687518fb4" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a> moltk::Aligner::Cell::compute_v </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="abc2eef27dee7e7042069ea25c049dd5f"></a><!-- doxytag: member="moltk::Aligner::Cell::e" ref="abc2eef27dee7e7042069ea25c049dd5f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#abc2eef27dee7e7042069ea25c049dd5f">moltk::Aligner::Cell::e</a></td>
         </tr>
       </table>
 </div>
@@ -140,12 +167,12 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2deb43ad184b117f41de5f4224d93513"></a><!-- doxytag: member="moltk::Aligner::Cell::f" ref="a2deb43ad184b117f41de5f4224d93513" args="" -->
+<a class="anchor" id="adbf73e205dd0a1ba60a232987058da50"></a><!-- doxytag: member="moltk::Aligner::Cell::f" ref="adbf73e205dd0a1ba60a232987058da50" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a2deb43ad184b117f41de5f4224d93513">moltk::Aligner::Cell::f</a></td>
+          <td class="memname"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#adbf73e205dd0a1ba60a232987058da50">moltk::Aligner::Cell::f</a></td>
         </tr>
       </table>
 </div>
@@ -155,12 +182,12 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a921184c8186d6b807e1ccc0d1c1c1146"></a><!-- doxytag: member="moltk::Aligner::Cell::g" ref="a921184c8186d6b807e1ccc0d1c1c1146" args="" -->
+<a class="anchor" id="ac66f132d15e84f948a4b041d78c56f03"></a><!-- doxytag: member="moltk::Aligner::Cell::g" ref="ac66f132d15e84f948a4b041d78c56f03" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a921184c8186d6b807e1ccc0d1c1c1146">moltk::Aligner::Cell::g</a></td>
+          <td class="memname"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#ac66f132d15e84f948a4b041d78c56f03">moltk::Aligner::Cell::g</a></td>
         </tr>
       </table>
 </div>
@@ -170,43 +197,12 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a03a7a56b79f7ce7c3f714d520d508309"></a><!-- doxytag: member="moltk::Aligner::Cell::s" ref="a03a7a56b79f7ce7c3f714d520d508309" args="" -->
+<a class="anchor" id="aa766a462abc1caa6199a66ca3a37ca68"></a><!-- doxytag: member="moltk::Aligner::Cell::v" ref="aa766a462abc1caa6199a66ca3a37ca68" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a03a7a56b79f7ce7c3f714d520d508309">moltk::Aligner::Cell::s</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>s is the score of aligning position S1(i) with S2(j); (Wm in Gusfield's nomenclature.) </p>
-<p>Wm, score of aligning position S1(i) with S2(j) </p>
-
-</div>
-</div>
-<a class="anchor" id="a67ff15b61646a1ec1200f5e5874d4f61"></a><!-- doxytag: member="moltk::Aligner::Cell::tracebackPointer" ref="a67ff15b61646a1ec1200f5e5874d4f61" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#adad98d3ee1780ac2f782bf87b466b55b">TracebackPointer</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a67ff15b61646a1ec1200f5e5874d4f61">moltk::Aligner::Cell::tracebackPointer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>breadcrumb to help reconstruct the final alignment </p>
-
-</div>
-</div>
-<a class="anchor" id="a967f02740eae5a328ceb32258f4d21ac"></a><!-- doxytag: member="moltk::Aligner::Cell::v" ref="a967f02740eae5a328ceb32258f4d21ac" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#a967f02740eae5a328ceb32258f4d21ac">moltk::Aligner::Cell::v</a></td>
+          <td class="memname"><a class="el" href="namespacemoltk_1_1units.html#ae48aa197908105b66ab2f3649669ff46">moltk::units::Information</a> <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#aa766a462abc1caa6199a66ca3a37ca68">moltk::Aligner::Cell::v</a></td>
         </tr>
       </table>
 </div>

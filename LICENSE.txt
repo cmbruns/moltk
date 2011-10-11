@@ -1,5 +1,7 @@
 MolTK is a Python and C++ toolkit for protein sequence/structure alignment and visualization
 	Copyright (C) 2011  Christopher M. Bruns 
+    Commercial users should ask about our dual licensing model.
+    For questions contact: cmbruns@rotatingpenguin.com
 
 GNU GENERAL PUBLIC LICENSE
 	Version 2, June 1991

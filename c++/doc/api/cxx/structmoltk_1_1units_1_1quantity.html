@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>MolTK: moltk::units::quantity&lt; TYPE, UNIT &gt; Struct Template Reference</title>
+<title>MolTK C++ API: moltk::units::quantity&lt; U, Y &gt; Struct Template Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -24,9 +24,11 @@
  <tbody>
  <tr style="height: 56px;">
   
+  <td id="projectlogo"><img alt="Logo" src="moltk55.png"/></td>
+  
   
   <td style="padding-left: 0.5em;">
-   <div id="projectname">MolTK
+   <div id="projectname">MolTK C++ API
    &#160;<span id="projectnumber">0.3.0</span>
    </div>
    
@@ -71,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -86,35 +88,300 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">moltk::units::quantity&lt; TYPE, UNIT &gt; Struct Template Reference</div>  </div>
+<div class="title">moltk::units::quantity&lt; U, Y &gt; Struct Template Reference</div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="moltk::units::quantity" -->
+<p>For efficiency, quantity&lt;&gt; should compile to a double in C++.  
+ <a href="structmoltk_1_1units_1_1quantity.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="units_8h_source.html">units.h</a>&gt;</code></p>
 
 <p><a href="structmoltk_1_1units_1_1quantity-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef UNIT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a853abecd70e33e40b51897d0fb889a49">unit_type</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef U&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a6ac5d6e2e68cd5297da73eac03550008">unit_type</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef Y&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a2dc9d6a7898f9b697427e34eaa31a75c">value_type</a></td></tr>
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a80182877312069ead59777a2607bef61">quantity</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a0ba4c66ce9271d14b4ef836a63164bf4">quantity</a> (Y v)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a3e429169fc58ed30a52923d6e85ce825">quantity</a> (const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;rhs)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#ae1f6aa3e25502f1119ff9155a7085f80">operator+</a> (const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;rhs) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a820269613de38030d51785ff5671e94a">operator-</a> (const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;rhs) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#ab46cbbdb33e21c552fbecf134387f73f">operator-</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a695715f009bb0319dfae9cefcbb9a296">operator*</a> (<a class="el" href="namespacemoltk.html#afe6fbd8f5686b34143c2742fcc97292c">Real</a> rhs) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a7fbcbcf13944e7ac0e08a0129b49359b">operator&lt;</a> (const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;rhs) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a0add1b49258b9521650b0cb756600267">operator&gt;</a> (const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;rhs) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a47ebd03b16f81f99c29d396b1bb3721f">operator&lt;=</a> (const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;rhs) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a56ad75b7e5e8fb355e79e424c75ce5bb">operator&gt;=</a> (const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;rhs) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#af445960e962b942e32be2a82957ba54d">print</a> (std::ostream &amp;os) const </td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a37c34180d5c5b141f6f6d7b6f0029f97">value</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a2dc9d6a7898f9b697427e34eaa31a75c">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a4e903ae904f984c7c33703a34c443c00">value</a></td></tr>
 </table>
-<h3>template&lt;class TYPE, class UNIT&gt;<br/>
- struct moltk::units::quantity&lt; TYPE, UNIT &gt;</h3>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class U, class Y = Real&gt;<br/>
+struct moltk::units::quantity&lt; U, Y &gt;</h3>
 
-<hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a853abecd70e33e40b51897d0fb889a49"></a><!-- doxytag: member="moltk::units::quantity::unit_type" ref="a853abecd70e33e40b51897d0fb889a49" args="" -->
+<p>For efficiency, quantity&lt;&gt; should compile to a double in C++. </p>
+<p>This means: no virtual methods no data members other than "value" unit is a class with a typedef These restrictions need not apply to unit class, which should do whatever it needs to, to be wrapped conveniently in python. </p>
+</div><hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="a6ac5d6e2e68cd5297da73eac03550008"></a><!-- doxytag: member="moltk::units::quantity::unit_type" ref="a6ac5d6e2e68cd5297da73eac03550008" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TYPE , class UNIT &gt; </div>
+template&lt;class U, class Y = Real&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef UNIT <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; TYPE, UNIT &gt;::<a class="el" href="structmoltk_1_1units_1_1quantity.html#a853abecd70e33e40b51897d0fb889a49">unit_type</a></td>
+          <td class="memname">typedef U <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::<a class="el" href="structmoltk_1_1units_1_1quantity.html#a6ac5d6e2e68cd5297da73eac03550008">unit_type</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2dc9d6a7898f9b697427e34eaa31a75c"></a><!-- doxytag: member="moltk::units::quantity::value_type" ref="a2dc9d6a7898f9b697427e34eaa31a75c" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef Y <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::<a class="el" href="structmoltk_1_1units_1_1quantity.html#a2dc9d6a7898f9b697427e34eaa31a75c">value_type</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a80182877312069ead59777a2607bef61"></a><!-- doxytag: member="moltk::units::quantity::quantity" ref="a80182877312069ead59777a2607bef61" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::<a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0ba4c66ce9271d14b4ef836a63164bf4"></a><!-- doxytag: member="moltk::units::quantity::quantity" ref="a0ba4c66ce9271d14b4ef836a63164bf4" args="(Y v)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::<a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a> </td>
+          <td>(</td>
+          <td class="paramtype">Y&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td><code> [inline, explicit]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3e429169fc58ed30a52923d6e85ce825"></a><!-- doxytag: member="moltk::units::quantity::quantity" ref="a3e429169fc58ed30a52923d6e85ce825" args="(const quantity&lt; U, Y &gt; &amp;rhs)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::<a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a695715f009bb0319dfae9cefcbb9a296"></a><!-- doxytag: member="moltk::units::quantity::operator*" ref="a695715f009bb0319dfae9cefcbb9a296" args="(Real rhs) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt;U,Y&gt; <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacemoltk.html#afe6fbd8f5686b34143c2742fcc97292c">Real</a>&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae1f6aa3e25502f1119ff9155a7085f80"></a><!-- doxytag: member="moltk::units::quantity::operator+" ref="ae1f6aa3e25502f1119ff9155a7085f80" args="(const quantity&lt; U, Y &gt; &amp;rhs) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt;U,Y&gt; <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a820269613de38030d51785ff5671e94a"></a><!-- doxytag: member="moltk::units::quantity::operator&#45;" ref="a820269613de38030d51785ff5671e94a" args="(const quantity&lt; U, Y &gt; &amp;rhs) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt;U,Y&gt; <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab46cbbdb33e21c552fbecf134387f73f"></a><!-- doxytag: member="moltk::units::quantity::operator&#45;" ref="ab46cbbdb33e21c552fbecf134387f73f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt;U,Y&gt; <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::operator- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7fbcbcf13944e7ac0e08a0129b49359b"></a><!-- doxytag: member="moltk::units::quantity::operator&lt;" ref="a7fbcbcf13944e7ac0e08a0129b49359b" args="(const quantity&lt; U, Y &gt; &amp;rhs) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a47ebd03b16f81f99c29d396b1bb3721f"></a><!-- doxytag: member="moltk::units::quantity::operator&lt;=" ref="a47ebd03b16f81f99c29d396b1bb3721f" args="(const quantity&lt; U, Y &gt; &amp;rhs) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0add1b49258b9521650b0cb756600267"></a><!-- doxytag: member="moltk::units::quantity::operator&gt;" ref="a0add1b49258b9521650b0cb756600267" args="(const quantity&lt; U, Y &gt; &amp;rhs) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a56ad75b7e5e8fb355e79e424c75ce5bb"></a><!-- doxytag: member="moltk::units::quantity::operator&gt;=" ref="a56ad75b7e5e8fb355e79e424c75ce5bb" args="(const quantity&lt; U, Y &gt; &amp;rhs) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1units_1_1quantity.html">quantity</a>&lt; U, Y &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af445960e962b942e32be2a82957ba54d"></a><!-- doxytag: member="moltk::units::quantity::print" ref="af445960e962b942e32be2a82957ba54d" args="(std::ostream &amp;os) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class U, class Y = Real&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::print </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -123,14 +390,14 @@ template&lt;class TYPE , class UNIT &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a37c34180d5c5b141f6f6d7b6f0029f97"></a><!-- doxytag: member="moltk::units::quantity::value" ref="a37c34180d5c5b141f6f6d7b6f0029f97" args="" -->
+<a class="anchor" id="a4e903ae904f984c7c33703a34c443c00"></a><!-- doxytag: member="moltk::units::quantity::value" ref="a4e903ae904f984c7c33703a34c443c00" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TYPE , class UNIT &gt; </div>
+template&lt;class U, class Y = Real&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">TYPE <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; TYPE, UNIT &gt;::<a class="el" href="structmoltk_1_1units_1_1quantity.html#a37c34180d5c5b141f6f6d7b6f0029f97">value</a></td>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1quantity.html#a2dc9d6a7898f9b697427e34eaa31a75c">value_type</a> <a class="el" href="structmoltk_1_1units_1_1quantity.html">moltk::units::quantity</a>&lt; U, Y &gt;::<a class="el" href="structmoltk_1_1units_1_1quantity.html#a4e903ae904f984c7c33703a34c443c00">value</a></td>
         </tr>
       </table>
 </div>
