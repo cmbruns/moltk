@@ -8,6 +8,6 @@ namespace bp = boost::python;
 
 void register_length_dimension_class(){
 
-    bp::class_< moltk::units::length_dimension >( "length_dimension" );
+    bp::class_< moltk::units::length_dimension, bp::bases< moltk::units::dimension > >( "length_dimension" );
 
 }

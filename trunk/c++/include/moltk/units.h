@@ -45,22 +45,29 @@ namespace moltk { namespace units {
     struct unit 
     {
         typedef D dimension_type;
-        static void print_name(std::ostream& os) {os << unit_name(singleton_pointer);}
-        static void print_symbol(std::ostream& os) {os << unit_symbol(singleton_pointer);}
-
+        static void print_name(std::ostream& os) {os << unit_name(getInstance());}
+        static void print_symbol(std::ostream& os) {os << unit_symbol(getInstance());}
+        static const unit& getInstance() {
+            static unit* singleton_pointer = NULL;
+            if (! singleton_pointer) {
+                singleton_pointer = new unit();
+            }
+            return *singleton_pointer;
+        }
     private:
-        static unit* singleton_pointer;
+        unit() {} // singleton provides no constructor
+        unit(const unit&) {}
     };
 
     typedef unit<information_dimension> bit_t;
-    inline std::string unit_symbol(const bit_t*) {return "b";}
-    inline std::string unit_name(const bit_t*) {return "bit";}
-    static const bit_t bit = bit_t();
+    inline std::string unit_symbol(const bit_t&) {return "b";}
+    inline std::string unit_name(const bit_t&) {return "bit";}
+    static const bit_t& bit = bit_t::getInstance();
 
     typedef unit<length_dimension> nanometer_t;
-    inline std::string unit_symbol(const nanometer_t*) {return "nm";}
-    inline std::string unit_name(const nanometer_t*) {return "nanometer";}
-    static const nanometer_t nanometer = nanometer_t();
+    inline std::string unit_symbol(const nanometer_t&) {return "nm";}
+    inline std::string unit_name(const nanometer_t&) {return "nanometer";}
+    static const nanometer_t& nanometer = nanometer_t::getInstance();
 
     ////////////////
     // Quantities //

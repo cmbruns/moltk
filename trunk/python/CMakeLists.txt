@@ -95,6 +95,7 @@ add_custom_target(SetupPyClean
 # setup.py build #
 ##################
 
+file(GLOB_RECURSE PURE_PYTHON_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/moltk/*.py")
 set(RUN_SETUP_PY_BUILD "${CMAKE_CURRENT_BINARY_DIR}/RunSetupPyBuild.cmake")
 file(WRITE "${RUN_SETUP_PY_BUILD}"
 "
@@ -125,6 +126,8 @@ add_custom_command(
         ${MOLTK_SOURCES}
         ${PYPLUSPLUS_SRCS}
         ${PYPLUSPLUS_HEADERS}
+        ${PURE_PYTHON_SRCS}
+        MoltkPyplusplusWrappers
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     COMMENT "Building python MolTK module/Installing to local directory ${MOLTK_LOCAL_INSTALL_DIR}"
 )
