@@ -8,7 +8,11 @@ namespace bp = boost::python;
 
 void register_bit_t_class(){
 
-    bp::class_< moltk::units::unit< moltk::units::information_dimension > >( "bit_t", "\n" )    
+    bp::class_< moltk::units::unit< moltk::units::information_dimension >, boost::noncopyable >( "bit_t", "\n", bp::no_init )    
+        .def( 
+            "getInstance"
+            , (::moltk::units::unit< moltk::units::information_dimension > const & (*)(  ))( &::moltk::units::unit< moltk::units::information_dimension >::getInstance )
+            , bp::return_value_policy< bp::copy_const_reference >() )    
         .def( 
             "print_name"
             , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::unit< moltk::units::information_dimension >::print_name )
@@ -17,6 +21,7 @@ void register_bit_t_class(){
             "print_symbol"
             , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::unit< moltk::units::information_dimension >::print_symbol )
             , ( bp::arg("os") ) )    
+        .staticmethod( "getInstance" )    
         .staticmethod( "print_name" )    
         .staticmethod( "print_symbol" );
 

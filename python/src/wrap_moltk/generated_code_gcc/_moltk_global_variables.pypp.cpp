@@ -8,8 +8,8 @@ namespace bp = boost::python;
 
 void register_global_variables(){
 
-    bp::scope().attr("bit") = moltk::units::bit;
+    bp::scope().attr("bit") = bp::object( boost::ref( moltk::units::bit ) );
 
-    bp::scope().attr("nanometer") = moltk::units::nanometer;
+    bp::scope().attr("nanometer") = bp::object( boost::ref( moltk::units::nanometer ) );
 
 }
