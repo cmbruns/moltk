@@ -190,11 +190,11 @@ Alignment Aligner::compute_traceback()
         case TRACEBACK_UP:
             --i;
             result.push_back( seq1[i+1]->getColumn() +
-                              seq2.getGapColumn() );
+                              seq2[j]->getGapColumn() );
             break;
         case TRACEBACK_LEFT:
             --j;
-            result.push_back( seq1.getGapColumn() +
+            result.push_back( seq1[i]->getGapColumn() +
                               seq2[j+1]->getColumn() );
             break;
         default:
