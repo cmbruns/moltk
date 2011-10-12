@@ -52,6 +52,7 @@ public:
         virtual moltk::units::Information score(const Aligner::Position& rhs) const;
         // virtual char getOneLetterCode() const {return oneLetterCode;}
         virtual Alignment::Column getColumn() const;
+        virtual Alignment::Column getGapColumn() const;
         virtual Information gapOpenPenalty() const {return m_gapOpenPenalty;}
         virtual Information gapExtensionPenalty() const {return m_gapExtensionPenalty;}
 

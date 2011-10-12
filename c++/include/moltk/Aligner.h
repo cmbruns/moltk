@@ -48,6 +48,7 @@ public:
             virtual moltk::units::Information score(const Position& rhs) const = 0;
             // virtual char getOneLetterCode() const = 0;
             virtual Alignment::Column getColumn() const = 0;
+            virtual Alignment::Column getGapColumn() const = 0; // for gaps after this position
             // Gap penalties are for inserting a gap character after this position.
             virtual moltk::units::Information gapOpenPenalty() const = 0;
             virtual moltk::units::Information gapExtensionPenalty() const = 0;
@@ -63,7 +64,6 @@ public:
         PositionList(const PositionList& rhs);
         virtual ~PositionList();
         PositionList& operator=(const PositionList& rhs);
-        Alignment::Column getGapColumn();
     };
 
 
