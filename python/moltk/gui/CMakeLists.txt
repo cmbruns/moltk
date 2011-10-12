@@ -17,7 +17,9 @@
 #    
 #    For questions contact: cmbruns@rotatingpenguin.com
 
-find_program(PYSIDE_UIC_EXE pyside-uic)
+find_package(PythonLibs)
+find_program(PYSIDE_UIC_EXE pyside-uic
+    PATHS "${PYTHON_EXECUTABLE}/../Scripts")
 add_custom_command(
     OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/moltk_ui.py"
     COMMAND "${PYSIDE_UIC_EXE}"
