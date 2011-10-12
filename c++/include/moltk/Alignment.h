@@ -26,12 +26,28 @@
 #include <string>
 #include <vector>
 #include "moltk/Printable.h"
+#include "moltk/Biosequence.h"
 
 namespace moltk {
 
-class Alignment : public std::vector< std::string > , public moltk::Printable
+class AlignmentColumn : public std::vector<BaseBiosequence::BaseResidue*>
 {
 public:
+    AlignmentColumn operator+(const AlignmentColumn& rhs) const;
+    virtual ~AlignmentColumn();
+};
+
+class Alignment : public moltk::Printable, public std::vector<AlignmentColumn>
+{
+public:
+    typedef AlignmentColumn Column;
+
+public:
+    Alignment();
+    /* implicit */ Alignment(const Biosequence&);
+    /* implicit */ Alignment(const std::string&);
+    /* implicit */ Alignment(const char*);
+    virtual ~Alignment();
     virtual void print_to_stream(std::ostream& os) const;
 };
 
