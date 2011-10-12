@@ -24,7 +24,7 @@
 
 #include <iostream>
 #include <vector>
-#include "Alignment.h"
+#include "moltk/Alignment.h"
 #include "moltk/units.h"
 #include "moltk/Biosequence.h"
 
@@ -46,7 +46,8 @@ public:
             virtual Position* clone() const = 0;
             virtual ~Position() {}
             virtual moltk::units::Information score(const Position& rhs) const = 0;
-            virtual char getOneLetterCode() const = 0;
+            // virtual char getOneLetterCode() const = 0;
+            virtual Alignment::Column getColumn() const = 0;
             // Gap penalties are for inserting a gap character after this position.
             virtual moltk::units::Information gapOpenPenalty() const = 0;
             virtual moltk::units::Information gapExtensionPenalty() const = 0;
@@ -62,6 +63,7 @@ public:
         PositionList(const PositionList& rhs);
         virtual ~PositionList();
         PositionList& operator=(const PositionList& rhs);
+        Alignment::Column getGapColumn();
     };
 
 
@@ -72,6 +74,7 @@ public:
     public:
         Scorer() : endGapsFree(true) {}
         virtual Aligner::Position* createPosition(char sequenceLetter, bool bTerminus = false) const = 0;
+        virtual Aligner::Position* createPosition(const Alignment::Column&, bool bTerminus = false) const = 0;
         bool getEndGapsFree() const {return endGapsFree;}
         void setEndGapsFree(bool f) {endGapsFree = f;}
 
@@ -123,7 +126,7 @@ public:
     // Finally, the actual Aligner methods
     Aligner();
     // Alignment align(const Alignment&);
-    Alignment align(const Biosequence&, const Biosequence&);
+    Alignment align(const Alignment&, const Alignment&);
 
     static const Scorer& getDefaultScorer();
     bool getEndGapsFree() const {return scorer->getEndGapsFree();}

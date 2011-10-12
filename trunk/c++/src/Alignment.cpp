@@ -27,10 +27,14 @@ using namespace std;
 /* virtual */
 void moltk::Alignment::print_to_stream(std::ostream& os) const 
 {
-   const_iterator i = begin();
-    while (i != end()) {
-        os << *i << std::endl;
-        ++i;
+    if (size() < 1) return;
+    int nRows = (*this)[0].size();
+    int nCols = size();
+    for (int r = 0; r < nRows; ++r) {
+        for (int c = 0; c < nCols; ++c) {
+            os << (*this)[c][r]->getOneLetterCode();
+        }
+        os << endl;
     }
 }
 

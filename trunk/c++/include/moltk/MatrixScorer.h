@@ -39,6 +39,7 @@ public:
     explicit MatrixScorer(const std::string& matrixString);
     explicit MatrixScorer(std::istream& matrixStream);
     virtual Aligner::Position* createPosition(char sequenceLetter, bool bTerminus = false) const;
+    virtual Aligner::Position* createPosition(const Alignment::Column&, bool bTerminus = false) const;
     std::istream& loadStream(std::istream&);
 
     static const MatrixScorer& getBlosum62Scorer();
@@ -49,7 +50,8 @@ public:
     public:
         virtual Position* clone() const;
         virtual moltk::units::Information score(const Aligner::Position& rhs) const;
-        virtual char getOneLetterCode() const {return oneLetterCode;}
+        // virtual char getOneLetterCode() const {return oneLetterCode;}
+        virtual Alignment::Column getColumn() const;
         virtual Information gapOpenPenalty() const {return m_gapOpenPenalty;}
         virtual Information gapExtensionPenalty() const {return m_gapExtensionPenalty;}
 

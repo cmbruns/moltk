@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classmoltk_1_1Structure_1_1Atom.html" title="Structure::Atom represents a chemical atom in a molecular structure." alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node1" href="$classmoltk_1_1Printable.html" title="moltk::Printable is an abstract base class to help streamline string conversion in the moltk python b..." alt="" coords="6,5,119,32"/>
+<area shape="rect" id="node3" href="$classmoltk_1_1Alignment.html" title="moltk::Alignment" alt="" coords="168,5,288,32"/>
 </map>

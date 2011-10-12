@@ -1,5 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structmoltk_1_1units_1_1dimension.html" title="moltk::units::dimension" alt="" coords="5,31,163,57"/>
-<area shape="rect" id="node3" href="$structmoltk_1_1units_1_1information__dimension.html" title="moltk::units::information_dimension" alt="" coords="211,5,437,32"/>
-<area shape="rect" id="node5" href="$structmoltk_1_1units_1_1length__dimension.html" title="moltk::units::length_dimension" alt="" coords="225,56,423,83"/>
+<area shape="rect" id="node1" href="$classmoltk_1_1Structure_1_1Atom.html" title="Structure::Atom represents a chemical atom in a molecular structure." alt="" coords="5,5,160,32"/>
 </map>

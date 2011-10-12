@@ -140,6 +140,7 @@ add_custom_target(SetupPyBuild
         ${MOLTK_HEADERS}
         ${PYPLUSPLUS_SRCS}
         ${PYPLUSPLUS_HEADERS}
+        ${PURE_PYTHON_SRCS}
 )
 add_dependencies(SetupPyBuild MoltkPyplusplusWrappers)
 

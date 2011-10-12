@@ -77,7 +77,7 @@ void Aligner::init()
     n = seq2.size() - 1;
 }
 
-Alignment Aligner::align(const Biosequence& s1, const Biosequence& s2)
+Alignment Aligner::align(const Alignment& s1, const Alignment& s2)
 {
 
     // Fill seq1, seq2
@@ -87,7 +87,7 @@ Alignment Aligner::align(const Biosequence& s1, const Biosequence& s2)
     seq1.push_back(scorer->createPosition('*', true)); // position "-1"
     for(size_t i = 0; i < m - 1; ++i)
         seq1.push_back(scorer->createPosition(s1[i]));
-    seq1.push_back(scorer->createPosition(s1[m - 1], true));
+    seq1.push_back(scorer->createPosition(s1[m -1], true));
 
     seq2.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
@@ -170,7 +170,7 @@ Alignment Aligner::compute_traceback()
 {
     // TODO - implement end gaps free version
     Alignment result;
-    result.assign(2, std::string());
+    // result.assign(2, std::string());
 
     // Start at lower right of dynamic programming matrix.
     int i = m;
@@ -184,18 +184,18 @@ Alignment Aligner::compute_traceback()
         {
         case TRACEBACK_UPLEFT:
             --i; --j;
-            result[0].push_back( seq1[i+1]->getOneLetterCode() );
-            result[1].push_back( seq2[j+1]->getOneLetterCode() );
+            result.push_back( seq1[i+1]->getColumn() +
+                              seq2[j+1]->getColumn() );
             break;
         case TRACEBACK_UP:
             --i;
-            result[0].push_back( seq1[i+1]->getOneLetterCode() );
-            result[1].push_back( '-' );
+            result.push_back( seq1[i+1]->getColumn() +
+                              seq2.getGapColumn() );
             break;
         case TRACEBACK_LEFT:
             --j;
-            result[0].push_back( '-' );
-            result[1].push_back( seq2[j+1]->getOneLetterCode() );
+            result.push_back( seq1.getGapColumn() +
+                              seq2[j+1]->getColumn() );
             break;
         default:
             cerr << "Traceback error!" << endl;
@@ -208,7 +208,7 @@ Alignment Aligner::compute_traceback()
     assert(j == 0);
     // OK, the sequences are actually backwards here
     for (size_t i = 0; i < result.size(); ++i)
-        std::reverse(result[i].begin(), result[i].end());
+        std::reverse(result.begin(), result.end());
     return result;
 }
 
