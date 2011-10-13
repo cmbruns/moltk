@@ -27,20 +27,6 @@ using namespace moltk;
 using namespace std;
 
 
-///////////////////////////////
-// Alignment::Column methods //
-///////////////////////////////
-
-/* virtual */
-AlignmentColumn::~AlignmentColumn() 
-{
-    for(size_t r = 0; r < size(); ++r) {
-        delete (*this)[r];
-        (*this)[r] = NULL;
-    }
-}
-
-
 ///////////////////////
 // Alignment methods //
 ///////////////////////
@@ -87,7 +73,7 @@ void Alignment::appendSequence(const Biosequence& seq)
 }
 
 /* virtual */
-void moltk::Alignment::print_to_stream(std::ostream& os) const 
+void moltk::Alignment::printString(std::ostream& os) const
 {
     if (size() < 1) return;
     int nRows = (*this)[0].size();
