@@ -112,25 +112,35 @@ public:
 
 public:
     Biosequence() {}
-    /* implicit */ Biosequence(const std::string& str);
-    /* implicit */ Biosequence(const char * str);
-    Biosequence(const Biosequence& rhs)
-        : std::vector<Residue>(rhs)
-    {}
+    Biosequence(const std::string& sequence, const std::string& description = "");
+    Biosequence(const char * sequence, const std::string& description = "");
+    Biosequence(const Biosequence& rhs);
     virtual ~Biosequence() {}
     void loadStream(std::istream& is);
     size_t getNumberOfResidues() const { return size(); }
     const Residue& getResidue(size_t ix) const { return (*this)[ix]; }
+    void printString(std::ostream& os) const
+    {
+        for (const_iterator i = begin(); i != end(); ++i)
+            os << *i;
+    }
+
+    inline friend std::ostream& operator<<(std::ostream& os, const Biosequence& seq)
+    {
+        seq.printString(os);
+        return os;
+    }
+
+    inline friend std::istream& operator>>(std::istream& is, Biosequence& seq)
+    {
+        seq.loadStream(is);
+        return is;
+    }
 
 protected:
     std::string description;
 };
 
-inline std::istream& operator>>(std::istream& is, Biosequence& seq)
-{
-    seq.loadStream(is);
-    return is;
-}
 
 } // namespace moltk
 
