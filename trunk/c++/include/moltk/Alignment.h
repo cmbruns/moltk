@@ -28,10 +28,11 @@
 #include "moltk/Printable.h"
 #include "moltk/Biosequence.h"
 #include "moltk/PdbStructure.h"
+#include "moltk/Real.h"
 
 namespace moltk {
 
-class Alignment : public moltk::Printable
+class Alignment
 {
 public:
     Alignment() {}
@@ -39,11 +40,18 @@ public:
     /* implicit */ Alignment(const std::string&);
     /* implicit */ Alignment(const char*);
     explicit Alignment(std::istream& is);
-    virtual ~Alignment() {}
+    ~Alignment() {}
     void appendSequence(const Biosequence& seq);
     void appendStructure(const PdbStructure::Chain& seq);
     void loadString(const std::string& s);
-    virtual void print_to_stream(std::ostream& os) const;
+    void printString(std::ostream& os) const;
+
+    inline friend std::ostream& operator<<(std::ostream& os, const Alignment& ali)
+    {
+        ali.printString(os);
+        return os;
+    }
+
 
 public:
 
@@ -52,7 +60,7 @@ public:
     {
     public:
         EString operator*(const EString& rhs) const;
-    }
+    };
 
 
 protected:

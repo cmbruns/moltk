@@ -72,6 +72,11 @@ public:
         int residueNumber;
     };
 
+    class Chain
+    {
+
+    };
+
 public:
     PdbStructure() {}
     explicit PdbStructure(std::istream&);

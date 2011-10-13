@@ -19,7 +19,7 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
-#include "moltk/Structure.h"
+#include "moltk/PdbStructure.h"
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -43,18 +43,18 @@ using namespace boost::iostreams;
 namespace moltk {
 
 /* explicit */
-Structure::Structure(const std::string& fileName)
+PdbStructure::PdbStructure(const std::string& fileName)
 {
     loadFile(fileName);
 }
 
 /* explicit */
-Structure::Structure(std::istream& istream)
+PdbStructure::PdbStructure(std::istream& istream)
 {
     loadStream(istream);
 }
 
-bool Structure::loadFile(const std::string& fileName)
+bool PdbStructure::loadFile(const std::string& fileName)
 {
     ifstream pdbFile(fileName.c_str(), ios_base::in | ios_base::binary);
     if (! pdbFile.good()) {
@@ -73,7 +73,7 @@ bool Structure::loadFile(const std::string& fileName)
 }
 
 /* explicit */
-bool Structure::loadStream(std::istream& istream)
+bool PdbStructure::loadStream(std::istream& istream)
 {
     if (!istream.good())
         return false;
