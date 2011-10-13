@@ -20,9 +20,71 @@
 */
 
 #include "moltk/Alignment.h"
+#include <cassert>
+#include <sstream>
 
 using namespace moltk;
 using namespace std;
+
+
+///////////////////////////////
+// Alignment::Column methods //
+///////////////////////////////
+
+/* virtual */
+AlignmentColumn::~AlignmentColumn() 
+{
+    for(size_t r = 0; r < size(); ++r) {
+        delete (*this)[r];
+        (*this)[r] = NULL;
+    }
+}
+
+
+///////////////////////
+// Alignment methods //
+///////////////////////
+
+/* implicit */
+Alignment::Alignment(const Biosequence& seq) 
+{
+    appendSequence(seq);
+}
+
+/* implicit */ 
+Alignment::Alignment(const std::string& s)
+{
+    loadString(s);
+}
+
+/* implicit */ 
+Alignment::Alignment(const char* str)
+{
+    std::string s(str);
+    loadString(s);
+}
+
+void Alignment::loadString(const std::string& s)
+{
+    stringstream ss(stringstream::in | stringstream::out);
+    ss << s;
+    while (ss.good())
+    {
+        Biosequence b;
+        ss >> b;
+        if (b.size() > 0)
+            appendSequence(b);
+    }
+}
+
+void Alignment::appendSequence(const Biosequence& seq)
+{
+    if (0 == size())
+        assign(seq.size(), Column());
+    assert(size() == seq.size());
+    for(size_t r = 0; r < size(); ++r)
+        (*this)[r].push_back(new Biosequence::Residue(seq[r]));
+}
 
 /* virtual */
 void moltk::Alignment::print_to_stream(std::ostream& os) const 

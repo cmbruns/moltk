@@ -70,9 +70,9 @@ protected:
     std::vector< std::vector<Information> > matrix;
 };
 
-} // namespace moltk
-
 std::istream& operator>>(std::istream&, moltk::MatrixScorer&);
+
+} // namespace moltk
 
 #endif // MOLTK_ALIGN_MATRIX_SCORER_H
 

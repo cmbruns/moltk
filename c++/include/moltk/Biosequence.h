@@ -85,60 +85,52 @@ private:
 };
 
 
-class Biosequence : public BaseBiosequence
+class BiosequenceResidue : public BaseBiosequence::BaseResidue
 {
 public:
+    BiosequenceResidue(char oneLetterCodeParam, int residueNumberParam)
+        : oneLetterCode(oneLetterCodeParam)
+        , residueNumber(residueNumberParam)
+    {}
+    BiosequenceResidue(const BiosequenceResidue& rhs)
+        : oneLetterCode(rhs.oneLetterCode)
+        , residueNumber(rhs.residueNumber)
+    {}
+    virtual char getOneLetterCode() const {return oneLetterCode;}
+    virtual int getResidueNumber() const {return residueNumber;}
+
+protected:
+    char oneLetterCode;
+    int residueNumber;
+};
 
 
-    class Residue : public BaseResidue
-    {
-    public:
-        Residue(char oneLetterCodeParam, int residueNumberParam)
-            : oneLetterCode(oneLetterCodeParam)
-            , residueNumber(residueNumberParam)
-        {}
-        Residue(const Residue& rhs)
-            : oneLetterCode(rhs.oneLetterCode)
-            , residueNumber(rhs.residueNumber)
-        {}
-        virtual char getOneLetterCode() const {return oneLetterCode;}
-        virtual int getResidueNumber() const {return residueNumber;}
-
-    protected:
-        char oneLetterCode;
-        int residueNumber;
-    };
-
-
-    // STL-conformant iterators
-    typedef std::vector<Residue> ResidueList;
-    typedef ResidueList::iterator iterator;
-    typedef ResidueList::const_iterator const_iterator;
+class Biosequence : public BaseBiosequence, public std::vector<BiosequenceResidue>
+{
+public:
+    typedef BiosequenceResidue Residue;
 
 public:
     Biosequence() {}
     /* implicit */ Biosequence(const std::string& str);
     /* implicit */ Biosequence(const char * str);
     Biosequence(const Biosequence& rhs)
-        : residues(rhs.residues)
+        : std::vector<Residue>(rhs)
     {}
     virtual ~Biosequence() {}
-    virtual size_t getNumberOfResidues() const {return residues.size();}
-    virtual const BaseResidue& getResidue(size_t index) const {
-        return residues[index];
-    }
-    iterator begin() {return residues.begin();}
-    const_iterator begin() const {return residues.begin();}
-    iterator end() {return residues.end();}
-    const_iterator end() const {return residues.end();}
-
-    const Residue& operator[](int ix) const {return residues[ix];}
-    Residue& operator[](int ix) {return residues[ix];}
-    size_t size() const {return residues.size();}
+    void loadStream(std::istream& is);
+    size_t getNumberOfResidues() const { return size(); }
+    const Residue& getResidue(size_t ix) const { return (*this)[ix]; }
 
 protected:
-    ResidueList residues;
+    std::string description;
 };
+
+inline std::istream& operator>>(std::istream& is, Biosequence& seq)
+{
+    seq.loadStream(is);
+    return is;
+}
 
 } // namespace moltk
 
