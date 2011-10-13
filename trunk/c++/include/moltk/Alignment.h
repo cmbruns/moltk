@@ -25,7 +25,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "moltk/Printable.h"
 #include "moltk/Biosequence.h"
 #include "moltk/PdbStructure.h"
 #include "moltk/Real.h"
@@ -41,8 +40,7 @@ public:
     /* implicit */ Alignment(const char*);
     explicit Alignment(std::istream& is);
     ~Alignment() {}
-    void appendSequence(const Biosequence& seq);
-    void appendStructure(const PdbStructure::Chain& seq);
+    Alignment& appendSequence(const Biosequence& seq);
     void loadString(const std::string& s);
     void printString(std::ostream& os) const;
 
@@ -54,21 +52,52 @@ public:
 
 
 public:
+    // index into displayOrder
+    enum List {
+        SequenceList,
+        StructureList
+    };
 
-
-    class EString : public std::vector<int>
+    class EString
     {
     public:
         EString operator*(const EString& rhs) const;
+        EString& appendRun(int run) {
+            if (run == 0) return *this; // run of nothing
+            if (runs.size() == 0) { // first run
+                runs.push_back(run);
+                return *this;
+            }
+            if ( (run * runs.back()) > 0 ) { // same sign: combine
+                runs.back() += run;
+                return *this;
+            }
+            // different sign: append
+            runs.push_back(run);
+            return *this;
+        }
+        size_t ungappedLength() const;
+        size_t totalLength() const;
+
+    protected:
+        std::vector<int> runs;
+    };
+
+    
+    class Row
+    {
+    public:
+        List list; // which list: sequences or structures?
+        int listIndex;
+        Real sequenceWeight;
+        EString eString;
     };
 
 
 protected:
     std::vector<Biosequence> sequences;
     std::vector<PdbStructure::Chain> structures;
-    std::vector< std::pair<int, int> > displayOrder;
-    std::vector<moltk::Real> sequenceWeights;
-    std::vector<EString> eStrings;
+    std::vector<Row> rows;
 };
 
 } // namespace moltk
