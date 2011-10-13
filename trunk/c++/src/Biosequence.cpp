@@ -50,15 +50,50 @@ void BaseBiosequence::print_to_stream(std::ostream& os) const
 Biosequence::Biosequence(const std::string& str)
 {
     for (size_t i = 0; i < str.length(); ++i)
-        residues.push_back( Residue(str[i], i+1) );
+        push_back( Residue(str[i], i+1) );
 }
 
 Biosequence::Biosequence(const char * strParam)
 {
     const std::string str(strParam);
     for (size_t i = 0; i < str.length(); ++i)
-        residues.push_back( Residue(str[i], i+1) );
+        push_back( Residue(str[i], i+1) );
 }
+
+void Biosequence::loadStream(std::istream& is)
+{
+    // Find first non-blank non-comment line
+    std::string line;
+    const char* spaces = " \t\n\r";
+    size_t pos = std::string::npos;
+    // while loop exits with first line of sequence data in line
+    while (is.good() && pos != std::string::npos)
+    {
+        getline(is, line);
+        pos = line.find_first_not_of(spaces);
+        if (pos == std::string::npos) continue; // blank line
+        char c = line[pos]; // first non-blank character
+        if (c == '#') continue; // comment
+        if (c == '>') // fasta format
+        {
+            description = "";
+            pos = line.find_first_not_of(spaces, pos + 1);
+            if (pos != std::string::npos)
+                description = line.substr(pos);
+            getline(is, line);
+            break;
+        }
+    }
+    // now "line" contains first line of sequence data
+    int residueNumber = 0;
+    for (size_t i = 0; i < line.length(); ++i) 
+    {
+        push_back( Residue(line[i], residueNumber+1) );
+        ++residueNumber;
+    }
+    // TODO - subsequent lines - peek() for '>' characters
+}
+
 
 //////////////////////////////////
 // Biosequence::Residue methods //

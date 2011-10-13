@@ -34,13 +34,7 @@ class AlignmentColumn : public std::vector<BaseBiosequence::BaseResidue*>
 {
 public:
     AlignmentColumn operator+(const AlignmentColumn& rhs) const;
-    virtual ~AlignmentColumn() 
-    {
-        for(int r = 0; r < size(); ++r) {
-            delete (*this)[r];
-            (*this)[r] = NULL;
-        }
-    }
+    virtual ~AlignmentColumn();
 };
 
 class Alignment : public moltk::Printable, public std::vector<AlignmentColumn>
@@ -53,7 +47,10 @@ public:
     /* implicit */ Alignment(const Biosequence&);
     /* implicit */ Alignment(const std::string&);
     /* implicit */ Alignment(const char*);
+    explicit Alignment(std::istream& is);
     virtual ~Alignment() {}
+    void appendSequence(const Biosequence& seq);
+    void loadString(const std::string& s);
     virtual void print_to_stream(std::ostream& os) const;
 };
 
