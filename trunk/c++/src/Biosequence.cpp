@@ -47,18 +47,25 @@ void BaseBiosequence::print_to_stream(std::ostream& os) const
 // Biosequence methods //
 /////////////////////////
 
-Biosequence::Biosequence(const std::string& str)
+Biosequence::Biosequence(const std::string& sequence, const std::string& descriptionParam)
+    : description(descriptionParam)
 {
+    for (size_t i = 0; i < sequence.length(); ++i)
+        push_back( Residue(sequence[i], i+1) );
+}
+
+Biosequence::Biosequence(const char * sequence, const std::string& descriptionParam)
+    : description(descriptionParam)
+{
+    const std::string str(sequence);
     for (size_t i = 0; i < str.length(); ++i)
         push_back( Residue(str[i], i+1) );
 }
 
-Biosequence::Biosequence(const char * strParam)
-{
-    const std::string str(strParam);
-    for (size_t i = 0; i < str.length(); ++i)
-        push_back( Residue(str[i], i+1) );
-}
+Biosequence::Biosequence(const Biosequence& rhs)
+    : std::vector<Residue>(rhs)
+    , description(rhs.description)
+{}
 
 void Biosequence::loadStream(std::istream& is)
 {

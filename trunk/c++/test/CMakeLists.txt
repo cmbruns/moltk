@@ -1,3 +1,8 @@
+find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+
+add_executable(test_biosequence1 test_biosequence.cpp ../src/Biosequence.cpp)
+target_link_libraries(test_biosequence1 ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+add_test(test_biosequence1 test_biosequence1)
 
 file(GLOB REGR_TESTS "test*.cpp")
 foreach(TEST_PROG ${REGR_TESTS})
