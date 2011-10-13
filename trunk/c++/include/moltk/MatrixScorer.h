@@ -44,13 +44,12 @@ public:
 
     static const MatrixScorer& getBlosum62Scorer();
 
-
     class Position : public Aligner::Position
     {
     public:
+
         virtual Position* clone() const;
         virtual moltk::units::Information score(const Aligner::Position& rhs) const;
-        // virtual char getOneLetterCode() const {return oneLetterCode;}
         virtual Alignment::Column getColumn() const;
         virtual Alignment::Column getGapColumn() const;
         virtual Information gapOpenPenalty() const {return m_gapOpenPenalty;}

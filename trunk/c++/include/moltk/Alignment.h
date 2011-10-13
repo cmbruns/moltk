@@ -27,21 +27,12 @@
 #include <vector>
 #include "moltk/Printable.h"
 #include "moltk/Biosequence.h"
+#include "moltk/PdbStructure.h"
 
 namespace moltk {
 
-class AlignmentColumn : public std::vector<BaseBiosequence::BaseResidue*>
+class Alignment : public moltk::Printable
 {
-public:
-    AlignmentColumn operator+(const AlignmentColumn& rhs) const;
-    virtual ~AlignmentColumn();
-};
-
-class Alignment : public moltk::Printable, public std::vector<AlignmentColumn>
-{
-public:
-    typedef AlignmentColumn Column;
-
 public:
     Alignment() {}
     /* implicit */ Alignment(const Biosequence&);
@@ -50,11 +41,27 @@ public:
     explicit Alignment(std::istream& is);
     virtual ~Alignment() {}
     void appendSequence(const Biosequence& seq);
+    void appendStructure(const PdbStructure::Chain& seq);
     void loadString(const std::string& s);
     virtual void print_to_stream(std::ostream& os) const;
-};
 
-// std::ostream& operator<<(std::ostream& os, const moltk::Alignment& p);
+public:
+
+
+    class EString : public std::vector<int>
+    {
+    public:
+        EString operator*(const EString& rhs) const;
+    }
+
+
+protected:
+    std::vector<Biosequence> sequences;
+    std::vector<PdbStructure::Chain> structures;
+    std::vector< std::pair<int, int> > displayOrder;
+    std::vector<moltk::Real> sequenceWeights;
+    std::vector<EString> eStrings;
+};
 
 } // namespace moltk
 
