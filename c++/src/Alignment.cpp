@@ -63,24 +63,33 @@ void Alignment::loadString(const std::string& s)
     }
 }
 
-void Alignment::appendSequence(const Biosequence& seq)
+Alignment& Alignment::appendSequence(const Biosequence& seq)
 {
-    if (0 == size())
-        assign(seq.size(), Column());
-    assert(size() == seq.size());
-    for(size_t r = 0; r < size(); ++r)
-        (*this)[r].push_back(new Biosequence::Residue(seq[r]));
+    sequences.push_back(seq);
+    Row row = {
+        SequenceList,
+        0,
+        1.0,
+        EString().appendRun(seq.size()) };
+    rows.push_back(row);
+    return *this;
 }
 
 /* virtual */
 void moltk::Alignment::printString(std::ostream& os) const
 {
-    if (size() < 1) return;
-    int nRows = (*this)[0].size();
-    int nCols = size();
-    for (int r = 0; r < nRows; ++r) {
-        for (int c = 0; c < nCols; ++c) {
-            os << (*this)[c][r]->getOneLetterCode();
+    for (size_t rowIx = 0; rowIx < rows.size(); ++rowIx) 
+    {
+        const Row& row = rows[rowIx];
+        const BaseBiosequence* seq;
+        if (row.list == SequenceList)
+            seq = &sequences[row.listIndex];
+        else
+            seq = &structures[row.listIndex];
+        for (size_t resIx = 0; resIx < seq->getNumberOfResidues(); ++resIx)
+        {
+            const BaseBiosequence::BaseResidue& residue = seq->getResidue(resIx);
+            os << residue.getOneLetterCode();
         }
         os << endl;
     }

@@ -43,10 +43,6 @@ public:
             ATOM_RECORD_TYPE, //< Standard protein, DNA, or RNA atoms
             HETATM_RECORD_TYPE //< Other atom types
         };
-    
-        /// Test function to test python bindings.
-        int foo() const {return 5;}
-    
         /// Whether this is a standard macromolecule atom type (ATOM) or other (HETATM).
         RecordType getRecordType() const {return recordType;}
     
@@ -72,9 +68,15 @@ public:
         int residueNumber;
     };
 
-    class Chain
+    class Chain : public BaseBiosequence
     {
-
+    public:
+        virtual size_t getNumberOfResidues() const {return residues.size();}
+        virtual const BaseResidue& getResidue(size_t index) const {
+            return residues[index];
+        }
+    protected:
+        std::vector<Residue> residues;
     };
 
 public:
