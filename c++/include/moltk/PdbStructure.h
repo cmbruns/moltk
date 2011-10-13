@@ -26,10 +26,11 @@
 #include <vector>
 #include <string>
 #include "moltk/Biosequence.h"
+#include "moltk/Printable.h"
 
 namespace moltk {
 	
-class Structure : public BaseBiosequence
+class PdbStructure : public BaseBiosequence, public Printable
 {
 public:
     /*!
@@ -72,10 +73,10 @@ public:
     };
 
 public:
-    Structure() {}
-    explicit Structure(std::istream&);
-    explicit Structure(const std::string& fileName);
-    Structure(const Structure& rhs)
+    PdbStructure() {}
+    explicit PdbStructure(std::istream&);
+    explicit PdbStructure(const std::string& fileName);
+    PdbStructure(const PdbStructure& rhs)
         : atoms(rhs.atoms)
         , residues(rhs.residues)
     {}
@@ -93,7 +94,7 @@ protected:
 
 } // namespace moltk
 
-inline std::istream& operator>>(std::istream& is, moltk::Structure& structure)
+inline std::istream& operator>>(std::istream& is, moltk::PdbStructure& structure)
 {
     structure.loadStream(is);
     return is;
