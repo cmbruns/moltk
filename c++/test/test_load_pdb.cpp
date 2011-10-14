@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
     }
     std::string pdbFileName(argv[1]);
 
-    Structure pdbStructure(pdbFileName);
+    PdbStructure pdbStructure(pdbFileName);
 
     return 0;
 }

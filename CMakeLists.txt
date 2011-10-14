@@ -39,11 +39,6 @@ if(WIN32)
 else()
     find_package(ZLIB REQUIRED)
 endif()
-# Want shared library for boost python
-set(Boost_USE_STATIC_LIBS OFF)
-find_package(Boost COMPONENTS python REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
-link_directories(${Boost_LIBRARY_DIRS})
 
 file(GLOB_RECURSE MOLTK_HEADERS "c++/include/*.h")
 file(GLOB_RECURSE MOLTK_SOURCES "c++/src/*.cpp")
@@ -51,7 +46,17 @@ file(GLOB_RECURSE MOLTK_SOURCES "c++/src/*.cpp")
 # C++ rules must precede python rules,
 # because python module depends on C++ libraries.
 add_subdirectory(c++)
-add_subdirectory(python)
+
+set(MOLTK_BUILD_PYTHON_MODULE ON CACHE BOOL "Whether to create moltk python module")
+if(MOLTK_BUILD_PYTHON_MODULE)
+    # Want shared library for boost python
+    set(Boost_USE_STATIC_LIBS OFF)
+    find_package(Boost COMPONENTS python REQUIRED)
+    include_directories(${Boost_INCLUDE_DIRS})
+    link_directories(${Boost_LIBRARY_DIRS})
+    add_subdirectory(python)
+endif()
+
 add_subdirectory(doc)
 
 # TODO - packaging

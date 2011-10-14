@@ -72,7 +72,7 @@ void Biosequence::loadStream(std::istream& is)
     // Find first non-blank non-comment line
     std::string line;
     const char* spaces = " \t\n\r";
-    size_t pos = std::string::npos;
+    size_t pos = 0;
     // while loop exits with first line of sequence data in line
     while (is.good() && pos != std::string::npos)
     {
