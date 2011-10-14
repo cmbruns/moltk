@@ -38,20 +38,17 @@ public:
 
     explicit MatrixScorer(const std::string& matrixString);
     explicit MatrixScorer(std::istream& matrixStream);
-    virtual Aligner::Position* createPosition(char sequenceLetter, bool bTerminus = false) const;
-    virtual Aligner::Position* createPosition(const Alignment::Column&, bool bTerminus = false) const;
+    std::vector<Aligner::QueryPosition*> createQueryPositions(const Alignment&) const;
+    std::vector<Aligner::TargetPosition*> createTargetPositions(const Alignment&) const;
     std::istream& loadStream(std::istream&);
 
     static const MatrixScorer& getBlosum62Scorer();
 
-    class Position : public Aligner::Position
+    class QueryPosition : public Aligner::QueryPosition
     {
     public:
 
-        virtual Position* clone() const;
-        virtual moltk::units::Information score(const Aligner::Position& rhs) const;
-        virtual Alignment::Column getColumn() const;
-        virtual Alignment::Column getGapColumn() const;
+        virtual QueryPosition* clone() const;
         virtual Information gapOpenPenalty() const {return m_gapOpenPenalty;}
         virtual Information gapExtensionPenalty() const {return m_gapExtensionPenalty;}
 
@@ -60,8 +57,23 @@ public:
         // cache values for quick score lookup
         double scoreWeight;
         int columnIndex;
+    };
+
+
+    class TargetPosition : public Aligner::TargetPosition
+    {
+    public:
+
+        virtual TargetPosition* clone() const;
+        virtual moltk::units::Information score(const Aligner::QueryPosition& rhs) const;
+        virtual Information gapOpenPenalty() const {return m_gapOpenPenalty;}
+        virtual Information gapExtensionPenalty() const {return m_gapExtensionPenalty;}
+
+        Information m_gapOpenPenalty;
+        Information m_gapExtensionPenalty;
+        // cache values for quick score lookup
+        double scoreWeight;
         const Information* rowPtr;
-        char oneLetterCode;
     };
 
 protected:

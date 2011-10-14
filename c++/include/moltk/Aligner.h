@@ -40,30 +40,22 @@ public:
 
 
     /// Aligner::Position represents a special biosequence residue that knows how to score itself during alignment.
-    class Position
+    class QueryPosition // seq2
     {
         public:
-            virtual Position* clone() const = 0;
-            virtual ~Position() {}
-            virtual moltk::units::Information score(const Position& rhs) const = 0;
-            // virtual char getOneLetterCode() const = 0;
-            virtual Alignment::Column getColumn() const = 0;
-            virtual Alignment::Column getGapColumn() const = 0; // for gaps after this position
-            // Gap penalties are for inserting a gap character after this position.
+            virtual QueryPosition* clone() const = 0;
+            virtual ~QueryPosition() {}
             virtual moltk::units::Information gapOpenPenalty() const = 0;
             virtual moltk::units::Information gapExtensionPenalty() const = 0;
     };
-
-
-    /// Aligner::PositionList is a special sequence containing Aligner::Positions,
-    /// which know how to score themselves.
-    class PositionList : public std::vector<Position*>
+    class TargetPosition // seq1
     {
-    public:
-        PositionList() {}
-        PositionList(const PositionList& rhs);
-        virtual ~PositionList();
-        PositionList& operator=(const PositionList& rhs);
+        public:
+            virtual TargetPosition* clone() const = 0;
+            virtual ~TargetPosition() {}
+            virtual moltk::units::Information score(const QueryPosition& rhs) const = 0;
+            virtual moltk::units::Information gapOpenPenalty() const = 0;
+            virtual moltk::units::Information gapExtensionPenalty() const = 0;
     };
 
 
@@ -73,8 +65,8 @@ public:
     {
     public:
         Scorer() : endGapsFree(true) {}
-        virtual Aligner::Position* createPosition(char sequenceLetter, bool bTerminus = false) const = 0;
-        virtual Aligner::Position* createPosition(const Alignment::Column&, bool bTerminus = false) const = 0;
+        virtual std::vector<QueryPosition*> createQueryPositions(const Alignment&) const = 0;
+        virtual std::vector<TargetPosition*> createTargetPositions(const Alignment&) const = 0;
         bool getEndGapsFree() const {return endGapsFree;}
         void setEndGapsFree(bool f) {endGapsFree = f;}
 
@@ -134,7 +126,6 @@ public:
 
 protected:
     void init();
-    void init(const PositionList& seq1Param, const PositionList& seq2Param);
     void allocate_dp_table();
     void initialize_dp_table();
     void initialize_dp_row(size_t rowIndex, DpRow& row);
@@ -152,10 +143,12 @@ protected:
     size_t m; // length of sequence 1
     size_t n; // length of sequence 2
     DpTable dpTable;
-    PositionList seq1;
-    PositionList seq2;
+    std::vector<TargetPosition*> seq1;
+    std::vector<QueryPosition*> seq2;
     Scorer* scorer;
-    Alignment alignment;
+    Alignment outputAlignment;
+    Alignment queryAlignment;
+    Alignment targetAlignment;
 };
 
 } // namespace moltk

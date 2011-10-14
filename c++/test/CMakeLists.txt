@@ -33,6 +33,19 @@ target_link_libraries(test_alignment1
     )
 add_test(test_alignment1 test_alignment1)
 
+add_executable(test_aligner1 
+    test_aligner.cpp 
+    ../src/PdbStructure.cpp 
+    ../src/Biosequence.cpp 
+    ../src/Alignment.cpp
+    ../src/Aligner.cpp
+    )
+target_link_libraries(test_aligner1 
+    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+    ${Boost_IOSTREAMS_LIBRARY}
+    ${ZLIB_LIBRARY}
+    )
+add_test(test_aligner1 test_aligner1)
 
 ########################################################
 # Regular automated tests that depend on MolTK library #
