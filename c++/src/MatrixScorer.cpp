@@ -141,6 +141,37 @@ istream& MatrixScorer::loadStream(istream& is)
 }
 
 /* virtual */
+std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Alignment& alignment) const
+{
+    std::vector<Aligner::QueryPosition*> result;
+    const size_t ncol = alignment.getNumberOfColumns();
+    if (ncol <= 0) return result;
+    for (size_t col = 0; col < ncol; ++col)
+    {
+        MatrixScorer::QueryPosition* pos = new MatrixScorer::QueryPosition();
+        assert(false); // TODO
+        result.push_back(pos);
+    }
+    return result;
+}
+
+/* virtual */
+std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const Alignment& alignment) const
+{
+    std::vector<Aligner::TargetPosition*> result;
+    const size_t ncol = alignment.getNumberOfColumns();
+    if (ncol <= 0) return result;
+    for (size_t col = 0; col < ncol; ++col)
+    {
+        MatrixScorer::TargetPosition* pos = new MatrixScorer::TargetPosition();
+        assert(false); // TODO
+        result.push_back(pos);
+    }
+    return result;
+}
+
+/* virtual */
+/*
 Aligner::Position* MatrixScorer::createPosition(char sequenceLetter, bool bTerminus) const
 {
     MatrixScorer::Position* result = new MatrixScorer::Position();
@@ -158,22 +189,29 @@ Aligner::Position* MatrixScorer::createPosition(char sequenceLetter, bool bTermi
     }
     return result;
 }
+*/
 
 ////////////////////////////////////
 // MatrixScorer::Position methods //
 ////////////////////////////////////
 
 /* virtual */
-MatrixScorer::Position* MatrixScorer::Position::clone() const
+MatrixScorer::QueryPosition* MatrixScorer::QueryPosition::clone() const
 {
-    return new MatrixScorer::Position(*this);
+    return new MatrixScorer::QueryPosition(*this);
 }
 
 /* virtual */
-units::Information MatrixScorer::Position::score(const Aligner::Position& rhs) const
+MatrixScorer::TargetPosition* MatrixScorer::TargetPosition::clone() const
+{
+    return new MatrixScorer::TargetPosition(*this);
+}
+
+/* virtual */
+units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosition& rhs) const
 {
     // TODO - use a more elegant mechanism for getting the other Position
-    const MatrixScorer::Position* rhsPtr = dynamic_cast<const MatrixScorer::Position*>(&rhs);
+    const MatrixScorer::QueryPosition* rhsPtr = dynamic_cast<const MatrixScorer::QueryPosition*>(&rhs);
     if (! rhsPtr)
         assert(false);  // TODO
     Information result = rowPtr[rhsPtr->columnIndex] * scoreWeight * rhsPtr->scoreWeight;

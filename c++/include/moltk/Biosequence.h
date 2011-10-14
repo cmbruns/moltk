@@ -29,7 +29,6 @@
 #ifndef BIOSEQUENCE_H_
 #define BIOSEQUENCE_H_
 
-#include "moltk/Printable.h"
 #include <vector>
 #include <string>
 #include <iterator>
