@@ -22,7 +22,6 @@
 #include "moltk/Aligner.h"
 #include "moltk/MatrixScorer.h"
 #include <cassert>
-#include <algorithm> // reverse
 #include <limits>
 
 using namespace std;
@@ -79,29 +78,24 @@ void Aligner::init()
 
 Alignment Aligner::align(const Alignment& s1, const Alignment& s2)
 {
-
+    targetAlignment = s1;
+    queryAlignment = s2;
     // Fill seq1, seq2
     seq1.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
-    m = s1.size();
-    seq1.push_back(scorer->createPosition('*', true)); // position "-1"
-    for(size_t i = 0; i < m - 1; ++i)
-        seq1.push_back(scorer->createPosition(s1[i]));
-    seq1.push_back(scorer->createPosition(s1[m -1], true));
+    m = s1.getNumberOfColumns();
+    seq1 = scorer->createTargetPositions(s1);
 
     seq2.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
-    n = s2.size();
-    seq2.push_back(scorer->createPosition('*', true)); // position "-1"
-    for(size_t i = 0; i < n - 1; ++i)
-        seq2.push_back(scorer->createPosition(s2[i]));
-    seq2.push_back(scorer->createPosition(s2[n - 1], true));
+    n = s2.getNumberOfColumns();
+    seq2 = scorer->createQueryPositions(s2);
 
     allocate_dp_table();
     initialize_dp_table();
     compute_recurrence();
-    alignment = compute_traceback();
-    return alignment;
+    outputAlignment = compute_traceback();
+    return outputAlignment;
 }
 
 void Aligner::allocate_dp_table()
@@ -119,8 +113,8 @@ void Aligner::initialize_dp_table()
 // single row initialization could come in handy during small memory alignment
 void Aligner::initialize_dp_row(size_t rowIndex, DpRow& row)
 {
-    Position& p1 = *seq1[0];
-    Position& p2 = *seq2[0];
+    TargetPosition& p1 = *seq1[0];
+    QueryPosition& p2 = *seq2[0];
 
     size_t i = rowIndex;
     // most rows only need the first element initialized
@@ -142,8 +136,8 @@ void Aligner::initialize_dp_row(size_t rowIndex, DpRow& row)
 
 void Aligner::compute_cell_recurrence(int i, int j)
 {
-    const Position& p1 = *seq1[i];
-    const Position& p2 = *seq2[j];
+    const TargetPosition& p1 = *seq1[i];
+    const QueryPosition& p2 = *seq2[j];
     Cell& cell = dpTable[i][j];
     const Cell& left = dpTable[i][j-1];
     const Cell& up = dpTable[i-1][j];
@@ -168,11 +162,9 @@ void Aligner::compute_recurrence()
 
 Alignment Aligner::compute_traceback()
 {
-    // TODO - implement end gaps free version
-    Alignment result;
-    // result.assign(2, std::string());
-
     // Start at lower right of dynamic programming matrix.
+    Alignment::EString eString1;
+    Alignment::EString eString2;
     int i = m;
     int j = n;
     // cout << "final alignment score = " << dpTable[i][j].v << endl;
@@ -184,18 +176,18 @@ Alignment Aligner::compute_traceback()
         {
         case TRACEBACK_UPLEFT:
             --i; --j;
-            result.push_back( seq1[i+1]->getColumn() +
-                              seq2[j+1]->getColumn() );
+            eString1.appendRun(1);
+            eString2.appendRun(1);
             break;
         case TRACEBACK_UP:
             --i;
-            result.push_back( seq1[i+1]->getColumn() +
-                              seq2[j]->getGapColumn() );
+            eString1.appendRun(1);
+            eString2.appendRun(-1);
             break;
         case TRACEBACK_LEFT:
             --j;
-            result.push_back( seq1[i]->getGapColumn() +
-                              seq2[j+1]->getColumn() );
+            eString1.appendRun(-1);
+            eString2.appendRun(1);
             break;
         default:
             cerr << "Traceback error!" << endl;
@@ -207,9 +199,10 @@ Alignment Aligner::compute_traceback()
     assert(i == 0);
     assert(j == 0);
     // OK, the sequences are actually backwards here
-    for (size_t i = 0; i < result.size(); ++i)
-        std::reverse(result.begin(), result.end());
-    return result;
+    eString1.reverse();
+    eString2.reverse();
+    outputAlignment = targetAlignment.align(queryAlignment, eString1, eString2);
+    return outputAlignment;
 }
 
 /* static */

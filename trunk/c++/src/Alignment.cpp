@@ -86,10 +86,14 @@ void moltk::Alignment::printString(std::ostream& os) const
             seq = &sequences[row.listIndex];
         else
             seq = &structures[row.listIndex];
-        for (size_t resIx = 0; resIx < seq->getNumberOfResidues(); ++resIx)
-        {
-            const BaseBiosequence::BaseResidue& residue = seq->getResidue(resIx);
-            os << residue.getOneLetterCode();
+        EString::const_iterator i = row.eString.begin();
+        while(i != row.eString.end()) {
+            int resIx = *i;
+            if (resIx < 0)
+                os << 'i'; // gap
+            else
+                os << seq->getResidue(resIx).getOneLetterCode();
+            ++i;
         }
         os << endl;
     }
