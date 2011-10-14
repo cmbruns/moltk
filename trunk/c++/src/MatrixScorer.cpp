@@ -222,7 +222,7 @@ units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosit
 // Global methods //
 ////////////////////
 
-istream& operator>>(istream& is, MatrixScorer& scorer) 
+istream& moltk::operator>>(istream& is, moltk::MatrixScorer& scorer)
 {
     return scorer.loadStream(is);
 };
