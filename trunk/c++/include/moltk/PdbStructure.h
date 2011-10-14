@@ -30,7 +30,7 @@
 
 namespace moltk {
 	
-class PdbStructure : public BaseBiosequence, public Printable
+class PdbStructure
 {
 public:
     /*!
@@ -52,7 +52,7 @@ public:
     typedef std::vector<Atom> AtomList;
 
 
-    class Residue : public BaseResidue
+    class Residue : public BaseBiosequence::BaseResidue
     {
     public:
         Residue() {}
@@ -71,6 +71,8 @@ public:
     class Chain : public BaseBiosequence
     {
     public:
+        Chain() {}
+        Chain(const Chain& rhs) : residues(rhs.residues) {}
         virtual size_t getNumberOfResidues() const {return residues.size();}
         virtual const BaseResidue& getResidue(size_t index) const {
             return residues[index];
@@ -85,18 +87,14 @@ public:
     explicit PdbStructure(const std::string& fileName);
     PdbStructure(const PdbStructure& rhs)
         : atoms(rhs.atoms)
-        , residues(rhs.residues)
+        , chains(rhs.chains)
     {}
     bool loadStream(std::istream&);
     bool loadFile(const std::string& fileName);
-    virtual size_t getNumberOfResidues() const {return residues.size();}
-    virtual const BaseResidue& getResidue(size_t index) const {
-        return residues[index];
-    }
 
 protected:
     AtomList atoms;
-    std::vector<Residue> residues;
+    std::vector<Chain> chains;
 };
 
 } // namespace moltk

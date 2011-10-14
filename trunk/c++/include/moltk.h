@@ -66,4 +66,4 @@ There are three faces of MolTK; in order from easiest-to-use to most-powerful:
 #include "moltk/Real.h"
 #include "moltk/Biosequence.h"
 #include "moltk/Aligner.h"
-#include "moltk/Structure.h"
+#include "moltk/PdbStructure.h"

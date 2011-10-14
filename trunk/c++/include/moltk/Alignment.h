@@ -54,8 +54,8 @@ public:
             const_iterator(const std::vector<int>& runsParam
                     , int runIndexParam
                     , int positionIndexParam) 
-                    : runIndex(runIndexParam)
-                    , runs(&runsParam)
+                    : runs(&runsParam)
+                    , runIndex(runIndexParam)
                     , positionIndex(positionIndexParam)
                     , sequenceIndex(-1) // default to gap start
             {

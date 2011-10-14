@@ -39,6 +39,7 @@ add_executable(test_aligner1
     ../src/Biosequence.cpp 
     ../src/Alignment.cpp
     ../src/Aligner.cpp
+    ../src/MatrixScorer.cpp
     )
 target_link_libraries(test_aligner1 
     ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
