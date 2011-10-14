@@ -201,8 +201,7 @@ Alignment Aligner::compute_traceback()
     // OK, the sequences are actually backwards here
     eString1.reverse();
     eString2.reverse();
-    outputAlignment = targetAlignment.align(queryAlignment, eString1, eString2);
-    return outputAlignment;
+    return targetAlignment.align(queryAlignment, eString1, eString2);
 }
 
 /* static */
