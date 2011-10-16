@@ -79,6 +79,11 @@ public:
     };
 
 protected:
+    // createFooPositions is a helper function to reduce redundancy between 
+    // methods createQueryPositions() and createTargetPositions()
+    template<class POSB, class POS>
+    std::vector<POSB*> createFooPositions(const Alignment& alignment) const;
+
     std::vector<int> characterIndices; // maps letters to matrix indices
     std::vector< std::vector<Information> > matrix;
 };
