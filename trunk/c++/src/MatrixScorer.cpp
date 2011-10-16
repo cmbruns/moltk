@@ -23,6 +23,7 @@
 #include <sstream>
 #include <cassert>
 #include <cctype>
+#include <map>
 
 using namespace std;
 using namespace moltk;
@@ -140,37 +141,18 @@ istream& MatrixScorer::loadStream(istream& is)
     return is;
 }
 
-/* virtual */
-std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Alignment& alignment) const
+template<class POSB, class POS>
+std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) const
 {
-    std::vector<Aligner::QueryPosition*> result;
-    const size_t ncol = alignment.getNumberOfColumns();
-    if (ncol <= 0) return result;
-    for (size_t col = 0; col < ncol; ++col)
-    {
-        MatrixScorer::QueryPosition* pos = new MatrixScorer::QueryPosition();
-        assert(false); // TODO
-        result.push_back(pos);
-    }
-    return result;
-}
-
-// createTargetPositions() is used to precompute everything that can be precomputed
-// in O(n) time, so that alignment score can be computed as quickly as possible
-// durint the O(n^2) alignment phase.
-/* virtual */
-std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const Alignment& alignment) const
-{
-    // TODO - end gaps free
-    std::vector<Aligner::TargetPosition*> result;
+    std::vector<POSB*> result;
     const size_t ncol = alignment.getNumberOfColumns();
     const size_t nseq = alignment.getNumberOfSequences();
     if (ncol <= 0) return result;
     // Initialize target positions with zero-scoring initial profile
     for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
     {
-        MatrixScorer::TargetPosition* pos = new MatrixScorer::TargetPosition();
-        pos->scoresByResidueTypeIndex.assign(matrix.size(), 0.0 * bit);
+        POS* pos = new POS();
+        // pos->scoresByResidueTypeIndex.assign(matrix.size(), 0.0 * bit);
         pos->m_gapOpenPenalty = 0.0 * bit;
         pos->m_gapExtensionPenalty = 0.0 * bit;
         result.push_back(pos);
@@ -184,8 +166,8 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
         if (getEndGapsFree())
             gapFactor = 0.0; // Always starts at a left end gap
         {
-            MatrixScorer::TargetPosition& pos = 
-                dynamic_cast<MatrixScorer::TargetPosition&>(*result[0]);
+            POS& pos = 
+                dynamic_cast<POS&>(*result[0]);
             // leave score zero, but set gap penalties
             pos.m_gapExtensionPenalty = gapFactor * defaultGapExtensionPenalty;
             pos.m_gapOpenPenalty = gapFactor * defaultGapOpenPenalty;
@@ -211,23 +193,101 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
             }
             ++colIx;
             // Position[i+1] represents column i
-            MatrixScorer::TargetPosition& pos = 
-                dynamic_cast<MatrixScorer::TargetPosition&>(*result[colIx + 1]);
+            POS& pos = 
+                dynamic_cast<POS&>(*result[colIx + 1]);
             double gapFactor = 1.0; // the usual case
             // Set gap penalties
             pos.m_gapExtensionPenalty = gapFactor * defaultGapExtensionPenalty;
             pos.m_gapOpenPenalty = gapFactor * defaultGapOpenPenalty;
+        }
+        assert(colIx == alignment.getNumberOfColumns() - 1);
+    }
+    return result;
+}
+
+// createTargetPositions() is used to precompute everything that can be precomputed
+// in O(n) time, so that alignment score can be computed as quickly as possible
+// durint the O(n^2) alignment phase.
+/* virtual */
+std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const Alignment& alignment) const
+{
+    std::vector<Aligner::TargetPosition*> result = 
+        createFooPositions<Aligner::TargetPosition, MatrixScorer::TargetPosition>(alignment);
+
+    const size_t ncol = alignment.getNumberOfColumns();
+    // initialize
+    for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
+    {
+        MatrixScorer::TargetPosition& pos = 
+                dynamic_cast<MatrixScorer::TargetPosition&>(*result[col]);
+        pos.scoresByResidueTypeIndex.assign(matrix.size(), 0.0 * bit);
+    }
+    const size_t nseq = alignment.getNumberOfSequences();
+    for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
+    {
+        const BaseBiosequence& seq = alignment.getSequence(seqIx);
+        const Alignment::EString& eString = alignment.getEString(seqIx);
+        Alignment::EString::const_iterator e;
+        int colIx = -1;
+        for (e = eString.begin(); e != eString.end(); ++e) 
+        {
+            size_t eResIx = *e;
+            colIx++;
             if (eResIx < 0) // This is a gap position
                 continue; // gap - zero score
             // Compute alignment score
+            MatrixScorer::TargetPosition& pos = 
+                dynamic_cast<MatrixScorer::TargetPosition&>(*result[colIx + 1]);
             const BaseBiosequence::BaseResidue& res = seq.getResidue(eResIx);
             size_t resTypeIndex = characterIndices[res.getOneLetterCode()];
             // loop over scoring matrix positions
             for (size_t m = 0; m < matrix.size(); ++m) {
                 pos.scoresByResidueTypeIndex[resTypeIndex] += matrix[resTypeIndex][m];
             }
-        }
-        assert(colIx == alignment.getNumberOfColumns() - 1);
+       }
+    }
+    return result;
+}
+
+/* virtual */
+std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Alignment& alignment) const
+{
+    std::vector<Aligner::QueryPosition*> result = 
+        createFooPositions<Aligner::QueryPosition, MatrixScorer::QueryPosition>(alignment);
+
+    // queryWeightIndexByResTypeIndex helps coalesce multiple instances of the same residue in a column
+    const size_t ncol = alignment.getNumberOfColumns();
+    std::vector< std::map<size_t, size_t> > queryWeightIndexByResTypeIndexByColumn;
+    queryWeightIndexByResTypeIndexByColumn.assign( ncol, std::map<size_t, size_t>() );
+
+    const size_t nseq = alignment.getNumberOfSequences();
+    for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
+    {
+        const BaseBiosequence& seq = alignment.getSequence(seqIx);
+        const Alignment::EString& eString = alignment.getEString(seqIx);
+        Alignment::EString::const_iterator e;
+        int colIx = -1;
+        for (e = eString.begin(); e != eString.end(); ++e) 
+        {
+            size_t eResIx = *e;
+            colIx++;
+            if (eResIx < 0) // This is a gap position
+                continue; // gap - zero score
+            // Compute alignment score
+            MatrixScorer::QueryPosition& pos = 
+                dynamic_cast<MatrixScorer::QueryPosition&>(*result[colIx + 1]);
+            const BaseBiosequence::BaseResidue& res = seq.getResidue(eResIx);
+            size_t resTypeIndex = characterIndices[res.getOneLetterCode()];
+            std::map<size_t, size_t>& qmap = 
+                queryWeightIndexByResTypeIndexByColumn[colIx];
+            if ( qmap.find(resTypeIndex) == qmap.end() )
+            {
+                qmap[resTypeIndex] = pos.residueTypeIndexWeights.size();
+                pos.residueTypeIndexWeights.push_back( 
+                    std::pair<size_t, double>(resTypeIndex, 0.0) );
+            }
+            pos.residueTypeIndexWeights[qmap[resTypeIndex]].second += 1.0;
+       }
     }
     return result;
 }
