@@ -100,7 +100,9 @@ namespace moltk { namespace units {
             return *this;
         }
 
-        // arithmetic operators
+        //////////////////////////
+        // arithmetic operators //
+        //////////////////////////
 
         // unary +/-
         const this_type& operator+() const { return *this; }
@@ -176,7 +178,9 @@ namespace moltk { namespace units {
             return value/rhs.value;
         }
 
-        // Comparison operators
+        //////////////////////////
+        // Comparison operators //
+        //////////////////////////
 
         bool operator==(const this_type& rhs) const 
         {
@@ -213,7 +217,7 @@ namespace moltk { namespace units {
         inline friend std::ostream& operator<<(std::ostream& os, const this_type& q)
         {
             os << q.value << " ";
-            q::unit_type::print_symbol(os);
+            this_type::unit_type::print_symbol(os);
             return os;
         }
 

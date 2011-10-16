@@ -143,6 +143,7 @@ void Aligner::compute_cell_recurrence(int i, int j)
     const Cell& up = dpTable[i-1][j];
     const Cell& upLeft = dpTable[i-1][j-1];
     // This recurrence comes from Gusfield chapter 11.
+    cerr << "score " << i << ", " << j << " = " << p1.score(p2) << endl;
     cell.g = upLeft.v + p1.score(p2); // score...
     cell.e = std::max(left.e, 
                       (Information)(left.v - p1.gapOpenPenalty()))
@@ -151,6 +152,7 @@ void Aligner::compute_cell_recurrence(int i, int j)
                       (Information)(up.v - p2.gapOpenPenalty()))
                  - p2.gapExtensionPenalty();
     cell.v = cell.compute_v();
+    cerr << cell << endl;
 }
 
 void Aligner::compute_recurrence()
@@ -167,7 +169,8 @@ Alignment Aligner::compute_traceback()
     Alignment::EString eString2;
     int i = m;
     int j = n;
-    // cout << "final alignment score = " << dpTable[i][j].v << endl;
+    Information alignmentScore = dpTable[i][j].v;
+    cout << "final alignment score = " << dpTable[i][j].v << endl;
     TracebackPointer tracebackPointer = dpTable[i][j].compute_traceback_pointer();
     while( (i > 0) || (j > 0) )
     {
@@ -201,7 +204,9 @@ Alignment Aligner::compute_traceback()
     // OK, the sequences are actually backwards here
     eString1.reverse();
     eString2.reverse();
-    return targetAlignment.align(queryAlignment, eString1, eString2);
+    Alignment result = targetAlignment.align(queryAlignment, eString1, eString2);
+    result.setScore(result.score() + alignmentScore);
+    return result;
 }
 
 /* static */

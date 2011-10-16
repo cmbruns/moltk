@@ -19,15 +19,26 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MODULE AlignerUnitTest
+#include <boost/test/unit_test.hpp>
+#include <boost/lexical_cast.hpp>
 #include "moltk.h"
 #include <iostream>
+#include <cassert>
 
 using namespace std;
 using namespace moltk;
+using moltk::units::bit;
 
-int main()
+BOOST_AUTO_TEST_CASE( test_aligner )
 {
     Aligner aligner;
+    aligner.setEndGapsFree(true);
+    Alignment a1 = aligner.align("W", "W");
+    BOOST_CHECK_EQUAL(a1.score(), 5.5 * bit);
+
+    /*
     aligner.setEndGapsFree(false);
     cout << aligner.align("QS", "SD");
 
@@ -35,7 +46,6 @@ int main()
     Biosequence seq2("ACEFG");
     Alignment alignment = aligner.align(seq1, seq2);
     cout << alignment;
-
-    return 0;
+    */
 }
 

@@ -33,18 +33,21 @@ using namespace std;
 
 /* implicit */
 Alignment::Alignment(const Biosequence& seq) 
+ : m_score(0.0 * moltk::units::bit)
 {
     appendSequence(seq);
 }
 
 /* implicit */ 
 Alignment::Alignment(const std::string& s)
+ : m_score(0.0 * moltk::units::bit)
 {
     loadString(s);
 }
 
 /* implicit */ 
 Alignment::Alignment(const char* str)
+ : m_score(0.0 * moltk::units::bit)
 {
     std::string s(str);
     loadString(s);
@@ -96,7 +99,7 @@ void moltk::Alignment::printString(std::ostream& os) const
         while(i != row.eString.end()) {
             int resIx = *i;
             if (resIx < 0)
-                os << 'i'; // gap
+                os << '-'; // gap
             else
                 os << seq->getResidue(resIx).getOneLetterCode();
             ++i;
@@ -107,6 +110,11 @@ void moltk::Alignment::printString(std::ostream& os) const
 
 Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString& e2) const
 {
+    const Alignment& a1 = *this;
+    cerr << *this;
+    cerr << a2;
+    cerr << e1 << endl;
+    cerr << e2 << endl;
     Alignment result;
     // Add sequences from first alignment
     for (size_t r = 0; r < rows.size(); ++r)
@@ -132,16 +140,17 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
         Row newRow(row);
         newRow.eString = e2 * newRow.eString;
         if (row.list == SequenceList) {
-            result.sequences.push_back(sequences[row.listIndex]);
+            result.sequences.push_back(a2.sequences[row.listIndex]);
             newRow.listIndex = result.sequences.size() - 1;
         }
         else {
             assert(row.list == StructureList);
-            result.structures.push_back(structures[row.listIndex]);
+            result.structures.push_back(a2.structures[row.listIndex]);
             newRow.listIndex = result.structures.size() - 1;
         }
         result.rows.push_back(newRow);
     }
+    result.setScore(a1.score() + a2.score());
 
     return result;
 }
@@ -210,6 +219,7 @@ Alignment::EString::EString()
 
 Alignment::EString Alignment::EString::operator*(const EString& rhs) const
 {
+    cerr << "EString::operator*()" << *this << rhs << endl;
     const EString & lhs = *this;
     assert(lhs.ungappedLength() == rhs.ungappedLength());
     EString result;
@@ -235,7 +245,7 @@ Alignment::EString Alignment::EString::operator*(const EString& rhs) const
             ++eIx1;
         }
         if ( (run2 == 0) && (eIx2 < rhs.runs.size()) ) {
-            run1 = rhs.runs[eIx2];
+            run2 = rhs.runs[eIx2];
             ++eIx2;
         }
         if ( (run1 > 0) && (run2 > 0) ) // both non-gaps, consume min
