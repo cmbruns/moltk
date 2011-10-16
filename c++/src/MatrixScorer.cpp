@@ -242,8 +242,9 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
             size_t resTypeIndex = characterIndices[res.getOneLetterCode()];
             // loop over scoring matrix positions
             for (size_t m = 0; m < matrix.size(); ++m) {
-                pos.scoresByResidueTypeIndex[resTypeIndex] += matrix[resTypeIndex][m];
+                pos.scoresByResidueTypeIndex[m] += matrix[resTypeIndex][m];
             }
+            cerr << pos.scoresByResidueTypeIndex[17] << endl;
        }
     }
     return result;
@@ -346,6 +347,8 @@ units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosit
     {
         double resTypeCount = i->second;
         size_t resTypeIndex = i->first;
+        cerr << "query weight count = " << resTypeCount;
+        cerr << " index = " << resTypeIndex << endl;
         result += resTypeCount * lhs.scoresByResidueTypeIndex[resTypeIndex];
     }
     return result;

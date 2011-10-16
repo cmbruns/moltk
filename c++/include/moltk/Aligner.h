@@ -103,6 +103,13 @@ public:
         moltk::units::Information g; ///< G, best ungapped score through this cell
         moltk::units::Information e; ///< E, best score with gap in sequence 1
         moltk::units::Information f; ///< F, best score with gap in sequence 2
+
+        inline friend std::ostream& operator<<(std::ostream& os, const Cell& c)
+        {
+            os << "Cell(v=" << c.v << ", g=" << c.g;
+            os << ", e=" << c.e << ", f=" << c.f << ")";
+            return os;
+        }
     };
     typedef std::vector<Cell> DpRow;
     typedef std::vector<DpRow> DpTable;

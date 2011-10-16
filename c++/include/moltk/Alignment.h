@@ -29,6 +29,7 @@
 #include "moltk/Biosequence.h"
 #include "moltk/PdbStructure.h"
 #include "moltk/Real.h"
+#include "moltk/units.h"
 
 namespace moltk {
 
@@ -76,6 +77,20 @@ public:
         const_iterator begin() const;
         const_iterator end() const;
         void reverse();
+        bool operator==(const EString& rhs) const { return runs == rhs.runs; }
+        bool operator!=(const EString& rhs) const { return runs != rhs.runs; }
+        inline friend std::ostream& operator<<(std::ostream& os, const EString& e)
+        {
+            os << "<";
+            std::vector<int>::const_iterator i;
+            for (i = e.runs.begin(); i != e.runs.end(); ++i) 
+            {
+                if (i != e.runs.begin()) os << ", ";
+                os << *i;
+            }
+            os << ">";
+            return os;
+        }
 
     protected:
         std::vector<int> runs;
@@ -95,7 +110,7 @@ public:
 
 
 public:
-    Alignment() {}
+    Alignment() : m_score(0.0 * moltk::units::bit) {}
     /* implicit */ Alignment(const Biosequence&);
     /* implicit */ Alignment(const std::string&);
     /* implicit */ Alignment(const char*);
@@ -120,6 +135,12 @@ public:
     {
         return rows[index].eString;
     }
+    const moltk::units::Information& score() const {return m_score;}
+    Alignment& setScore(const moltk::units::Information& s) 
+    {
+        m_score = s;
+        return *this;
+    }
 
     inline friend std::ostream& operator<<(std::ostream& os, const Alignment& ali)
     {
@@ -132,6 +153,7 @@ protected:
     std::vector<Biosequence> sequences;
     std::vector<PdbStructure::Chain> structures;
     std::vector<Row> rows;
+    moltk::units::Information m_score;
 };
 
 } // namespace moltk
