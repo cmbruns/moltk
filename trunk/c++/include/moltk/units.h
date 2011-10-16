@@ -48,11 +48,10 @@ namespace moltk { namespace units {
         static void print_name(std::ostream& os) {os << unit_name(getInstance());}
         static void print_symbol(std::ostream& os) {os << unit_symbol(getInstance());}
         static const unit& getInstance() {
-            static unit* singleton_pointer = NULL;
-            if (! singleton_pointer) {
-                singleton_pointer = new unit();
-            }
-            return *singleton_pointer;
+            static std::auto_ptr<unit> singleton_pointer(NULL);
+            if (!singleton_pointer.get()) 
+                singleton_pointer.reset( new unit() );
+            return *singleton_pointer.get();
         }
     private:
         unit() {} // singleton provides no constructor
