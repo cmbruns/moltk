@@ -64,7 +64,11 @@ public:
     class Scorer
     {
     public:
-        Scorer() : endGapsFree(true) {}
+        Scorer() 
+            : endGapsFree(true) 
+            , defaultGapOpenPenalty(5.0 * moltk::units::bit)
+            , defaultGapExtensionPenalty(0.5 * moltk::units::bit)
+        {}
         virtual std::vector<QueryPosition*> createQueryPositions(const Alignment&) const = 0;
         virtual std::vector<TargetPosition*> createTargetPositions(const Alignment&) const = 0;
         bool getEndGapsFree() const {return endGapsFree;}
@@ -72,6 +76,8 @@ public:
 
     protected:
         bool endGapsFree;
+        Information defaultGapOpenPenalty;
+        Information defaultGapExtensionPenalty;
     };
 
     /// TracebackPointer is an Aligner::Cell attribute that helps reconstruct the final alignment.

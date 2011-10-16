@@ -155,17 +155,79 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Al
     return result;
 }
 
+// createTargetPositions() is used to precompute everything that can be precomputed
+// in O(n) time, so that alignment score can be computed as quickly as possible
+// durint the O(n^2) alignment phase.
 /* virtual */
 std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const Alignment& alignment) const
 {
+    // TODO - end gaps free
     std::vector<Aligner::TargetPosition*> result;
     const size_t ncol = alignment.getNumberOfColumns();
+    const size_t nseq = alignment.getNumberOfSequences();
     if (ncol <= 0) return result;
-    for (size_t col = 0; col < ncol; ++col)
+    // Initialize target positions with zero-scoring initial profile
+    for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
     {
         MatrixScorer::TargetPosition* pos = new MatrixScorer::TargetPosition();
-        assert(false); // TODO
+        pos->scoresByResidueTypeIndex.assign(matrix.size(), 0.0 * bit);
+        pos->m_gapOpenPenalty = 0.0 * bit;
+        pos->m_gapExtensionPenalty = 0.0 * bit;
         result.push_back(pos);
+    }
+    // Add contributions from each residue of each sequence
+    for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
+    {
+        // Special treatment for position zero, which corresponds to column -1
+        // end gaps free?
+        double gapFactor = 1.0;
+        if (getEndGapsFree())
+            gapFactor = 0.0; // Always starts at a left end gap
+        {
+            MatrixScorer::TargetPosition& pos = 
+                dynamic_cast<MatrixScorer::TargetPosition&>(*result[0]);
+            // leave score zero, but set gap penalties
+            pos.m_gapExtensionPenalty = gapFactor * defaultGapExtensionPenalty;
+            pos.m_gapOpenPenalty = gapFactor * defaultGapOpenPenalty;
+        }
+        int colIx = -1;
+        const BaseBiosequence& seq = alignment.getSequence(seqIx);
+        const Alignment::EString& eString = alignment.getEString(seqIx);
+        Alignment::EString::const_iterator e;
+        for (e = eString.begin(); e != eString.end(); ++e) 
+        {
+            size_t eResIx = *e;
+            if (eResIx >= 0) { // eResIx is an actual residue number
+                // Is this an end gap?
+                // This cannot be a left end-gap, but it could be
+                // a right end gap.
+                gapFactor = 1.0;
+                if (   getEndGapsFree() 
+                    && (eResIx == (seq.getNumberOfResidues() - 1) ) )
+                {
+                    gapFactor = 0.0;
+                }
+                assert(eResIx <= (seq.getNumberOfResidues() - 1));
+            }
+            ++colIx;
+            // Position[i+1] represents column i
+            MatrixScorer::TargetPosition& pos = 
+                dynamic_cast<MatrixScorer::TargetPosition&>(*result[colIx + 1]);
+            double gapFactor = 1.0; // the usual case
+            // Set gap penalties
+            pos.m_gapExtensionPenalty = gapFactor * defaultGapExtensionPenalty;
+            pos.m_gapOpenPenalty = gapFactor * defaultGapOpenPenalty;
+            if (eResIx < 0) // This is a gap position
+                continue; // gap - zero score
+            // Compute alignment score
+            const BaseBiosequence::BaseResidue& res = seq.getResidue(eResIx);
+            size_t resTypeIndex = characterIndices[res.getOneLetterCode()];
+            // loop over scoring matrix positions
+            for (size_t m = 0; m < matrix.size(); ++m) {
+                pos.scoresByResidueTypeIndex[resTypeIndex] += matrix[resTypeIndex][m];
+            }
+        }
+        assert(colIx == alignment.getNumberOfColumns() - 1);
     }
     return result;
 }
@@ -208,13 +270,24 @@ MatrixScorer::TargetPosition* MatrixScorer::TargetPosition::clone() const
 }
 
 /* virtual */
-units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosition& rhs) const
+units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosition& rhsParam) const
 {
+    const TargetPosition& lhs = *this;
     // TODO - use a more elegant mechanism for getting the other Position
-    const MatrixScorer::QueryPosition* rhsPtr = dynamic_cast<const MatrixScorer::QueryPosition*>(&rhs);
+    const MatrixScorer::QueryPosition* rhsPtr = dynamic_cast<const MatrixScorer::QueryPosition*>(&rhsParam);
     if (! rhsPtr)
         assert(false);  // TODO
-    Information result = rowPtr[rhsPtr->columnIndex] * scoreWeight * rhsPtr->scoreWeight;
+    const MatrixScorer::QueryPosition& rhs = *rhsPtr;
+    Information result = 0.0 * bit;
+    typedef MatrixScorer::QueryPosition::QueryWeights QueryWeights;
+    const QueryWeights& queryWeights = rhs.residueTypeIndexWeights;
+    QueryWeights::const_iterator i;
+    for (i = queryWeights.begin();  i != queryWeights.end(); ++i) 
+    {
+        double resTypeCount = i->second;
+        size_t resTypeIndex = i->first;
+        result += resTypeCount * lhs.scoresByResidueTypeIndex[resTypeIndex];
+    }
     return result;
 }
 
