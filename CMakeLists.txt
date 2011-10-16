@@ -39,6 +39,8 @@ if(WIN32)
 else()
     find_package(ZLIB REQUIRED)
 endif()
+include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIRS})
 
 file(GLOB_RECURSE MOLTK_HEADERS "c++/include/*.h")
 file(GLOB_RECURSE MOLTK_SOURCES "c++/src/*.cpp")
@@ -52,8 +54,6 @@ if(MOLTK_BUILD_PYTHON_MODULE)
     # Want shared library for boost python
     set(Boost_USE_STATIC_LIBS OFF)
     find_package(Boost COMPONENTS python REQUIRED)
-    include_directories(${Boost_INCLUDE_DIRS})
-    link_directories(${Boost_LIBRARY_DIRS})
     add_subdirectory(python)
 endif()
 

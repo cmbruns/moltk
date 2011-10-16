@@ -51,6 +51,7 @@ public:
         class const_iterator
         {
         public:
+            const_iterator() {}
             const_iterator(const std::vector<int>& runs
                     , int runIndex
                     , int positionIndex);
@@ -104,7 +105,21 @@ public:
     void loadString(const std::string& s);
     void printString(std::ostream& os) const;
     size_t getNumberOfColumns() const;
+    // getNumberOfSequences() includes both sequences and structures
+    size_t getNumberOfSequences() const {return rows.size();}
     Alignment align(const Alignment&, const EString&, const EString&) const;
+    const BaseBiosequence& getSequence(size_t index) const
+    {
+        const Row& row = rows[index];
+        if (row.list == SequenceList)
+            return sequences[row.listIndex];
+        else
+            return structures[row.listIndex];
+    }
+    const EString& getEString(size_t index) const
+    {
+        return rows[index].eString;
+    }
 
     inline friend std::ostream& operator<<(std::ostream& os, const Alignment& ali)
     {

@@ -44,6 +44,9 @@ public:
 
     static const MatrixScorer& getBlosum62Scorer();
 
+    // Query alignment appears after target alignment in combined alignment.
+    // Query alignment should be shorter than target alignment for small-memory optimizaion.
+    // Query alignment should have fewer/less-diverse sequences for scoring optimization.
     class QueryPosition : public Aligner::QueryPosition
     {
     public:
@@ -55,8 +58,8 @@ public:
         Information m_gapOpenPenalty;
         Information m_gapExtensionPenalty;
         // cache values for quick score lookup
-        double scoreWeight;
-        int columnIndex;
+        typedef std::vector< std::pair<size_t, double> > QueryWeights;
+        QueryWeights residueTypeIndexWeights;
     };
 
 
@@ -72,8 +75,7 @@ public:
         Information m_gapOpenPenalty;
         Information m_gapExtensionPenalty;
         // cache values for quick score lookup
-        double scoreWeight;
-        const Information* rowPtr;
+        std::vector<Information> scoresByResidueTypeIndex;
     };
 
 protected:
