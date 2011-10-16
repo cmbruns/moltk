@@ -130,6 +130,7 @@ public:
 public:
     // Finally, the actual Aligner methods
     Aligner();
+    virtual ~Aligner();
     // Alignment align(const Alignment&);
     Alignment align(const Alignment&, const Alignment&);
 
@@ -148,6 +149,8 @@ protected:
     void compute_cell_recurrence_freeF(int i, int j);
     void compute_cell_recurrence_freeEF(int i, int j);
     Alignment compute_traceback();
+    void clearPositions();
+    void clearScorer();
 
     // Information gapOpenPenalty; // positive penalty (will be subtracted at gaps)
     // Information gapExtensionPenalty; // positive penalty (will be subtracted on extension)

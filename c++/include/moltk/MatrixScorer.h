@@ -54,6 +54,12 @@ public:
         virtual QueryPosition* clone() const;
         virtual Information gapOpenPenalty() const {return m_gapOpenPenalty;}
         virtual Information gapExtensionPenalty() const {return m_gapExtensionPenalty;}
+        inline friend std::ostream& operator<<(std::ostream& os, const QueryPosition& p)
+        {
+            os << "op=" << p.gapOpenPenalty();
+            os << ", ep=" << p.gapExtensionPenalty();
+            return os;
+        }
 
         Information m_gapOpenPenalty;
         Information m_gapExtensionPenalty;
