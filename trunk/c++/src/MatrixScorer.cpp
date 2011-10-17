@@ -289,12 +289,14 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Al
        }
     }
 
+    /*
     for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
     {
         MatrixScorer::QueryPosition& pos = 
             dynamic_cast<MatrixScorer::QueryPosition&>(*result[col]);
         // cerr << "query position " << col << ": " << pos << endl;
     }
+    */
 
     return result;
 }
