@@ -1,0 +1,42 @@
+#summary Guidelines for MolTK code.
+
+= MolTK Coding Style Guidelines =
+
+Purpose: To provide a consistent look for both python and C++ MolTK code.
+
+
+= Details =
+
+== Indentation ==
+
+Use four space characters per indent.
+
+== Class names ==
+
+CapitalizedWords
+
+nouns
+
+== Macro, enum, and constant names ==
+
+CAPITALIZED_WITH_UNDERSCORES
+
+== Method and function names ==
+
+Use lower_case_with_underscores.
+
+Begin with a verb.
+
+== Attribute and member names ==
+
+lower_case_with_underscores
+
+adjective_noun or noun
+
+m_variable_name for private/protected members in C++
+
+b_variable_name for boolean values
+
+== Namespace, package, and module names ==
+
+lower case, single word, short names
