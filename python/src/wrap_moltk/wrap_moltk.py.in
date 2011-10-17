@@ -14,7 +14,7 @@ def wrap_moltk():
 
     # To force indexing_suite?
     vec_int = mb.class_('vector<int>')
-    vec_int.include();
+    # vec_int.include();
     ns_moltk = mb.namespace('moltk')
     ns_moltk.include()
     # Avoid exposing non-public members

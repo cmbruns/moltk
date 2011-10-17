@@ -32,7 +32,7 @@
 
 using namespace moltk;
 using namespace moltk::units;
-template class std::vector<int>;
+// template class std::vector<int>;
 
 namespace pyplusplus { namespace aliases {
 
