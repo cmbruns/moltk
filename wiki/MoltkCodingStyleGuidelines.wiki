@@ -9,7 +9,7 @@ Purpose: To provide a consistent look for both python and C++ MolTK code.
 
 == Indentation ==
 
-Use four space characters per indent.
+Use four space characters per indent.  No tabs.
 
 == Class names ==
 
