@@ -13,7 +13,7 @@ Use four space characters per indent.
 
 == Class names ==
 
-Use CapitalizedWords
+Use !CapitalizedWords
 
 nouns
 
