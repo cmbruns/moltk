@@ -132,10 +132,10 @@ namespace moltk { namespace units {
         // multiplication
         // quantity = quantity * real
         this_type operator*(Real rhs) const {
-            return moltk::units::this_type(value * rhs);
+            return this_type(value * rhs);
         }
 
-        this_type operator*=(Real rhs) const {
+        this_type operator*=(Real rhs) {
             value *= rhs;
             return *this;
         }
@@ -145,29 +145,18 @@ namespace moltk { namespace units {
             return this_type(lhs * rhs.value);
         }
 
-        // quantity = value * unit, e.g. noseLength = 5.6 * centimeter;
-        inline friend this_type operator*(const Y& lhs, const U& rhs) 
-        {
-            return this_type(lhs);
-        }
-
         // division
         this_type operator/(Real rhs) const {
-            return moltk::units::this_type(value / rhs);
+            return this_type(value / rhs);
         }
 
-        this_type operator/=(Real rhs) const {
+        this_type operator/=(Real rhs) {
             value /= rhs;
             return *this;
         }
 
         // value = quantity / unit
-        const Y& operator/(const U& rhs) const
-        {
-            return value;
-        }
-
-        Y& operator/(const U& rhs)
+        Y operator/(const U& rhs) const
         {
             return value;
         }
@@ -223,6 +212,15 @@ namespace moltk { namespace units {
     protected:
         explicit quantity(const Y& v) : value(v) {}
     };
+
+    // GCCXML on Windows does not like real * unit to be defined
+    // inline friend within quantity; so define it here.
+    // quantity = value * unit, e.g. noseLength = 5.6 * centimeter;
+    template<class Y, class D>
+    quantity<unit<D>, Y> operator*(const Y& lhs, const unit<D>& rhs) 
+    {
+        return quantity<unit<D>, Y>(lhs, rhs);
+    }
 
     typedef quantity<bit_t> Information;
     typedef quantity<nanometer_t> Length;

@@ -32,6 +32,7 @@
 
 using namespace moltk;
 using namespace moltk::units;
+template class std::vector<int>;
 
 namespace pyplusplus { namespace aliases {
 
@@ -40,6 +41,9 @@ namespace pyplusplus { namespace aliases {
     typedef quantity<bit_t> Information;
     typedef unit<length_dimension> nanometer_t;
     typedef quantity<nanometer_t> Length;
+    typedef std::vector<int> std_vector_int;
+    typedef std::vector<Aligner::QueryPosition*> QueryPositionList;
+    typedef std::vector<Aligner::TargetPosition*> TargetPositionList;
 
 }} // namespace pyplusplus::aliases
 

@@ -8,48 +8,6 @@ namespace bp = boost::python;
 
 struct Biosequence_wrapper : moltk::Biosequence, bp::wrapper< moltk::Biosequence > {
 
-    struct Residue_wrapper : moltk::Biosequence::Residue, bp::wrapper< moltk::Biosequence::Residue > {
-    
-        Residue_wrapper(char oneLetterCodeParam, int residueNumberParam )
-        : moltk::Biosequence::Residue( oneLetterCodeParam, residueNumberParam )
-          , bp::wrapper< moltk::Biosequence::Residue >(){
-            // constructor
-        
-        }
-    
-        Residue_wrapper(::moltk::Biosequence::Residue const & rhs )
-        : moltk::Biosequence::Residue( boost::ref(rhs) )
-          , bp::wrapper< moltk::Biosequence::Residue >(){
-            // copy constructor
-        
-        }
-    
-        virtual char getOneLetterCode(  ) const  {
-            if( bp::override func_getOneLetterCode = this->get_override( "getOneLetterCode" ) )
-                return func_getOneLetterCode(  );
-            else{
-                return this->moltk::Biosequence::Residue::getOneLetterCode(  );
-            }
-        }
-        
-        char default_getOneLetterCode(  ) const  {
-            return moltk::Biosequence::Residue::getOneLetterCode( );
-        }
-    
-        virtual int getResidueNumber(  ) const  {
-            if( bp::override func_getResidueNumber = this->get_override( "getResidueNumber" ) )
-                return func_getResidueNumber(  );
-            else{
-                return this->moltk::Biosequence::Residue::getResidueNumber(  );
-            }
-        }
-        
-        int default_getResidueNumber(  ) const  {
-            return moltk::Biosequence::Residue::getResidueNumber( );
-        }
-    
-    };
-
     Biosequence_wrapper( )
     : moltk::Biosequence( )
       , bp::wrapper< moltk::Biosequence >(){
@@ -57,15 +15,15 @@ struct Biosequence_wrapper : moltk::Biosequence, bp::wrapper< moltk::Biosequence
     
     }
 
-    Biosequence_wrapper(::std::string const & str )
-    : moltk::Biosequence( str )
+    Biosequence_wrapper(::std::string const & sequence, ::std::string const & description="" )
+    : moltk::Biosequence( sequence, description )
       , bp::wrapper< moltk::Biosequence >(){
         // constructor
     
     }
 
-    Biosequence_wrapper(char const * str )
-    : moltk::Biosequence( str )
+    Biosequence_wrapper(char const * sequence, ::std::string const & description="" )
+    : moltk::Biosequence( sequence, description )
       , bp::wrapper< moltk::Biosequence >(){
         // constructor
     
@@ -110,57 +68,11 @@ void register_Biosequence_class(){
         typedef bp::class_< Biosequence_wrapper, bp::bases< moltk::BaseBiosequence > > Biosequence_exposer_t;
         Biosequence_exposer_t Biosequence_exposer = Biosequence_exposer_t( "Biosequence", bp::init< >() );
         bp::scope Biosequence_scope( Biosequence_exposer );
-        bp::class_< Biosequence_wrapper::Residue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "Residue", bp::init< char, int >(( bp::arg("oneLetterCodeParam"), bp::arg("residueNumberParam") )) )    
-            .def( bp::init< moltk::Biosequence::Residue const & >(( bp::arg("rhs") )) )    
-            .def( 
-                "getOneLetterCode"
-                , (char ( ::moltk::Biosequence::Residue::* )(  ) const)(&::moltk::Biosequence::Residue::getOneLetterCode)
-                , (char ( Biosequence_wrapper::Residue_wrapper::* )(  ) const)(&Biosequence_wrapper::Residue_wrapper::default_getOneLetterCode) )    
-            .def( 
-                "getResidueNumber"
-                , (int ( ::moltk::Biosequence::Residue::* )(  ) const)(&::moltk::Biosequence::Residue::getResidueNumber)
-                , (int ( Biosequence_wrapper::Residue_wrapper::* )(  ) const)(&Biosequence_wrapper::Residue_wrapper::default_getResidueNumber) );
-        Biosequence_exposer.def( bp::init< std::string const & >(( bp::arg("str") )) );
+        Biosequence_exposer.def( bp::init< std::string const &, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" )) );
         bp::implicitly_convertible< std::string const &, moltk::Biosequence >();
-        Biosequence_exposer.def( bp::init< char const * >(( bp::arg("str") )) );
+        Biosequence_exposer.def( bp::init< char const *, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" )) );
         bp::implicitly_convertible< char const *, moltk::Biosequence >();
         Biosequence_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("rhs") )) );
-        { //::moltk::Biosequence::begin
-        
-            typedef ::std::_Vector_iterator< moltk::Biosequence::Residue, std::allocator< moltk::Biosequence::Residue > > ( ::moltk::Biosequence::*begin_function_type )(  ) ;
-            
-            Biosequence_exposer.def( 
-                "begin"
-                , begin_function_type( &::moltk::Biosequence::begin ) );
-        
-        }
-        { //::moltk::Biosequence::begin
-        
-            typedef ::std::_Vector_const_iterator< moltk::Biosequence::Residue, std::allocator< moltk::Biosequence::Residue > > ( ::moltk::Biosequence::*begin_function_type )(  ) const;
-            
-            Biosequence_exposer.def( 
-                "begin"
-                , begin_function_type( &::moltk::Biosequence::begin ) );
-        
-        }
-        { //::moltk::Biosequence::end
-        
-            typedef ::std::_Vector_iterator< moltk::Biosequence::Residue, std::allocator< moltk::Biosequence::Residue > > ( ::moltk::Biosequence::*end_function_type )(  ) ;
-            
-            Biosequence_exposer.def( 
-                "end"
-                , end_function_type( &::moltk::Biosequence::end ) );
-        
-        }
-        { //::moltk::Biosequence::end
-        
-            typedef ::std::_Vector_const_iterator< moltk::Biosequence::Residue, std::allocator< moltk::Biosequence::Residue > > ( ::moltk::Biosequence::*end_function_type )(  ) const;
-            
-            Biosequence_exposer.def( 
-                "end"
-                , end_function_type( &::moltk::Biosequence::end ) );
-        
-        }
         { //::moltk::Biosequence::getNumberOfResidues
         
             typedef ::size_t ( ::moltk::Biosequence::*getNumberOfResidues_function_type )(  ) const;
@@ -174,44 +86,33 @@ void register_Biosequence_class(){
         }
         { //::moltk::Biosequence::getResidue
         
-            typedef ::moltk::BaseBiosequence::BaseResidue const & ( ::moltk::Biosequence::*getResidue_function_type )( ::size_t ) const;
+            typedef ::moltk::BiosequenceResidue const & ( ::moltk::Biosequence::*getResidue_function_type )( ::size_t ) const;
             
             Biosequence_exposer.def( 
                 "getResidue"
                 , getResidue_function_type(&::moltk::Biosequence::getResidue)
-                , ( bp::arg("index") )
-                , bp::return_value_policy< bp::copy_const_reference >() );
-        
-        }
-        { //::moltk::Biosequence::operator[]
-        
-            typedef ::moltk::Biosequence::Residue const & ( ::moltk::Biosequence::*__getitem___function_type )( int ) const;
-            
-            Biosequence_exposer.def( 
-                "__getitem__"
-                , __getitem___function_type( &::moltk::Biosequence::operator[] )
                 , ( bp::arg("ix") )
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
-        { //::moltk::Biosequence::operator[]
+        { //::moltk::Biosequence::loadStream
         
-            typedef ::moltk::Biosequence::Residue & ( ::moltk::Biosequence::*__getitem___function_type )( int ) ;
+            typedef void ( ::moltk::Biosequence::*loadStream_function_type )( ::std::istream & ) ;
             
             Biosequence_exposer.def( 
-                "__getitem__"
-                , __getitem___function_type( &::moltk::Biosequence::operator[] )
-                , ( bp::arg("ix") )
-                , bp::return_internal_reference< >() );
+                "loadStream"
+                , loadStream_function_type( &::moltk::Biosequence::loadStream )
+                , ( bp::arg("is") ) );
         
         }
-        { //::moltk::Biosequence::size
+        { //::moltk::Biosequence::printString
         
-            typedef ::size_t ( ::moltk::Biosequence::*size_function_type )(  ) const;
+            typedef void ( ::moltk::Biosequence::*printString_function_type )( ::std::ostream & ) const;
             
             Biosequence_exposer.def( 
-                "size"
-                , size_function_type( &::moltk::Biosequence::size ) );
+                "printString"
+                , printString_function_type( &::moltk::Biosequence::printString )
+                , ( bp::arg("os") ) );
         
         }
         { //::moltk::BaseBiosequence::print_to_stream
@@ -226,6 +127,7 @@ void register_Biosequence_class(){
                 , ( bp::arg("os") ) );
         
         }
+        Biosequence_exposer.def( bp::self_ns::str( bp::self ) );
     }
 
 }

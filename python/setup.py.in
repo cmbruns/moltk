@@ -63,6 +63,11 @@ def do_setup():
     boost_lib_dir, boost_python_library = get_lib_from_env_var("BOOST_PYTHON_LIBRARY")
     boost_iostreams_library = get_lib_from_env_var("BOOST_IOSTREAMS_LIBRARY")[1]
     
+    include_dirs = ["./c++/include", 
+                    "./python/src/wrap_moltk",
+                    boost_include_dir,
+                   ]
+
     CFLAGS = []
     moltk_sources = glob.glob(os.path.join('c++','src','*.cpp'))
     
@@ -72,13 +77,10 @@ def do_setup():
         # And avoid strange MSVC header errors, to match gccxml args (-D"_HAS_TR1=0")
         CFLAGS.append('-D"_HAS_TR1=0"')
         moltk_sources.extend(glob.glob(os.path.join('python','src','wrap_moltk','generated_code_msvc','*.cpp')))
+        include_dirs.append("./python/src/wrap_moltk/generated_code_msvc")
     else:
         moltk_sources.extend(glob.glob(os.path.join('python','src','wrap_moltk','generated_code_gcc','*.cpp')))
-    
-    include_dirs = ["./c++/include", 
-                    "./python/src/wrap_moltk",
-                    boost_include_dir,
-                   ]
+        include_dirs.append("./python/src/wrap_moltk/generated_code_gcc")
     
     library_dirs = [boost_lib_dir,]
     

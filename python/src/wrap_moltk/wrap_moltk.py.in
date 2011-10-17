@@ -12,6 +12,9 @@ def wrap_moltk():
         , indexing_suite_version = 2
         , define_symbols = ["_HAS_TR1=0"])
 
+    # To force indexing_suite?
+    vec_int = mb.class_('vector<int>')
+    vec_int.include();
     ns_moltk = mb.namespace('moltk')
     ns_moltk.include()
     # Avoid exposing non-public members
@@ -19,21 +22,18 @@ def wrap_moltk():
         fn.exclude()
     for fn in mb.constructors(lambda f: f.access_type != declarations.ACCESS_TYPES.PUBLIC):
         fn.exclude()
-    ns_moltk.class_('Aligner').class_('Position').member_function('clone').call_policies = \
-        return_value_policy(manage_new_object)
-    ns_moltk.class_('Aligner').class_('Scorer').member_function('createPosition').call_policies = \
-        return_value_policy(manage_new_object)
-    # ns_moltk.class_('Information').member_function('print').exclude()
-    # Use boost::python mechanism for wrapping ostream operator<<()
-    # mb.class_('Printable').add_registration_code(
-    #     'def( bp::self_ns::str(bp::self) )')
-    # mb.class_('Alignment').add_registration_code(
-    #     'def( bp::self_ns::str(bp::self) )')
-    aligner = mb.class_('Aligner')
+    aligner = ns_moltk.class_('Aligner')
+    for cls_name in ['QueryPosition', 'TargetPosition']:
+        aligner.class_(cls_name).member_function('clone').call_policies = \
+            return_value_policy(manage_new_object)
     aligner.add_property('endGapsFree', 
          fget=aligner.member_functions('getEndGapsFree')[1],
          fset=aligner.member_functions('setEndGapsFree')[1])
-    # ns_moltk.free_functions('unit_name').exclude()
+    alignment = ns_moltk.class_('Alignment')
+    for fn_name in ['appendSequence', 'setScore']:
+         alignment.member_function(fn_name).call_policies = return_self()
+    estring = alignment.class_('EString')
+    estring.member_function('appendRun').call_policies = return_self()
 
     extractor = doxygen_doc_extractor()
     mb.build_code_creator(module_name = '_moltk', doc_extractor = extractor)

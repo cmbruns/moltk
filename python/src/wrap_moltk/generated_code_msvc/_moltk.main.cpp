@@ -2,6 +2,10 @@
 
 #include "boost/python.hpp"
 
+#include "indexing_suite/container_suite.hpp"
+
+#include "indexing_suite/vector.hpp"
+
 #include "wrap_moltk.h"
 
 #include "generated_code_msvc/_moltk_free_functions.pypp.hpp"
@@ -16,6 +20,8 @@
 
 #include "generated_code_msvc/biosequence.pypp.hpp"
 
+#include "generated_code_msvc/biosequenceresidue.pypp.hpp"
+
 #include "generated_code_msvc/bit_t.pypp.hpp"
 
 #include "generated_code_msvc/dimension.pypp.hpp"
@@ -28,16 +34,26 @@
 
 #include "generated_code_msvc/nanometer_t.pypp.hpp"
 
+#include "generated_code_msvc/pdbstructure.pypp.hpp"
+
 #include "generated_code_msvc/printable.pypp.hpp"
 
-#include "generated_code_msvc/structure.pypp.hpp"
+#include "generated_code_msvc/querypositionlist.pypp.hpp"
+
+#include "generated_code_msvc/std_vector_int.pypp.hpp"
+
+#include "generated_code_msvc/targetpositionlist.pypp.hpp"
 
 namespace bp = boost::python;
 
 BOOST_PYTHON_MODULE(_moltk){
-    register_Aligner_class();
+    register_TargetPositionList_class();
 
-    register_Printable_class();
+    register_QueryPositionList_class();
+
+    register_std_vector_int_class();
+
+    register_Aligner_class();
 
     register_Alignment_class();
 
@@ -45,7 +61,11 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_Biosequence_class();
 
-    register_Structure_class();
+    register_BiosequenceResidue_class();
+
+    register_PdbStructure_class();
+
+    register_Printable_class();
 
     register_dimension_class();
 

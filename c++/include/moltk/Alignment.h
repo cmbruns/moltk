@@ -114,7 +114,7 @@ public:
     /* implicit */ Alignment(const Biosequence&);
     /* implicit */ Alignment(const std::string&);
     /* implicit */ Alignment(const char*);
-    explicit Alignment(std::istream& is);
+    // explicit Alignment(std::istream& is);
     ~Alignment() {}
     Alignment& appendSequence(const Biosequence& seq);
     void loadString(const std::string& s);
