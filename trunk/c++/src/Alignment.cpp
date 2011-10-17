@@ -61,15 +61,8 @@ size_t Alignment::getNumberOfColumns() const
 
 void Alignment::loadString(const std::string& s)
 {
-    stringstream ss(stringstream::in | stringstream::out);
-    ss << s;
-    Biosequence b;
-    while (ss >> b) {
-        if (b.size() == 0)
-            break;
-        appendSequence(b);
-        b = Biosequence(); // clear
-    }
+    Biosequence b(s);
+    appendSequence(b);
 }
 
 Alignment& Alignment::appendSequence(const Biosequence& seq)
@@ -111,10 +104,10 @@ void moltk::Alignment::printString(std::ostream& os) const
 Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString& e2) const
 {
     const Alignment& a1 = *this;
-    cerr << *this;
-    cerr << a2;
-    cerr << e1 << endl;
-    cerr << e2 << endl;
+    // cerr << *this;
+    // cerr << a2;
+    // cerr << e1 << endl;
+    // cerr << e2 << endl;
     Alignment result;
     // Add sequences from first alignment
     for (size_t r = 0; r < rows.size(); ++r)
@@ -219,7 +212,7 @@ Alignment::EString::EString()
 
 Alignment::EString Alignment::EString::operator*(const EString& rhs) const
 {
-    cerr << "EString::operator*()" << *this << rhs << endl;
+    // cerr << "EString::operator*()" << *this << rhs << endl;
     const EString & lhs = *this;
     assert(lhs.ungappedLength() == rhs.ungappedLength());
     EString result;
@@ -313,8 +306,9 @@ Alignment::EString::const_iterator Alignment::EString::end() const
 
 void Alignment::EString::reverse()
 {
-    for (size_t i = 0; i < runs.size(); ++i)
-        std::reverse(runs.begin(), runs.end());
+    // cout << "forward" << *this;
+    std::reverse(runs.begin(), runs.end());
+    // cout << "reverse" << *this << endl;
 }
 
 

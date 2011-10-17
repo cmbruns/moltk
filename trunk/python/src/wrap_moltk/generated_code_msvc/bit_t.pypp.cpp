@@ -23,6 +23,7 @@ void register_bit_t_class(){
             , ( bp::arg("os") ) )    
         .staticmethod( "getInstance" )    
         .staticmethod( "print_name" )    
-        .staticmethod( "print_symbol" );
+        .staticmethod( "print_symbol" )    
+        .def( bp::other< double >() * bp::self );
 
 }

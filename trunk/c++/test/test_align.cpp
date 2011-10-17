@@ -23,29 +23,37 @@
 #define BOOST_TEST_MODULE AlignerUnitTest
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/test/debug.hpp>
 #include "moltk.h"
 #include <iostream>
 #include <cassert>
 
+
 using namespace std;
 using namespace moltk;
 using moltk::units::bit;
+using namespace boost;
 
 BOOST_AUTO_TEST_CASE( test_aligner )
 {
+    boost::debug::detect_memory_leaks(false);
+    // boost::debug::break_memory_alloc(566);
     Aligner aligner;
     aligner.setEndGapsFree(true);
     Alignment a1 = aligner.align("W", "W");
+    cout << a1 << a1.score() << endl;
     BOOST_CHECK_EQUAL(a1.score(), 5.5 * bit);
 
-    /*
     aligner.setEndGapsFree(false);
-    cout << aligner.align("QS", "SD");
+    Alignment a = aligner.align("QS", "SD");
+    cout << a << a.score() << endl;
+    aligner.setEndGapsFree(true);
+    a = aligner.align("QS", "SD");
+    cout << a << a.score() << endl;
 
     Biosequence seq1("AACDEF");
     Biosequence seq2("ACEFG");
-    Alignment alignment = aligner.align(seq1, seq2);
-    cout << alignment;
-    */
+    a = aligner.align(seq1, seq2);
+    cout << a << a.score() << endl;
 }
 

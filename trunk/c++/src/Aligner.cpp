@@ -63,10 +63,19 @@ Aligner::TracebackPointer Aligner::Cell::compute_traceback_pointer() const
 /////////////////////
 
 Aligner::Aligner()
+    : scorer(NULL)
 {init();}
+
+/* virtual */
+Aligner::~Aligner()
+{
+    clearPositions();
+    clearScorer();
+}
 
 void Aligner::init()
 {
+    clearScorer();
     scorer = new MatrixScorer(MatrixScorer::getBlosum62Scorer());
     // gapOpenPenalty = 1.0 * bit; 
     // gapExtensionPenalty = 0.5 * bit;
@@ -76,8 +85,31 @@ void Aligner::init()
     n = seq2.size() - 1;
 }
 
+void Aligner::clearScorer()
+{
+    delete scorer;
+    scorer = NULL;
+}
+
+void Aligner::clearPositions() 
+{
+    for (size_t i = 0; i < seq1.size(); ++i) 
+    {
+        delete seq1[i];
+        seq1[i] = NULL;
+    }
+    seq1.clear();
+    for (size_t i = 0; i < seq2.size(); ++i) 
+    {
+        delete seq2[i];
+        seq2[i] = NULL;
+    }
+    seq2.clear();
+}
+
 Alignment Aligner::align(const Alignment& s1, const Alignment& s2)
 {
+    clearPositions();
     targetAlignment = s1;
     queryAlignment = s2;
     // Fill seq1, seq2
@@ -123,8 +155,15 @@ void Aligner::initialize_dp_row(size_t rowIndex, DpRow& row)
         -p1.gapOpenPenalty() - ((double)i * p1.gapExtensionPenalty());
 
     // ...but the top row gets full treatment
-    if (rowIndex == 0) {
-        for (size_t j = 0; j < row.size(); ++j)
+    if (rowIndex == 0) 
+    {
+        // upper left corner gets special treatment
+        Cell& cornerCell = row[0];
+        cornerCell.e = -p1.gapOpenPenalty();
+        cornerCell.f = -p2.gapOpenPenalty();
+        cornerCell.g = 0.0 * bit;
+        cornerCell.v = 0.0 * bit;
+        for (size_t j = 1; j < row.size(); ++j)
         {
             Cell& cell = row[j];
             cell.e = numeric_limits<Real>::infinity() * bit;
@@ -143,7 +182,7 @@ void Aligner::compute_cell_recurrence(int i, int j)
     const Cell& up = dpTable[i-1][j];
     const Cell& upLeft = dpTable[i-1][j-1];
     // This recurrence comes from Gusfield chapter 11.
-    cerr << "score " << i << ", " << j << " = " << p1.score(p2) << endl;
+    //  << "score " << i << ", " << j << " = " << p1.score(p2) << endl;
     cell.g = upLeft.v + p1.score(p2); // score...
     cell.e = std::max(left.e, 
                       (Information)(left.v - p1.gapOpenPenalty()))
@@ -152,7 +191,7 @@ void Aligner::compute_cell_recurrence(int i, int j)
                       (Information)(up.v - p2.gapOpenPenalty()))
                  - p2.gapExtensionPenalty();
     cell.v = cell.compute_v();
-    cerr << cell << endl;
+    //  << cell << endl;
 }
 
 void Aligner::compute_recurrence()
@@ -170,7 +209,7 @@ Alignment Aligner::compute_traceback()
     int i = m;
     int j = n;
     Information alignmentScore = dpTable[i][j].v;
-    cout << "final alignment score = " << dpTable[i][j].v << endl;
+    // cout << "final alignment score = " << dpTable[i][j].v << endl;
     TracebackPointer tracebackPointer = dpTable[i][j].compute_traceback_pointer();
     while( (i > 0) || (j > 0) )
     {
@@ -181,16 +220,19 @@ Alignment Aligner::compute_traceback()
             --i; --j;
             eString1.appendRun(1);
             eString2.appendRun(1);
+            // cout << "upleft" << endl;
             break;
         case TRACEBACK_UP:
             --i;
             eString1.appendRun(1);
             eString2.appendRun(-1);
+            // cout << "up" << endl;
             break;
         case TRACEBACK_LEFT:
             --j;
             eString1.appendRun(-1);
             eString2.appendRun(1);
+            // cout << "left" << endl;
             break;
         default:
             cerr << "Traceback error!" << endl;
@@ -204,6 +246,8 @@ Alignment Aligner::compute_traceback()
     // OK, the sequences are actually backwards here
     eString1.reverse();
     eString2.reverse();
+    // cerr << eString1 << eString2 << endl;
+    // cerr << targetAlignment << queryAlignment;
     Alignment result = targetAlignment.align(queryAlignment, eString1, eString2);
     result.setScore(result.score() + alignmentScore);
     return result;

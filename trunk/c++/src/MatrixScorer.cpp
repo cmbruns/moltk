@@ -73,8 +73,7 @@ const MatrixScorer& MatrixScorer::getBlosum62Scorer()
 /* explicit */
 MatrixScorer::MatrixScorer(const std::string& matrixString) 
 {
-    stringstream ss (stringstream::in | stringstream::out);
-    ss << blosum62Text;
+    istringstream ss(blosum62Text);
     ss >> *this;
 }
 
@@ -185,7 +184,7 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
                 // a right end gap.
                 gapFactor = 1.0;
                 if (   getEndGapsFree() 
-                    && (eResIx == (seq.getNumberOfResidues() - 1) ) )
+                    && (eResIx >= (seq.getNumberOfResidues() - 1) ) )
                 {
                     gapFactor = 0.0;
                 }
@@ -195,7 +194,6 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
             // Position[i+1] represents column i
             POS& pos = 
                 dynamic_cast<POS&>(*result[colIx + 1]);
-            double gapFactor = 1.0; // the usual case
             // Set gap penalties
             pos.m_gapExtensionPenalty = gapFactor * defaultGapExtensionPenalty;
             pos.m_gapOpenPenalty = gapFactor * defaultGapOpenPenalty;
@@ -244,7 +242,7 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
             for (size_t m = 0; m < matrix.size(); ++m) {
                 pos.scoresByResidueTypeIndex[m] += matrix[resTypeIndex][m];
             }
-            cerr << pos.scoresByResidueTypeIndex[17] << endl;
+            // cerr << pos.scoresByResidueTypeIndex[17] << endl;
        }
     }
     return result;
@@ -290,6 +288,14 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Al
             pos.residueTypeIndexWeights[qmap[resTypeIndex]].second += 1.0;
        }
     }
+
+    for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
+    {
+        MatrixScorer::QueryPosition& pos = 
+            dynamic_cast<MatrixScorer::QueryPosition&>(*result[col]);
+        // cerr << "query position " << col << ": " << pos << endl;
+    }
+
     return result;
 }
 
@@ -347,8 +353,8 @@ units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosit
     {
         double resTypeCount = i->second;
         size_t resTypeIndex = i->first;
-        cerr << "query weight count = " << resTypeCount;
-        cerr << " index = " << resTypeIndex << endl;
+        // cerr << "query weight count = " << resTypeCount;
+        // cerr << " index = " << resTypeIndex << endl;
         result += resTypeCount * lhs.scoresByResidueTypeIndex[resTypeIndex];
     }
     return result;

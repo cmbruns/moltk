@@ -6,43 +6,200 @@
 
 namespace bp = boost::python;
 
-struct Alignment_wrapper : moltk::Alignment, bp::wrapper< moltk::Alignment > {
-
-    Alignment_wrapper(moltk::Alignment const & arg )
-    : moltk::Alignment( arg )
-      , bp::wrapper< moltk::Alignment >(){
-        // copy constructor
-        
-    }
-
-    Alignment_wrapper()
-    : moltk::Alignment()
-      , bp::wrapper< moltk::Alignment >(){
-        // null constructor
-        
-    }
-
-    virtual void print_to_stream( ::std::ostream & os ) const  {
-        if( bp::override func_print_to_stream = this->get_override( "print_to_stream" ) )
-            func_print_to_stream( boost::ref(os) );
-        else{
-            this->moltk::Alignment::print_to_stream( boost::ref(os) );
-        }
-    }
-    
-    void default_print_to_stream( ::std::ostream & os ) const  {
-        moltk::Alignment::print_to_stream( boost::ref(os) );
-    }
-
-};
-
 void register_Alignment_class(){
 
-    bp::class_< Alignment_wrapper, bp::bases< moltk::Printable > >( "Alignment" )    
-        .def( 
-            "print_to_stream"
-            , (void ( ::moltk::Alignment::* )( ::std::ostream & ) const)(&::moltk::Alignment::print_to_stream)
-            , (void ( Alignment_wrapper::* )( ::std::ostream & ) const)(&Alignment_wrapper::default_print_to_stream)
-            , ( bp::arg("os") ) );
+    { //::moltk::Alignment
+        typedef bp::class_< moltk::Alignment > Alignment_exposer_t;
+        Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", bp::init< >() );
+        bp::scope Alignment_scope( Alignment_exposer );
+        bp::enum_< moltk::Alignment::List>("List")
+            .value("SequenceList", moltk::Alignment::SequenceList)
+            .value("StructureList", moltk::Alignment::StructureList)
+            .export_values()
+            ;
+        { //::moltk::Alignment::EString
+            typedef bp::class_< moltk::Alignment::EString > EString_exposer_t;
+            EString_exposer_t EString_exposer = EString_exposer_t( "EString", bp::init< >() );
+            bp::scope EString_scope( EString_exposer );
+            bp::class_< moltk::Alignment::EString::const_iterator >( "const_iterator", bp::init< >() )    
+                .def( bp::init< std::vector< int > const &, int, int >(( bp::arg("runs"), bp::arg("runIndex"), bp::arg("positionIndex") )) )    
+                .def( bp::self != bp::self )    
+                .def( bp::self == bp::self );
+            { //::moltk::Alignment::EString::appendRun
+            
+                typedef ::moltk::Alignment::EString & ( ::moltk::Alignment::EString::*appendRun_function_type )( int ) ;
+                
+                EString_exposer.def( 
+                    "appendRun"
+                    , appendRun_function_type( &::moltk::Alignment::EString::appendRun )
+                    , ( bp::arg("run") )
+                    , bp::return_self< >() );
+            
+            }
+            { //::moltk::Alignment::EString::begin
+            
+                typedef ::moltk::Alignment::EString::const_iterator ( ::moltk::Alignment::EString::*begin_function_type )(  ) const;
+                
+                EString_exposer.def( 
+                    "begin"
+                    , begin_function_type( &::moltk::Alignment::EString::begin ) );
+            
+            }
+            { //::moltk::Alignment::EString::end
+            
+                typedef ::moltk::Alignment::EString::const_iterator ( ::moltk::Alignment::EString::*end_function_type )(  ) const;
+                
+                EString_exposer.def( 
+                    "end"
+                    , end_function_type( &::moltk::Alignment::EString::end ) );
+            
+            }
+            EString_exposer.def( bp::self != bp::self );
+            EString_exposer.def( bp::self * bp::self );
+            EString_exposer.def( bp::self == bp::self );
+            { //::moltk::Alignment::EString::reverse
+            
+                typedef void ( ::moltk::Alignment::EString::*reverse_function_type )(  ) ;
+                
+                EString_exposer.def( 
+                    "reverse"
+                    , reverse_function_type( &::moltk::Alignment::EString::reverse ) );
+            
+            }
+            { //::moltk::Alignment::EString::totalLength
+            
+                typedef ::size_t ( ::moltk::Alignment::EString::*totalLength_function_type )(  ) const;
+                
+                EString_exposer.def( 
+                    "totalLength"
+                    , totalLength_function_type( &::moltk::Alignment::EString::totalLength ) );
+            
+            }
+            { //::moltk::Alignment::EString::ungappedLength
+            
+                typedef ::size_t ( ::moltk::Alignment::EString::*ungappedLength_function_type )(  ) const;
+                
+                EString_exposer.def( 
+                    "ungappedLength"
+                    , ungappedLength_function_type( &::moltk::Alignment::EString::ungappedLength ) );
+            
+            }
+            EString_exposer.def( bp::self_ns::str( bp::self ) );
+        }
+        bp::class_< moltk::Alignment::Row >( "Row" )    
+            .def_readwrite( "eString", &moltk::Alignment::Row::eString )    
+            .def_readwrite( "list", &moltk::Alignment::Row::list )    
+            .def_readwrite( "listIndex", &moltk::Alignment::Row::listIndex )    
+            .def_readwrite( "sequenceWeight", &moltk::Alignment::Row::sequenceWeight );
+        Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("arg0") )) );
+        bp::implicitly_convertible< moltk::Biosequence const &, moltk::Alignment >();
+        Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("arg0") )) );
+        bp::implicitly_convertible< std::string const &, moltk::Alignment >();
+        Alignment_exposer.def( bp::init< char const * >(( bp::arg("arg0") )) );
+        bp::implicitly_convertible< char const *, moltk::Alignment >();
+        { //::moltk::Alignment::align
+        
+            typedef ::moltk::Alignment ( ::moltk::Alignment::*align_function_type )( ::moltk::Alignment const &,::moltk::Alignment::EString const &,::moltk::Alignment::EString const & ) const;
+            
+            Alignment_exposer.def( 
+                "align"
+                , align_function_type( &::moltk::Alignment::align )
+                , ( bp::arg("arg0"), bp::arg("arg1"), bp::arg("arg2") ) );
+        
+        }
+        { //::moltk::Alignment::appendSequence
+        
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*appendSequence_function_type )( ::moltk::Biosequence const & ) ;
+            
+            Alignment_exposer.def( 
+                "appendSequence"
+                , appendSequence_function_type( &::moltk::Alignment::appendSequence )
+                , ( bp::arg("seq") )
+                , bp::return_self< >() );
+        
+        }
+        { //::moltk::Alignment::getEString
+        
+            typedef ::moltk::Alignment::EString const & ( ::moltk::Alignment::*getEString_function_type )( ::size_t ) const;
+            
+            Alignment_exposer.def( 
+                "getEString"
+                , getEString_function_type( &::moltk::Alignment::getEString )
+                , ( bp::arg("index") )
+                , bp::return_value_policy< bp::copy_const_reference >() );
+        
+        }
+        { //::moltk::Alignment::getNumberOfColumns
+        
+            typedef ::size_t ( ::moltk::Alignment::*getNumberOfColumns_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "getNumberOfColumns"
+                , getNumberOfColumns_function_type( &::moltk::Alignment::getNumberOfColumns ) );
+        
+        }
+        { //::moltk::Alignment::getNumberOfSequences
+        
+            typedef ::size_t ( ::moltk::Alignment::*getNumberOfSequences_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "getNumberOfSequences"
+                , getNumberOfSequences_function_type( &::moltk::Alignment::getNumberOfSequences ) );
+        
+        }
+        { //::moltk::Alignment::getSequence
+        
+            typedef ::moltk::BaseBiosequence const & ( ::moltk::Alignment::*getSequence_function_type )( ::size_t ) const;
+            
+            Alignment_exposer.def( 
+                "getSequence"
+                , getSequence_function_type( &::moltk::Alignment::getSequence )
+                , ( bp::arg("index") )
+                , bp::return_value_policy< bp::copy_const_reference >() );
+        
+        }
+        { //::moltk::Alignment::loadString
+        
+            typedef void ( ::moltk::Alignment::*loadString_function_type )( ::std::string const & ) ;
+            
+            Alignment_exposer.def( 
+                "loadString"
+                , loadString_function_type( &::moltk::Alignment::loadString )
+                , ( bp::arg("s") ) );
+        
+        }
+        { //::moltk::Alignment::printString
+        
+            typedef void ( ::moltk::Alignment::*printString_function_type )( ::std::ostream & ) const;
+            
+            Alignment_exposer.def( 
+                "printString"
+                , printString_function_type( &::moltk::Alignment::printString )
+                , ( bp::arg("os") ) );
+        
+        }
+        { //::moltk::Alignment::score
+        
+            typedef ::moltk::units::Information const & ( ::moltk::Alignment::*score_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "score"
+                , score_function_type( &::moltk::Alignment::score )
+                , bp::return_value_policy< bp::copy_const_reference >() );
+        
+        }
+        { //::moltk::Alignment::setScore
+        
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*setScore_function_type )( ::moltk::units::Information const & ) ;
+            
+            Alignment_exposer.def( 
+                "setScore"
+                , setScore_function_type( &::moltk::Alignment::setScore )
+                , ( bp::arg("s") )
+                , bp::return_self< >() );
+        
+        }
+        Alignment_exposer.def( bp::self_ns::str( bp::self ) );
+    }
 
 }
