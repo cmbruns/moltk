@@ -15,6 +15,8 @@ Use four space characters per indent.
 
 Use !CapitalizedWords
 
+Use all caps for abbreviations, e.g. PDBStructure.
+
 nouns
 
 == Macro, enum, and constant names ==
