@@ -115,12 +115,12 @@ Alignment Aligner::align(const Alignment& s1, const Alignment& s2)
     // Fill seq1, seq2
     seq1.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
-    m = s1.getNumberOfColumns();
+    m = s1.get_number_of_columns();
     seq1 = scorer->createTargetPositions(s1);
 
     seq2.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
-    n = s2.getNumberOfColumns();
+    n = s2.get_number_of_columns();
     seq2 = scorer->createQueryPositions(s2);
 
     allocate_dp_table();
@@ -249,7 +249,7 @@ Alignment Aligner::compute_traceback()
     // cerr << eString1 << eString2 << endl;
     // cerr << targetAlignment << queryAlignment;
     Alignment result = targetAlignment.align(queryAlignment, eString1, eString2);
-    result.setScore(result.score() + alignmentScore);
+    result.set_score(result.score() + alignmentScore);
     return result;
 }
 

@@ -35,14 +35,14 @@ using namespace std;
 Alignment::Alignment(const Biosequence& seq) 
  : m_score(0.0 * moltk::units::bit)
 {
-    appendSequence(seq);
+    append_sequence(seq);
 }
 
 /* implicit */ 
 Alignment::Alignment(const std::string& s)
  : m_score(0.0 * moltk::units::bit)
 {
-    loadString(s);
+    load_string(s);
 }
 
 /* implicit */ 
@@ -50,22 +50,22 @@ Alignment::Alignment(const char* str)
  : m_score(0.0 * moltk::units::bit)
 {
     std::string s(str);
-    loadString(s);
+    load_string(s);
 }
 
-size_t Alignment::getNumberOfColumns() const
+size_t Alignment::get_number_of_columns() const
 {
     if (rows.size() == 0) return 0;
-    return rows[0].eString.totalLength();
+    return rows[0].eString.total_length();
 }
 
-void Alignment::loadString(const std::string& s)
+void Alignment::load_string(const std::string& s)
 {
     Biosequence b(s);
-    appendSequence(b);
+    append_sequence(b);
 }
 
-Alignment& Alignment::appendSequence(const Biosequence& seq)
+Alignment& Alignment::append_sequence(const Biosequence& seq)
 {
     sequences.push_back(seq);
     Row row = {
@@ -78,16 +78,16 @@ Alignment& Alignment::appendSequence(const Biosequence& seq)
 }
 
 /* virtual */
-void moltk::Alignment::printString(std::ostream& os) const
+void moltk::Alignment::print_string(std::ostream& os) const
 {
     for (size_t rowIx = 0; rowIx < rows.size(); ++rowIx) 
     {
         const Row& row = rows[rowIx];
         const BaseBiosequence* seq;
         if (row.list == SequenceList)
-            seq = &sequences[row.listIndex];
+            seq = &sequences[row.list_index];
         else
-            seq = &structures[row.listIndex];
+            seq = &structures[row.list_index];
         EString::const_iterator i = row.eString.begin();
         while(i != row.eString.end()) {
             int resIx = *i;
@@ -116,13 +116,13 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
         Row newRow(row);
         newRow.eString = e1 * newRow.eString;
         if (row.list == SequenceList) {
-            result.sequences.push_back(sequences[row.listIndex]);
-            assert(result.sequences.size() - 1 == newRow.listIndex);
+            result.sequences.push_back(sequences[row.list_index]);
+            assert(result.sequences.size() - 1 == newRow.list_index);
         }
         else {
             assert(row.list == StructureList);
-            result.structures.push_back(structures[row.listIndex]);
-            assert(result.structures.size() - 1 == newRow.listIndex);
+            result.structures.push_back(structures[row.list_index]);
+            assert(result.structures.size() - 1 == newRow.list_index);
         }
         result.rows.push_back(newRow);
     }
@@ -133,17 +133,17 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
         Row newRow(row);
         newRow.eString = e2 * newRow.eString;
         if (row.list == SequenceList) {
-            result.sequences.push_back(a2.sequences[row.listIndex]);
-            newRow.listIndex = result.sequences.size() - 1;
+            result.sequences.push_back(a2.sequences[row.list_index]);
+            newRow.list_index = result.sequences.size() - 1;
         }
         else {
             assert(row.list == StructureList);
-            result.structures.push_back(a2.structures[row.listIndex]);
-            newRow.listIndex = result.structures.size() - 1;
+            result.structures.push_back(a2.structures[row.list_index]);
+            newRow.list_index = result.structures.size() - 1;
         }
         result.rows.push_back(newRow);
     }
-    result.setScore(a1.score() + a2.score());
+    result.set_score(a1.score() + a2.score());
 
     return result;
 }
@@ -207,7 +207,7 @@ bool Alignment::EString::const_iterator::operator==(const const_iterator& rhs)
 
 Alignment::EString::EString()
     : m_ungapped_length(0)
-    , m_totalLength(0)
+    , m_total_length(0)
 {}
 
 Alignment::EString Alignment::EString::operator*(const EString& rhs) const
@@ -270,7 +270,7 @@ Alignment::EString Alignment::EString::operator*(const EString& rhs) const
 Alignment::EString& Alignment::EString::append_run(int run)
 {
     if (run == 0) return *this; // run of nothing
-    m_totalLength += std::abs(run);
+    m_total_length += std::abs(run);
     if (run > 0)
         m_ungapped_length += run;
     if (runs.size() == 0) { // first run
@@ -290,8 +290,8 @@ size_t Alignment::EString::ungapped_length() const {
     return m_ungapped_length;
 }
 
-size_t Alignment::EString::totalLength() const {
-    return m_totalLength;
+size_t Alignment::EString::total_length() const {
+    return m_total_length;
 }
 
 Alignment::EString::const_iterator Alignment::EString::begin() const
