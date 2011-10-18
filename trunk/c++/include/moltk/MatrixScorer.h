@@ -36,13 +36,13 @@ class MatrixScorer : public Aligner::Scorer
 public:
     typedef moltk::units::Information Information;
 
-    explicit MatrixScorer(const std::string& matrixString);
-    explicit MatrixScorer(std::istream& matrixStream);
-    std::vector<Aligner::QueryPosition*> createQueryPositions(const Alignment&) const;
-    std::vector<Aligner::TargetPosition*> createTargetPositions(const Alignment&) const;
-    std::istream& loadStream(std::istream&);
+    explicit MatrixScorer(const std::string& matrix_string);
+    explicit MatrixScorer(std::istream& matrix_stream);
+    std::vector<Aligner::QueryPosition*> create_query_positions(const Alignment& alignment) const;
+    std::vector<Aligner::TargetPosition*> create_target_positions(const Alignment& alignment) const;
+    std::istream& load_stream(std::istream&);
 
-    static const MatrixScorer& getBlosum62Scorer();
+    static const MatrixScorer& get_blosum62_scorer();
 
     // Query alignment appears after target alignment in combined alignment.
     // Query alignment should be shorter than target alignment for small-memory optimizaion.
@@ -52,8 +52,8 @@ public:
     public:
 
         virtual QueryPosition* clone() const;
-        virtual Information get_gap_open_penalty() const {return m_gapOpenPenalty;}
-        virtual Information get_gap_extension_penalty() const {return m_gapExtensionPenalty;}
+        virtual Information get_gap_open_penalty() const {return gap_open_penalty;}
+        virtual Information get_gap_extension_penalty() const {return gap_extension_penalty;}
         inline friend std::ostream& operator<<(std::ostream& os, const QueryPosition& p)
         {
             os << "op=" << p.get_gap_open_penalty();
@@ -61,11 +61,11 @@ public:
             return os;
         }
 
-        Information m_gapOpenPenalty;
-        Information m_gapExtensionPenalty;
+        Information gap_open_penalty;
+        Information gap_extension_penalty;
         // cache values for quick score lookup
         typedef std::vector< std::pair<size_t, double> > QueryWeights;
-        QueryWeights residueTypeIndexWeights;
+        QueryWeights residue_type_index_weights;
     };
 
 
@@ -75,22 +75,22 @@ public:
 
         virtual TargetPosition* clone() const;
         virtual moltk::units::Information score(const Aligner::QueryPosition& rhs) const;
-        virtual Information get_gap_open_penalty() const {return m_gapOpenPenalty;}
-        virtual Information get_gap_extension_penalty() const {return m_gapExtensionPenalty;}
+        virtual Information get_gap_open_penalty() const {return gap_open_penalty;}
+        virtual Information get_gap_extension_penalty() const {return gap_extension_penalty;}
 
-        Information m_gapOpenPenalty;
-        Information m_gapExtensionPenalty;
+        Information gap_open_penalty;
+        Information gap_extension_penalty;
         // cache values for quick score lookup
-        std::vector<Information> scoresByResidueTypeIndex;
+        std::vector<Information> scores_by_residue_type_index;
     };
 
 protected:
-    // createFooPositions is a helper function to reduce redundancy between 
-    // methods createQueryPositions() and createTargetPositions()
+    // create_foo_positions is a helper function to reduce redundancy between 
+    // methods create_query_positions() and create_target_positions()
     template<class POSB, class POS>
-    std::vector<POSB*> createFooPositions(const Alignment& alignment) const;
+    std::vector<POSB*> create_foo_positions(const Alignment& alignment) const;
 
-    std::vector<int> characterIndices; // maps letters to matrix indices
+    std::vector<int> character_indices; // maps letters to matrix indices
     std::vector< std::vector<Information> > matrix;
 };
 
