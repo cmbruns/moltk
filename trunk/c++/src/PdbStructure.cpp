@@ -43,18 +43,18 @@ using namespace boost::iostreams;
 namespace moltk {
 
 /* explicit */
-PdbStructure::PdbStructure(const std::string& fileName)
+PDBStructure::PDBStructure(const std::string& fileName)
 {
-    loadFile(fileName);
+    load_file(fileName);
 }
 
 /* explicit */
-PdbStructure::PdbStructure(std::istream& istream)
+PDBStructure::PDBStructure(std::istream& istream)
 {
-    loadStream(istream);
+    load_stream(istream);
 }
 
-bool PdbStructure::loadFile(const std::string& fileName)
+bool PDBStructure::load_file(const std::string& fileName)
 {
     ifstream pdbFile(fileName.c_str(), ios_base::in | ios_base::binary);
     if (! pdbFile.good()) {
@@ -69,11 +69,11 @@ bool PdbStructure::loadFile(const std::string& fileName)
     }
 	in.push(pdbFile);
     std::istream inStream(&in);
-    return loadStream(inStream);
+    return load_stream(inStream);
 }
 
 /* explicit */
-bool PdbStructure::loadStream(std::istream& istream)
+bool PDBStructure::load_stream(std::istream& istream)
 {
     if (!istream.good())
         return false;

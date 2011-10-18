@@ -8,6 +8,6 @@ using namespace moltk;
 
 BOOST_AUTO_TEST_CASE( test_pdb_atom )
 {
-    PdbStructure::Atom a;
+    PDBStructure::Atom a;
 }
 
