@@ -57,15 +57,15 @@ public:
     public:
         Residue() {}
         Residue(const Residue& rhs)
-            : oneLetterCode(rhs.oneLetterCode)
-            , residueNumber(rhs.residueNumber)
+            : one_letter_code(rhs.one_letter_code)
+            , residue_number(rhs.residue_number)
         {}
-        virtual char get_one_letter_code() const {return oneLetterCode;}
-        virtual int getResidueNumber() const {return residueNumber;}
+        virtual char get_one_letter_code() const {return one_letter_code;}
+        virtual int get_residue_number() const {return residue_number;}
 
     protected:
-        char oneLetterCode;
-        int residueNumber;
+        char one_letter_code;
+        int residue_number;
     };
 
     class Chain : public BaseBiosequence
@@ -73,8 +73,8 @@ public:
     public:
         Chain() {}
         Chain(const Chain& rhs) : residues(rhs.residues) {}
-        virtual size_t getNumberOfResidues() const {return residues.size();}
-        virtual const BaseResidue& getResidue(size_t index) const {
+        virtual size_t get_number_of_residues() const {return residues.size();}
+        virtual const BaseResidue& get_residue(size_t index) const {
             return residues[index];
         }
     protected:

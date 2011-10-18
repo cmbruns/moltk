@@ -38,8 +38,8 @@ namespace moltk
 /* virtual */
 void BaseBiosequence::print_to_stream(std::ostream& os) const
 {
-    for(size_t i = 0; i < getNumberOfResidues(); ++i)
-        os << getResidue(i).get_one_letter_code();
+    for(size_t i = 0; i < get_number_of_residues(); ++i)
+        os << get_residue(i).get_one_letter_code();
 }
 
 
@@ -67,7 +67,7 @@ Biosequence::Biosequence(const Biosequence& rhs)
     , description(rhs.description)
 {}
 
-void Biosequence::loadStream(std::istream& is)
+void Biosequence::load_stream(std::istream& is)
 {
     // Find first non-blank non-comment line
     std::string line;

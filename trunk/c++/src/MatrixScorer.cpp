@@ -184,11 +184,11 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
                 // a right end gap.
                 gapFactor = 1.0;
                 if (   getEndGapsFree() 
-                    && (eResIx >= (seq.getNumberOfResidues() - 1) ) )
+                    && (eResIx >= (seq.get_number_of_residues() - 1) ) )
                 {
                     gapFactor = 0.0;
                 }
-                assert(eResIx <= (seq.getNumberOfResidues() - 1));
+                assert(eResIx <= (seq.get_number_of_residues() - 1));
             }
             ++colIx;
             // Position[i+1] represents column i
@@ -236,7 +236,7 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
             // Compute alignment score
             MatrixScorer::TargetPosition& pos = 
                 dynamic_cast<MatrixScorer::TargetPosition&>(*result[colIx + 1]);
-            const BaseBiosequence::BaseResidue& res = seq.getResidue(eResIx);
+            const BaseBiosequence::BaseResidue& res = seq.get_residue(eResIx);
             size_t resTypeIndex = characterIndices[res.get_one_letter_code()];
             // loop over scoring matrix positions
             for (size_t m = 0; m < matrix.size(); ++m) {
@@ -275,7 +275,7 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Al
             // Compute alignment score
             MatrixScorer::QueryPosition& pos = 
                 dynamic_cast<MatrixScorer::QueryPosition&>(*result[colIx + 1]);
-            const BaseBiosequence::BaseResidue& res = seq.getResidue(eResIx);
+            const BaseBiosequence::BaseResidue& res = seq.get_residue(eResIx);
             size_t resTypeIndex = characterIndices[res.get_one_letter_code()];
             std::map<size_t, size_t>& qmap = 
                 queryWeightIndexByResTypeIndexByColumn[colIx];
