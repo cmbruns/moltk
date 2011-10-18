@@ -151,7 +151,7 @@ public:
 
 protected:
     std::vector<Biosequence> sequences;
-    std::vector<PdbStructure::Chain> structures;
+    std::vector<PDBStructure::Chain> structures;
     std::vector<Row> rows;
     moltk::units::Information m_score;
 };

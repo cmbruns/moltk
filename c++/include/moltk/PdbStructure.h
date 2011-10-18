@@ -30,7 +30,7 @@
 
 namespace moltk {
 	
-class PdbStructure
+class PDBStructure
 {
 public:
     /*!
@@ -40,14 +40,14 @@ public:
     {
     public:
         enum RecordType {
-            ATOM_RECORD_TYPE, //< Standard protein, DNA, or RNA atoms
-            HETATM_RECORD_TYPE //< Other atom types
+            RECORD_TYPE_ATOM, //< Standard protein, DNA, or RNA atoms
+            RECORD_TYPE_HETATM //< Other atom types
         };
         /// Whether this is a standard macromolecule atom type (ATOM) or other (HETATM).
-        RecordType getRecordType() const {return recordType;}
+        RecordType get_record_type() const {return record_type;}
     
     protected:
-        RecordType recordType;
+        RecordType record_type;
     };
     typedef std::vector<Atom> AtomList;
 
@@ -82,15 +82,15 @@ public:
     };
 
 public:
-    PdbStructure() {}
-    explicit PdbStructure(std::istream&);
-    explicit PdbStructure(const std::string& fileName);
-    PdbStructure(const PdbStructure& rhs)
+    PDBStructure() {}
+    explicit PDBStructure(std::istream&);
+    explicit PDBStructure(const std::string& file_name);
+    PDBStructure(const PDBStructure& rhs)
         : atoms(rhs.atoms)
         , chains(rhs.chains)
     {}
-    bool loadStream(std::istream&);
-    bool loadFile(const std::string& fileName);
+    bool load_stream(std::istream&);
+    bool load_file(const std::string& file_name);
 
 protected:
     AtomList atoms;
@@ -99,9 +99,9 @@ protected:
 
 } // namespace moltk
 
-inline std::istream& operator>>(std::istream& is, moltk::PdbStructure& structure)
+inline std::istream& operator>>(std::istream& is, moltk::PDBStructure& structure)
 {
-    structure.loadStream(is);
+    structure.load_stream(is);
     return is;
 }
 
