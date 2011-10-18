@@ -162,14 +162,14 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
         // Special treatment for position zero, which corresponds to column -1
         // end gaps free?
         double gapFactor = 1.0;
-        if (getEndGapsFree())
+        if (get_end_gaps_free())
             gapFactor = 0.0; // Always starts at a left end gap
         {
             POS& pos = 
                 dynamic_cast<POS&>(*result[0]);
             // leave score zero, but set gap penalties
-            pos.m_gapExtensionPenalty = gapFactor * defaultGapExtensionPenalty;
-            pos.m_gapOpenPenalty = gapFactor * defaultGapOpenPenalty;
+            pos.m_gapExtensionPenalty = gapFactor * default_gap_extension_penalty;
+            pos.m_gapOpenPenalty = gapFactor * default_gap_open_penalty;
         }
         int colIx = -1;
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
@@ -183,7 +183,7 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
                 // This cannot be a left end-gap, but it could be
                 // a right end gap.
                 gapFactor = 1.0;
-                if (   getEndGapsFree() 
+                if (   get_end_gaps_free() 
                     && (eResIx >= (seq.get_number_of_residues() - 1) ) )
                 {
                     gapFactor = 0.0;
@@ -195,8 +195,8 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
             POS& pos = 
                 dynamic_cast<POS&>(*result[colIx + 1]);
             // Set gap penalties
-            pos.m_gapExtensionPenalty = gapFactor * defaultGapExtensionPenalty;
-            pos.m_gapOpenPenalty = gapFactor * defaultGapOpenPenalty;
+            pos.m_gapExtensionPenalty = gapFactor * default_gap_extension_penalty;
+            pos.m_gapOpenPenalty = gapFactor * default_gap_open_penalty;
         }
         assert(colIx == alignment.get_number_of_columns() - 1);
     }

@@ -45,8 +45,8 @@ public:
         public:
             virtual QueryPosition* clone() const = 0;
             virtual ~QueryPosition() {}
-            virtual moltk::units::Information gapOpenPenalty() const = 0;
-            virtual moltk::units::Information gapExtensionPenalty() const = 0;
+            virtual moltk::units::Information get_gap_open_penalty() const = 0;
+            virtual moltk::units::Information get_gap_extension_penalty() const = 0;
     };
     class TargetPosition // seq1
     {
@@ -54,8 +54,8 @@ public:
             virtual TargetPosition* clone() const = 0;
             virtual ~TargetPosition() {}
             virtual moltk::units::Information score(const QueryPosition& rhs) const = 0;
-            virtual moltk::units::Information gapOpenPenalty() const = 0;
-            virtual moltk::units::Information gapExtensionPenalty() const = 0;
+            virtual moltk::units::Information get_gap_open_penalty() const = 0;
+            virtual moltk::units::Information get_gap_extension_penalty() const = 0;
     };
 
 
@@ -65,19 +65,19 @@ public:
     {
     public:
         Scorer() 
-            : endGapsFree(true) 
-            , defaultGapOpenPenalty(5.0 * moltk::units::bit)
-            , defaultGapExtensionPenalty(0.5 * moltk::units::bit)
+            : b_end_gaps_free(true) 
+            , default_gap_open_penalty(5.0 * moltk::units::bit)
+            , default_gap_extension_penalty(0.5 * moltk::units::bit)
         {}
         virtual std::vector<QueryPosition*> createQueryPositions(const Alignment&) const = 0;
         virtual std::vector<TargetPosition*> createTargetPositions(const Alignment&) const = 0;
-        bool getEndGapsFree() const {return endGapsFree;}
-        void setEndGapsFree(bool f) {endGapsFree = f;}
+        bool get_end_gaps_free() const {return b_end_gaps_free;}
+        void set_end_gaps_free(bool f) {b_end_gaps_free = f;}
 
     protected:
-        bool endGapsFree;
-        Information defaultGapOpenPenalty;
-        Information defaultGapExtensionPenalty;
+        bool b_end_gaps_free;
+        Information default_gap_open_penalty;
+        Information default_gap_extension_penalty;
     };
 
     /// TracebackPointer is an Aligner::Cell attribute that helps reconstruct the final alignment.
@@ -117,13 +117,13 @@ public:
 
     // Aligner::Stage represents current state of an incomplete alignment
     enum Stage {
-        EMPTY_STAGE, // have nothing
-        SCORER_STAGE, // have a scorer
-        SEQUENCE_STAGE, // have sequences
-        ALLOCATED_STAGE, // have dynamic programming table
-        TABLE_INITIALIZED_STAGE, // first edge of table initialized
-        RECURRENCE_COMPUTED_STAGE, // recurrence computed
-        TRACED_STAGE // alignment computed
+        STAGE_EMPTY, // have nothing
+        STAGE_SCORER, // have a scorer
+        STAGE_SEQUENCE, // have sequences
+        STAGE_ALLOCATED, // have dynamic programming table
+        STAGE_TABLE_INITIALIZED, // first edge of table initialized
+        STAGE_RECURRENCE_COMPUTED, // recurrence computed
+        STAGE_TRACED // alignment computed
     };
 
 
@@ -134,9 +134,9 @@ public:
     // Alignment align(const Alignment&);
     Alignment align(const Alignment&, const Alignment&);
 
-    static const Scorer& getDefaultScorer();
-    bool getEndGapsFree() const {return scorer->getEndGapsFree();}
-    void setEndGapsFree(bool f) {scorer->setEndGapsFree(f);}
+    static const Scorer& get_default_scorer();
+    bool get_end_gaps_free() const {return scorer->get_end_gaps_free();}
+    void set_end_gaps_free(bool f) {scorer->set_end_gaps_free(f);}
 
 protected:
     void init();
@@ -149,22 +149,22 @@ protected:
     void compute_cell_recurrence_freeF(int i, int j);
     void compute_cell_recurrence_freeEF(int i, int j);
     Alignment compute_traceback();
-    void clearPositions();
-    void clearScorer();
+    void clear_positions();
+    void clear_scorer();
 
     // Information gapOpenPenalty; // positive penalty (will be subtracted at gaps)
     // Information gapExtensionPenalty; // positive penalty (will be subtracted on extension)
     // bool bEndGapsFree;
-    bool bLocalAligner;
+    bool b_local_aligner;
     size_t m; // length of sequence 1
     size_t n; // length of sequence 2
-    DpTable dpTable;
+    DpTable dp_table;
     std::vector<TargetPosition*> seq1;
     std::vector<QueryPosition*> seq2;
     Scorer* scorer;
-    Alignment outputAlignment;
-    Alignment queryAlignment;
-    Alignment targetAlignment;
+    Alignment output_alignment;
+    Alignment query_alignment;
+    Alignment target_alignment;
 };
 
 } // namespace moltk

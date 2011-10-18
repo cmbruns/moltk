@@ -105,7 +105,7 @@ public:
         List list; // which list: sequences or structures?
         int list_index;
         Real sequence_weight;
-        EString eString;
+        EString e_string;
     };
 
 
@@ -133,7 +133,7 @@ public:
     }
     const EString& get_estring(size_t index) const
     {
-        return rows[index].eString;
+        return rows[index].e_string;
     }
     const moltk::units::Information& score() const {return m_score;}
     Alignment& set_score(const moltk::units::Information& s) 

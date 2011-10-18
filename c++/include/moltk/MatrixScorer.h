@@ -52,12 +52,12 @@ public:
     public:
 
         virtual QueryPosition* clone() const;
-        virtual Information gapOpenPenalty() const {return m_gapOpenPenalty;}
-        virtual Information gapExtensionPenalty() const {return m_gapExtensionPenalty;}
+        virtual Information get_gap_open_penalty() const {return m_gapOpenPenalty;}
+        virtual Information get_gap_extension_penalty() const {return m_gapExtensionPenalty;}
         inline friend std::ostream& operator<<(std::ostream& os, const QueryPosition& p)
         {
-            os << "op=" << p.gapOpenPenalty();
-            os << ", ep=" << p.gapExtensionPenalty();
+            os << "op=" << p.get_gap_open_penalty();
+            os << ", ep=" << p.get_gap_extension_penalty();
             return os;
         }
 
@@ -75,8 +75,8 @@ public:
 
         virtual TargetPosition* clone() const;
         virtual moltk::units::Information score(const Aligner::QueryPosition& rhs) const;
-        virtual Information gapOpenPenalty() const {return m_gapOpenPenalty;}
-        virtual Information gapExtensionPenalty() const {return m_gapExtensionPenalty;}
+        virtual Information get_gap_open_penalty() const {return m_gapOpenPenalty;}
+        virtual Information get_gap_extension_penalty() const {return m_gapExtensionPenalty;}
 
         Information m_gapOpenPenalty;
         Information m_gapExtensionPenalty;
