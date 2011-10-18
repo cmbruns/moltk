@@ -237,7 +237,7 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
             MatrixScorer::TargetPosition& pos = 
                 dynamic_cast<MatrixScorer::TargetPosition&>(*result[colIx + 1]);
             const BaseBiosequence::BaseResidue& res = seq.getResidue(eResIx);
-            size_t resTypeIndex = characterIndices[res.getOneLetterCode()];
+            size_t resTypeIndex = characterIndices[res.get_one_letter_code()];
             // loop over scoring matrix positions
             for (size_t m = 0; m < matrix.size(); ++m) {
                 pos.scoresByResidueTypeIndex[m] += matrix[resTypeIndex][m];
@@ -276,7 +276,7 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Al
             MatrixScorer::QueryPosition& pos = 
                 dynamic_cast<MatrixScorer::QueryPosition&>(*result[colIx + 1]);
             const BaseBiosequence::BaseResidue& res = seq.getResidue(eResIx);
-            size_t resTypeIndex = characterIndices[res.getOneLetterCode()];
+            size_t resTypeIndex = characterIndices[res.get_one_letter_code()];
             std::map<size_t, size_t>& qmap = 
                 queryWeightIndexByResTypeIndexByColumn[colIx];
             if ( qmap.find(resTypeIndex) == qmap.end() )

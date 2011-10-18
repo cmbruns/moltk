@@ -44,9 +44,9 @@ public:
     {
     public:
         BaseResidue() {}
-        virtual char getOneLetterCode() const = 0;
+        virtual char get_one_letter_code() const = 0;
         virtual int getResidueNumber() const = 0;
-        operator char() const {return getOneLetterCode();}
+        operator char() const {return get_one_letter_code();}
 
     private:
         BaseResidue(const BaseResidue&);
@@ -64,7 +64,7 @@ public:
         explicit GapResidue(int residueNumberParam)
             : residueNumber(residueNumberParam)
         {}
-        virtual char getOneLetterCode() const {return '-';}
+        virtual char get_one_letter_code() const {return '-';}
         virtual int getResidueNumber() const {return residueNumber;};
 
     protected:
@@ -95,7 +95,7 @@ public:
         : oneLetterCode(rhs.oneLetterCode)
         , residueNumber(rhs.residueNumber)
     {}
-    virtual char getOneLetterCode() const {return oneLetterCode;}
+    virtual char get_one_letter_code() const {return oneLetterCode;}
     virtual int getResidueNumber() const {return residueNumber;}
 
 protected:
