@@ -287,7 +287,7 @@ Alignment::EString& Alignment::EString::append_run(int run)
 }
 
 size_t Alignment::EString::ungapped_length() const {
-    return ungapped_length;
+    return m_ungapped_length;
 }
 
 size_t Alignment::EString::totalLength() const {
