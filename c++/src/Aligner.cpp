@@ -76,7 +76,7 @@ Aligner::~Aligner()
 void Aligner::init()
 {
     clear_scorer();
-    scorer = new MatrixScorer(MatrixScorer::getBlosum62Scorer());
+    scorer = new MatrixScorer(MatrixScorer::get_blosum62_scorer());
     // gapOpenPenalty = 1.0 * bit; 
     // gapExtensionPenalty = 0.5 * bit;
     // m and n are lengths of input Biosequences
@@ -116,12 +116,12 @@ Alignment Aligner::align(const Alignment& s1, const Alignment& s2)
     seq1.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
     m = s1.get_number_of_columns();
-    seq1 = scorer->createTargetPositions(s1);
+    seq1 = scorer->create_target_positions(s1);
 
     seq2.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
     n = s2.get_number_of_columns();
-    seq2 = scorer->createQueryPositions(s2);
+    seq2 = scorer->create_query_positions(s2);
 
     allocate_dp_table();
     initialize_dp_table();
@@ -255,7 +255,7 @@ Alignment Aligner::compute_traceback()
 
 /* static */
 const Aligner::Scorer& Aligner::get_default_scorer() {
-    return MatrixScorer::getBlosum62Scorer();
+    return MatrixScorer::get_blosum62_scorer();
 }
 
 

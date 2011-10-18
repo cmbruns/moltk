@@ -69,8 +69,8 @@ public:
             , default_gap_open_penalty(5.0 * moltk::units::bit)
             , default_gap_extension_penalty(0.5 * moltk::units::bit)
         {}
-        virtual std::vector<QueryPosition*> createQueryPositions(const Alignment&) const = 0;
-        virtual std::vector<TargetPosition*> createTargetPositions(const Alignment&) const = 0;
+        virtual std::vector<QueryPosition*> create_query_positions(const Alignment&) const = 0;
+        virtual std::vector<TargetPosition*> create_target_positions(const Alignment&) const = 0;
         bool get_end_gaps_free() const {return b_end_gaps_free;}
         void set_end_gaps_free(bool f) {b_end_gaps_free = f;}
 

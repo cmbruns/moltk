@@ -64,7 +64,7 @@ X  0 -1 -1 -1 -2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -2  0  0 -2 -1 -1 -1 -1 -1 -4 \n\
 ";
 
 /* static */
-const MatrixScorer& MatrixScorer::getBlosum62Scorer() 
+const MatrixScorer& MatrixScorer::get_blosum62_scorer() 
 {
     static const MatrixScorer blosum62Scorer(blosum62Text);
     return blosum62Scorer;
@@ -80,10 +80,10 @@ MatrixScorer::MatrixScorer(const std::string& matrixString)
 /* explicit */
 MatrixScorer::MatrixScorer(std::istream& matrixStream)
 {
-    loadStream(matrixStream);
+    load_stream(matrixStream);
 }
 
-istream& MatrixScorer::loadStream(istream& is)
+istream& MatrixScorer::load_stream(istream& is)
 {
     char lineBuffer[1000];
     // skip header comments
@@ -101,13 +101,13 @@ istream& MatrixScorer::loadStream(istream& is)
     // characterIndices array.
     stringstream oneLetterStream(lineBuffer);
     int index = 0;
-    characterIndices.assign(256, -1);
+    character_indices.assign(256, -1);
     while (oneLetterStream.good()) {
         std::string letterString;
         oneLetterStream >> letterString;
         // cout << "Here is a letter: " << letterString[0] << endl;
         int upperChar = std::toupper(letterString[0]);
-        characterIndices[upperChar] = index;
+        character_indices[upperChar] = index;
         ++index;
     }
     // Allocate matrix
@@ -122,7 +122,7 @@ istream& MatrixScorer::loadStream(istream& is)
         stringstream lineStream(lineString);
         std::string sequenceLetterString;
         lineStream >> sequenceLetterString;
-        int rowIndex = characterIndices[std::toupper(sequenceLetterString[0])];
+        int rowIndex = character_indices[std::toupper(sequenceLetterString[0])];
         std::vector<Information>& row = matrix[rowIndex];
         // cout << sequenceLetterString << " : " << rowIndex << endl;
         double value;
@@ -141,7 +141,7 @@ istream& MatrixScorer::loadStream(istream& is)
 }
 
 template<class POSB, class POS>
-std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) const
+std::vector<POSB*> MatrixScorer::create_foo_positions(const Alignment& alignment) const
 {
     std::vector<POSB*> result;
     const size_t ncol = alignment.get_number_of_columns();
@@ -152,8 +152,8 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
     {
         POS* pos = new POS();
         // pos->scoresByResidueTypeIndex.assign(matrix.size(), 0.0 * bit);
-        pos->m_gapOpenPenalty = 0.0 * bit;
-        pos->m_gapExtensionPenalty = 0.0 * bit;
+        pos->gap_open_penalty = 0.0 * bit;
+        pos->gap_extension_penalty = 0.0 * bit;
         result.push_back(pos);
     }
     // Add contributions from each residue of each sequence
@@ -168,8 +168,8 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
             POS& pos = 
                 dynamic_cast<POS&>(*result[0]);
             // leave score zero, but set gap penalties
-            pos.m_gapExtensionPenalty = gapFactor * default_gap_extension_penalty;
-            pos.m_gapOpenPenalty = gapFactor * default_gap_open_penalty;
+            pos.gap_extension_penalty = gapFactor * default_gap_extension_penalty;
+            pos.gap_open_penalty = gapFactor * default_gap_open_penalty;
         }
         int colIx = -1;
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
@@ -195,8 +195,8 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
             POS& pos = 
                 dynamic_cast<POS&>(*result[colIx + 1]);
             // Set gap penalties
-            pos.m_gapExtensionPenalty = gapFactor * default_gap_extension_penalty;
-            pos.m_gapOpenPenalty = gapFactor * default_gap_open_penalty;
+            pos.gap_extension_penalty = gapFactor * default_gap_extension_penalty;
+            pos.gap_open_penalty = gapFactor * default_gap_open_penalty;
         }
         assert(colIx == alignment.get_number_of_columns() - 1);
     }
@@ -207,10 +207,10 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
 // in O(n) time, so that alignment score can be computed as quickly as possible
 // durint the O(n^2) alignment phase.
 /* virtual */
-std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const Alignment& alignment) const
+std::vector<Aligner::TargetPosition*> MatrixScorer::create_target_positions(const Alignment& alignment) const
 {
     std::vector<Aligner::TargetPosition*> result = 
-        createFooPositions<Aligner::TargetPosition, MatrixScorer::TargetPosition>(alignment);
+        create_foo_positions<Aligner::TargetPosition, MatrixScorer::TargetPosition>(alignment);
 
     const size_t ncol = alignment.get_number_of_columns();
     // initialize
@@ -218,7 +218,7 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
     {
         MatrixScorer::TargetPosition& pos = 
                 dynamic_cast<MatrixScorer::TargetPosition&>(*result[col]);
-        pos.scoresByResidueTypeIndex.assign(matrix.size(), 0.0 * bit);
+        pos.scores_by_residue_type_index.assign(matrix.size(), 0.0 * bit);
     }
     const size_t nseq = alignment.get_number_of_sequences();
     for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
@@ -237,10 +237,10 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
             MatrixScorer::TargetPosition& pos = 
                 dynamic_cast<MatrixScorer::TargetPosition&>(*result[colIx + 1]);
             const BaseBiosequence::BaseResidue& res = seq.get_residue(eResIx);
-            size_t resTypeIndex = characterIndices[res.get_one_letter_code()];
+            size_t resTypeIndex = character_indices[res.get_one_letter_code()];
             // loop over scoring matrix positions
             for (size_t m = 0; m < matrix.size(); ++m) {
-                pos.scoresByResidueTypeIndex[m] += matrix[resTypeIndex][m];
+                pos.scores_by_residue_type_index[m] += matrix[resTypeIndex][m];
             }
             // cerr << pos.scoresByResidueTypeIndex[17] << endl;
        }
@@ -249,10 +249,10 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
 }
 
 /* virtual */
-std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Alignment& alignment) const
+std::vector<Aligner::QueryPosition*> MatrixScorer::create_query_positions(const Alignment& alignment) const
 {
     std::vector<Aligner::QueryPosition*> result = 
-        createFooPositions<Aligner::QueryPosition, MatrixScorer::QueryPosition>(alignment);
+        create_foo_positions<Aligner::QueryPosition, MatrixScorer::QueryPosition>(alignment);
 
     // queryWeightIndexByResTypeIndex helps coalesce multiple instances of the same residue in a column
     const size_t ncol = alignment.get_number_of_columns();
@@ -276,16 +276,16 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Al
             MatrixScorer::QueryPosition& pos = 
                 dynamic_cast<MatrixScorer::QueryPosition&>(*result[colIx + 1]);
             const BaseBiosequence::BaseResidue& res = seq.get_residue(eResIx);
-            size_t resTypeIndex = characterIndices[res.get_one_letter_code()];
+            size_t resTypeIndex = character_indices[res.get_one_letter_code()];
             std::map<size_t, size_t>& qmap = 
                 queryWeightIndexByResTypeIndexByColumn[colIx];
             if ( qmap.find(resTypeIndex) == qmap.end() )
             {
-                qmap[resTypeIndex] = pos.residueTypeIndexWeights.size();
-                pos.residueTypeIndexWeights.push_back( 
+                qmap[resTypeIndex] = pos.residue_type_index_weights.size();
+                pos.residue_type_index_weights.push_back( 
                     std::pair<size_t, double>(resTypeIndex, 0.0) );
             }
-            pos.residueTypeIndexWeights[qmap[resTypeIndex]].second += 1.0;
+            pos.residue_type_index_weights[qmap[resTypeIndex]].second += 1.0;
        }
     }
 
@@ -349,7 +349,7 @@ units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosit
     const MatrixScorer::QueryPosition& rhs = *rhsPtr;
     Information result = 0.0 * bit;
     typedef MatrixScorer::QueryPosition::QueryWeights QueryWeights;
-    const QueryWeights& queryWeights = rhs.residueTypeIndexWeights;
+    const QueryWeights& queryWeights = rhs.residue_type_index_weights;
     QueryWeights::const_iterator i;
     for (i = queryWeights.begin();  i != queryWeights.end(); ++i) 
     {
@@ -357,7 +357,7 @@ units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosit
         size_t resTypeIndex = i->first;
         // cerr << "query weight count = " << resTypeCount;
         // cerr << " index = " << resTypeIndex << endl;
-        result += resTypeCount * lhs.scoresByResidueTypeIndex[resTypeIndex];
+        result += resTypeCount * lhs.scores_by_residue_type_index[resTypeIndex];
     }
     return result;
 }
@@ -368,5 +368,5 @@ units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosit
 
 istream& moltk::operator>>(istream& is, moltk::MatrixScorer& scorer)
 {
-    return scorer.loadStream(is);
+    return scorer.load_stream(is);
 };
