@@ -39,7 +39,7 @@ namespace moltk
 void BaseBiosequence::print_to_stream(std::ostream& os) const
 {
     for(size_t i = 0; i < getNumberOfResidues(); ++i)
-        os << getResidue(i).getOneLetterCode();
+        os << getResidue(i).get_one_letter_code();
 }
 
 

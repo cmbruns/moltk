@@ -60,7 +60,7 @@ public:
             : oneLetterCode(rhs.oneLetterCode)
             , residueNumber(rhs.residueNumber)
         {}
-        virtual char getOneLetterCode() const {return oneLetterCode;}
+        virtual char get_one_letter_code() const {return oneLetterCode;}
         virtual int getResidueNumber() const {return residueNumber;}
 
     protected:

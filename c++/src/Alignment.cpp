@@ -94,7 +94,7 @@ void moltk::Alignment::printString(std::ostream& os) const
             if (resIx < 0)
                 os << '-'; // gap
             else
-                os << seq->getResidue(resIx).getOneLetterCode();
+                os << seq->getResidue(resIx).get_one_letter_code();
             ++i;
         }
         os << endl;
