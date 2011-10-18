@@ -54,8 +54,8 @@ public:
         public:
             const_iterator() {}
             const_iterator(const std::vector<int>& runs
-                    , int runIndex
-                    , int positionIndex);
+                    , int run_index
+                    , int position_index);
             const_iterator& operator++();
             int operator*() const ;
             bool operator!=(const const_iterator& rhs);
@@ -63,16 +63,16 @@ public:
 
         protected:
             const std::vector<int>* runs;
-            size_t runIndex;
-            int positionIndex;
-            size_t sequenceIndex;
+            size_t run_index;
+            int position_index;
+            size_t sequence_index;
         };
 
 
         EString();
         EString operator*(const EString& rhs) const;
-        EString& appendRun(int run);
-        size_t ungappedLength() const;
+        EString& append_run(int run);
+        size_t ungapped_length() const;
         size_t totalLength() const;
         const_iterator begin() const;
         const_iterator end() const;
@@ -94,7 +94,7 @@ public:
 
     protected:
         std::vector<int> runs;
-        size_t m_ungappedLength;
+        size_t m_ungapped_length;
         size_t m_totalLength;
     };
 
