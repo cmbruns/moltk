@@ -45,7 +45,7 @@ public:
     public:
         BaseResidue() {}
         virtual char get_one_letter_code() const = 0;
-        virtual int getResidueNumber() const = 0;
+        virtual int get_residue_number() const = 0;
         operator char() const {return get_one_letter_code();}
 
     private:
@@ -61,14 +61,14 @@ public:
         /// GapResidue has the residue number of the preceding non-gap residue.
         ///
         /// Thus a left end-gap might have a residue number of zero.
-        explicit GapResidue(int residueNumberParam)
-            : residueNumber(residueNumberParam)
+        explicit GapResidue(int residue_number_param)
+            : residue_number(residue_number_param)
         {}
         virtual char get_one_letter_code() const {return '-';}
-        virtual int getResidueNumber() const {return residueNumber;};
+        virtual int get_residue_number() const {return residue_number;};
 
     protected:
-        int residueNumber;
+        int residue_number;
     };
 
 
@@ -76,8 +76,8 @@ public:
     BaseBiosequence() {}
     virtual ~BaseBiosequence() {}
     virtual void print_to_stream(std::ostream& os) const;
-    virtual size_t getNumberOfResidues() const = 0;
-    virtual const BaseResidue& getResidue(size_t index) const = 0;
+    virtual size_t get_number_of_residues() const = 0;
+    virtual const BaseResidue& get_residue(size_t index) const = 0;
 
 private:
     BaseBiosequence(const BaseBiosequence&);
@@ -87,20 +87,20 @@ private:
 class BiosequenceResidue : public BaseBiosequence::BaseResidue
 {
 public:
-    BiosequenceResidue(char oneLetterCodeParam, int residueNumberParam)
-        : oneLetterCode(oneLetterCodeParam)
-        , residueNumber(residueNumberParam)
+    BiosequenceResidue(char one_letter_code_param, int residue_number_param)
+        : one_letter_code(one_letter_code_param)
+        , residue_number(residue_number_param)
     {}
     BiosequenceResidue(const BiosequenceResidue& rhs)
-        : oneLetterCode(rhs.oneLetterCode)
-        , residueNumber(rhs.residueNumber)
+        : one_letter_code(rhs.one_letter_code)
+        , residue_number(rhs.residue_number)
     {}
-    virtual char get_one_letter_code() const {return oneLetterCode;}
-    virtual int getResidueNumber() const {return residueNumber;}
+    virtual char get_one_letter_code() const {return one_letter_code;}
+    virtual int get_residue_number() const {return residue_number;}
 
 protected:
-    char oneLetterCode;
-    int residueNumber;
+    char one_letter_code;
+    int residue_number;
 };
 
 
@@ -115,10 +115,10 @@ public:
     Biosequence(const char * sequence, const std::string& description = "");
     Biosequence(const Biosequence& rhs);
     virtual ~Biosequence() {}
-    void loadStream(std::istream& is);
-    size_t getNumberOfResidues() const { return size(); }
-    const Residue& getResidue(size_t ix) const { return (*this)[ix]; }
-    void printString(std::ostream& os) const
+    void load_stream(std::istream& is);
+    size_t get_number_of_residues() const { return size(); }
+    const Residue& get_residue(size_t ix) const { return (*this)[ix]; }
+    void print_string(std::ostream& os) const
     {
         for (const_iterator i = begin(); i != end(); ++i)
             os << *i;
@@ -126,13 +126,13 @@ public:
 
     inline friend std::ostream& operator<<(std::ostream& os, const Biosequence& seq)
     {
-        seq.printString(os);
+        seq.print_string(os);
         return os;
     }
 
     inline friend std::istream& operator>>(std::istream& is, Biosequence& seq)
     {
-        seq.loadStream(is);
+        seq.load_stream(is);
         return is;
     }
 
