@@ -144,8 +144,8 @@ template<class POSB, class POS>
 std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) const
 {
     std::vector<POSB*> result;
-    const size_t ncol = alignment.getNumberOfColumns();
-    const size_t nseq = alignment.getNumberOfSequences();
+    const size_t ncol = alignment.get_number_of_columns();
+    const size_t nseq = alignment.get_number_of_sequences();
     if (ncol <= 0) return result;
     // Initialize target positions with zero-scoring initial profile
     for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
@@ -172,8 +172,8 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
             pos.m_gapOpenPenalty = gapFactor * defaultGapOpenPenalty;
         }
         int colIx = -1;
-        const BaseBiosequence& seq = alignment.getSequence(seqIx);
-        const Alignment::EString& eString = alignment.getEString(seqIx);
+        const BaseBiosequence& seq = alignment.get_sequence(seqIx);
+        const Alignment::EString& eString = alignment.get_estring(seqIx);
         Alignment::EString::const_iterator e;
         for (e = eString.begin(); e != eString.end(); ++e) 
         {
@@ -198,7 +198,7 @@ std::vector<POSB*> MatrixScorer::createFooPositions(const Alignment& alignment) 
             pos.m_gapExtensionPenalty = gapFactor * defaultGapExtensionPenalty;
             pos.m_gapOpenPenalty = gapFactor * defaultGapOpenPenalty;
         }
-        assert(colIx == alignment.getNumberOfColumns() - 1);
+        assert(colIx == alignment.get_number_of_columns() - 1);
     }
     return result;
 }
@@ -212,7 +212,7 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
     std::vector<Aligner::TargetPosition*> result = 
         createFooPositions<Aligner::TargetPosition, MatrixScorer::TargetPosition>(alignment);
 
-    const size_t ncol = alignment.getNumberOfColumns();
+    const size_t ncol = alignment.get_number_of_columns();
     // initialize
     for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
     {
@@ -220,11 +220,11 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::createTargetPositions(const 
                 dynamic_cast<MatrixScorer::TargetPosition&>(*result[col]);
         pos.scoresByResidueTypeIndex.assign(matrix.size(), 0.0 * bit);
     }
-    const size_t nseq = alignment.getNumberOfSequences();
+    const size_t nseq = alignment.get_number_of_sequences();
     for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
     {
-        const BaseBiosequence& seq = alignment.getSequence(seqIx);
-        const Alignment::EString& eString = alignment.getEString(seqIx);
+        const BaseBiosequence& seq = alignment.get_sequence(seqIx);
+        const Alignment::EString& eString = alignment.get_estring(seqIx);
         Alignment::EString::const_iterator e;
         int colIx = -1;
         for (e = eString.begin(); e != eString.end(); ++e) 
@@ -255,15 +255,15 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::createQueryPositions(const Al
         createFooPositions<Aligner::QueryPosition, MatrixScorer::QueryPosition>(alignment);
 
     // queryWeightIndexByResTypeIndex helps coalesce multiple instances of the same residue in a column
-    const size_t ncol = alignment.getNumberOfColumns();
+    const size_t ncol = alignment.get_number_of_columns();
     std::vector< std::map<size_t, size_t> > queryWeightIndexByResTypeIndexByColumn;
     queryWeightIndexByResTypeIndexByColumn.assign( ncol, std::map<size_t, size_t>() );
 
-    const size_t nseq = alignment.getNumberOfSequences();
+    const size_t nseq = alignment.get_number_of_sequences();
     for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
     {
-        const BaseBiosequence& seq = alignment.getSequence(seqIx);
-        const Alignment::EString& eString = alignment.getEString(seqIx);
+        const BaseBiosequence& seq = alignment.get_sequence(seqIx);
+        const Alignment::EString& eString = alignment.get_estring(seqIx);
         Alignment::EString::const_iterator e;
         int colIx = -1;
         for (e = eString.begin(); e != eString.end(); ++e) 

@@ -73,7 +73,7 @@ public:
         EString operator*(const EString& rhs) const;
         EString& append_run(int run);
         size_t ungapped_length() const;
-        size_t totalLength() const;
+        size_t total_length() const;
         const_iterator begin() const;
         const_iterator end() const;
         void reverse();
@@ -95,7 +95,7 @@ public:
     protected:
         std::vector<int> runs;
         size_t m_ungapped_length;
-        size_t m_totalLength;
+        size_t m_total_length;
     };
 
     
@@ -103,8 +103,8 @@ public:
     {
     public:
         List list; // which list: sequences or structures?
-        int listIndex;
-        Real sequenceWeight;
+        int list_index;
+        Real sequence_weight;
         EString eString;
     };
 
@@ -116,27 +116,27 @@ public:
     /* implicit */ Alignment(const char*);
     // explicit Alignment(std::istream& is);
     ~Alignment() {}
-    Alignment& appendSequence(const Biosequence& seq);
-    void loadString(const std::string& s);
-    void printString(std::ostream& os) const;
-    size_t getNumberOfColumns() const;
-    // getNumberOfSequences() includes both sequences and structures
-    size_t getNumberOfSequences() const {return rows.size();}
+    Alignment& append_sequence(const Biosequence& seq);
+    void load_string(const std::string& s);
+    void print_string(std::ostream& os) const;
+    size_t get_number_of_columns() const;
+    // get_number_of_sequences() includes both sequences and structures
+    size_t get_number_of_sequences() const {return rows.size();}
     Alignment align(const Alignment&, const EString&, const EString&) const;
-    const BaseBiosequence& getSequence(size_t index) const
+    const BaseBiosequence& get_sequence(size_t index) const
     {
         const Row& row = rows[index];
         if (row.list == SequenceList)
-            return sequences[row.listIndex];
+            return sequences[row.list_index];
         else
-            return structures[row.listIndex];
+            return structures[row.list_index];
     }
-    const EString& getEString(size_t index) const
+    const EString& get_estring(size_t index) const
     {
         return rows[index].eString;
     }
     const moltk::units::Information& score() const {return m_score;}
-    Alignment& setScore(const moltk::units::Information& s) 
+    Alignment& set_score(const moltk::units::Information& s) 
     {
         m_score = s;
         return *this;
@@ -144,7 +144,7 @@ public:
 
     inline friend std::ostream& operator<<(std::ostream& os, const Alignment& ali)
     {
-        ali.printString(os);
+        ali.print_string(os);
         return os;
     }
 
