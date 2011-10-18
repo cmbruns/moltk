@@ -39,15 +39,15 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     boost::debug::detect_memory_leaks(false);
     // boost::debug::break_memory_alloc(566);
     Aligner aligner;
-    aligner.setEndGapsFree(true);
+    aligner.set_end_gaps_free(true);
     Alignment a1 = aligner.align("W", "W");
     cout << a1 << a1.score() << endl;
     BOOST_CHECK_EQUAL(a1.score(), 5.5 * bit);
 
-    aligner.setEndGapsFree(false);
+    aligner.set_end_gaps_free(false);
     Alignment a = aligner.align("QS", "SD");
     cout << a << a.score() << endl;
-    aligner.setEndGapsFree(true);
+    aligner.set_end_gaps_free(true);
     a = aligner.align("QS", "SD");
     cout << a << a.score() << endl;
 

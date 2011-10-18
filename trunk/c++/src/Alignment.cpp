@@ -56,7 +56,7 @@ Alignment::Alignment(const char* str)
 size_t Alignment::get_number_of_columns() const
 {
     if (rows.size() == 0) return 0;
-    return rows[0].eString.total_length();
+    return rows[0].e_string.total_length();
 }
 
 void Alignment::load_string(const std::string& s)
@@ -88,8 +88,8 @@ void moltk::Alignment::print_string(std::ostream& os) const
             seq = &sequences[row.list_index];
         else
             seq = &structures[row.list_index];
-        EString::const_iterator i = row.eString.begin();
-        while(i != row.eString.end()) {
+        EString::const_iterator i = row.e_string.begin();
+        while(i != row.e_string.end()) {
             int resIx = *i;
             if (resIx < 0)
                 os << '-'; // gap
@@ -114,7 +114,7 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
     {
         const Row& row = rows[r];
         Row newRow(row);
-        newRow.eString = e1 * newRow.eString;
+        newRow.e_string = e1 * newRow.e_string;
         if (row.list == SequenceList) {
             result.sequences.push_back(sequences[row.list_index]);
             assert(result.sequences.size() - 1 == newRow.list_index);
@@ -131,7 +131,7 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
     {
         const Row& row = a2.rows[r];
         Row newRow(row);
-        newRow.eString = e2 * newRow.eString;
+        newRow.e_string = e2 * newRow.e_string;
         if (row.list == SequenceList) {
             result.sequences.push_back(a2.sequences[row.list_index]);
             newRow.list_index = result.sequences.size() - 1;
