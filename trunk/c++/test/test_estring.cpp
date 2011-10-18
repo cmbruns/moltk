@@ -13,14 +13,14 @@ BOOST_AUTO_TEST_CASE( test_estring_equality )
     EString s2;
     BOOST_CHECK_EQUAL( s1, s2 );
     EString s3;
-    s3.appendRun(2);
+    s3.append_run(2);
     BOOST_CHECK_NE( s1, s3 );
     EString s4;
-    s4.appendRun(2);
+    s4.append_run(2);
     BOOST_CHECK_EQUAL( s3, s4 );
     EString s5;
-    s5.appendRun(2);
-    s5.appendRun(-1);
+    s5.append_run(2);
+    s5.append_run(-1);
     BOOST_CHECK_NE(s3, s5);
 }
 

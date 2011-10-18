@@ -218,20 +218,20 @@ Alignment Aligner::compute_traceback()
         {
         case TRACEBACK_UPLEFT:
             --i; --j;
-            eString1.appendRun(1);
-            eString2.appendRun(1);
+            eString1.append_run(1);
+            eString2.append_run(1);
             // cout << "upleft" << endl;
             break;
         case TRACEBACK_UP:
             --i;
-            eString1.appendRun(1);
-            eString2.appendRun(-1);
+            eString1.append_run(1);
+            eString2.append_run(-1);
             // cout << "up" << endl;
             break;
         case TRACEBACK_LEFT:
             --j;
-            eString1.appendRun(-1);
-            eString2.appendRun(1);
+            eString1.append_run(-1);
+            eString2.append_run(1);
             // cout << "left" << endl;
             break;
         default:

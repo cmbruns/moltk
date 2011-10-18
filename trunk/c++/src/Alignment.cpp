@@ -72,7 +72,7 @@ Alignment& Alignment::appendSequence(const Biosequence& seq)
         SequenceList,
         0,
         1.0,
-        EString().appendRun(seq.size()) };
+        EString().append_run(seq.size()) };
     rows.push_back(row);
     return *this;
 }
@@ -157,41 +157,41 @@ Alignment::EString::const_iterator::const_iterator(const std::vector<int>& runsP
         , int runIndexParam
         , int positionIndexParam)
         : runs(&runsParam)
-        , runIndex(runIndexParam)
-        , positionIndex(positionIndexParam)
-        , sequenceIndex(-1) // default to gap start
+        , run_index(runIndexParam)
+        , position_index(positionIndexParam)
+        , sequence_index(-1) // default to gap start
 {
-    if ( (runs->size() > runIndex) && ((*runs)[runIndex] > 0) )
-        sequenceIndex = 0; // EString starts with non-gap
+    if ( (runs->size() > run_index) && ((*runs)[run_index] > 0) )
+        sequence_index = 0; // EString starts with non-gap
 }
 
 Alignment::EString::const_iterator& Alignment::EString::const_iterator::operator++()
 {
-    ++positionIndex;
-    if (positionIndex >= std::abs((*runs)[runIndex]))
+    ++position_index;
+    if (position_index >= std::abs((*runs)[run_index]))
     {
-        positionIndex = 0;
-        ++runIndex;
+        position_index = 0;
+        ++run_index;
     }
-    if ( (runIndex < runs->size())
-        && ( (*runs)[runIndex] > 0 ) )
+    if ( (run_index < runs->size())
+        && ( (*runs)[run_index] > 0 ) )
     {
-        ++sequenceIndex;
+        ++sequence_index;
     }
     return *this;
 }
 
 int Alignment::EString::const_iterator::operator*() const
 {
-    if (runIndex >= runs->size()) return -1; // end()
-    if ((*runs)[runIndex] < 0) return -1; // gap
-    return sequenceIndex; // current sequence position
+    if (run_index >= runs->size()) return -1; // end()
+    if ((*runs)[run_index] < 0) return -1; // gap
+    return sequence_index; // current sequence position
 }
 
 bool Alignment::EString::const_iterator::operator!=(const const_iterator& rhs)
 {
-    if (runIndex != rhs.runIndex) return true;
-    if (positionIndex != rhs.positionIndex) return true;
+    if (run_index != rhs.run_index) return true;
+    if (position_index != rhs.position_index) return true;
     return false;
 }
 
@@ -206,7 +206,7 @@ bool Alignment::EString::const_iterator::operator==(const const_iterator& rhs)
 /////////////////////
 
 Alignment::EString::EString()
-    : m_ungappedLength(0)
+    : m_ungapped_length(0)
     , m_totalLength(0)
 {}
 
@@ -214,7 +214,7 @@ Alignment::EString Alignment::EString::operator*(const EString& rhs) const
 {
     // cerr << "EString::operator*()" << *this << rhs << endl;
     const EString & lhs = *this;
-    assert(lhs.ungappedLength() == rhs.ungappedLength());
+    assert(lhs.ungapped_length() == rhs.ungapped_length());
     EString result;
     // seqIx1 is current ungapped sequence position in EString 1
     size_t seqIx1 = -1;
@@ -244,7 +244,7 @@ Alignment::EString Alignment::EString::operator*(const EString& rhs) const
         if ( (run1 > 0) && (run2 > 0) ) // both non-gaps, consume min
         {
             int min = std::min(run1, run2);
-            result.appendRun(min);
+            result.append_run(min);
             run1 -= min;
             run2 -= min;
             seqIx1 += min;
@@ -252,27 +252,27 @@ Alignment::EString Alignment::EString::operator*(const EString& rhs) const
         }
         // at least one EString with gaps; consume them.
         if (run1 < 0) {
-            result.appendRun(run1);
+            result.append_run(run1);
             run1 = 0;
         }
         if (run2 < 0) {
-            result.appendRun(run2);
+            result.append_run(run2);
             run2 = 0;
         }
         assert(seqIx1 == seqIx2);
     }
-    assert(result.ungappedLength() == lhs.ungappedLength());
-    assert(seqIx1 == result.ungappedLength() - 1);
-    assert(seqIx2 == result.ungappedLength() - 1);
+    assert(result.ungapped_length() == lhs.ungapped_length());
+    assert(seqIx1 == result.ungapped_length() - 1);
+    assert(seqIx2 == result.ungapped_length() - 1);
     return result;
 }
 
-Alignment::EString& Alignment::EString::appendRun(int run)
+Alignment::EString& Alignment::EString::append_run(int run)
 {
     if (run == 0) return *this; // run of nothing
     m_totalLength += std::abs(run);
     if (run > 0)
-        m_ungappedLength += run;
+        m_ungapped_length += run;
     if (runs.size() == 0) { // first run
         runs.push_back(run);
         return *this;
@@ -286,8 +286,8 @@ Alignment::EString& Alignment::EString::appendRun(int run)
     return *this;
 }
 
-size_t Alignment::EString::ungappedLength() const {
-    return m_ungappedLength;
+size_t Alignment::EString::ungapped_length() const {
+    return ungapped_length;
 }
 
 size_t Alignment::EString::totalLength() const {
