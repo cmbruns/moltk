@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'moltk.ui'
 #
-# Created: Mon Oct 17 10:19:34 2011
+# Created: Wed Oct 19 13:04:18 2011
 #      by: pyside-uic 0.2.9 running on PySide 1.0.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -44,7 +44,7 @@ class Ui_MoltkMainWindow(object):
         self.horizontalLayout.addWidget(self.frame)
         MoltkMainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MoltkMainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 498, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 498, 22))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -60,7 +60,10 @@ class Ui_MoltkMainWindow(object):
         MoltkMainWindow.setStatusBar(self.statusbar)
         self.actionOpen = QtGui.QAction(MoltkMainWindow)
         self.actionOpen.setObjectName("actionOpen")
+        self.actionBrowse_MolTK_python_API = QtGui.QAction(MoltkMainWindow)
+        self.actionBrowse_MolTK_python_API.setObjectName("actionBrowse_MolTK_python_API")
         self.menuFile.addAction(self.actionOpen)
+        self.menuHelp.addAction(self.actionBrowse_MolTK_python_API)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit.menuAction())
         self.menubar.addAction(self.menuView.menuAction())
@@ -76,4 +79,5 @@ class Ui_MoltkMainWindow(object):
         self.menuEdit.setTitle(QtGui.QApplication.translate("MoltkMainWindow", "Edit", None, QtGui.QApplication.UnicodeUTF8))
         self.menuView.setTitle(QtGui.QApplication.translate("MoltkMainWindow", "View", None, QtGui.QApplication.UnicodeUTF8))
         self.actionOpen.setText(QtGui.QApplication.translate("MoltkMainWindow", "Open...", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionBrowse_MolTK_python_API.setText(QtGui.QApplication.translate("MoltkMainWindow", "Browse MolTK python API", None, QtGui.QApplication.UnicodeUTF8))
 

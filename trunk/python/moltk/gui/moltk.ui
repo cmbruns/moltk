@@ -76,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>498</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -89,6 +89,7 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionBrowse_MolTK_python_API"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -109,6 +110,11 @@
   <action name="actionOpen">
    <property name="text">
     <string>Open...</string>
+   </property>
+  </action>
+  <action name="actionBrowse_MolTK_python_API">
+   <property name="text">
+    <string>Browse MolTK python API</string>
    </property>
   </action>
  </widget>

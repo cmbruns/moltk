@@ -27,11 +27,15 @@ class MoltkMainWindow(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.ui = Ui_MoltkMainWindow()
         self.ui.setupUi(self)
+        # work around Mac menubar bug
+        # http://bugs.pyside.org/show_bug.cgi?id=907
+        self.ui.menubar.setParent(None)
 
 
 class MoltkApp(QApplication):
     def __init__(self):
         QApplication.__init__(self, sys.argv)
+        self.setApplicationName("MolTK5")
         self.mainWindow = MoltkMainWindow()
         self.mainWindow.show()
         self.exec_()
