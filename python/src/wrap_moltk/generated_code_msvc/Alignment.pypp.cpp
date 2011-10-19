@@ -22,16 +22,16 @@ void register_Alignment_class(){
             EString_exposer_t EString_exposer = EString_exposer_t( "EString", bp::init< >() );
             bp::scope EString_scope( EString_exposer );
             bp::class_< moltk::Alignment::EString::const_iterator >( "const_iterator", bp::init< >() )    
-                .def( bp::init< std::vector< int > const &, int, int >(( bp::arg("runs"), bp::arg("runIndex"), bp::arg("positionIndex") )) )    
+                .def( bp::init< std::vector< int > const &, int, int >(( bp::arg("runs"), bp::arg("run_index"), bp::arg("position_index") )) )    
                 .def( bp::self != bp::self )    
                 .def( bp::self == bp::self );
-            { //::moltk::Alignment::EString::appendRun
+            { //::moltk::Alignment::EString::append_run
             
-                typedef ::moltk::Alignment::EString & ( ::moltk::Alignment::EString::*appendRun_function_type )( int ) ;
+                typedef ::moltk::Alignment::EString & ( ::moltk::Alignment::EString::*append_run_function_type )( int ) ;
                 
                 EString_exposer.def( 
-                    "appendRun"
-                    , appendRun_function_type( &::moltk::Alignment::EString::appendRun )
+                    "append_run"
+                    , append_run_function_type( &::moltk::Alignment::EString::append_run )
                     , ( bp::arg("run") )
                     , bp::return_self< >() );
             
@@ -66,31 +66,31 @@ void register_Alignment_class(){
                     , reverse_function_type( &::moltk::Alignment::EString::reverse ) );
             
             }
-            { //::moltk::Alignment::EString::totalLength
+            { //::moltk::Alignment::EString::total_length
             
-                typedef ::size_t ( ::moltk::Alignment::EString::*totalLength_function_type )(  ) const;
+                typedef ::size_t ( ::moltk::Alignment::EString::*total_length_function_type )(  ) const;
                 
                 EString_exposer.def( 
-                    "totalLength"
-                    , totalLength_function_type( &::moltk::Alignment::EString::totalLength ) );
+                    "total_length"
+                    , total_length_function_type( &::moltk::Alignment::EString::total_length ) );
             
             }
-            { //::moltk::Alignment::EString::ungappedLength
+            { //::moltk::Alignment::EString::ungapped_length
             
-                typedef ::size_t ( ::moltk::Alignment::EString::*ungappedLength_function_type )(  ) const;
+                typedef ::size_t ( ::moltk::Alignment::EString::*ungapped_length_function_type )(  ) const;
                 
                 EString_exposer.def( 
-                    "ungappedLength"
-                    , ungappedLength_function_type( &::moltk::Alignment::EString::ungappedLength ) );
+                    "ungapped_length"
+                    , ungapped_length_function_type( &::moltk::Alignment::EString::ungapped_length ) );
             
             }
             EString_exposer.def( bp::self_ns::str( bp::self ) );
         }
         bp::class_< moltk::Alignment::Row >( "Row" )    
-            .def_readwrite( "eString", &moltk::Alignment::Row::eString )    
+            .def_readwrite( "e_string", &moltk::Alignment::Row::e_string )    
             .def_readwrite( "list", &moltk::Alignment::Row::list )    
-            .def_readwrite( "listIndex", &moltk::Alignment::Row::listIndex )    
-            .def_readwrite( "sequenceWeight", &moltk::Alignment::Row::sequenceWeight );
+            .def_readwrite( "list_index", &moltk::Alignment::Row::list_index )    
+            .def_readwrite( "sequence_weight", &moltk::Alignment::Row::sequence_weight );
         Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("arg0") )) );
         bp::implicitly_convertible< moltk::Biosequence const &, moltk::Alignment >();
         Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("arg0") )) );
@@ -107,74 +107,74 @@ void register_Alignment_class(){
                 , ( bp::arg("arg0"), bp::arg("arg1"), bp::arg("arg2") ) );
         
         }
-        { //::moltk::Alignment::appendSequence
+        { //::moltk::Alignment::append_sequence
         
-            typedef ::moltk::Alignment & ( ::moltk::Alignment::*appendSequence_function_type )( ::moltk::Biosequence const & ) ;
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*append_sequence_function_type )( ::moltk::Biosequence const & ) ;
             
             Alignment_exposer.def( 
-                "appendSequence"
-                , appendSequence_function_type( &::moltk::Alignment::appendSequence )
+                "append_sequence"
+                , append_sequence_function_type( &::moltk::Alignment::append_sequence )
                 , ( bp::arg("seq") )
                 , bp::return_self< >() );
         
         }
-        { //::moltk::Alignment::getEString
+        { //::moltk::Alignment::get_estring
         
-            typedef ::moltk::Alignment::EString const & ( ::moltk::Alignment::*getEString_function_type )( ::size_t ) const;
+            typedef ::moltk::Alignment::EString const & ( ::moltk::Alignment::*get_estring_function_type )( ::size_t ) const;
             
             Alignment_exposer.def( 
-                "getEString"
-                , getEString_function_type( &::moltk::Alignment::getEString )
+                "get_estring"
+                , get_estring_function_type( &::moltk::Alignment::get_estring )
                 , ( bp::arg("index") )
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
-        { //::moltk::Alignment::getNumberOfColumns
+        { //::moltk::Alignment::get_number_of_columns
         
-            typedef ::size_t ( ::moltk::Alignment::*getNumberOfColumns_function_type )(  ) const;
+            typedef ::size_t ( ::moltk::Alignment::*get_number_of_columns_function_type )(  ) const;
             
             Alignment_exposer.def( 
-                "getNumberOfColumns"
-                , getNumberOfColumns_function_type( &::moltk::Alignment::getNumberOfColumns ) );
+                "get_number_of_columns"
+                , get_number_of_columns_function_type( &::moltk::Alignment::get_number_of_columns ) );
         
         }
-        { //::moltk::Alignment::getNumberOfSequences
+        { //::moltk::Alignment::get_number_of_sequences
         
-            typedef ::size_t ( ::moltk::Alignment::*getNumberOfSequences_function_type )(  ) const;
+            typedef ::size_t ( ::moltk::Alignment::*get_number_of_sequences_function_type )(  ) const;
             
             Alignment_exposer.def( 
-                "getNumberOfSequences"
-                , getNumberOfSequences_function_type( &::moltk::Alignment::getNumberOfSequences ) );
+                "get_number_of_sequences"
+                , get_number_of_sequences_function_type( &::moltk::Alignment::get_number_of_sequences ) );
         
         }
-        { //::moltk::Alignment::getSequence
+        { //::moltk::Alignment::get_sequence
         
-            typedef ::moltk::BaseBiosequence const & ( ::moltk::Alignment::*getSequence_function_type )( ::size_t ) const;
+            typedef ::moltk::BaseBiosequence const & ( ::moltk::Alignment::*get_sequence_function_type )( ::size_t ) const;
             
             Alignment_exposer.def( 
-                "getSequence"
-                , getSequence_function_type( &::moltk::Alignment::getSequence )
+                "get_sequence"
+                , get_sequence_function_type( &::moltk::Alignment::get_sequence )
                 , ( bp::arg("index") )
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
-        { //::moltk::Alignment::loadString
+        { //::moltk::Alignment::load_string
         
-            typedef void ( ::moltk::Alignment::*loadString_function_type )( ::std::string const & ) ;
+            typedef void ( ::moltk::Alignment::*load_string_function_type )( ::std::string const & ) ;
             
             Alignment_exposer.def( 
-                "loadString"
-                , loadString_function_type( &::moltk::Alignment::loadString )
+                "load_string"
+                , load_string_function_type( &::moltk::Alignment::load_string )
                 , ( bp::arg("s") ) );
         
         }
-        { //::moltk::Alignment::printString
+        { //::moltk::Alignment::print_string
         
-            typedef void ( ::moltk::Alignment::*printString_function_type )( ::std::ostream & ) const;
+            typedef void ( ::moltk::Alignment::*print_string_function_type )( ::std::ostream & ) const;
             
             Alignment_exposer.def( 
-                "printString"
-                , printString_function_type( &::moltk::Alignment::printString )
+                "print_string"
+                , print_string_function_type( &::moltk::Alignment::print_string )
                 , ( bp::arg("os") ) );
         
         }
@@ -188,13 +188,13 @@ void register_Alignment_class(){
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
-        { //::moltk::Alignment::setScore
+        { //::moltk::Alignment::set_score
         
-            typedef ::moltk::Alignment & ( ::moltk::Alignment::*setScore_function_type )( ::moltk::units::Information const & ) ;
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*set_score_function_type )( ::moltk::units::Information const & ) ;
             
             Alignment_exposer.def( 
-                "setScore"
-                , setScore_function_type( &::moltk::Alignment::setScore )
+                "set_score"
+                , set_score_function_type( &::moltk::Alignment::set_score )
                 , ( bp::arg("s") )
                 , bp::return_self< >() );
         

@@ -22,17 +22,17 @@
 
 #include "generated_code_msvc/biosequenceresidue.pypp.hpp"
 
-#include "generated_code_msvc/bit_t.pypp.hpp"
+#include "generated_code_msvc/bitunit.pypp.hpp"
 
 #include "generated_code_msvc/dimension.pypp.hpp"
 
 #include "generated_code_msvc/information.pypp.hpp"
 
-#include "generated_code_msvc/information_dimension.pypp.hpp"
+#include "generated_code_msvc/informationdimension.pypp.hpp"
 
-#include "generated_code_msvc/length_dimension.pypp.hpp"
+#include "generated_code_msvc/lengthdimension.pypp.hpp"
 
-#include "generated_code_msvc/nanometer_t.pypp.hpp"
+#include "generated_code_msvc/nanometerunit.pypp.hpp"
 
 #include "generated_code_msvc/pdbstructure.pypp.hpp"
 
@@ -63,21 +63,21 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_BiosequenceResidue_class();
 
-    register_PdbStructure_class();
+    register_PDBStructure_class();
 
     register_Printable_class();
 
-    register_dimension_class();
+    register_Dimension_class();
 
-    register_information_dimension_class();
+    register_InformationDimension_class();
 
-    register_length_dimension_class();
+    register_LengthDimension_class();
 
     register_Information_class();
 
-    register_bit_t_class();
+    register_BitUnit_class();
 
-    register_nanometer_t_class();
+    register_NanometerUnit_class();
 
     register_global_variables();
 

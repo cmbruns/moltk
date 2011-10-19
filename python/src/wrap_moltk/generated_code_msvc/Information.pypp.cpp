@@ -8,12 +8,12 @@ namespace bp = boost::python;
 
 void register_Information_class(){
 
-    { //::moltk::units::quantity< moltk::units::unit< moltk::units::information_dimension >, double >
-        typedef bp::class_< moltk::units::quantity< moltk::units::unit< moltk::units::information_dimension >, double > > Information_exposer_t;
-        Information_exposer_t Information_exposer = Information_exposer_t( "Information", "\n For efficiency, quantity<> should compile to a double in C++.\n This means:\n     no virtual methods\n     no data members other than value\n     unit is a class with a typedef\n These restrictions need not apply to unit class, which should do\n whatever it needs to, to be wrapped conveniently in python.\n", bp::init< >() );
+    { //::moltk::units::Quantity< moltk::units::Unit< moltk::units::InformationDimension >, double >
+        typedef bp::class_< moltk::units::Quantity< moltk::units::Unit< moltk::units::InformationDimension >, double > > Information_exposer_t;
+        Information_exposer_t Information_exposer = Information_exposer_t( "Information", "\n For efficiency, Quantity<> should compile to a double in C++.\n This means:\n     no virtual methods\n     no data members other than value\n     unit is a class with a typedef\n These restrictions need not apply to unit class, which should do\n whatever it needs to, to be wrapped conveniently in python.\n", bp::init< >() );
         bp::scope Information_scope( Information_exposer );
-        Information_exposer.def( bp::init< double const &, moltk::units::unit< moltk::units::information_dimension > const & >(( bp::arg("v"), bp::arg("u") )) );
-        Information_exposer.def( bp::init< moltk::units::quantity< moltk::units::unit< moltk::units::information_dimension >, double > const & >(( bp::arg("rhs") )) );
+        Information_exposer.def( bp::init< double const &, moltk::units::Unit< moltk::units::InformationDimension > const & >(( bp::arg("v"), bp::arg("u") )) );
+        Information_exposer.def( bp::init< moltk::units::Quantity< moltk::units::Unit< moltk::units::InformationDimension >, double > const & >(( bp::arg("rhs") )) );
         Information_exposer.def( bp::self != bp::self );
         Information_exposer.def( bp::self * bp::other< moltk::Real >() );
         Information_exposer.def( bp::self *= bp::other< moltk::Real >() );
@@ -25,19 +25,19 @@ void register_Information_class(){
         Information_exposer.def( bp::self - bp::self );
         Information_exposer.def( bp::self -= bp::self );
         Information_exposer.def( bp::self / bp::other< moltk::Real >() );
-        Information_exposer.def( bp::self / bp::other< moltk::units::unit< moltk::units::information_dimension > >() );
+        Information_exposer.def( bp::self / bp::other< moltk::units::Unit< moltk::units::InformationDimension > >() );
         Information_exposer.def( bp::self / bp::self );
         Information_exposer.def( bp::self /= bp::other< moltk::Real >() );
         Information_exposer.def( bp::self < bp::self );
         Information_exposer.def( bp::self <= bp::self );
-        { //::moltk::units::quantity< moltk::units::unit< moltk::units::information_dimension >, double >::operator=
+        { //::moltk::units::Quantity< moltk::units::Unit< moltk::units::InformationDimension >, double >::operator=
         
-            typedef moltk::units::quantity< moltk::units::unit< moltk::units::information_dimension >, double > exported_class_t;
-            typedef ::moltk::units::quantity< moltk::units::unit< moltk::units::information_dimension >, double > & ( exported_class_t::*assign_function_type )( ::moltk::units::quantity< moltk::units::unit< moltk::units::information_dimension >, double > const & ) ;
+            typedef moltk::units::Quantity< moltk::units::Unit< moltk::units::InformationDimension >, double > exported_class_t;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::InformationDimension >, double > & ( exported_class_t::*assign_function_type )( ::moltk::units::Quantity< moltk::units::Unit< moltk::units::InformationDimension >, double > const & ) ;
             
             Information_exposer.def( 
                 "assign"
-                , assign_function_type( &::moltk::units::quantity< moltk::units::unit< moltk::units::information_dimension >, double >::operator= )
+                , assign_function_type( &::moltk::units::Quantity< moltk::units::Unit< moltk::units::InformationDimension >, double >::operator= )
                 , ( bp::arg("rhs") )
                 , bp::return_self< >() );
         
@@ -45,7 +45,7 @@ void register_Information_class(){
         Information_exposer.def( bp::self == bp::self );
         Information_exposer.def( bp::self > bp::self );
         Information_exposer.def( bp::self >= bp::self );
-        Information_exposer.def_readwrite( "value", &moltk::units::quantity< moltk::units::unit< moltk::units::information_dimension >, double >::value );
+        Information_exposer.def_readwrite( "value", &moltk::units::Quantity< moltk::units::Unit< moltk::units::InformationDimension >, double >::value );
         Information_exposer.def( bp::other< moltk::Real >() * bp::self );
         Information_exposer.def( bp::self_ns::str( bp::self ) );
     }

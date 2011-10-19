@@ -8,46 +8,46 @@ namespace bp = boost::python;
 
 void register_free_functions(){
 
-    { //::moltk::units::unit_name
+    { //::moltk::units::get_unit_name
     
-        typedef ::std::string ( *unit_name_function_type )( ::moltk::units::nanometer_t const & );
+        typedef ::std::string ( *get_unit_name_function_type )( ::moltk::units::NanometerUnit const & );
         
         bp::def( 
-            "unit_name"
-            , unit_name_function_type( &::moltk::units::unit_name )
+            "get_unit_name"
+            , get_unit_name_function_type( &::moltk::units::get_unit_name )
             , ( bp::arg("arg0") ) );
     
     }
 
-    { //::moltk::units::unit_name
+    { //::moltk::units::get_unit_name
     
-        typedef ::std::string ( *unit_name_function_type )( ::moltk::units::bit_t const & );
+        typedef ::std::string ( *get_unit_name_function_type )( ::moltk::units::BitUnit const & );
         
         bp::def( 
-            "unit_name"
-            , unit_name_function_type( &::moltk::units::unit_name )
+            "get_unit_name"
+            , get_unit_name_function_type( &::moltk::units::get_unit_name )
             , ( bp::arg("arg0") ) );
     
     }
 
-    { //::moltk::units::unit_symbol
+    { //::moltk::units::get_unit_symbol
     
-        typedef ::std::string ( *unit_symbol_function_type )( ::moltk::units::nanometer_t const & );
+        typedef ::std::string ( *get_unit_symbol_function_type )( ::moltk::units::NanometerUnit const & );
         
         bp::def( 
-            "unit_symbol"
-            , unit_symbol_function_type( &::moltk::units::unit_symbol )
+            "get_unit_symbol"
+            , get_unit_symbol_function_type( &::moltk::units::get_unit_symbol )
             , ( bp::arg("arg0") ) );
     
     }
 
-    { //::moltk::units::unit_symbol
+    { //::moltk::units::get_unit_symbol
     
-        typedef ::std::string ( *unit_symbol_function_type )( ::moltk::units::bit_t const & );
+        typedef ::std::string ( *get_unit_symbol_function_type )( ::moltk::units::BitUnit const & );
         
         bp::def( 
-            "unit_symbol"
-            , unit_symbol_function_type( &::moltk::units::unit_symbol )
+            "get_unit_symbol"
+            , get_unit_symbol_function_type( &::moltk::units::get_unit_symbol )
             , ( bp::arg("arg0") ) );
     
     }
