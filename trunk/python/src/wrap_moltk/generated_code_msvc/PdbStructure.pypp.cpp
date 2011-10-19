@@ -6,34 +6,34 @@
 
 namespace bp = boost::python;
 
-struct PdbStructure_wrapper : moltk::PdbStructure, bp::wrapper< moltk::PdbStructure > {
+struct PDBStructure_wrapper : moltk::PDBStructure, bp::wrapper< moltk::PDBStructure > {
 
-    struct Chain_wrapper : moltk::PdbStructure::Chain, bp::wrapper< moltk::PdbStructure::Chain > {
+    struct Chain_wrapper : moltk::PDBStructure::Chain, bp::wrapper< moltk::PDBStructure::Chain > {
     
         Chain_wrapper( )
-        : moltk::PdbStructure::Chain( )
-          , bp::wrapper< moltk::PdbStructure::Chain >(){
+        : moltk::PDBStructure::Chain( )
+          , bp::wrapper< moltk::PDBStructure::Chain >(){
             // null constructor
         
         }
     
-        Chain_wrapper(::moltk::PdbStructure::Chain const & rhs )
-        : moltk::PdbStructure::Chain( boost::ref(rhs) )
-          , bp::wrapper< moltk::PdbStructure::Chain >(){
+        Chain_wrapper(::moltk::PDBStructure::Chain const & rhs )
+        : moltk::PDBStructure::Chain( boost::ref(rhs) )
+          , bp::wrapper< moltk::PDBStructure::Chain >(){
             // copy constructor
         
         }
     
-        virtual ::size_t getNumberOfResidues(  ) const  {
-            if( bp::override func_getNumberOfResidues = this->get_override( "getNumberOfResidues" ) )
-                return func_getNumberOfResidues(  );
+        virtual ::size_t get_number_of_residues(  ) const  {
+            if( bp::override func_get_number_of_residues = this->get_override( "get_number_of_residues" ) )
+                return func_get_number_of_residues(  );
             else{
-                return this->moltk::PdbStructure::Chain::getNumberOfResidues(  );
+                return this->moltk::PDBStructure::Chain::get_number_of_residues(  );
             }
         }
         
-        ::size_t default_getNumberOfResidues(  ) const  {
-            return moltk::PdbStructure::Chain::getNumberOfResidues( );
+        ::size_t default_get_number_of_residues(  ) const  {
+            return moltk::PDBStructure::Chain::get_number_of_residues( );
         }
     
         virtual void print_to_stream( ::std::ostream & os ) const  {
@@ -50,152 +50,152 @@ struct PdbStructure_wrapper : moltk::PdbStructure, bp::wrapper< moltk::PdbStruct
     
     };
 
-    struct Residue_wrapper : moltk::PdbStructure::Residue, bp::wrapper< moltk::PdbStructure::Residue > {
+    struct Residue_wrapper : moltk::PDBStructure::Residue, bp::wrapper< moltk::PDBStructure::Residue > {
     
         Residue_wrapper( )
-        : moltk::PdbStructure::Residue( )
-          , bp::wrapper< moltk::PdbStructure::Residue >(){
+        : moltk::PDBStructure::Residue( )
+          , bp::wrapper< moltk::PDBStructure::Residue >(){
             // null constructor
         
         }
     
-        Residue_wrapper(::moltk::PdbStructure::Residue const & rhs )
-        : moltk::PdbStructure::Residue( boost::ref(rhs) )
-          , bp::wrapper< moltk::PdbStructure::Residue >(){
+        Residue_wrapper(::moltk::PDBStructure::Residue const & rhs )
+        : moltk::PDBStructure::Residue( boost::ref(rhs) )
+          , bp::wrapper< moltk::PDBStructure::Residue >(){
             // copy constructor
         
         }
     
-        virtual char getOneLetterCode(  ) const  {
-            if( bp::override func_getOneLetterCode = this->get_override( "getOneLetterCode" ) )
-                return func_getOneLetterCode(  );
+        virtual char get_one_letter_code(  ) const  {
+            if( bp::override func_get_one_letter_code = this->get_override( "get_one_letter_code" ) )
+                return func_get_one_letter_code(  );
             else{
-                return this->moltk::PdbStructure::Residue::getOneLetterCode(  );
+                return this->moltk::PDBStructure::Residue::get_one_letter_code(  );
             }
         }
         
-        char default_getOneLetterCode(  ) const  {
-            return moltk::PdbStructure::Residue::getOneLetterCode( );
+        char default_get_one_letter_code(  ) const  {
+            return moltk::PDBStructure::Residue::get_one_letter_code( );
         }
     
-        virtual int getResidueNumber(  ) const  {
-            if( bp::override func_getResidueNumber = this->get_override( "getResidueNumber" ) )
-                return func_getResidueNumber(  );
+        virtual int get_residue_number(  ) const  {
+            if( bp::override func_get_residue_number = this->get_override( "get_residue_number" ) )
+                return func_get_residue_number(  );
             else{
-                return this->moltk::PdbStructure::Residue::getResidueNumber(  );
+                return this->moltk::PDBStructure::Residue::get_residue_number(  );
             }
         }
         
-        int default_getResidueNumber(  ) const  {
-            return moltk::PdbStructure::Residue::getResidueNumber( );
+        int default_get_residue_number(  ) const  {
+            return moltk::PDBStructure::Residue::get_residue_number( );
         }
     
     };
 
-    PdbStructure_wrapper( )
-    : moltk::PdbStructure( )
-      , bp::wrapper< moltk::PdbStructure >(){
+    PDBStructure_wrapper( )
+    : moltk::PDBStructure( )
+      , bp::wrapper< moltk::PDBStructure >(){
         // null constructor
     
     }
 
-    PdbStructure_wrapper(::std::istream & arg0 )
-    : moltk::PdbStructure( boost::ref(arg0) )
-      , bp::wrapper< moltk::PdbStructure >(){
+    PDBStructure_wrapper(::std::istream & arg0 )
+    : moltk::PDBStructure( boost::ref(arg0) )
+      , bp::wrapper< moltk::PDBStructure >(){
         // constructor
     
     }
 
-    PdbStructure_wrapper(::std::string const & fileName )
-    : moltk::PdbStructure( fileName )
-      , bp::wrapper< moltk::PdbStructure >(){
+    PDBStructure_wrapper(::std::string const & file_name )
+    : moltk::PDBStructure( file_name )
+      , bp::wrapper< moltk::PDBStructure >(){
         // constructor
     
     }
 
-    PdbStructure_wrapper(::moltk::PdbStructure const & rhs )
-    : moltk::PdbStructure( boost::ref(rhs) )
-      , bp::wrapper< moltk::PdbStructure >(){
+    PDBStructure_wrapper(::moltk::PDBStructure const & rhs )
+    : moltk::PDBStructure( boost::ref(rhs) )
+      , bp::wrapper< moltk::PDBStructure >(){
         // copy constructor
     
     }
 
 };
 
-void register_PdbStructure_class(){
+void register_PDBStructure_class(){
 
-    { //::moltk::PdbStructure
-        typedef bp::class_< PdbStructure_wrapper > PdbStructure_exposer_t;
-        PdbStructure_exposer_t PdbStructure_exposer = PdbStructure_exposer_t( "PdbStructure", bp::init< >() );
-        bp::scope PdbStructure_scope( PdbStructure_exposer );
-        { //::moltk::PdbStructure::Atom
-            typedef bp::class_< moltk::PdbStructure::Atom > Atom_exposer_t;
+    { //::moltk::PDBStructure
+        typedef bp::class_< PDBStructure_wrapper > PDBStructure_exposer_t;
+        PDBStructure_exposer_t PDBStructure_exposer = PDBStructure_exposer_t( "PDBStructure", bp::init< >() );
+        bp::scope PDBStructure_scope( PDBStructure_exposer );
+        { //::moltk::PDBStructure::Atom
+            typedef bp::class_< moltk::PDBStructure::Atom > Atom_exposer_t;
             Atom_exposer_t Atom_exposer = Atom_exposer_t( "Atom", "\n Structure::Atom represents a chemical atom in a molecular structure.\n" );
             bp::scope Atom_scope( Atom_exposer );
-            bp::enum_< moltk::PdbStructure::Atom::RecordType>("RecordType")
-                .value("ATOM_RECORD_TYPE", moltk::PdbStructure::Atom::ATOM_RECORD_TYPE)
-                .value("HETATM_RECORD_TYPE", moltk::PdbStructure::Atom::HETATM_RECORD_TYPE)
+            bp::enum_< moltk::PDBStructure::Atom::RecordType>("RecordType")
+                .value("RECORD_TYPE_ATOM", moltk::PDBStructure::Atom::RECORD_TYPE_ATOM)
+                .value("RECORD_TYPE_HETATM", moltk::PDBStructure::Atom::RECORD_TYPE_HETATM)
                 .export_values()
                 ;
-            { //::moltk::PdbStructure::Atom::getRecordType
+            { //::moltk::PDBStructure::Atom::get_record_type
             
-                typedef ::moltk::PdbStructure::Atom::RecordType ( ::moltk::PdbStructure::Atom::*getRecordType_function_type )(  ) const;
+                typedef ::moltk::PDBStructure::Atom::RecordType ( ::moltk::PDBStructure::Atom::*get_record_type_function_type )(  ) const;
                 
                 Atom_exposer.def( 
-                    "getRecordType"
-                    , getRecordType_function_type( &::moltk::PdbStructure::Atom::getRecordType )
+                    "get_record_type"
+                    , get_record_type_function_type( &::moltk::PDBStructure::Atom::get_record_type )
                     , "\n Whether this is a standard macromolecule atom type (ATOM) or other (HETATM).\n" );
             
             }
         }
-        bp::class_< PdbStructure_wrapper::Chain_wrapper, bp::bases< moltk::BaseBiosequence > >( "Chain", bp::init< >() )    
-            .def( bp::init< moltk::PdbStructure::Chain const & >(( bp::arg("rhs") )) )    
+        bp::class_< PDBStructure_wrapper::Chain_wrapper, bp::bases< moltk::BaseBiosequence > >( "Chain", bp::init< >() )    
+            .def( bp::init< moltk::PDBStructure::Chain const & >(( bp::arg("rhs") )) )    
             .def( 
-                "getNumberOfResidues"
-                , (::size_t ( ::moltk::PdbStructure::Chain::* )(  ) const)(&::moltk::PdbStructure::Chain::getNumberOfResidues)
-                , (::size_t ( PdbStructure_wrapper::Chain_wrapper::* )(  ) const)(&PdbStructure_wrapper::Chain_wrapper::default_getNumberOfResidues) )    
+                "get_number_of_residues"
+                , (::size_t ( ::moltk::PDBStructure::Chain::* )(  ) const)(&::moltk::PDBStructure::Chain::get_number_of_residues)
+                , (::size_t ( PDBStructure_wrapper::Chain_wrapper::* )(  ) const)(&PDBStructure_wrapper::Chain_wrapper::default_get_number_of_residues) )    
             .def( 
-                "getResidue"
-                , (::moltk::BaseBiosequence::BaseResidue const & ( ::moltk::PdbStructure::Chain::* )( ::size_t ) const)(&::moltk::PdbStructure::Chain::getResidue)
+                "get_residue"
+                , (::moltk::BaseBiosequence::BaseResidue const & ( ::moltk::PDBStructure::Chain::* )( ::size_t ) const)(&::moltk::PDBStructure::Chain::get_residue)
                 , ( bp::arg("index") )
                 , bp::return_value_policy< bp::copy_const_reference >() )    
             .def( 
                 "print_to_stream"
                 , (void ( ::moltk::BaseBiosequence::* )( ::std::ostream & ) const)(&::moltk::BaseBiosequence::print_to_stream)
-                , (void ( PdbStructure_wrapper::Chain_wrapper::* )( ::std::ostream & ) const)(&PdbStructure_wrapper::Chain_wrapper::default_print_to_stream)
+                , (void ( PDBStructure_wrapper::Chain_wrapper::* )( ::std::ostream & ) const)(&PDBStructure_wrapper::Chain_wrapper::default_print_to_stream)
                 , ( bp::arg("os") ) );
-        bp::class_< PdbStructure_wrapper::Residue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "Residue", bp::init< >() )    
-            .def( bp::init< moltk::PdbStructure::Residue const & >(( bp::arg("rhs") )) )    
+        bp::class_< PDBStructure_wrapper::Residue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "Residue", bp::init< >() )    
+            .def( bp::init< moltk::PDBStructure::Residue const & >(( bp::arg("rhs") )) )    
             .def( 
-                "getOneLetterCode"
-                , (char ( ::moltk::PdbStructure::Residue::* )(  ) const)(&::moltk::PdbStructure::Residue::getOneLetterCode)
-                , (char ( PdbStructure_wrapper::Residue_wrapper::* )(  ) const)(&PdbStructure_wrapper::Residue_wrapper::default_getOneLetterCode) )    
+                "get_one_letter_code"
+                , (char ( ::moltk::PDBStructure::Residue::* )(  ) const)(&::moltk::PDBStructure::Residue::get_one_letter_code)
+                , (char ( PDBStructure_wrapper::Residue_wrapper::* )(  ) const)(&PDBStructure_wrapper::Residue_wrapper::default_get_one_letter_code) )    
             .def( 
-                "getResidueNumber"
-                , (int ( ::moltk::PdbStructure::Residue::* )(  ) const)(&::moltk::PdbStructure::Residue::getResidueNumber)
-                , (int ( PdbStructure_wrapper::Residue_wrapper::* )(  ) const)(&PdbStructure_wrapper::Residue_wrapper::default_getResidueNumber) );
-        PdbStructure_exposer.def( bp::init< std::istream & >(( bp::arg("arg0") )) );
-        bp::implicitly_convertible< std::istream &, moltk::PdbStructure >();
-        PdbStructure_exposer.def( bp::init< std::string const & >(( bp::arg("fileName") )) );
-        bp::implicitly_convertible< std::string const &, moltk::PdbStructure >();
-        PdbStructure_exposer.def( bp::init< moltk::PdbStructure const & >(( bp::arg("rhs") )) );
-        { //::moltk::PdbStructure::loadFile
+                "get_residue_number"
+                , (int ( ::moltk::PDBStructure::Residue::* )(  ) const)(&::moltk::PDBStructure::Residue::get_residue_number)
+                , (int ( PDBStructure_wrapper::Residue_wrapper::* )(  ) const)(&PDBStructure_wrapper::Residue_wrapper::default_get_residue_number) );
+        PDBStructure_exposer.def( bp::init< std::istream & >(( bp::arg("arg0") )) );
+        bp::implicitly_convertible< std::istream &, moltk::PDBStructure >();
+        PDBStructure_exposer.def( bp::init< std::string const & >(( bp::arg("file_name") )) );
+        bp::implicitly_convertible< std::string const &, moltk::PDBStructure >();
+        PDBStructure_exposer.def( bp::init< moltk::PDBStructure const & >(( bp::arg("rhs") )) );
+        { //::moltk::PDBStructure::load_file
         
-            typedef bool ( ::moltk::PdbStructure::*loadFile_function_type )( ::std::string const & ) ;
+            typedef bool ( ::moltk::PDBStructure::*load_file_function_type )( ::std::string const & ) ;
             
-            PdbStructure_exposer.def( 
-                "loadFile"
-                , loadFile_function_type( &::moltk::PdbStructure::loadFile )
-                , ( bp::arg("fileName") ) );
+            PDBStructure_exposer.def( 
+                "load_file"
+                , load_file_function_type( &::moltk::PDBStructure::load_file )
+                , ( bp::arg("file_name") ) );
         
         }
-        { //::moltk::PdbStructure::loadStream
+        { //::moltk::PDBStructure::load_stream
         
-            typedef bool ( ::moltk::PdbStructure::*loadStream_function_type )( ::std::istream & ) ;
+            typedef bool ( ::moltk::PDBStructure::*load_stream_function_type )( ::std::istream & ) ;
             
-            PdbStructure_exposer.def( 
-                "loadStream"
-                , loadStream_function_type( &::moltk::PdbStructure::loadStream )
+            PDBStructure_exposer.def( 
+                "load_stream"
+                , load_stream_function_type( &::moltk::PDBStructure::load_stream )
                 , ( bp::arg("arg0") ) );
         
         }

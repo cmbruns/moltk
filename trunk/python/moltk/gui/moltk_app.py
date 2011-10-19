@@ -21,6 +21,7 @@ import sys
 from PySide.QtCore import *
 from PySide.QtGui import *
 from moltk_ui import Ui_MoltkMainWindow
+import platform
 
 class MoltkMainWindow(QMainWindow):
     def __init__(self, parent = None):
@@ -29,7 +30,8 @@ class MoltkMainWindow(QMainWindow):
         self.ui.setupUi(self)
         # work around Mac menubar bug
         # http://bugs.pyside.org/show_bug.cgi?id=907
-        self.ui.menubar.setParent(None)
+        if 'Darwin' == platform.system():
+            self.ui.menubar.setParent(None)
 
 
 class MoltkApp(QApplication):

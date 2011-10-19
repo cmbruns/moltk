@@ -8,8 +8,8 @@ namespace bp = boost::python;
 
 struct BiosequenceResidue_wrapper : moltk::BiosequenceResidue, bp::wrapper< moltk::BiosequenceResidue > {
 
-    BiosequenceResidue_wrapper(char oneLetterCodeParam, int residueNumberParam )
-    : moltk::BiosequenceResidue( oneLetterCodeParam, residueNumberParam )
+    BiosequenceResidue_wrapper(char one_letter_code_param, int residue_number_param )
+    : moltk::BiosequenceResidue( one_letter_code_param, residue_number_param )
       , bp::wrapper< moltk::BiosequenceResidue >(){
         // constructor
     
@@ -22,43 +22,43 @@ struct BiosequenceResidue_wrapper : moltk::BiosequenceResidue, bp::wrapper< molt
     
     }
 
-    virtual char getOneLetterCode(  ) const  {
-        if( bp::override func_getOneLetterCode = this->get_override( "getOneLetterCode" ) )
-            return func_getOneLetterCode(  );
+    virtual char get_one_letter_code(  ) const  {
+        if( bp::override func_get_one_letter_code = this->get_override( "get_one_letter_code" ) )
+            return func_get_one_letter_code(  );
         else{
-            return this->moltk::BiosequenceResidue::getOneLetterCode(  );
+            return this->moltk::BiosequenceResidue::get_one_letter_code(  );
         }
     }
     
-    char default_getOneLetterCode(  ) const  {
-        return moltk::BiosequenceResidue::getOneLetterCode( );
+    char default_get_one_letter_code(  ) const  {
+        return moltk::BiosequenceResidue::get_one_letter_code( );
     }
 
-    virtual int getResidueNumber(  ) const  {
-        if( bp::override func_getResidueNumber = this->get_override( "getResidueNumber" ) )
-            return func_getResidueNumber(  );
+    virtual int get_residue_number(  ) const  {
+        if( bp::override func_get_residue_number = this->get_override( "get_residue_number" ) )
+            return func_get_residue_number(  );
         else{
-            return this->moltk::BiosequenceResidue::getResidueNumber(  );
+            return this->moltk::BiosequenceResidue::get_residue_number(  );
         }
     }
     
-    int default_getResidueNumber(  ) const  {
-        return moltk::BiosequenceResidue::getResidueNumber( );
+    int default_get_residue_number(  ) const  {
+        return moltk::BiosequenceResidue::get_residue_number( );
     }
 
 };
 
 void register_BiosequenceResidue_class(){
 
-    bp::class_< BiosequenceResidue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "BiosequenceResidue", bp::init< char, int >(( bp::arg("oneLetterCodeParam"), bp::arg("residueNumberParam") )) )    
+    bp::class_< BiosequenceResidue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "BiosequenceResidue", bp::init< char, int >(( bp::arg("one_letter_code_param"), bp::arg("residue_number_param") )) )    
         .def( bp::init< moltk::BiosequenceResidue const & >(( bp::arg("rhs") )) )    
         .def( 
-            "getOneLetterCode"
-            , (char ( ::moltk::BiosequenceResidue::* )(  ) const)(&::moltk::BiosequenceResidue::getOneLetterCode)
-            , (char ( BiosequenceResidue_wrapper::* )(  ) const)(&BiosequenceResidue_wrapper::default_getOneLetterCode) )    
+            "get_one_letter_code"
+            , (char ( ::moltk::BiosequenceResidue::* )(  ) const)(&::moltk::BiosequenceResidue::get_one_letter_code)
+            , (char ( BiosequenceResidue_wrapper::* )(  ) const)(&BiosequenceResidue_wrapper::default_get_one_letter_code) )    
         .def( 
-            "getResidueNumber"
-            , (int ( ::moltk::BiosequenceResidue::* )(  ) const)(&::moltk::BiosequenceResidue::getResidueNumber)
-            , (int ( BiosequenceResidue_wrapper::* )(  ) const)(&BiosequenceResidue_wrapper::default_getResidueNumber) );
+            "get_residue_number"
+            , (int ( ::moltk::BiosequenceResidue::* )(  ) const)(&::moltk::BiosequenceResidue::get_residue_number)
+            , (int ( BiosequenceResidue_wrapper::* )(  ) const)(&BiosequenceResidue_wrapper::default_get_residue_number) );
 
 }
