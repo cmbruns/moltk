@@ -17,7 +17,7 @@ Use !CapitalizedWords
 
 Use all caps for abbreviations, e.g. PDBStructure.
 
-nouns
+Class names should be nouns.
 
 == Macro, enum, and constant names ==
 
@@ -27,7 +27,7 @@ CAPITALIZED_WITH_UNDERSCORES
 
 Use lower_case_with_underscores.
 
-Begin with a verb.
+Begin method and function names with a verb.
 
 == Attribute and member names ==
 
@@ -35,10 +35,14 @@ lower_case_with_underscores
 
 adjective_noun or noun
 
-m_variable_name for private/protected members in C++
-
 b_variable_name for boolean values
 
 == Namespace, package, and module names ==
 
 lower case, single word, short names
+
+== Methods parameters ==
+
+lower_case_with_underscores
+
+Remember that method parameter names are more important in python than in C++, because python allows named parameter use.  In all C++ header files, every parameter to every exposed method should have an understandable name.
