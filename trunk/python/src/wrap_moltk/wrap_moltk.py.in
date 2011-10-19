@@ -27,13 +27,13 @@ def wrap_moltk():
         aligner.class_(cls_name).member_function('clone').call_policies = \
             return_value_policy(manage_new_object)
     aligner.add_property('endGapsFree', 
-         fget=aligner.member_functions('getEndGapsFree')[1],
-         fset=aligner.member_functions('setEndGapsFree')[1])
+         fget=aligner.member_functions('get_end_gaps_free')[1],
+         fset=aligner.member_functions('set_end_gaps_free')[1])
     alignment = ns_moltk.class_('Alignment')
-    for fn_name in ['appendSequence', 'setScore']:
+    for fn_name in ['append_sequence', 'set_score']:
          alignment.member_function(fn_name).call_policies = return_self()
     estring = alignment.class_('EString')
-    estring.member_function('appendRun').call_policies = return_self()
+    estring.member_function('append_run').call_policies = return_self()
 
     extractor = doxygen_doc_extractor()
     mb.build_code_creator(module_name = '_moltk', doc_extractor = extractor)

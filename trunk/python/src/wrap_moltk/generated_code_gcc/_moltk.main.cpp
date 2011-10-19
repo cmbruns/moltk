@@ -18,9 +18,19 @@
 
 #include "generated_code_gcc/BiosequenceResidue.pypp.hpp"
 
+#include "generated_code_gcc/BitUnit.pypp.hpp"
+
+#include "generated_code_gcc/Dimension.pypp.hpp"
+
 #include "generated_code_gcc/Information.pypp.hpp"
 
-#include "generated_code_gcc/PdbStructure.pypp.hpp"
+#include "generated_code_gcc/InformationDimension.pypp.hpp"
+
+#include "generated_code_gcc/LengthDimension.pypp.hpp"
+
+#include "generated_code_gcc/NanometerUnit.pypp.hpp"
+
+#include "generated_code_gcc/PDBStructure.pypp.hpp"
 
 #include "generated_code_gcc/Printable.pypp.hpp"
 
@@ -31,16 +41,6 @@
 #include "generated_code_gcc/_moltk_free_functions.pypp.hpp"
 
 #include "generated_code_gcc/_moltk_global_variables.pypp.hpp"
-
-#include "generated_code_gcc/bit_t.pypp.hpp"
-
-#include "generated_code_gcc/dimension.pypp.hpp"
-
-#include "generated_code_gcc/information_dimension.pypp.hpp"
-
-#include "generated_code_gcc/length_dimension.pypp.hpp"
-
-#include "generated_code_gcc/nanometer_t.pypp.hpp"
 
 #include "generated_code_gcc/std_vector_int.pypp.hpp"
 
@@ -63,21 +63,21 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_BiosequenceResidue_class();
 
-    register_PdbStructure_class();
+    register_PDBStructure_class();
 
     register_Printable_class();
 
-    register_dimension_class();
+    register_Dimension_class();
 
-    register_information_dimension_class();
+    register_InformationDimension_class();
 
-    register_length_dimension_class();
+    register_LengthDimension_class();
 
     register_Information_class();
 
-    register_bit_t_class();
+    register_BitUnit_class();
 
-    register_nanometer_t_class();
+    register_NanometerUnit_class();
 
     register_global_variables();
 
