@@ -33,46 +33,47 @@ namespace moltk { namespace units {
     // Dimensions //
     ////////////////
 
-    struct dimension {};
-    struct information_dimension : public dimension {};
-    struct length_dimension : public dimension {};
+    struct Dimension {};
+    struct InformationDimension : public Dimension {};
+    struct LengthDimension : public Dimension {};
 
     ///////////
     // Units //
     ///////////
 
     template<class D>
-    struct unit 
+    struct Unit
     {
-        typedef D dimension_type;
+        typedef D DimensionType;
+        typedef Unit<D> ThisType;
         static void print_name(std::ostream& os) {os << get_unit_name(get_instance());}
         static void print_symbol(std::ostream& os) {os << get_unit_symbol(get_instance());}
-        static const unit& get_instance() {
-            static std::auto_ptr<unit> singleton_pointer(NULL);
+        static const ThisType& get_instance() {
+            static std::auto_ptr<ThisType> singleton_pointer(NULL);
             if (!singleton_pointer.get()) 
-                singleton_pointer.reset( new unit() );
+                singleton_pointer.reset( new ThisType() );
             return *singleton_pointer.get();
         }
     private:
-        unit() {} // singleton provides no constructor
-        unit(const unit&) {}
+        Unit() {} // singleton provides no constructor
+        Unit(const ThisType&) {}
     };
 
-    typedef unit<information_dimension> bit_t;
-    inline std::string get_unit_symbol(const bit_t&) {return "b";}
-    inline std::string get_unit_name(const bit_t&) {return "bit";}
-    static const bit_t& bit = bit_t::get_instance();
+    typedef Unit<InformationDimension> BitUnit;
+    inline std::string get_unit_symbol(const BitUnit&) {return "b";}
+    inline std::string get_unit_name(const BitUnit&) {return "bit";}
+    static const BitUnit& bit = BitUnit::get_instance();
 
-    typedef unit<length_dimension> nanometer_t;
-    inline std::string get_unit_symbol(const nanometer_t&) {return "nm";}
-    inline std::string get_unit_name(const nanometer_t&) {return "nanometer";}
-    static const nanometer_t& nanometer = nanometer_t::get_instance();
+    typedef Unit<LengthDimension> NanometerUnit;
+    inline std::string get_unit_symbol(const NanometerUnit&) {return "nm";}
+    inline std::string get_unit_name(const NanometerUnit&) {return "nanometer";}
+    static const NanometerUnit& nanometer = NanometerUnit::get_instance();
 
     ////////////////
     // Quantities //
     ////////////////
 
-    /// For efficiency, quantity<> should compile to a double in C++.
+    /// For efficiency, Quantity<> should compile to a double in C++.
     /// This means:
     ///     no virtual methods
     ///     no data members other than "value"
@@ -80,20 +81,20 @@ namespace moltk { namespace units {
     /// These restrictions need not apply to unit class, which should do
     /// whatever it needs to, to be wrapped conveniently in python.
     template<class U, class Y = Real>
-    struct quantity 
+    struct Quantity 
     {
-        typedef U unit_type;
-        typedef Y value_type;
-        typedef quantity<U,Y> this_type;
+        typedef U UnitType;
+        typedef Y ValueType;
+        typedef Quantity<U,Y> ThisType;
 
-        value_type value;
+        ValueType value;
 
         // constructors / assignment
-        quantity() {}
-        quantity(const Y& v, const U& u) : value(v) {}
-        quantity(const this_type& rhs) : value(rhs.value) {}
+        Quantity() {}
+        Quantity(const Y& v, const U& u) : value(v) {}
+        Quantity(const ThisType& rhs) : value(rhs.value) {}
 
-        this_type& operator=(const this_type& rhs)
+        ThisType& operator=(const ThisType& rhs)
         {
             value = rhs.value;
             return *this;
@@ -104,64 +105,64 @@ namespace moltk { namespace units {
         //////////////////////////
 
         // unary +/-
-        const this_type& operator+() const { return *this; }
-        this_type& operator+() { return *this; }
-        this_type operator-() const { return this_type(-value); }
+        const ThisType& operator+() const { return *this; }
+        ThisType& operator+() { return *this; }
+        ThisType operator-() const { return ThisType(-value); }
 
         // addition
-        this_type operator+(const this_type& rhs) const 
+        ThisType operator+(const ThisType& rhs) const 
         {
-            return quantity(value + rhs.value);
+            return ThisType(value + rhs.value);
         }
 
-        this_type& operator+=(const this_type& rhs) {
+        ThisType& operator+=(const ThisType& rhs) {
             value += rhs.value;
             return *this;
         }
 
         // subtraction
-        this_type operator-(const this_type& rhs) const {
-            return this_type(value - rhs.value);
+        ThisType operator-(const ThisType& rhs) const {
+            return ThisType(value - rhs.value);
         }
 
-        this_type& operator-=(const this_type& rhs) {
+        ThisType& operator-=(const ThisType& rhs) {
             value -= rhs.value;
             return *this;
         }
 
         // multiplication
-        // quantity = quantity * real
-        this_type operator*(Real rhs) const {
-            return this_type(value * rhs);
+        // Quantity = Quantity * real
+        ThisType operator*(Real rhs) const {
+            return ThisType(value * rhs);
         }
 
-        this_type operator*=(Real rhs) {
+        ThisType operator*=(Real rhs) {
             value *= rhs;
             return *this;
         }
 
-        // quantity = real * quantity
-        inline friend this_type operator*(moltk::Real lhs, const this_type& rhs) {
-            return this_type(lhs * rhs.value);
+        // Quantity = real * Quantity
+        inline friend ThisType operator*(moltk::Real lhs, const ThisType& rhs) {
+            return ThisType(lhs * rhs.value);
         }
 
         // division
-        this_type operator/(Real rhs) const {
-            return this_type(value / rhs);
+        ThisType operator/(Real rhs) const {
+            return ThisType(value / rhs);
         }
 
-        this_type operator/=(Real rhs) {
+        ThisType operator/=(Real rhs) {
             value /= rhs;
             return *this;
         }
 
-        // value = quantity / unit
+        // value = Quantity / unit
         Y operator/(const U& rhs) const
         {
             return value;
         }
 
-        Y operator/(const this_type& rhs) const
+        Y operator/(const ThisType& rhs) const
         {
             return value/rhs.value;
         }
@@ -170,60 +171,60 @@ namespace moltk { namespace units {
         // Comparison operators //
         //////////////////////////
 
-        bool operator==(const this_type& rhs) const 
+        bool operator==(const ThisType& rhs) const 
         {
             return value == rhs.value;
         }
 
-        bool operator!=(const this_type& rhs) const
+        bool operator!=(const ThisType& rhs) const
         {
             return value != rhs.value;
         }
 
-        bool operator<(const this_type& rhs) const 
+        bool operator<(const ThisType& rhs) const 
         {
             return value < rhs.value;
         }
 
-        bool operator>(const this_type& rhs) const 
+        bool operator>(const ThisType& rhs) const 
         {
             return value > rhs.value;
         }
 
-        bool operator<=(const this_type& rhs) const 
+        bool operator<=(const ThisType& rhs) const 
         {
             return value <= rhs.value;
         }
 
-        bool operator>=(const this_type& rhs) const 
+        bool operator>=(const ThisType& rhs) const 
         {
             return value >= rhs.value;
         }
 
         // I/O
 
-        inline friend std::ostream& operator<<(std::ostream& os, const this_type& q)
+        inline friend std::ostream& operator<<(std::ostream& os, const ThisType& q)
         {
             os << q.value << " ";
-            this_type::unit_type::print_symbol(os);
+            ThisType::UnitType::print_symbol(os);
             return os;
         }
 
     protected:
-        explicit quantity(const Y& v) : value(v) {}
+        explicit Quantity(const Y& v) : value(v) {}
     };
 
     // GCCXML on Windows does not like real * unit to be defined
-    // inline friend within quantity; so define it here.
-    // quantity = value * unit, e.g. noseLength = 5.6 * centimeter;
+    // inline friend within Quantity; so define it here.
+    // Quantity = value * unit, e.g. noseLength = 5.6 * centimeter;
     template<class Y, class D>
-    quantity<unit<D>, Y> operator*(const Y& lhs, const unit<D>& rhs) 
+    Quantity<Unit<D>, Y> operator*(const Y& lhs, const Unit<D>& rhs) 
     {
-        return quantity<unit<D>, Y>(lhs, rhs);
+        return Quantity<Unit<D>, Y>(lhs, rhs);
     }
 
-    typedef quantity<bit_t> Information;
-    typedef quantity<nanometer_t> Length;
+    typedef Quantity<BitUnit> Information;
+    typedef Quantity<NanometerUnit> Length;
 
 }} // namespace moltk::units
 

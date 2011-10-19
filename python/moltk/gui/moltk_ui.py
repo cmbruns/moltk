@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'moltk.ui'
 #
-# Created: Fri Oct 07 20:15:09 2011
-#      by: pyside-uic 0.2.10 running on PySide 1.0.4
+# Created: Mon Oct 17 10:19:34 2011
+#      by: pyside-uic 0.2.9 running on PySide 1.0.3
 #
 # WARNING! All changes made in this file will be lost!
 

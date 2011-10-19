@@ -17,49 +17,49 @@ struct BaseBiosequence_wrapper : moltk::BaseBiosequence, bp::wrapper< moltk::Bas
         
         }
     
-        virtual char getOneLetterCode(  ) const {
-            bp::override func_getOneLetterCode = this->get_override( "getOneLetterCode" );
-            return func_getOneLetterCode(  );
+        virtual char get_one_letter_code(  ) const {
+            bp::override func_get_one_letter_code = this->get_override( "get_one_letter_code" );
+            return func_get_one_letter_code(  );
         }
     
-        virtual int getResidueNumber(  ) const {
-            bp::override func_getResidueNumber = this->get_override( "getResidueNumber" );
-            return func_getResidueNumber(  );
+        virtual int get_residue_number(  ) const {
+            bp::override func_get_residue_number = this->get_override( "get_residue_number" );
+            return func_get_residue_number(  );
         }
     
     };
 
     struct GapResidue_wrapper : moltk::BaseBiosequence::GapResidue, bp::wrapper< moltk::BaseBiosequence::GapResidue > {
     
-        GapResidue_wrapper(int residueNumberParam )
-        : moltk::BaseBiosequence::GapResidue( residueNumberParam )
+        GapResidue_wrapper(int residue_number_param )
+        : moltk::BaseBiosequence::GapResidue( residue_number_param )
           , bp::wrapper< moltk::BaseBiosequence::GapResidue >(){
             // constructor
         
         }
     
-        virtual char getOneLetterCode(  ) const  {
-            if( bp::override func_getOneLetterCode = this->get_override( "getOneLetterCode" ) )
-                return func_getOneLetterCode(  );
+        virtual char get_one_letter_code(  ) const  {
+            if( bp::override func_get_one_letter_code = this->get_override( "get_one_letter_code" ) )
+                return func_get_one_letter_code(  );
             else{
-                return this->moltk::BaseBiosequence::GapResidue::getOneLetterCode(  );
+                return this->moltk::BaseBiosequence::GapResidue::get_one_letter_code(  );
             }
         }
         
-        char default_getOneLetterCode(  ) const  {
-            return moltk::BaseBiosequence::GapResidue::getOneLetterCode( );
+        char default_get_one_letter_code(  ) const  {
+            return moltk::BaseBiosequence::GapResidue::get_one_letter_code( );
         }
     
-        virtual int getResidueNumber(  ) const  {
-            if( bp::override func_getResidueNumber = this->get_override( "getResidueNumber" ) )
-                return func_getResidueNumber(  );
+        virtual int get_residue_number(  ) const  {
+            if( bp::override func_get_residue_number = this->get_override( "get_residue_number" ) )
+                return func_get_residue_number(  );
             else{
-                return this->moltk::BaseBiosequence::GapResidue::getResidueNumber(  );
+                return this->moltk::BaseBiosequence::GapResidue::get_residue_number(  );
             }
         }
         
-        int default_getResidueNumber(  ) const  {
-            return moltk::BaseBiosequence::GapResidue::getResidueNumber( );
+        int default_get_residue_number(  ) const  {
+            return moltk::BaseBiosequence::GapResidue::get_residue_number( );
         }
     
     };
@@ -71,12 +71,12 @@ struct BaseBiosequence_wrapper : moltk::BaseBiosequence, bp::wrapper< moltk::Bas
     
     }
 
-    virtual ::size_t getNumberOfResidues(  ) const {
-        bp::override func_getNumberOfResidues = this->get_override( "getNumberOfResidues" );
-        return func_getNumberOfResidues(  );
+    virtual ::size_t get_number_of_residues(  ) const {
+        bp::override func_get_number_of_residues = this->get_override( "get_number_of_residues" );
+        return func_get_number_of_residues(  );
     }
 
-    virtual ::moltk::BaseBiosequence::BaseResidue const & getResidue( ::size_t index ) const {
+    virtual ::moltk::BaseBiosequence::BaseResidue const & get_residue( ::size_t index ) const {
         throw std::logic_error("warning W1049: This method could not be overriden in Python - method returns reference to local variable!");
     }
 
@@ -102,56 +102,56 @@ void register_BaseBiosequence_class(){
         bp::scope BaseBiosequence_scope( BaseBiosequence_exposer );
         bp::class_< BaseBiosequence_wrapper::BaseResidue_wrapper, boost::noncopyable >( "BaseResidue", bp::init< >() )    
             .def( 
-                "getOneLetterCode"
-                , bp::pure_virtual( (char ( ::moltk::BaseBiosequence::BaseResidue::* )(  ) const)(&::moltk::BaseBiosequence::BaseResidue::getOneLetterCode) ) )    
+                "get_one_letter_code"
+                , bp::pure_virtual( (char ( ::moltk::BaseBiosequence::BaseResidue::* )(  ) const)(&::moltk::BaseBiosequence::BaseResidue::get_one_letter_code) ) )    
             .def( 
-                "getResidueNumber"
-                , bp::pure_virtual( (int ( ::moltk::BaseBiosequence::BaseResidue::* )(  ) const)(&::moltk::BaseBiosequence::BaseResidue::getResidueNumber) ) )    
+                "get_residue_number"
+                , bp::pure_virtual( (int ( ::moltk::BaseBiosequence::BaseResidue::* )(  ) const)(&::moltk::BaseBiosequence::BaseResidue::get_residue_number) ) )    
             .def( "__int__", &moltk::BaseBiosequence::BaseResidue::operator char  );
         { //::moltk::BaseBiosequence::GapResidue
             typedef bp::class_< BaseBiosequence_wrapper::GapResidue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue >, boost::noncopyable > GapResidue_exposer_t;
-            GapResidue_exposer_t GapResidue_exposer = GapResidue_exposer_t( "GapResidue", "\n GapResidue is used in Alignments\n", bp::init< int >(( bp::arg("residueNumberParam") ), "\n GapResidue has the residue number of the preceding non-gap residue.\n\n Thus a left end-gap might have a residue number of zero.\n") );
+            GapResidue_exposer_t GapResidue_exposer = GapResidue_exposer_t( "GapResidue", "\n GapResidue is used in Alignments\n", bp::init< int >(( bp::arg("residue_number_param") ), "\n GapResidue has the residue number of the preceding non-gap residue.\n\n Thus a left end-gap might have a residue number of zero.\n") );
             bp::scope GapResidue_scope( GapResidue_exposer );
             bp::implicitly_convertible< int, moltk::BaseBiosequence::GapResidue >();
-            { //::moltk::BaseBiosequence::GapResidue::getOneLetterCode
+            { //::moltk::BaseBiosequence::GapResidue::get_one_letter_code
             
-                typedef char ( ::moltk::BaseBiosequence::GapResidue::*getOneLetterCode_function_type )(  ) const;
-                typedef char ( BaseBiosequence_wrapper::GapResidue_wrapper::*default_getOneLetterCode_function_type )(  ) const;
+                typedef char ( ::moltk::BaseBiosequence::GapResidue::*get_one_letter_code_function_type )(  ) const;
+                typedef char ( BaseBiosequence_wrapper::GapResidue_wrapper::*default_get_one_letter_code_function_type )(  ) const;
                 
                 GapResidue_exposer.def( 
-                    "getOneLetterCode"
-                    , getOneLetterCode_function_type(&::moltk::BaseBiosequence::GapResidue::getOneLetterCode)
-                    , default_getOneLetterCode_function_type(&BaseBiosequence_wrapper::GapResidue_wrapper::default_getOneLetterCode) );
+                    "get_one_letter_code"
+                    , get_one_letter_code_function_type(&::moltk::BaseBiosequence::GapResidue::get_one_letter_code)
+                    , default_get_one_letter_code_function_type(&BaseBiosequence_wrapper::GapResidue_wrapper::default_get_one_letter_code) );
             
             }
-            { //::moltk::BaseBiosequence::GapResidue::getResidueNumber
+            { //::moltk::BaseBiosequence::GapResidue::get_residue_number
             
-                typedef int ( ::moltk::BaseBiosequence::GapResidue::*getResidueNumber_function_type )(  ) const;
-                typedef int ( BaseBiosequence_wrapper::GapResidue_wrapper::*default_getResidueNumber_function_type )(  ) const;
+                typedef int ( ::moltk::BaseBiosequence::GapResidue::*get_residue_number_function_type )(  ) const;
+                typedef int ( BaseBiosequence_wrapper::GapResidue_wrapper::*default_get_residue_number_function_type )(  ) const;
                 
                 GapResidue_exposer.def( 
-                    "getResidueNumber"
-                    , getResidueNumber_function_type(&::moltk::BaseBiosequence::GapResidue::getResidueNumber)
-                    , default_getResidueNumber_function_type(&BaseBiosequence_wrapper::GapResidue_wrapper::default_getResidueNumber) );
+                    "get_residue_number"
+                    , get_residue_number_function_type(&::moltk::BaseBiosequence::GapResidue::get_residue_number)
+                    , default_get_residue_number_function_type(&BaseBiosequence_wrapper::GapResidue_wrapper::default_get_residue_number) );
             
             }
         }
-        { //::moltk::BaseBiosequence::getNumberOfResidues
+        { //::moltk::BaseBiosequence::get_number_of_residues
         
-            typedef ::size_t ( ::moltk::BaseBiosequence::*getNumberOfResidues_function_type )(  ) const;
+            typedef ::size_t ( ::moltk::BaseBiosequence::*get_number_of_residues_function_type )(  ) const;
             
             BaseBiosequence_exposer.def( 
-                "getNumberOfResidues"
-                , bp::pure_virtual( getNumberOfResidues_function_type(&::moltk::BaseBiosequence::getNumberOfResidues) ) );
+                "get_number_of_residues"
+                , bp::pure_virtual( get_number_of_residues_function_type(&::moltk::BaseBiosequence::get_number_of_residues) ) );
         
         }
-        { //::moltk::BaseBiosequence::getResidue
+        { //::moltk::BaseBiosequence::get_residue
         
-            typedef ::moltk::BaseBiosequence::BaseResidue const & ( ::moltk::BaseBiosequence::*getResidue_function_type )( ::size_t ) const;
+            typedef ::moltk::BaseBiosequence::BaseResidue const & ( ::moltk::BaseBiosequence::*get_residue_function_type )( ::size_t ) const;
             
             BaseBiosequence_exposer.def( 
-                "getResidue"
-                , bp::pure_virtual( getResidue_function_type(&::moltk::BaseBiosequence::getResidue) )
+                "get_residue"
+                , bp::pure_virtual( get_residue_function_type(&::moltk::BaseBiosequence::get_residue) )
                 , ( bp::arg("index") )
                 , bp::return_value_policy< bp::copy_const_reference >() );
         

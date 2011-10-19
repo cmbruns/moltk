@@ -36,16 +36,16 @@ struct Biosequence_wrapper : moltk::Biosequence, bp::wrapper< moltk::Biosequence
     
     }
 
-    virtual ::size_t getNumberOfResidues(  ) const  {
-        if( bp::override func_getNumberOfResidues = this->get_override( "getNumberOfResidues" ) )
-            return func_getNumberOfResidues(  );
+    virtual ::size_t get_number_of_residues(  ) const  {
+        if( bp::override func_get_number_of_residues = this->get_override( "get_number_of_residues" ) )
+            return func_get_number_of_residues(  );
         else{
-            return this->moltk::Biosequence::getNumberOfResidues(  );
+            return this->moltk::Biosequence::get_number_of_residues(  );
         }
     }
     
-    ::size_t default_getNumberOfResidues(  ) const  {
-        return moltk::Biosequence::getNumberOfResidues( );
+    ::size_t default_get_number_of_residues(  ) const  {
+        return moltk::Biosequence::get_number_of_residues( );
     }
 
     virtual void print_to_stream( ::std::ostream & os ) const  {
@@ -73,45 +73,45 @@ void register_Biosequence_class(){
         Biosequence_exposer.def( bp::init< char const *, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" )) );
         bp::implicitly_convertible< char const *, moltk::Biosequence >();
         Biosequence_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("rhs") )) );
-        { //::moltk::Biosequence::getNumberOfResidues
+        { //::moltk::Biosequence::get_number_of_residues
         
-            typedef ::size_t ( ::moltk::Biosequence::*getNumberOfResidues_function_type )(  ) const;
-            typedef ::size_t ( Biosequence_wrapper::*default_getNumberOfResidues_function_type )(  ) const;
+            typedef ::size_t ( ::moltk::Biosequence::*get_number_of_residues_function_type )(  ) const;
+            typedef ::size_t ( Biosequence_wrapper::*default_get_number_of_residues_function_type )(  ) const;
             
             Biosequence_exposer.def( 
-                "getNumberOfResidues"
-                , getNumberOfResidues_function_type(&::moltk::Biosequence::getNumberOfResidues)
-                , default_getNumberOfResidues_function_type(&Biosequence_wrapper::default_getNumberOfResidues) );
+                "get_number_of_residues"
+                , get_number_of_residues_function_type(&::moltk::Biosequence::get_number_of_residues)
+                , default_get_number_of_residues_function_type(&Biosequence_wrapper::default_get_number_of_residues) );
         
         }
-        { //::moltk::Biosequence::getResidue
+        { //::moltk::Biosequence::get_residue
         
-            typedef ::moltk::BiosequenceResidue const & ( ::moltk::Biosequence::*getResidue_function_type )( ::size_t ) const;
+            typedef ::moltk::BiosequenceResidue const & ( ::moltk::Biosequence::*get_residue_function_type )( ::size_t ) const;
             
             Biosequence_exposer.def( 
-                "getResidue"
-                , getResidue_function_type(&::moltk::Biosequence::getResidue)
+                "get_residue"
+                , get_residue_function_type(&::moltk::Biosequence::get_residue)
                 , ( bp::arg("ix") )
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
-        { //::moltk::Biosequence::loadStream
+        { //::moltk::Biosequence::load_stream
         
-            typedef void ( ::moltk::Biosequence::*loadStream_function_type )( ::std::istream & ) ;
+            typedef void ( ::moltk::Biosequence::*load_stream_function_type )( ::std::istream & ) ;
             
             Biosequence_exposer.def( 
-                "loadStream"
-                , loadStream_function_type( &::moltk::Biosequence::loadStream )
+                "load_stream"
+                , load_stream_function_type( &::moltk::Biosequence::load_stream )
                 , ( bp::arg("is") ) );
         
         }
-        { //::moltk::Biosequence::printString
+        { //::moltk::Biosequence::print_string
         
-            typedef void ( ::moltk::Biosequence::*printString_function_type )( ::std::ostream & ) const;
+            typedef void ( ::moltk::Biosequence::*print_string_function_type )( ::std::ostream & ) const;
             
             Biosequence_exposer.def( 
-                "printString"
-                , printString_function_type( &::moltk::Biosequence::printString )
+                "print_string"
+                , print_string_function_type( &::moltk::Biosequence::print_string )
                 , ( bp::arg("os") ) );
         
         }

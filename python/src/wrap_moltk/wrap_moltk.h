@@ -36,11 +36,11 @@ using namespace moltk::units;
 
 namespace pyplusplus { namespace aliases {
 
-    typedef std::vector<PdbStructure::Atom> AtomList;
-    typedef unit<information_dimension> bit_t;
-    typedef quantity<bit_t> Information;
-    typedef unit<length_dimension> nanometer_t;
-    typedef quantity<nanometer_t> Length;
+    typedef std::vector<PDBStructure::Atom> AtomList;
+    typedef Unit<InformationDimension> BitUnit;
+    typedef Quantity<BitUnit> Information;
+    typedef Unit<LengthDimension> NanometerUnit;
+    typedef Quantity<NanometerUnit> Length;
     typedef std::vector<int> std_vector_int;
     typedef std::vector<Aligner::QueryPosition*> QueryPositionList;
     typedef std::vector<Aligner::TargetPosition*> TargetPositionList;
