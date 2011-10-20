@@ -57,14 +57,11 @@ if(MOLTK_REGENERATE_PYTHON_API_DOCS)
         WORKING_DIRECTORY \"${PYTHON_API_DIR}\")
     ")
     # Run this script after local-install, but before install
-    add_custom_command(
-        OUTPUT "${PYTHON_API_DIR}/python/index.html"
-        COMMAND ${CMAKE_COMMAND} ARGS -P "${DOCSCRIPT}"
-        COMMAND ${CMAKE_COMMAND} ARGS -E touch "${PYTHON_API_DIR}/python/index.html"
-        DEPENDS "${DOCSCRIPT}" InstallMolTKLocally ${PURE_PYTHON_SRCS})
     add_custom_target(MoltkPythonApiDocs ALL
-        DEPENDS "${PYTHON_API_DIR}/python/index.html" LocalPyMolTKInstallation ${PURE_PYTHON_SRCS}
+        COMMAND ${CMAKE_COMMAND} ARGS -P "${DOCSCRIPT}"
+        DEPENDS "${DOCSCRIPT}" ${PURE_PYTHON_SRCS}
         SOURCES "${DOCSCRIPT}")
+    add_dependencies(MoltkPythonApiDocs LocalPyMolTKInstallation)
 endif()
 
 # TODO

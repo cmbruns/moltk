@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.0 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.1 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -42,7 +42,7 @@
   <tr valign="top">
     <td width="100%">
       <span class="breadcrumbs">
-        <a href="moltk-module.html">Module&nbsp;moltk</a> ::
+        <a href="moltk-module.html">Package&nbsp;moltk</a> ::
         <a href="moltk.Aligner-class.html">Class&nbsp;Aligner</a> ::
         Class&nbsp;Cell
       </span>
@@ -62,14 +62,25 @@
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class Cell</h1><p class="nomargin-top"></p>
-<pre class="base-tree">
- object --+    
-          |    
-??.instance --+
-              |
-             <strong class="uidshort">Aligner.Cell</strong>
-</pre>
-
+<center>
+<center>  <map id="uml_class_diagram_for_moltk_al_2" name="uml_class_diagram_for_moltk_al_2">
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#__instance_size__" title="moltk.Aligner.Cell.__instance_size__" alt="" coords="17,108,237,127"/>
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#e" title="E, best score with gap in sequence 1" alt="" coords="17,127,237,145"/>
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#f" title="F, best score with gap in sequence 2" alt="" coords="17,145,237,164"/>
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#g" title="G, best ungapped score through this cell" alt="" coords="17,164,237,183"/>
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#v" title="V, best score through this cell" alt="" coords="17,183,237,201"/>
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,204,237,223"/>
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#__reduce__" title="helper for pickle" alt="" coords="17,223,237,241"/>
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#__str__" title="__str__( (Cell)arg1) &#45;&gt; object :" alt="" coords="17,241,237,260"/>
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#compute_traceback_pointer" title="compute_traceback_pointer( (Cell)arg1) &#45;&gt; TracebackPointer : &#160;&#160;&#160;&#160;&#160;An Aligner::Cell is one node in the dynamic programming table" alt="" coords="17,260,237,279"/>
+<area shape="rect" id="node18" href="moltk.Aligner.Cell-class.html#compute_v" title="compute_v( (Cell)arg1) &#45;&gt; Information :" alt="" coords="17,279,237,297"/>
+<area shape="rect" id="node1" href="moltk.Aligner.Cell-class.html" title="An Aligner::Cell is one node in the dynamic programming table" alt="" coords="5,83,248,303"/>
+<area shape="rect" id="node19" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="65,39,189,57"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="53,6,200,63"/>
+</map>
+  <img src="uml_class_diagram_for_moltk_al_2.gif" alt='' usemap="#uml_class_diagram_for_moltk_al_2" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
 <hr />
 <p>An Aligner::Cell is one node in the dynamic programming table</p>
 
@@ -124,6 +135,58 @@
       
     </td>
   </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Aligner.Cell-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __str__( (Cell)arg1) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Aligner.Cell-class.html#compute_traceback_pointer" class="summary-sig-name">compute_traceback_pointer</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      compute_traceback_pointer( (Cell)arg1) -&gt; TracebackPointer :
+     An Aligner::Cell is one node in the dynamic programming table</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Aligner.Cell-class.html#compute_v" class="summary-sig-name">compute_v</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      compute_v( (Cell)arg1) -&gt; Information :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
   <tr>
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><i>unreachable</i>.instance</code></b>:
@@ -138,7 +201,6 @@
       <code>__repr__</code>,
       <code>__setattr__</code>,
       <code>__sizeof__</code>,
-      <code>__str__</code>,
       <code>__subclasshook__</code>
       </p>
     </td>
@@ -165,7 +227,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="__instance_size__"></a><span class="summary-name">__instance_size__</span> = <code title="56">56</code>
+        <a name="__instance_size__"></a><span class="summary-name">__instance_size__</span> = <code title="48">48</code>
     </td>
   </tr>
 </table>
@@ -208,23 +270,6 @@
     </td><td class="summary">
         <a href="moltk.Aligner.Cell-class.html#g" class="summary-name">g</a><br />
       G, best ungapped score through this cell
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="moltk.Aligner.Cell-class.html#s" class="summary-name">s</a><br />
-      Wm, score of aligning position S1(i) with S2(j) s is the score of 
-      aligning position S1(i) with S2(j); (Wm in Gusfields nomenclature.)
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="moltk.Aligner.Cell-class.html#tracebackPointer" class="summary-name">tracebackPointer</a><br />
-      breadcrumb to help reconstruct the final alignment
     </td>
   </tr>
 <tr>
@@ -281,7 +326,7 @@
 __init__( (object)arg1) -&gt; None :
 
     C++ signature :
-        void __init__(struct _object *)
+        void __init__(_object*)
 
 </pre>
   <dl class="fields">
@@ -311,6 +356,89 @@ __init__( (object)arg1) -&gt; None :
         object.__reduce__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__str__( (Cell)arg1) -&gt; object :
+
+    C++ signature :
+        _object* __str__(moltk::Aligner::Cell {lvalue})
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="compute_traceback_pointer"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compute_traceback_pointer</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+compute_traceback_pointer( (Cell)arg1) -&gt; TracebackPointer :
+     An Aligner::Cell is one node in the dynamic programming table
+
+    C++ signature :
+        moltk::Aligner::TracebackPointer compute_traceback_pointer(moltk::Aligner::Cell {lvalue})
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="compute_v"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compute_v</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+compute_v( (Cell)arg1) -&gt; Information :
+
+    C++ signature :
+        moltk::units::Quantity&lt;moltk::units::Unit&lt;moltk::units::InformationDimension&gt;, double&gt; compute_v(moltk::Aligner::Cell {lvalue})
+
+</pre>
+  <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
@@ -384,41 +512,6 @@ __init__( (object)arg1) -&gt; None :
   </dl>
 </td></tr></table>
 </div>
-<a name="s"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">s</h3>
-  <p>Wm, score of aligning position S1(i) with S2(j) s is the score of 
-  aligning position S1(i) with S2(j); (Wm in Gusfields nomenclature.)</p>
-  <dl class="fields">
-    <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
-    </dd>
-    <dt>Set Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="tracebackPointer"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">tracebackPointer</h3>
-  <p>breadcrumb to help reconstruct the final alignment</p>
-  <dl class="fields">
-    <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
-    </dd>
-    <dt>Set Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
 <a name="v"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -461,14 +554,14 @@ __init__( (object)arg1) -&gt; None :
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.0 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.1 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Oct 02 18:08:13 2011
+    Generated by Epydoc 3.0.1 on Thu Oct 20 09:54:58 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
