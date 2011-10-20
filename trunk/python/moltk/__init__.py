@@ -52,6 +52,12 @@ For questions contact: cmbruns@rotatingpenguin.com
 import _moltk
 from _moltk import *
 
+# Put documentation for _moltk members into moltk docs.
+__all__ = []
+for s in dir():
+    if not s.startswith('_'):
+        __all__.append(s)
+
 # moltk._moltk docstring
 _moltk.__doc__ = """
 The _moltk module provides tools for protein sequence/structure alignment and visualization.
@@ -79,3 +85,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 Commercial users should ask about our dual licensing model.
 For questions contact: cmbruns@rotatingpenguin.com
 """
+
+# Hide _moltk submodule
+_moltk = None
+
