@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'moltk.ui'
 #
-# Created: Wed Oct 19 13:04:18 2011
+# Created: Thu Oct 20 14:45:59 2011
 #      by: pyside-uic 0.2.9 running on PySide 1.0.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -35,11 +35,8 @@ class Ui_MoltkMainWindow(object):
         self.frame_2.setFrameShadow(QtGui.QFrame.Raised)
         self.frame_2.setLineWidth(5)
         self.frame_2.setObjectName("frame_2")
-        self.frame_3 = QtGui.QFrame(self.splitter)
-        self.frame_3.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.frame_3.setFrameShadow(QtGui.QFrame.Raised)
-        self.frame_3.setLineWidth(5)
-        self.frame_3.setObjectName("frame_3")
+        self.widget_3 = StructureCanvas(self.splitter)
+        self.widget_3.setObjectName("widget_3")
         self.horizontalLayout_2.addWidget(self.splitter)
         self.horizontalLayout.addWidget(self.frame)
         MoltkMainWindow.setCentralWidget(self.centralwidget)
@@ -81,3 +78,4 @@ class Ui_MoltkMainWindow(object):
         self.actionOpen.setText(QtGui.QApplication.translate("MoltkMainWindow", "Open...", None, QtGui.QApplication.UnicodeUTF8))
         self.actionBrowse_MolTK_python_API.setText(QtGui.QApplication.translate("MoltkMainWindow", "Browse MolTK python API", None, QtGui.QApplication.UnicodeUTF8))
 
+from structure_canvas import StructureCanvas
