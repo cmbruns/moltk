@@ -19,7 +19,7 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
-#include "moltk/Alignment.h"
+#include "moltk/Alignment.hpp"
 #include <cassert>
 #include <sstream>
 

@@ -24,7 +24,7 @@ cmake_minimum_required(VERSION 2.8)
 enable_testing()
 
 # Some declarations are common to C++ and python subdirectories
-set(MOLTK_VERSION 0.3.1)
+set(MOLTK_VERSION 0.3.2)
 add_definitions(-DMOLTK_VERSION="\\"${MOLTK_VERSION}\\"")
 include_directories(c++/include)
 
@@ -42,7 +42,7 @@ endif()
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
-file(GLOB_RECURSE MOLTK_HEADERS "c++/include/*.h")
+file(GLOB_RECURSE MOLTK_HEADERS "c++/include/*.hpp")
 file(GLOB_RECURSE MOLTK_SOURCES "c++/src/*.cpp")
 
 # C++ rules must precede python rules,

@@ -2,7 +2,7 @@
 #define BOOST_TEST_MODULE EStringUnitTest
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
-#include "moltk/Alignment.h"
+#include "moltk/Alignment.hpp"
 
 using namespace moltk;
 typedef moltk::Alignment::EString EString;

@@ -1,3 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classmoltk_1_1Structure_1_1Atom.html" title="Structure::Atom represents a chemical atom in a molecular structure." alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node1" href="$classmoltk_1_1BaseBiosequence_1_1BaseResidue.html" title="moltk::BaseBiosequence::BaseResidue" alt="" coords="7,55,297,83"/>
+<area shape="rect" id="node3" href="$classmoltk_1_1BaseBiosequence_1_1GapResidue.html" title="GapResidue is used in Alignments." alt="" coords="347,5,632,33"/>
+<area shape="rect" id="node5" href="$classmoltk_1_1BiosequenceResidue.html" title="moltk::BiosequenceResidue" alt="" coords="383,55,596,83"/>
+<area shape="rect" id="node7" href="$classmoltk_1_1PDBStructure_1_1Residue.html" title="moltk::PDBStructure::Residue" alt="" coords="375,106,604,134"/>
 </map>

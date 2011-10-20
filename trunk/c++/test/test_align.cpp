@@ -24,7 +24,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/test/debug.hpp>
-#include "moltk.h"
+#include "moltk.hpp"
 #include <iostream>
 #include <cassert>
 

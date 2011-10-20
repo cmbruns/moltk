@@ -19,7 +19,7 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
-#include "moltk.h"
+#include "moltk.hpp"
 
 using namespace std;
 using namespace moltk;

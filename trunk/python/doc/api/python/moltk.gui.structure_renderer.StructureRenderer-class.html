@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>moltk.gui.structure_renderer.StructureRenderer</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.2 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="moltk-module.html">Package&nbsp;moltk</a> ::
+        <a href="moltk.gui-module.html">Package&nbsp;gui</a> ::
+        <a href="moltk.gui.structure_renderer-module.html">Module&nbsp;structure_renderer</a> ::
+        Class&nbsp;StructureRenderer
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="moltk.gui.structure_renderer.StructureRenderer-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class StructureRenderer</h1><p class="nomargin-top"><span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_moltk_gu_5" name="uml_class_diagram_for_moltk_gu_5">
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#sceneChanged" title="moltk.gui.structure_renderer.StructureRenderer.sceneChanged" alt="" coords="17,31,273,49"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#__init__" title="moltk.gui.structure_renderer.StructureRenderer.__init__" alt="" coords="17,52,273,71"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#onRotationChanged" title="moltk.gui.structure_renderer.StructureRenderer.onRotationChanged" alt="" coords="17,71,273,89"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#update" title="moltk.gui.structure_renderer.StructureRenderer.update" alt="" coords="17,89,273,108"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#initGL" title="moltk.gui.structure_renderer.StructureRenderer.initGL" alt="" coords="17,108,273,127"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#paintBackground" title="moltk.gui.structure_renderer.StructureRenderer.paintBackground" alt="" coords="17,127,273,145"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#setupCamera" title="moltk.gui.structure_renderer.StructureRenderer.setupCamera" alt="" coords="17,145,273,164"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#paintOpaqueGeometry" title="moltk.gui.structure_renderer.StructureRenderer.paintOpaqueGeometry" alt="" coords="17,164,273,183"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#paintTransparentGeometry" title="moltk.gui.structure_renderer.StructureRenderer.paintTransparentGeometry" alt="" coords="17,183,273,201"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#paint" title="moltk.gui.structure_renderer.StructureRenderer.paint" alt="" coords="17,201,273,220"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#paint_monoscopic" title="moltk.gui.structure_renderer.StructureRenderer.paint_monoscopic" alt="" coords="17,220,273,239"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#onPaintCalled" title="moltk.gui.structure_renderer.StructureRenderer.onPaintCalled" alt="" coords="17,239,273,257"/>
+<area shape="rect" id="node86" href="moltk.gui.structure_renderer.StructureRenderer-class.html#onResizeCalled" title="moltk.gui.structure_renderer.StructureRenderer.onResizeCalled" alt="" coords="17,257,273,276"/>
+<area shape="rect" id="node1" href="moltk.gui.structure_renderer.StructureRenderer-class.html" title="StructureRenderer is a custom renderer class that performs all OpenGL operations in a separate thread." alt="" coords="5,6,285,282"/>
+</map>
+  <img src="uml_class_diagram_for_moltk_gu_5.gif" alt='' usemap="#uml_class_diagram_for_moltk_gu_5" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>StructureRenderer is a custom renderer class that performs all OpenGL 
+  operations in a separate thread.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">glwidget</span>,
+        <span class="summary-sig-arg">parent</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onRotationChanged"></a><span class="summary-sig-name">onRotationChanged</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">glwidget</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.onRotationChanged">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="update"></a><span class="summary-sig-name">update</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.update">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="initGL"></a><span class="summary-sig-name">initGL</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.initGL">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="paintBackground"></a><span class="summary-sig-name">paintBackground</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.paintBackground">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setupCamera"></a><span class="summary-sig-name">setupCamera</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.setupCamera">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="paintOpaqueGeometry"></a><span class="summary-sig-name">paintOpaqueGeometry</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.paintOpaqueGeometry">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="paintTransparentGeometry"></a><span class="summary-sig-name">paintTransparentGeometry</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.paintTransparentGeometry">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="paint"></a><span class="summary-sig-name">paint</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.paint">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="paint_monoscopic"></a><span class="summary-sig-name">paint_monoscopic</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.paint_monoscopic">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onPaintCalled"></a><span class="summary-sig-name">onPaintCalled</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.onPaintCalled">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onResizeCalled"></a><span class="summary-sig-name">onResizeCalled</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">w</span>,
+        <span class="summary-sig-arg">h</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.structure_renderer-pysrc.html#StructureRenderer.onResizeCalled">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sceneChanged"></a><span class="summary-name">sceneChanged</span> = <code title="QtCore.Signal()">QtCore.Signal()</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.2 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Oct 20 16:26:23 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
