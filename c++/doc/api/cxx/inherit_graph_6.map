@@ -1,5 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classmoltk_1_1BaseBiosequence.html" title="moltk::BaseBiosequence" alt="" coords="6,31,173,57"/>
-<area shape="rect" id="node3" href="$classmoltk_1_1Biosequence.html" title="moltk::Biosequence" alt="" coords="222,5,359,32"/>
-<area shape="rect" id="node5" href="$classmoltk_1_1Structure.html" title="moltk::Structure" alt="" coords="233,56,348,83"/>
+<area shape="rect" id="node1" href="$classmoltk_1_1Alignment_1_1EString.html" title="moltk::Alignment::EString" alt="" coords="7,5,207,33"/>
 </map>

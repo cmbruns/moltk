@@ -19,7 +19,7 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
-#include "moltk/MatrixScorer.h"
+#include "moltk/MatrixScorer.hpp"
 #include <sstream>
 #include <cassert>
 #include <cctype>

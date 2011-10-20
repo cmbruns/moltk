@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node4" href="$classmoltk_1_1PDBStructure_1_1Atom.html" title="Structure::Atom represents a chemical atom in a molecular structure." alt="" coords="5,273,216,301"/>
+<area shape="rect" id="node8" href="$classmoltk_1_1PDBStructure_1_1Chain.html" title="moltk::PDBStructure::Chain" alt="" coords="240,273,453,301"/>
+<area shape="rect" id="node10" href="$classmoltk_1_1BaseBiosequence.html" title="moltk::BaseBiosequence" alt="" coords="187,179,379,207"/>
+<area shape="rect" id="node14" href="$classmoltk_1_1PDBStructure_1_1Residue.html" title="moltk::PDBStructure::Residue" alt="" coords="377,86,607,114"/>
+<area shape="rect" id="node16" href="$classmoltk_1_1BaseBiosequence_1_1BaseResidue.html" title="moltk::BaseBiosequence::BaseResidue" alt="" coords="347,6,637,34"/>
+</map>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>moltk.gui.structure_canvas</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.2 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="moltk-module.html">Package&nbsp;moltk</a> ::
+        <a href="moltk.gui-module.html">Package&nbsp;gui</a> ::
+        Module&nbsp;structure_canvas
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="moltk.gui.structure_canvas-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="moltk.gui.structure_canvas-module.html">Module moltk.gui.structure_canvas</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Do not import PyOpenGL in this file,</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># to help avoid mixing QtGui thread with OpenGL thread.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">division</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module moltk.gui.structure_renderer=moltk.gui.structure_renderer-module.html"><a title="moltk.gui.structure_renderer" class="py-name" href="#" onclick="return doclink('link-0', 'structure_renderer', 'link-0');">structure_renderer</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class moltk.gui.structure_renderer.StructureRenderer=moltk.gui.structure_renderer.StructureRenderer-class.html"><a title="moltk.gui.structure_renderer.StructureRenderer" class="py-name" href="#" onclick="return doclink('link-1', 'StructureRenderer', 'link-1');">StructureRenderer</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package moltk=moltk-module.html"><a title="moltk" class="py-name" href="#" onclick="return doclink('link-2', 'moltk', 'link-2');">moltk</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">Displacement</tt><tt class="py-op">,</tt> <tt class="py-name">Rotation3D</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">PySide</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QtCore</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">PySide</tt><tt class="py-op">.</tt><tt class="py-name">QtOpenGL</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QGLWidget</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">math</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="StructureCanvas"></a><div id="StructureCanvas-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="StructureCanvas-toggle" onclick="return toggle('StructureCanvas');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="moltk.gui.structure_canvas.StructureCanvas-class.html">StructureCanvas</a><tt class="py-op">(</tt><tt class="py-base-class">QGLWidget</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StructureCanvas-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="StructureCanvas-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">    Widget for displaying 3D molecule structure in the MolTK GUI.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">    Don't put OpenGL calls in this class, because all OpenGL calls</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">    must be called from a dedicated OpenGL thread.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="StructureCanvas.__init__"></a><div id="StructureCanvas.__init__-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="StructureCanvas.__init__-toggle" onclick="return toggle('StructureCanvas.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="moltk.gui.structure_canvas.StructureCanvas-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StructureCanvas.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="StructureCanvas.__init__-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">QGLWidget</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method moltk.Aligner.Cell.__init__()=moltk.Aligner.Cell-class.html#__init__,Method moltk.Aligner.QueryPosition.__init__()=moltk.Aligner.QueryPosition-class.html#__init__,Method moltk.Aligner.Scorer.__init__()=moltk.Aligner.Scorer-class.html#__init__,Method moltk.Aligner.TargetPosition.__init__()=moltk.Aligner.TargetPosition-class.html#__init__,Method moltk.Aligner.__init__()=moltk.Aligner-class.html#__init__,Method moltk.Alignment.EString.__init__()=moltk.Alignment.EString-class.html#__init__,Method moltk.Alignment.EString.const_iterator.__init__()=moltk.Alignment.EString.const_iterator-class.html#__init__,Method moltk.Alignment.Row.__init__()=moltk.Alignment.Row-class.html#__init__,Method moltk.Alignment.__init__()=moltk.Alignment-class.html#__init__,Method moltk.BaseBiosequence.BaseResidue.__init__()=moltk.BaseBiosequence.BaseResidue-class.html#__init__,Method moltk.BaseBiosequence.GapResidue.__init__()=moltk.BaseBiosequence.GapResidue-class.html#__init__,Method moltk.BaseBiosequence.__init__()=moltk.BaseBiosequence-class.html#__init__,Method moltk.Biosequence.__init__()=moltk.Biosequence-class.html#__init__,Method moltk.BiosequenceResidue.__init__()=moltk.BiosequenceResidue-class.html#__init__,Method moltk.BitUnit.__init__()=moltk.BitUnit-class.html#__init__,Method moltk.Dimension.__init__()=moltk.Dimension-class.html#__init__,Method moltk.Information.__init__()=moltk.Information-class.html#__init__,Method moltk.InformationDimension.__init__()=moltk.InformationDimension-class.html#__init__,Method moltk.LengthDimension.__init__()=moltk.LengthDimension-class.html#__init__,Method moltk.NanometerUnit.__init__()=moltk.NanometerUnit-class.html#__init__,Method moltk.PDBStructure.Atom.__init__()=moltk.PDBStructure.Atom-class.html#__init__,Method moltk.PDBStructure.Chain.__init__()=moltk.PDBStructure.Chain-class.html#__init__,Method moltk.PDBStructure.Residue.__init__()=moltk.PDBStructure.Residue-class.html#__init__,Method moltk.PDBStructure.__init__()=moltk.PDBStructure-class.html#__init__,Method moltk.Printable.__init__()=moltk.Printable-class.html#__init__,Method moltk.QueryPositionList.__init__()=moltk.QueryPositionList-class.html#__init__,Method moltk.TargetPositionList.__init__()=moltk.TargetPositionList-class.html#__init__,Method moltk.gui.moltk_app.MoltkApp.__init__()=moltk.gui.moltk_app.MoltkApp-class.html#__init__,Method moltk.gui.moltk_app.MoltkMainWindow.__init__()=moltk.gui.moltk_app.MoltkMainWindow-class.html#__init__,Method moltk.gui.structure_canvas.StructureCanvas.__init__()=moltk.gui.structure_canvas.StructureCanvas-class.html#__init__,Method moltk.gui.structure_renderer.StructureRenderer.__init__()=moltk.gui.structure_renderer.StructureRenderer-class.html#__init__,Method moltk.std_vector_int.__init__()=moltk.std_vector_int-class.html#__init__"><a title="moltk.Aligner.Cell.__init__
+moltk.Aligner.QueryPosition.__init__
+moltk.Aligner.Scorer.__init__
+moltk.Aligner.TargetPosition.__init__
+moltk.Aligner.__init__
+moltk.Alignment.EString.__init__
+moltk.Alignment.EString.const_iterator.__init__
+moltk.Alignment.Row.__init__
+moltk.Alignment.__init__
+moltk.BaseBiosequence.BaseResidue.__init__
+moltk.BaseBiosequence.GapResidue.__init__
+moltk.BaseBiosequence.__init__
+moltk.Biosequence.__init__
+moltk.BiosequenceResidue.__init__
+moltk.BitUnit.__init__
+moltk.Dimension.__init__
+moltk.Information.__init__
+moltk.InformationDimension.__init__
+moltk.LengthDimension.__init__
+moltk.NanometerUnit.__init__
+moltk.PDBStructure.Atom.__init__
+moltk.PDBStructure.Chain.__init__
+moltk.PDBStructure.Residue.__init__
+moltk.PDBStructure.__init__
+moltk.Printable.__init__
+moltk.QueryPositionList.__init__
+moltk.TargetPositionList.__init__
+moltk.gui.moltk_app.MoltkApp.__init__
+moltk.gui.moltk_app.MoltkMainWindow.__init__
+moltk.gui.structure_canvas.StructureCanvas.__init__
+moltk.gui.structure_renderer.StructureRenderer.__init__
+moltk.std_vector_int.__init__" class="py-name" href="#" onclick="return doclink('link-3', '__init__', 'link-3');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">parent</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">renderer</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="moltk.gui.structure_renderer.StructureRenderer" class="py-name" href="#" onclick="return doclink('link-4', 'StructureRenderer', 'link-1');">StructureRenderer</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oldMousePos</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rotation</tt> <tt class="py-op">=</tt> <tt class="py-name">Rotation3D</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt class="py-comment"># Because we want all OpenGL operations in a separate thread,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-comment"># we need to override paintEvent and resizeEvent to </tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-comment"># avoid unwanted GUI thread OpenGL calls</tt> </tt>
+<a name="StructureCanvas.paintEvent"></a><div id="StructureCanvas.paintEvent-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="StructureCanvas.paintEvent-toggle" onclick="return toggle('StructureCanvas.paintEvent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="moltk.gui.structure_canvas.StructureCanvas-class.html#paintEvent">paintEvent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StructureCanvas.paintEvent-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="StructureCanvas.paintEvent-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">doneCurrent</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Variable moltk.gui.structure_canvas.StructureCanvas.paintCalled=moltk.gui.structure_canvas.StructureCanvas-class.html#paintCalled"><a title="moltk.gui.structure_canvas.StructureCanvas.paintCalled" class="py-name" href="#" onclick="return doclink('link-5', 'paintCalled', 'link-5');">paintCalled</a></tt><tt class="py-op">.</tt><tt class="py-name">emit</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="StructureCanvas.resizeEvent"></a><div id="StructureCanvas.resizeEvent-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="StructureCanvas.resizeEvent-toggle" onclick="return toggle('StructureCanvas.resizeEvent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="moltk.gui.structure_canvas.StructureCanvas-class.html#resizeEvent">resizeEvent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StructureCanvas.resizeEvent-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="StructureCanvas.resizeEvent-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">doneCurrent</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Variable moltk.gui.structure_canvas.StructureCanvas.resizeCalled=moltk.gui.structure_canvas.StructureCanvas-class.html#resizeCalled"><a title="moltk.gui.structure_canvas.StructureCanvas.resizeCalled" class="py-name" href="#" onclick="return doclink('link-6', 'resizeCalled', 'link-6');">resizeCalled</a></tt><tt class="py-op">.</tt><tt class="py-name">emit</tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">size</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">width</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">size</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">height</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="StructureCanvas.mouseMoveEvent"></a><div id="StructureCanvas.mouseMoveEvent-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="StructureCanvas.mouseMoveEvent-toggle" onclick="return toggle('StructureCanvas.mouseMoveEvent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="moltk.gui.structure_canvas.StructureCanvas-class.html#mouseMoveEvent">mouseMoveEvent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StructureCanvas.mouseMoveEvent-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="StructureCanvas.mouseMoveEvent-expanded"><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oldMousePos</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt class="py-name">dPos</tt> <tt class="py-op">=</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oldMousePos</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">            <tt class="py-comment">#</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">            <tt class="py-name">dx</tt> <tt class="py-op">=</tt> <tt class="py-name">dPos</tt><tt class="py-op">.</tt><tt class="py-name">x</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">            <tt class="py-name">dy</tt> <tt class="py-op">=</tt> <tt class="py-name">dPos</tt><tt class="py-op">.</tt><tt class="py-name">y</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">            <tt class="py-comment"># self.rotY.emit(dx * 0.20)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">            <tt class="py-comment">#</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">            <tt class="py-name">rotAnglePerPixel</tt> <tt class="py-op">=</tt> <tt class="py-number">2.0</tt> <tt class="py-op">*</tt> <tt class="py-number">3.14159</tt> <tt class="py-op">/</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">width</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">height</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2.0</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">            <tt class="py-name">dragDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">math</tt><tt class="py-op">.</tt><tt class="py-name">sqrt</tt><tt class="py-op">(</tt><tt class="py-name">dx</tt><tt class="py-op">*</tt><tt class="py-name">dx</tt> <tt class="py-op">+</tt> <tt class="py-name">dy</tt><tt class="py-op">*</tt><tt class="py-name">dy</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">            <tt class="py-name">rotAngle</tt> <tt class="py-op">=</tt> <tt class="py-name">dragDistance</tt> <tt class="py-op">*</tt> <tt class="py-name">rotAnglePerPixel</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-name">rotAxis</tt> <tt class="py-op">=</tt> <tt class="py-name">Displacement</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">dy</tt><tt class="py-op">,</tt> <tt class="py-name">dx</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">normalize</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">            <tt class="py-name">dragRotation</tt> <tt class="py-op">=</tt> <tt class="py-name">Rotation3D</tt><tt class="py-op">.</tt><tt class="py-name">fromAngleAboutUnitVector</tt><tt class="py-op">(</tt><tt class="py-name">rotAngle</tt><tt class="py-op">,</tt> <tt class="py-name">rotAxis</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">            <tt class="py-comment"># print "rotation0 = ", self.rotation</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">            <tt class="py-comment"># print "dragRotation = ", dragRotation</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rotation</tt> <tt class="py-op">=</tt> <tt class="py-name">dragRotation</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rotation</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">            <tt class="py-comment"># print "rotation1 = ", self.rotation</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">            <tt class="py-comment"># print self.rotation</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Variable moltk.gui.structure_canvas.StructureCanvas.rotationChanged=moltk.gui.structure_canvas.StructureCanvas-class.html#rotationChanged"><a title="moltk.gui.structure_canvas.StructureCanvas.rotationChanged" class="py-name" href="#" onclick="return doclink('link-7', 'rotationChanged', 'link-7');">rotationChanged</a></tt><tt class="py-op">.</tt><tt class="py-name">emit</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-comment"># print event.pos()</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oldMousePos</tt> <tt class="py-op">=</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="StructureCanvas.mousePressEvent"></a><div id="StructureCanvas.mousePressEvent-def"><a name="L57"></a><tt class="py-lineno">57</tt> <a class="py-toggle" href="#" id="StructureCanvas.mousePressEvent-toggle" onclick="return toggle('StructureCanvas.mousePressEvent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="moltk.gui.structure_canvas.StructureCanvas-class.html#mousePressEvent">mousePressEvent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StructureCanvas.mousePressEvent-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="StructureCanvas.mousePressEvent-expanded"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oldMousePos</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"> </tt>
+<a name="StructureCanvas.mouseReleaseEvent"></a><div id="StructureCanvas.mouseReleaseEvent-def"><a name="L60"></a><tt class="py-lineno">60</tt> <a class="py-toggle" href="#" id="StructureCanvas.mouseReleaseEvent-toggle" onclick="return toggle('StructureCanvas.mouseReleaseEvent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="moltk.gui.structure_canvas.StructureCanvas-class.html#mouseReleaseEvent">mouseReleaseEvent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StructureCanvas.mouseReleaseEvent-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="StructureCanvas.mouseReleaseEvent-expanded"><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oldMousePos</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt id="link-8" class="py-name"><a title="moltk.gui.structure_canvas.StructureCanvas.paintCalled" class="py-name" href="#" onclick="return doclink('link-8', 'paintCalled', 'link-5');">paintCalled</a></tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Signal</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">    <tt id="link-9" class="py-name"><a title="moltk.gui.structure_canvas.StructureCanvas.resizeCalled" class="py-name" href="#" onclick="return doclink('link-9', 'resizeCalled', 'link-6');">resizeCalled</a></tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Signal</tt><tt class="py-op">(</tt><tt class="py-name">int</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt id="link-10" class="py-name" targets="Variable moltk.gui.structure_canvas.StructureCanvas.rotY=moltk.gui.structure_canvas.StructureCanvas-class.html#rotY"><a title="moltk.gui.structure_canvas.StructureCanvas.rotY" class="py-name" href="#" onclick="return doclink('link-10', 'rotY', 'link-10');">rotY</a></tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Signal</tt><tt class="py-op">(</tt><tt class="py-name">float</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">    <tt id="link-11" class="py-name"><a title="moltk.gui.structure_canvas.StructureCanvas.rotationChanged" class="py-name" href="#" onclick="return doclink('link-11', 'rotationChanged', 'link-7');">rotationChanged</a></tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Signal</tt><tt class="py-op">(</tt><tt class="py-name">QGLWidget</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.2 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Oct 20 16:26:23 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

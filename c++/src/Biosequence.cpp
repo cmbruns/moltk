@@ -26,7 +26,7 @@
  *      Author: brunsc
  */
 
-#include "moltk/Biosequence.h"
+#include "moltk/Biosequence.hpp"
 
 namespace moltk
 {

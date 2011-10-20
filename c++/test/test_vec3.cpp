@@ -2,7 +2,7 @@
 #define BOOST_TEST_MODULE BiosequenceUnitTest
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
-#include "moltk/PdbStructure.h"
+#include "moltk/PDBStructure.hpp"
 
 using namespace moltk;
 

@@ -64,7 +64,7 @@ def do_setup():
     boost_iostreams_library = get_lib_from_env_var("BOOST_IOSTREAMS_LIBRARY")[1]
     
     include_dirs = ["./c++/include", 
-                    "./python/src/wrap_moltk",
+                    "./python/wrap_moltk",
                     boost_include_dir,
                    ]
 
@@ -76,16 +76,16 @@ def do_setup():
         CFLAGS.append('/EHsc')
         # And avoid strange MSVC header errors, to match gccxml args (-D"_HAS_TR1=0")
         CFLAGS.append('-D"_HAS_TR1=0"')
-        moltk_sources.extend(glob.glob(os.path.join('python','src','wrap_moltk','generated_code_msvc','*.cpp')))
-        include_dirs.append("./python/src/wrap_moltk/generated_code_msvc")
+        moltk_sources.extend(glob.glob(os.path.join('python','wrap_moltk','generated_code_msvc','*.cpp')))
+        include_dirs.append("./python/wrap_moltk/generated_code_msvc")
     else:
-        moltk_sources.extend(glob.glob(os.path.join('python','src','wrap_moltk','generated_code_gcc','*.cpp')))
-        include_dirs.append("./python/src/wrap_moltk/generated_code_gcc")
+        moltk_sources.extend(glob.glob(os.path.join('python','wrap_moltk','generated_code_gcc','*.cpp')))
+        include_dirs.append("./python/wrap_moltk/generated_code_gcc")
     
     library_dirs = [boost_lib_dir,]
     
     setup(name='MolTK',
-          version = '0.3.1',
+          version = '0.3.2',
           description = "Python API for moltk sequence/structure alignment/visualization tool kit.",
           author = "Christopher Bruns",
           author_email = "cmbruns@rotatingpenguin.com",

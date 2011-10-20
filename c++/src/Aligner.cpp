@@ -19,8 +19,8 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
-#include "moltk/Aligner.h"
-#include "moltk/MatrixScorer.h"
+#include "moltk/Aligner.hpp"
+#include "moltk/MatrixScorer.hpp"
 #include <cassert>
 #include <limits>
 

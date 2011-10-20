@@ -26,10 +26,10 @@ if(MSVC)
 else()
     set(GENERATED_CODE_DIR "generated_code_gcc")
 endif()
-file(GLOB PYPLUSPLUS_SRCS "src/wrap_moltk/${GENERATED_CODE_DIR}/*.cpp")
-file(GLOB PYPLUSPLUS_HEADERS "src/wrap_moltk/${GENERATED_CODE_DIR}/*.hpp")
+file(GLOB PYPLUSPLUS_SRCS "wrap_moltk/${GENERATED_CODE_DIR}/*.cpp")
+file(GLOB PYPLUSPLUS_HEADERS "wrap_moltk/${GENERATED_CODE_DIR}/*.hpp")
 
-add_subdirectory(src)
+add_subdirectory(wrap_moltk)
 
 # Create setup.py for local install and other uses
 set(SETUP_PY "${CMAKE_SOURCE_DIR}/setup.py") # in root dir where users expect it
