@@ -22,9 +22,12 @@
 #ifndef MOLTK_REAL_H
 #define MOLTK_REAL_H
 
+#include <cmath>
+
 namespace moltk {
 
 typedef double Real;
+using std::sqrt;
 
 } // namespace moltk
 

@@ -12,6 +12,14 @@ def wrap_moltk():
         , indexing_suite_version = 2
         , define_symbols = ["_HAS_TR1=0"])
 
+    wrap_custom(mb)
+    
+    extractor = doxygen_doc_extractor()
+    mb.build_code_creator(module_name = '_moltk', doc_extractor = extractor)
+    mb.split_module('@GENERATED_CODE_DIR@')
+
+
+def wrap_custom(mb):
     # To force indexing_suite?
     vec_int = mb.class_('vector<int>')
     # vec_int.include();
@@ -34,9 +42,11 @@ def wrap_moltk():
          alignment.member_function(fn_name).call_policies = return_self()
     estring = alignment.class_('EString')
     estring.member_function('append_run').call_policies = return_self()
-
-    extractor = doxygen_doc_extractor()
-    mb.build_code_creator(module_name = '_moltk', doc_extractor = extractor)
-    mb.split_module('@GENERATED_CODE_DIR@')
-
-wrap_moltk()
+    for cls in ns_moltk.classes(lambda c: c.name.startswith('BaseVect')):
+        for fn_name in ['begin', 'end']:
+            cls.member_functions(fn_name).exclude()
+        cls.casting_operators().exclude()
+    
+    
+if __name__ == '__main__':
+    wrap_moltk()

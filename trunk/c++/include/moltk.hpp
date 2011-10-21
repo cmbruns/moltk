@@ -67,3 +67,6 @@ There are three faces of MolTK; in order from easiest-to-use to most-powerful:
 #include "moltk/Biosequence.hpp"
 #include "moltk/Aligner.hpp"
 #include "moltk/PDBStructure.hpp"
+#include "moltk/Vector3D.hpp"
+#include "moltk/Rotation3D.hpp"
+#include "moltk/RigidTransform.hpp"
