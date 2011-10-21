@@ -50,8 +50,8 @@ struct BiosequenceResidue_wrapper : moltk::BiosequenceResidue, bp::wrapper< molt
 
 void register_BiosequenceResidue_class(){
 
-    bp::class_< BiosequenceResidue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "BiosequenceResidue", bp::init< char, int >(( bp::arg("one_letter_code_param"), bp::arg("residue_number_param") )) )    
-        .def( bp::init< moltk::BiosequenceResidue const & >(( bp::arg("rhs") )) )    
+    bp::class_< BiosequenceResidue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "BiosequenceResidue", "\n One residue in a macromolecule sequence (a nucleotide or amino acid)\n", bp::init< char, int >(( bp::arg("one_letter_code_param"), bp::arg("residue_number_param") ), "\n One residue in a macromolecule sequence (a nucleotide or amino acid)\n") )    
+        .def( bp::init< moltk::BiosequenceResidue const & >(( bp::arg("rhs") ), "\n One residue in a macromolecule sequence (a nucleotide or amino acid)\n") )    
         .def( 
             "get_one_letter_code"
             , (char ( ::moltk::BiosequenceResidue::* )(  ) const)(&::moltk::BiosequenceResidue::get_one_letter_code)

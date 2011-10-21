@@ -8,6 +8,6 @@ namespace bp = boost::python;
 
 void register_LengthDimension_class(){
 
-    bp::class_< moltk::units::LengthDimension, bp::bases< moltk::units::Dimension > >( "LengthDimension" );
+    bp::class_< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 >, boost::noncopyable >( "LengthDimension", "\n Dimension represents a physical dimension such as mass, length, time, etc.\n" );
 
 }

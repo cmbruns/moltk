@@ -36,10 +36,16 @@
 namespace moltk
 {
 
+/*!
+ * Parent class for macromolecule sequences and structures.
+ */
 class BaseBiosequence
 {
 public:
 
+    /*!
+     * Parent class for macromolecule sequence residues (nucleotides or amino acids)
+     */
     class BaseResidue
     {
     public:
@@ -50,25 +56,6 @@ public:
 
     private:
         BaseResidue(const BaseResidue&);
-    };
-
-
-    // TODO - Does GapResidue belong somewhere else?  Biosequence or Alignment?
-    /// GapResidue is used in Alignments
-    class GapResidue : public BaseResidue
-    {
-    public:
-        /// GapResidue has the residue number of the preceding non-gap residue.
-        ///
-        /// Thus a left end-gap might have a residue number of zero.
-        explicit GapResidue(int residue_number_param)
-            : residue_number(residue_number_param)
-        {}
-        virtual char get_one_letter_code() const {return '-';}
-        virtual int get_residue_number() const {return residue_number;};
-
-    protected:
-        int residue_number;
     };
 
 
@@ -84,6 +71,9 @@ private:
 };
 
 
+/*!
+ * One residue in a macromolecule sequence (a nucleotide or amino acid)
+ */
 class BiosequenceResidue : public BaseBiosequence::BaseResidue
 {
 public:
@@ -104,6 +94,9 @@ protected:
 };
 
 
+/*!
+ * A macromolecule sequence (DNA or RNA or protein)
+ */
 class Biosequence : public BaseBiosequence, public std::vector<BiosequenceResidue>
 {
 public:

@@ -24,7 +24,7 @@ cmake_minimum_required(VERSION 2.8)
 enable_testing()
 
 # Some declarations are common to C++ and python subdirectories
-set(MOLTK_VERSION 0.3.2)
+set(MOLTK_VERSION 0.3.3)
 add_definitions(-DMOLTK_VERSION="\\"${MOLTK_VERSION}\\"")
 include_directories(c++/include)
 

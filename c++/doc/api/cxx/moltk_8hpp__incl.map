@@ -1,6 +1,9 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$Real_8hpp.html" title="moltk/Real.hpp" alt="" coords="5,83,128,111"/>
-<area shape="rect" id="node5" href="$Biosequence_8hpp.html" title="moltk/Biosequence.hpp" alt="" coords="152,83,333,111"/>
-<area shape="rect" id="node13" href="$Aligner_8hpp.html" title="moltk/Aligner.hpp" alt="" coords="623,83,764,111"/>
-<area shape="rect" id="node24" href="$PDBStructure_8hpp.html" title="moltk/PDBStructure.hpp" alt="" coords="357,83,544,111"/>
+<area shape="rect" id="node7" href="$Biosequence_8hpp.html" title="moltk/Biosequence.hpp" alt="" coords="200,83,381,111"/>
+<area shape="rect" id="node15" href="$Aligner_8hpp.html" title="moltk/Aligner.hpp" alt="" coords="677,83,819,111"/>
+<area shape="rect" id="node26" href="$PDBStructure_8hpp.html" title="moltk/PDBStructure.hpp" alt="" coords="448,83,635,111"/>
+<area shape="rect" id="node34" href="$Vector3D_8hpp.html" title="moltk/Vector3D.hpp" alt="" coords="869,83,1024,111"/>
+<area shape="rect" id="node37" href="$Rotation3D_8hpp.html" title="moltk/Rotation3D.hpp" alt="" coords="1100,83,1271,111"/>
+<area shape="rect" id="node41" href="$RigidTransform_8hpp.html" title="moltk/RigidTransform.hpp" alt="" coords="1321,83,1524,111"/>
 </map>

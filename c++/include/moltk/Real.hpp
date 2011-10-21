@@ -26,6 +26,7 @@
 
 namespace moltk {
 
+/// Real represents a real number, such as 5.6.
 typedef double Real;
 using std::sqrt;
 

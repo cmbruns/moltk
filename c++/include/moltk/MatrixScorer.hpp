@@ -29,8 +29,10 @@
 
 namespace moltk {
 
-// MatrixScorer knows how to lookup residue alignment scores from 
-// a matrix such as BLOSUM62
+/*!
+ * MatrixScorer scores alignments using a residue type
+ * matrix such as BLOSUM62 or PAM250.
+ */
 class MatrixScorer : public Aligner::Scorer
 {
 public:
@@ -44,9 +46,14 @@ public:
 
     static const MatrixScorer& get_blosum62_scorer();
 
+    /*!
+     * QueryPosition represents an alignment/sequence column in the
+     * second of two sequences being scored by a MatrixScorer.
+     *
     // Query alignment appears after target alignment in combined alignment.
     // Query alignment should be shorter than target alignment for small-memory optimizaion.
     // Query alignment should have fewer/less-diverse sequences for scoring optimization.
+     */
     class QueryPosition : public Aligner::QueryPosition
     {
     public:
@@ -69,6 +76,10 @@ public:
     };
 
 
+    /*!
+     * TargetPosition represents an alignment/sequence column in the
+     * first of two sequences being scored by a MatrixScorer.
+     */
     class TargetPosition : public Aligner::TargetPosition
     {
     public:

@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="moltk55.png"></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">MolTK C++ API&#160;<span id="projectnumber">0.3.2</span></div>
+   <div id="projectname">MolTK C++ API&#160;<span id="projectnumber">0.3.3</span></div>
   </td>
  </tr>
  </tbody>
@@ -67,46 +67,105 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <h1>moltk::units Namespace Reference</h1>  </div>
 </div>
 <div class="contents">
+
+<p>The <a class="el" href="namespacemoltk_1_1units.html" title="The moltk::units namespace contains physical Quantities, Units, and Dimensions.">moltk::units</a> namespace contains physical Quantities, Units, and Dimensions.  
+<a href="#_details">More...</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1InformationDimension.html">InformationDimension</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1LengthDimension.html">LengthDimension</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structmoltk_1_1units_1_1Dimension.html" title="Dimension represents a physical dimension such as mass, length, time, etc.">Dimension</a> represents a physical dimension such as mass, length, time, etc.  <a href="structmoltk_1_1units_1_1Dimension.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structmoltk_1_1units_1_1Unit.html" title="Unit represents a unit of measure, such as gram, nanometer, or second.">Unit</a> represents a unit of measure, such as gram, nanometer, or second.  <a href="structmoltk_1_1units_1_1Unit.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">For efficiency, Quantity&lt;&gt; should compile to a double in C++.  <a href="structmoltk_1_1units_1_1Quantity.html#_details">More...</a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;.">Quantity</a> represents a physical value with a unit, such as "5.6 nanometers".  <a href="structmoltk_1_1units_1_1Quantity.html#_details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a>&lt; 0, 0, 0, 0, 0, 0, 0 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ad1f08edba26688bdf12c25384d9155cf">DimensionlessDimension</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a>&lt; 0, 0, 0, 0, 0, 0, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a6a3fd9ad3f631a00896d41b6df7c7f32">InformationDimension</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a>&lt; 0, 1, 0, 0, 0, 0, 0 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#aff2268d3543167fc6e52aa3f139e8cfc">LengthDimension</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a>&lt; 0, 2, 0, 0, 0, 0, 0 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ac51c0610ed480a567fe39559188231b4">AreaDimension</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a><br class="typebreak"/>
-&lt; <a class="el" href="structmoltk_1_1units_1_1InformationDimension.html">InformationDimension</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a7ffc3778dcfa8f3ab61be0266d7705db">BitUnit</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; <a class="el" href="structmoltk_1_1units_1_1LengthDimension.html">LengthDimension</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ac9eb406e7079ae577d9d15e1b4c15a72">NanometerUnit</a></td></tr>
+&lt; <a class="el" href="structmoltk_1_1units_1_1Dimension.html">InformationDimension</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a7ffc3778dcfa8f3ab61be0266d7705db">BitUnit</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Dimension.html">LengthDimension</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ac9eb406e7079ae577d9d15e1b4c15a72">NanometerUnit</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">BitUnit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">Information</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Information is a quantity in units of bits.  <a href="#a84d2541f1ab08c8ae38bea32fa7b33ca"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">NanometerUnit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a5800c5371d9ddac68ae3edf51b0e3881">Length</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Length is a length quantity in units of nanometers.  <a href="#a5800c5371d9ddac68ae3edf51b0e3881"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360">DimensionIndex</a> { <br/>
+&#160;&#160;<a class="el" href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360a59e856f36fd2bfa90321ec6e432dec0d">DIMENSION_MASS</a>, 
+<a class="el" href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360a351ee817f5459adbc77b2ec5db260e88">DIMENSION_LENGTH</a>, 
+<a class="el" href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360a5f0d01290e7b611e552ff8319d035cf9">DIMENSION_TIME</a>, 
+<a class="el" href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360a1346f4bcddd1ebd3f6a48487e0441bd7">DIMENSION_CHARGE</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360ac99ba632ad5179828b5b8cc695cf4a15">DIMENSION_AMOUNT</a>, 
+<a class="el" href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360af9dce97ec1ac48d83325b99f9ae02215">DIMENSION_ANGLE</a>, 
+<a class="el" href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360a88c696a7f3b61520db07aa3e260770c6">DIMENSION_INFORMATION</a>
+<br/>
+ }</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>DimensionIndex enumerates the dimension types used by the Dimension class. </p>
+ <a href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a757570c1709c56d1493956f91d5ecd82">get_unit_symbol</a> (const <a class="el" href="structmoltk_1_1units_1_1Unit.html">BitUnit</a> &amp;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a482de8717eb99d9abb41ac1792bc8146">get_unit_name</a> (const <a class="el" href="structmoltk_1_1units_1_1Unit.html">BitUnit</a> &amp;)</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Y , class D &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt;, Y &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a6711cd18489e5509362ee3fd3bac22fd">operator*</a> (const Y &amp;lhs, const <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt; &amp;rhs)</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class Y , class D &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt;, Y &gt;<br class="typebreak"/>
+::SquareRootType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ac095c128028f38dde55f7e1b2e9bb8a5">sqrt</a> (const <a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt;, Y &gt; q)</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class D , class Y &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt;, Y &gt;<br class="typebreak"/>
+::SquareType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a80db75e7a7d669584888da166b0b648c">operator*</a> (const <a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt;, Y &gt; &amp;lhs, const <a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt;, Y &gt; &amp;rhs)</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structmoltk_1_1units_1_1Unit.html">BitUnit</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a602a3e9be116d69627ba824da7d22e72">bit</a> = BitUnit::get_instance()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structmoltk_1_1units_1_1Unit.html">NanometerUnit</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#afe1d41f95fc042a8d19d25b877415b2d">nanometer</a> = NanometerUnit::get_instance()</td></tr>
 </table>
-<hr/><h2>Typedef Documentation</h2>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="namespacemoltk_1_1units.html" title="The moltk::units namespace contains physical Quantities, Units, and Dimensions.">moltk::units</a> namespace contains physical Quantities, Units, and Dimensions. </p>
+</div><hr/><h2>Typedef Documentation</h2>
+<a class="anchor" id="ac51c0610ed480a567fe39559188231b4"></a><!-- doxytag: member="moltk::units::AreaDimension" ref="ac51c0610ed480a567fe39559188231b4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a>&lt; 0, 2, 0, 0, 0, 0, 0&gt; <a class="el" href="structmoltk_1_1units_1_1Dimension.html">moltk::units::AreaDimension</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a7ffc3778dcfa8f3ab61be0266d7705db"></a><!-- doxytag: member="moltk::units::BitUnit" ref="a7ffc3778dcfa8f3ab61be0266d7705db" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt;<a class="el" href="structmoltk_1_1units_1_1InformationDimension.html">InformationDimension</a>&gt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">moltk::units::BitUnit</a></td>
+          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt;<a class="el" href="structmoltk_1_1units_1_1Dimension.html">InformationDimension</a>&gt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">moltk::units::BitUnit</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad1f08edba26688bdf12c25384d9155cf"></a><!-- doxytag: member="moltk::units::DimensionlessDimension" ref="ad1f08edba26688bdf12c25384d9155cf" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a>&lt; 0, 0, 0, 0, 0, 0, 0&gt; <a class="el" href="structmoltk_1_1units_1_1Dimension.html">moltk::units::DimensionlessDimension</a></td>
         </tr>
       </table>
 </div>
@@ -125,6 +184,21 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Information is a quantity in units of bits. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6a3fd9ad3f631a00896d41b6df7c7f32"></a><!-- doxytag: member="moltk::units::InformationDimension" ref="a6a3fd9ad3f631a00896d41b6df7c7f32" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a>&lt; 0, 0, 0, 0, 0, 0, 1&gt; <a class="el" href="structmoltk_1_1units_1_1Dimension.html">moltk::units::InformationDimension</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
 </div>
 </div>
 <a class="anchor" id="a5800c5371d9ddac68ae3edf51b0e3881"></a><!-- doxytag: member="moltk::units::Length" ref="a5800c5371d9ddac68ae3edf51b0e3881" args="" -->
@@ -138,6 +212,21 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Length is a length quantity in units of nanometers. </p>
+
+</div>
+</div>
+<a class="anchor" id="aff2268d3543167fc6e52aa3f139e8cfc"></a><!-- doxytag: member="moltk::units::LengthDimension" ref="aff2268d3543167fc6e52aa3f139e8cfc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a>&lt; 0, 1, 0, 0, 0, 0, 0&gt; <a class="el" href="structmoltk_1_1units_1_1Dimension.html">moltk::units::LengthDimension</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
 </div>
 </div>
 <a class="anchor" id="ac9eb406e7079ae577d9d15e1b4c15a72"></a><!-- doxytag: member="moltk::units::NanometerUnit" ref="ac9eb406e7079ae577d9d15e1b4c15a72" args="" -->
@@ -145,11 +234,45 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt;<a class="el" href="structmoltk_1_1units_1_1LengthDimension.html">LengthDimension</a>&gt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">moltk::units::NanometerUnit</a></td>
+          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt;<a class="el" href="structmoltk_1_1units_1_1Dimension.html">LengthDimension</a>&gt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">moltk::units::NanometerUnit</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Enumeration Type Documentation</h2>
+<a class="anchor" id="afed1f2d4160617c10e7fd090f8ff7360"></a><!-- doxytag: member="moltk::units::DimensionIndex" ref="afed1f2d4160617c10e7fd090f8ff7360" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacemoltk_1_1units.html#afed1f2d4160617c10e7fd090f8ff7360">moltk::units::DimensionIndex</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>DimensionIndex enumerates the dimension types used by the <a class="el" href="structmoltk_1_1units_1_1Dimension.html" title="Dimension represents a physical dimension such as mass, length, time, etc.">Dimension</a> class. </p>
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="afed1f2d4160617c10e7fd090f8ff7360a59e856f36fd2bfa90321ec6e432dec0d"></a><!-- doxytag: member="DIMENSION_MASS" ref="afed1f2d4160617c10e7fd090f8ff7360a59e856f36fd2bfa90321ec6e432dec0d" args="" -->DIMENSION_MASS</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="afed1f2d4160617c10e7fd090f8ff7360a351ee817f5459adbc77b2ec5db260e88"></a><!-- doxytag: member="DIMENSION_LENGTH" ref="afed1f2d4160617c10e7fd090f8ff7360a351ee817f5459adbc77b2ec5db260e88" args="" -->DIMENSION_LENGTH</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="afed1f2d4160617c10e7fd090f8ff7360a5f0d01290e7b611e552ff8319d035cf9"></a><!-- doxytag: member="DIMENSION_TIME" ref="afed1f2d4160617c10e7fd090f8ff7360a5f0d01290e7b611e552ff8319d035cf9" args="" -->DIMENSION_TIME</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="afed1f2d4160617c10e7fd090f8ff7360a1346f4bcddd1ebd3f6a48487e0441bd7"></a><!-- doxytag: member="DIMENSION_CHARGE" ref="afed1f2d4160617c10e7fd090f8ff7360a1346f4bcddd1ebd3f6a48487e0441bd7" args="" -->DIMENSION_CHARGE</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="afed1f2d4160617c10e7fd090f8ff7360ac99ba632ad5179828b5b8cc695cf4a15"></a><!-- doxytag: member="DIMENSION_AMOUNT" ref="afed1f2d4160617c10e7fd090f8ff7360ac99ba632ad5179828b5b8cc695cf4a15" args="" -->DIMENSION_AMOUNT</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="afed1f2d4160617c10e7fd090f8ff7360af9dce97ec1ac48d83325b99f9ae02215"></a><!-- doxytag: member="DIMENSION_ANGLE" ref="afed1f2d4160617c10e7fd090f8ff7360af9dce97ec1ac48d83325b99f9ae02215" args="" -->DIMENSION_ANGLE</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="afed1f2d4160617c10e7fd090f8ff7360a88c696a7f3b61520db07aa3e260770c6"></a><!-- doxytag: member="DIMENSION_INFORMATION" ref="afed1f2d4160617c10e7fd090f8ff7360a88c696a7f3b61520db07aa3e260770c6" args="" -->DIMENSION_INFORMATION</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
 
 </div>
 </div>
@@ -188,6 +311,35 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a80db75e7a7d669584888da166b0b648c"></a><!-- doxytag: member="moltk::units::operator*" ref="a80db75e7a7d669584888da166b0b648c" args="(const Quantity&lt; Unit&lt; D &gt;, Y &gt; &amp;lhs, const Quantity&lt; Unit&lt; D &gt;, Y &gt; &amp;rhs)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class D , class Y &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt;<a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt;D&gt;, Y&gt;::SquareType moltk::units::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const Quantity&lt; Unit&lt; D &gt;, Y &gt; &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quantity&lt; Unit&lt; D &gt;, Y &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a6711cd18489e5509362ee3fd3bac22fd"></a><!-- doxytag: member="moltk::units::operator*" ref="a6711cd18489e5509362ee3fd3bac22fd" args="(const Y &amp;lhs, const Unit&lt; D &gt; &amp;rhs)" -->
 <div class="memitem">
 <div class="memproto">
@@ -210,6 +362,25 @@ template&lt;class Y , class D &gt; </div>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac095c128028f38dde55f7e1b2e9bb8a5"></a><!-- doxytag: member="moltk::units::sqrt" ref="ac095c128028f38dde55f7e1b2e9bb8a5" args="(const Quantity&lt; Unit&lt; D &gt;, Y &gt; q)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Y , class D &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt;<a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt;D&gt;, Y&gt;::SquareRootType moltk::units::sqrt </td>
+          <td>(</td>
+          <td class="paramtype">const Quantity&lt; Unit&lt; D &gt;, Y &gt;&#160;</td>
+          <td class="paramname"><em>q</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div>

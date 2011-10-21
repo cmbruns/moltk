@@ -29,7 +29,11 @@
 #include <string>
 
 namespace moltk {
-	
+
+/*!
+ * PDBStructure represents a macromolecule structure as found in a
+ * Protein Data Bank file.
+ */
 class PDBStructure
 {
 public:
@@ -52,6 +56,10 @@ public:
     typedef std::vector<Atom> AtomList;
 
 
+    /*!
+     * Residue represents a single amino acid or nucleotide residue, or a small molecule,
+     * in a macromolecule structure.
+     */
     class Residue : public BaseBiosequence::BaseResidue
     {
     public:
@@ -68,6 +76,9 @@ public:
         int residue_number;
     };
 
+    /*!
+     * Chain represents a single polymer or molecule in a PDBStructure.
+     */
     class Chain : public BaseBiosequence
     {
     public:

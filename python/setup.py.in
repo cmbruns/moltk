@@ -70,6 +70,8 @@ def do_setup():
 
     CFLAGS = []
     moltk_sources = glob.glob(os.path.join('c++','src','*.cpp'))
+    # instantiate.cpp
+    moltk_sources.extend(glob.glob(os.path.join('python', 'wrap_moltk', '*.cpp')))
     
     if (platform.system() == 'Windows'):
         # Avoid compiler warning and subsequent link error with MSVC9 (/EHsc)

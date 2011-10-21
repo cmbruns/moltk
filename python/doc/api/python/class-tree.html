@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.2 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.3 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -60,97 +60,193 @@
 </b></center><br />
 <h1 class="epydoc">Class Hierarchy</h1>
 <ul class="nomargin-top">
-    <li> <strong class="uidlink"><i>unreachable</i></strong>
-    </li>
-    <li> <strong class="uidlink"><i>unreachable</i></strong>
-    </li>
-    <li> <strong class="uidlink">PySide.QtOpenGL.QGLWidget</strong>
-    </li>
-    <li> <strong class="uidlink">PySide.QtCore.QObject</strong>
-    </li>
     <li> <strong class="uidlink">object</strong>:
       <em class="summary">The most base type</em>
     <ul>
+    <li> <strong class="uidlink"><i>unreachable</i>.Object</strong>
+    <ul>
+    <li> <strong class="uidlink">PySide.QtCore.QObject</strong>
+    <ul>
+    <li> <strong class="uidlink">PySide.QtCore.QCoreApplication</strong>
+    <ul>
+    <li> <strong class="uidlink">PySide.QtGui.QApplication</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="moltk.gui.moltk_app.MoltkApp-class.html">moltk.gui.moltk_app.MoltkApp</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">PySide.QtGui.QWidget</strong>
+    <ul>
+    <li> <strong class="uidlink">PySide.QtOpenGL.QGLWidget</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="moltk.gui.structure_canvas.StructureCanvas-class.html">moltk.gui.structure_canvas.StructureCanvas</a></strong>:
+      <em class="summary">Widget for displaying 3D molecule structure in the MolTK GUI.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">PySide.QtGui.QMainWindow</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="moltk.gui.moltk_app.MoltkMainWindow-class.html">moltk.gui.moltk_app.MoltkMainWindow</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="moltk.gui.structure_renderer.StructureRenderer-class.html">moltk.gui.structure_renderer.StructureRenderer</a></strong>:
+      <em class="summary">StructureRenderer is a custom renderer class that performs all 
+        OpenGL operations in a separate thread.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">PySide.QtGui.QPaintDevice</strong>
+    <ul>
+    <li> <strong class="uidlink">PySide.QtGui.QWidget</strong>
+    <ul>
+    <li> <strong class="uidlink">PySide.QtOpenGL.QGLWidget</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="moltk.gui.structure_canvas.StructureCanvas-class.html">moltk.gui.structure_canvas.StructureCanvas</a></strong>:
+      <em class="summary">Widget for displaying 3D molecule structure in the MolTK GUI.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">PySide.QtGui.QMainWindow</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="moltk.gui.moltk_app.MoltkMainWindow-class.html">moltk.gui.moltk_app.MoltkMainWindow</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
     <li> <strong class="uidlink"><a href="moltk.gui.moltk_ui.Ui_MoltkMainWindow-class.html">moltk.gui.moltk_ui.Ui_MoltkMainWindow</a></strong>
     </li>
     <li> <strong class="uidlink"><i>unreachable</i>.instance</strong>
     <ul>
     <li> <strong class="uidlink"><a href="moltk.Aligner-class.html">moltk.Aligner</a></strong>:
-      <em class="summary">Aligner is the class that creates sequence or structure alignments.</em>
+      <em class="summary">The Aligner class creates macromolecule sequence alignments and 
+        structure alignments.</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.Alignment-class.html">moltk.Alignment</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.Alignment-class.html">moltk.Alignment</a></strong>:
+      <em class="summary">Alignment represents a set of aligned macromolecule sequences 
+        and/or structures.</em>
     </li>
     <li> <strong class="uidlink"><a href="moltk.PDBStructure.Atom-class.html">moltk.PDBStructure.Atom</a></strong>:
       <em class="summary">Structure::Atom represents a chemical atom in a molecular 
         structure.</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.BaseBiosequence-class.html">moltk.BaseBiosequence</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.BaseBiosequence-class.html">moltk.BaseBiosequence</a></strong>:
+      <em class="summary">Parent class for macromolecule sequences and structures.</em>
     <ul>
-    <li> <strong class="uidlink"><a href="moltk.Biosequence-class.html">moltk.Biosequence</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.Biosequence-class.html">moltk.Biosequence</a></strong>:
+      <em class="summary">A macromolecule sequence (DNA or RNA or protein)</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.PDBStructure.Chain-class.html">moltk.PDBStructure.Chain</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.PDBStructure.Chain-class.html">moltk.PDBStructure.Chain</a></strong>:
+      <em class="summary">Chain represents a single polymer or molecule in a PDBStructure.</em>
     </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.BaseBiosequence.BaseResidue-class.html">moltk.BaseBiosequence.BaseResidue</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.BaseBiosequence.BaseResidue-class.html">moltk.BaseBiosequence.BaseResidue</a></strong>:
+      <em class="summary">Parent class for macromolecule sequence residues (nucleotides or 
+        amino acids)</em>
     <ul>
-    <li> <strong class="uidlink"><a href="moltk.BiosequenceResidue-class.html">moltk.BiosequenceResidue</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.BiosequenceResidue-class.html">moltk.BiosequenceResidue</a></strong>:
+      <em class="summary">One residue in a macromolecule sequence (a nucleotide or amino 
+        acid)</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.BaseBiosequence.GapResidue-class.html">moltk.BaseBiosequence.GapResidue</a></strong>:
-      <em class="summary">GapResidue is used in Alignments</em>
-    </li>
-    <li> <strong class="uidlink"><a href="moltk.PDBStructure.Residue-class.html">moltk.PDBStructure.Residue</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.PDBStructure.Residue-class.html">moltk.PDBStructure.Residue</a></strong>:
+      <em class="summary">Residue represents a single amino acid or nucleotide residue, or a 
+        small molecule, in a macromolecule structure.</em>
     </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.BitUnit-class.html">moltk.BitUnit</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.BitUnit-class.html">moltk.BitUnit</a></strong>:
+      <em class="summary">Unit represents a unit of measure, such as gram, nanometer, or 
+        second.</em>
     </li>
     <li> <strong class="uidlink"><a href="moltk.Aligner.Cell-class.html">moltk.Aligner.Cell</a></strong>:
       <em class="summary">An Aligner::Cell is one node in the dynamic programming table</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.Dimension-class.html">moltk.Dimension</a></strong>
-    <ul>
-    <li> <strong class="uidlink"><a href="moltk.InformationDimension-class.html">moltk.InformationDimension</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.Displacement-class.html">moltk.Displacement</a></strong>:
+      <em class="summary">Vector3D_&lt;&gt; is an arbitrary point or vector in 3-space.</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.LengthDimension-class.html">moltk.LengthDimension</a></strong>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="moltk.Alignment.EString-class.html">moltk.Alignment.EString</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.Alignment.EString-class.html">moltk.Alignment.EString</a></strong>:
+      <em class="summary">A compact representation of the gapping pattern for one sequence in
+        an alignment.</em>
     </li>
     <li> <strong class="uidlink"><a href="moltk.Information-class.html">moltk.Information</a></strong>:
-      <em class="summary">For efficiency, Quantity&lt;&gt; should compile to a double in C++.</em>
+      <em class="summary">Quantity represents a physical value with a unit, such as 5.6 nanometers</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.NanometerUnit-class.html">moltk.NanometerUnit</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.InformationDimension-class.html">moltk.InformationDimension</a></strong>:
+      <em class="summary">Dimension represents a physical dimension such as mass, length, 
+        time, etc.</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.PDBStructure-class.html">moltk.PDBStructure</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.Length-class.html">moltk.Length</a></strong>:
+      <em class="summary">Quantity represents a physical value with a unit, such as 5.6 nanometers</em>
+    </li>
+    <li> <strong class="uidlink"><a href="moltk.LengthDimension-class.html">moltk.LengthDimension</a></strong>:
+      <em class="summary">Dimension represents a physical dimension such as mass, length, 
+        time, etc.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="moltk.NanometerUnit-class.html">moltk.NanometerUnit</a></strong>:
+      <em class="summary">Unit represents a unit of measure, such as gram, nanometer, or 
+        second.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="moltk.PDBStructure-class.html">moltk.PDBStructure</a></strong>:
+      <em class="summary">PDBStructure represents a macromolecule structure as found in a 
+        Protein Data Bank file.</em>
     </li>
     <li> <strong class="uidlink"><a href="moltk.Printable-class.html">moltk.Printable</a></strong>:
       <em class="summary">moltk::Printable is an abstract base class to help streamline 
         string conversion in the moltk python bindings.</em>
     </li>
     <li> <strong class="uidlink"><a href="moltk.Aligner.QueryPosition-class.html">moltk.Aligner.QueryPosition</a></strong>:
-      <em class="summary">Aligner::Position represents a special biosequence residue that 
-        knows how to score itself during alignment.</em>
+      <em class="summary">QueryPosition is an alignment column specialized to efficiently 
+        compute an alignment score with a TargetPosition.</em>
     </li>
     <li> <strong class="uidlink"><a href="moltk.QueryPositionList-class.html">moltk.QueryPositionList</a></strong>:
       <em class="summary">A standard container which offers fixed time access to individual 
         elements in any order.</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.Alignment.Row-class.html">moltk.Alignment.Row</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.RigidTransform-class.html">moltk.RigidTransform</a></strong>:
+      <em class="summary">RigidTransform converts one reference frame to another with 
+        rotation and translation.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="moltk.Rotation3D-class.html">moltk.Rotation3D</a></strong>:
+      <em class="summary">Rotation3D represents a rotation matrix.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="moltk.Alignment.Row-class.html">moltk.Alignment.Row</a></strong>:
+      <em class="summary">Meta-data for one sequence in an Alignment</em>
+    </li>
+    <li> <strong class="uidlink"><a href="moltk.Rotation3D.Row-class.html">moltk.Rotation3D.Row</a></strong>:
+      <em class="summary">One row of three numbers in a Rotation3D rotation matrix.</em>
     </li>
     <li> <strong class="uidlink"><a href="moltk.Aligner.Scorer-class.html">moltk.Aligner.Scorer</a></strong>:
-      <em class="summary">Aligner::Scorer converts dumb sequence and structure residues into 
-        Aligner::Positions, which know how to quickly score themselves with
-        other AlignerPositions.</em>
+      <em class="summary">Scorer can convert, in O(m+n) time, dumb sequence and structure 
+        residues into TargetPositions and QueryPositions, which can 
+        efficiently compute alignment scores.</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.Aligner.TargetPosition-class.html">moltk.Aligner.TargetPosition</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.Aligner.TargetPosition-class.html">moltk.Aligner.TargetPosition</a></strong>:
+      <em class="summary">TargetPosition is an alignment column specialized to efficiently compute
+ an alignment score with a QueryPosition.</em>
     </li>
     <li> <strong class="uidlink"><a href="moltk.TargetPositionList-class.html">moltk.TargetPositionList</a></strong>:
       <em class="summary">A standard container which offers fixed time access to individual 
         elements in any order.</em>
     </li>
-    <li> <strong class="uidlink"><a href="moltk.Alignment.EString.const_iterator-class.html">moltk.Alignment.EString.const_iterator</a></strong>
+    <li> <strong class="uidlink"><a href="moltk.UnitVector3D-class.html">moltk.UnitVector3D</a></strong>:
+      <em class="summary">UnitVector3D represents a direction in 3 space, and, unlike 
+        Vector3D_&lt;&gt;, does NOT have Units.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="moltk.Vector3D-class.html">moltk.Vector3D</a></strong>:
+      <em class="summary">Vector3D_&lt;&gt; is an arbitrary point or vector in 3-space.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="moltk.Alignment.EString.const_iterator-class.html">moltk.Alignment.EString.const_iterator</a></strong>:
+      <em class="summary">Iterator for accessing the residue positions encoded in an estring.</em>
     </li>
     <li> <strong class="uidlink"><a href="moltk.std_vector_int-class.html">moltk.std_vector_int</a></strong>:
       <em class="summary">A standard container which offers fixed time access to individual 
@@ -161,8 +257,26 @@
     <li> <strong class="uidlink">int</strong>:
       <em class="summary">int(x[, base]) -&gt; integer</em>
     <ul>
+    <li> <strong class="uidlink"><a href="PySide.QtGui.QApplication.ColorSpec-class.html">PySide.QtGui.QApplication.ColorSpec</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="PySide.QtGui.QMainWindow.DockOption-class.html">PySide.QtGui.QMainWindow.DockOption</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="PySide.QtGui.QMainWindow.DockOptions-class.html">PySide.QtGui.QMainWindow.DockOptions</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="PySide.QtCore.QCoreApplication.Encoding-class.html">PySide.QtCore.QCoreApplication.Encoding</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="PySide.QtGui.QPaintDevice.PaintDeviceMetric-class.html">PySide.QtGui.QPaintDevice.PaintDeviceMetric</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="PySide.QtGui.QWidget.RenderFlag-class.html">PySide.QtGui.QWidget.RenderFlag</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="PySide.QtGui.QWidget.RenderFlags-class.html">PySide.QtGui.QWidget.RenderFlags</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="PySide.QtGui.QApplication.Type-class.html">PySide.QtGui.QApplication.Type</a></strong>
+    </li>
     <li> <strong class="uidlink"><i>unreachable</i>.enum</strong>
     <ul>
+    <li> <strong class="uidlink"><a href="moltk.DimensionIndex-class.html">moltk.DimensionIndex</a></strong>
+    </li>
     <li> <strong class="uidlink"><a href="moltk.Alignment.List-class.html">moltk.Alignment.List</a></strong>
     </li>
     <li> <strong class="uidlink"><a href="moltk.PDBStructure.Atom.RecordType-class.html">moltk.PDBStructure.Atom.RecordType</a></strong>
@@ -202,14 +316,14 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.2 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.3 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Oct 20 16:26:21 2011
+    Generated by Epydoc 3.0.1 on Fri Oct 21 14:57:59 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

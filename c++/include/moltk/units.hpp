@@ -26,26 +26,62 @@
 // so I decided to roll my own.
 
 #include "moltk/Real.hpp"
+#include "boost/utility.hpp"
+#include <cassert>
 
-namespace moltk { namespace units {
+namespace moltk {
+/*!
+ * The moltk::units namespace contains physical Quantities, Units, and Dimensions.
+ */
+namespace units {
 
     ////////////////
     // Dimensions //
     ////////////////
 
-    struct Dimension {};
-    struct InformationDimension : public Dimension {};
-    struct LengthDimension : public Dimension {};
+    /*!
+     * DimensionIndex enumerates the dimension types used by the Dimension class.
+     */
+    enum DimensionIndex {
+        DIMENSION_MASS,
+        DIMENSION_LENGTH,
+        DIMENSION_TIME,
+        DIMENSION_CHARGE,
+        DIMENSION_AMOUNT,
+        DIMENSION_ANGLE,
+        DIMENSION_INFORMATION
+    };
+
+    /*!
+     * Dimension represents a physical dimension such as mass, length, time, etc.
+     */
+    template<int M, int L, int T, int Q, int N, int A, int I>
+    struct Dimension : boost::noncopyable {
+        typedef Dimension<M*2, L*2, T*2, Q*2, N*2, A*2, I*2> SquareType;
+        typedef Dimension<M*2, L/2, T/2, Q/2, N/2, A/2, I/2> SquareRootType;
+    };
+
+    //      Dimension< M, L, T, Q, N, A, I>
+    typedef Dimension< 0, 0, 0, 0, 0, 0, 0> DimensionlessDimension;
+    typedef Dimension< 0, 0, 0, 0, 0, 0, 1> InformationDimension;
+    typedef Dimension< 0, 1, 0, 0, 0, 0, 0> LengthDimension;
+    typedef Dimension< 0, 2, 0, 0, 0, 0, 0> AreaDimension;
 
     ///////////
     // Units //
     ///////////
 
+    /*!
+     * Unit represents a unit of measure, such as gram, nanometer, or second.
+     */
     template<class D>
-    struct Unit
+    struct Unit : boost::noncopyable
     {
         typedef D DimensionType;
         typedef Unit<D> ThisType;
+        typedef Unit<typename DimensionType::SquareType> SquareType;
+        typedef Unit<typename DimensionType::SquareRootType> SquareRootType;
+
         static void print_name(std::ostream& os) {os << get_unit_name(get_instance());}
         static void print_symbol(std::ostream& os) {os << get_unit_symbol(get_instance());}
         static const ThisType& get_instance() {
@@ -54,9 +90,6 @@ namespace moltk { namespace units {
                 singleton_pointer.reset( new ThisType() );
             return *singleton_pointer.get();
         }
-    private:
-        Unit() {} // singleton provides no constructor
-        Unit(const ThisType&) {}
     };
 
     typedef Unit<InformationDimension> BitUnit;
@@ -73,19 +106,25 @@ namespace moltk { namespace units {
     // Quantities //
     ////////////////
 
-    /// For efficiency, Quantity<> should compile to a double in C++.
-    /// This means:
-    ///     no virtual methods
-    ///     no data members other than "value"
-    ///     unit is a class with a typedef
-    /// These restrictions need not apply to unit class, which should do
-    /// whatever it needs to, to be wrapped conveniently in python.
+    /*!
+     * Quantity represents a physical value with a unit, such as "5.6 nanometers"
+     *
+     * For efficiency, Quantity<> should compile to a double in C++.
+        This means:
+            no virtual methods
+            no data members other than "value"
+            unit is a class with a typedef
+        These restrictions need not apply to unit class, which should do
+        whatever it needs to, to be wrapped conveniently in python.
+     */
     template<class U, class Y = Real>
     struct Quantity 
     {
         typedef U UnitType;
         typedef Y ValueType;
         typedef Quantity<U,Y> ThisType;
+        typedef Quantity<typename UnitType::SquareType, Y> SquareType;
+        typedef Quantity<typename UnitType::SquareRootType, Y> SquareRootType;
 
         ValueType value;
 
@@ -201,6 +240,10 @@ namespace moltk { namespace units {
             return value >= rhs.value;
         }
 
+        SquareRootType squareRoot() const {
+            return SquareRootType(sqrt(value), SquareRootType::UnitType::get_instance());
+        }
+
         // I/O
 
         inline friend std::ostream& operator<<(std::ostream& os, const ThisType& q)
@@ -210,9 +253,14 @@ namespace moltk { namespace units {
             return os;
         }
 
+        /// Proper way to extract value attribute - tell me the unit first.
+        /// TODO - unit conversion
+        ValueType value_in_unit(const UnitType&) const {return value;}
+
     protected:
         explicit Quantity(const Y& v) : value(v) {}
     };
+
 
     // GCCXML on Windows does not like real * unit to be defined
     // inline friend within Quantity; so define it here.
@@ -223,7 +271,29 @@ namespace moltk { namespace units {
         return Quantity<Unit<D>, Y>(lhs, rhs);
     }
 
+    template<class Y, class D>
+    typename Quantity<Unit<D>, Y>::SquareRootType
+    sqrt(const Quantity<Unit<D>, Y> q)
+    {
+        return q.squareRoot();
+    }
+
+    // Quantity * Quantity composition
+    // Took this out of member functions to avoid unlimited instantiation in python.
+    template<class D, class Y>
+    typename Quantity<Unit<D>, Y>::SquareType
+    operator*(const Quantity<Unit<D>, Y>& lhs, const Quantity<Unit<D>, Y>& rhs)
+    {
+        typedef Quantity<Unit<D>, Y> ArgType;
+        const Unit<D>& unit1 = Unit<D>::get_instance();
+        typedef typename ArgType::SquareType SquareType;
+        return SquareType(lhs.value_in_unit(unit1) * rhs.value_in_unit(unit1),
+                SquareType::UnitType::get_instance());
+    }
+
+    /// Information is a quantity in units of bits.
     typedef Quantity<BitUnit> Information;
+    /// Length is a length quantity in units of nanometers
     typedef Quantity<NanometerUnit> Length;
 
 }} // namespace moltk::units

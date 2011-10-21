@@ -1,5 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classmoltk_1_1BaseBiosequence_1_1GapResidue.html" title="GapResidue is used in Alignments." alt="" coords="347,5,632,33"/>
-<area shape="rect" id="node5" href="$classmoltk_1_1BiosequenceResidue.html" title="moltk::BiosequenceResidue" alt="" coords="383,55,596,83"/>
-<area shape="rect" id="node7" href="$classmoltk_1_1PDBStructure_1_1Residue.html" title="moltk::PDBStructure::Residue" alt="" coords="375,106,604,134"/>
+<area shape="rect" id="node3" href="$classmoltk_1_1BiosequenceResidue.html" title="One residue in a macromolecule sequence (a nucleotide or amino acid)" alt="" coords="5,83,219,111"/>
+<area shape="rect" id="node5" href="$classmoltk_1_1PDBStructure_1_1Residue.html" title="Residue represents a single amino acid or nucleotide residue, or a small molecule, in a macromolecule structure." alt="" coords="243,83,472,111"/>
 </map>

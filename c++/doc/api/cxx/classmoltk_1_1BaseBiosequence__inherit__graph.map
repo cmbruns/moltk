@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classmoltk_1_1Biosequence.html" title="moltk::Biosequence" alt="" coords="5,83,163,111"/>
-<area shape="rect" id="node5" href="$classmoltk_1_1PDBStructure_1_1Chain.html" title="moltk::PDBStructure::Chain" alt="" coords="187,83,400,111"/>
+<area shape="rect" id="node3" href="$classmoltk_1_1Biosequence.html" title="A macromolecule sequence (DNA or RNA or protein)" alt="" coords="5,83,163,111"/>
+<area shape="rect" id="node5" href="$classmoltk_1_1PDBStructure_1_1Chain.html" title="Chain represents a single polymer or molecule in a PDBStructure." alt="" coords="187,83,400,111"/>
 </map>
