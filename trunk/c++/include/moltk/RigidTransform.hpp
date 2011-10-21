@@ -6,6 +6,9 @@
 
 namespace moltk {
 
+/*!
+ * RigidTransform converts one reference frame to another with rotation and translation.
+ */
 class RigidTransform
 {
 protected:

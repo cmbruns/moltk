@@ -10,7 +10,7 @@ void register_Alignment_class(){
 
     { //::moltk::Alignment
         typedef bp::class_< moltk::Alignment > Alignment_exposer_t;
-        Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", bp::init< >() );
+        Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", "\n Alignment represents a set of aligned macromolecule sequences and/or structures.\n", bp::init< >() );
         bp::scope Alignment_scope( Alignment_exposer );
         bp::enum_< moltk::Alignment::List>("List")
             .value("SequenceList", moltk::Alignment::SequenceList)
@@ -19,10 +19,10 @@ void register_Alignment_class(){
             ;
         { //::moltk::Alignment::EString
             typedef bp::class_< moltk::Alignment::EString > EString_exposer_t;
-            EString_exposer_t EString_exposer = EString_exposer_t( "EString", bp::init< >() );
+            EString_exposer_t EString_exposer = EString_exposer_t( "EString", "\n A compact representation of the gapping pattern for one sequence in an alignment.\n", bp::init< >() );
             bp::scope EString_scope( EString_exposer );
-            bp::class_< moltk::Alignment::EString::const_iterator >( "const_iterator", bp::init< >() )    
-                .def( bp::init< std::vector< int > const &, int, int >(( bp::arg("runs"), bp::arg("run_index"), bp::arg("position_index") )) )    
+            bp::class_< moltk::Alignment::EString::const_iterator >( "const_iterator", "\n Iterator for accessing the residue positions encoded in an estring.\n\n EString::const_iterator emits one residue number for each\n column in an alignment.  Positions with a gap dereference to\n residue number -1.  Other positions dereference to the\n ordinal residue position index in the corresponding sequence.\n", bp::init< >("\n Iterator for accessing the residue positions encoded in an estring.\n\n EString::const_iterator emits one residue number for each\n column in an alignment.  Positions with a gap dereference to\n residue number -1.  Other positions dereference to the\n ordinal residue position index in the corresponding sequence.\n") )    
+                .def( bp::init< std::vector< int > const &, int, int >(( bp::arg("runs"), bp::arg("run_index"), bp::arg("position_index") ), "\n Iterator for accessing the residue positions encoded in an estring.\n\n EString::const_iterator emits one residue number for each\n column in an alignment.  Positions with a gap dereference to\n residue number -1.  Other positions dereference to the\n ordinal residue position index in the corresponding sequence.\n") )    
                 .def( bp::self != bp::self )    
                 .def( bp::self == bp::self );
             { //::moltk::Alignment::EString::append_run
@@ -86,9 +86,9 @@ void register_Alignment_class(){
             }
             EString_exposer.def( bp::self_ns::str( bp::self ) );
         }
-        bp::class_< moltk::Alignment::Row >( "Row" )    
+        bp::class_< moltk::Alignment::Row >( "Row", "\n Meta-data for one sequence in an Alignment\n" )    
             .def_readwrite( "e_string", &moltk::Alignment::Row::e_string )    
-            .def_readwrite( "list", &moltk::Alignment::Row::list )    
+            .def_readwrite( "list", &moltk::Alignment::Row::list, "\n Meta-data for one sequence in an Alignment\n" )    
             .def_readwrite( "list_index", &moltk::Alignment::Row::list_index )    
             .def_readwrite( "sequence_weight", &moltk::Alignment::Row::sequence_weight );
         Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("arg0") )) );

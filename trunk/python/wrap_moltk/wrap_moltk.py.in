@@ -46,7 +46,9 @@ def wrap_custom(mb):
         for fn_name in ['begin', 'end']:
             cls.member_functions(fn_name).exclude()
         cls.casting_operators().exclude()
-    
+        cls.exclude()
+    mb.class_('_classes_to_instantiate').exclude() # hide wrapping hack
+
     
 if __name__ == '__main__':
     wrap_moltk()

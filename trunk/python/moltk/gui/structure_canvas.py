@@ -3,7 +3,7 @@
 # to help avoid mixing QtGui thread with OpenGL thread.
 from __future__ import division
 from structure_renderer import StructureRenderer
-from moltk import Displacement, Rotation3D
+from moltk import Displacement, Rotation3D, Vector3D
 from PySide import QtCore
 from PySide.QtOpenGL import QGLWidget
 import math

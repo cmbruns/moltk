@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classmoltk_1_1Aligner_1_1QueryPosition.html" title="Aligner::Position represents a special biosequence residue that knows how to score itself during alig..." alt="" coords="5,5,232,33"/>
-<area shape="rect" id="node3" href="$classmoltk_1_1MatrixScorer_1_1QueryPosition.html" title="moltk::MatrixScorer::QueryPosition" alt="" coords="280,5,547,33"/>
+<area shape="rect" id="node1" href="$classmoltk_1_1Aligner_1_1QueryPosition.html" title="QueryPosition is an alignment column specialized to efficiently compute an alignment score with a Tar..." alt="" coords="5,5,232,33"/>
+<area shape="rect" id="node3" href="$classmoltk_1_1MatrixScorer_1_1QueryPosition.html" title="QueryPosition represents an alignment/sequence column in the second of two sequences being scored by ..." alt="" coords="280,5,547,33"/>
 </map>

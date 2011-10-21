@@ -70,6 +70,8 @@ def do_setup():
 
     CFLAGS = []
     moltk_sources = glob.glob(os.path.join('c++','src','*.cpp'))
+    # instantiate.cpp
+    moltk_sources.extend(glob.glob(os.path.join('python', 'wrap_moltk', '*.cpp')))
     
     if (platform.system() == 'Windows'):
         # Avoid compiler warning and subsequent link error with MSVC9 (/EHsc)
@@ -85,7 +87,7 @@ def do_setup():
     library_dirs = [boost_lib_dir,]
     
     setup(name='MolTK',
-          version = '0.3.2',
+          version = '0.3.3',
           description = "Python API for moltk sequence/structure alignment/visualization tool kit.",
           author = "Christopher Bruns",
           author_email = "cmbruns@rotatingpenguin.com",

@@ -5,6 +5,9 @@
 
 namespace moltk {
 
+/*!
+ * BaseVector3D is a parent class for points and vectors.
+ */
 template<class ELT>
 class BaseVector3D
 {
@@ -70,7 +73,11 @@ public:
 
 };
 
-
+/*!
+ * Vector3D_<> is an arbitrary point or vector in 3-space.
+ *
+ * Vector3D_<> can contain Quantities with Units.
+ */
 template<class ELT>
 class Vector3D_ : public BaseVector3D<ELT>
 {
@@ -96,7 +103,9 @@ public:
 
 };
 
-
+/*!
+ * UnitVector3D represents a direction in 3 space, and, unlike Vector3D_<>, does NOT have Units.
+ */
 class UnitVector3D : public BaseVector3D< moltk::Real >
 {
 private:
@@ -119,9 +128,23 @@ public:
 };
 
 
+/*!
+ * Vector3D is an arbitrary unitless vector or point in 3 space.
+ */
 typedef Vector3D_< moltk::Real > Vector3D;
 typedef Vector3D_< moltk::units::Length > Displacement;
 
+// Vector * unit
+template<class D, class Y>
+Vector3D_<moltk::units::Quantity<moltk::units::Unit<D>, Y> >
+operator*(const Vector3D_<Y>& vector, const moltk::units::Unit<D>& unit)
+{
+    typedef Vector3D_<moltk::units::Quantity<moltk::units::Unit<D>, Y> >
+        ResultType;
+    return ResultType(vector.x() * unit,
+                      vector.y() * unit,
+                      vector.z() * unit);
+}
 
 } // namespace moltk
 

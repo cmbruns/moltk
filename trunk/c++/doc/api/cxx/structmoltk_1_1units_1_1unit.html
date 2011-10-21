@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="moltk55.png"></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">MolTK C++ API&#160;<span id="projectnumber">0.3.2</span></div>
+   <div id="projectname">MolTK C++ API&#160;<span id="projectnumber">0.3.3</span></div>
   </td>
  </tr>
  </tbody>
@@ -75,6 +75,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="moltk::units::Unit" -->
+<p><a class="el" href="structmoltk_1_1units_1_1Unit.html" title="Unit represents a unit of measure, such as gram, nanometer, or second.">Unit</a> represents a unit of measure, such as gram, nanometer, or second.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="units_8hpp_source.html">units.hpp</a>&gt;</code></p>
 
 <p><a href="structmoltk_1_1units_1_1Unit-members.html">List of all members.</a></p>
@@ -83,16 +86,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Unit.html#a4e4e24eb5e9a5d43321305d915c538f9">DimensionType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Unit.html#af24ff59360262fa4ea03af8d6d20f0c3">ThisType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; typename <br class="typebreak"/>
+DimensionType::SquareType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Unit.html#a11d0f74ab1654292bf50a66aced07fa5">SquareType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; typename <br class="typebreak"/>
+DimensionType::SquareRootType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Unit.html#aec3622514f1535f0ff7eef06d83c0de1">SquareRootType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Unit.html#adc0745107d65dcea7c461c066e00155d">print_name</a> (std::ostream &amp;os)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Unit.html#afa4e6d81ce9a2d381f0a6dcf9fcc6880">print_symbol</a> (std::ostream &amp;os)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structmoltk_1_1units_1_1Unit.html">ThisType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Unit.html#a826fc8257f93873c15845a01e465dfc3">get_instance</a> ()</td></tr>
 </table>
-<h3>template&lt;class D&gt;<br/>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class D&gt;<br/>
  struct moltk::units::Unit&lt; D &gt;</h3>
 
-<hr/><h2>Member Typedef Documentation</h2>
+<p><a class="el" href="structmoltk_1_1units_1_1Unit.html" title="Unit represents a unit of measure, such as gram, nanometer, or second.">Unit</a> represents a unit of measure, such as gram, nanometer, or second. </p>
+</div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="a4e4e24eb5e9a5d43321305d915c538f9"></a><!-- doxytag: member="moltk::units::Unit::DimensionType" ref="a4e4e24eb5e9a5d43321305d915c538f9" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -101,6 +110,36 @@ template&lt;class D&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef D <a class="el" href="structmoltk_1_1units_1_1Unit.html">moltk::units::Unit</a>&lt; D &gt;::<a class="el" href="structmoltk_1_1units_1_1Unit.html#a4e4e24eb5e9a5d43321305d915c538f9">DimensionType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aec3622514f1535f0ff7eef06d83c0de1"></a><!-- doxytag: member="moltk::units::Unit::SquareRootType" ref="aec3622514f1535f0ff7eef06d83c0de1" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt;typename DimensionType::SquareRootType&gt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">moltk::units::Unit</a>&lt; D &gt;::<a class="el" href="structmoltk_1_1units_1_1Unit.html">SquareRootType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a11d0f74ab1654292bf50a66aced07fa5"></a><!-- doxytag: member="moltk::units::Unit::SquareType" ref="a11d0f74ab1654292bf50a66aced07fa5" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt;typename DimensionType::SquareType&gt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">moltk::units::Unit</a>&lt; D &gt;::<a class="el" href="structmoltk_1_1units_1_1Unit.html">SquareType</a></td>
         </tr>
       </table>
 </div>

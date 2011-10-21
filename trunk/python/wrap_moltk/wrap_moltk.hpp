@@ -35,6 +35,11 @@ using namespace moltk::units;
 
 namespace pyplusplus { namespace aliases {
 
+    typedef moltk::units::DimensionlessDimension DimensionlessDimension;
+    typedef moltk::units::InformationDimension InformationDimension;
+    typedef moltk::units::LengthDimension LengthDimension;
+    typedef moltk::units::AreaDimension AreaDimension;
+
     typedef std::vector<PDBStructure::Atom> AtomList;
     typedef Unit<InformationDimension> BitUnit;
     typedef Quantity<BitUnit> Information;
@@ -47,6 +52,10 @@ namespace pyplusplus { namespace aliases {
     typedef Vector3D_< moltk::units::Length > Displacement;
     typedef BaseVector3D< double > BaseVector3D_double;
     typedef BaseVector3D< moltk::units::Length > BaseDisplacement;
+
+    struct _classes_to_instantiate {
+        Vector3D vector3D;
+    };
 
 }} // namespace pyplusplus::aliases
 

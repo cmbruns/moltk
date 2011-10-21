@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="moltk55.png"></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">MolTK C++ API&#160;<span id="projectnumber">0.3.2</span></div>
+   <div id="projectname">MolTK C++ API&#160;<span id="projectnumber">0.3.3</span></div>
   </td>
  </tr>
  </tbody>
@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><table border="0" cellspacing="10" cellpadding="0">
 <tr><td><img src="inherit_graph_0.png" border="0" alt="" usemap="#moltk_1_1Aligner"/>
 <map name="moltk_1_1Aligner" id="moltk_1_1Aligner">
-<area shape="rect" id="node1" href="classmoltk_1_1Aligner.html" title="Aligner is the class that creates sequence or structure alignments." alt="" coords="5,5,125,33"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1Aligner.html" title="The Aligner class creates macromolecule sequence alignments and structure alignments." alt="" coords="5,5,125,33"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_1.png" border="0" alt="" usemap="#moltk_1_1Aligner_1_1Cell"/>
 <map name="moltk_1_1Aligner_1_1Cell" id="moltk_1_1Aligner_1_1Cell">
@@ -77,67 +77,83 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </td></tr>
 <tr><td><img src="inherit_graph_2.png" border="0" alt="" usemap="#moltk_1_1Aligner_1_1QueryPosition"/>
 <map name="moltk_1_1Aligner_1_1QueryPosition" id="moltk_1_1Aligner_1_1QueryPosition">
-<area shape="rect" id="node1" href="classmoltk_1_1Aligner_1_1QueryPosition.html" title="Aligner::Position represents a special biosequence residue that knows how to score itself during alig..." alt="" coords="5,5,232,33"/><area shape="rect" id="node3" href="classmoltk_1_1MatrixScorer_1_1QueryPosition.html" title="moltk::MatrixScorer::QueryPosition" alt="" coords="280,5,547,33"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1Aligner_1_1QueryPosition.html" title="QueryPosition is an alignment column specialized to efficiently compute an alignment score with a Tar..." alt="" coords="5,5,232,33"/><area shape="rect" id="node3" href="classmoltk_1_1MatrixScorer_1_1QueryPosition.html" title="QueryPosition represents an alignment/sequence column in the second of two sequences being scored by ..." alt="" coords="280,5,547,33"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_3.png" border="0" alt="" usemap="#moltk_1_1Aligner_1_1Scorer"/>
 <map name="moltk_1_1Aligner_1_1Scorer" id="moltk_1_1Aligner_1_1Scorer">
-<area shape="rect" id="node1" href="classmoltk_1_1Aligner_1_1Scorer.html" title="Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which know how to quickly score themselves with other AlignerPositions." alt="" coords="5,5,181,33"/><area shape="rect" id="node3" href="classmoltk_1_1MatrixScorer.html" title="moltk::MatrixScorer" alt="" coords="231,5,388,33"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1Aligner_1_1Scorer.html" title="Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and Que..." alt="" coords="5,5,181,33"/><area shape="rect" id="node3" href="classmoltk_1_1MatrixScorer.html" title="MatrixScorer scores alignments using a residue type matrix such as BLOSUM62 or PAM250." alt="" coords="231,5,388,33"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_4.png" border="0" alt="" usemap="#moltk_1_1Aligner_1_1TargetPosition"/>
 <map name="moltk_1_1Aligner_1_1TargetPosition" id="moltk_1_1Aligner_1_1TargetPosition">
-<area shape="rect" id="node1" href="classmoltk_1_1Aligner_1_1TargetPosition.html" title="moltk::Aligner::TargetPosition" alt="" coords="5,5,240,33"/><area shape="rect" id="node3" href="classmoltk_1_1MatrixScorer_1_1TargetPosition.html" title="moltk::MatrixScorer::TargetPosition" alt="" coords="289,5,561,33"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1Aligner_1_1TargetPosition.html" title="TargetPosition is an alignment column specialized to efficiently compute an alignment score with a Qu..." alt="" coords="5,5,240,33"/><area shape="rect" id="node3" href="classmoltk_1_1MatrixScorer_1_1TargetPosition.html" title="TargetPosition represents an alignment/sequence column in the first of two sequences being scored by ..." alt="" coords="289,5,561,33"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_5.png" border="0" alt="" usemap="#moltk_1_1Alignment"/>
 <map name="moltk_1_1Alignment" id="moltk_1_1Alignment">
-<area shape="rect" id="node1" href="classmoltk_1_1Alignment.html" title="moltk::Alignment" alt="" coords="7,5,145,33"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures." alt="" coords="7,5,145,33"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_6.png" border="0" alt="" usemap="#moltk_1_1Alignment_1_1EString"/>
 <map name="moltk_1_1Alignment_1_1EString" id="moltk_1_1Alignment_1_1EString">
-<area shape="rect" id="node1" href="classmoltk_1_1Alignment_1_1EString.html" title="moltk::Alignment::EString" alt="" coords="7,5,207,33"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1Alignment_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment." alt="" coords="7,5,207,33"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_7.png" border="0" alt="" usemap="#moltk_1_1Alignment_1_1EString_1_1const__iterator"/>
 <map name="moltk_1_1Alignment_1_1EString_1_1const__iterator" id="moltk_1_1Alignment_1_1EString_1_1const__iterator">
-<area shape="rect" id="node1" href="classmoltk_1_1Alignment_1_1EString_1_1const__iterator.html" title="moltk::Alignment::EString::const_iterator" alt="" coords="7,5,316,33"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1Alignment_1_1EString_1_1const__iterator.html" title="Iterator for accessing the residue positions encoded in an estring." alt="" coords="7,5,316,33"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_8.png" border="0" alt="" usemap="#moltk_1_1Alignment_1_1Row"/>
 <map name="moltk_1_1Alignment_1_1Row" id="moltk_1_1Alignment_1_1Row">
-<area shape="rect" id="node1" href="classmoltk_1_1Alignment_1_1Row.html" title="moltk::Alignment::Row" alt="" coords="5,5,184,33"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1Alignment_1_1Row.html" title="Meta&#45;data for one sequence in an Alignment." alt="" coords="5,5,184,33"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_9.png" border="0" alt="" usemap="#moltk_1_1BaseBiosequence"/>
 <map name="moltk_1_1BaseBiosequence" id="moltk_1_1BaseBiosequence">
-<area shape="rect" id="node1" href="classmoltk_1_1BaseBiosequence.html" title="moltk::BaseBiosequence" alt="" coords="7,30,199,58"/><area shape="rect" id="node3" href="classmoltk_1_1Biosequence.html" title="moltk::Biosequence" alt="" coords="276,5,433,33"/><area shape="rect" id="node5" href="classmoltk_1_1PDBStructure_1_1Chain.html" title="moltk::PDBStructure::Chain" alt="" coords="248,55,461,83"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1BaseBiosequence.html" title="Parent class for macromolecule sequences and structures." alt="" coords="7,30,199,58"/><area shape="rect" id="node3" href="classmoltk_1_1Biosequence.html" title="A macromolecule sequence (DNA or RNA or protein)" alt="" coords="276,5,433,33"/><area shape="rect" id="node5" href="classmoltk_1_1PDBStructure_1_1Chain.html" title="Chain represents a single polymer or molecule in a PDBStructure." alt="" coords="248,55,461,83"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_10.png" border="0" alt="" usemap="#moltk_1_1BaseBiosequence_1_1BaseResidue"/>
 <map name="moltk_1_1BaseBiosequence_1_1BaseResidue" id="moltk_1_1BaseBiosequence_1_1BaseResidue">
-<area shape="rect" id="node1" href="classmoltk_1_1BaseBiosequence_1_1BaseResidue.html" title="moltk::BaseBiosequence::BaseResidue" alt="" coords="7,55,297,83"/><area shape="rect" id="node3" href="classmoltk_1_1BaseBiosequence_1_1GapResidue.html" title="GapResidue is used in Alignments." alt="" coords="347,5,632,33"/><area shape="rect" id="node5" href="classmoltk_1_1BiosequenceResidue.html" title="moltk::BiosequenceResidue" alt="" coords="383,55,596,83"/><area shape="rect" id="node7" href="classmoltk_1_1PDBStructure_1_1Residue.html" title="moltk::PDBStructure::Residue" alt="" coords="375,106,604,134"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1BaseBiosequence_1_1BaseResidue.html" title="Parent class for macromolecule sequence residues (nucleotides or amino acids)" alt="" coords="7,30,297,58"/><area shape="rect" id="node3" href="classmoltk_1_1BiosequenceResidue.html" title="One residue in a macromolecule sequence (a nucleotide or amino acid)" alt="" coords="356,5,569,33"/><area shape="rect" id="node5" href="classmoltk_1_1PDBStructure_1_1Residue.html" title="Residue represents a single amino acid or nucleotide residue, or a small molecule, in a macromolecule structure." alt="" coords="348,55,577,83"/></map>
 </td></tr>
-<tr><td><img src="inherit_graph_11.png" border="0" alt="" usemap="#moltk_1_1PDBStructure"/>
+<tr><td><img src="inherit_graph_11.png" border="0" alt="" usemap="#moltk_1_1BaseVector3D_3_01ELT_01_4"/>
+<map name="moltk_1_1BaseVector3D_3_01ELT_01_4" id="moltk_1_1BaseVector3D_3_01ELT_01_4">
+<area shape="rect" id="node1" href="classmoltk_1_1BaseVector3D.html" title="BaseVector3D is a parent class for points and vectors." alt="" coords="7,5,228,33"/><area shape="rect" id="node3" href="classmoltk_1_1Vector3D__.html" title="Vector3D_&lt;&gt; is an arbitrary point or vector in 3&#45;space." alt="" coords="277,5,472,33"/></map>
+</td></tr>
+<tr><td><img src="inherit_graph_12.png" border="0" alt="" usemap="#moltk_1_1BaseVector3D_3_01moltk_1_1Real_01_4"/>
+<map name="moltk_1_1BaseVector3D_3_01moltk_1_1Real_01_4" id="moltk_1_1BaseVector3D_3_01moltk_1_1Real_01_4">
+<area shape="rect" id="node1" href="classmoltk_1_1BaseVector3D.html" title="moltk::BaseVector3D\&lt; moltk::Real \&gt;" alt="" coords="7,5,279,33"/><area shape="rect" id="node3" href="classmoltk_1_1UnitVector3D.html" title="UnitVector3D represents a direction in 3 space, and, unlike Vector3D_&lt;&gt;, does NOT have Units..." alt="" coords="328,5,491,33"/></map>
+</td></tr>
+<tr><td><img src="inherit_graph_13.png" border="0" alt="" usemap="#moltk_1_1PDBStructure"/>
 <map name="moltk_1_1PDBStructure" id="moltk_1_1PDBStructure">
-<area shape="rect" id="node1" href="classmoltk_1_1PDBStructure.html" title="moltk::PDBStructure" alt="" coords="5,5,171,33"/></map>
+<area shape="rect" id="node1" href="classmoltk_1_1PDBStructure.html" title="PDBStructure represents a macromolecule structure as found in a Protein Data Bank file..." alt="" coords="5,5,171,33"/></map>
 </td></tr>
-<tr><td><img src="inherit_graph_12.png" border="0" alt="" usemap="#moltk_1_1PDBStructure_1_1Atom"/>
+<tr><td><img src="inherit_graph_14.png" border="0" alt="" usemap="#moltk_1_1PDBStructure_1_1Atom"/>
 <map name="moltk_1_1PDBStructure_1_1Atom" id="moltk_1_1PDBStructure_1_1Atom">
 <area shape="rect" id="node1" href="classmoltk_1_1PDBStructure_1_1Atom.html" title="Structure::Atom represents a chemical atom in a molecular structure." alt="" coords="7,5,217,33"/></map>
 </td></tr>
-<tr><td><img src="inherit_graph_13.png" border="0" alt="" usemap="#moltk_1_1Printable"/>
+<tr><td><img src="inherit_graph_15.png" border="0" alt="" usemap="#moltk_1_1Printable"/>
 <map name="moltk_1_1Printable" id="moltk_1_1Printable">
 <area shape="rect" id="node1" href="classmoltk_1_1Printable.html" title="moltk::Printable is an abstract base class to help streamline string conversion in the moltk python b..." alt="" coords="7,5,137,33"/></map>
 </td></tr>
-<tr><td><img src="inherit_graph_14.png" border="0" alt="" usemap="#moltk_1_1units_1_1Dimension"/>
-<map name="moltk_1_1units_1_1Dimension" id="moltk_1_1units_1_1Dimension">
-<area shape="rect" id="node1" href="structmoltk_1_1units_1_1Dimension.html" title="moltk::units::Dimension" alt="" coords="5,30,192,58"/><area shape="rect" id="node3" href="structmoltk_1_1units_1_1InformationDimension.html" title="moltk::units::InformationDimension" alt="" coords="240,5,507,33"/><area shape="rect" id="node5" href="structmoltk_1_1units_1_1LengthDimension.html" title="moltk::units::LengthDimension" alt="" coords="256,55,491,83"/></map>
+<tr><td><img src="inherit_graph_16.png" border="0" alt="" usemap="#moltk_1_1RigidTransform"/>
+<map name="moltk_1_1RigidTransform" id="moltk_1_1RigidTransform">
+<area shape="rect" id="node1" href="classmoltk_1_1RigidTransform.html" title="RigidTransform converts one reference frame to another with rotation and translation." alt="" coords="7,5,185,33"/></map>
 </td></tr>
-<tr><td><img src="inherit_graph_15.png" border="0" alt="" usemap="#moltk_1_1units_1_1Quantity_3_01U_00_01Y_01_4"/>
+<tr><td><img src="inherit_graph_17.png" border="0" alt="" usemap="#moltk_1_1Rotation3D"/>
+<map name="moltk_1_1Rotation3D" id="moltk_1_1Rotation3D">
+<area shape="rect" id="node1" href="classmoltk_1_1Rotation3D.html" title="Rotation3D represents a rotation matrix." alt="" coords="7,5,153,33"/></map>
+</td></tr>
+<tr><td><img src="inherit_graph_18.png" border="0" alt="" usemap="#moltk_1_1Rotation3D_1_1Row"/>
+<map name="moltk_1_1Rotation3D_1_1Row" id="moltk_1_1Rotation3D_1_1Row">
+<area shape="rect" id="node1" href="classmoltk_1_1Rotation3D_1_1Row.html" title="One row of three numbers in a Rotation3D rotation matrix." alt="" coords="5,5,192,33"/></map>
+</td></tr>
+<tr><td><img src="inherit_graph_19.png" border="0" alt="" usemap="#moltk_1_1units_1_1Dimension_3_01M_00_01L_00_01T_00_01Q_00_01N_00_01A_00_01I_01_4"/>
+<map name="moltk_1_1units_1_1Dimension_3_01M_00_01L_00_01T_00_01Q_00_01N_00_01A_00_01I_01_4" id="moltk_1_1units_1_1Dimension_3_01M_00_01L_00_01T_00_01Q_00_01N_00_01A_00_01I_01_4">
+<area shape="rect" id="node1" href="structmoltk_1_1units_1_1Dimension.html" title="Dimension represents a physical dimension such as mass, length, time, etc." alt="" coords="5,5,331,33"/></map>
+</td></tr>
+<tr><td><img src="inherit_graph_20.png" border="0" alt="" usemap="#moltk_1_1units_1_1Quantity_3_01U_00_01Y_01_4"/>
 <map name="moltk_1_1units_1_1Quantity_3_01U_00_01Y_01_4" id="moltk_1_1units_1_1Quantity_3_01U_00_01Y_01_4">
-<area shape="rect" id="node1" href="structmoltk_1_1units_1_1Quantity.html" title="For efficiency, Quantity&lt;&gt; should compile to a double in C++." alt="" coords="5,5,232,33"/></map>
+<area shape="rect" id="node1" href="structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;." alt="" coords="5,5,232,33"/></map>
 </td></tr>
-<tr><td><img src="inherit_graph_16.png" border="0" alt="" usemap="#moltk_1_1units_1_1Unit_3_01D_01_4"/>
+<tr><td><img src="inherit_graph_21.png" border="0" alt="" usemap="#moltk_1_1units_1_1Unit_3_01D_01_4"/>
 <map name="moltk_1_1units_1_1Unit_3_01D_01_4" id="moltk_1_1units_1_1Unit_3_01D_01_4">
-<area shape="rect" id="node1" href="structmoltk_1_1units_1_1Unit.html" title="moltk::units::Unit\&lt; D \&gt;" alt="" coords="5,5,184,33"/></map>
-</td></tr>
-<tr><td><img src="inherit_graph_17.png" border="0" alt="" usemap="#moltk_1_1Vector3D_3_01ELT_01_4"/>
-<map name="moltk_1_1Vector3D_3_01ELT_01_4" id="moltk_1_1Vector3D_3_01ELT_01_4">
-<area shape="rect" id="node1" href="classmoltk_1_1Vector3D.html" title="moltk::Vector3D\&lt; ELT \&gt;" alt="" coords="7,5,193,33"/></map>
+<area shape="rect" id="node1" href="structmoltk_1_1units_1_1Unit.html" title="Unit represents a unit of measure, such as gram, nanometer, or second." alt="" coords="5,5,184,33"/></map>
 </td></tr>
 </table>
 </div>

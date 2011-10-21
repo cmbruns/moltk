@@ -5,10 +5,16 @@
 
 namespace moltk {
 
+/*!
+ * Rotation3D represents a rotation matrix.
+ */
 class Rotation3D
 {
 public:
 
+    /*!
+     * One row of three numbers in a Rotation3D rotation matrix.
+     */
     class Row
     {
     public:

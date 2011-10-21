@@ -126,7 +126,7 @@ void register_PDBStructure_class(){
 
     { //::moltk::PDBStructure
         typedef bp::class_< PDBStructure_wrapper > PDBStructure_exposer_t;
-        PDBStructure_exposer_t PDBStructure_exposer = PDBStructure_exposer_t( "PDBStructure", bp::init< >() );
+        PDBStructure_exposer_t PDBStructure_exposer = PDBStructure_exposer_t( "PDBStructure", "\n PDBStructure represents a macromolecule structure as found in a\n Protein Data Bank file.\n", bp::init< >() );
         bp::scope PDBStructure_scope( PDBStructure_exposer );
         { //::moltk::PDBStructure::Atom
             typedef bp::class_< moltk::PDBStructure::Atom > Atom_exposer_t;
@@ -148,8 +148,8 @@ void register_PDBStructure_class(){
             
             }
         }
-        bp::class_< PDBStructure_wrapper::Chain_wrapper, bp::bases< moltk::BaseBiosequence > >( "Chain", bp::init< >() )    
-            .def( bp::init< moltk::PDBStructure::Chain const & >(( bp::arg("rhs") )) )    
+        bp::class_< PDBStructure_wrapper::Chain_wrapper, bp::bases< moltk::BaseBiosequence > >( "Chain", "\n Chain represents a single polymer or molecule in a PDBStructure.\n", bp::init< >("\n Chain represents a single polymer or molecule in a PDBStructure.\n") )    
+            .def( bp::init< moltk::PDBStructure::Chain const & >(( bp::arg("rhs") ), "\n Chain represents a single polymer or molecule in a PDBStructure.\n") )    
             .def( 
                 "get_number_of_residues"
                 , (::size_t ( ::moltk::PDBStructure::Chain::* )(  ) const)(&::moltk::PDBStructure::Chain::get_number_of_residues)
@@ -164,8 +164,8 @@ void register_PDBStructure_class(){
                 , (void ( ::moltk::BaseBiosequence::* )( ::std::ostream & ) const)(&::moltk::BaseBiosequence::print_to_stream)
                 , (void ( PDBStructure_wrapper::Chain_wrapper::* )( ::std::ostream & ) const)(&PDBStructure_wrapper::Chain_wrapper::default_print_to_stream)
                 , ( bp::arg("os") ) );
-        bp::class_< PDBStructure_wrapper::Residue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "Residue", bp::init< >() )    
-            .def( bp::init< moltk::PDBStructure::Residue const & >(( bp::arg("rhs") )) )    
+        bp::class_< PDBStructure_wrapper::Residue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "Residue", "\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n", bp::init< >("\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n") )    
+            .def( bp::init< moltk::PDBStructure::Residue const & >(( bp::arg("rhs") ), "\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n") )    
             .def( 
                 "get_one_letter_code"
                 , (char ( ::moltk::PDBStructure::Residue::* )(  ) const)(&::moltk::PDBStructure::Residue::get_one_letter_code)

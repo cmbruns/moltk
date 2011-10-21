@@ -30,6 +30,15 @@ There are three faces of MolTK; in order from easiest-to-use to most-powerful:
     -# moltk is a Python programming language module that allows the user to align and otherwise compute on molecular sequences and structures.
     -# moltk is a C++ API that allow the programmer to compute with molecular sequences and structures with high efficiency. 
 
+\section resources MolTK Resources
+
+    - Browse the MolTK home page at http://rotatingpenguin.com/moltk/
+    - Download MolTK at http://code.google.com/p/moltk/downloads/list
+    - Find questions and answers in the moltk-users forum at http://groups.google.com/group/moltk-users
+    - Report issues and get source code at http://code.google.com/p/moltk/
+    - Study the MolTK Python API at http://www.rotatingpenguin.com/moltk/api_python/python_api.html
+    - Study the MolTK C++ API at http://www.rotatingpenguin.com/moltk/api_cxx/cxx_api.html
+
 \section designgoals Design Goals of MolTK
 
     - Python programming language interactive environment for sequence/structure alignment that is just as easy to use as our (aging) dedicated alignment tool SEQUOIA.
@@ -62,6 +71,11 @@ There are three faces of MolTK; in order from easiest-to-use to most-powerful:
     Commercial users should ask about our dual licensing model.
     For questions contact: cmbruns@rotatingpenguin.com    
 */
+
+/*!
+ *  The moltk namespace contains everything in the MolTK C++ API.
+ */
+namespace moltk {}
 
 #include "moltk/Real.hpp"
 #include "moltk/Biosequence.hpp"

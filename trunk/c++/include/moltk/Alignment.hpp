@@ -27,28 +27,40 @@
 #include <vector>
 #include <algorithm> // reverse
 #include "moltk/Biosequence.hpp"
-#include "moltk/PdbStructure.hpp"
+#include "moltk/PDBStructure.hpp"
 #include "moltk/Real.hpp"
 #include "moltk/units.hpp"
 
 namespace moltk {
 
+/*!
+ * Alignment represents a set of aligned macromolecule sequences and/or structures.
+ */
 class Alignment
 {
 public:
 
 
-    // index into displayOrder
+    /// Whether a particular Alignment member is a sequence or structure.
     enum List {
         SequenceList,
         StructureList
     };
 
 
+    /// A compact representation of the gapping pattern for one sequence in an alignment.
     class EString
     {
     public:
 
+        /*!
+         * Iterator for accessing the residue positions encoded in an estring.
+         *
+         * EString::const_iterator emits one residue number for each
+         * column in an alignment.  Positions with a gap dereference to
+         * residue number -1.  Other positions dereference to the
+         * ordinal residue position index in the corresponding sequence.
+         */
         class const_iterator
         {
         public:
@@ -99,6 +111,7 @@ public:
     };
 
     
+    /// Meta-data for one sequence in an Alignment
     class Row
     {
     public:

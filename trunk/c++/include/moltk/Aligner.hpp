@@ -30,7 +30,9 @@
 
 namespace moltk {
 
-/// Aligner is the class that creates sequence or structure alignments.
+/*! The Aligner class creates macromolecule sequence alignments and structure alignments.
+ *
+ */
 class Aligner 
 {
 public:
@@ -39,7 +41,10 @@ public:
     typedef moltk::units::Information Information;
 
 
-    /// Aligner::Position represents a special biosequence residue that knows how to score itself during alignment.
+    /*!
+     * QueryPosition is an alignment column specialized to efficiently compute
+     * an alignment score with a TargetPosition.
+     */
     class QueryPosition // seq2
     {
         public:
@@ -48,6 +53,9 @@ public:
             virtual moltk::units::Information get_gap_open_penalty() const = 0;
             virtual moltk::units::Information get_gap_extension_penalty() const = 0;
     };
+    /*! TargetPosition is an alignment column specialized to efficiently compute
+     *  an alignment score with a QueryPosition.
+     */
     class TargetPosition // seq1
     {
         public:
@@ -59,8 +67,9 @@ public:
     };
 
 
-    /// Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which
-    /// know how to quickly score themselves with other AlignerPositions.
+    /*! Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions
+     * and QueryPositions, which can efficiently compute alignment scores.
+     */
     class Scorer
     {
     public:
@@ -80,7 +89,7 @@ public:
         Information default_gap_extension_penalty;
     };
 
-    /// TracebackPointer is an Aligner::Cell attribute that helps reconstruct the final alignment.
+    /// TracebackPointer help reconstruct the final alignment.
     enum TracebackPointer
     {
         TRACEBACK_UP,
@@ -115,7 +124,7 @@ public:
     typedef std::vector<DpRow> DpTable;
 
 
-    // Aligner::Stage represents current state of an incomplete alignment
+    /// Aligner::Stage represents current state of an incomplete alignment
     enum Stage {
         STAGE_EMPTY, // have nothing
         STAGE_SCORER, // have a scorer
