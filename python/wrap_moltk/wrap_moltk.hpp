@@ -32,7 +32,6 @@
 
 using namespace moltk;
 using namespace moltk::units;
-// template class std::vector<int>;
 
 namespace pyplusplus { namespace aliases {
 
@@ -44,6 +43,10 @@ namespace pyplusplus { namespace aliases {
     typedef std::vector<int> std_vector_int;
     typedef std::vector<Aligner::QueryPosition*> QueryPositionList;
     typedef std::vector<Aligner::TargetPosition*> TargetPositionList;
+    typedef Vector3D_< moltk::Real > Vector3D;
+    typedef Vector3D_< moltk::units::Length > Displacement;
+    typedef BaseVector3D< double > BaseVector3D_double;
+    typedef BaseVector3D< moltk::units::Length > BaseDisplacement;
 
 }} // namespace pyplusplus::aliases
 

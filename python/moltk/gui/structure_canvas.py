@@ -43,7 +43,7 @@ class StructureCanvas(QGLWidget):
             rotAnglePerPixel = 2.0 * 3.14159 / (self.width() + self.height() / 2.0)
             dragDistance = math.sqrt(dx*dx + dy*dy)
             rotAngle = dragDistance * rotAnglePerPixel
-            rotAxis = Displacement([dy, dx, 0]).normalize()
+            rotAxis = Vector3D([dy, dx, 0]).normalize()
             dragRotation = Rotation3D.fromAngleAboutUnitVector(rotAngle, rotAxis)
             # print "rotation0 = ", self.rotation
             # print "dragRotation = ", dragRotation

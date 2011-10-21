@@ -2,12 +2,12 @@
 
 #include "boost/python.hpp"
 #include "wrap_moltk.hpp"
-#include "dimension.pypp.hpp"
+#include "rigidtransform.pypp.hpp"
 
 namespace bp = boost::python;
 
-void register_Dimension_class(){
+void register_RigidTransform_class(){
 
-    bp::class_< moltk::units::Dimension >( "Dimension", "\n" );
+    bp::class_< moltk::RigidTransform >( "RigidTransform" );
 
 }
