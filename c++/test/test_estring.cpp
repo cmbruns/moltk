@@ -44,5 +44,34 @@ BOOST_AUTO_TEST_CASE( test_estring_equality )
     s5.append_run(2);
     s5.append_run(-1);
     BOOST_CHECK_NE(s3, s5);
+    BOOST_CHECK_EQUAL(
+        EString(),
+        EString());
+    BOOST_CHECK_NE(
+        EString() << 2,
+        EString());
+    // example from Edgar paper
+    BOOST_CHECK_EQUAL(
+        (EString()<<1<<-1<<5) * (EString()<<3<<-1<<2),
+        EString()<<1<<-1<<2<<-1<<2);
+    // tests from MUSCLE estring.cpp
+    BOOST_CHECK_EQUAL(
+        (EString()<<1<<-1<<2) * (EString()<<-1<<1<<-1<<0),
+        EString()<<-2<<1<<-1);
+    BOOST_CHECK_EQUAL(
+        (EString()<<1<<-1<<3<<-1<<1) * (EString()<<2<<-1<<2),
+        EString()<<1<<-1<<1<<-1<<1<<-1<<1);
+    BOOST_CHECK_EQUAL(
+        (EString()<<2<<-1<<2) * (EString()<<-1<<3),
+        EString()<<-1<<1<<-1<<2);
+    BOOST_CHECK_EQUAL(
+        (EString()<<4) * (EString()<<-1<<1<<-1<<1),
+        EString()<<-1<<1<<-1<<1);
+    BOOST_CHECK_EQUAL(
+        (EString()<<4) * (EString()<<1<<-1<<1<<-1),
+        EString()<<1<<-1<<1<<-1);
+    BOOST_CHECK_EQUAL(
+        (EString()<<-1<<4<<-1) * (EString()<<1<<-1<<1<<-1),
+        EString()<<-1<<1<<-1<<1<<-2);
 }
 
