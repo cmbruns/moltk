@@ -74,6 +74,12 @@ def wrap_custom(mb):
     quaternion.member_function('set_from_angle_axis').call_policies = return_self()
     ns_moltk.class_('Rotation3D').member_functions(lambda f: f.name.startswith('set_from_')
             ).call_policies = return_self()
+    biosequence = ns_moltk.class_('Biosequence')
+    biosequence.member_functions('load_fasta').call_policies = return_self()
+    biosequence.add_registration_code("""
+        def("__repr__", &::moltk::Biosequence::repr, "string representation")
+        """)
+
 
             
 if __name__ == '__main__':

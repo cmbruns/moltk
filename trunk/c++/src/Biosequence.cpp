@@ -28,6 +28,10 @@
  */
 
 #include "moltk/Biosequence.hpp"
+#include <fstream>
+#include <cassert>
+
+using namespace std;
 
 namespace moltk
 {
@@ -99,7 +103,50 @@ void Biosequence::load_stream(std::istream& is)
         push_back( Residue(line[i], residueNumber+1) );
         ++residueNumber;
     }
-    // TODO - subsequent lines - peek() for '>' characters
+    // Read subsequent lines that do not start with ">" characters.
+    char peek = is.peek();
+    while ((peek != '>') && (! is.eof())) {
+        getline(is, line);
+        for (size_t i = 0; i < line.length(); ++i) 
+        {
+            push_back( Residue(line[i], residueNumber+1) );
+            ++residueNumber;
+        }
+        peek = is.peek();
+    }
+}
+
+Biosequence& Biosequence::load_fasta(const std::string& file_name)
+{
+    ifstream in_stream(file_name.c_str());
+    load_fasta(in_stream);
+    return *this;
+}
+
+Biosequence& Biosequence::load_fasta(std::istream& is)
+{
+    load_stream(is);
+    // throw std::exception("load_fasta() not implemented.  Talk to Christopher.");
+    return *this;
+}
+
+void Biosequence::print_string(std::ostream& os) const
+{
+    for (const_iterator i = begin(); i != end(); ++i)
+        os << *i;
+}
+
+/*!
+ * repr is a helper for the python __repr__ method.
+ */
+std::string Biosequence::repr() const
+{
+    std::ostringstream s;
+    s << "Biosequence(sequence='";
+    for (const_iterator i = begin(); i != end(); ++i)
+        s << *i;
+    s << "', description='" << description << "')";
+    return s.str();
 }
 
 
@@ -107,5 +154,16 @@ void Biosequence::load_stream(std::istream& is)
 // Biosequence::Residue methods //
 //////////////////////////////////
 
+
+////////////////////
+// Global methods //
+////////////////////
+
+Biosequence load_fasta(const std::string& file_name)
+{
+    Biosequence result;
+    result.load_fasta(file_name);
+    return result;
+}
 
 } // namespace moltk

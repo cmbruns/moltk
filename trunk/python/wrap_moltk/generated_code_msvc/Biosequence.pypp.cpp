@@ -95,6 +95,28 @@ void register_Biosequence_class(){
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
+        { //::moltk::Biosequence::load_fasta
+        
+            typedef ::moltk::Biosequence & ( ::moltk::Biosequence::*load_fasta_function_type )( ::std::string const & ) ;
+            
+            Biosequence_exposer.def( 
+                "load_fasta"
+                , load_fasta_function_type( &::moltk::Biosequence::load_fasta )
+                , ( bp::arg("file_name") )
+                , bp::return_self< >() );
+        
+        }
+        { //::moltk::Biosequence::load_fasta
+        
+            typedef ::moltk::Biosequence & ( ::moltk::Biosequence::*load_fasta_function_type )( ::std::istream & ) ;
+            
+            Biosequence_exposer.def( 
+                "load_fasta"
+                , load_fasta_function_type( &::moltk::Biosequence::load_fasta )
+                , ( bp::arg("is") )
+                , bp::return_self< >() );
+        
+        }
         { //::moltk::Biosequence::load_stream
         
             typedef void ( ::moltk::Biosequence::*load_stream_function_type )( ::std::istream & ) ;
@@ -115,6 +137,16 @@ void register_Biosequence_class(){
                 , ( bp::arg("os") ) );
         
         }
+        { //::moltk::Biosequence::repr
+        
+            typedef ::std::string ( ::moltk::Biosequence::*repr_function_type )(  ) const;
+            
+            Biosequence_exposer.def( 
+                "repr"
+                , repr_function_type( &::moltk::Biosequence::repr )
+                , " repr is a helper for the python __repr__ method." );
+        
+        }
         { //::moltk::BaseBiosequence::print_to_stream
         
             typedef void ( ::moltk::BaseBiosequence::*print_to_stream_function_type )( ::std::ostream & ) const;
@@ -128,6 +160,7 @@ void register_Biosequence_class(){
         
         }
         Biosequence_exposer.def( bp::self_ns::str( bp::self ) );
+        Biosequence_exposer.def("__repr__", &::moltk::Biosequence::repr, "string representation");
     }
 
 }

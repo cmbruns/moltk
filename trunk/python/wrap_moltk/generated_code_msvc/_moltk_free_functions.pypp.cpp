@@ -85,6 +85,17 @@ void register_free_functions(){
     
     }
 
+    { //::moltk::load_fasta
+    
+        typedef ::moltk::Biosequence ( *load_fasta_function_type )( ::std::string const & );
+        
+        bp::def( 
+            "load_fasta"
+            , load_fasta_function_type( &::moltk::load_fasta )
+            , ( bp::arg("file_name") ) );
+    
+    }
+
     { //::moltk::units::sin
     
         typedef ::moltk::Real ( *sin_function_type )( ::moltk::units::Angle const & );
