@@ -55,6 +55,7 @@ namespace pyplusplus { namespace aliases {
 
     struct _classes_to_instantiate {
         Vector3D vector3D;
+        UnitVector3D unitVector3D;
     };
 
 }} // namespace pyplusplus::aliases

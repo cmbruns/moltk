@@ -10,9 +10,9 @@ void register_Rotation3D_class(){
 
     { //::moltk::Rotation3D
         typedef bp::class_< moltk::Rotation3D > Rotation3D_exposer_t;
-        Rotation3D_exposer_t Rotation3D_exposer = Rotation3D_exposer_t( "Rotation3D" );
+        Rotation3D_exposer_t Rotation3D_exposer = Rotation3D_exposer_t( "Rotation3D", "\n Rotation3D represents a rotation matrix.\n" );
         bp::scope Rotation3D_scope( Rotation3D_exposer );
-        bp::class_< moltk::Rotation3D::Row >( "Row" );
+        bp::class_< moltk::Rotation3D::Row >( "Row", "\n One row of three numbers in a Rotation3D rotation matrix.\n" );
     }
 
 }
