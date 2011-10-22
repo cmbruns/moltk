@@ -28,6 +28,8 @@
 
 #include "moltk/Real.hpp"
 #include "boost/utility.hpp"
+#include <string>
+#include <memory>
 #include <cassert>
 
 namespace moltk {
@@ -67,6 +69,7 @@ namespace units {
     typedef Dimension< 0, 0, 0, 0, 0, 0, 1> InformationDimension;
     typedef Dimension< 0, 1, 0, 0, 0, 0, 0> LengthDimension;
     typedef Dimension< 0, 2, 0, 0, 0, 0, 0> AreaDimension;
+    typedef Dimension< 0, 0, 0, 0, 0, 1, 0> AngleDimension;
 
     ///////////
     // Units //
@@ -102,6 +105,11 @@ namespace units {
     inline std::string get_unit_symbol(const NanometerUnit&) {return "nm";}
     inline std::string get_unit_name(const NanometerUnit&) {return "nanometer";}
     static const NanometerUnit& nanometer = NanometerUnit::get_instance();
+
+    typedef Unit<AngleDimension> RadianUnit;
+    inline std::string get_unit_symbol(const RadianUnit&) {return "rad";}
+    inline std::string get_unit_name(const RadianUnit&) {return "radian";}
+    static const RadianUnit& radian = RadianUnit::get_instance();
 
     ////////////////
     // Quantities //
@@ -296,6 +304,8 @@ namespace units {
     typedef Quantity<BitUnit> Information;
     /// Length is a length quantity in units of nanometers
     typedef Quantity<NanometerUnit> Length;
+    /// Angle is a quantity in radians
+    typedef Quantity<RadianUnit> Angle;
 
 }} // namespace moltk::units
 

@@ -10,6 +10,17 @@ void register_free_functions(){
 
     { //::moltk::units::get_unit_name
     
+        typedef ::std::string ( *get_unit_name_function_type )( ::moltk::units::RadianUnit const & );
+        
+        bp::def( 
+            "get_unit_name"
+            , get_unit_name_function_type( &::moltk::units::get_unit_name )
+            , ( bp::arg("arg0") ) );
+    
+    }
+
+    { //::moltk::units::get_unit_name
+    
         typedef ::std::string ( *get_unit_name_function_type )( ::moltk::units::NanometerUnit const & );
         
         bp::def( 
@@ -26,6 +37,17 @@ void register_free_functions(){
         bp::def( 
             "get_unit_name"
             , get_unit_name_function_type( &::moltk::units::get_unit_name )
+            , ( bp::arg("arg0") ) );
+    
+    }
+
+    { //::moltk::units::get_unit_symbol
+    
+        typedef ::std::string ( *get_unit_symbol_function_type )( ::moltk::units::RadianUnit const & );
+        
+        bp::def( 
+            "get_unit_symbol"
+            , get_unit_symbol_function_type( &::moltk::units::get_unit_symbol )
             , ( bp::arg("arg0") ) );
     
     }
