@@ -21,6 +21,7 @@ void register_Rotation3D_class(){
         Rotation3D_exposer.def( bp::init< moltk::units::Angle const &, moltk::UnitVector3D const & >(( bp::arg("angle"), bp::arg("unit_vector") )) );
         Rotation3D_exposer.def( bp::init< moltk::Quaternion const & >(( bp::arg("quaternion") )) );
         bp::implicitly_convertible< moltk::Quaternion const &, moltk::Rotation3D >();
+        Rotation3D_exposer.def( bp::self * bp::self );
         { //::moltk::Rotation3D::operator[]
         
             typedef ::moltk::Rotation3D::Row const & ( ::moltk::Rotation3D::*__getitem___function_type )( ::size_t ) const;

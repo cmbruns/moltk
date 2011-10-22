@@ -22,7 +22,7 @@
 # to help avoid mixing QtGui thread with OpenGL thread.
 from __future__ import division
 from structure_renderer import StructureRenderer
-from moltk import Displacement, Rotation3D, Vector3D, UnitVector3D
+from moltk import Displacement, Rotation3D, Vector3D, UnitVector3D, radian
 from PySide import QtCore
 from PySide.QtOpenGL import QGLWidget
 import math
@@ -60,10 +60,12 @@ class StructureCanvas(QGLWidget):
             # self.rotY.emit(dx * 0.20)
             #
             rotAnglePerPixel = 2.0 * 3.14159 / (self.width() + self.height() / 2.0)
+            rotAnglePerPixel = rotAnglePerPixel * radian
             dragDistance = math.sqrt(dx*dx + dy*dy)
             rotAngle = dragDistance * rotAnglePerPixel
             rotAxis = UnitVector3D(dy, dx, 0)
-            dragRotation = Rotation3D.fromAngleAboutUnitVector(rotAngle, rotAxis)
+            dragRotation = Rotation3D()
+            dragRotation.set_from_angle_about_unit_vector(rotAngle, rotAxis)
             # print "rotation0 = ", self.rotation
             # print "dragRotation = ", dragRotation
             self.rotation = dragRotation * self.rotation

@@ -23,6 +23,8 @@ void register_RadianUnit_class(){
             , ( bp::arg("os") ) )    
         .staticmethod( "get_instance" )    
         .staticmethod( "print_name" )    
-        .staticmethod( "print_symbol" );
+        .staticmethod( "print_symbol" )    
+        .def( bp::other< int >() * bp::self )    
+        .def( bp::other< double >() * bp::self );
 
 }

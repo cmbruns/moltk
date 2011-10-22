@@ -75,3 +75,19 @@ Rotation3D& Rotation3D::set_from_elements(
     R[2][0] = e20; R[2][1] = e21; R[2][2] = e22;
     return *this;
 }
+
+Rotation3D Rotation3D::operator*(const Rotation3D& rhs) const
+{
+    const Rotation3D& lhs = *this;
+    Rotation3D result;
+    for (int i = 0; i < 3; ++i)
+        for (int j = 0; j < 3; ++j)
+        {
+            result[i][j] = 0.0;
+            for (int k = 0; k < 3; ++k)
+            {
+                result[i][j] += lhs[i][k] * rhs[k][j];
+            }
+        }
+    return result;
+}
