@@ -30,6 +30,7 @@
 #ifndef BIOSEQUENCE_H_
 #define BIOSEQUENCE_H_
 
+#include <sstream>
 #include <vector>
 #include <string>
 #include <iterator>
@@ -110,13 +111,15 @@ public:
     Biosequence(const Biosequence& rhs);
     virtual ~Biosequence() {}
     void load_stream(std::istream& is);
+    Biosequence& load_fasta(const std::string& file_name);
+    Biosequence& load_fasta(std::istream& is);
     size_t get_number_of_residues() const { return size(); }
     const Residue& get_residue(size_t ix) const { return (*this)[ix]; }
-    void print_string(std::ostream& os) const
-    {
-        for (const_iterator i = begin(); i != end(); ++i)
-            os << *i;
-    }
+    void print_string(std::ostream& os) const;
+    /*!
+     * repr is a helper for the python __repr__ method.
+     */
+    std::string repr() const;
 
     inline friend std::ostream& operator<<(std::ostream& os, const Biosequence& seq)
     {
@@ -134,6 +137,7 @@ protected:
     std::string description;
 };
 
+Biosequence load_fasta(const std::string& file_name);
 
 } // namespace moltk
 
