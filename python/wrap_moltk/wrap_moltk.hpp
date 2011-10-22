@@ -57,9 +57,13 @@ namespace pyplusplus { namespace aliases {
     typedef BaseVector3D< double > BaseVector3D_double;
     typedef BaseVector3D< moltk::units::Length > BaseDisplacement;
 
-    struct _classes_to_instantiate {
+    struct _classes_to_instantiate 
+    {
+        // instantiate classes
         Vector3D vector3D;
         UnitVector3D unitVector3D;
+        // instantiate methods
+        void foo() {Angle a = 4.0 * radian;}
     };
 
 }} // namespace pyplusplus::aliases

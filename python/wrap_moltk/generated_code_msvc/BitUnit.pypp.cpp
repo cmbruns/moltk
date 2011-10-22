@@ -24,6 +24,7 @@ void register_BitUnit_class(){
         .staticmethod( "get_instance" )    
         .staticmethod( "print_name" )    
         .staticmethod( "print_symbol" )    
+        .def( bp::other< int >() * bp::self )    
         .def( bp::other< double >() * bp::self );
 
 }

@@ -276,6 +276,12 @@ namespace units {
     {
         return Quantity<Unit<D>, Y>(lhs, rhs);
     }
+    // int * unit version
+    template<class D>
+    Quantity<Unit<D>, Real> operator*(int lhs, const Unit<D>& rhs) 
+    {
+        return Quantity<Unit<D>, Real>((Real)lhs, rhs);
+    }
 
     template<class Y, class D>
     typename Quantity<Unit<D>, Y>::SquareRootType

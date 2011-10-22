@@ -61,6 +61,7 @@ public:
     Rotation3D& set_from_quaternion(const Quaternion& quaternion);
 
     const Row& operator[](size_t ix) const {return (&row0)[ix];}
+    Rotation3D operator*(const Rotation3D& rhs) const;
 
 protected:
     Rotation3D& set_from_elements(
