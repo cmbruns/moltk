@@ -48,6 +48,7 @@ public:
     typedef value_type const * const_iterator;
     static const size_type SIZE = 3;
 
+// hide methods not-exposed by UnitVector3D inside protected block
 protected:
     value_type m_x;
     value_type m_y;
@@ -62,6 +63,13 @@ protected:
         m_x /= s;
         m_y /= s;
         m_z /= s;
+        return *this;
+    }
+
+    ThisType& operator*=(moltk::Real s) {
+        m_x *= s;
+        m_y *= s;
+        m_z *= s;
         return *this;
     }
 
@@ -113,17 +121,27 @@ public:
     Vector3D_() {}
     Vector3D_(const value_type& x, const value_type& y, const value_type& z) 
         : super(x, y, z) {}
+    Vector3D_(const super& rhs) : super(rhs) {}
 
+    // expose protected members of base class
     using super::x;
     using super::y;
     using super::z;
     using super::operator[];
+    using super::operator*=;
+    using super::operator/=;
 
     using super::operator value_type*;
     using super::begin;
     using super::end;
 
 };
+
+/*!
+ * Vector3D is an arbitrary unitless vector or point in 3 space.
+ */
+typedef Vector3D_< moltk::Real > Vector3D;
+typedef Vector3D_< moltk::units::Length > Displacement;
 
 /*!
  * UnitVector3D represents a direction in 3 space, and, unlike Vector3D_<>, does NOT have Units.
@@ -147,14 +165,22 @@ public:
 
     moltk::Real norm() const {return 1.0;}
     moltk::Real normSquared() const {return 1.0;}
+
+    Vector3D operator*(Real s) const 
+    {
+        Vector3D result(*this);
+        result *= s;
+        return result;
+    }
+    inline friend Vector3D operator*(Real s, const UnitVector3D& unit_vector)
+    {
+        Vector3D result(unit_vector);
+        result *= s;
+        return result;
+    }
+
 };
 
-
-/*!
- * Vector3D is an arbitrary unitless vector or point in 3 space.
- */
-typedef Vector3D_< moltk::Real > Vector3D;
-typedef Vector3D_< moltk::units::Length > Displacement;
 
 // Vector * unit
 template<class D, class Y>

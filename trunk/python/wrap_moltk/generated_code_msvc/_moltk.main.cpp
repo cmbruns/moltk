@@ -18,6 +18,8 @@
 
 #include "generated_code_msvc/alignment.pypp.hpp"
 
+#include "generated_code_msvc/angle.pypp.hpp"
+
 #include "generated_code_msvc/angledimension.pypp.hpp"
 
 #include "generated_code_msvc/basebiosequence.pypp.hpp"
@@ -106,6 +108,8 @@ BOOST_PYTHON_MODULE(_moltk){
     register_LengthDimension_class();
 
     register_Information_class();
+
+    register_Angle_class();
 
     register_Length_class();
 

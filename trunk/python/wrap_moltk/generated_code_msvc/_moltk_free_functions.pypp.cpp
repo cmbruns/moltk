@@ -8,6 +8,17 @@ namespace bp = boost::python;
 
 void register_free_functions(){
 
+    { //::moltk::units::cos
+    
+        typedef ::moltk::Real ( *cos_function_type )( ::moltk::units::Angle const & );
+        
+        bp::def( 
+            "cos"
+            , cos_function_type( &::moltk::units::cos )
+            , ( bp::arg("angle") ) );
+    
+    }
+
     { //::moltk::units::get_unit_name
     
         typedef ::std::string ( *get_unit_name_function_type )( ::moltk::units::RadianUnit const & );
@@ -71,6 +82,17 @@ void register_free_functions(){
             "get_unit_symbol"
             , get_unit_symbol_function_type( &::moltk::units::get_unit_symbol )
             , ( bp::arg("arg0") ) );
+    
+    }
+
+    { //::moltk::units::sin
+    
+        typedef ::moltk::Real ( *sin_function_type )( ::moltk::units::Angle const & );
+        
+        bp::def( 
+            "sin"
+            , sin_function_type( &::moltk::units::sin )
+            , ( bp::arg("angle") ) );
     
     }
 

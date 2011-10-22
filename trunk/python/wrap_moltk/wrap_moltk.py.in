@@ -68,7 +68,13 @@ def wrap_custom(mb):
         cls.casting_operators().exclude()
         cls.exclude()
     mb.class_('_classes_to_instantiate').exclude() # hide wrapping hack
+    quaternion = ns_moltk.class_('Quaternion')
+    quaternion.member_functions('begin').exclude()
+    quaternion.member_functions('end').exclude()
+    quaternion.member_function('set_from_angle_axis').call_policies = return_self()
+    ns_moltk.class_('Rotation3D').member_functions(lambda f: f.name.startswith('set_from_')
+            ).call_policies = return_self()
 
-    
+            
 if __name__ == '__main__':
     wrap_moltk()

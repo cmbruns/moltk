@@ -59,14 +59,14 @@ public:
     Rotation3D& set_from_angle_about_unit_vector(
         const units::Angle& angle, const UnitVector3D& unit_vector);
     Rotation3D& set_from_quaternion(const Quaternion& quaternion);
-    Rotation3D& set_from_elements(
-        Real e00, Real e01, Real e02,
-        Real e10, Real e11, Real e12,
-        Real e20, Real e21, Real e22);
 
     const Row& operator[](size_t ix) const {return (&row0)[ix];}
 
 protected:
+    Rotation3D& set_from_elements(
+        Real e00, Real e01, Real e02,
+        Real e10, Real e11, Real e12,
+        Real e20, Real e21, Real e22);
     Row& operator[](size_t ix) {return (&row0)[ix];}
     Row row0, row1, row2;
 };

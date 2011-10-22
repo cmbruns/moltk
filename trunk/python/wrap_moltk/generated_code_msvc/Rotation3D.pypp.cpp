@@ -40,18 +40,7 @@ void register_Rotation3D_class(){
                 "set_from_angle_about_unit_vector"
                 , set_from_angle_about_unit_vector_function_type( &::moltk::Rotation3D::set_from_angle_about_unit_vector )
                 , ( bp::arg("angle"), bp::arg("unit_vector") )
-                    /* undefined call policies */ );
-        
-        }
-        { //::moltk::Rotation3D::set_from_elements
-        
-            typedef ::moltk::Rotation3D & ( ::moltk::Rotation3D::*set_from_elements_function_type )( ::moltk::Real,::moltk::Real,::moltk::Real,::moltk::Real,::moltk::Real,::moltk::Real,::moltk::Real,::moltk::Real,::moltk::Real ) ;
-            
-            Rotation3D_exposer.def( 
-                "set_from_elements"
-                , set_from_elements_function_type( &::moltk::Rotation3D::set_from_elements )
-                , ( bp::arg("e00"), bp::arg("e01"), bp::arg("e02"), bp::arg("e10"), bp::arg("e11"), bp::arg("e12"), bp::arg("e20"), bp::arg("e21"), bp::arg("e22") )
-                    /* undefined call policies */ );
+                , bp::return_self< >() );
         
         }
         { //::moltk::Rotation3D::set_from_quaternion
@@ -62,7 +51,7 @@ void register_Rotation3D_class(){
                 "set_from_quaternion"
                 , set_from_quaternion_function_type( &::moltk::Rotation3D::set_from_quaternion )
                 , ( bp::arg("quaternion") )
-                    /* undefined call policies */ );
+                , bp::return_self< >() );
         
         }
     }
