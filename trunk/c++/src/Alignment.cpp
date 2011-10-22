@@ -211,11 +211,47 @@ Alignment::EString::EString()
     , m_total_length(0)
 {}
 
+// Helpers for EString multiplication.
+// Finite state machine to handle tricky cases of EString composition
+// Numbering is abitrary to match our notes.
+enum EStringMulState {
+    STATE_1_ZZ, // both run nibbles zero
+    STATE_2_PZ,
+    STATE_3_NZ,
+    STATE_4_ZP,
+    STATE_5_PP, // both run nibbles positive
+    STATE_6_NP,
+    STATE_7_ZN,
+    STATE_8_PN,
+    STATE_9_NN // both run nibbles negative
+};
+
+EStringMulState getState(int run1, int run2)
+{
+    if (run1 == 0) {
+        if (run2 == 0) return STATE_1_ZZ;
+        else if (run2 > 0) return STATE_4_ZP;
+        else {assert (run2 < 0); return STATE_7_ZN;}
+    }
+    else if (run1 > 0) {
+        if (run2 == 0) return STATE_2_PZ;
+        else if (run2 > 0) return STATE_5_PP;
+        else {assert (run2 < 0); return STATE_8_PN;}
+    }
+    else {
+        assert(run1 < 0);
+        if (run2 == 0) return STATE_3_NZ;
+        else if (run2 > 0) return STATE_6_NP;
+        else {assert (run2 < 0); return STATE_9_NN;}
+    }
+    assert(false); // should not get here
+}
+
 Alignment::EString Alignment::EString::operator*(const EString& rhs) const
 {
     // cerr << "EString::operator*()" << *this << rhs << endl;
     const EString & lhs = *this;
-    assert(lhs.ungapped_length() == rhs.ungapped_length());
+    assert(lhs.ungapped_length() == rhs.total_length());
     EString result;
     // seqIx1 is current ungapped sequence position in EString 1
     size_t seqIx1 = -1;
@@ -226,43 +262,85 @@ Alignment::EString Alignment::EString::operator*(const EString& rhs) const
     // run 1 is the remaining portion of the current run in EString 1
     int run1 = 0;
     int run2 = 0;
-    while (    (eIx1 < lhs.runs.size())
-            || (eIx2 < rhs.runs.size())
-            || (run1 != 0)
-            || (run2 != 0)
-          )
+    EStringMulState state = getState(run1, run2);
+    assert(state == STATE_1_ZZ);
+    while ((eIx1 < lhs.runs.size()) 
+        || (eIx2 < rhs.runs.size())
+        || (run1 != 0)
+        || (run2 != 0)
+        )
     {
-        // With each loop, zero out either run1 or run2.
-        // Populate empty run values.
-        if ( (run1 == 0) && (eIx1 < lhs.runs.size()) ) {
-            run1 = lhs.runs[eIx1];
-            ++eIx1;
-        }
-        if ( (run2 == 0) && (eIx2 < rhs.runs.size()) ) {
-            run2 = rhs.runs[eIx2];
-            ++eIx2;
-        }
-        if ( (run1 > 0) && (run2 > 0) ) // both non-gaps, consume min
+        int min;
+        switch(state) 
         {
-            int min = std::min(run1, run2);
-            result.append_run(min);
+        case STATE_1_ZZ:
+            // both nibbles zero.
+            // populate each with a new bite.
+            // take a bite of string 1
+            if (eIx1 < lhs.runs.size()) {
+                run1 = lhs.runs[eIx1];
+                ++eIx1;
+            }
+            // take a bite of string 2
+            if (eIx2 < rhs.runs.size()) {
+                run2 = rhs.runs[eIx2];
+                ++eIx2;
+            }
+            state = getState(run1, run2);
+            break;
+        case STATE_2_PZ:
+            // take a bite of string 2
+            if (eIx2 < rhs.runs.size()) {
+                run2 = rhs.runs[eIx2];
+                ++eIx2;
+            }
+            state = getState(run1, run2);
+            break;
+        case STATE_5_PP:
+            min = std::min(run1, run2);
+            result << min;
             run1 -= min;
             run2 -= min;
             seqIx1 += min;
             seqIx2 += min;
-        }
-        // at least one EString with gaps; consume them.
-        if (run1 < 0) {
-            result.append_run(run1);
+            state = getState(run1, run2);
+            break;
+        case STATE_4_ZP:
+        case STATE_7_ZN:
+            // take a bite of string 1
+            if (eIx1 < lhs.runs.size()) {
+                run1 = lhs.runs[eIx1];
+                ++eIx1;
+            }
+            state = getState(run1, run2);
+            break;
+        case STATE_8_PN:
+            // minimum absolute value
+            min = std::min(std::abs(run1), std::abs(run2));            
+            result << -min; // add some gaps
+            run1 -= min;
+            run2 += min;
+            state = getState(run1, run2);
+            break;
+        case STATE_3_NZ:
+        case STATE_6_NP:
+        case STATE_9_NN:
+            // First nibble negative.
+            // Clear first nibble.
+            result << run1;
             run1 = 0;
-        }
-        if (run2 < 0) {
-            result.append_run(run2);
-            run2 = 0;
+            state = getState(run1, run2);
+            break;
+        default:
+            assert(false);
+            break;
         }
         assert(seqIx1 == seqIx2);
     }
-    assert(result.ungapped_length() == lhs.ungapped_length());
+    state = getState(run1, run2);
+    assert(state == STATE_1_ZZ);
+    assert(result.ungapped_length() == rhs.ungapped_length());
+    assert(result.total_length() == lhs.total_length());
     assert(seqIx1 == result.ungapped_length() - 1);
     assert(seqIx2 == result.ungapped_length() - 1);
     return result;

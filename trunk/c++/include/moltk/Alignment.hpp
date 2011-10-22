@@ -85,6 +85,7 @@ public:
         EString();
         EString operator*(const EString& rhs) const;
         EString& append_run(int run);
+        EString& operator<<(int run) {append_run(run); return *this;}
         size_t ungapped_length() const;
         size_t total_length() const;
         const_iterator begin() const;
