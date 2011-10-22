@@ -23,7 +23,9 @@
 #ifndef MOLTK_ROTATION3D_HPP
 #define MOLTK_ROTATION3D_HPP
 
+#include "moltk/Quaternion.hpp"
 #include "moltk/Real.hpp"
+#include "moltk/units.hpp"
 
 namespace moltk {
 
@@ -40,14 +42,32 @@ public:
     class Row
     {
     public:
+        friend class Rotation3D;
+        const Real& operator[](size_t ix) const {return (&x)[ix];}
+
     protected:
-        moltk::Real x, y, z;
+        Real& operator[](size_t ix) {return (&x)[ix];}
+        Real x, y, z;
     };
 
 
 public:
+    Rotation3D();
+    Rotation3D(const units::Angle& angle, const UnitVector3D& unit_vector);
+    explicit Rotation3D(const Quaternion& quaternion);
+
+    Rotation3D& set_from_angle_about_unit_vector(
+        const units::Angle& angle, const UnitVector3D& unit_vector);
+    Rotation3D& set_from_quaternion(const Quaternion& quaternion);
+    Rotation3D& set_from_elements(
+        Real e00, Real e01, Real e02,
+        Real e10, Real e11, Real e12,
+        Real e20, Real e21, Real e22);
+
+    const Row& operator[](size_t ix) const {return (&row0)[ix];}
 
 protected:
+    Row& operator[](size_t ix) {return (&row0)[ix];}
     Row row0, row1, row2;
 };
 

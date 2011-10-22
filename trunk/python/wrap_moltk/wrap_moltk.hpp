@@ -40,6 +40,7 @@ namespace pyplusplus { namespace aliases {
     typedef moltk::units::InformationDimension InformationDimension;
     typedef moltk::units::LengthDimension LengthDimension;
     typedef moltk::units::AreaDimension AreaDimension;
+    typedef moltk::units::AngleDimension AngleDimension;
 
     typedef std::vector<PDBStructure::Atom> AtomList;
     typedef Unit<InformationDimension> BitUnit;

@@ -18,6 +18,8 @@
 
 #include "generated_code_msvc/alignment.pypp.hpp"
 
+#include "generated_code_msvc/angledimension.pypp.hpp"
+
 #include "generated_code_msvc/basebiosequence.pypp.hpp"
 
 #include "generated_code_msvc/biosequence.pypp.hpp"
@@ -42,7 +44,11 @@
 
 #include "generated_code_msvc/printable.pypp.hpp"
 
+#include "generated_code_msvc/quaternion.pypp.hpp"
+
 #include "generated_code_msvc/querypositionlist.pypp.hpp"
+
+#include "generated_code_msvc/radianunit.pypp.hpp"
 
 #include "generated_code_msvc/rigidtransform.pypp.hpp"
 
@@ -81,6 +87,8 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_Printable_class();
 
+    register_Quaternion_class();
+
     register_RigidTransform_class();
 
     register_Rotation3D_class();
@@ -93,6 +101,8 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_InformationDimension_class();
 
+    register_AngleDimension_class();
+
     register_LengthDimension_class();
 
     register_Information_class();
@@ -100,6 +110,8 @@ BOOST_PYTHON_MODULE(_moltk){
     register_Length_class();
 
     register_BitUnit_class();
+
+    register_RadianUnit_class();
 
     register_NanometerUnit_class();
 
