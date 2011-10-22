@@ -8,18 +8,18 @@ namespace bp = boost::python;
 
 void register_NanometerUnit_class(){
 
-    bp::class_< moltk::units::Unit< moltk::units::LengthDimension >, boost::noncopyable >( "NanometerUnit", "\n", bp::no_init )    
+    bp::class_< moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >, boost::noncopyable >( "NanometerUnit", "\n Unit represents a unit of measure, such as gram, nanometer, or second.\n" )    
         .def( 
             "get_instance"
-            , (::moltk::units::Unit< moltk::units::LengthDimension > const & (*)(  ))( &::moltk::units::Unit< moltk::units::LengthDimension >::get_instance )
+            , (::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > > const & (*)(  ))( &::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >::get_instance )
             , bp::return_value_policy< bp::copy_const_reference >() )    
         .def( 
             "print_name"
-            , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::Unit< moltk::units::LengthDimension >::print_name )
+            , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >::print_name )
             , ( bp::arg("os") ) )    
         .def( 
             "print_symbol"
-            , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::Unit< moltk::units::LengthDimension >::print_symbol )
+            , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >::print_symbol )
             , ( bp::arg("os") ) )    
         .staticmethod( "get_instance" )    
         .staticmethod( "print_name" )    

@@ -8,6 +8,8 @@
 
 #include "wrap_moltk.hpp"
 
+#include "generated_code_msvc/_moltk_enumerations.pypp.hpp"
+
 #include "generated_code_msvc/_moltk_free_functions.pypp.hpp"
 
 #include "generated_code_msvc/_moltk_global_variables.pypp.hpp"
@@ -18,17 +20,11 @@
 
 #include "generated_code_msvc/basebiosequence.pypp.hpp"
 
-#include "generated_code_msvc/basedisplacement.pypp.hpp"
-
-#include "generated_code_msvc/basevector3d_double.pypp.hpp"
-
 #include "generated_code_msvc/biosequence.pypp.hpp"
 
 #include "generated_code_msvc/biosequenceresidue.pypp.hpp"
 
 #include "generated_code_msvc/bitunit.pypp.hpp"
-
-#include "generated_code_msvc/dimension.pypp.hpp"
 
 #include "generated_code_msvc/displacement.pypp.hpp"
 
@@ -58,9 +54,13 @@
 
 #include "generated_code_msvc/unitvector3d.pypp.hpp"
 
+#include "generated_code_msvc/vector3d.pypp.hpp"
+
 namespace bp = boost::python;
 
 BOOST_PYTHON_MODULE(_moltk){
+    register_enumerations();
+
     register_TargetPositionList_class();
 
     register_QueryPositionList_class();
@@ -72,10 +72,6 @@ BOOST_PYTHON_MODULE(_moltk){
     register_Alignment_class();
 
     register_BaseBiosequence_class();
-
-    register_BaseVector3D_double_class();
-
-    register_BaseDisplacement_class();
 
     register_Biosequence_class();
 
@@ -91,9 +87,9 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_UnitVector3D_class();
 
-    register_Displacement_class();
+    register_Vector3D_class();
 
-    register_Dimension_class();
+    register_Displacement_class();
 
     register_InformationDimension_class();
 

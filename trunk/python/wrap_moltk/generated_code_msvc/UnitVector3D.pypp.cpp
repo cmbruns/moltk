@@ -6,34 +6,9 @@
 
 namespace bp = boost::python;
 
-struct UnitVector3D_wrapper : moltk::UnitVector3D, bp::wrapper< moltk::UnitVector3D > {
-
-    UnitVector3D_wrapper( )
-    : moltk::UnitVector3D( )
-      , bp::wrapper< moltk::UnitVector3D >(){
-        // null constructor
-    
-    }
-
-    UnitVector3D_wrapper(::moltk::UnitVector3D const & other )
-    : moltk::UnitVector3D( boost::ref(other) )
-      , bp::wrapper< moltk::UnitVector3D >(){
-        // copy constructor
-    
-    }
-
-    UnitVector3D_wrapper(double const & x, double const & y, double const & z )
-    : moltk::UnitVector3D( x, y, z )
-      , bp::wrapper< moltk::UnitVector3D >(){
-        // constructor
-    
-    }
-
-};
-
 void register_UnitVector3D_class(){
 
-    bp::class_< UnitVector3D_wrapper, bp::bases< moltk::BaseVector3D< double > > >( "UnitVector3D", bp::init< >() )    
+    bp::class_< moltk::UnitVector3D >( "UnitVector3D", "\n UnitVector3D represents a direction in 3 space, and, unlike Vector3D_<>, does NOT have Units.\n", bp::init< >() )    
         .def( bp::init< moltk::UnitVector3D const & >(( bp::arg("other") )) )    
         .def( bp::init< double const &, double const &, double const & >(( bp::arg("x"), bp::arg("y"), bp::arg("z") )) )    
         .def( 

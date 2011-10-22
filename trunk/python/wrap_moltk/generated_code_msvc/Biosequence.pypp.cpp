@@ -66,7 +66,7 @@ void register_Biosequence_class(){
 
     { //::moltk::Biosequence
         typedef bp::class_< Biosequence_wrapper, bp::bases< moltk::BaseBiosequence > > Biosequence_exposer_t;
-        Biosequence_exposer_t Biosequence_exposer = Biosequence_exposer_t( "Biosequence", bp::init< >() );
+        Biosequence_exposer_t Biosequence_exposer = Biosequence_exposer_t( "Biosequence", "\n A macromolecule sequence (DNA or RNA or protein)\n", bp::init< >() );
         bp::scope Biosequence_scope( Biosequence_exposer );
         Biosequence_exposer.def( bp::init< std::string const &, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" )) );
         bp::implicitly_convertible< std::string const &, moltk::Biosequence >();

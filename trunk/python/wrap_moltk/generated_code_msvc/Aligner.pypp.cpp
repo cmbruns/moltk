@@ -106,7 +106,7 @@ void register_Aligner_class(){
 
     { //::moltk::Aligner
         typedef bp::class_< Aligner_wrapper > Aligner_exposer_t;
-        Aligner_exposer_t Aligner_exposer = Aligner_exposer_t( "Aligner", "\n Aligner is the class that creates sequence or structure alignments.\n", bp::init< >() );
+        Aligner_exposer_t Aligner_exposer = Aligner_exposer_t( "Aligner", "\n The Aligner class creates macromolecule sequence alignments and structure alignments.\n", bp::init< >() );
         bp::scope Aligner_scope( Aligner_exposer );
         bp::enum_< moltk::Aligner::Stage>("Stage")
             .value("STAGE_EMPTY", moltk::Aligner::STAGE_EMPTY)
@@ -139,24 +139,24 @@ void register_Aligner_class(){
             .def_readwrite( "g", &moltk::Aligner::Cell::g, " G, best ungapped score through this cell" )    
             .def_readwrite( "v", &moltk::Aligner::Cell::v, " V, best score through this cell" )    
             .def( bp::self_ns::str( bp::self ) );
-        bp::class_< Aligner_wrapper::QueryPosition_wrapper, boost::noncopyable >( "QueryPosition", "\n Aligner::Position represents a special biosequence residue that knows how to score itself during alignment.\n" )    
+        bp::class_< Aligner_wrapper::QueryPosition_wrapper, boost::noncopyable >( "QueryPosition", "\n QueryPosition is an alignment column specialized to efficiently compute\n an alignment score with a TargetPosition.\n" )    
             .def( 
                 "clone"
                 , bp::pure_virtual( (::moltk::Aligner::QueryPosition * ( ::moltk::Aligner::QueryPosition::* )(  ) const)(&::moltk::Aligner::QueryPosition::clone) )
                 , bp::return_value_policy< bp::manage_new_object >()
-                , "\n Aligner::Position represents a special biosequence residue that knows how to score itself during alignment.\n" )    
+                , "\n QueryPosition is an alignment column specialized to efficiently compute\n an alignment score with a TargetPosition.\n" )    
             .def( 
                 "get_gap_extension_penalty"
                 , bp::pure_virtual( (::moltk::units::Information ( ::moltk::Aligner::QueryPosition::* )(  ) const)(&::moltk::Aligner::QueryPosition::get_gap_extension_penalty) ) )    
             .def( 
                 "get_gap_open_penalty"
                 , bp::pure_virtual( (::moltk::units::Information ( ::moltk::Aligner::QueryPosition::* )(  ) const)(&::moltk::Aligner::QueryPosition::get_gap_open_penalty) ) );
-        bp::class_< Aligner_wrapper::Scorer_wrapper, boost::noncopyable >( "Scorer", "\n Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which\n know how to quickly score themselves with other AlignerPositions.\n", bp::init< >("\n Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which\n know how to quickly score themselves with other AlignerPositions.\n") )    
+        bp::class_< Aligner_wrapper::Scorer_wrapper, boost::noncopyable >( "Scorer", "\n Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions\n and QueryPositions, which can efficiently compute alignment scores.\n", bp::init< >("\n Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions\n and QueryPositions, which can efficiently compute alignment scores.\n") )    
             .def( 
                 "create_query_positions"
                 , bp::pure_virtual( (::std::vector< moltk::Aligner::QueryPosition* > ( ::moltk::Aligner::Scorer::* )( ::moltk::Alignment const & ) const)(&::moltk::Aligner::Scorer::create_query_positions) )
                 , ( bp::arg("arg0") )
-                , "\n Aligner::Scorer converts dumb sequence and structure residues into Aligner::Positions, which\n know how to quickly score themselves with other AlignerPositions.\n" )    
+                , "\n Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions\n and QueryPositions, which can efficiently compute alignment scores.\n" )    
             .def( 
                 "create_target_positions"
                 , bp::pure_virtual( (::std::vector< moltk::Aligner::TargetPosition* > ( ::moltk::Aligner::Scorer::* )( ::moltk::Alignment const & ) const)(&::moltk::Aligner::Scorer::create_target_positions) )
@@ -168,11 +168,12 @@ void register_Aligner_class(){
                 "set_end_gaps_free"
                 , (void ( ::moltk::Aligner::Scorer::* )( bool ) )( &::moltk::Aligner::Scorer::set_end_gaps_free )
                 , ( bp::arg("f") ) );
-        bp::class_< Aligner_wrapper::TargetPosition_wrapper, boost::noncopyable >( "TargetPosition" )    
+        bp::class_< Aligner_wrapper::TargetPosition_wrapper, boost::noncopyable >( "TargetPosition", "\n TargetPosition is an alignment column specialized to efficiently compute\n  an alignment score with a QueryPosition.\n" )    
             .def( 
                 "clone"
                 , bp::pure_virtual( (::moltk::Aligner::TargetPosition * ( ::moltk::Aligner::TargetPosition::* )(  ) const)(&::moltk::Aligner::TargetPosition::clone) )
-                , bp::return_value_policy< bp::manage_new_object >() )    
+                , bp::return_value_policy< bp::manage_new_object >()
+                , "\n TargetPosition is an alignment column specialized to efficiently compute\n  an alignment score with a QueryPosition.\n" )    
             .def( 
                 "get_gap_extension_penalty"
                 , bp::pure_virtual( (::moltk::units::Information ( ::moltk::Aligner::TargetPosition::* )(  ) const)(&::moltk::Aligner::TargetPosition::get_gap_extension_penalty) ) )    

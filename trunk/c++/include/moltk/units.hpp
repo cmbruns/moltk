@@ -240,10 +240,6 @@ namespace units {
             return value >= rhs.value;
         }
 
-        SquareRootType squareRoot() const {
-            return SquareRootType(sqrt(value), SquareRootType::UnitType::get_instance());
-        }
-
         // I/O
 
         inline friend std::ostream& operator<<(std::ostream& os, const ThisType& q)
@@ -275,7 +271,11 @@ namespace units {
     typename Quantity<Unit<D>, Y>::SquareRootType
     sqrt(const Quantity<Unit<D>, Y> q)
     {
-        return q.squareRoot();
+        typedef typename Quantity<Unit<D>, Y>::SquareRootType ResultType;
+        typedef Quantity<Unit<D>, Y> ArgType;
+        return ResultType(
+            sqrt(q.value_in_unit(ArgType::UnitType::get_instance())), 
+            ResultType::UnitType::get_instance());
     }
 
     // Quantity * Quantity composition

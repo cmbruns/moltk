@@ -8,6 +8,6 @@ namespace bp = boost::python;
 
 void register_RigidTransform_class(){
 
-    bp::class_< moltk::RigidTransform >( "RigidTransform" );
+    bp::class_< moltk::RigidTransform >( "RigidTransform", "\n RigidTransform converts one reference frame to another with rotation and translation.\n" );
 
 }
