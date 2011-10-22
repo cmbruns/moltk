@@ -8,24 +8,8 @@ namespace bp = boost::python;
 
 void register_Quaternion_class(){
 
-    bp::class_< moltk::Quaternion >( "Quaternion", "\n Quaternion is an elegant 4-element representation of a 3D rotation.\n", bp::init< >() )    
+    bp::class_< moltk::Quaternion >( "Quaternion", "\n Quaternion is an elegant 4-element representation of a 3D rotation.\n", bp::init< >("\n Default constructor creates the identity Quaternion (1 0 0 0)\n") )    
         .def( bp::init< moltk::units::Angle const &, moltk::UnitVector3D const & >(( bp::arg("angle"), bp::arg("unit_vector") )) )    
-        .def( 
-            "begin"
-            , (::moltk::Real const * ( ::moltk::Quaternion::* )(  ) const)( &::moltk::Quaternion::begin )
-                /* undefined call policies */ )    
-        .def( 
-            "begin"
-            , (::moltk::Real * ( ::moltk::Quaternion::* )(  ) )( &::moltk::Quaternion::begin )
-                /* undefined call policies */ )    
-        .def( 
-            "end"
-            , (::moltk::Real const * ( ::moltk::Quaternion::* )(  ) const)( &::moltk::Quaternion::end )
-                /* undefined call policies */ )    
-        .def( 
-            "end"
-            , (::moltk::Real * ( ::moltk::Quaternion::* )(  ) )( &::moltk::Quaternion::end )
-                /* undefined call policies */ )    
         .def( 
             "__getitem__"
             , (::moltk::Real & ( ::moltk::Quaternion::* )( ::size_t ) )( &::moltk::Quaternion::operator[] )
@@ -40,7 +24,7 @@ void register_Quaternion_class(){
             "set_from_angle_axis"
             , (::moltk::Quaternion & ( ::moltk::Quaternion::* )( ::moltk::units::Angle const &,::moltk::UnitVector3D const & ) )( &::moltk::Quaternion::set_from_angle_axis )
             , ( bp::arg("angle"), bp::arg("unit_vector") )
-                /* undefined call policies */ )    
+            , bp::return_self< >() )    
         .def( 
             "size"
             , (::size_t ( ::moltk::Quaternion::* )(  ) const)( &::moltk::Quaternion::size ) );

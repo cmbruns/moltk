@@ -29,6 +29,7 @@
 #include "moltk/Real.hpp"
 #include "boost/utility.hpp"
 #include <string>
+#include <cmath>
 #include <memory>
 #include <cassert>
 
@@ -306,6 +307,9 @@ namespace units {
     typedef Quantity<NanometerUnit> Length;
     /// Angle is a quantity in radians
     typedef Quantity<RadianUnit> Angle;
+
+    inline Real sin(const Angle& angle) {return std::sin(angle.value_in_unit(radian));}
+    inline Real cos(const Angle& angle) {return std::cos(angle.value_in_unit(radian));}
 
 }} // namespace moltk::units
 

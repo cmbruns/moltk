@@ -47,6 +47,8 @@ namespace pyplusplus { namespace aliases {
     typedef Quantity<BitUnit> Information;
     typedef Unit<LengthDimension> NanometerUnit;
     typedef Quantity<NanometerUnit> Length;
+    typedef Unit<AngleDimension> RadianUnit;
+    typedef Quantity<RadianUnit> Angle;
     typedef std::vector<int> std_vector_int;
     typedef std::vector<Aligner::QueryPosition*> QueryPositionList;
     typedef std::vector<Aligner::TargetPosition*> TargetPositionList;

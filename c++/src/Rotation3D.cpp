@@ -26,6 +26,13 @@
 using namespace moltk;
 using namespace moltk::units;
 
+Rotation3D::Rotation3D()
+{
+    set_from_elements(1, 0, 0,
+                      0, 1, 0,
+                      0, 0, 1);
+}
+
 Rotation3D::Rotation3D(const Angle& angle, const UnitVector3D& unit_vector) 
 {
     set_from_angle_about_unit_vector(angle, unit_vector);

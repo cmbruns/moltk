@@ -39,21 +39,25 @@ public:
     typedef value_type* iterator;
     typedef value_type const * const_iterator;
 
+    /*!
+     * Default constructor creates the identity Quaternion (1 0 0 0)
+     */
     Quaternion();
     Quaternion(const units::Angle& angle, const UnitVector3D& unit_vector);
 
     Quaternion& set_from_angle_axis(const units::Angle& angle, const UnitVector3D& unit_vector);
-    value_type& operator[](size_t i) {return data[i];}
-    const value_type& operator[](size_t i) const {return data[i];}
+    value_type& operator[](size_t i) {return (&m_w)[i];}
+    const value_type& operator[](size_t i) const {return (&m_w)[i];}
     size_t size() const {return 4;}
 
-    const_iterator begin() const {return &data[0];}
-    const_iterator end() const {return &data[4];}
-    iterator begin() {return &data[0];}
-    iterator end() {return &data[4];}
+    const_iterator begin() const {return &m_w;}
+    const_iterator end() const {return &(&m_w)[4];}
+    iterator begin() {return &m_w;}
+    iterator end() {return &(&m_w)[4];}
 
 protected:
-    value_type data[4];
+    value_type m_w; // scalar component
+    Vector3D m_v; // vector component
 };
 
 } // namespace moltk
