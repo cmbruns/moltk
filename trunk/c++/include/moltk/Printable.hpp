@@ -33,7 +33,7 @@ namespace moltk {
 class Printable
 {
 public:
-    virtual void print_to_stream(std::ostream& output_stream) const = 0;
+    virtual void write_to_stream(std::ostream& output_stream) const = 0;
 };
 
     std::ostream& operator<<(std::ostream& output_stream, const moltk::Printable& printable);

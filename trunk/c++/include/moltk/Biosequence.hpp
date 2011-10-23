@@ -64,7 +64,7 @@ public:
 public:
     BaseBiosequence() {}
     virtual ~BaseBiosequence() {}
-    virtual void print_to_stream(std::ostream& os) const;
+    virtual void write_to_stream(std::ostream& os) const;
     virtual size_t get_number_of_residues() const = 0;
     virtual const BaseResidue& get_residue(size_t index) const = 0;
 
@@ -116,7 +116,7 @@ public:
     size_t get_number_of_residues() const { return size(); }
     const Residue& get_residue(size_t ix) const { return (*this)[ix]; }
     std::string get_description() const {return description;}
-    void print_string(std::ostream& os) const;
+    void write_string(std::ostream& os) const;
     void write_fasta(std::ostream& os) const;
     /*!
      * repr is a helper for the python __repr__ method.
@@ -125,7 +125,7 @@ public:
 
     inline friend std::ostream& operator<<(std::ostream& os, const Biosequence& seq)
     {
-        seq.print_string(os);
+        seq.write_string(os);
         return os;
     }
 
