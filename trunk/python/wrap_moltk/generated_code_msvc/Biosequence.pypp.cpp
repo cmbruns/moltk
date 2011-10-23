@@ -156,6 +156,16 @@ void register_Biosequence_class(){
                 , " repr is a helper for the python __repr__ method." );
         
         }
+        { //::moltk::Biosequence::write_fasta
+        
+            typedef void ( ::moltk::Biosequence::*write_fasta_function_type )( ::std::ostream & ) const;
+            
+            Biosequence_exposer.def( 
+                "write_fasta"
+                , write_fasta_function_type( &::moltk::Biosequence::write_fasta )
+                , ( bp::arg("os") ) );
+        
+        }
         { //::moltk::BaseBiosequence::print_to_stream
         
             typedef void ( ::moltk::BaseBiosequence::*print_to_stream_function_type )( ::std::ostream & ) const;

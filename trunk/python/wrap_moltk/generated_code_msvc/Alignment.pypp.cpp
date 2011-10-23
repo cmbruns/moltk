@@ -13,8 +13,8 @@ void register_Alignment_class(){
         Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", "\n Alignment represents a set of aligned macromolecule sequences and/or structures.\n", bp::init< >() );
         bp::scope Alignment_scope( Alignment_exposer );
         bp::enum_< moltk::Alignment::List>("List")
-            .value("SequenceList", moltk::Alignment::SequenceList)
-            .value("StructureList", moltk::Alignment::StructureList)
+            .value("LIST_SEQUENCE", moltk::Alignment::LIST_SEQUENCE)
+            .value("LIST_STRUCTURE", moltk::Alignment::LIST_STRUCTURE)
             .export_values()
             ;
         bp::class_< moltk::Alignment::Row >( "Row", "\n Meta-data for one sequence in an Alignment\n" )    
@@ -22,11 +22,11 @@ void register_Alignment_class(){
             .def_readwrite( "list", &moltk::Alignment::Row::list, "\n Meta-data for one sequence in an Alignment\n" )    
             .def_readwrite( "list_index", &moltk::Alignment::Row::list_index )    
             .def_readwrite( "sequence_weight", &moltk::Alignment::Row::sequence_weight );
-        Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("arg0") )) );
+        Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("sequence") )) );
         bp::implicitly_convertible< moltk::Biosequence const &, moltk::Alignment >();
-        Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("arg0") )) );
+        Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("alignment_string") )) );
         bp::implicitly_convertible< std::string const &, moltk::Alignment >();
-        Alignment_exposer.def( bp::init< char const * >(( bp::arg("arg0") )) );
+        Alignment_exposer.def( bp::init< char const * >(( bp::arg("alignment_string") )) );
         bp::implicitly_convertible< char const *, moltk::Alignment >();
         { //::moltk::Alignment::align
         
@@ -45,7 +45,7 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "append_sequence"
                 , append_sequence_function_type( &::moltk::Alignment::append_sequence )
-                , ( bp::arg("seq") )
+                , ( bp::arg("sequence") )
                 , bp::return_self< >() );
         
         }
@@ -89,6 +89,28 @@ void register_Alignment_class(){
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
+        { //::moltk::Alignment::load_fasta
+        
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*load_fasta_function_type )( ::std::istream & ) ;
+            
+            Alignment_exposer.def( 
+                "load_fasta"
+                , load_fasta_function_type( &::moltk::Alignment::load_fasta )
+                , ( bp::arg("input_stream") )
+                , bp::return_self< >() );
+        
+        }
+        { //::moltk::Alignment::load_fasta
+        
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*load_fasta_function_type )( ::std::string const & ) ;
+            
+            Alignment_exposer.def( 
+                "load_fasta"
+                , load_fasta_function_type( &::moltk::Alignment::load_fasta )
+                , ( bp::arg("file_name") )
+                , bp::return_self< >() );
+        
+        }
         { //::moltk::Alignment::load_string
         
             typedef void ( ::moltk::Alignment::*load_string_function_type )( ::std::string const & ) ;
@@ -96,7 +118,7 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "load_string"
                 , load_string_function_type( &::moltk::Alignment::load_string )
-                , ( bp::arg("s") ) );
+                , ( bp::arg("alignment_string") ) );
         
         }
         { //::moltk::Alignment::print_pretty
@@ -106,7 +128,7 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "print_pretty"
                 , print_pretty_function_type( &::moltk::Alignment::print_pretty )
-                , ( bp::arg("os") ) );
+                , ( bp::arg("output_stream") ) );
         
         }
         { //::moltk::Alignment::print_string
@@ -116,7 +138,7 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "print_string"
                 , print_string_function_type( &::moltk::Alignment::print_string )
-                , ( bp::arg("os") ) );
+                , ( bp::arg("output_stream") ) );
         
         }
         { //::moltk::Alignment::score

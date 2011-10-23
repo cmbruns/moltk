@@ -23,6 +23,7 @@
 #include "moltk/Alignment.hpp"
 #include <cassert>
 #include <sstream>
+#include <fstream>
 
 using namespace moltk;
 using namespace std;
@@ -78,7 +79,7 @@ Alignment& Alignment::append_sequence(const Biosequence& seq)
 {
     sequences.push_back(seq);
     Row row = {
-        SequenceList,
+        LIST_SEQUENCE,
         0,
         1.0,
         EString().append_run(seq.size()) };
@@ -93,7 +94,7 @@ void moltk::Alignment::print_string(std::ostream& os) const
     {
         const Row& row = rows[rowIx];
         const BaseBiosequence* seq;
-        if (row.list == SequenceList)
+        if (row.list == LIST_SEQUENCE)
             seq = &sequences[row.list_index];
         else
             seq = &structures[row.list_index];
@@ -122,11 +123,15 @@ void Alignment::print_pretty(std::ostream& os) const
     for (size_t rowIx = 0; rowIx < rows.size(); ++rowIx) 
     {
         // sequence number
-        os.width(3);
-        os << rowIx + 1 << ") ";
+        if (n_seqs > 1) {
+            os.width(3);
+            os << rowIx + 1 << ") ";
+        } else {
+            os << ">";
+        }
         const Row& row = rows[rowIx];
         iseq[rowIx] = row.e_string.begin(); // initialize iterators
-        if (row.list == SequenceList) {
+        if (row.list == LIST_SEQUENCE) {
             os << sequences[row.list_index].get_description();
         }
         else
@@ -138,33 +143,37 @@ void Alignment::print_pretty(std::ostream& os) const
     size_t start_col = 0;
     while(start_col < n_cols)
     {
-        os << endl;
         size_t end_col = start_col + pretty_width - 1;
         if (end_col >= n_cols)
             end_col = n_cols - 1;
 
-        // one line with dots every ten positions
-        os << "     ";
-        for(size_t col = start_col; col <= end_col; ++col)
-        {
-            if (! ((col + 1) % 10))
-                os << '.';
-            else
-                os << ' ';
+        if (n_seqs > 1) {
+            os << endl; // blank line between blocks
+            // one line with dots every ten positions
+            os << "     ";
+            for(size_t col = start_col; col <= end_col; ++col)
+            {
+                if (! ((col + 1) % 10))
+                    os << '.';
+                else
+                    os << ' ';
+            }
+            os.width(5);
+            os << end_col + 1;
+            os << endl;
         }
-        os.width(5);
-        os << end_col + 1;
-        os << endl;
 
         // one line for each sequence
         for (size_t s = 0; s < n_seqs; ++s)
         {
             // sequence number
-            os.width(3);
-            os << s + 1 << ") ";
+            if (n_seqs > 1) {
+                os.width(3);
+                os << s + 1 << ") ";
+            }
             const Row& row = rows[s];
             const BaseBiosequence* seq;
-            if (row.list == SequenceList)
+            if (row.list == LIST_SEQUENCE)
                 seq = &sequences[row.list_index];
             else
                 seq = &structures[row.list_index];
@@ -196,15 +205,17 @@ void Alignment::print_pretty(std::ostream& os) const
         }
 
         // one line with stars for identities
-        os << "     ";
-        for(size_t col = start_col; col <= end_col; ++col)
-        {
-            if (identities[col] == ' ')
-                os << ' ';
-            else
-                os << '*';
+        if (n_seqs > 1) {
+            os << "     ";
+            for(size_t col = start_col; col <= end_col; ++col)
+            {
+                if (identities[col] == ' ')
+                    os << ' ';
+                else
+                    os << '*';
+            }
+            os << endl;
         }
-        os << endl;
 
         start_col = end_col + 1;
     }
@@ -224,12 +235,12 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
         const Row& row = rows[r];
         Row newRow(row);
         newRow.e_string = e1 * newRow.e_string;
-        if (row.list == SequenceList) {
+        if (row.list == LIST_SEQUENCE) {
             result.sequences.push_back(sequences[row.list_index]);
             assert(result.sequences.size() - 1 == newRow.list_index);
         }
         else {
-            assert(row.list == StructureList);
+            assert(row.list == LIST_STRUCTURE);
             result.structures.push_back(structures[row.list_index]);
             assert(result.structures.size() - 1 == newRow.list_index);
         }
@@ -241,12 +252,12 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
         const Row& row = a2.rows[r];
         Row newRow(row);
         newRow.e_string = e2 * newRow.e_string;
-        if (row.list == SequenceList) {
+        if (row.list == LIST_SEQUENCE) {
             result.sequences.push_back(a2.sequences[row.list_index]);
             newRow.list_index = result.sequences.size() - 1;
         }
         else {
-            assert(row.list == StructureList);
+            assert(row.list == LIST_STRUCTURE);
             result.structures.push_back(a2.structures[row.list_index]);
             newRow.list_index = result.structures.size() - 1;
         }
@@ -256,3 +267,58 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
 
     return result;
 }
+
+Alignment& Alignment::load_fasta(std::istream& input_stream)
+{
+    while(! input_stream.eof()) {
+        Biosequence sequence;
+        EString e_string;
+        sequence.load_fasta(input_stream);
+        if (sequence.size() < 1) continue;
+        if ( (get_number_of_columns() != 0)
+          && (sequence.size() != get_number_of_columns()) )
+        {
+            throw std::exception("Sequence length mismatch in Alignment.load_fasta()");
+        }
+        // Compress sequence
+        Biosequence compressed_sequence(sequence);
+        compressed_sequence.clear(); // empty sequence, but not description
+        Biosequence::const_iterator r;
+        for(r = sequence.begin(); r != sequence.end(); ++r) {
+            if (r->get_one_letter_code() == '-')
+                e_string << -1;
+            else {
+                e_string << 1;
+                compressed_sequence.push_back(*r);
+            }
+        }
+        Row row;
+        row.list = LIST_SEQUENCE;
+        row.list_index = sequences.size();
+        row.sequence_weight = 1.0; // TODO
+        row.e_string = e_string;
+        sequences.push_back(compressed_sequence);
+        rows.push_back(row);
+    }
+    return *this;
+}
+
+Alignment& Alignment::load_fasta(const std::string& file_name)
+{
+    ifstream in_stream(file_name.c_str());
+    load_fasta(in_stream);
+    return *this;
+}
+
+
+////////////////////
+// Global methods //
+////////////////////
+
+Alignment moltk::load_fasta(const std::string& file_name)
+{
+    Alignment result;
+    result.load_fasta(file_name);
+    return result;
+}
+
