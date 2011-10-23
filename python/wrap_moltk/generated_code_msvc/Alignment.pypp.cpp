@@ -121,26 +121,6 @@ void register_Alignment_class(){
                 , ( bp::arg("alignment_string") ) );
         
         }
-        { //::moltk::Alignment::print_pretty
-        
-            typedef void ( ::moltk::Alignment::*print_pretty_function_type )( ::std::ostream & ) const;
-            
-            Alignment_exposer.def( 
-                "print_pretty"
-                , print_pretty_function_type( &::moltk::Alignment::print_pretty )
-                , ( bp::arg("output_stream") ) );
-        
-        }
-        { //::moltk::Alignment::print_string
-        
-            typedef void ( ::moltk::Alignment::*print_string_function_type )( ::std::ostream & ) const;
-            
-            Alignment_exposer.def( 
-                "print_string"
-                , print_string_function_type( &::moltk::Alignment::print_string )
-                , ( bp::arg("output_stream") ) );
-        
-        }
         { //::moltk::Alignment::score
         
             typedef ::moltk::units::Information const & ( ::moltk::Alignment::*score_function_type )(  ) const;
@@ -160,6 +140,56 @@ void register_Alignment_class(){
                 , set_score_function_type( &::moltk::Alignment::set_score )
                 , ( bp::arg("s") )
                 , bp::return_self< >() );
+        
+        }
+        { //::moltk::Alignment::write_fasta
+        
+            typedef void ( ::moltk::Alignment::*write_fasta_function_type )( ::std::ostream & ) const;
+            
+            Alignment_exposer.def( 
+                "write_fasta"
+                , write_fasta_function_type( &::moltk::Alignment::write_fasta )
+                , ( bp::arg("output_stream") ) );
+        
+        }
+        { //::moltk::Alignment::write_fasta
+        
+            typedef void ( ::moltk::Alignment::*write_fasta_function_type )( ::std::string const & ) const;
+            
+            Alignment_exposer.def( 
+                "write_fasta"
+                , write_fasta_function_type( &::moltk::Alignment::write_fasta )
+                , ( bp::arg("file_name") ) );
+        
+        }
+        { //::moltk::Alignment::write_pretty
+        
+            typedef void ( ::moltk::Alignment::*write_pretty_function_type )( ::std::ostream & ) const;
+            
+            Alignment_exposer.def( 
+                "write_pretty"
+                , write_pretty_function_type( &::moltk::Alignment::write_pretty )
+                , ( bp::arg("output_stream") ) );
+        
+        }
+        { //::moltk::Alignment::write_pretty
+        
+            typedef void ( ::moltk::Alignment::*write_pretty_function_type )( ::std::string const & ) const;
+            
+            Alignment_exposer.def( 
+                "write_pretty"
+                , write_pretty_function_type( &::moltk::Alignment::write_pretty )
+                , ( bp::arg("file_name") ) );
+        
+        }
+        { //::moltk::Alignment::write_string
+        
+            typedef void ( ::moltk::Alignment::*write_string_function_type )( ::std::ostream & ) const;
+            
+            Alignment_exposer.def( 
+                "write_string"
+                , write_string_function_type( &::moltk::Alignment::write_string )
+                , ( bp::arg("output_stream") ) );
         
         }
         Alignment_exposer.def( bp::self_ns::str( bp::self ) );

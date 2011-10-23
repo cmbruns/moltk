@@ -41,7 +41,7 @@ namespace moltk
 /////////////////////////////
 
 /* virtual */
-void BaseBiosequence::print_to_stream(std::ostream& os) const
+void BaseBiosequence::write_to_stream(std::ostream& os) const
 {
     for(size_t i = 0; i < get_number_of_residues(); ++i)
         os << get_residue(i).get_one_letter_code();
@@ -136,7 +136,7 @@ Biosequence& Biosequence::load_fasta(std::istream& is)
     return *this;
 }
 
-void Biosequence::print_string(std::ostream& os) const
+void Biosequence::write_string(std::ostream& os) const
 {
     for (const_iterator i = begin(); i != end(); ++i)
         os << *i;

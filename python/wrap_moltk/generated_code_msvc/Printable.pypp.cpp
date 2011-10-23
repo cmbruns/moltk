@@ -15,9 +15,9 @@ struct Printable_wrapper : moltk::Printable, bp::wrapper< moltk::Printable > {
         
     }
 
-    virtual void print_to_stream( ::std::ostream & output_stream ) const {
-        bp::override func_print_to_stream = this->get_override( "print_to_stream" );
-        func_print_to_stream( boost::ref(output_stream) );
+    virtual void write_to_stream( ::std::ostream & output_stream ) const {
+        bp::override func_write_to_stream = this->get_override( "write_to_stream" );
+        func_write_to_stream( boost::ref(output_stream) );
     }
 
 };
@@ -26,8 +26,8 @@ void register_Printable_class(){
 
     bp::class_< Printable_wrapper, boost::noncopyable >( "Printable", "\n moltk::Printable is an abstract base class to help streamline\n string conversion in the moltk python bindings.\n" )    
         .def( 
-            "print_to_stream"
-            , bp::pure_virtual( (void ( ::moltk::Printable::* )( ::std::ostream & ) const)(&::moltk::Printable::print_to_stream) )
+            "write_to_stream"
+            , bp::pure_virtual( (void ( ::moltk::Printable::* )( ::std::ostream & ) const)(&::moltk::Printable::write_to_stream) )
             , ( bp::arg("output_stream") )
             , "\n moltk::Printable is an abstract base class to help streamline\n string conversion in the moltk python bindings.\n" )    
         .def( bp::self_ns::str( bp::self ) );

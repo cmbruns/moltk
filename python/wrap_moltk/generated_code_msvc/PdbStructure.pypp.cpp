@@ -36,16 +36,16 @@ struct PDBStructure_wrapper : moltk::PDBStructure, bp::wrapper< moltk::PDBStruct
             return moltk::PDBStructure::Chain::get_number_of_residues( );
         }
     
-        virtual void print_to_stream( ::std::ostream & os ) const  {
-            if( bp::override func_print_to_stream = this->get_override( "print_to_stream" ) )
-                func_print_to_stream( boost::ref(os) );
+        virtual void write_to_stream( ::std::ostream & os ) const  {
+            if( bp::override func_write_to_stream = this->get_override( "write_to_stream" ) )
+                func_write_to_stream( boost::ref(os) );
             else{
-                this->moltk::BaseBiosequence::print_to_stream( boost::ref(os) );
+                this->moltk::BaseBiosequence::write_to_stream( boost::ref(os) );
             }
         }
         
-        void default_print_to_stream( ::std::ostream & os ) const  {
-            moltk::BaseBiosequence::print_to_stream( boost::ref(os) );
+        void default_write_to_stream( ::std::ostream & os ) const  {
+            moltk::BaseBiosequence::write_to_stream( boost::ref(os) );
         }
     
     };
@@ -160,9 +160,9 @@ void register_PDBStructure_class(){
                 , ( bp::arg("index") )
                 , bp::return_value_policy< bp::copy_const_reference >() )    
             .def( 
-                "print_to_stream"
-                , (void ( ::moltk::BaseBiosequence::* )( ::std::ostream & ) const)(&::moltk::BaseBiosequence::print_to_stream)
-                , (void ( PDBStructure_wrapper::Chain_wrapper::* )( ::std::ostream & ) const)(&PDBStructure_wrapper::Chain_wrapper::default_print_to_stream)
+                "write_to_stream"
+                , (void ( ::moltk::BaseBiosequence::* )( ::std::ostream & ) const)(&::moltk::BaseBiosequence::write_to_stream)
+                , (void ( PDBStructure_wrapper::Chain_wrapper::* )( ::std::ostream & ) const)(&PDBStructure_wrapper::Chain_wrapper::default_write_to_stream)
                 , ( bp::arg("os") ) );
         bp::class_< PDBStructure_wrapper::Residue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "Residue", "\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n", bp::init< >("\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n") )    
             .def( bp::init< moltk::PDBStructure::Residue const & >(( bp::arg("rhs") ), "\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n") )    

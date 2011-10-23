@@ -45,16 +45,16 @@ struct BaseBiosequence_wrapper : moltk::BaseBiosequence, bp::wrapper< moltk::Bas
         throw std::logic_error("warning W1049: This method could not be overriden in Python - method returns reference to local variable!");
     }
 
-    virtual void print_to_stream( ::std::ostream & os ) const  {
-        if( bp::override func_print_to_stream = this->get_override( "print_to_stream" ) )
-            func_print_to_stream( boost::ref(os) );
+    virtual void write_to_stream( ::std::ostream & os ) const  {
+        if( bp::override func_write_to_stream = this->get_override( "write_to_stream" ) )
+            func_write_to_stream( boost::ref(os) );
         else{
-            this->moltk::BaseBiosequence::print_to_stream( boost::ref(os) );
+            this->moltk::BaseBiosequence::write_to_stream( boost::ref(os) );
         }
     }
     
-    void default_print_to_stream( ::std::ostream & os ) const  {
-        moltk::BaseBiosequence::print_to_stream( boost::ref(os) );
+    void default_write_to_stream( ::std::ostream & os ) const  {
+        moltk::BaseBiosequence::write_to_stream( boost::ref(os) );
     }
 
 };
@@ -94,15 +94,15 @@ void register_BaseBiosequence_class(){
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
-        { //::moltk::BaseBiosequence::print_to_stream
+        { //::moltk::BaseBiosequence::write_to_stream
         
-            typedef void ( ::moltk::BaseBiosequence::*print_to_stream_function_type )( ::std::ostream & ) const;
-            typedef void ( BaseBiosequence_wrapper::*default_print_to_stream_function_type )( ::std::ostream & ) const;
+            typedef void ( ::moltk::BaseBiosequence::*write_to_stream_function_type )( ::std::ostream & ) const;
+            typedef void ( BaseBiosequence_wrapper::*default_write_to_stream_function_type )( ::std::ostream & ) const;
             
             BaseBiosequence_exposer.def( 
-                "print_to_stream"
-                , print_to_stream_function_type(&::moltk::BaseBiosequence::print_to_stream)
-                , default_print_to_stream_function_type(&BaseBiosequence_wrapper::default_print_to_stream)
+                "write_to_stream"
+                , write_to_stream_function_type(&::moltk::BaseBiosequence::write_to_stream)
+                , default_write_to_stream_function_type(&BaseBiosequence_wrapper::default_write_to_stream)
                 , ( bp::arg("os") ) );
         
         }

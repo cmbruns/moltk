@@ -48,16 +48,16 @@ struct Biosequence_wrapper : moltk::Biosequence, bp::wrapper< moltk::Biosequence
         return moltk::Biosequence::get_number_of_residues( );
     }
 
-    virtual void print_to_stream( ::std::ostream & os ) const  {
-        if( bp::override func_print_to_stream = this->get_override( "print_to_stream" ) )
-            func_print_to_stream( boost::ref(os) );
+    virtual void write_to_stream( ::std::ostream & os ) const  {
+        if( bp::override func_write_to_stream = this->get_override( "write_to_stream" ) )
+            func_write_to_stream( boost::ref(os) );
         else{
-            this->moltk::BaseBiosequence::print_to_stream( boost::ref(os) );
+            this->moltk::BaseBiosequence::write_to_stream( boost::ref(os) );
         }
     }
     
-    void default_print_to_stream( ::std::ostream & os ) const  {
-        moltk::BaseBiosequence::print_to_stream( boost::ref(os) );
+    void default_write_to_stream( ::std::ostream & os ) const  {
+        moltk::BaseBiosequence::write_to_stream( boost::ref(os) );
     }
 
 };
@@ -136,16 +136,6 @@ void register_Biosequence_class(){
                 , ( bp::arg("is") ) );
         
         }
-        { //::moltk::Biosequence::print_string
-        
-            typedef void ( ::moltk::Biosequence::*print_string_function_type )( ::std::ostream & ) const;
-            
-            Biosequence_exposer.def( 
-                "print_string"
-                , print_string_function_type( &::moltk::Biosequence::print_string )
-                , ( bp::arg("os") ) );
-        
-        }
         { //::moltk::Biosequence::repr
         
             typedef ::std::string ( ::moltk::Biosequence::*repr_function_type )(  ) const;
@@ -166,15 +156,25 @@ void register_Biosequence_class(){
                 , ( bp::arg("os") ) );
         
         }
-        { //::moltk::BaseBiosequence::print_to_stream
+        { //::moltk::Biosequence::write_string
         
-            typedef void ( ::moltk::BaseBiosequence::*print_to_stream_function_type )( ::std::ostream & ) const;
-            typedef void ( Biosequence_wrapper::*default_print_to_stream_function_type )( ::std::ostream & ) const;
+            typedef void ( ::moltk::Biosequence::*write_string_function_type )( ::std::ostream & ) const;
             
             Biosequence_exposer.def( 
-                "print_to_stream"
-                , print_to_stream_function_type(&::moltk::BaseBiosequence::print_to_stream)
-                , default_print_to_stream_function_type(&Biosequence_wrapper::default_print_to_stream)
+                "write_string"
+                , write_string_function_type( &::moltk::Biosequence::write_string )
+                , ( bp::arg("os") ) );
+        
+        }
+        { //::moltk::BaseBiosequence::write_to_stream
+        
+            typedef void ( ::moltk::BaseBiosequence::*write_to_stream_function_type )( ::std::ostream & ) const;
+            typedef void ( Biosequence_wrapper::*default_write_to_stream_function_type )( ::std::ostream & ) const;
+            
+            Biosequence_exposer.def( 
+                "write_to_stream"
+                , write_to_stream_function_type(&::moltk::BaseBiosequence::write_to_stream)
+                , default_write_to_stream_function_type(&Biosequence_wrapper::default_write_to_stream)
                 , ( bp::arg("os") ) );
         
         }

@@ -87,8 +87,8 @@ namespace units {
         typedef Unit<typename DimensionType::SquareType> SquareType;
         typedef Unit<typename DimensionType::SquareRootType> SquareRootType;
 
-        static void print_name(std::ostream& os) {os << get_unit_name(get_instance());}
-        static void print_symbol(std::ostream& os) {os << get_unit_symbol(get_instance());}
+        static void write_name(std::ostream& os) {os << get_unit_name(get_instance());}
+        static void write_symbol(std::ostream& os) {os << get_unit_symbol(get_instance());}
         static const ThisType& get_instance() {
             static std::auto_ptr<ThisType> singleton_pointer(NULL);
             if (!singleton_pointer.get()) 
@@ -255,7 +255,7 @@ namespace units {
         inline friend std::ostream& operator<<(std::ostream& os, const ThisType& q)
         {
             os << q.value << " ";
-            ThisType::UnitType::print_symbol(os);
+            ThisType::UnitType::write_symbol(os);
             return os;
         }
 
