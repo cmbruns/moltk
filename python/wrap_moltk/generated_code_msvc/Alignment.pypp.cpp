@@ -98,6 +98,15 @@ void register_Alignment_class(){
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
+        { //::moltk::Alignment::id_table
+        
+            typedef ::std::string ( ::moltk::Alignment::*id_table_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "id_table"
+                , id_table_function_type( &::moltk::Alignment::id_table ) );
+        
+        }
         { //::moltk::Alignment::load_fasta
         
             typedef ::moltk::Alignment & ( ::moltk::Alignment::*load_fasta_function_type )( ::std::istream & ) ;
@@ -177,6 +186,26 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "write_fasta"
                 , write_fasta_function_type( &::moltk::Alignment::write_fasta )
+                , ( bp::arg("file_name") ) );
+        
+        }
+        { //::moltk::Alignment::write_id_table
+        
+            typedef void ( ::moltk::Alignment::*write_id_table_function_type )( ::std::ostream & ) const;
+            
+            Alignment_exposer.def( 
+                "write_id_table"
+                , write_id_table_function_type( &::moltk::Alignment::write_id_table )
+                , ( bp::arg("output_stream") ) );
+        
+        }
+        { //::moltk::Alignment::write_id_table
+        
+            typedef void ( ::moltk::Alignment::*write_id_table_function_type )( ::std::string const & ) const;
+            
+            Alignment_exposer.def( 
+                "write_id_table"
+                , write_id_table_function_type( &::moltk::Alignment::write_id_table )
                 , ( bp::arg("file_name") ) );
         
         }

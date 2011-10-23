@@ -22,6 +22,7 @@
 
 #include "moltk/Alignment.hpp"
 #include <cassert>
+#include <cctype> // toupper
 #include <sstream>
 #include <fstream>
 
@@ -259,6 +260,90 @@ std::string Alignment::pretty() const
 {
     ostringstream output_stream;
     write_pretty(output_stream);
+    return output_stream.str();
+}
+
+void Alignment::write_id_table(std::ostream& output_stream) const
+{
+    size_t n_seq = get_number_of_sequences();
+
+    // total_table contains number of residues aligned
+    std::vector< std::vector<int> > total_table;
+    total_table.assign(n_seq, std::vector<int>(n_seq, 0));
+
+    // match_table contains number of same residues aligned.
+    std::vector< std::vector<int> > match_table;
+    match_table.assign(n_seq, std::vector<int>(n_seq, 0));
+
+    std::vector<EString::const_iterator> iseq(n_seq); // iterators into gapped sequences
+    for (size_t s = 0; s < n_seq; ++s) {
+        const Row& row = rows[s];
+        iseq[s] = row.e_string.begin(); // initialize iterators
+    }
+    size_t n_col = get_number_of_columns();
+    for (size_t c = 0; c < n_col; ++c) {
+        for (size_t s1 = 0; s1 < n_seq; ++s1) {
+            int resIx1 = *iseq[s1];
+            if (resIx1 < 0) continue; // gap
+            const BaseBiosequence& seq1 = get_sequence(s1);
+            char olc1 = std::toupper(seq1.get_residue(resIx1).get_one_letter_code());
+            for (size_t s2 = 0; s2 < n_seq; ++s2) {
+                int resIx2 = *iseq[s2];
+                if (resIx2 < 0) continue; // gap
+                total_table[s1][s2] += 1;
+                total_table[s2][s1] += 1;
+                // "so what" if we double count self residues; it cancels out.
+                const BaseBiosequence& seq2 = get_sequence(s2);
+                char olc2 = std::toupper(seq2.get_residue(resIx2).get_one_letter_code());
+                if (olc1 == olc2) {
+                    match_table[s1][s2] += 1;
+                    match_table[s2][s1] += 1;
+                }
+            }
+        }
+        // advance iterators
+        for (size_t s = 0; s < n_seq; ++s) {
+            ++iseq[s];
+        }
+    }
+
+    output_stream << "Percent sequence identities:" << endl;
+    // header row with sequence numbers
+    output_stream << "     ";
+    for (size_t s = 0; s < n_seq; ++s) {
+        output_stream.width(4);
+        output_stream << s + 1;
+    }
+    output_stream << endl;
+    // One line for each sequence
+    for (size_t s1 = 0; s1 < n_seq; ++s1) {
+        output_stream.width(4);
+        output_stream << s1 + 1 << ')';
+        for (size_t s2 = 0; s2 < n_seq; ++s2) {
+            output_stream.width(4);
+            int id = 0;
+            if (total_table[s1][s2] > 0)
+                id = (int)(100.0 * (double)match_table[s1][s2] / (double)total_table[s1][s2]);
+            output_stream << id;
+        }
+        output_stream << endl;
+    }
+}
+void Alignment::write_id_table(const std::string& file_name) const
+{
+    ofstream output_stream;
+    output_stream.open(file_name.c_str());
+    if (!output_stream) {
+        std::string msg("Error: moltk.Alignment unable to write to id table file ");
+        msg += file_name;
+        throw std::exception(msg.c_str());
+    }
+    write_id_table(output_stream);
+}
+std::string Alignment::id_table() const
+{
+    ostringstream output_stream;
+    write_id_table(output_stream);
     return output_stream.str();
 }
 
