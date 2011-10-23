@@ -136,6 +136,19 @@ void Biosequence::print_string(std::ostream& os) const
         os << *i;
 }
 
+void Biosequence::write_fasta(std::ostream& os) const
+{
+    os << '>' << description;
+    int pos = 0;
+    for (const_iterator i = begin(); i != end(); ++i)
+    {
+        if (0 == (pos % 70)) // newline before first residue, and every 70 residues
+            os << endl;
+        os << *i;
+        ++pos;
+    }
+}
+
 /*!
  * repr is a helper for the python __repr__ method.
  */
@@ -153,17 +166,5 @@ std::string Biosequence::repr() const
 //////////////////////////////////
 // Biosequence::Residue methods //
 //////////////////////////////////
-
-
-////////////////////
-// Global methods //
-////////////////////
-
-Biosequence load_fasta(const std::string& file_name)
-{
-    Biosequence result;
-    result.load_fasta(file_name);
-    return result;
-}
 
 } // namespace moltk

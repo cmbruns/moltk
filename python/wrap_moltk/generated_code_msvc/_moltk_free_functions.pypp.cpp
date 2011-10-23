@@ -98,7 +98,7 @@ void register_free_functions(){
 
     { //::moltk::load_fasta
     
-        typedef ::moltk::Biosequence ( *load_fasta_function_type )( ::std::string const & );
+        typedef ::moltk::Alignment ( *load_fasta_function_type )( ::std::string const & );
         
         bp::def( 
             "load_fasta"

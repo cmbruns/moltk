@@ -44,8 +44,8 @@ public:
 
     /// Whether a particular Alignment member is a sequence or structure.
     enum List {
-        SequenceList,
-        StructureList
+        LIST_SEQUENCE,
+        LIST_STRUCTURE
     };
 
     typedef moltk::EString EString;
@@ -63,15 +63,17 @@ public:
 
 public:
     Alignment();
-    /* implicit */ Alignment(const Biosequence&);
-    /* implicit */ Alignment(const std::string&);
-    /* implicit */ Alignment(const char*);
+    /* implicit */ Alignment(const Biosequence& sequence);
+    /* implicit */ Alignment(const std::string& alignment_string);
+    /* implicit */ Alignment(const char* alignment_string);
     // explicit Alignment(std::istream& is);
     ~Alignment() {}
-    Alignment& append_sequence(const Biosequence& seq);
-    void load_string(const std::string& s);
-    void print_string(std::ostream& os) const;
-    void print_pretty(std::ostream& os) const;
+    Alignment& append_sequence(const Biosequence& sequence);
+    void load_string(const std::string& alignment_string);
+    Alignment& load_fasta(std::istream& input_stream);
+    Alignment& load_fasta(const std::string& file_name);
+    void print_string(std::ostream& output_stream) const;
+    void print_pretty(std::ostream& output_stream) const;
     size_t get_number_of_columns() const;
     // get_number_of_sequences() includes both sequences and structures
     size_t get_number_of_sequences() const {return rows.size();}
@@ -79,7 +81,7 @@ public:
     const BaseBiosequence& get_sequence(size_t index) const
     {
         const Row& row = rows[index];
-        if (row.list == SequenceList)
+        if (row.list == LIST_SEQUENCE)
             return sequences[row.list_index];
         else
             return structures[row.list_index];
@@ -109,6 +111,11 @@ protected:
     moltk::units::Information m_score;
     int pretty_width;
 };
+
+/*!
+ * global load_fasta method helps get SEQUOIA-like conciseness in python.
+ */
+Alignment load_fasta(const std::string& file_name);
 
 } // namespace moltk
 
