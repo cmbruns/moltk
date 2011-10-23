@@ -41,10 +41,13 @@ public:
     BaseVector3D(const ELT& x, const ELT& y, const ELT& z) 
         : m_x(x), m_y(y), m_z(z) {}
 
-    typedef ELT value_type;
+    typedef ThisType container;
     typedef size_t size_type;
-    typedef size_t index_type;
+    typedef ELT value_type;
     typedef value_type* iterator;
+    typedef value_type& reference;
+    typedef value_type key_type;
+    typedef size_t index_type;
     typedef value_type const * const_iterator;
     static const size_type SIZE = 3;
 
@@ -116,6 +119,7 @@ private:
     typedef Vector3D_<ELT> ThisType;
 
 public:
+    typedef Vector3D_<ELT> container;
     typedef ELT value_type;
 
     Vector3D_() {}

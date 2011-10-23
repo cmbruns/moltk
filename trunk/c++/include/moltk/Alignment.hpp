@@ -125,7 +125,7 @@ public:
 
 
 public:
-    Alignment() : m_score(0.0 * moltk::units::bit) {}
+    Alignment();
     /* implicit */ Alignment(const Biosequence&);
     /* implicit */ Alignment(const std::string&);
     /* implicit */ Alignment(const char*);
@@ -134,6 +134,7 @@ public:
     Alignment& append_sequence(const Biosequence& seq);
     void load_string(const std::string& s);
     void print_string(std::ostream& os) const;
+    void print_pretty(std::ostream& os) const;
     size_t get_number_of_columns() const;
     // get_number_of_sequences() includes both sequences and structures
     size_t get_number_of_sequences() const {return rows.size();}
@@ -159,7 +160,7 @@ public:
 
     inline friend std::ostream& operator<<(std::ostream& os, const Alignment& ali)
     {
-        ali.print_string(os);
+        ali.print_pretty(os);
         return os;
     }
 
@@ -169,6 +170,7 @@ protected:
     std::vector<PDBStructure::Chain> structures;
     std::vector<Row> rows;
     moltk::units::Information m_score;
+    int pretty_width;
 };
 
 } // namespace moltk

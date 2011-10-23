@@ -144,9 +144,14 @@ public:
     // Alignment align(const Alignment&);
     Alignment align(const Alignment&, const Alignment&);
 
-    static const Scorer& get_default_scorer();
     bool get_end_gaps_free() const {return scorer->get_end_gaps_free();}
     void set_end_gaps_free(bool f) {scorer->set_end_gaps_free(f);}
+
+    static const Scorer& get_default_scorer();
+   /*!
+     * Global shared aligner object used by align() method.
+     */
+    static Aligner& get_shared_aligner();
 
 protected:
     void init();
@@ -176,6 +181,11 @@ protected:
     Alignment query_alignment;
     Alignment target_alignment;
 };
+
+/*
+ * global align() methods helps get SEQUOIA-like conciseness in python.
+ */
+Alignment align(const Alignment& target_alignment, const Alignment& query_alignment);
 
 } // namespace moltk
 

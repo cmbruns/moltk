@@ -142,7 +142,7 @@ void Biosequence::print_string(std::ostream& os) const
 std::string Biosequence::repr() const
 {
     std::ostringstream s;
-    s << "Biosequence(sequence='";
+    s << "moltk.Biosequence(sequence='";
     for (const_iterator i = begin(); i != end(); ++i)
         s << *i;
     s << "', description='" << description << "')";

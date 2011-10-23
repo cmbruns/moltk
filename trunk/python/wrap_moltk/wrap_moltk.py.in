@@ -57,6 +57,8 @@ def wrap_custom(mb):
     aligner.add_property('endGapsFree', 
          fget=aligner.member_functions('get_end_gaps_free')[1],
          fset=aligner.member_functions('set_end_gaps_free')[1])
+    aligner.member_function('get_shared_aligner').call_policies = \
+         return_value_policy(reference_existing_object)
     alignment = ns_moltk.class_('Alignment')
     for fn_name in ['append_sequence', 'set_score']:
          alignment.member_function(fn_name).call_policies = return_self()
@@ -79,7 +81,7 @@ def wrap_custom(mb):
     biosequence.add_registration_code("""
         def("__repr__", &::moltk::Biosequence::repr, "string representation")
         """)
-
+    # vector3d = ns_moltk.class_('Vector3D')
 
             
 if __name__ == '__main__':
