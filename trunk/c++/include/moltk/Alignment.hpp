@@ -81,6 +81,10 @@ public:
     void write_fasta(const std::string& file_name) const;
     std::string fasta() const;
 
+    void write_id_table(std::ostream& output_stream) const;
+    void write_id_table(const std::string& file_name) const;
+    std::string id_table() const;
+
     size_t get_number_of_columns() const;
     // get_number_of_sequences() includes both sequences and structures
     size_t get_number_of_sequences() const {return rows.size();}
