@@ -57,18 +57,17 @@ PDBStructure::PDBStructure(std::istream& istream)
 
 bool PDBStructure::load_file(const std::string& fileName)
 {
-    ifstream pdbFile(fileName.c_str(), ios_base::in | ios_base::binary);
-    if (! pdbFile.good()) {
-        cerr << "Problem opening file " << fileName << endl;
-        return false;
-    }
+    ifstream pdb_file;
+    pdb_file.open(fileName.c_str(), ios_base::in | ios_base::binary);
+    if (!pdb_file)
+        throw std::exception("Error opening PDB file");
 	filtering_streambuf<input> in;
     if ( (fileName.substr(fileName.length() - 3) == ".gz") 
       || (fileName.substr(fileName.length() - 3) == ".GZ") )
     {
     	in.push(gzip_decompressor());
     }
-	in.push(pdbFile);
+	in.push(pdb_file);
     std::istream inStream(&in);
     return load_stream(inStream);
 }

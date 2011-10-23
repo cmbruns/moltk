@@ -22,14 +22,25 @@
 
 // #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE BiosequenceUnitTest
-#include <boost/test/unit_test.hpp>
-#include <boost/lexical_cast.hpp>
 #include "moltk/Aligner.hpp"
+#include <boost/test/unit_test.hpp>
+#include <boost/test/debug.hpp>
+#include <iostream>
 
 using namespace moltk;
+using namespace std;
 
 BOOST_AUTO_TEST_CASE( test_aligner )
 {
+    boost::debug::detect_memory_leaks(false);
     Aligner a;
+    // Sequoia 3 sequence alignment paradigm
+    Alignment seq1 = load_fasta("sequences/sod1_Hsap.fasta");
+    Alignment seq2 = load_fasta("sequences/sod_Dmel.fasta");
+    Alignment al1 = align(seq1, seq2);
+    cout << al1 << endl;
+    cout << seq1 << endl;
+    Alignment seq3 = load_fasta("sequences/sod1_Scer.fasta");
+    Alignment al2 = align(al1, seq3);
+    cout << al2 << endl;
 }
-

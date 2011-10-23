@@ -27,13 +27,9 @@ using namespace moltk;
 
 int main(int argc, char* argv[])
 {
-    if (argc < 2) {
-        cerr << "File name argument missing" << endl;
-        return 1; // file name argument missing
-    }
-    std::string pdbFileName(argv[1]);
+    std::string pdb_file_name("structures/1FND.pdb.gz");
 
-    PDBStructure PDBStructure(pdbFileName);
+    PDBStructure PDBStructure(pdb_file_name);
 
     return 0;
 }

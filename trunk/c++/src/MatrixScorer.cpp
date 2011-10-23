@@ -178,18 +178,18 @@ std::vector<POSB*> MatrixScorer::create_foo_positions(const Alignment& alignment
         EString::const_iterator e;
         for (e = eString.begin(); e != eString.end(); ++e) 
         {
-            size_t eResIx = *e;
+            int eResIx = *e;
             if (eResIx >= 0) { // eResIx is an actual residue number
                 // Is this an end gap?
                 // This cannot be a left end-gap, but it could be
                 // a right end gap.
                 gapFactor = 1.0;
                 if (   get_end_gaps_free() 
-                    && (eResIx >= (seq.get_number_of_residues() - 1) ) )
+                    && (eResIx >= ((int)seq.get_number_of_residues() - 1) ) )
                 {
                     gapFactor = 0.0;
                 }
-                assert(eResIx <= (seq.get_number_of_residues() - 1));
+                assert(eResIx <= ((int)seq.get_number_of_residues() - 1));
             }
             ++colIx;
             // Position[i+1] represents column i

@@ -305,8 +305,14 @@ Alignment& Alignment::load_fasta(std::istream& input_stream)
 
 Alignment& Alignment::load_fasta(const std::string& file_name)
 {
-    ifstream in_stream(file_name.c_str());
-    load_fasta(in_stream);
+    ifstream fasta_stream;
+    fasta_stream.open(file_name.c_str());
+    if (! fasta_stream) {
+        std::string msg("Error opening fasta file ");
+        msg += file_name;
+        throw std::exception(msg.c_str());
+    }
+    load_fasta(fasta_stream);
     return *this;
 }
 
