@@ -72,11 +72,15 @@ public:
     void load_string(const std::string& alignment_string);
     Alignment& load_fasta(std::istream& input_stream);
     Alignment& load_fasta(const std::string& file_name);
-    void write_string(std::ostream& output_stream) const;
+
     void write_pretty(std::ostream& output_stream) const;
     void write_pretty(const std::string& file_name) const;
+    std::string pretty() const;
+
     void write_fasta(std::ostream& output_stream) const;
     void write_fasta(const std::string& file_name) const;
+    std::string fasta() const;
+
     size_t get_number_of_columns() const;
     // get_number_of_sequences() includes both sequences and structures
     size_t get_number_of_sequences() const {return rows.size();}

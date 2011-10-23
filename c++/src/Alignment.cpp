@@ -87,30 +87,6 @@ Alignment& Alignment::append_sequence(const Biosequence& seq)
     return *this;
 }
 
-/* virtual */
-void moltk::Alignment::write_string(std::ostream& os) const
-{
-    for (size_t rowIx = 0; rowIx < rows.size(); ++rowIx) 
-    {
-        const Row& row = rows[rowIx];
-        const BaseBiosequence* seq;
-        if (row.list == LIST_SEQUENCE)
-            seq = &sequences[row.list_index];
-        else
-            seq = &structures[row.list_index];
-        EString::const_iterator i = row.e_string.begin();
-        while(i != row.e_string.end()) {
-            int resIx = *i;
-            if (resIx < 0)
-                os << '-'; // gap
-            else
-                os << seq->get_residue(resIx).get_one_letter_code();
-            ++i;
-        }
-        os << endl;
-    }
-}
-
 void Alignment::write_fasta(std::ostream& output_stream) const
 {
     for (size_t rowIx = 0; rowIx < rows.size(); ++rowIx) 
@@ -143,11 +119,18 @@ void Alignment::write_fasta(const std::string& file_name) const
     ofstream output_stream;
     output_stream.open(file_name.c_str());
     if (!output_stream) {
-        std::string msg("Error: unable to write to fasta file ");
+        std::string msg("Error: moltk.Alignment unable to write to fasta file ");
         msg += file_name;
         throw std::exception(msg.c_str());
     }
     write_fasta(output_stream);
+}
+
+std::string Alignment::fasta() const
+{
+    ostringstream output_stream;
+    write_fasta(output_stream);
+    return output_stream.str();
 }
 
 void Alignment::write_pretty(std::ostream& os) const
@@ -270,6 +253,13 @@ void Alignment::write_pretty(const std::string& file_name) const
         throw std::exception(msg.c_str());
     }
     write_pretty(output_stream);
+}
+    
+std::string Alignment::pretty() const
+{
+    ostringstream output_stream;
+    write_pretty(output_stream);
+    return output_stream.str();
 }
 
 Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString& e2) const

@@ -73,6 +73,16 @@ void register_Biosequence_class(){
         Biosequence_exposer.def( bp::init< char const *, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" )) );
         bp::implicitly_convertible< char const *, moltk::Biosequence >();
         Biosequence_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("rhs") )) );
+        { //::moltk::Biosequence::fasta
+        
+            typedef ::std::string ( ::moltk::Biosequence::*fasta_function_type )(  ) const;
+            
+            Biosequence_exposer.def( 
+                "fasta"
+                , fasta_function_type( &::moltk::Biosequence::fasta )
+                , " Create a string representing the sequence in fasta format." );
+        
+        }
         { //::moltk::Biosequence::get_description
         
             typedef ::std::string ( ::moltk::Biosequence::*get_description_function_type )(  ) const;
@@ -153,17 +163,30 @@ void register_Biosequence_class(){
             Biosequence_exposer.def( 
                 "write_fasta"
                 , write_fasta_function_type( &::moltk::Biosequence::write_fasta )
-                , ( bp::arg("os") ) );
+                , ( bp::arg("os") )
+                , " Write sequence in fasta format to a C++ stream." );
         
         }
-        { //::moltk::Biosequence::write_string
+        { //::moltk::Biosequence::write_fasta
         
-            typedef void ( ::moltk::Biosequence::*write_string_function_type )( ::std::ostream & ) const;
+            typedef void ( ::moltk::Biosequence::*write_fasta_function_type )( ::std::string const & ) const;
             
             Biosequence_exposer.def( 
-                "write_string"
-                , write_string_function_type( &::moltk::Biosequence::write_string )
-                , ( bp::arg("os") ) );
+                "write_fasta"
+                , write_fasta_function_type( &::moltk::Biosequence::write_fasta )
+                , ( bp::arg("file_name") )
+                , " Write sequence in fasta format to a designated file." );
+        
+        }
+        { //::moltk::Biosequence::write_sequence_string
+        
+            typedef void ( ::moltk::Biosequence::*write_sequence_string_function_type )( ::std::ostream & ) const;
+            
+            Biosequence_exposer.def( 
+                "write_sequence_string"
+                , write_sequence_string_function_type( &::moltk::Biosequence::write_sequence_string )
+                , ( bp::arg("os") )
+                , " Write a sequence string to a C++ stream.  The sequence description is NOT included." );
         
         }
         { //::moltk::BaseBiosequence::write_to_stream
