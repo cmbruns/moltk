@@ -116,8 +116,25 @@ public:
     size_t get_number_of_residues() const { return size(); }
     const Residue& get_residue(size_t ix) const { return (*this)[ix]; }
     std::string get_description() const {return description;}
-    void write_string(std::ostream& os) const;
+
+    /*!
+     * Write sequence in fasta format to a C++ stream.
+     */
     void write_fasta(std::ostream& os) const;
+    /*!
+     * Write sequence in fasta format to a designated file.
+     */
+    void write_fasta(const std::string& file_name) const;
+    /*!
+     * Create a string representing the sequence in fasta format.
+     */
+    std::string fasta() const;
+
+    /*!
+     * Write a sequence string to a C++ stream.  The sequence description is NOT included.
+     */
+    void write_sequence_string(std::ostream& os) const;
+
     /*!
      * repr is a helper for the python __repr__ method.
      */
@@ -125,7 +142,7 @@ public:
 
     inline friend std::ostream& operator<<(std::ostream& os, const Biosequence& seq)
     {
-        seq.write_string(os);
+        seq.write_sequence_string(os);
         return os;
     }
 

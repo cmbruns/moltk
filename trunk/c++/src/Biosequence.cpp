@@ -136,12 +136,6 @@ Biosequence& Biosequence::load_fasta(std::istream& is)
     return *this;
 }
 
-void Biosequence::write_string(std::ostream& os) const
-{
-    for (const_iterator i = begin(); i != end(); ++i)
-        os << *i;
-}
-
 void Biosequence::write_fasta(std::ostream& os) const
 {
     os << '>' << description;
@@ -153,6 +147,31 @@ void Biosequence::write_fasta(std::ostream& os) const
         os << *i;
         ++pos;
     }
+}
+
+void Biosequence::write_fasta(const std::string& file_name) const
+{
+    ofstream output_stream;
+    output_stream.open(file_name.c_str());
+    if (!output_stream) {
+        std::string msg("Error: moltk.Biosequence unable to write to fasta file ");
+        msg += file_name;
+        throw std::exception(msg.c_str());
+    }
+    write_fasta(output_stream);
+}
+
+std::string Biosequence::fasta() const
+{
+    ostringstream output_stream;
+    write_fasta(output_stream);
+    return output_stream.str();
+}
+
+void Biosequence::write_sequence_string(std::ostream& os) const
+{
+    for (const_iterator i = begin(); i != end(); ++i)
+        os << *i;
 }
 
 /*!

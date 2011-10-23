@@ -49,6 +49,15 @@ void register_Alignment_class(){
                 , bp::return_self< >() );
         
         }
+        { //::moltk::Alignment::fasta
+        
+            typedef ::std::string ( ::moltk::Alignment::*fasta_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "fasta"
+                , fasta_function_type( &::moltk::Alignment::fasta ) );
+        
+        }
         { //::moltk::Alignment::get_estring
         
             typedef ::moltk::EString const & ( ::moltk::Alignment::*get_estring_function_type )( ::size_t ) const;
@@ -121,6 +130,15 @@ void register_Alignment_class(){
                 , ( bp::arg("alignment_string") ) );
         
         }
+        { //::moltk::Alignment::pretty
+        
+            typedef ::std::string ( ::moltk::Alignment::*pretty_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "pretty"
+                , pretty_function_type( &::moltk::Alignment::pretty ) );
+        
+        }
         { //::moltk::Alignment::score
         
             typedef ::moltk::units::Information const & ( ::moltk::Alignment::*score_function_type )(  ) const;
@@ -180,16 +198,6 @@ void register_Alignment_class(){
                 "write_pretty"
                 , write_pretty_function_type( &::moltk::Alignment::write_pretty )
                 , ( bp::arg("file_name") ) );
-        
-        }
-        { //::moltk::Alignment::write_string
-        
-            typedef void ( ::moltk::Alignment::*write_string_function_type )( ::std::ostream & ) const;
-            
-            Alignment_exposer.def( 
-                "write_string"
-                , write_string_function_type( &::moltk::Alignment::write_string )
-                , ( bp::arg("output_stream") ) );
         
         }
         Alignment_exposer.def( bp::self_ns::str( bp::self ) );
