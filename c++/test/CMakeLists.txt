@@ -34,10 +34,7 @@ foreach(TEST_PROG ${REGR_TESTS})
         ${Boost_IOSTREAMS_LIBRARY}
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
         MoltkLibrary)
-    set(TEST_ARGS "")
-    if("${TEST_NAME_WE}" STREQUAL "test_load_pdb")
-        set(TEST_ARGS "${CMAKE_SOURCE_DIR}/data/structures/1FND.pdb.gz")
-    endif()
-    add_test(${TEST_NAME_WE} 
-        ${TEST_NAME_WE} ${TEST_ARGS})
+    add_test(NAME ${TEST_NAME_WE}
+        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/data/"
+        COMMAND ${TEST_NAME_WE})
 endforeach()

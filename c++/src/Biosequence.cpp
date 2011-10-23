@@ -105,7 +105,7 @@ void Biosequence::load_stream(std::istream& is)
     }
     // Read subsequent lines that do not start with ">" characters.
     char peek = is.peek();
-    while ((peek != '>') && (! is.eof())) {
+    while ((peek != '>') && is) {
         getline(is, line);
         for (size_t i = 0; i < line.length(); ++i) 
         {
@@ -118,8 +118,14 @@ void Biosequence::load_stream(std::istream& is)
 
 Biosequence& Biosequence::load_fasta(const std::string& file_name)
 {
-    ifstream in_stream(file_name.c_str());
-    load_fasta(in_stream);
+    ifstream fasta_stream;
+    fasta_stream.open(file_name.c_str());
+    if (! fasta_stream) {
+        std::string msg("Error opening fasta file ");
+        msg += file_name;
+        throw std::exception(msg.c_str());
+    }
+    load_fasta(fasta_stream);
     return *this;
 }
 

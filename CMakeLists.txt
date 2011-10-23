@@ -19,7 +19,8 @@
 #    For questions contact: cmbruns@rotatingpenguin.com
 
 project(MolTK)
-cmake_minimum_required(VERSION 2.8)
+# cmake 2.8.3 does not have ADD_TEST(WORKING_DIRECTORY) option
+cmake_minimum_required(VERSION 2.8.6)
 
 # I think enable_testing() has to be in top-level CMakeLists.txt file.
 enable_testing()
