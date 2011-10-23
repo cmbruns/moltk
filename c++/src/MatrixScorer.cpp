@@ -174,8 +174,8 @@ std::vector<POSB*> MatrixScorer::create_foo_positions(const Alignment& alignment
         }
         int colIx = -1;
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
-        const Alignment::EString& eString = alignment.get_estring(seqIx);
-        Alignment::EString::const_iterator e;
+        const EString& eString = alignment.get_estring(seqIx);
+        EString::const_iterator e;
         for (e = eString.begin(); e != eString.end(); ++e) 
         {
             size_t eResIx = *e;
@@ -225,8 +225,8 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::create_target_positions(cons
     for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
     {
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
-        const Alignment::EString& eString = alignment.get_estring(seqIx);
-        Alignment::EString::const_iterator e;
+        const EString& eString = alignment.get_estring(seqIx);
+        EString::const_iterator e;
         int colIx = -1;
         for (e = eString.begin(); e != eString.end(); ++e) 
         {
@@ -264,8 +264,8 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::create_query_positions(const 
     for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
     {
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
-        const Alignment::EString& eString = alignment.get_estring(seqIx);
-        Alignment::EString::const_iterator e;
+        const EString& eString = alignment.get_estring(seqIx);
+        EString::const_iterator e;
         int colIx = -1;
         for (e = eString.begin(); e != eString.end(); ++e) 
         {
