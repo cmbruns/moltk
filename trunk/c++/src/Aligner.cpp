@@ -22,6 +22,7 @@
 
 #include "moltk/Aligner.hpp"
 #include "moltk/MatrixScorer.hpp"
+#include "moltk/EString.hpp"
 #include <cassert>
 #include <limits>
 
@@ -205,8 +206,8 @@ void Aligner::compute_recurrence()
 Alignment Aligner::compute_traceback()
 {
     // Start at lower right of dynamic programming matrix.
-    Alignment::EString eString1;
-    Alignment::EString eString2;
+    EString eString1;
+    EString eString2;
     int i = m;
     int j = n;
     Information alignmentScore = dp_table[i][j].v;

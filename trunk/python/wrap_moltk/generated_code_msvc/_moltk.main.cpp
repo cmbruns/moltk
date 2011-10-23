@@ -32,6 +32,8 @@
 
 #include "generated_code_msvc/displacement.pypp.hpp"
 
+#include "generated_code_msvc/estring.pypp.hpp"
+
 #include "generated_code_msvc/information.pypp.hpp"
 
 #include "generated_code_msvc/informationdimension.pypp.hpp"
@@ -84,6 +86,8 @@ BOOST_PYTHON_MODULE(_moltk){
     register_Biosequence_class();
 
     register_BiosequenceResidue_class();
+
+    register_EString_class();
 
     register_PDBStructure_class();
 

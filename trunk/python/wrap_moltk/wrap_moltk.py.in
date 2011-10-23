@@ -62,7 +62,7 @@ def wrap_custom(mb):
     alignment = ns_moltk.class_('Alignment')
     for fn_name in ['append_sequence', 'set_score']:
          alignment.member_function(fn_name).call_policies = return_self()
-    estring = alignment.class_('EString')
+    estring = ns_moltk.class_('EString')
     estring.member_function('append_run').call_policies = return_self()
     for cls in ns_moltk.classes(lambda c: c.name.startswith('BaseVect')):
         for fn_name in ['begin', 'end']:

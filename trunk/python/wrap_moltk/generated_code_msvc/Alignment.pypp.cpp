@@ -17,75 +17,6 @@ void register_Alignment_class(){
             .value("StructureList", moltk::Alignment::StructureList)
             .export_values()
             ;
-        { //::moltk::Alignment::EString
-            typedef bp::class_< moltk::Alignment::EString > EString_exposer_t;
-            EString_exposer_t EString_exposer = EString_exposer_t( "EString", "\n A compact representation of the gapping pattern for one sequence in an alignment.\n", bp::init< >() );
-            bp::scope EString_scope( EString_exposer );
-            bp::class_< moltk::Alignment::EString::const_iterator >( "const_iterator", "\n Iterator for accessing the residue positions encoded in an estring.\n\n EString::const_iterator emits one residue number for each\n column in an alignment.  Positions with a gap dereference to\n residue number -1.  Other positions dereference to the\n ordinal residue position index in the corresponding sequence.\n", bp::init< >("\n Iterator for accessing the residue positions encoded in an estring.\n\n EString::const_iterator emits one residue number for each\n column in an alignment.  Positions with a gap dereference to\n residue number -1.  Other positions dereference to the\n ordinal residue position index in the corresponding sequence.\n") )    
-                .def( bp::init< std::vector< int > const &, int, int >(( bp::arg("runs"), bp::arg("run_index"), bp::arg("position_index") ), "\n Iterator for accessing the residue positions encoded in an estring.\n\n EString::const_iterator emits one residue number for each\n column in an alignment.  Positions with a gap dereference to\n residue number -1.  Other positions dereference to the\n ordinal residue position index in the corresponding sequence.\n") )    
-                .def( bp::self != bp::self )    
-                .def( bp::self == bp::self );
-            { //::moltk::Alignment::EString::append_run
-            
-                typedef ::moltk::Alignment::EString & ( ::moltk::Alignment::EString::*append_run_function_type )( int ) ;
-                
-                EString_exposer.def( 
-                    "append_run"
-                    , append_run_function_type( &::moltk::Alignment::EString::append_run )
-                    , ( bp::arg("run") )
-                    , bp::return_self< >() );
-            
-            }
-            { //::moltk::Alignment::EString::begin
-            
-                typedef ::moltk::Alignment::EString::const_iterator ( ::moltk::Alignment::EString::*begin_function_type )(  ) const;
-                
-                EString_exposer.def( 
-                    "begin"
-                    , begin_function_type( &::moltk::Alignment::EString::begin ) );
-            
-            }
-            { //::moltk::Alignment::EString::end
-            
-                typedef ::moltk::Alignment::EString::const_iterator ( ::moltk::Alignment::EString::*end_function_type )(  ) const;
-                
-                EString_exposer.def( 
-                    "end"
-                    , end_function_type( &::moltk::Alignment::EString::end ) );
-            
-            }
-            EString_exposer.def( bp::self != bp::self );
-            EString_exposer.def( bp::self * bp::self );
-            EString_exposer.def( bp::self == bp::self );
-            { //::moltk::Alignment::EString::reverse
-            
-                typedef void ( ::moltk::Alignment::EString::*reverse_function_type )(  ) ;
-                
-                EString_exposer.def( 
-                    "reverse"
-                    , reverse_function_type( &::moltk::Alignment::EString::reverse ) );
-            
-            }
-            { //::moltk::Alignment::EString::total_length
-            
-                typedef ::size_t ( ::moltk::Alignment::EString::*total_length_function_type )(  ) const;
-                
-                EString_exposer.def( 
-                    "total_length"
-                    , total_length_function_type( &::moltk::Alignment::EString::total_length ) );
-            
-            }
-            { //::moltk::Alignment::EString::ungapped_length
-            
-                typedef ::size_t ( ::moltk::Alignment::EString::*ungapped_length_function_type )(  ) const;
-                
-                EString_exposer.def( 
-                    "ungapped_length"
-                    , ungapped_length_function_type( &::moltk::Alignment::EString::ungapped_length ) );
-            
-            }
-            EString_exposer.def( bp::self_ns::str( bp::self ) );
-        }
         bp::class_< moltk::Alignment::Row >( "Row", "\n Meta-data for one sequence in an Alignment\n" )    
             .def_readwrite( "e_string", &moltk::Alignment::Row::e_string )    
             .def_readwrite( "list", &moltk::Alignment::Row::list, "\n Meta-data for one sequence in an Alignment\n" )    
@@ -99,7 +30,7 @@ void register_Alignment_class(){
         bp::implicitly_convertible< char const *, moltk::Alignment >();
         { //::moltk::Alignment::align
         
-            typedef ::moltk::Alignment ( ::moltk::Alignment::*align_function_type )( ::moltk::Alignment const &,::moltk::Alignment::EString const &,::moltk::Alignment::EString const & ) const;
+            typedef ::moltk::Alignment ( ::moltk::Alignment::*align_function_type )( ::moltk::Alignment const &,::moltk::EString const &,::moltk::EString const & ) const;
             
             Alignment_exposer.def( 
                 "align"
@@ -120,7 +51,7 @@ void register_Alignment_class(){
         }
         { //::moltk::Alignment::get_estring
         
-            typedef ::moltk::Alignment::EString const & ( ::moltk::Alignment::*get_estring_function_type )( ::size_t ) const;
+            typedef ::moltk::EString const & ( ::moltk::Alignment::*get_estring_function_type )( ::size_t ) const;
             
             Alignment_exposer.def( 
                 "get_estring"

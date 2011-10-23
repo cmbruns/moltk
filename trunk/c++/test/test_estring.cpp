@@ -22,12 +22,11 @@
 
 // #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE EStringUnitTest
+#include "moltk/EString.hpp"
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
-#include "moltk/Alignment.hpp"
 
 using namespace moltk;
-typedef moltk::Alignment::EString EString;
 
 BOOST_AUTO_TEST_CASE( test_estring_equality )
 {

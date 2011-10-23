@@ -23,14 +23,14 @@
 #ifndef MOLTK_ALIGN_ALIGNMENT_H
 #define MOLTK_ALIGN_ALIGNMENT_H
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm> // reverse
+#include "moltk/EString.hpp"
 #include "moltk/Biosequence.hpp"
 #include "moltk/PDBStructure.hpp"
 #include "moltk/Real.hpp"
 #include "moltk/units.hpp"
+#include <iostream>
+#include <string>
+#include <vector>
 
 namespace moltk {
 
@@ -48,71 +48,8 @@ public:
         StructureList
     };
 
+    typedef moltk::EString EString;
 
-    /// A compact representation of the gapping pattern for one sequence in an alignment.
-    class EString
-    {
-    public:
-
-        /*!
-         * Iterator for accessing the residue positions encoded in an estring.
-         *
-         * EString::const_iterator emits one residue number for each
-         * column in an alignment.  Positions with a gap dereference to
-         * residue number -1.  Other positions dereference to the
-         * ordinal residue position index in the corresponding sequence.
-         */
-        class const_iterator
-        {
-        public:
-            const_iterator() {}
-            const_iterator(const std::vector<int>& runs
-                    , int run_index
-                    , int position_index);
-            const_iterator& operator++();
-            int operator*() const ;
-            bool operator!=(const const_iterator& rhs);
-            bool operator==(const const_iterator& rhs);
-
-        protected:
-            const std::vector<int>* runs;
-            size_t run_index;
-            int position_index;
-            size_t sequence_index;
-        };
-
-
-        EString();
-        EString operator*(const EString& rhs) const;
-        EString& append_run(int run);
-        EString& operator<<(int run) {append_run(run); return *this;}
-        size_t ungapped_length() const;
-        size_t total_length() const;
-        const_iterator begin() const;
-        const_iterator end() const;
-        void reverse();
-        bool operator==(const EString& rhs) const { return runs == rhs.runs; }
-        bool operator!=(const EString& rhs) const { return runs != rhs.runs; }
-        inline friend std::ostream& operator<<(std::ostream& os, const EString& e)
-        {
-            os << "<";
-            std::vector<int>::const_iterator i;
-            for (i = e.runs.begin(); i != e.runs.end(); ++i) 
-            {
-                if (i != e.runs.begin()) os << ", ";
-                os << *i;
-            }
-            os << ">";
-            return os;
-        }
-
-    protected:
-        std::vector<int> runs;
-        size_t m_ungapped_length;
-        size_t m_total_length;
-    };
-
-    
     /// Meta-data for one sequence in an Alignment
     class Row
     {
