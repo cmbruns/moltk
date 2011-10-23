@@ -8,6 +8,17 @@ namespace bp = boost::python;
 
 void register_free_functions(){
 
+    { //::moltk::align
+    
+        typedef ::moltk::Alignment ( *align_function_type )( ::moltk::Alignment const &,::moltk::Alignment const & );
+        
+        bp::def( 
+            "align"
+            , align_function_type( &::moltk::align )
+            , ( bp::arg("target_alignment"), bp::arg("query_alignment") ) );
+    
+    }
+
     { //::moltk::units::cos
     
         typedef ::moltk::Real ( *cos_function_type )( ::moltk::units::Angle const & );
@@ -92,7 +103,8 @@ void register_free_functions(){
         bp::def( 
             "load_fasta"
             , load_fasta_function_type( &::moltk::load_fasta )
-            , ( bp::arg("file_name") ) );
+            , ( bp::arg("file_name") )
+            , " global load_fasta method helps get SEQUOIA-like conciseness in python." );
     
     }
 

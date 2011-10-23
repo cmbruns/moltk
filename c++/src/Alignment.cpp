@@ -32,9 +32,15 @@ using namespace std;
 // Alignment methods //
 ///////////////////////
 
+Alignment::Alignment() 
+    : m_score(0.0 * moltk::units::bit) 
+    , pretty_width(50)
+{}
+
 /* implicit */
 Alignment::Alignment(const Biosequence& seq) 
  : m_score(0.0 * moltk::units::bit)
+ , pretty_width(50)
 {
     append_sequence(seq);
 }
@@ -42,6 +48,7 @@ Alignment::Alignment(const Biosequence& seq)
 /* implicit */ 
 Alignment::Alignment(const std::string& s)
  : m_score(0.0 * moltk::units::bit)
+ , pretty_width(50)
 {
     load_string(s);
 }
@@ -49,6 +56,7 @@ Alignment::Alignment(const std::string& s)
 /* implicit */ 
 Alignment::Alignment(const char* str)
  : m_score(0.0 * moltk::units::bit)
+ , pretty_width(50)
 {
     std::string s(str);
     load_string(s);
@@ -99,6 +107,106 @@ void moltk::Alignment::print_string(std::ostream& os) const
             ++i;
         }
         os << endl;
+    }
+}
+
+void Alignment::print_pretty(std::ostream& os) const
+{
+    size_t n_cols = get_number_of_columns();
+    size_t n_seqs = get_number_of_sequences();
+    std::vector<EString::const_iterator> iseq(n_seqs); // iterators into gapped sequences
+    std::vector<int> last_res(n_seqs, 1); // most recently seen residue number
+    std::vector<char> identities(n_cols, '*'); // start optimistic
+
+    // print sequence descriptions in first block
+    for (size_t rowIx = 0; rowIx < rows.size(); ++rowIx) 
+    {
+        // sequence number
+        os.width(3);
+        os << rowIx + 1 << ") ";
+        const Row& row = rows[rowIx];
+        iseq[rowIx] = row.e_string.begin(); // initialize iterators
+        if (row.list == SequenceList) {
+            os << sequences[row.list_index].get_description();
+        }
+        else
+            os << "structure";
+        os << endl;
+    }
+
+    // loop over blocks of columns
+    size_t start_col = 0;
+    while(start_col < n_cols)
+    {
+        os << endl;
+        size_t end_col = start_col + pretty_width - 1;
+        if (end_col >= n_cols)
+            end_col = n_cols - 1;
+
+        // one line with dots every ten positions
+        os << "     ";
+        for(size_t col = start_col; col <= end_col; ++col)
+        {
+            if (! ((col + 1) % 10))
+                os << '.';
+            else
+                os << ' ';
+        }
+        os.width(5);
+        os << end_col + 1;
+        os << endl;
+
+        // one line for each sequence
+        for (size_t s = 0; s < n_seqs; ++s)
+        {
+            // sequence number
+            os.width(3);
+            os << s + 1 << ") ";
+            const Row& row = rows[s];
+            const BaseBiosequence* seq;
+            if (row.list == SequenceList)
+                seq = &sequences[row.list_index];
+            else
+                seq = &structures[row.list_index];
+            // sequence characters
+            for(size_t col = start_col; col <= end_col; ++col)
+            {
+                int resIx = *iseq[s];
+                if (resIx < 0) {
+                    os << '-'; // gap
+                    identities[col] = ' '; // not identical
+                }
+                else {
+                    char olc = seq->get_residue(resIx).get_one_letter_code();
+                    os << olc;
+                    last_res[s] = seq->get_residue(resIx).get_residue_number();
+                    char& iden = identities[col];
+                    if (iden == '*')
+                        iden = olc;
+                    else if (iden == olc)
+                        ; // still identical
+                    else
+                        iden = ' '; // not identical
+                }
+                ++iseq[s];
+            }
+            os.width(5);
+            os << last_res[s]; // final sequence number
+            os << endl;
+        }
+
+        // one line with stars for identities
+        os << "     ";
+        for(size_t col = start_col; col <= end_col; ++col)
+        {
+            if (identities[col] == ' ')
+                os << ' ';
+            else
+                os << '*';
+        }
+        os << endl;
+
+        start_col = end_col + 1;
     }
 }
 

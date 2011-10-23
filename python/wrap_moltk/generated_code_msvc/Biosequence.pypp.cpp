@@ -73,6 +73,15 @@ void register_Biosequence_class(){
         Biosequence_exposer.def( bp::init< char const *, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" )) );
         bp::implicitly_convertible< char const *, moltk::Biosequence >();
         Biosequence_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("rhs") )) );
+        { //::moltk::Biosequence::get_description
+        
+            typedef ::std::string ( ::moltk::Biosequence::*get_description_function_type )(  ) const;
+            
+            Biosequence_exposer.def( 
+                "get_description"
+                , get_description_function_type( &::moltk::Biosequence::get_description ) );
+        
+        }
         { //::moltk::Biosequence::get_number_of_residues
         
             typedef ::size_t ( ::moltk::Biosequence::*get_number_of_residues_function_type )(  ) const;

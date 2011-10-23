@@ -168,6 +168,16 @@ void register_Alignment_class(){
                 , ( bp::arg("s") ) );
         
         }
+        { //::moltk::Alignment::print_pretty
+        
+            typedef void ( ::moltk::Alignment::*print_pretty_function_type )( ::std::ostream & ) const;
+            
+            Alignment_exposer.def( 
+                "print_pretty"
+                , print_pretty_function_type( &::moltk::Alignment::print_pretty )
+                , ( bp::arg("os") ) );
+        
+        }
         { //::moltk::Alignment::print_string
         
             typedef void ( ::moltk::Alignment::*print_string_function_type )( ::std::ostream & ) const;

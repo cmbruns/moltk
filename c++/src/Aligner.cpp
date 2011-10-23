@@ -259,8 +259,24 @@ const Aligner::Scorer& Aligner::get_default_scorer() {
     return MatrixScorer::get_blosum62_scorer();
 }
 
+/* static */
+Aligner& Aligner::get_shared_aligner()
+{
+    static std::auto_ptr<Aligner> shared_aligner(NULL);
+    if (!shared_aligner.get())
+        shared_aligner.reset( new Aligner() );
+    return *shared_aligner.get();
+}
+
 
 ////////////////////
 // global methods //
 ////////////////////
 
+/*
+ * global align() methods helps get SEQUOIA-like conciseness in python.
+ */
+Alignment moltk::align(const Alignment& target_alignment, const Alignment& query_alignment)
+{
+    return Aligner::get_shared_aligner().align(target_alignment, query_alignment);
+}

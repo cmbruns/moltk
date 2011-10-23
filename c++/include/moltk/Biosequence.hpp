@@ -115,6 +115,7 @@ public:
     Biosequence& load_fasta(std::istream& is);
     size_t get_number_of_residues() const { return size(); }
     const Residue& get_residue(size_t ix) const { return (*this)[ix]; }
+    std::string get_description() const {return description;}
     void print_string(std::ostream& os) const;
     /*!
      * repr is a helper for the python __repr__ method.
@@ -137,6 +138,9 @@ protected:
     std::string description;
 };
 
+/*!
+ * global load_fasta method helps get SEQUOIA-like conciseness in python.
+ */
 Biosequence load_fasta(const std::string& file_name);
 
 } // namespace moltk
