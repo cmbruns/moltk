@@ -43,4 +43,6 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     Alignment seq3 = load_fasta("sequences/sod1_Scer.fasta");
     Alignment al2 = align(al1, seq3);
     cout << al2 << endl;
+    Alignment al3 = align(seq3, al1);
+    cout << al3 << endl;
 }

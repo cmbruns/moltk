@@ -230,7 +230,7 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::create_target_positions(cons
         int colIx = -1;
         for (e = eString.begin(); e != eString.end(); ++e) 
         {
-            size_t eResIx = *e;
+            int eResIx = *e;
             colIx++;
             if (eResIx < 0) // This is a gap position
                 continue; // gap - zero score
@@ -269,7 +269,7 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::create_query_positions(const 
         int colIx = -1;
         for (e = eString.begin(); e != eString.end(); ++e) 
         {
-            size_t eResIx = *e;
+            int eResIx = *e; // NOT size_t, could be -1!
             colIx++;
             if (eResIx < 0) // This is a gap position
                 continue; // gap - zero score

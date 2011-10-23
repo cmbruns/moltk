@@ -34,7 +34,9 @@ foreach(TEST_PROG ${REGR_TESTS})
         ${Boost_IOSTREAMS_LIBRARY}
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
         MoltkLibrary)
-    add_test(NAME ${TEST_NAME_WE}
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/data/"
-        COMMAND ${TEST_NAME_WE})
+    set(TEST_ARGS "")
+    add_test(
+        NAME ${TEST_NAME_WE}
+        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/data"
+        COMMAND ${TEST_NAME_WE} ${TEST_ARGS})
 endforeach()
