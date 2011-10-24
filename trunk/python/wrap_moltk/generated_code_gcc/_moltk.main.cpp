@@ -12,6 +12,10 @@
 
 #include "generated_code_gcc/Alignment.pypp.hpp"
 
+#include "generated_code_gcc/Angle.pypp.hpp"
+
+#include "generated_code_gcc/AngleDimension.pypp.hpp"
+
 #include "generated_code_gcc/BaseBiosequence.pypp.hpp"
 
 #include "generated_code_gcc/Biosequence.pypp.hpp"
@@ -21,6 +25,8 @@
 #include "generated_code_gcc/BitUnit.pypp.hpp"
 
 #include "generated_code_gcc/Displacement.pypp.hpp"
+
+#include "generated_code_gcc/EString.pypp.hpp"
 
 #include "generated_code_gcc/Information.pypp.hpp"
 
@@ -36,7 +42,11 @@
 
 #include "generated_code_gcc/Printable.pypp.hpp"
 
+#include "generated_code_gcc/Quaternion.pypp.hpp"
+
 #include "generated_code_gcc/QueryPositionList.pypp.hpp"
+
+#include "generated_code_gcc/RadianUnit.pypp.hpp"
 
 #include "generated_code_gcc/RigidTransform.pypp.hpp"
 
@@ -77,9 +87,13 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_BiosequenceResidue_class();
 
+    register_EString_class();
+
     register_PDBStructure_class();
 
     register_Printable_class();
+
+    register_Quaternion_class();
 
     register_RigidTransform_class();
 
@@ -93,13 +107,19 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_InformationDimension_class();
 
+    register_AngleDimension_class();
+
     register_LengthDimension_class();
 
     register_Information_class();
 
+    register_Angle_class();
+
     register_Length_class();
 
     register_BitUnit_class();
+
+    register_RadianUnit_class();
 
     register_NanometerUnit_class();
 

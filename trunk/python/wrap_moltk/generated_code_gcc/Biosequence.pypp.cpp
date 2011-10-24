@@ -48,16 +48,16 @@ struct Biosequence_wrapper : moltk::Biosequence, bp::wrapper< moltk::Biosequence
         return moltk::Biosequence::get_number_of_residues( );
     }
 
-    virtual void print_to_stream( ::std::ostream & os ) const  {
-        if( bp::override func_print_to_stream = this->get_override( "print_to_stream" ) )
-            func_print_to_stream( boost::ref(os) );
+    virtual void write_to_stream( ::std::ostream & os ) const  {
+        if( bp::override func_write_to_stream = this->get_override( "write_to_stream" ) )
+            func_write_to_stream( boost::ref(os) );
         else{
-            this->moltk::BaseBiosequence::print_to_stream( boost::ref(os) );
+            this->moltk::BaseBiosequence::write_to_stream( boost::ref(os) );
         }
     }
     
-    void default_print_to_stream( ::std::ostream & os ) const  {
-        moltk::BaseBiosequence::print_to_stream( boost::ref(os) );
+    void default_write_to_stream( ::std::ostream & os ) const  {
+        moltk::BaseBiosequence::write_to_stream( boost::ref(os) );
     }
 
 };
@@ -73,6 +73,25 @@ void register_Biosequence_class(){
         Biosequence_exposer.def( bp::init< char const *, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" )) );
         bp::implicitly_convertible< char const *, moltk::Biosequence >();
         Biosequence_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("rhs") )) );
+        { //::moltk::Biosequence::fasta
+        
+            typedef ::std::string ( ::moltk::Biosequence::*fasta_function_type )(  ) const;
+            
+            Biosequence_exposer.def( 
+                "fasta"
+                , fasta_function_type( &::moltk::Biosequence::fasta )
+                , " Create a string representing the sequence in fasta format." );
+        
+        }
+        { //::moltk::Biosequence::get_description
+        
+            typedef ::std::string ( ::moltk::Biosequence::*get_description_function_type )(  ) const;
+            
+            Biosequence_exposer.def( 
+                "get_description"
+                , get_description_function_type( &::moltk::Biosequence::get_description ) );
+        
+        }
         { //::moltk::Biosequence::get_number_of_residues
         
             typedef ::size_t ( ::moltk::Biosequence::*get_number_of_residues_function_type )(  ) const;
@@ -95,6 +114,28 @@ void register_Biosequence_class(){
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
+        { //::moltk::Biosequence::load_fasta
+        
+            typedef ::moltk::Biosequence & ( ::moltk::Biosequence::*load_fasta_function_type )( ::std::string const & ) ;
+            
+            Biosequence_exposer.def( 
+                "load_fasta"
+                , load_fasta_function_type( &::moltk::Biosequence::load_fasta )
+                , ( bp::arg("file_name") )
+                , bp::return_self< >() );
+        
+        }
+        { //::moltk::Biosequence::load_fasta
+        
+            typedef ::moltk::Biosequence & ( ::moltk::Biosequence::*load_fasta_function_type )( ::std::istream & ) ;
+            
+            Biosequence_exposer.def( 
+                "load_fasta"
+                , load_fasta_function_type( &::moltk::Biosequence::load_fasta )
+                , ( bp::arg("is") )
+                , bp::return_self< >() );
+        
+        }
         { //::moltk::Biosequence::load_stream
         
             typedef void ( ::moltk::Biosequence::*load_stream_function_type )( ::std::istream & ) ;
@@ -105,29 +146,63 @@ void register_Biosequence_class(){
                 , ( bp::arg("is") ) );
         
         }
-        { //::moltk::Biosequence::print_string
+        { //::moltk::Biosequence::repr
         
-            typedef void ( ::moltk::Biosequence::*print_string_function_type )( ::std::ostream & ) const;
+            typedef ::std::string ( ::moltk::Biosequence::*repr_function_type )(  ) const;
             
             Biosequence_exposer.def( 
-                "print_string"
-                , print_string_function_type( &::moltk::Biosequence::print_string )
-                , ( bp::arg("os") ) );
+                "repr"
+                , repr_function_type( &::moltk::Biosequence::repr )
+                , " repr is a helper for the python __repr__ method." );
         
         }
-        { //::moltk::BaseBiosequence::print_to_stream
+        { //::moltk::Biosequence::write_fasta
         
-            typedef void ( ::moltk::BaseBiosequence::*print_to_stream_function_type )( ::std::ostream & ) const;
-            typedef void ( Biosequence_wrapper::*default_print_to_stream_function_type )( ::std::ostream & ) const;
+            typedef void ( ::moltk::Biosequence::*write_fasta_function_type )( ::std::ostream & ) const;
             
             Biosequence_exposer.def( 
-                "print_to_stream"
-                , print_to_stream_function_type(&::moltk::BaseBiosequence::print_to_stream)
-                , default_print_to_stream_function_type(&Biosequence_wrapper::default_print_to_stream)
+                "write_fasta"
+                , write_fasta_function_type( &::moltk::Biosequence::write_fasta )
+                , ( bp::arg("os") )
+                , " Write sequence in fasta format to a C++ stream." );
+        
+        }
+        { //::moltk::Biosequence::write_fasta
+        
+            typedef void ( ::moltk::Biosequence::*write_fasta_function_type )( ::std::string const & ) const;
+            
+            Biosequence_exposer.def( 
+                "write_fasta"
+                , write_fasta_function_type( &::moltk::Biosequence::write_fasta )
+                , ( bp::arg("file_name") )
+                , " Write sequence in fasta format to a designated file." );
+        
+        }
+        { //::moltk::Biosequence::write_sequence_string
+        
+            typedef void ( ::moltk::Biosequence::*write_sequence_string_function_type )( ::std::ostream & ) const;
+            
+            Biosequence_exposer.def( 
+                "write_sequence_string"
+                , write_sequence_string_function_type( &::moltk::Biosequence::write_sequence_string )
+                , ( bp::arg("os") )
+                , " Write a sequence string to a C++ stream.  The sequence description is NOT included." );
+        
+        }
+        { //::moltk::BaseBiosequence::write_to_stream
+        
+            typedef void ( ::moltk::BaseBiosequence::*write_to_stream_function_type )( ::std::ostream & ) const;
+            typedef void ( Biosequence_wrapper::*default_write_to_stream_function_type )( ::std::ostream & ) const;
+            
+            Biosequence_exposer.def( 
+                "write_to_stream"
+                , write_to_stream_function_type(&::moltk::BaseBiosequence::write_to_stream)
+                , default_write_to_stream_function_type(&Biosequence_wrapper::default_write_to_stream)
                 , ( bp::arg("os") ) );
         
         }
         Biosequence_exposer.def( bp::self_ns::str( bp::self ) );
+        Biosequence_exposer.def("__repr__", &::moltk::Biosequence::repr, "string representation");
     }
 
 }

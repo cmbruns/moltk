@@ -23,6 +23,7 @@
 #include "moltk/Alignment.hpp"
 #include <cassert>
 #include <cctype> // toupper
+#include <stdexcept>
 #include <sstream>
 #include <fstream>
 
@@ -122,7 +123,7 @@ void Alignment::write_fasta(const std::string& file_name) const
     if (!output_stream) {
         std::string msg("Error: moltk.Alignment unable to write to fasta file ");
         msg += file_name;
-        throw std::exception(msg.c_str());
+        throw std::runtime_error(msg.c_str());
     }
     write_fasta(output_stream);
 }
@@ -251,7 +252,7 @@ void Alignment::write_pretty(const std::string& file_name) const
     if (!output_stream) {
         std::string msg("Error: unable to write to pretty file ");
         msg += file_name;
-        throw std::exception(msg.c_str());
+        throw std::runtime_error(msg.c_str());
     }
     write_pretty(output_stream);
 }
@@ -336,7 +337,7 @@ void Alignment::write_id_table(const std::string& file_name) const
     if (!output_stream) {
         std::string msg("Error: moltk.Alignment unable to write to id table file ");
         msg += file_name;
-        throw std::exception(msg.c_str());
+        throw std::runtime_error(msg.c_str());
     }
     write_id_table(output_stream);
 }
@@ -404,7 +405,7 @@ Alignment& Alignment::load_fasta(std::istream& input_stream)
         if ( (get_number_of_columns() != 0)
           && (sequence.size() != get_number_of_columns()) )
         {
-            throw std::exception("Sequence length mismatch in Alignment.load_fasta()");
+            throw std::runtime_error("Sequence length mismatch in Alignment.load_fasta()");
         }
         // Compress sequence
         Biosequence compressed_sequence(sequence);
@@ -436,7 +437,7 @@ Alignment& Alignment::load_fasta(const std::string& file_name)
     if (! fasta_stream) {
         std::string msg("Error opening fasta file ");
         msg += file_name;
-        throw std::exception(msg.c_str());
+        throw std::runtime_error(msg.c_str());
     }
     load_fasta(fasta_stream);
     return *this;

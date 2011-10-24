@@ -24,6 +24,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <stdexcept>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -60,7 +61,7 @@ bool PDBStructure::load_file(const std::string& fileName)
     ifstream pdb_file;
     pdb_file.open(fileName.c_str(), ios_base::in | ios_base::binary);
     if (!pdb_file)
-        throw std::exception("Error opening PDB file");
+        throw std::runtime_error("Error opening PDB file");
 	filtering_streambuf<input> in;
     if ( (fileName.substr(fileName.length() - 3) == ".gz") 
       || (fileName.substr(fileName.length() - 3) == ".GZ") )

@@ -13,93 +13,24 @@ void register_Alignment_class(){
         Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", "\n Alignment represents a set of aligned macromolecule sequences and/or structures.\n", bp::init< >() );
         bp::scope Alignment_scope( Alignment_exposer );
         bp::enum_< moltk::Alignment::List>("List")
-            .value("SequenceList", moltk::Alignment::SequenceList)
-            .value("StructureList", moltk::Alignment::StructureList)
+            .value("LIST_SEQUENCE", moltk::Alignment::LIST_SEQUENCE)
+            .value("LIST_STRUCTURE", moltk::Alignment::LIST_STRUCTURE)
             .export_values()
             ;
-        { //::moltk::Alignment::EString
-            typedef bp::class_< moltk::Alignment::EString > EString_exposer_t;
-            EString_exposer_t EString_exposer = EString_exposer_t( "EString", "\n A compact representation of the gapping pattern for one sequence in an alignment.\n", bp::init< >() );
-            bp::scope EString_scope( EString_exposer );
-            bp::class_< moltk::Alignment::EString::const_iterator >( "const_iterator", "\n Iterator for accessing the residue positions encoded in an estring.\n\n EString::const_iterator emits one residue number for each\n column in an alignment.  Positions with a gap dereference to\n residue number -1.  Other positions dereference to the\n ordinal residue position index in the corresponding sequence.\n", bp::init< >("\n Iterator for accessing the residue positions encoded in an estring.\n\n EString::const_iterator emits one residue number for each\n column in an alignment.  Positions with a gap dereference to\n residue number -1.  Other positions dereference to the\n ordinal residue position index in the corresponding sequence.\n") )    
-                .def( bp::init< std::vector< int > const &, int, int >(( bp::arg("runs"), bp::arg("run_index"), bp::arg("position_index") ), "\n Iterator for accessing the residue positions encoded in an estring.\n\n EString::const_iterator emits one residue number for each\n column in an alignment.  Positions with a gap dereference to\n residue number -1.  Other positions dereference to the\n ordinal residue position index in the corresponding sequence.\n") )    
-                .def( bp::self != bp::self )    
-                .def( bp::self == bp::self );
-            { //::moltk::Alignment::EString::append_run
-            
-                typedef ::moltk::Alignment::EString & ( ::moltk::Alignment::EString::*append_run_function_type )( int ) ;
-                
-                EString_exposer.def( 
-                    "append_run"
-                    , append_run_function_type( &::moltk::Alignment::EString::append_run )
-                    , ( bp::arg("run") )
-                    , bp::return_self< >() );
-            
-            }
-            { //::moltk::Alignment::EString::begin
-            
-                typedef ::moltk::Alignment::EString::const_iterator ( ::moltk::Alignment::EString::*begin_function_type )(  ) const;
-                
-                EString_exposer.def( 
-                    "begin"
-                    , begin_function_type( &::moltk::Alignment::EString::begin ) );
-            
-            }
-            { //::moltk::Alignment::EString::end
-            
-                typedef ::moltk::Alignment::EString::const_iterator ( ::moltk::Alignment::EString::*end_function_type )(  ) const;
-                
-                EString_exposer.def( 
-                    "end"
-                    , end_function_type( &::moltk::Alignment::EString::end ) );
-            
-            }
-            EString_exposer.def( bp::self != bp::self );
-            EString_exposer.def( bp::self * bp::self );
-            EString_exposer.def( bp::self == bp::self );
-            { //::moltk::Alignment::EString::reverse
-            
-                typedef void ( ::moltk::Alignment::EString::*reverse_function_type )(  ) ;
-                
-                EString_exposer.def( 
-                    "reverse"
-                    , reverse_function_type( &::moltk::Alignment::EString::reverse ) );
-            
-            }
-            { //::moltk::Alignment::EString::total_length
-            
-                typedef ::size_t ( ::moltk::Alignment::EString::*total_length_function_type )(  ) const;
-                
-                EString_exposer.def( 
-                    "total_length"
-                    , total_length_function_type( &::moltk::Alignment::EString::total_length ) );
-            
-            }
-            { //::moltk::Alignment::EString::ungapped_length
-            
-                typedef ::size_t ( ::moltk::Alignment::EString::*ungapped_length_function_type )(  ) const;
-                
-                EString_exposer.def( 
-                    "ungapped_length"
-                    , ungapped_length_function_type( &::moltk::Alignment::EString::ungapped_length ) );
-            
-            }
-            EString_exposer.def( bp::self_ns::str( bp::self ) );
-        }
         bp::class_< moltk::Alignment::Row >( "Row", "\n Meta-data for one sequence in an Alignment\n" )    
             .def_readwrite( "e_string", &moltk::Alignment::Row::e_string )    
             .def_readwrite( "list", &moltk::Alignment::Row::list, "\n Meta-data for one sequence in an Alignment\n" )    
             .def_readwrite( "list_index", &moltk::Alignment::Row::list_index )    
             .def_readwrite( "sequence_weight", &moltk::Alignment::Row::sequence_weight );
-        Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("arg0") )) );
+        Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("sequence") )) );
         bp::implicitly_convertible< moltk::Biosequence const &, moltk::Alignment >();
-        Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("arg0") )) );
+        Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("alignment_string") )) );
         bp::implicitly_convertible< std::string const &, moltk::Alignment >();
-        Alignment_exposer.def( bp::init< char const * >(( bp::arg("arg0") )) );
+        Alignment_exposer.def( bp::init< char const * >(( bp::arg("alignment_string") )) );
         bp::implicitly_convertible< char const *, moltk::Alignment >();
         { //::moltk::Alignment::align
         
-            typedef ::moltk::Alignment ( ::moltk::Alignment::*align_function_type )( ::moltk::Alignment const &,::moltk::Alignment::EString const &,::moltk::Alignment::EString const & ) const;
+            typedef ::moltk::Alignment ( ::moltk::Alignment::*align_function_type )( ::moltk::Alignment const &,::moltk::EString const &,::moltk::EString const & ) const;
             
             Alignment_exposer.def( 
                 "align"
@@ -114,13 +45,22 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "append_sequence"
                 , append_sequence_function_type( &::moltk::Alignment::append_sequence )
-                , ( bp::arg("seq") )
+                , ( bp::arg("sequence") )
                 , bp::return_self< >() );
+        
+        }
+        { //::moltk::Alignment::fasta
+        
+            typedef ::std::string ( ::moltk::Alignment::*fasta_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "fasta"
+                , fasta_function_type( &::moltk::Alignment::fasta ) );
         
         }
         { //::moltk::Alignment::get_estring
         
-            typedef ::moltk::Alignment::EString const & ( ::moltk::Alignment::*get_estring_function_type )( ::size_t ) const;
+            typedef ::moltk::EString const & ( ::moltk::Alignment::*get_estring_function_type )( ::size_t ) const;
             
             Alignment_exposer.def( 
                 "get_estring"
@@ -158,6 +98,37 @@ void register_Alignment_class(){
                 , bp::return_value_policy< bp::copy_const_reference >() );
         
         }
+        { //::moltk::Alignment::id_table
+        
+            typedef ::std::string ( ::moltk::Alignment::*id_table_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "id_table"
+                , id_table_function_type( &::moltk::Alignment::id_table ) );
+        
+        }
+        { //::moltk::Alignment::load_fasta
+        
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*load_fasta_function_type )( ::std::istream & ) ;
+            
+            Alignment_exposer.def( 
+                "load_fasta"
+                , load_fasta_function_type( &::moltk::Alignment::load_fasta )
+                , ( bp::arg("input_stream") )
+                , bp::return_self< >() );
+        
+        }
+        { //::moltk::Alignment::load_fasta
+        
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*load_fasta_function_type )( ::std::string const & ) ;
+            
+            Alignment_exposer.def( 
+                "load_fasta"
+                , load_fasta_function_type( &::moltk::Alignment::load_fasta )
+                , ( bp::arg("file_name") )
+                , bp::return_self< >() );
+        
+        }
         { //::moltk::Alignment::load_string
         
             typedef void ( ::moltk::Alignment::*load_string_function_type )( ::std::string const & ) ;
@@ -165,17 +136,16 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "load_string"
                 , load_string_function_type( &::moltk::Alignment::load_string )
-                , ( bp::arg("s") ) );
+                , ( bp::arg("alignment_string") ) );
         
         }
-        { //::moltk::Alignment::print_string
+        { //::moltk::Alignment::pretty
         
-            typedef void ( ::moltk::Alignment::*print_string_function_type )( ::std::ostream & ) const;
+            typedef ::std::string ( ::moltk::Alignment::*pretty_function_type )(  ) const;
             
             Alignment_exposer.def( 
-                "print_string"
-                , print_string_function_type( &::moltk::Alignment::print_string )
-                , ( bp::arg("os") ) );
+                "pretty"
+                , pretty_function_type( &::moltk::Alignment::pretty ) );
         
         }
         { //::moltk::Alignment::score
@@ -197,6 +167,66 @@ void register_Alignment_class(){
                 , set_score_function_type( &::moltk::Alignment::set_score )
                 , ( bp::arg("s") )
                 , bp::return_self< >() );
+        
+        }
+        { //::moltk::Alignment::write_fasta
+        
+            typedef void ( ::moltk::Alignment::*write_fasta_function_type )( ::std::ostream & ) const;
+            
+            Alignment_exposer.def( 
+                "write_fasta"
+                , write_fasta_function_type( &::moltk::Alignment::write_fasta )
+                , ( bp::arg("output_stream") ) );
+        
+        }
+        { //::moltk::Alignment::write_fasta
+        
+            typedef void ( ::moltk::Alignment::*write_fasta_function_type )( ::std::string const & ) const;
+            
+            Alignment_exposer.def( 
+                "write_fasta"
+                , write_fasta_function_type( &::moltk::Alignment::write_fasta )
+                , ( bp::arg("file_name") ) );
+        
+        }
+        { //::moltk::Alignment::write_id_table
+        
+            typedef void ( ::moltk::Alignment::*write_id_table_function_type )( ::std::ostream & ) const;
+            
+            Alignment_exposer.def( 
+                "write_id_table"
+                , write_id_table_function_type( &::moltk::Alignment::write_id_table )
+                , ( bp::arg("output_stream") ) );
+        
+        }
+        { //::moltk::Alignment::write_id_table
+        
+            typedef void ( ::moltk::Alignment::*write_id_table_function_type )( ::std::string const & ) const;
+            
+            Alignment_exposer.def( 
+                "write_id_table"
+                , write_id_table_function_type( &::moltk::Alignment::write_id_table )
+                , ( bp::arg("file_name") ) );
+        
+        }
+        { //::moltk::Alignment::write_pretty
+        
+            typedef void ( ::moltk::Alignment::*write_pretty_function_type )( ::std::ostream & ) const;
+            
+            Alignment_exposer.def( 
+                "write_pretty"
+                , write_pretty_function_type( &::moltk::Alignment::write_pretty )
+                , ( bp::arg("output_stream") ) );
+        
+        }
+        { //::moltk::Alignment::write_pretty
+        
+            typedef void ( ::moltk::Alignment::*write_pretty_function_type )( ::std::string const & ) const;
+            
+            Alignment_exposer.def( 
+                "write_pretty"
+                , write_pretty_function_type( &::moltk::Alignment::write_pretty )
+                , ( bp::arg("file_name") ) );
         
         }
         Alignment_exposer.def( bp::self_ns::str( bp::self ) );

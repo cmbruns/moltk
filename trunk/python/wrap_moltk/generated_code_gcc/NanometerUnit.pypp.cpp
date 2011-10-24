@@ -14,15 +14,15 @@ void register_NanometerUnit_class(){
             , (::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > > const & (*)(  ))( &::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >::get_instance )
             , bp::return_value_policy< bp::copy_const_reference >() )    
         .def( 
-            "print_name"
-            , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >::print_name )
+            "write_name"
+            , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >::write_name )
             , ( bp::arg("os") ) )    
         .def( 
-            "print_symbol"
-            , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >::print_symbol )
+            "write_symbol"
+            , (void (*)( ::std::basic_ostream< char, std::char_traits< char > > & ))( &::moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >::write_symbol )
             , ( bp::arg("os") ) )    
         .staticmethod( "get_instance" )    
-        .staticmethod( "print_name" )    
-        .staticmethod( "print_symbol" );
+        .staticmethod( "write_name" )    
+        .staticmethod( "write_symbol" );
 
 }

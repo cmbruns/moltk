@@ -45,16 +45,6 @@ void register_Length_class(){
         Length_exposer.def( bp::self == bp::self );
         Length_exposer.def( bp::self > bp::self );
         Length_exposer.def( bp::self >= bp::self );
-        { //::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >, double >::squareRoot
-        
-            typedef moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >, double > exported_class_t;
-            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 0 > >, double > ( exported_class_t::*squareRoot_function_type )(  ) const;
-            
-            Length_exposer.def( 
-                "squareRoot"
-                , squareRoot_function_type( &::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >, double >::squareRoot ) );
-        
-        }
         { //::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >, double >::value_in_unit
         
             typedef moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 1, 0, 0, 0, 0, 0 > >, double > exported_class_t;
