@@ -16,6 +16,8 @@ void register_UnitVector3D_class(){
             , (::moltk::Real ( ::moltk::UnitVector3D::* )(  ) const)( &::moltk::UnitVector3D::norm ) )    
         .def( 
             "normSquared"
-            , (::moltk::Real ( ::moltk::UnitVector3D::* )(  ) const)( &::moltk::UnitVector3D::normSquared ) );
+            , (::moltk::Real ( ::moltk::UnitVector3D::* )(  ) const)( &::moltk::UnitVector3D::normSquared ) )    
+        .def( bp::self * bp::other< moltk::Real >() )    
+        .def( bp::other< moltk::Real >() * bp::self );
 
 }

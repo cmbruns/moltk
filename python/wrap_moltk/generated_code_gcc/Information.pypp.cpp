@@ -45,16 +45,6 @@ void register_Information_class(){
         Information_exposer.def( bp::self == bp::self );
         Information_exposer.def( bp::self > bp::self );
         Information_exposer.def( bp::self >= bp::self );
-        { //::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >::squareRoot
-        
-            typedef moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > exported_class_t;
-            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 0 > >, double > ( exported_class_t::*squareRoot_function_type )(  ) const;
-            
-            Information_exposer.def( 
-                "squareRoot"
-                , squareRoot_function_type( &::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >::squareRoot ) );
-        
-        }
         { //::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >::value_in_unit
         
             typedef moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > exported_class_t;

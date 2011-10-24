@@ -12,4 +12,6 @@ void register_global_variables(){
 
     bp::scope().attr("nanometer") = bp::object( boost::ref( moltk::units::nanometer ) );
 
+    bp::scope().attr("radian") = bp::object( boost::ref( moltk::units::radian ) );
+
 }

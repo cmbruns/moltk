@@ -213,6 +213,17 @@ void register_Aligner_class(){
                 , get_end_gaps_free_function_type( &::moltk::Aligner::get_end_gaps_free ) );
         
         }
+        { //::moltk::Aligner::get_shared_aligner
+        
+            typedef ::moltk::Aligner & ( *get_shared_aligner_function_type )(  );
+            
+            Aligner_exposer.def( 
+                "get_shared_aligner"
+                , get_shared_aligner_function_type( &::moltk::Aligner::get_shared_aligner )
+                , bp::return_value_policy< bp::reference_existing_object >()
+                , " Global shared aligner object used by align() method." );
+        
+        }
         { //::moltk::Aligner::set_end_gaps_free
         
             typedef void ( ::moltk::Aligner::*set_end_gaps_free_function_type )( bool ) ;
@@ -224,6 +235,7 @@ void register_Aligner_class(){
         
         }
         Aligner_exposer.staticmethod( "get_default_scorer" );
+        Aligner_exposer.staticmethod( "get_shared_aligner" );
         { //property "endGapsFree"[fget=::moltk::Aligner::get_end_gaps_free, fset=::moltk::Aligner::set_end_gaps_free]
         
             typedef bool ( ::moltk::Aligner::*fget )(  ) const;

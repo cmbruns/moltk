@@ -29,6 +29,7 @@
 
 #include "moltk/Biosequence.hpp"
 #include <fstream>
+#include <stdexcept>
 #include <cassert>
 
 using namespace std;
@@ -123,7 +124,7 @@ Biosequence& Biosequence::load_fasta(const std::string& file_name)
     if (! fasta_stream) {
         std::string msg("Error opening fasta file ");
         msg += file_name;
-        throw std::exception(msg.c_str());
+        throw std::runtime_error(msg.c_str());
     }
     load_fasta(fasta_stream);
     return *this;
@@ -132,7 +133,7 @@ Biosequence& Biosequence::load_fasta(const std::string& file_name)
 Biosequence& Biosequence::load_fasta(std::istream& is)
 {
     load_stream(is);
-    // throw std::exception("load_fasta() not implemented.  Talk to Christopher.");
+    // throw std::runtime_error("load_fasta() not implemented.  Talk to Christopher.");
     return *this;
 }
 
@@ -156,7 +157,7 @@ void Biosequence::write_fasta(const std::string& file_name) const
     if (!output_stream) {
         std::string msg("Error: moltk.Biosequence unable to write to fasta file ");
         msg += file_name;
-        throw std::exception(msg.c_str());
+        throw std::runtime_error(msg.c_str());
     }
     write_fasta(output_stream);
 }
