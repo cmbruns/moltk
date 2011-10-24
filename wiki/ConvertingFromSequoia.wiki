@@ -1,10 +1,25 @@
-#summary Converting from SEQUOIA to moltk
+#summary Converting from SEQUOIA to MolTK
 
 = Introduction =
 
-We intend for SEQUOIA users to have an easy time learning to use moltk.  Use the following guide to using moltk.
+We intend for SEQUOIA users to have an easy time learning to use moltk.  MolTK is in python, and requires the use of more parentheses, quotation marks, and underscores that SEQUOIA does.  But I promise that the greater power of the python programming language is worth it.  Use the following guide to using moltk.
 
-= Conversions =
+= Conversions (MolTK 0.5) =
 
-|| *Sequoia command* || Corresponding moltk command || Comment ||
-|| {{{% sequoia}}} || {{{% python -i}}} <br> {{{from moltk import *}}} || start an alignment session ||
+|| *Sequoia command* || *Corresponding moltk command(s)* || *Comment* ||
+|| {{{% sequoia}}} || {{{% python -i}}} <br> {{{>>> from moltk import *}}} || Start an alignment session ||
+|| {{{SEQUOIA> read SEQ1 test1.fasta}}} || {{{>>> seq1 = load_fasta("test1.fasta")}}} || Load a sequence into seq1 ||
+|| {{{SEQUOIA> read SEQ2 test2.fasta}}} || {{{>>> seq2 = load_fasta("test2.fasta")}}} || load a sequence into seq2 ||
+|| {{{SEQUOIA> align}}} || {{{>>> aln = align(seq1, seq2)}}} || align two sequences/alignments. <br>NOTE: You cannot use "align" as the result in moltk <br>because "align" is already a method name. ||
+|| {{{SEQUOIA> print ALIGN}}} || {{{>>> print aln}}} || Display the alignment on screen ||
+|| {{{SEQUOIA> set SEQ1 ALIGN}}} || {{{>>> seq1 = aln}}} || Copy the alignment to seq1 ||
+|| {{{SEQUOIA> write ALIGN test.fasta}}} || {{{>>> aln.write_fasta("test.fasta")}}} || Save alignment to a file ||
+|| {{{SEQUOIA> print ALIGN test.pretty}}} || {{{>>> aln.write_pretty("test.pretty")}}} || Save nicely formatted but not computer readable version of alignment to a file || 
+|| {{{SEQUOIA> print id ALIGN}}} || {{{>>> print aln.id_table()}}} || Display a table of pairwise sequence identities ||
+|| quit || {{{>>> quit()}}} || End alignment session. ||
+|| {{{SEQUOIA> @test.inp}}} || {{{>>> execfile("test.py")}}} || Run a script file you wrote ||
+|| {{{% sequoia < test.inp}}} || {{{% python test.py}}} || Run a script you wrote directly from a command prompt ||
+
+= Conversions not implemented in moltk 0.5 =
+
+|| {{{SEQUOIA> read STRUCT1 test1.pdb}}} || {{{<TODO in moltk 0.6>}}} || Load a structure into struct1 ||
