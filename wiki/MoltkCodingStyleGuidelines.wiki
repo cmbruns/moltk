@@ -41,7 +41,7 @@ b_variable_name for boolean values
 
 lower case, single word, short names
 
-== Methods parameters ==
+== Method parameters ==
 
 lower_case_with_underscores
 
