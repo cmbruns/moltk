@@ -1,0 +1,10 @@
+#summary Converting from SEQUOIA to moltk
+
+= Introduction =
+
+We intend for SEQUOIA users to have an easy time learning to use moltk.  Use the following guide to using moltk.
+
+= Conversions =
+
+|| *Sequoia command* || Corresponding moltk command || Comment ||
+|| {{{% sequoia}}} || {{{% python -i}}} <br> {{{from moltk import *}}} || start an alignment session ||
