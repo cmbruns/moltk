@@ -8,8 +8,8 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 
 || *Sequoia command* || *Corresponding moltk command(s)* || *Comment* ||
 || {{{% sequoia}}} || {{{% python -i}}} <br> {{{>>> from moltk import *}}} || Start an alignment session ||
-|| {{{SEQUOIA> read SEQ1 test1.fasta}}} || {{{>>> seq1 = load_fasta("test1.fasta")}}} || Load a sequence into seq1 ||
-|| {{{SEQUOIA> read SEQ2 test2.fasta}}} || {{{>>> seq2 = load_fasta("test2.fasta")}}} || load a sequence into seq2 ||
+|| {{{SEQUOIA> read SEQ1 test1.fasta}}} || {{{>>> seq1 = load_fasta("test1.fasta")}}} || Load a sequence or alignment into seq1 ||
+|| {{{SEQUOIA> read SEQ2 test2.fasta}}} || {{{>>> seq2 = load_fasta("test2.fasta")}}} || load a sequence or alignment into seq2 ||
 || {{{SEQUOIA> align}}} || {{{>>> aln = align(seq1, seq2)}}} || Align two sequences/alignments. <br>NOTE: Do not use "align" as the result in MolTK <br>because "align" is already a method name. ||
 || {{{SEQUOIA> print ALIGN}}} || {{{>>> print aln}}} || Display the alignment on screen ||
 || {{{SEQUOIA> set SEQ1 ALIGN}}} || {{{>>> seq1 = aln}}} || Copy the alignment to seq1 ||
