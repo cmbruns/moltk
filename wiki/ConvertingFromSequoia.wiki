@@ -2,7 +2,7 @@
 
 = Introduction =
 
-We intend for SEQUOIA users to have an easy time learning to use moltk.  MolTK is in python, and requires the use of more parentheses, quotation marks, and underscores that SEQUOIA does.  But I promise that the greater power of the python programming language is worth it.  Use the following guide to using MolTK.
+We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interactive MolTK uses python, and requires the use of more parentheses, quotation marks, and underscores that SEQUOIA does.  But I promise that the greater power of the python programming language is worth it.  Use the following guide to using MolTK.
 
 = Conversions (MolTK 0.5) =
 
