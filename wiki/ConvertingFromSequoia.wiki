@@ -23,6 +23,7 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 
 = Conversions not yet implemented in moltk 0.5 =
 
+|| *Sequoia command* || *Corresponding moltk command(s)* || *Description* ||
 || {{{SEQUOIA> read STRUCT1 test1.pdb}}} || {{{<TODO in moltk 0.6>}}} || Load a structure into struct1 ||
 || {{{SEQUOIA> salign}}} || {{{<TODO in moltk 0.6>}}} || Create a structure based alignment ||
 || {{{SEQUOIA> overlay}}} || {{{<TODO in moltk 0.6>}}} || Superpose two structures ||
