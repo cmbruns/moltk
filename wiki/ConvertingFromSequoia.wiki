@@ -35,7 +35,7 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 || {{{SEQUOIA> set random_seed 1}}} || ??? TODO || change seed for RANDOM command ||
 || {{{SEQUOIA> set suboptimal 0.1}}} || ??? TODO || parameter for allowing suboptimal alignments ||
 
-= Conversions not yet implemented in moltk 0.5 =
+= Conversions not implemented in moltk 0.5 =
 
 || *Sequoia command* || *Corresponding moltk command(s)* || *Description* ||
 || {{{SEQUOIA> read STRUCT1 test1.pdb}}} || {{{<TODO in moltk 0.6>}}} || Load a structure into struct1 ||
