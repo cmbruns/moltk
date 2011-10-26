@@ -29,9 +29,11 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 || {{{SEQUOIA> random 5}}} || ??? TODO || Calculate 5 alignment scores with SEQ2 randomly shuffled ||
 || {{{SEQUOIA> split 5}}} || ??? TODO || Remove sequence 5 from alignment and place it in seq1 ||
 || {{{SEQUOIA> weight}}} || ??? TODO || Apply sequence weights to alignment ||
-
-
-
+|| {{{SEQUOIA> set epen 0.5}}} || ??? TODO || Set gap extension penalty ||
+|| {{{SEQUOIA> set gpen 10}}} || ??? TODO || Set gap opening penalty ||
+|| {{{SEQUOIA> set pretty_length 50}}} || ??? TODO || set sequence width of formatted alignments ||
+|| {{{SEQUOIA> set random_seed 1}}} || ??? TODO || change seed for RANDOM command ||
+|| {{{SEQUOIA> set suboptimal 0.1}}} || ??? TODO || parameter for allowing suboptimal alignments ||
 
 = Conversions not yet implemented in moltk 0.5 =
 
@@ -42,6 +44,8 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 || {{{SEQUOIA> equivalence}}} || {{{<TODO in moltk 0.6>}}} || Assign equivalent residues between two structures. ||
 || {{{SEQUOIA> set acutoff 45}}} || {{{<TODO in moltk 0.6>}}} || Max rotation difference for structure alignment in degrees ||
 || {{{SEQUOIA> set dcutoff 4.5}}} || {{{<TODO in moltk 0.6>}}} || Max distance difference for structure alignment in angstroms ||
+|| {{{SEQUOIA> set runlength 4.5}}} || {{{<TODO in moltk 0.6>}}} || Min length required for a run of structurally equivalent residues ||
+|| {{{SEQUOIA> set useangle 0}}} || {{{<TODO in moltk 0.6>}}} || Whether to use rotation similarity in structure alignment ||
 || {{{SEQUOIA> tabulate}}} || There is no tabulate command in MolTK || Populate pairwise residue scores before aligning.<br>Seldom used. ||
 || {{{SEQUOIA> stabulate}}} || There is no stabulate command in MolTK || Populate pairwise residue structure scores before aligning.<br>Seldom used. ||
-
+|| {{{SEQUOIA> set echo 1}}} || I don't know how to do that in python || Output a copy of user's commands ||
