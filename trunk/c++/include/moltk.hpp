@@ -32,12 +32,12 @@ There are three faces of MolTK; in order from easiest-to-use to most-powerful:
 
 \section resources MolTK Resources
 
-    - Browse the MolTK home page at http://rotatingpenguin.com/moltk/
+    - Visit the MolTK home page at http://moltk.rotatingpenguin.com/
     - Download MolTK at http://code.google.com/p/moltk/downloads/list
     - Find questions and answers in the moltk-users forum at http://groups.google.com/group/moltk-users
     - Report issues and get source code at http://code.google.com/p/moltk/
-    - Study the MolTK Python API at http://www.rotatingpenguin.com/moltk/api_python/python_api.html
-    - Study the MolTK C++ API at http://www.rotatingpenguin.com/moltk/api_cxx/cxx_api.html
+    - Study the MolTK Python API at http://moltk.rotatingpenguin.com/api_python/python_api.html
+    - Study the MolTK C++ API at http://moltk.rotatingpenguin.com/api_cxx/cxx_api.html
 
 \section designgoals Design Goals of MolTK
 
