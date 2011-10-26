@@ -20,6 +20,15 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 || {{{SEQUOIA> @test.inp}}} || {{{>>> execfile("test.py")}}} || Run a script file you wrote ||
 || {{{% sequoia < test.inp}}} || {{{% python test.py}}} || Run a script you wrote directly from a command prompt ||
 || {{{SEQUOIA> COMMENT This is a comment}}} || {{{ >>> # This is a comment}}} || Statement is ignored ||
+|| {{{SEQUOIA> help <command>}}} || {{{>>> help(<command>)}}} || Access dcoumentation about a command ||
+|| {{{SEQUOIA> system <command>}}} || {{{>>> import os}}}<br>{{{>>> os.system("<command>")}}} || Issue an operating system command ||
+|| {{{SEQUOIA> consensus <sigma>}}} || ??? TODO || Create a consensus sequence with X's at non-conserved positions ||
+|| {{{SEQUOIA> optimize}}} || ??? TODO || Improve an alignment by successively removing and realigning sequences ||
+|| {{{SEQUOIA> print matrix}}} || ??? TODO || Display the current scoring matrix ||
+|| {{{SEQUOIA> read matrix test.mat}}} || ??? TODO || Load a scoring matrix ||
+|| {{{SEQUOIA> random 5}}} || ??? TODO || Calculate 5 alignment scores with SEQ2 randomly shuffled ||
+|| {{{SEQUOIA> split 5}}} || ??? TODO || Remove sequence 5 from alignment and place it in seq1 ||
+|| {{{SEQUOIA> weight}}} || ??? TODO || Apply sequence weights to alignment ||
 
 = Conversions not yet implemented in moltk 0.5 =
 
@@ -29,3 +38,4 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 || {{{SEQUOIA> overlay}}} || {{{<TODO in moltk 0.6>}}} || Superpose two structures ||
 || {{{SEQUOIA> equivalence}}} || {{{<TODO in moltk 0.6>}}} || Assign equivalent residues between two structures. ||
 || {{{SEQUOIA> tabulate}}} || There is no tabulate command in MolTK || Populate pairwise residue scores before aligning.<br>Seldom used. ||
+|| {{{SEQUOIA> stabulate}}} || There is no stabulate command in MolTK || Populate pairwise residue structure scores before aligning.<br>Seldom used. ||
