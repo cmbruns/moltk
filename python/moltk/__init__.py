@@ -20,14 +20,15 @@
 
 # moltk module docstring
 """
-The moltk module provides tools for protein sequence/structure alignment and visualization.
-
-The submodule "moltk._moltk" represents the binary extension implemented in C++.  The top
-level module "moltk" contains all of the symbols from "moltk._moltk", so use "import moltk"
-of "from moltk import <whatever>" to get symbols from "moltk._moltk".
+moltk is the top level package of the MolTK tool kit, which provides tools for protein sequence/structure alignment and visualization.
 
 The submodule "moltk.gui" contains the pure python moltk application and user interface.  
 The PySide package (http://www.pyside.org/) must be installed to use the moltk.gui package.
+
+Do not directly use the submodule "moltk._moltk", which represents the binary extension 
+implemented in C++.  The top
+level module "moltk" contains all of the symbols from "moltk._moltk", so use "import moltk"
+of "from moltk import <whatever>" to get symbols from "moltk._moltk".
 
 All MolTK code is Copyright (C) 2011  Christopher M. Bruns
 
@@ -60,6 +61,7 @@ for s in dir():
 
 # moltk._moltk docstring
 _moltk.__doc__ = """
+Do not directly use the submodule "moltk._moltk".  Use module "moltk" instead.
 The _moltk module provides tools for protein sequence/structure alignment and visualization.
 
 This submodule "moltk._moltk" represents the binary extension implemented in C++.  The top
