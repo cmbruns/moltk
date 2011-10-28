@@ -53,7 +53,8 @@ if(MOLTK_REGENERATE_PYTHON_API_DOCS)
           # -v
           --html moltk -o python
           --name \"MolTK python API v${MOLTK_VERSION} Documentation\"
-          --url http://code.google.com/p/moltk/
+          --url http://moltk.rotatingpenguin.com/
+          --css epydoc_sahara.css
           ${DOT_ARG}
         WORKING_DIRECTORY \"${PYTHON_API_DIR}\")
     ")

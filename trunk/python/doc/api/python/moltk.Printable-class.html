@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.3 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.3.4 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -63,14 +63,14 @@
 <h1 class="epydoc">Class Printable</h1><p class="nomargin-top"></p>
 <center>
 <center>  <map id="uml_class_diagram_for_moltk_pr" name="uml_class_diagram_for_moltk_pr">
-<area shape="rect" id="node87" href="moltk.Printable-class.html#__instance_size__" title="moltk.Printable.__instance_size__" alt="" coords="17,108,156,127"/>
-<area shape="rect" id="node87" href="moltk.Printable-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,129,156,148"/>
-<area shape="rect" id="node87" href="moltk.Printable-class.html#__reduce__" title="helper for pickle" alt="" coords="17,148,156,167"/>
-<area shape="rect" id="node87" href="moltk.Printable-class.html#__str__" title="__str__( (Printable)arg1) &#45;&gt; object :" alt="" coords="17,167,156,185"/>
-<area shape="rect" id="node87" href="moltk.Printable-class.html#print_to_stream" title="print_to_stream( (Printable)arg1, (object)output_stream) &#45;&gt; None :" alt="" coords="17,185,156,204"/>
-<area shape="rect" id="node1" href="moltk.Printable-class.html" title="moltk::Printable is an abstract base class to help streamline string conversion in the moltk python bindings." alt="" coords="5,83,168,210"/>
-<area shape="rect" id="node88" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="24,39,148,57"/>
-<area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="12,6,159,63"/>
+<area shape="rect" id="node1_6" href="moltk.Printable-class.html#__instance_size__" title="moltk.Printable.__instance_size__" alt="" coords="17,108,137,127"/>
+<area shape="rect" id="node1_7" href="moltk.Printable-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,129,137,148"/>
+<area shape="rect" id="node1_8" href="moltk.Printable-class.html#__reduce__" title="helper for pickle" alt="" coords="17,148,137,167"/>
+<area shape="rect" id="node1_9" href="moltk.Printable-class.html#__str__" title="__str__( (Printable)arg1) &#45;&gt; object :" alt="" coords="17,167,137,185"/>
+<area shape="rect" id="node1_10" href="moltk.Printable-class.html#write_to_stream" title="write_to_stream( (Printable)arg1, (object)output_stream) &#45;&gt; None :" alt="" coords="17,185,137,204"/>
+<area shape="rect" id="node1" href="moltk.Printable-class.html" title="moltk::Printable is an abstract base class to help streamline string conversion in the moltk python bindings." alt="" coords="5,83,149,210"/>
+<area shape="rect" id="node2_11" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="19,39,135,57"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="6,6,146,63"/>
 </map>
   <img src="uml_class_diagram_for_moltk_pr.gif" alt='' usemap="#uml_class_diagram_for_moltk_pr" ismap="ismap" class="graph-without-title" />
 </center>
@@ -153,8 +153,8 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="moltk.Printable-class.html#print_to_stream" class="summary-sig-name">print_to_stream</a>(<span class="summary-sig-arg">...</span>)</span><br />
-      print_to_stream( (Printable)arg1, (object)output_stream) -&gt; None :</td>
+          <td><span class="summary-sig"><a href="moltk.Printable-class.html#write_to_stream" class="summary-sig-name">write_to_stream</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      write_to_stream( (Printable)arg1, (object)output_stream) -&gt; None :</td>
           <td align="right" valign="top">
             
             
@@ -204,7 +204,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="__instance_size__"></a><span class="summary-name">__instance_size__</span> = <code title="32">32</code>
+        <a name="__instance_size__"></a><span class="summary-name">__instance_size__</span> = <code title="16">16</code>
     </td>
   </tr>
 </table>
@@ -271,7 +271,7 @@
 __init__( (object)arg1) -&gt; None :
 
     C++ signature :
-        void __init__(_object*)
+        void __init__(struct _object *)
 
 </pre>
   <dl class="fields">
@@ -324,7 +324,7 @@ __init__( (object)arg1) -&gt; None :
 __str__( (Printable)arg1) -&gt; object :
 
     C++ signature :
-        _object* __str__(moltk::Printable {lvalue})
+        struct _object * __str__(class moltk::Printable {lvalue})
 
 </pre>
   <dl class="fields">
@@ -334,14 +334,14 @@ __str__( (Printable)arg1) -&gt; object :
   </dl>
 </td></tr></table>
 </div>
-<a name="print_to_stream"></a>
+<a name="write_to_stream"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">print_to_stream</span>(<span class="sig-arg">...</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">write_to_stream</span>(<span class="sig-arg">...</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     >&nbsp;
@@ -350,19 +350,19 @@ __str__( (Printable)arg1) -&gt; object :
   
   <pre class="literalblock">
 
-print_to_stream( (Printable)arg1, (object)output_stream) -&gt; None :
+write_to_stream( (Printable)arg1, (object)output_stream) -&gt; None :
     
      moltk::Printable is an abstract base class to help streamline
      string conversion in the moltk python bindings.
     
 
     C++ signature :
-        void print_to_stream(moltk::Printable {lvalue},std::ostream {lvalue})
+        void write_to_stream(class moltk::Printable {lvalue},class std::basic_ostream&lt;char,struct std::char_traits&lt;char&gt; &gt; {lvalue})
 
-print_to_stream( (Printable)arg1, (object)arg2) -&gt; None :
+write_to_stream( (Printable)arg1, (object)arg2) -&gt; None :
 
     C++ signature :
-        void print_to_stream(Printable_wrapper {lvalue},std::ostream {lvalue})
+        void write_to_stream(struct Printable_wrapper {lvalue},class std::basic_ostream&lt;char,struct std::char_traits&lt;char&gt; &gt; {lvalue})
 
 </pre>
   <dl class="fields">
@@ -394,14 +394,14 @@ print_to_stream( (Printable)arg1, (object)arg2) -&gt; None :
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.3 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.3.4 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Oct 21 14:58:01 2011
+    Generated by Epydoc 3.0.1 on Fri Oct 28 17:55:11 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

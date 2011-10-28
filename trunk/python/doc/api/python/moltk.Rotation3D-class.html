@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.3 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.3.4 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -63,13 +63,17 @@
 <h1 class="epydoc">Class Rotation3D</h1><p class="nomargin-top"></p>
 <center>
 <center>  <map id="uml_class_diagram_for_moltk_ro" name="uml_class_diagram_for_moltk_ro">
-<area shape="rect" id="node93" href="moltk.Rotation3D.Row-class.html" title="One row of three numbers in a Rotation3D rotation matrix." alt="" coords="17,108,145,127"/>
-<area shape="rect" id="node93" href="moltk.Rotation3D-class.html#__instance_size__" title="moltk.Rotation3D.__instance_size__" alt="" coords="17,127,145,145"/>
-<area shape="rect" id="node93" href="moltk.Rotation3D-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,148,145,167"/>
-<area shape="rect" id="node93" href="moltk.Rotation3D-class.html#__reduce__" title="helper for pickle" alt="" coords="17,167,145,185"/>
-<area shape="rect" id="node1" href="moltk.Rotation3D-class.html" title="Rotation3D represents a rotation matrix." alt="" coords="5,83,157,191"/>
-<area shape="rect" id="node94" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="19,39,143,57"/>
-<area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="7,6,153,63"/>
+<area shape="rect" id="node1_9" href="moltk.Rotation3D.Row-class.html" title="One row of three numbers in a Rotation3D rotation matrix." alt="" coords="17,108,241,127"/>
+<area shape="rect" id="node1_10" href="moltk.Rotation3D-class.html#__instance_size__" title="moltk.Rotation3D.__instance_size__" alt="" coords="17,127,241,145"/>
+<area shape="rect" id="node1_11" href="moltk.Rotation3D-class.html#__getitem__" title="__getitem__( (Rotation3D)arg1, (int)ix) &#45;&gt; Row :" alt="" coords="17,148,241,167"/>
+<area shape="rect" id="node1_12" href="moltk.Rotation3D-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,167,241,185"/>
+<area shape="rect" id="node1_13" href="moltk.Rotation3D-class.html#__mul__" title="__mul__( (Rotation3D)arg1, (Rotation3D)arg2) &#45;&gt; object :" alt="" coords="17,185,241,204"/>
+<area shape="rect" id="node1_14" href="moltk.Rotation3D-class.html#__reduce__" title="helper for pickle" alt="" coords="17,204,241,223"/>
+<area shape="rect" id="node1_15" href="moltk.Rotation3D-class.html#set_from_angle_about_unit_vector" title="set_from_angle_about_unit_vector( (Rotation3D)arg1, (Angle)angle, (UnitVector3D)unit_vector) &#45;&gt; Rotation3D :" alt="" coords="17,223,241,241"/>
+<area shape="rect" id="node1_16" href="moltk.Rotation3D-class.html#set_from_quaternion" title="set_from_quaternion( (Rotation3D)arg1, (Quaternion)quaternion) &#45;&gt; Rotation3D :" alt="" coords="17,241,241,260"/>
+<area shape="rect" id="node1" href="moltk.Rotation3D-class.html" title="Rotation3D represents a rotation matrix." alt="" coords="5,83,253,266"/>
+<area shape="rect" id="node2_17" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="71,39,187,57"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="58,6,198,63"/>
 </map>
   <img src="uml_class_diagram_for_moltk_ro.gif" alt='' usemap="#uml_class_diagram_for_moltk_ro" ismap="ismap" class="graph-without-title" />
 </center>
@@ -126,6 +130,23 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="moltk.Rotation3D-class.html#__getitem__" class="summary-sig-name">__getitem__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __getitem__( (Rotation3D)arg1, (int)ix) -&gt; Row :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="moltk.Rotation3D-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">...</span>)</span><br />
       __init__( (object)arg1) -&gt; None :</td>
           <td align="right" valign="top">
@@ -143,8 +164,59 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="moltk.Rotation3D-class.html#__mul__" class="summary-sig-name">__mul__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __mul__( (Rotation3D)arg1, (Rotation3D)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="moltk.Rotation3D-class.html#__reduce__" class="summary-sig-name">__reduce__</a>(<span class="summary-sig-arg">...</span>)</span><br />
       helper for pickle</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Rotation3D-class.html#set_from_angle_about_unit_vector" class="summary-sig-name">set_from_angle_about_unit_vector</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      set_from_angle_about_unit_vector( (Rotation3D)arg1, (Angle)angle, (UnitVector3D)unit_vector) -&gt; Rotation3D :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Rotation3D-class.html#set_from_quaternion" class="summary-sig-name">set_from_quaternion</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      set_from_quaternion( (Rotation3D)arg1, (Quaternion)quaternion) -&gt; Rotation3D :</td>
           <td align="right" valign="top">
             
             
@@ -195,7 +267,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="__instance_size__"></a><span class="summary-name">__instance_size__</span> = <code title="88">88</code>
+        <a name="__instance_size__"></a><span class="summary-name">__instance_size__</span> = <code title="80">80</code>
     </td>
   </tr>
 </table>
@@ -242,6 +314,33 @@
   </td>
 </tr>
 </table>
+<a name="__getitem__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__getitem__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Indexing operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__getitem__( (Rotation3D)arg1, (int)ix) -&gt; Row :
+
+    C++ signature :
+        class moltk::Rotation3D::Row __getitem__(class moltk::Rotation3D {lvalue},unsigned int)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
 <a name="__init__"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -262,13 +361,49 @@
 __init__( (object)arg1) -&gt; None :
 
     C++ signature :
-        void __init__(_object*)
+        void __init__(struct _object *)
+
+__init__( (object)arg1, (Angle)angle, (UnitVector3D)unit_vector) -&gt; None :
+
+    C++ signature :
+        void __init__(struct _object *,struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;,class moltk::UnitVector3D)
+
+__init__( (object)arg1, (Quaternion)quaternion) -&gt; None :
+
+    C++ signature :
+        void __init__(struct _object *,class moltk::Quaternion)
 
 </pre>
   <dl class="fields">
     <dt>Overrides:
         object.__init__
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__mul__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__mul__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__mul__( (Rotation3D)arg1, (Rotation3D)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __mul__(class moltk::Rotation3D {lvalue},class moltk::Rotation3D)
+
+</pre>
+  <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
@@ -292,6 +427,58 @@ __init__( (object)arg1) -&gt; None :
         object.__reduce__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_from_angle_about_unit_vector"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_from_angle_about_unit_vector</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+set_from_angle_about_unit_vector( (Rotation3D)arg1, (Angle)angle, (UnitVector3D)unit_vector) -&gt; Rotation3D :
+
+    C++ signature :
+        class moltk::Rotation3D {lvalue} set_from_angle_about_unit_vector(class moltk::Rotation3D {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;,class moltk::UnitVector3D)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_from_quaternion"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_from_quaternion</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+set_from_quaternion( (Rotation3D)arg1, (Quaternion)quaternion) -&gt; Rotation3D :
+
+    C++ signature :
+        class moltk::Rotation3D {lvalue} set_from_quaternion(class moltk::Rotation3D {lvalue},class moltk::Quaternion)
+
+</pre>
+  <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
@@ -320,14 +507,14 @@ __init__( (object)arg1) -&gt; None :
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://code.google.com/p/moltk/">MolTK python API v0.3.3 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.3.4 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Oct 21 14:58:01 2011
+    Generated by Epydoc 3.0.1 on Fri Oct 28 17:55:11 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
