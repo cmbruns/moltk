@@ -16,10 +16,19 @@
  *     either class='epydoc' or class='toc' (CSS styles for both
  *     defined below).
  */
-body                        { background: #ffffff; color: #000000; }
+body                        
+{ 
+	background-color: #FEFEF2;
+	background-image: url('images/a3.gif');
+	background-repeat: repeat-x;
+	color: #37371E;
+	font-family: georgia, serif;
+	font-size: 10pt;
+}
 p                           { margin-top: 0.5em; margin-bottom: 0.5em; }
-a:link                      { color: #0000ff; }
-a:visited                   { color: #204080; }
+a:link                      { color: #006600; }
+a:visited                   { color: #8DA359; }
+a:hover				{text-decoration: none;}
 dt                          { font-weight: bold; }
 h1                          { font-size: +140%; font-style: italic;
                               font-weight: bold; }
@@ -48,19 +57,33 @@ h3.epydoc                   { font-size: +115%; font-weight: bold;
                               margin-top: 0.2em; }
 td h3.epydoc                { font-size: +115%; font-weight: bold;
                               margin-bottom: 0; }
-table.navbar                { background: #a0c0ff; color: #000000;
-                              border: 2px groove #c0d0d0; }
+table.navbar                
+{ background-color: #6C7424;
+	background-image: url('images/a1.gif');
+	background-repeat: repeat-x;
+	color: #ffffff;
+	height: 1.4em;
+	line-height: 1.4em;
+	padding: 0.8em;
+	border-bottom: solid 1px #ffffff;
+	border-top: solid 1px #6D7B34;
+}
 table.navbar table          { color: #000000; }
-th.navbar-select            { background: #70b0ff;
+th.navbar-select            { background: #99CC99;
                               color: #000000; } 
-table.navbar a              { text-decoration: none; }  
-table.navbar a:link         { color: #0000ff; }
+table.navbar a              { text-decoration: none; }
+table.navbar a:link         { color: #ffffff; } 
 table.navbar a:visited      { color: #204080; }
 span.breadcrumbs            { font-size: 85%; font-weight: bold; }
 span.options                { font-size: 70%; }
 span.codelink               { font-size: 85%; }
 td.footer                   { font-size: 85%; }
-
+table.navbar a:hover
+{
+	background-color: #515815;
+	background-image: url('images/a2.gif');
+	background-repeat: repeat-x;
+}
 /* Table Headers
  *   - Each summary table and details section begins with a 'header'
  *     row.  This row contains a section title (marked by
@@ -69,11 +92,20 @@ td.footer                   { font-size: 85%; }
  *   - Summary tables that contain user-defined groups mark those
  *     groups using 'group header' rows.
  */
-td.table-header             { background: #70b0ff; color: #000000;
-                              border: 1px solid #608090; }
-td.table-header table       { color: #000000; }
-td.table-header table a:link      { color: #0000ff; }
-td.table-header table a:visited   { color: #204080; }
+td.table-header             
+{ background-color: #6C7424;
+	background-image: url('images/a1.gif');
+	background-repeat: repeat-x;
+	color: #ffffff;
+	height: 1.4em;
+	line-height: 1.4em;
+	padding: 0.8em;
+	border-bottom: solid 1px #ffffff;
+	border-top: solid 1px #6D7B34;
+}
+td.table-header table       { color: #ffffff; }
+td.table-header table a:link      { color: #ffffff; }
+td.table-header table a:visited   { color: #eeeeee; }
 span.table-header           { font-size: 120%; font-weight: bold; }
 th.group-header             { background: #c0e0f8; color: #000000;
                               text-align: left; font-style: italic; 
@@ -89,14 +121,14 @@ th.group-header             { background: #c0e0f8; color: #000000;
  *     defined above, under 'Table Headers'
  */
 table.summary               { border-collapse: collapse;
-                              background: #e8f0f8; color: #000000;
+                              background: #ffffe2; color: #000000;
                               border: 1px solid #608090;
                               margin-bottom: 0.5em; }
 td.summary                  { border: 1px solid #608090; }
 code.summary-type           { font-size: 85%; }
-table.summary a:link        { color: #0000ff; }
+/*table.summary a:link        { color: #0000ff; }
 table.summary a:visited     { color: #204080; }
-
+*/
 
 /* Details Tables (functions, variables, etc)
  *   - Each object is described in its own div.
@@ -105,12 +137,13 @@ table.summary a:visited     { color: #204080; }
  *     is defined above, under 'Table Headers').
  */
 table.details               { border-collapse: collapse;
-                              background: #e8f0f8; color: #000000;
+                              background: #ffffe2; color: #000000;
                               border: 1px solid #608090;
                               margin: .2em 0 0 0; }
-table.details table         { color: #000000; }
-table.details a:link        { color: #0000ff; }
+table.details table         { color: #ffffff; }
+/*table.details a:link        { color: #0000ff; }
 table.details a:visited     { color: #204080; }
+*/
 
 /* Fields */
 dl.fields                   { margin-left: 2em; margin-top: 1em;
@@ -129,35 +162,38 @@ div.fields p                { margin-bottom: 0.5em; }
  *     extracted from fields (namely, the bug index & todo index).
  */
 table.link-index            { border-collapse: collapse;
-                              background: #e8f0f8; color: #000000;
+                              background: #ffffe2; color: #000000;
                               border: 1px solid #608090; }
 td.link-index               { border-width: 0px; }
-table.link-index a:link     { color: #0000ff; }
+/*table.link-index a:link     { color: #0000ff; }
 table.link-index a:visited  { color: #204080; }
+*/
 span.index-where            { font-size: 70%; }
 table.metadata-index        { border-collapse: collapse;
-                              background: #e8f0f8; color: #000000;
+                              background: #ffffe2; color: #000000;
                               border: 1px solid #608090; 
                               margin: .2em 0 0 0; }
 td.metadata-index           { border-width: 1px; border-style: solid; }
-table.metadata-index a:link { color: #0000ff; }
+/*table.metadata-index a:link { color: #0000ff; }
 table.metadata-index a:visited  { color: #204080; }
+*/
 
 /* Function signatures
  *   - sig* is used for the signature in the details section.
  *   - .summary-sig* is used for the signature in the summary 
  *     table, and when listing property accessor functions.
  * */
-.sig-name                   { color: #006080; }
+.sig-name                   { color: #008060; }
 .sig-arg                    { color: #008060; }
-.sig-default                { color: #602000; }
+.sig-default                { color: #008060; }
 .summary-sig                { font-family: monospace; }
-.summary-sig-name           { color: #006080; font-weight: bold; }
+.summary-sig-name           { color: #008060; font-weight: bold; }
 table.summary a.summary-sig-name:link
-                            { color: #006080; font-weight: bold; }
+                            { color: #008060; font-weight: bold; }
 table.summary a.summary-sig-name:visited
-                            { color: #006080; font-weight: bold; }
-.summary-sig-arg            { color: #006040; }
+                            { color: #008060; font-weight: bold; }
+
+summary-sig-arg            { color: #006040; }
 .summary-sig-default        { color: #501800; }
 
 /* Subclass list
@@ -166,14 +202,15 @@ ul.subclass-list { display: inline; }
 ul.subclass-list li { display: inline; }
 
 /* To render variables, classes etc. like functions */
-table.summary .summary-name { color: #006080; font-weight: bold;
+table.summary .summary-name { color: #008060; font-weight: bold;
                               font-family: monospace; }
 table.summary
-     a.summary-name:link    { color: #006080; font-weight: bold;
+     a.summary-name:link    { color: #008060; font-weight: bold;
                               font-family: monospace; }
 table.summary
-    a.summary-name:visited  { color: #006080; font-weight: bold;
+    a.summary-name:visited  { color: #008060; font-weight: bold;
                               font-family: monospace; }
+
 
 /* Variable values
  *   - In the 'variable details' sections, each varaible's value is
@@ -241,7 +278,7 @@ h2.toc                      { font-size: 100%; font-weight: bold;
  *     etc.)
  */
 pre.py-doctest              { padding: .5em; margin: 1em;
-                              background: #e8f0f8; color: #000000;
+                              background: #ffffe2; color: #000000;
                               border: 1px solid #708890; }
 table pre.py-doctest        { background: #dce4ec;
                               color: #000000; }
@@ -302,7 +339,7 @@ p.indent-wrapped-lines      { padding: 0 0 0 7em; text-indent: -7em;
 
 /* HTML Log */
 div.log-block               { padding: 0; margin: .5em 0 .5em 0;
-                              background: #e8f0f8; color: #000000;
+                              background: #ffffe2; color: #000000;
                               border: 1px solid #000000; }
 div.log-error               { padding: .1em .3em .1em .3em; margin: 4px;
                               background: #ffb0b0; color: #000000;
