@@ -1,7 +1,8 @@
 =Guideline for Webpage Colors=
 
 {{{
-body {
+body 
+{
     background-color: LightYellow;
     background-image: url('images/a3.gif');
     background-repeat: repeat-x;
