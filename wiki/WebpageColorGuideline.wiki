@@ -1,4 +1,5 @@
 #summary Guidelines for webpage colors
+#labels Featured
 
 =Guideline for Webpage Colors=
 
