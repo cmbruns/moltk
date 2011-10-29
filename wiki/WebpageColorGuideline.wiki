@@ -1,0 +1,12 @@
+Guideline for webpage colors.
+
+body {
+background-image: url('images/a3.gif');
+background-repeat: repeat-x;
+}
+
+a:link {color: #006600;}
+
+a:visited {color: #8DA359;}
+
+a:hover	{text-decoration: none;}
