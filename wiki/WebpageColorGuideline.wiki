@@ -1,4 +1,4 @@
-Guideline for webpage colors.
+=Guideline for Webpage Colors=
 
 body {
 background-image: url('images/a3.gif');
@@ -6,6 +6,7 @@ background-repeat: repeat-x;
 }
 
 a:link {color: #006600;}
+http://www.color-hex.com/color/006600
 
 a:visited {color: #8DA359;}
 
