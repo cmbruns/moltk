@@ -157,6 +157,12 @@ body
 	margin-bottom: 1.0em;
 }
 
+#column1 ul
+{
+	list-style: none;
+	margin-left: 2em;
+}
+
 #column2
 {
 	width: 175px;
