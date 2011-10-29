@@ -1,5 +1,5 @@
 #summary Guidelines for webpage colors
-#labels Featured
+#labels Phase-Implementation
 
 =Guideline for Webpage Colors=
 
