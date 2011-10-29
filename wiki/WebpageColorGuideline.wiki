@@ -61,6 +61,8 @@ or color {{{#515815}}} http://moltk.rotatingpenguin.com/images/515815.jpg
 
 Color {{{#515815}}} can also be used as a non-link accent color.
 
+Current selected menu item can be black text on !LemonChiffon background.
+
 {{{
 menu bar
 {
