@@ -26,8 +26,8 @@ body
 	font-size: 10pt;
 }
 p                           { margin-top: 0.5em; margin-bottom: 0.5em; }
-a:link                      { color: #006600; }
-a:visited                   { color: #8DA359; }
+a:link                      { color: DarkGreen; }
+a:visited                   { color: Green; }
 a:hover				{text-decoration: none;}
 dt                          { font-weight: bold; }
 h1                          { font-size: +140%; font-style: italic;
@@ -69,7 +69,7 @@ table.navbar
 	border-top: solid 1px #6D7B34;
 }
 table.navbar table          { color: #000000; }
-th.navbar-select            { background: #D0E080;
+th.navbar-select            { background: LemonChiffon;
                               color: #000000; } 
 table.navbar a              { text-decoration: none; color: #ffffff }
 table.navbar a:link         { color: #ffffff; } 
@@ -106,8 +106,8 @@ td.table-header
 td.table-header table       { color: #ffffff; }
 td.table-header table a:link      { color: #ffffff; }
 td.table-header table a:visited   { color: #eeeeee; }
-span.table-header           { font-size: 120%; font-weight: bold; }
-th.group-header             { background: #c0e0f8; color: #000000;
+span.table-header           { font-size: 120%; font-weight: bold; color: white; }
+th.group-header             { background: #c0e0f8; color: white;
                               text-align: left; font-style: italic; 
                               font-size: 115%; 
                               border: 1px solid #608090; }
@@ -121,7 +121,7 @@ th.group-header             { background: #c0e0f8; color: #000000;
  *     defined above, under 'Table Headers'
  */
 table.summary               { border-collapse: collapse;
-                              background: #ffffe2; color: #000000;
+                              background: LemonChiffon; color: #000000;
                               border: 1px solid #608090;
                               margin-bottom: 0.5em; }
 td.summary                  { border: 1px solid #608090; }
@@ -137,10 +137,10 @@ table.summary a:visited     { color: #204080; }
  *     is defined above, under 'Table Headers').
  */
 table.details               { border-collapse: collapse;
-                              background: #ffffe2; color: #000000;
+                              background: LemonChiffon; color: #000000;
                               border: 1px solid #608090;
                               margin: .2em 0 0 0; }
-table.details table         { color: #ffffff; }
+table.details table         { color: black; }
 /*table.details a:link        { color: #0000ff; }
 table.details a:visited     { color: #204080; }
 */
@@ -183,15 +183,15 @@ table.metadata-index a:visited  { color: #204080; }
  *   - .summary-sig* is used for the signature in the summary 
  *     table, and when listing property accessor functions.
  * */
-.sig-name                   { color: #008060; }
-.sig-arg                    { color: #008060; }
-.sig-default                { color: #008060; }
+.sig-name                   { color: #515815; }
+.sig-arg                    { color: #515815; }
+.sig-default                { color: #515815; }
 .summary-sig                { font-family: monospace; }
-.summary-sig-name           { color: #008060; font-weight: bold; }
+.summary-sig-name           { color: #515815; font-weight: bold; }
 table.summary a.summary-sig-name:link
-                            { color: #008060; font-weight: bold; }
+                            { /*color: #515815;*/ font-weight: bold; }
 table.summary a.summary-sig-name:visited
-                            { color: #008060; font-weight: bold; }
+                            { /*color: #515815;*/ font-weight: bold; }
 
 summary-sig-arg            { color: #006040; }
 .summary-sig-default        { color: #501800; }
@@ -202,13 +202,13 @@ ul.subclass-list { display: inline; }
 ul.subclass-list li { display: inline; }
 
 /* To render variables, classes etc. like functions */
-table.summary .summary-name { color: #008060; font-weight: bold;
+table.summary .summary-name { /*color: #515815;*/ font-weight: bold;
                               font-family: monospace; }
 table.summary
-     a.summary-name:link    { color: #008060; font-weight: bold;
+     a.summary-name:link    { /*color: #515815;*/ font-weight: bold;
                               font-family: monospace; }
 table.summary
-    a.summary-name:visited  { color: #008060; font-weight: bold;
+    a.summary-name:visited  { /*color: #515815;*/ font-weight: bold;
                               font-family: monospace; }
 
 
@@ -226,7 +226,7 @@ table.summary
  *     the re* CSS classes.
  */
 pre.variable                { padding: .5em; margin: 0;
-                              background: #dce4ec; color: #000000;
+                              background: #FEFEF2; color: #000000;
                               border: 1px solid #708890; }
 .variable-linewrap          { color: #604000; font-weight: bold; }
 .variable-ellipsis          { color: #604000; font-weight: bold; }
