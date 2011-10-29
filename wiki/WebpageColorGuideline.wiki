@@ -11,14 +11,14 @@ Large sections of background should use the gradient image a3.gif from the modif
 
 Otherwise the main background should be color {{{#FEFEF2}}} http://moltk.rotatingpenguin.com/images/FEFEF2.jpg
 
-When a subtle contrast in background is needed, use web color !LemonChiffon http://moltk.rotatingpenguin.com/images/LemonChiffon.jpg
+When a subtle contrast in background is needed, use the darker web color !LemonChiffon http://moltk.rotatingpenguin.com/images/LemonChiffon.jpg
 
-Second pale yellow: !LemonChiffon (darker than !LightYellow)
+
 
 {{{
 body 
 {
-    background-color: LightYellow;
+    background-color: #FEFEF2;
     background-image: url('images/a3.gif');
     background-repeat: repeat-x;
 }
@@ -79,4 +79,3 @@ menu bar: hover
 	background-repeat: repeat-x;
 }
 }}}
-http://www.color-hex.com/color/515815
