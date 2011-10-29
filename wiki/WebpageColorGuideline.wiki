@@ -1,10 +1,12 @@
 =Guideline for Webpage Colors=
 
+{{{
 body {
     background-color: #FEFEF2;
     background-image: url('images/a3.gif');
     background-repeat: repeat-x;
 }
+}}}
 http://www.color-hex.com/color/fefef2
 
 
