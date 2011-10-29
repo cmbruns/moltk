@@ -6,7 +6,13 @@
 
 a
 {
-	color: #8DA359;
+	color: DarkGreen;
+	text-decoration: underline;
+}
+
+a:visited
+{
+	color: Green;
 	text-decoration: underline;
 }
 
@@ -31,7 +37,7 @@ body
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 1.0em;
-	background-color: #FEFEF2;	
+	background-color: LightYellow;	
 	background-image: url('images/a3.gif');
 	background-repeat: repeat-x;
 	padding: 1.0em;
@@ -47,7 +53,7 @@ body
 
 #menu
 {
-	background-color: #6C7424;
+	background-color: DarkOliveGreen;
 	background-image: url('images/a1.gif');
 	background-repeat: repeat-x;
 	color: #ffffff;
