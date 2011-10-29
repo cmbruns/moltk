@@ -3,7 +3,7 @@
 
 =Guideline for Webpage Colors=
 
-We use a green and yellow color scheme for the MolTK web sites,  Based on the Sahara theme from http://www.freecsstemplates.org/.
+We use a green and yellow color scheme for the MolTK web sites,  Based on the Sahara theme from http://www.freecsstemplates.org/preview/sahara/
 
 ==Background Colors==
 
