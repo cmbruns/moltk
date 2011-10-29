@@ -63,7 +63,7 @@ h3.version {
 }
 
 div.qindex, div.navtab{
-	background-color: #EBEFF6;
+	background-color: LemonChiffon;
 	border: 1px solid #A3B4D7;
 	text-align: center;
 	margin: 2px;
@@ -82,13 +82,13 @@ div.navtab {
 /* @group Link Styling */
 
 a {
-	color: #006600;
+	color: DarkGreen;
 	font-weight: normal;
 	text-decoration: none;
 }
 
 .contents a:visited {
-	color: #8DA359;
+	color: Green;
 }
 
 a:hover {
@@ -177,10 +177,10 @@ div.groupText {
 }
 
 body {
-	background-color: #FFFCE0;
+	background-color: #FEFEF2;
 	background-image: url('images/a3.gif');
 	background-repeat: repeat-x;
-	color: #37371E;
+	color: black;
 	font-family: georgia, serif;
 	font-size: 11pt;
 	margin: 0;
@@ -193,7 +193,7 @@ div.contents {
 }
 
 td.indexkey {
-	background-color: #FBF8E6;
+	background-color: LemonChiffon;
 	font-weight: bold;
 	border: 1px solid #C4CFE5;
 	margin: 2px 0px 2px 0;
@@ -201,7 +201,7 @@ td.indexkey {
 }
 
 td.indexvalue {
-	background-color: #FBF8E6;
+	background-color: LemonChiffon;
 	border: 1px solid #C4CFE5;
 	padding: 2px 10px;
 	margin: 2px 0px;
@@ -346,7 +346,7 @@ table.memberdecls {
 .mdescLeft, .mdescRight,
 .memItemLeft, .memItemRight,
 .memTemplItemLeft, .memTemplItemRight, .memTemplParams {
-	background-color: #FCF4D0;
+	background-color: LemonChiffon;
 	border: none;
 	margin: 4px;
 	padding: 1px 0 0 8px;
@@ -366,7 +366,7 @@ table.memberdecls {
 }
 
 .memTemplParams {
-	color: #466530;
+	color: #515815;
         white-space: nowrap;
 }
 
@@ -378,7 +378,7 @@ table.memberdecls {
 
 .memtemplate {
 	font-size: 80%;
-	color: #469265;
+	color: #515815;
 	font-weight: normal;
 	margin-left: 9px;
 }
@@ -408,7 +408,7 @@ table.memberdecls {
         border-left: 1px solid #A8B8D9;
         border-right: 1px solid #A8B8D9;
         padding: 6px 0px 6px 0px;
-        color: #255535;
+        color: #515815;
         font-weight: bold;
         text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.9);
         /* opera specific markup */
@@ -425,7 +425,7 @@ table.memberdecls {
         -webkit-border-top-left-radius: 8px;
         /*background-image:url('nav_f.png');*/
         background-repeat:repeat-x;
-        background-color: #FCF4D0;
+        background-color: LemonChiffon;
 
 }
 
