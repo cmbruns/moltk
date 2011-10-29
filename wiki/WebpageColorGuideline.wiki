@@ -21,7 +21,7 @@ body
 
 ==Text Colors==
 
-Most text should be black.  Link text should be DarkGreen http://moltk.rotatingpenguin.com/images/DarkGreen.jpg.  Visited link text should be Green http://moltk.rotatingpenguin.com/images/Green.jpg
+Most text should be black.  Link text should be !DarkGreen http://moltk.rotatingpenguin.com/images/DarkGreen.jpg.  Visited link text should be Green http://moltk.rotatingpenguin.com/images/Green.jpg
 
 {{{
 a:link {color: DarkGreen;}
