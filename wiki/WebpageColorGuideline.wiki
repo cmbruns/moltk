@@ -47,7 +47,9 @@ a:hover	{text-decoration: none;}
 
 Use white text on green background.
 
+The background should be a1.gif from the modified Sahara style. http://moltk.rotatingpenguin.com/css/sahara/images/a1.gif
 
+Otherwise the menu background should be web color DarkOliveGreen. http://moltk.rotatingpenguin.com/images/DarkOliveGreen.jpg
 
 {{{
 menu bar
