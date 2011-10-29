@@ -44,4 +44,4 @@ menu bar: hover
 }}}
 http://www.color-hex.com/color/515815
 
-Second pale yellow: LemonChiffon (darker that LightYellow)
+Second pale yellow: LemonChiffon (darker than LightYellow)
