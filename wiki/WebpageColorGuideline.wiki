@@ -2,29 +2,43 @@
 
 {{{
 body {
-    background-color: #FEFEF2;
+    background-color: LightYellow;
     background-image: url('images/a3.gif');
     background-repeat: repeat-x;
 }
 }}}
-http://www.color-hex.com/color/fefef2
+
 
 {{{
-a:link {color: #006600;}
+a:link {color: DarkGreen;}
 }}}
-http://www.color-hex.com/color/006600
+
 
 {{{
-a:visited {color: #8DA359;}
+a:visited {color: Green;}
 }}}
-http://www.color-hex.com/color/8da359
+
 
 {{{
 a:hover	{text-decoration: none;}
 }}}
 
+{{{
 menu bar
-    background-image: url('images/a1.gif');
-    background-repeat: repeat-x;
+{
+	background-color: DarkOliveGreen;
+	background-image: url('images/a1.gif');
+	background-repeat: repeat-x;
+	color: #ffffff;
+}
+}}}
 
-menu bar hover
+{{{
+menu bar: hover
+{
+	background-color: #515815;
+	background-image: url('images/a2.gif');
+	background-repeat: repeat-x;
+}
+}}}
+http://www.color-hex.com/color/515815
