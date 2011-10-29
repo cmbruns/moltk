@@ -45,6 +45,8 @@ if(MOLTK_REGENERATE_CPP_API_DOCS)
     configure_file(Doxyfile.in ${DOXY_CONFIG} @ONLY )
     add_custom_target(MoltkCxxApiDocs ALL
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXY_CONFIG}
+        COMMAND ${CMAKE_COMMAND} -E copy doxygen_tabs.css cxx/tabs.css
+        COMMAND ${CMAKE_COMMAND} -E copy doxygen_sahara.css cxx/doxygen.css
         COMMENT "Generating C++ API html documentation using doxygen"
         WORKING_DIRECTORY ${DOXYGEN_API_DIR}
         SOURCES Doxyfile.in)

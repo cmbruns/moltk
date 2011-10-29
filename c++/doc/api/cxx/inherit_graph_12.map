@@ -1,4 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classmoltk_1_1BaseVector3D.html" title="moltk::BaseVector3D\&lt; moltk::Real \&gt;" alt="" coords="7,5,279,33"/>
-<area shape="rect" id="node3" href="$classmoltk_1_1UnitVector3D.html" title="UnitVector3D represents a direction in 3 space, and, unlike Vector3D_&lt;&gt;, does NOT have Units..." alt="" coords="328,5,491,33"/>
+<area shape="rect" id="node1" href="$classmoltk_1_1EString_1_1const__iterator.html" title="Iterator for accessing the residue positions encoded in an estring." alt="" coords="5,5,197,32"/>
 </map>

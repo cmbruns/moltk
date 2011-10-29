@@ -1,3 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$moltk_8hpp.html" title="/Users/brunsc/svn/moltk/c++/include/moltk.hpp" alt="" coords="52,83,391,111"/>
+<area shape="rect" id="node3" href="$Aligner_8hpp.html" title="C:/Users/cmbruns/svn/moltk/c++/include/moltk/Aligner.hpp" alt="" coords="79,229,441,256"/>
+<area shape="rect" id="node7" href="$moltk_8hpp.html" title="C:/Users/cmbruns/svn/moltk/c++/include/moltk.hpp" alt="" coords="427,304,745,331"/>
+<area shape="rect" id="node9" href="$Alignment_8hpp.html" title="C:/Users/cmbruns/svn/moltk/c++/include/moltk/Alignment.hpp" alt="" coords="127,155,508,181"/>
+<area shape="rect" id="node12" href="$PDBStructure_8hpp.html" title="C:/Users/cmbruns/svn/moltk/c++/include/moltk/PDBStructure.hpp" alt="" coords="177,80,580,107"/>
+<area shape="rect" id="node5" href="$MatrixScorer_8hpp.html" title="C:/Users/cmbruns/svn/moltk/c++/include/moltk/MatrixScorer.hpp" alt="" coords="5,304,403,331"/>
 </map>

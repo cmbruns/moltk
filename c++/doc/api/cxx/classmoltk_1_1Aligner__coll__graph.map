@@ -1,18 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures." alt="" coords="2101,177,2240,205"/>
-<area shape="rect" id="node6" href="$classmoltk_1_1Alignment_1_1Row.html" title="Meta&#45;data for one sequence in an Alignment." alt="" coords="1108,103,1287,131"/>
-<area shape="rect" id="node8" href="$classmoltk_1_1Alignment_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment." alt="" coords="728,106,928,134"/>
-<area shape="rect" id="node14" href="$classmoltk_1_1Biosequence.html" title="A macromolecule sequence (DNA or RNA or protein)" alt="" coords="1119,154,1276,182"/>
-<area shape="rect" id="node16" href="$classmoltk_1_1BaseBiosequence.html" title="Parent class for macromolecule sequences and structures." alt="" coords="732,209,924,237"/>
-<area shape="rect" id="node28" href="$classmoltk_1_1PDBStructure_1_1Chain.html" title="Chain represents a single polymer or molecule in a PDBStructure." alt="" coords="1091,219,1304,247"/>
-<area shape="rect" id="node18" title="STL class." alt="" coords="695,55,961,83"/>
-<area shape="rect" id="node53" title="STL class." alt="" coords="761,5,895,33"/>
-<area shape="rect" id="node22" title="STL class." alt="" coords="780,157,876,185"/>
-<area shape="rect" id="node24" title="STL class." alt="" coords="368,157,563,185"/>
-<area shape="rect" id="node33" href="$classmoltk_1_1PDBStructure_1_1Residue.html" title="Residue represents a single amino acid or nucleotide residue, or a small molecule, in a macromolecule structure." alt="" coords="351,263,580,291"/>
-<area shape="rect" id="node35" href="$classmoltk_1_1BaseBiosequence_1_1BaseResidue.html" title="Parent class for macromolecule sequence residues (nucleotides or amino acids)" alt="" coords="7,263,297,291"/>
-<area shape="rect" id="node37" href="$classmoltk_1_1Aligner_1_1Scorer.html" title="Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and Que..." alt="" coords="2083,263,2259,291"/>
-<area shape="rect" id="node39" href="$structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;." alt="" coords="1545,263,1772,291"/>
-<area shape="rect" id="node45" href="$classmoltk_1_1Aligner_1_1QueryPosition.html" title="QueryPosition is an alignment column specialized to efficiently compute an alignment score with a Tar..." alt="" coords="1545,314,1772,342"/>
-<area shape="rect" id="node49" href="$classmoltk_1_1Aligner_1_1TargetPosition.html" title="TargetPosition is an alignment column specialized to efficiently compute an alignment score with a Qu..." alt="" coords="1541,365,1776,393"/>
+<area shape="rect" id="node2" href="$classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures." alt="" coords="621,71,741,97"/>
+<area shape="rect" id="node10" href="$classmoltk_1_1Aligner_1_1Scorer.html" title="Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and Que..." alt="" coords="607,148,755,175"/>
+<area shape="rect" id="node12" href="$structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;." alt="" coords="143,164,340,191"/>
 </map>
