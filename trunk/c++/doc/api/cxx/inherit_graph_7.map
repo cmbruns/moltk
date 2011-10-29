@@ -1,3 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classmoltk_1_1Alignment_1_1EString_1_1const__iterator.html" title="Iterator for accessing the residue positions encoded in an estring." alt="" coords="7,5,316,33"/>
+<area shape="rect" id="node1" href="$classmoltk_1_1BaseBiosequence.html" title="Parent class for macromolecule sequences and structures." alt="" coords="6,31,173,57"/>
+<area shape="rect" id="node3" href="$classmoltk_1_1Biosequence.html" title="A macromolecule sequence (DNA or RNA or protein)" alt="" coords="245,5,382,32"/>
+<area shape="rect" id="node5" href="$classmoltk_1_1PDBStructure_1_1Chain.html" title="Chain represents a single polymer or molecule in a PDBStructure." alt="" coords="222,56,405,83"/>
 </map>

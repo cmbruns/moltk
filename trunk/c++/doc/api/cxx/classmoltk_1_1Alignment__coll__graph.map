@@ -1,12 +1,2 @@
 <map id="G" name="G">
-<area shape="rect" id="node4" href="$classmoltk_1_1Alignment_1_1Row.html" title="Meta&#45;data for one sequence in an Alignment." alt="" coords="1108,19,1287,47"/>
-<area shape="rect" id="node6" href="$classmoltk_1_1Alignment_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment." alt="" coords="728,7,928,35"/>
-<area shape="rect" id="node12" href="$classmoltk_1_1Biosequence.html" title="A macromolecule sequence (DNA or RNA or protein)" alt="" coords="1119,166,1276,194"/>
-<area shape="rect" id="node14" href="$classmoltk_1_1BaseBiosequence.html" title="Parent class for macromolecule sequences and structures." alt="" coords="732,109,924,137"/>
-<area shape="rect" id="node26" href="$classmoltk_1_1PDBStructure_1_1Chain.html" title="Chain represents a single polymer or molecule in a PDBStructure." alt="" coords="1091,90,1304,118"/>
-<area shape="rect" id="node16" title="STL class." alt="" coords="695,218,961,246"/>
-<area shape="rect" id="node20" title="STL class." alt="" coords="780,167,876,195"/>
-<area shape="rect" id="node22" title="STL class." alt="" coords="368,167,563,195"/>
-<area shape="rect" id="node31" href="$classmoltk_1_1PDBStructure_1_1Residue.html" title="Residue represents a single amino acid or nucleotide residue, or a small molecule, in a macromolecule structure." alt="" coords="351,58,580,86"/>
-<area shape="rect" id="node33" href="$classmoltk_1_1BaseBiosequence_1_1BaseResidue.html" title="Parent class for macromolecule sequence residues (nucleotides or amino acids)" alt="" coords="7,58,297,86"/>
 </map>
