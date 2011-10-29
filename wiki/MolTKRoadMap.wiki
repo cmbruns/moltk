@@ -1,4 +1,5 @@
 #summary Plans for MolTK Releases
+#labels Featured,Phase-Requirements
 
 = MolTK Release Road Map =
 
