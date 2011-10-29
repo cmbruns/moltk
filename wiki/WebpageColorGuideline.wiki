@@ -9,14 +9,19 @@ body {
 }}}
 http://www.color-hex.com/color/fefef2
 
-
+{{{
 a:link {color: #006600;}
+}}}
 http://www.color-hex.com/color/006600
 
+{{{
 a:visited {color: #8DA359;}
+}}}
 http://www.color-hex.com/color/8da359
 
+{{{
 a:hover	{text-decoration: none;}
+}}}
 
 menu bar
     background-image: url('images/a1.gif');
