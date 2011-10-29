@@ -1,5 +1,11 @@
 =Guideline for Webpage Colors=
 
+We use a green and yellow color scheme for the MolTK web sites,  Based on the Sahara theme from http://www.freecsstemplates.org/.
+
+==Background Colors==
+
+Large sections of background should use the gradient image a3.gif from the modified Sahara style. http://moltk.rotatingpenguin.com/css/sahara/images/a3.gif
+
 {{{
 body 
 {
@@ -9,6 +15,7 @@ body
 }
 }}}
 
+==Text Colors==
 
 {{{
 a:link {color: DarkGreen;}
@@ -23,6 +30,10 @@ a:visited {color: Green;}
 {{{
 a:hover	{text-decoration: none;}
 }}}
+
+==Menu Colors==
+
+White text on green background.
 
 {{{
 menu bar
