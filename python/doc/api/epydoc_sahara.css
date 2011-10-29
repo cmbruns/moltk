@@ -140,7 +140,7 @@ table.details               { border-collapse: collapse;
                               background: LemonChiffon; color: #000000;
                               border: 1px solid #608090;
                               margin: .2em 0 0 0; }
-table.details table         { color: black; }
+/*table.details table         { color: black; }*/
 /*table.details a:link        { color: #0000ff; }
 table.details a:visited     { color: #204080; }
 */
@@ -283,7 +283,7 @@ pre.py-doctest              { padding: .5em; margin: 1em;
 table pre.py-doctest        { background: #dce4ec;
                               color: #000000; }
 pre.py-src                  { border: 2px solid #000000; 
-                              background: #f0f0f0; color: #000000; }
+                              background: white; color: #000000; }
 .py-line                    { border-left: 2px solid #000000; 
                               margin-left: .2em; padding-left: .4em; }
 .py-lineno                  { font-style: italic; font-size: 90%;
