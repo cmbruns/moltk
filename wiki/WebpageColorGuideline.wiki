@@ -53,7 +53,7 @@ Use white text on green background.
 
 The background should be a1.gif from the modified Sahara style. http://moltk.rotatingpenguin.com/css/sahara/images/a1.gif
 
-Otherwise the menu background should be web color DarkOliveGreen. http://moltk.rotatingpenguin.com/images/DarkOliveGreen.jpg
+Otherwise the menu background should be web color !DarkOliveGreen. http://moltk.rotatingpenguin.com/images/DarkOliveGreen.jpg
 
 Menu hover effect should use Sahara a2.gif,
 http://moltk.rotatingpenguin.com/css/sahara/images/a2.gif
