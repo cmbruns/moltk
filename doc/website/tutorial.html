@@ -51,13 +51,121 @@
         <li><a href="#cxxtut">MolTK C++ Tutorial</a></li>
     </ul>
 <p></p>
-<h3 name="aptut">MolTK Application Tutorial</h3>
+<h3> <a name="aptut">MolTK Application Tutorial</a></h3>
 <p>There is no MolTK application release until MolTK version 0.7.
 Try again later.</p>
 
-<h3 name="pytut">Interactive MolTK Python Tutorial</h3>
+<h3> <a name="pytut">Interactive MolTK Python Tutorial</a></h3>
 
-<h3 name="cxxtut">MolTK C++ Tutorial</h3>
+<p>Download and install MolTK from the MolTK download site
+<a href="http://code.google.com/p/moltk/downloads/list">
+http://code.google.com/p/moltk/downloads/list</a>.
+</p>
+
+<p>In the following examples, text following the >>> prompt represents
+commands typed by the user. Other lines represent the output of the program.
+</p>
+
+<h4> Scenario 1: Aligning 3 sequences </h4>
+
+<p>In this example, the files test1.fasta, test2.fasta, 
+and test3.fasta are sequences in the FASTA format.
+Information about the FASTA format can be found at
+<a href="http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml">
+http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml</a>.
+A file called test.fasta can be saved with the alignment. The alignment
+can be also saved as test.pretty which is a nicely formatted but
+not computer parseable version of the alignment. What follows
+is an example of performing an alignment of three sequences.
+
+<h5> Step 1. Start an alignment session </h5>
+<pre>% python -i 
+>>> from moltk import * 
+</pre>
+<p></p>
+
+<h5> Step 2. Load test1.fasta sequence into seq1 </h5>
+<pre>
+>>> seq1 = load_fasta("test1.fasta") 
+</pre>
+<p></p>
+
+<h5> Step 3. Load test2.fasta sequence into seq2 </h5>
+<pre>
+>>> seq2 = load_fasta("test2.fasta") 
+</pre>
+<p></p>
+
+<h5> Step 4. Align seq1 and seq2 </h5>
+<pre>
+>>> aln = align(seq1, seq2)
+</pre>
+<p>Here we name our alignment result "aln."
+NOTE: Do not use "align" as the result in MolTK 
+because "align" is already a method name. </p>
+
+<h5> Step 5. Display the alignment on the screen </h5>
+<pre>
+>>> print aln 
+</pre>
+<p></p>
+
+<h5> Step 6. Copy the alignment to seq1 </h5>
+<pre>
+>>> seq1 = aln 
+</pre>
+<p></p>
+
+<h5> Step 7. Load test3.fasta sequence into seq3 </h5>
+<pre>
+>>> seq3 = load_fasta("test3.fasta") 
+</pre>
+<p></p>
+
+<h5> Step 8. Align previous alignment of test1.fasta and 
+test2.fasta with test3.fasts </h5>
+<pre>
+>>> aln = align(seq1, seq3) 
+</pre>
+<p>Note that the previous alignment of test1.fasta and
+test2.fasta is now contained in seq1. </p>
+
+<h5> Step 9. Save the alignment to a file </h5>
+<pre>
+>>> aln.write_fasta("test.fasta") 
+</pre>
+<p></p>
+<p>You can also save as test.pretty for a nicely formatted
+but not computer parseable version.
+<pre>
+>>> aln.write_pretty("test.pretty")
+</pre></p>
+
+<h5> Step 10. Display a table of pairwise sequence identities </h5>
+<pre>
+>>> print aln.id_table() 
+</pre>
+<p></p>
+
+<h5> Step 11. End your alignment session </h5>
+<pre>
+>>> quit() 
+</pre>
+<p></p>
+
+<h4> Scenario 2: Writing a python script to help automate 
+the alignment process </h4>
+
+<p></p>
+
+<h4> Scenario 3: Aligning 2 sequences and assessing significance </h4>
+
+<p></p>
+
+<h4> Scenario 4: Overlaying 2 tertiary structures </h4>
+
+<p></p>
+<h3> <a name="cxxtut">MolTK C++ Tutorial</a></h3>
 
 
 </div> <!-- column1 -->
