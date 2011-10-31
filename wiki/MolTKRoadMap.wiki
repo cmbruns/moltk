@@ -4,6 +4,7 @@
 = MolTK Release Road Map =
 
 || *Release* || *Features* || Estimated date ||
+|| 0.4 || Downloads:<br> Windows python module installer<br> Example data<br> Users Manual || Mid November 2011 ||
 || 0.5 || C++ SDK<br>Interactive MolTK python module<br>SEQUOIA sequence features<br>Users Manual<br>C++ API documentation<br>Python API documentation<br>Windows binaries|| January 2012 ||
 || 0.6 || SEQUOIA structure features<br>Mac binaries<br>Linux binaries || ??? ||
 || 0.7 || MolTK GUI application || ??? ||
