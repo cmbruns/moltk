@@ -3,6 +3,7 @@
 =Tasks to perform when creating a release of MolTK=
 
   # Print out this page to use it as a literal check list
+  # Check out a fresh working copy of MolTK in a new folder
   # Set version number in CMakeLists.txt
   # Review User Manual for changes
   # Update User Manual pdf
