@@ -8,15 +8,15 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 = Conversions (MolTK 0.5) =
 
 || *Sequoia command* || *Corresponding moltk command(s)* || *Description* ||
-|| {{{% sequoia}}} || {{{% python -i}}} <br> {{{>>> from moltk import *}}} || Start an alignment session ||
-|| {{{SEQUOIA> read SEQ1 test1.fasta}}} || {{{>>> seq1 = load_fasta("test1.fasta")}}} || Load a sequence or alignment into seq1 ||
-|| {{{SEQUOIA> read SEQ2 test2.fasta}}} || {{{>>> seq2 = load_fasta("test2.fasta")}}} || load a sequence or alignment into seq2 ||
-|| {{{SEQUOIA> align}}} || {{{>>> aln = align(seq1, seq2)}}} || Align two sequences/alignments. <br>NOTE: Do not use "align" as the result in MolTK <br>because "align" is already a method name. ||
-|| {{{SEQUOIA> print ALIGN}}} || {{{>>> print aln}}} || Display the alignment on screen ||
-|| {{{SEQUOIA> set SEQ1 ALIGN}}} || {{{>>> seq1 = aln}}} || Copy the alignment to seq1 ||
-|| {{{SEQUOIA> write ALIGN test.fasta}}} || {{{>>> aln.write_fasta("test.fasta")}}} || Save alignment to a file ||
-|| {{{SEQUOIA> print ALIGN test.pretty}}} || {{{>>> aln.write_pretty("test.pretty")}}} || Save nicely formatted (but not computer parseable) version of alignment to a file || 
-|| {{{SEQUOIA> print id ALIGN}}} || {{{>>> print aln.id_table()}}} || Display a table of pairwise sequence identities ||
+|| {{{% sequoia}}} || {{{% python -i}}} <br> {{{>>> import moltk}}} || Start an alignment session ||
+|| {{{SEQUOIA> read SEQ1 test1.fasta}}} || {{{>>> seq1 = moltk.load_fasta("test1.fasta")}}} || Load a sequence or alignment into seq1 ||
+|| {{{SEQUOIA> read SEQ2 test2.fasta}}} || {{{>>> seq2 = moltk.load_fasta("test2.fasta")}}} || load a sequence or alignment into seq2 ||
+|| {{{SEQUOIA> align}}} || {{{>>> align1 = moltk.align(seq1, seq2)}}} || Align two sequences/alignments.  ||
+|| {{{SEQUOIA> print ALIGN}}} || {{{>>> print align1}}} || Display the alignment on screen ||
+|| {{{SEQUOIA> set SEQ1 ALIGN}}} || {{{>>> seq1 = align1}}} || Copy the alignment to seq1 ||
+|| {{{SEQUOIA> write ALIGN test.fasta}}} || {{{>>> align1.write_fasta("test.fasta")}}} || Save alignment to a file ||
+|| {{{SEQUOIA> print ALIGN test.pretty}}} || {{{>>> align1.write_pretty("test.pretty")}}} || Save nicely formatted (but not computer parseable) version of alignment to a file || 
+|| {{{SEQUOIA> print id ALIGN}}} || {{{>>> print align1.id_table()}}} || Display a table of pairwise sequence identities ||
 || {{{SEQUOIA> quit}}} || {{{>>> quit()}}} || End alignment session. ||
 || {{{SEQUOIA> @test.inp}}} || {{{>>> execfile("test.py")}}} || Run a script file you wrote ||
 || {{{% sequoia < test.inp}}} || {{{% python test.py}}} || Run a script you wrote directly from a command prompt ||
