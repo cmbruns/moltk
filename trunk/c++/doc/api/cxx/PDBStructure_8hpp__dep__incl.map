@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$Alignment_8hpp.html" title="C:/Users/cmbruns/svn/moltk/c++/include/moltk/Alignment.hpp" alt="" coords="168,80,549,107"/>
-<area shape="rect" id="node9" href="$moltk_8hpp.html" title="C:/Users/cmbruns/svn/moltk/c++/include/moltk.hpp" alt="" coords="427,229,745,256"/>
-<area shape="rect" id="node5" href="$Aligner_8hpp.html" title="C:/Users/cmbruns/svn/moltk/c++/include/moltk/Aligner.hpp" alt="" coords="177,155,540,181"/>
-<area shape="rect" id="node7" href="$MatrixScorer_8hpp.html" title="C:/Users/cmbruns/svn/moltk/c++/include/moltk/MatrixScorer.hpp" alt="" coords="5,229,403,256"/>
+<area shape="rect" id="node3" href="$Alignment_8hpp.html" title="moltk/Alignment.hpp" alt="" coords="48,80,189,107"/>
+<area shape="rect" id="node9" href="$moltk_8hpp.html" title="moltk.hpp" alt="" coords="187,229,265,256"/>
+<area shape="rect" id="node5" href="$Aligner_8hpp.html" title="moltk/Aligner.hpp" alt="" coords="57,155,180,181"/>
+<area shape="rect" id="node7" href="$MatrixScorer_8hpp.html" title="moltk/MatrixScorer.hpp" alt="" coords="5,229,163,256"/>
 </map>
