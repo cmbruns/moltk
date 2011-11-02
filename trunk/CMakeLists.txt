@@ -22,13 +22,29 @@ project(MolTK)
 # cmake 2.8.3 does not have ADD_TEST(WORKING_DIRECTORY) option
 cmake_minimum_required(VERSION 2.8.6)
 
-# I think enable_testing() has to be in top-level CMakeLists.txt file.
-enable_testing()
-
 # Some declarations are common to C++ and python subdirectories
 set(MOLTK_VERSION 0.3.5)
 add_definitions(-DMOLTK_VERSION="\\"${MOLTK_VERSION}\\"")
 include_directories(c++/include)
+
+# I think enable_testing() has to be in top-level CMakeLists.txt file.
+enable_testing()
+
+# Default to Release build
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Release or Debug" FORCE)
+endif()
+
+if(APPLE)
+    # Default to Fat 32/64 Build
+    if(NOT CMAKE_OSX_ARCHITECTURES)
+        set(CMAKE_OSX_ARCHITECTURES "i386;x86_64;ppc" CACHE STRING "" FORCE)
+    endif()
+    # Default to Leopard support (OSX 10.5)
+    if (NOT CMAKE_OSX_DEPLOYMENT_TARGET)
+        set(CMAKE_OSX_DEPLOYMENT_TARGET "10.5" CACHE STRING "Minimum OSX version binaries will run on" FORCE)
+    endif()
+endif()
 
 # Boost is for both C++ and python
 set(Boost_ADDITIONAL_VERSIONS 1.47)
@@ -43,6 +59,7 @@ else()
 endif()
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
+mark_as_advanced(Boost_DIR)
 
 file(GLOB_RECURSE MOLTK_HEADERS "c++/include/*.hpp")
 file(GLOB_RECURSE MOLTK_SOURCES "c++/src/*.cpp")
