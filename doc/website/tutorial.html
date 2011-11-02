@@ -84,67 +84,50 @@ http://code.google.com/p/moltk/downloads/list</a> and download
 the three test sequences: test1.fasta, test2.fasta, and test3.fasta.
 
 <h5> Step 2. Start an alignment session </h5>
-<pre>% python -i 
->>> import moltk 
-</pre>
+<div id="code-box">% python -i 
+>>> import moltk </div> <!-- code-box -->
 <p></p>
 
 <h5> Step 3. Load test1.fasta sequence into seq1 </h5>
-<pre>
->>> seq1 = moltk.load_fasta("test1.fasta") 
-</pre>
+<div id="code-box">>>> seq1 = moltk.load_fasta("test1.fasta")</div>
 <p></p>
 
 <h5> Step 4. Load test2.fasta sequence into seq2 </h5>
-<pre>
->>> seq2 = moltk.load_fasta("test2.fasta") 
-</pre>
+<div id="code-box">>>> seq2 = moltk.load_fasta("test2.fasta")</div>
 <p></p>
 
 <h5> Step 5. Align seq1 and seq2 </h5>
-<pre>
->>> align1 = moltk.align(seq1, seq2)
+<div id="code-box">>>> align1 = moltk.align(seq1, seq2)</div>
 </pre>
+<p></p>
 
 <h5> Step 6. Display the alignment on the screen </h5>
-<pre>
->>> print align1 
-</pre>
+<div id="code-box">>>> print align1</div>
 <p></p>
 
 <h5> Step 7. Load test3.fasta sequence into seq3 </h5>
-<pre>
->>> seq3 = moltk.load_fasta("test3.fasta") 
-</pre>
+<div id="code-box">>>> seq3 = moltk.load_fasta("test3.fasta")</div>
 <p></p>
 
 <h5> Step 8. Align previous alignment of test1.fasta and 
-test2.fasta with test3.fasts </h5>
-<pre>
->>> align2 = moltk.align(align1, seq3) 
-</pre>
+test2.fasta with test3.fasta </h5>
+<div id="code-box">>>> align2 = moltk.align(align1, seq3)</div>
+<p></p>
 
 <h5> Step 9. Save the alignment to a file </h5>
-<pre>
->>> align2.write_fasta("test.fasta") 
-</pre>
+<div id="code-box">>>> align2.write_fasta("test.fasta")</div>
 <p></p>
 <p>You can also save as test.pretty for a nicely formatted
-but not computer parseable version.
-<pre>
->>> align2.write_pretty("test.pretty")
-</pre></p>
+(but not computer parseable) version.
+<div id="code-box">>>> align2.write_pretty("test.pretty")</div>
+</p>
 
 <h5> Step 10. Display a table of pairwise sequence identities </h5>
-<pre>
->>> print align2.id_table() 
-</pre>
+<div id="code-box">>>> print align2.id_table()</div>
 <p></p>
 
 <h5> Step 11. End your alignment session </h5>
-<pre>
->>> quit() 
-</pre>
+<div id="code-box">>>> quit()</div>
 <p></p>
 
 <h4> Scenario 2: Writing a python script to help automate 
