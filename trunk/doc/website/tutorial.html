@@ -78,72 +78,66 @@ can be also saved as test.pretty which is a nicely formatted but
 not computer parseable version of the alignment. What follows
 is an example of performing an alignment of three sequences.
 
-<h5> Step 1. Start an alignment session </h5>
+<h5> Step 1. Download FASTA test sequences </h5>
+<p>Go to download page <a href="http://code.google.com/p/moltk/downloads/list">
+http://code.google.com/p/moltk/downloads/list</a> and download
+the three test sequences: test1.fasta, test2.fasta, and test3.fasta.
+
+<h5> Step 2. Start an alignment session </h5>
 <pre>% python -i 
->>> from moltk import * 
+>>> import moltk 
 </pre>
 <p></p>
 
-<h5> Step 2. Load test1.fasta sequence into seq1 </h5>
+<h5> Step 3. Load test1.fasta sequence into seq1 </h5>
 <pre>
->>> seq1 = load_fasta("test1.fasta") 
+>>> seq1 = moltk.load_fasta("test1.fasta") 
 </pre>
 <p></p>
 
-<h5> Step 3. Load test2.fasta sequence into seq2 </h5>
+<h5> Step 4. Load test2.fasta sequence into seq2 </h5>
 <pre>
->>> seq2 = load_fasta("test2.fasta") 
+>>> seq2 = moltk.load_fasta("test2.fasta") 
 </pre>
 <p></p>
 
-<h5> Step 4. Align seq1 and seq2 </h5>
+<h5> Step 5. Align seq1 and seq2 </h5>
 <pre>
->>> aln = align(seq1, seq2)
+>>> align1 = moltk.align(seq1, seq2)
 </pre>
-<p>Here we name our alignment result "aln."
-NOTE: Do not use "align" as the result in MolTK 
-because "align" is already a method name. </p>
 
-<h5> Step 5. Display the alignment on the screen </h5>
+<h5> Step 6. Display the alignment on the screen </h5>
 <pre>
->>> print aln 
-</pre>
-<p></p>
-
-<h5> Step 6. Copy the alignment to seq1 </h5>
-<pre>
->>> seq1 = aln 
+>>> print align1 
 </pre>
 <p></p>
 
 <h5> Step 7. Load test3.fasta sequence into seq3 </h5>
 <pre>
->>> seq3 = load_fasta("test3.fasta") 
+>>> seq3 = moltk.load_fasta("test3.fasta") 
 </pre>
 <p></p>
 
 <h5> Step 8. Align previous alignment of test1.fasta and 
 test2.fasta with test3.fasts </h5>
 <pre>
->>> aln = align(seq1, seq3) 
+>>> align2 = moltk.align(align1, seq3) 
 </pre>
-<p>Note that the previous alignment of test1.fasta and
-test2.fasta is now contained in seq1. </p>
 
 <h5> Step 9. Save the alignment to a file </h5>
 <pre>
->>> aln.write_fasta("test.fasta") 
+>>> align2.write_fasta("test.fasta") 
 </pre>
 <p></p>
 <p>You can also save as test.pretty for a nicely formatted
 but not computer parseable version.
 <pre>
->>> aln.write_pretty("test.pretty")
+>>> align2.write_pretty("test.pretty")
 </pre></p>
 
 <h5> Step 10. Display a table of pairwise sequence identities </h5>
 <pre>
->>> print aln.id_table() 
+>>> print align2.id_table() 
 </pre>
 <p></p>
 
