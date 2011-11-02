@@ -197,3 +197,16 @@ body
 {
 	border-bottom: dashed 1px #EFEFD6;
 }
+
+#code-box
+{
+	font-family: Courier New, monospace;
+	background-color: LemonChiffon;
+	background: LemonChiffon url("images/cut.gif") no-repeat top right;
+	font-weight: bold;
+	white-space: pre;
+	border: 1px dashed #515815;
+	padding: 0.5em 0 0.3em 0.5em;
+	color: #515815;
+	overflow: auto;
+}
