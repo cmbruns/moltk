@@ -23,7 +23,7 @@ project(MolTK)
 cmake_minimum_required(VERSION 2.8.6)
 
 # Some declarations are common to C++ and python subdirectories
-set(MOLTK_VERSION 0.3.5)
+set(MOLTK_VERSION 0.3.6)
 add_definitions(-DMOLTK_VERSION="\\"${MOLTK_VERSION}\\"")
 include_directories(c++/include)
 
