@@ -68,8 +68,9 @@ commands typed by the user. Other lines represent the output of the program.
 
 <h4> Scenario 1: Aligning 3 sequences </h4>
 
-<p>In this example, the files test1.fasta, test2.fasta, 
-and test3.fasta are sequences in the FASTA format.
+<p>In this example, the files insulin_shark_v1.fasta, 
+insulin_pig_v1.fasta, and insulin_human_v1.fasta are 
+sequences in the FASTA format.
 Information about the FASTA format can be found at
 <a href="http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml">
 http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml</a>.
@@ -81,7 +82,8 @@ is an example of performing an alignment of three sequences.
 <h5> Step 1. Download FASTA test sequences </h5>
 <p>Go to download page <a href="http://code.google.com/p/moltk/downloads/list">
 http://code.google.com/p/moltk/downloads/list</a> and download
-the three test sequences: test1.fasta, test2.fasta, and test3.fasta.
+the three FASTA sequences: insulin_shark_v1.fasta, insulin_pig_v1.fasta, 
+and insulin_human_v1.fasta.
 
 <h5> Step 2. Start an alignment session </h5>
 <div id="code-box">% python -i 
@@ -89,11 +91,11 @@ the three test sequences: test1.fasta, test2.fasta, and test3.fasta.
 <p></p>
 
 <h5> Step 3. Load test1.fasta sequence into seq1 </h5>
-<div id="code-box">>>> seq1 = moltk.load_fasta("test1.fasta")</div>
+<div id="code-box">>>> seq1 = moltk.load_fasta(" insulin_human_v1.fasta")</div>
 <p></p>
 
 <h5> Step 4. Load test2.fasta sequence into seq2 </h5>
-<div id="code-box">>>> seq2 = moltk.load_fasta("test2.fasta")</div>
+<div id="code-box">>>> seq2 = moltk.load_fasta("insulin_pig_v1.fasta")</div>
 <p></p>
 
 <h5> Step 5. Align seq1 and seq2 </h5>
@@ -106,7 +108,7 @@ the three test sequences: test1.fasta, test2.fasta, and test3.fasta.
 <p></p>
 
 <h5> Step 7. Load test3.fasta sequence into seq3 </h5>
-<div id="code-box">>>> seq3 = moltk.load_fasta("test3.fasta")</div>
+<div id="code-box">>>> seq3 = moltk.load_fasta("insulin_shark_v1.fasta")</div>
 <p></p>
 
 <h5> Step 8. Align previous alignment of test1.fasta and 
