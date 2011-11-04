@@ -4,8 +4,8 @@
 
   # Print out this page to use it as a literal check list
   # Check out a fresh working copy of MolTK in a new folder
-  # Set version number in CMakeLists.txt
-  # Review User Manual for changes
+  # Set version number in top level CMakeLists.txt
+  # Review User Manual for changes, including updating version number.
   # Update User Manual pdf
   # Add News item to website index.html
   # Windows:
