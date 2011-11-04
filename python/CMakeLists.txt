@@ -40,6 +40,12 @@ configure_file(setup.py.in ${SETUP_PY} @ONLY)
 set(MOLTK_LOCAL_INSTALL_DIR "${CMAKE_BINARY_DIR}/py_install")
 # setup.py --home argument helps create consistent lib/python destination...
 set(MOLTK_LOCAL_PYTHON_PATH ${MOLTK_LOCAL_INSTALL_DIR}/lib/python)
+# except on 64-bit linux, where it's lib64/python
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    if(UNIX AND NOT APPLE)
+        set(MOLTK_LOCAL_PYTHON_PATH ${MOLTK_LOCAL_INSTALL_DIR}/lib64/python)
+    endif()
+endif()
 file(TO_NATIVE_PATH "${MOLTK_LOCAL_PYTHON_PATH}" NATIVE_LOCAL_PYTHONPATH)
 
 file(RELATIVE_PATH BUILD_BASE "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/py_build")

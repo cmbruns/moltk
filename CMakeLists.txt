@@ -20,7 +20,7 @@
 
 project(MolTK)
 # cmake 2.8.3 does not have ADD_TEST(WORKING_DIRECTORY) option
-cmake_minimum_required(VERSION 2.8.6)
+cmake_minimum_required(VERSION 2.8.4)
 
 # Some declarations are common to C++ and python subdirectories
 set(MOLTK_VERSION 0.3.6)
@@ -48,8 +48,14 @@ endif()
 
 # Boost is for both C++ and python
 set(Boost_ADDITIONAL_VERSIONS 1.47)
-set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost COMPONENTS iostreams REQUIRED)
+# Link errors with static boost on Fedora
+if(UNIX AND NOT APPLE)
+    set(Boost_USE_STATIC_LIBS OFF)
+    add_definitions("-DBOOST_TEST_DYN_LINK")
+else()
+    set(Boost_USE_STATIC_LIBS ON)
+endif()
+find_package(Boost COMPONENTS iostreams unit_test_framework REQUIRED)
 # Boost_LIB_DIAGNOSTIC_DEFINITIONS causes autolink library information to be printed at build time.
 # add_definitions(${Boost_LIB_DIAGNOSTIC_DEFINITIONS})
 if(WIN32)
