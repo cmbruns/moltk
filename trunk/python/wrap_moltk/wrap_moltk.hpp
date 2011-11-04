@@ -63,7 +63,10 @@ namespace pyplusplus { namespace aliases {
         Vector3D vector3D;
         UnitVector3D unitVector3D;
         // instantiate methods
-        void foo() {Angle a = 4.0 * radian;}
+        void foo() {
+            Angle a = 4.0 * radian;
+            a *= 3.0;
+        }
     };
 
 }} // namespace pyplusplus::aliases
