@@ -22,6 +22,6 @@
     # {{{svn update}}} python API area
     # {{{svn update}}} C++ API area
   # Google Code site:
-    # Add User Manual to downloads
+    # Add User Manual to downloads (copy pdf with version number, delete after added to downloads)
     # Add Windows python installer to downloads
   # Test installer on a virgin virtual machine
