@@ -19,19 +19,36 @@
 #    For questions contact: cmbruns@rotatingpenguin.com
 
 How to install moltk:
-
-A) The easy way - get a binary installer.
+A) MolTK application
+    TODO in MolTK version 0.7
+    
+B) The easy way - get a binary installer.
 
     Avoid the hassle of building from source by getting a binary distribution, if you can.
+    1) Windows
+        Install 32-bit Python 2.7
+            http://www.python.org/download/
+            Python 2.7.2 Windows Installer (current version on November 5, 2011)
+        Put Python on your Path
+            Start -> Control Panel -> (System and Security) -> System -> Advanced System Settings -> 
+            Environment Variables (in Advanced tab) -> Edit "Path" in System variables -> 
+            Add ";C:\Python27" (without the quotation marks) onto the end of the current text in the 
+            Variable value field -> Click OK
+        Install the MolTK Python module for windows
+            http://code.google.com/p/moltk/downloads/list
+            MolTK-0.4.1.win32-py2.7.msi (curren version on November 5, 2011)
+            
+    2) Macintosh
+        TODO in MolTK version 0.6
+        Install Python 2.6
+        
+    3) Linux
+        TODO in MolTK version 0.6
 
-    Prerequisites:
+C) MolTK C++ SDK
+    TODO in MolTK version 0.5
     
-    1) Python version 2.x
-        http://www.python.org
-        http://www.python.org/download/releases/2.7/
-
-
-B) The hard way - build from source.
+D) The hard way - build from source.
 
     Build from source if you cannot find a binary installer for your system.
 
@@ -58,7 +75,7 @@ B) The hard way - build from source.
 
 
 
-C) Even harder - also regenerate python bindings.
+E) Even harder - also regenerate python bindings.
 
     Only regenerate python bindings if you have changed the moltk API.
 
@@ -86,7 +103,7 @@ C) Even harder - also regenerate python bindings.
         python setup.py build
         python setup.py install
         
-D) Generate API documentation
+F) Generate API documentation
     * epydoc (for generating python API documentation)
         http://sourceforge.net/projects/epydoc/files/epydoc/
 
