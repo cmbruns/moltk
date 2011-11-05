@@ -74,6 +74,10 @@ def do_setup():
     # instantiate.cpp
     moltk_sources.extend(glob.glob(os.path.join('python', 'wrap_moltk', '*.cpp')))
     
+    package_dir = {'moltk': os.path.join('python','moltk')} # sources are under python subdirectory
+    package_data = {}
+    packages = ['moltk', 'moltk.gui']
+    
     if (platform.system() == 'Windows'):
         # Avoid compiler warning and subsequent link error with MSVC9 (/EHsc)
         CFLAGS.append('/EHsc')
@@ -81,6 +85,9 @@ def do_setup():
         CFLAGS.append('-D"_HAS_TR1=0"')
         moltk_sources.extend(glob.glob(os.path.join('python','wrap_moltk','generated_code_msvc','*.cpp')))
         include_dirs.append("./python/wrap_moltk/generated_code_msvc")
+        # Install microsoft redistributable for use by installer
+        # Install shared boost python dll TODO
+        package_data['moltk'] = ['vcredist_x86.exe', 'boost_python-vc90-mt-1_47.dll']
     else:
         moltk_sources.extend(glob.glob(os.path.join('python','wrap_moltk','generated_code_gcc','*.cpp')))
         include_dirs.append("./python/wrap_moltk/generated_code_gcc")
@@ -93,8 +100,9 @@ def do_setup():
           author = "Christopher Bruns",
           author_email = "cmbruns@rotatingpenguin.com",
           url = "http://code.google.com/p/moltk/",
-          package_dir = {'': 'python'}, # sources are under python subdirectory
-          packages = ['moltk', 'moltk.gui'],
+          package_dir = package_dir, # sources are under python subdirectory
+          packages = packages,
+          package_data = package_data,
           ext_modules = [Extension( 'moltk._moltk', moltk_sources,
                 library_dirs = library_dirs,
                 libraries = [boost_python_library, boost_iostreams_library],
