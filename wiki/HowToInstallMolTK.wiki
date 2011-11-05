@@ -8,5 +8,8 @@ This document explains how to install MolTK.
 = How to install interactive MolTK Python module =
 
 == Installing MolTK python module on Windows ==
-  * Install [http://www.python.org/download/ Python 2.7]
+  * Install [http://www.python.org/download/ 32-bit Python 2.7]
+  * Make sure python is on your path
+     * Start -> Control Panel -> (System and Security) -> System -> Advanced System Settings -> Environment Variables (in Advanced tab) -> Edit "Path" in System variables -> Add ";C:\Python27" (without the quotation marks) onto the end of the current text in the Variable value field -> Click OK > Keep clicking OK as long as necessary
+     * 
   * Install the [http://code.google.com/p/moltk/downloads/list MolTK Python module for windows]
