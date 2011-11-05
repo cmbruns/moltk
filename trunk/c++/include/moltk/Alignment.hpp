@@ -44,8 +44,8 @@ public:
 
     /// Whether a particular Alignment member is a sequence or structure.
     enum List {
-        LIST_SEQUENCE,
-        LIST_STRUCTURE
+        LIST_SEQUENCE, ///< Item belongs to the sequence list
+        LIST_STRUCTURE ///< Item belongs to the structure list
     };
 
     typedef moltk::EString EString;
@@ -54,66 +54,79 @@ public:
     class Row
     {
     public:
-        List list; // which list: sequences or structures?
-        int list_index;
-        Real sequence_weight;
-        EString e_string;
+        List list; ///< which list: sequences or structures?
+        int list_index; ///< index into either the structure or sequence list
+        Real sequence_weight; ///< relative contribution of this sequence to the alignment score
+        EString e_string; ///< gap pattern of this sequence
     };
 
 
 public:
+    /// Default constructor creates an empty Alignment
     Alignment();
+    /// Create an alignment with exactly one sequence
     /* implicit */ Alignment(const Biosequence& sequence);
+    /// Create an alignment from fasta sequences or a single sequence string
     /* implicit */ Alignment(const std::string& alignment_string);
+    /// Create an alignment from fasta sequences or a single sequence string
     /* implicit */ Alignment(const char* alignment_string);
-    // explicit Alignment(std::istream& is);
+    /// Delete alignment (destructor)
     ~Alignment() {}
+    /// Add one sequence to the alignment.  Internally, gaps will be removed and encoded into an EString.
     Alignment& append_sequence(const Biosequence& sequence);
+    /// Add sequences from fasta sequences or a single sequence string.
     void load_string(const std::string& alignment_string);
+    /// Load fasta format sequences from a C++ stream
     Alignment& load_fasta(std::istream& input_stream);
+    /// Load fasta sequences from named file
     Alignment& load_fasta(const std::string& file_name);
 
+    /// Write a pretty formatted alignment to a C++ stream
     void write_pretty(std::ostream& output_stream) const;
+    /// Write a pretty formatted alignment to a file
     void write_pretty(const std::string& file_name) const;
+    /// Create a string containing a pretty formatted alignment
     std::string pretty() const;
 
+    /// Write Alignment in fasta format to a C++ stream
     void write_fasta(std::ostream& output_stream) const;
+    /// Write Alignment in fasta format to a file
     void write_fasta(const std::string& file_name) const;
+    /// Create a string with Alignment in fasta format
     std::string fasta() const;
 
+    /// Write table of pairwise sequence identities to a C++ stream
     void write_id_table(std::ostream& output_stream) const;
+    /// Write table of pairwise sequence identities to a file
     void write_id_table(const std::string& file_name) const;
+    /// Create a string containing table of pairwise sequence identities
     std::string id_table() const;
 
+    /// Number of columns (width) of sequence Alignment
     size_t get_number_of_columns() const;
-    // get_number_of_sequences() includes both sequences and structures
+    /// get_number_of_sequences() includes combined number of both sequences and structures
     size_t get_number_of_sequences() const {return rows.size();}
+
+    /// Align two sequence alignments using a pair of precomputed EStrings.
+    ///
+    /// This methods is used to create the final Alignment after the dynamic
+    /// programming alignment has completed.
     Alignment align(const Alignment&, const EString&, const EString&) const;
-    const BaseBiosequence& get_sequence(size_t index) const
-    {
-        const Row& row = rows[index];
-        if (row.list == LIST_SEQUENCE)
-            return sequences[row.list_index];
-        else
-            return structures[row.list_index];
-    }
-    const EString& get_estring(size_t index) const
-    {
-        return rows[index].e_string;
-    }
-    const moltk::units::Information& score() const {return m_score;}
-    Alignment& set_score(const moltk::units::Information& s) 
-    {
-        m_score = s;
-        return *this;
-    }
 
-    inline friend std::ostream& operator<<(std::ostream& os, const Alignment& ali)
-    {
-        ali.write_pretty(os);
-        return os;
-    }
-
+    /// Returns the particular sequence or structure at Row index
+    const BaseBiosequence& get_sequence(size_t index) const;
+    /// The gapping pattern of Row index
+    const EString& get_estring(size_t index) const;
+    /// The precomputed total sum of pairs score of this Alignment
+    const moltk::units::Information& get_score() const;
+    /// Set the sum of pairs score for this Alignment.  Make sure you put the correct answer!
+    Alignment& set_score(const moltk::units::Information& s);
+    /// Inefficient computation of sum-of-pairs score, for use in testing and debugging.
+    units::Information calc_explicit_sum_of_pairs_score() const;
+    /// Compute pair score between two sequences in this alignment
+    units::Information Alignment::calc_explicit_pair_score(int i, int j) const;
+    /// Low level python string representation of this Alignment
+    std::string repr() const;
 
 protected:
     std::vector<Biosequence> sequences;
@@ -123,10 +136,12 @@ protected:
     int pretty_width;
 };
 
-/*!
- * global load_fasta method helps get SEQUOIA-like conciseness in python.
- */
+
+/// global load_fasta method helps get SEQUOIA-like conciseness in python.
 Alignment load_fasta(const std::string& file_name);
+
+/// Standard print method for Alignment produces pretty formatted output.
+std::ostream& operator<<(std::ostream& os, const Alignment& ali);
 
 } // namespace moltk
 

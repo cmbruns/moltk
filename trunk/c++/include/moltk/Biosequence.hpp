@@ -135,9 +135,7 @@ public:
      */
     void write_sequence_string(std::ostream& os) const;
 
-    /*!
-     * repr is a helper for the python __repr__ method.
-     */
+    /// Low level python string representation of this Biosequence
     std::string repr() const;
 
     inline friend std::ostream& operator<<(std::ostream& os, const Biosequence& seq)

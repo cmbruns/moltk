@@ -251,7 +251,7 @@ Alignment Aligner::compute_traceback()
     // cerr << eString1 << eString2 << endl;
     // cerr << targetAlignment << queryAlignment;
     Alignment result = target_alignment.align(query_alignment, eString1, eString2);
-    result.set_score(result.score() + alignmentScore);
+    result.set_score(result.get_score() + alignmentScore);
     return result;
 }
 

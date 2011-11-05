@@ -42,19 +42,19 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     Aligner aligner;
     aligner.set_end_gaps_free(true);
     Alignment a1 = aligner.align("W", "W");
-    cout << a1 << a1.score() << endl;
-    BOOST_CHECK_EQUAL(a1.score(), 5.5 * bit);
+    cout << a1 << a1.get_score() << endl;
+    BOOST_CHECK_EQUAL(a1.get_score(), 5.5 * bit);
 
     aligner.set_end_gaps_free(false);
     Alignment a = aligner.align("QS", "SD");
-    cout << a << a.score() << endl;
+    cout << a << a.get_score() << endl;
     aligner.set_end_gaps_free(true);
     a = aligner.align("QS", "SD");
-    cout << a << a.score() << endl;
+    cout << a << a.get_score() << endl;
 
     Biosequence seq1("AACDEF");
     Biosequence seq2("ACEFG");
     a = aligner.align(seq1, seq2);
-    cout << a << a.score() << endl;
+    cout << a << a.get_score() << endl;
 }
 
