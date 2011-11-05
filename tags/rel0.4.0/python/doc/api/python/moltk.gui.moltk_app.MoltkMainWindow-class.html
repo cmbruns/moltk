@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>moltk.gui.moltk_app.MoltkMainWindow</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="moltk-module.html">Package&nbsp;moltk</a> ::
+        <a href="moltk.gui-module.html">Package&nbsp;gui</a> ::
+        <a href="moltk.gui.moltk_app-module.html">Module&nbsp;moltk_app</a> ::
+        Class&nbsp;MoltkMainWindow
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="moltk.gui.moltk_app.MoltkMainWindow-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class MoltkMainWindow</h1><p class="nomargin-top"><span class="codelink"><a href="moltk.gui.moltk_app-pysrc.html#MoltkMainWindow">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_moltk_gu_2" name="uml_class_diagram_for_moltk_gu_2">
+<area shape="rect" id="node1_81" href="moltk.gui.moltk_app.MoltkMainWindow-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="121,1513,284,1532"/>
+<area shape="rect" id="node1" href="moltk.gui.moltk_app.MoltkMainWindow-class.html" title="moltk.gui.moltk_app.MoltkMainWindow" alt="" coords="109,1481,296,1538"/>
+<area shape="rect" id="node2_82" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.AllowNestedDocks" alt="" coords="104,1004,301,1023"/>
+<area shape="rect" id="node2_83" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.AllowTabbedDocks" alt="" coords="104,1023,301,1041"/>
+<area shape="rect" id="node2_84" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.AnimatedDocks" alt="" coords="104,1041,301,1060"/>
+<area shape="rect" id="node2_85" href="PySide.QtGui.QMainWindow.DockOption-class.html" title="PySide.QtGui.QMainWindow.DockOption" alt="" coords="104,1060,301,1079"/>
+<area shape="rect" id="node2_86" href="PySide.QtGui.QMainWindow.DockOptions-class.html" title="PySide.QtGui.QMainWindow.DockOptions" alt="" coords="104,1079,301,1097"/>
+<area shape="rect" id="node2_87" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.ForceTabbedDocks" alt="" coords="104,1097,301,1116"/>
+<area shape="rect" id="node2_88" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.VerticalTabs" alt="" coords="104,1116,301,1135"/>
+<area shape="rect" id="node2_89" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.iconSizeChanged" alt="" coords="104,1135,301,1153"/>
+<area shape="rect" id="node2_90" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.toolButtonStyleChanged" alt="" coords="104,1153,301,1172"/>
+<area shape="rect" id="node2_91" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.__new__" alt="" coords="104,1175,301,1193"/>
+<area shape="rect" id="node2_92" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.addDockWidget" alt="" coords="104,1193,301,1212"/>
+<area shape="rect" id="node2_93" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.addToolBar" alt="" coords="104,1212,301,1231"/>
+<area shape="rect" id="node2_94" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.addToolBarBreak" alt="" coords="104,1231,301,1249"/>
+<area shape="rect" id="node2_95" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.centralWidget" alt="" coords="104,1249,301,1268"/>
+<area shape="rect" id="node2_96" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.contextMenuEvent" alt="" coords="104,1268,301,1287"/>
+<area shape="rect" id="node2_97" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.corner" alt="" coords="104,1287,301,1305"/>
+<area shape="rect" id="node2_98" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.createPopupMenu" alt="" coords="104,1305,301,1324"/>
+<area shape="rect" id="node2_99" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.dockOptions" alt="" coords="104,1324,301,1343"/>
+<area shape="rect" id="node2_100" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.dockWidgetArea" alt="" coords="104,1343,301,1361"/>
+<area shape="rect" id="node2_101" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.documentMode" alt="" coords="104,1361,301,1380"/>
+<area shape="rect" id="node2_102" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.event" alt="" coords="104,1380,301,1399"/>
+<area shape="rect" id="node2_103" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.iconSize" alt="" coords="104,1399,301,1417"/>
+<area shape="rect" id="node2_104" href="javascript:void(0);" title="PySide.QtGui.QMainWindow.unifiedTitleAndToolBarOnMac" alt="" coords="104,1436,301,1455"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="PySide.QtGui.QMainWindow" alt="" coords="92,979,313,1461"/>
+<area shape="rect" id="node3_105" href="javascript:void(0);" title="PySide.QtGui.QWidget.DrawChildren" alt="" coords="108,559,297,577"/>
+<area shape="rect" id="node3_106" href="javascript:void(0);" title="PySide.QtGui.QWidget.DrawWindowBackground" alt="" coords="108,577,297,596"/>
+<area shape="rect" id="node3_107" href="javascript:void(0);" title="PySide.QtGui.QWidget.IgnoreMask" alt="" coords="108,596,297,615"/>
+<area shape="rect" id="node3_108" href="PySide.QtGui.QWidget.RenderFlag-class.html" title="PySide.QtGui.QWidget.RenderFlag" alt="" coords="108,615,297,633"/>
+<area shape="rect" id="node3_109" href="PySide.QtGui.QWidget.RenderFlags-class.html" title="PySide.QtGui.QWidget.RenderFlags" alt="" coords="108,633,297,652"/>
+<area shape="rect" id="node3_110" href="javascript:void(0);" title="PySide.QtGui.QWidget.customContextMenuRequested" alt="" coords="108,652,297,671"/>
+<area shape="rect" id="node3_111" href="javascript:void(0);" title="PySide.QtGui.QWidget.acceptDrops" alt="" coords="108,673,297,692"/>
+<area shape="rect" id="node3_112" href="javascript:void(0);" title="PySide.QtGui.QWidget.accessibleDescription" alt="" coords="108,692,297,711"/>
+<area shape="rect" id="node3_113" href="javascript:void(0);" title="PySide.QtGui.QWidget.accessibleName" alt="" coords="108,711,297,729"/>
+<area shape="rect" id="node3_114" href="javascript:void(0);" title="PySide.QtGui.QWidget.actionEvent" alt="" coords="108,729,297,748"/>
+<area shape="rect" id="node3_115" href="javascript:void(0);" title="PySide.QtGui.QWidget.actions" alt="" coords="108,748,297,767"/>
+<area shape="rect" id="node3_116" href="javascript:void(0);" title="PySide.QtGui.QWidget.activateWindow" alt="" coords="108,767,297,785"/>
+<area shape="rect" id="node3_117" href="javascript:void(0);" title="PySide.QtGui.QWidget.addAction" alt="" coords="108,785,297,804"/>
+<area shape="rect" id="node3_118" href="javascript:void(0);" title="PySide.QtGui.QWidget.addActions" alt="" coords="108,804,297,823"/>
+<area shape="rect" id="node3_119" href="javascript:void(0);" title="PySide.QtGui.QWidget.adjustSize" alt="" coords="108,823,297,841"/>
+<area shape="rect" id="node3_120" href="javascript:void(0);" title="PySide.QtGui.QWidget.autoFillBackground" alt="" coords="108,841,297,860"/>
+<area shape="rect" id="node3_121" href="javascript:void(0);" title="PySide.QtGui.QWidget.backgroundRole" alt="" coords="108,860,297,879"/>
+<area shape="rect" id="node3_122" href="javascript:void(0);" title="PySide.QtGui.QWidget.baseSize" alt="" coords="108,879,297,897"/>
+<area shape="rect" id="node3_123" href="javascript:void(0);" title="PySide.QtGui.QWidget.changeEvent" alt="" coords="108,897,297,916"/>
+<area shape="rect" id="node3_124" href="javascript:void(0);" title="PySide.QtGui.QWidget.y" alt="" coords="108,935,297,953"/>
+<area shape="rect" id="node3" href="javascript:void(0);" title="PySide.QtGui.QWidget" alt="" coords="96,534,309,959"/>
+<area shape="rect" id="node4" href="javascript:void(0);" title="??.Object" alt="" coords="161,6,244,50"/>
+<area shape="rect" id="node5_125" href="PySide.QtGui.QPaintDevice.PaintDeviceMetric-class.html" title="PySide.QtGui.QPaintDevice.PaintDeviceMetric" alt="" coords="17,95,181,113"/>
+<area shape="rect" id="node5_126" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmDepth" alt="" coords="17,113,181,132"/>
+<area shape="rect" id="node5_127" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmDpiX" alt="" coords="17,132,181,151"/>
+<area shape="rect" id="node5_128" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmDpiY" alt="" coords="17,151,181,169"/>
+<area shape="rect" id="node5_129" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmHeight" alt="" coords="17,169,181,188"/>
+<area shape="rect" id="node5_130" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmHeightMM" alt="" coords="17,188,181,207"/>
+<area shape="rect" id="node5_131" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmNumColors" alt="" coords="17,207,181,225"/>
+<area shape="rect" id="node5_132" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmPhysicalDpiX" alt="" coords="17,225,181,244"/>
+<area shape="rect" id="node5_133" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmPhysicalDpiY" alt="" coords="17,244,181,263"/>
+<area shape="rect" id="node5_134" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmWidth" alt="" coords="17,263,181,281"/>
+<area shape="rect" id="node5_135" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.PdmWidthMM" alt="" coords="17,281,181,300"/>
+<area shape="rect" id="node5_136" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.painters" alt="" coords="17,300,181,319"/>
+<area shape="rect" id="node5_137" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.colorCount" alt="" coords="17,321,181,340"/>
+<area shape="rect" id="node5_138" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.depth" alt="" coords="17,340,181,359"/>
+<area shape="rect" id="node5_139" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.heightMM" alt="" coords="17,359,181,377"/>
+<area shape="rect" id="node5_140" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.logicalDpiX" alt="" coords="17,377,181,396"/>
+<area shape="rect" id="node5_141" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.logicalDpiY" alt="" coords="17,396,181,415"/>
+<area shape="rect" id="node5_142" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.numColors" alt="" coords="17,415,181,433"/>
+<area shape="rect" id="node5_143" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.paintingActive" alt="" coords="17,433,181,452"/>
+<area shape="rect" id="node5_144" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.physicalDpiX" alt="" coords="17,452,181,471"/>
+<area shape="rect" id="node5_145" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.physicalDpiY" alt="" coords="17,471,181,489"/>
+<area shape="rect" id="node5_146" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice.widthMM" alt="" coords="17,489,181,508"/>
+<area shape="rect" id="node5" href="javascript:void(0);" title="PySide.QtGui.QPaintDevice" alt="" coords="5,70,193,514"/>
+<area shape="rect" id="node6_147" href="javascript:void(0);" title="PySide.QtCore.QObject.destroyed" alt="" coords="235,151,376,169"/>
+<area shape="rect" id="node6_148" href="javascript:void(0);" title="x.__delattr__(&#39;name&#39;) &lt;==&gt; del x.name" alt="" coords="235,172,376,191"/>
+<area shape="rect" id="node6_149" href="javascript:void(0);" title="x.__getattribute__(&#39;name&#39;) &lt;==&gt; x.name" alt="" coords="235,191,376,209"/>
+<area shape="rect" id="node6_150" href="javascript:void(0);" title="x.__setattr__(&#39;name&#39;, value) &lt;==&gt; x.name = value" alt="" coords="235,209,376,228"/>
+<area shape="rect" id="node6_151" href="javascript:void(0);" title="PySide.QtCore.QObject.blockSignals" alt="" coords="235,228,376,247"/>
+<area shape="rect" id="node6_152" href="javascript:void(0);" title="PySide.QtCore.QObject.childEvent" alt="" coords="235,247,376,265"/>
+<area shape="rect" id="node6_153" href="javascript:void(0);" title="PySide.QtCore.QObject.children" alt="" coords="235,265,376,284"/>
+<area shape="rect" id="node6_154" href="javascript:void(0);" title="PySide.QtCore.QObject.connect" alt="" coords="235,284,376,303"/>
+<area shape="rect" id="node6_155" href="javascript:void(0);" title="PySide.QtCore.QObject.connectNotify" alt="" coords="235,303,376,321"/>
+<area shape="rect" id="node6_156" href="javascript:void(0);" title="PySide.QtCore.QObject.customEvent" alt="" coords="235,321,376,340"/>
+<area shape="rect" id="node6_157" href="javascript:void(0);" title="PySide.QtCore.QObject.deleteLater" alt="" coords="235,340,376,359"/>
+<area shape="rect" id="node6_158" href="javascript:void(0);" title="PySide.QtCore.QObject.disconnect" alt="" coords="235,359,376,377"/>
+<area shape="rect" id="node6_159" href="javascript:void(0);" title="PySide.QtCore.QObject.disconnectNotify" alt="" coords="235,377,376,396"/>
+<area shape="rect" id="node6_160" href="javascript:void(0);" title="PySide.QtCore.QObject.dumpObjectInfo" alt="" coords="235,396,376,415"/>
+<area shape="rect" id="node6_161" href="javascript:void(0);" title="PySide.QtCore.QObject.trUtf8" alt="" coords="235,433,376,452"/>
+<area shape="rect" id="node6" href="javascript:void(0);" title="PySide.QtCore.QObject" alt="" coords="223,126,388,458"/>
+</map>
+  <img src="uml_class_diagram_for_moltk_gu_2.gif" alt='' usemap="#uml_class_diagram_for_moltk_gu_2" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QMainWindow</code></b>:
+      <code><a href="PySide.QtGui.QMainWindow.DockOption-class.html">DockOption</a></code>,
+      <code><a href="PySide.QtGui.QMainWindow.DockOptions-class.html">DockOptions</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QWidget</code></b>:
+      <code><a href="PySide.QtGui.QWidget.RenderFlag-class.html">RenderFlag</a></code>,
+      <code><a href="PySide.QtGui.QWidget.RenderFlags-class.html">RenderFlags</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QPaintDevice</code></b>:
+      <code><a href="PySide.QtGui.QPaintDevice.PaintDeviceMetric-class.html">PaintDeviceMetric</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.gui.moltk_app.MoltkMainWindow-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">parent</span>=<span class="summary-sig-default">None</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="moltk.gui.moltk_app-pysrc.html#MoltkMainWindow.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QMainWindow</code></b>:
+      <code>__new__</code>,
+      <code>addDockWidget</code>,
+      <code>addToolBar</code>,
+      <code>addToolBarBreak</code>,
+      <code>centralWidget</code>,
+      <code>contextMenuEvent</code>,
+      <code>corner</code>,
+      <code>createPopupMenu</code>,
+      <code>dockOptions</code>,
+      <code>dockWidgetArea</code>,
+      <code>documentMode</code>,
+      <code>event</code>,
+      <code>iconSize</code>,
+      <code>insertToolBar</code>,
+      <code>insertToolBarBreak</code>,
+      <code>isAnimated</code>,
+      <code>isDockNestingEnabled</code>,
+      <code>isSeparator</code>,
+      <code>menuBar</code>,
+      <code>menuWidget</code>,
+      <code>removeDockWidget</code>,
+      <code>removeToolBar</code>,
+      <code>removeToolBarBreak</code>,
+      <code>restoreDockWidget</code>,
+      <code>restoreState</code>,
+      <code>saveState</code>,
+      <code>setAnimated</code>,
+      <code>setCentralWidget</code>,
+      <code>setCorner</code>,
+      <code>setDockNestingEnabled</code>,
+      <code>setDockOptions</code>,
+      <code>setDocumentMode</code>,
+      <code>setIconSize</code>,
+      <code>setMenuBar</code>,
+      <code>setMenuWidget</code>,
+      <code>setStatusBar</code>,
+      <code>setTabPosition</code>,
+      <code>setTabShape</code>,
+      <code>setToolButtonStyle</code>,
+      <code>setUnifiedTitleAndToolBarOnMac</code>,
+      <code>splitDockWidget</code>,
+      <code>statusBar</code>,
+      <code>tabPosition</code>,
+      <code>tabShape</code>,
+      <code>tabifiedDockWidgets</code>,
+      <code>tabifyDockWidget</code>,
+      <code>toolBarArea</code>,
+      <code>toolBarBreak</code>,
+      <code>toolButtonStyle</code>,
+      <code>unifiedTitleAndToolBarOnMac</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QWidget</code></b>:
+      <code>acceptDrops</code>,
+      <code>accessibleDescription</code>,
+      <code>accessibleName</code>,
+      <code>actionEvent</code>,
+      <code>actions</code>,
+      <code>activateWindow</code>,
+      <code>addAction</code>,
+      <code>addActions</code>,
+      <code>adjustSize</code>,
+      <code>autoFillBackground</code>,
+      <code>backgroundRole</code>,
+      <code>baseSize</code>,
+      <code>changeEvent</code>,
+      <code>childAt</code>,
+      <code>childrenRect</code>,
+      <code>childrenRegion</code>,
+      <code>clearFocus</code>,
+      <code>clearMask</code>,
+      <code>close</code>,
+      <code>closeEvent</code>,
+      <code>contentsMargins</code>,
+      <code>contentsRect</code>,
+      <code>contextMenuPolicy</code>,
+      <code>createWinId</code>,
+      <code>cursor</code>,
+      <code>destroy</code>,
+      <code>devType</code>,
+      <code>dragEnterEvent</code>,
+      <code>dragLeaveEvent</code>,
+      <code>dragMoveEvent</code>,
+      <code>dropEvent</code>,
+      <code>effectiveWinId</code>,
+      <code>ensurePolished</code>,
+      <code>enterEvent</code>,
+      <code>focusInEvent</code>,
+      <code>focusNextChild</code>,
+      <code>focusNextPrevChild</code>,
+      <code>focusOutEvent</code>,
+      <code>focusPolicy</code>,
+      <code>focusPreviousChild</code>,
+      <code>focusProxy</code>,
+      <code>focusWidget</code>,
+      <code>font</code>,
+      <code>fontInfo</code>,
+      <code>fontMetrics</code>,
+      <code>foregroundRole</code>,
+      <code>frameGeometry</code>,
+      <code>frameSize</code>,
+      <code>geometry</code>,
+      <code>getContentsMargins</code>,
+      <code>grabGesture</code>,
+      <code>grabKeyboard</code>,
+      <code>grabMouse</code>,
+      <code>grabShortcut</code>,
+      <code>graphicsEffect</code>,
+      <code>graphicsProxyWidget</code>,
+      <code>hasFocus</code>,
+      <code>hasMouseTracking</code>,
+      <code>height</code>,
+      <code>heightForWidth</code>,
+      <code>hide</code>,
+      <code>hideEvent</code>,
+      <code>inputContext</code>,
+      <code>inputMethodEvent</code>,
+      <code>inputMethodHints</code>,
+      <code>inputMethodQuery</code>,
+      <code>insertAction</code>,
+      <code>insertActions</code>,
+      <code>isActiveWindow</code>,
+      <code>isAncestorOf</code>,
+      <code>isEnabled</code>,
+      <code>isEnabledTo</code>,
+      <code>isFullScreen</code>,
+      <code>isHidden</code>,
+      <code>isLeftToRight</code>,
+      <code>isMaximized</code>,
+      <code>isMinimized</code>,
+      <code>isModal</code>,
+      <code>isRightToLeft</code>,
+      <code>isVisible</code>,
+      <code>isVisibleTo</code>,
+      <code>isWindow</code>,
+      <code>isWindowModified</code>,
+      <code>keyPressEvent</code>,
+      <code>keyReleaseEvent</code>,
+      <code>languageChange</code>,
+      <code>layout</code>,
+      <code>layoutDirection</code>,
+      <code>leaveEvent</code>,
+      <code>locale</code>,
+      <code>lower</code>,
+      <code>mapFrom</code>,
+      <code>mapFromGlobal</code>,
+      <code>mapFromParent</code>,
+      <code>mapTo</code>,
+      <code>mapToGlobal</code>,
+      <code>mapToParent</code>,
+      <code>mask</code>,
+      <code>maximumHeight</code>,
+      <code>maximumSize</code>,
+      <code>maximumWidth</code>,
+      <code>metric</code>,
+      <code>minimumHeight</code>,
+      <code>minimumSize</code>,
+      <code>minimumSizeHint</code>,
+      <code>minimumWidth</code>,
+      <code>mouseDoubleClickEvent</code>,
+      <code>mouseMoveEvent</code>,
+      <code>mousePressEvent</code>,
+      <code>mouseReleaseEvent</code>,
+      <code>move</code>,
+      <code>moveEvent</code>,
+      <code>nativeParentWidget</code>,
+      <code>nextInFocusChain</code>,
+      <code>normalGeometry</code>,
+      <code>overrideWindowFlags</code>,
+      <code>overrideWindowState</code>,
+      <code>paintEngine</code>,
+      <code>paintEvent</code>,
+      <code>palette</code>,
+      <code>parentWidget</code>,
+      <code>pos</code>,
+      <code>previousInFocusChain</code>,
+      <code>raise_</code>,
+      <code>rect</code>,
+      <code>releaseKeyboard</code>,
+      <code>releaseMouse</code>,
+      <code>releaseShortcut</code>,
+      <code>removeAction</code>,
+      <code>render</code>,
+      <code>repaint</code>,
+      <code>resetInputContext</code>,
+      <code>resize</code>,
+      <code>resizeEvent</code>,
+      <code>restoreGeometry</code>,
+      <code>saveGeometry</code>,
+      <code>scroll</code>,
+      <code>setAcceptDrops</code>,
+      <code>setAccessibleDescription</code>,
+      <code>setAccessibleName</code>,
+      <code>setAttribute</code>,
+      <code>setAutoFillBackground</code>,
+      <code>setBackgroundRole</code>,
+      <code>setBaseSize</code>,
+      <code>setContentsMargins</code>,
+      <code>setContextMenuPolicy</code>,
+      <code>setCursor</code>,
+      <code>setDisabled</code>,
+      <code>setEnabled</code>,
+      <code>setFixedHeight</code>,
+      <code>setFixedSize</code>,
+      <code>setFixedWidth</code>,
+      <code>setFocus</code>,
+      <code>setFocusPolicy</code>,
+      <code>setFocusProxy</code>,
+      <code>setFont</code>,
+      <code>setForegroundRole</code>,
+      <code>setGeometry</code>,
+      <code>setGraphicsEffect</code>,
+      <code>setHidden</code>,
+      <code>setInputContext</code>,
+      <code>setInputMethodHints</code>,
+      <code>setLayout</code>,
+      <code>setLayoutDirection</code>,
+      <code>setLocale</code>,
+      <code>setMask</code>,
+      <code>setMaximumHeight</code>,
+      <code>setMaximumSize</code>,
+      <code>setMaximumWidth</code>,
+      <code>setMinimumHeight</code>,
+      <code>setMinimumSize</code>,
+      <code>setMinimumWidth</code>,
+      <code>setMouseTracking</code>,
+      <code>setPalette</code>,
+      <code>setParent</code>,
+      <code>setShortcutAutoRepeat</code>,
+      <code>setShortcutEnabled</code>,
+      <code>setSizeIncrement</code>,
+      <code>setSizePolicy</code>,
+      <code>setStatusTip</code>,
+      <code>setStyle</code>,
+      <code>setStyleSheet</code>,
+      <code>setToolTip</code>,
+      <code>setUpdatesEnabled</code>,
+      <code>setVisible</code>,
+      <code>setWhatsThis</code>,
+      <code>setWindowFilePath</code>,
+      <code>setWindowFlags</code>,
+      <code>setWindowIcon</code>,
+      <code>setWindowIconText</code>,
+      <code>setWindowModality</code>,
+      <code>setWindowModified</code>,
+      <code>setWindowOpacity</code>,
+      <code>setWindowRole</code>,
+      <code>setWindowState</code>,
+      <code>setWindowTitle</code>,
+      <code>show</code>,
+      <code>showEvent</code>,
+      <code>showFullScreen</code>,
+      <code>showMaximized</code>,
+      <code>showMinimized</code>,
+      <code>showNormal</code>,
+      <code>size</code>,
+      <code>sizeHint</code>,
+      <code>sizeIncrement</code>,
+      <code>sizePolicy</code>,
+      <code>stackUnder</code>,
+      <code>statusTip</code>,
+      <code>style</code>,
+      <code>styleSheet</code>,
+      <code>tabletEvent</code>,
+      <code>testAttribute</code>,
+      <code>toolTip</code>,
+      <code>underMouse</code>,
+      <code>ungrabGesture</code>,
+      <code>unsetCursor</code>,
+      <code>unsetLayoutDirection</code>,
+      <code>unsetLocale</code>,
+      <code>update</code>,
+      <code>updateGeometry</code>,
+      <code>updateMicroFocus</code>,
+      <code>updatesEnabled</code>,
+      <code>visibleRegion</code>,
+      <code>whatsThis</code>,
+      <code>wheelEvent</code>,
+      <code>width</code>,
+      <code>winId</code>,
+      <code>window</code>,
+      <code>windowFilePath</code>,
+      <code>windowFlags</code>,
+      <code>windowIcon</code>,
+      <code>windowIconText</code>,
+      <code>windowModality</code>,
+      <code>windowOpacity</code>,
+      <code>windowRole</code>,
+      <code>windowState</code>,
+      <code>windowTitle</code>,
+      <code>windowType</code>,
+      <code>x</code>,
+      <code>y</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtCore.QObject</code></b>:
+      <code>__delattr__</code>,
+      <code>__getattribute__</code>,
+      <code>__setattr__</code>,
+      <code>blockSignals</code>,
+      <code>childEvent</code>,
+      <code>children</code>,
+      <code>connectNotify</code>,
+      <code>customEvent</code>,
+      <code>deleteLater</code>,
+      <code>disconnectNotify</code>,
+      <code>dumpObjectInfo</code>,
+      <code>dumpObjectTree</code>,
+      <code>dynamicPropertyNames</code>,
+      <code>emit</code>,
+      <code>eventFilter</code>,
+      <code>findChild</code>,
+      <code>findChildren</code>,
+      <code>inherits</code>,
+      <code>installEventFilter</code>,
+      <code>isWidgetType</code>,
+      <code>killTimer</code>,
+      <code>metaObject</code>,
+      <code>moveToThread</code>,
+      <code>objectName</code>,
+      <code>parent</code>,
+      <code>property</code>,
+      <code>receivers</code>,
+      <code>removeEventFilter</code>,
+      <code>sender</code>,
+      <code>setObjectName</code>,
+      <code>setProperty</code>,
+      <code>signalsBlocked</code>,
+      <code>startTimer</code>,
+      <code>thread</code>,
+      <code>timerEvent</code>,
+      <code>tr</code>,
+      <code>trUtf8</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QPaintDevice</code></b>:
+      <code>colorCount</code>,
+      <code>depth</code>,
+      <code>heightMM</code>,
+      <code>logicalDpiX</code>,
+      <code>logicalDpiY</code>,
+      <code>numColors</code>,
+      <code>paintingActive</code>,
+      <code>physicalDpiX</code>,
+      <code>physicalDpiY</code>,
+      <code>widthMM</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__format__</code>,
+      <code>__hash__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QWidget</code></b>:
+      <code>keyboardGrabber</code>,
+      <code>mouseGrabber</code>,
+      <code>setTabOrder</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtCore.QObject</code></b>:
+      <code>connect</code>,
+      <code>disconnect</code>,
+      <code>registerUserData</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QMainWindow</code></b>:
+      <code>AllowNestedDocks</code>,
+      <code>AllowTabbedDocks</code>,
+      <code>AnimatedDocks</code>,
+      <code>ForceTabbedDocks</code>,
+      <code>VerticalTabs</code>,
+      <code>iconSizeChanged</code>,
+      <code>toolButtonStyleChanged</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QWidget</code></b>:
+      <code>DrawChildren</code>,
+      <code>DrawWindowBackground</code>,
+      <code>IgnoreMask</code>,
+      <code>customContextMenuRequested</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtCore.QObject</code></b>:
+      <code>destroyed</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QPaintDevice</code></b>:
+      <code>PdmDepth</code>,
+      <code>PdmDpiX</code>,
+      <code>PdmDpiY</code>,
+      <code>PdmHeight</code>,
+      <code>PdmHeightMM</code>,
+      <code>PdmNumColors</code>,
+      <code>PdmPhysicalDpiX</code>,
+      <code>PdmPhysicalDpiY</code>,
+      <code>PdmWidth</code>,
+      <code>PdmWidthMM</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>PySide.QtGui.QPaintDevice</code></b>:
+      <code>painters</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">parent</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="moltk.gui.moltk_app-pysrc.html#MoltkMainWindow.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov 04 20:07:19 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

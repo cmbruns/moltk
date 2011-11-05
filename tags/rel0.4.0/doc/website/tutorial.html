@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="css/sahara/default.css" />
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="images.favicon.ico" type="image/x-icon">
+
+<title>MolTK Tutorial</title>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2854544-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+<body>
+
+<div id="outer">
+<div id="outer2">
+
+<div id="header">
+  <h1><img src="images/moltk.png" alt="[MolTK Logo]">MolTK Tutorial</h1>
+  <h2>Let's get started with MolTK!</h2>
+</div> <!-- header -->
+
+<div id="menu">
+  <ul>
+    <li><a href="http://moltk.rotatingpenguin.com/">Home</a></li>
+    <!-- <li><a href="about.html">About</a></li> -->
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div> <!-- menu -->
+
+<div id="content">
+<div id="column1">
+
+<h3 name="toc">Table of Contents</h3>
+    <ul>
+        <li><a href="#toc">Table of Contents</a></li>
+        <li><a href="#aptut">MolTK Application Tutorial</a></li>
+        <li><a href="#pytut">Interactive MolTK Python Tutorial</a></li>
+        <li><a href="#cxxtut">MolTK C++ Tutorial</a></li>
+    </ul>
+<p></p>
+<h3> <a name="aptut">MolTK Application Tutorial</a></h3>
+<p>There is no MolTK application release until MolTK version 0.7.
+Try again later.</p>
+
+<h3> <a name="pytut">Interactive MolTK Python Tutorial</a></h3>
+
+<p>Download and install MolTK from the MolTK download site
+<a href="http://code.google.com/p/moltk/downloads/list">
+http://code.google.com/p/moltk/downloads/list</a>.
+</p>
+
+<p>In the following examples, text following the >>> prompt represents
+commands typed by the user. Other lines represent the output of the program.
+</p>
+
+<h4> Scenario 1: Aligning 3 sequences </h4>
+
+<p>In this example, the files insulin_shark_v1.fasta, 
+insulin_pig_v1.fasta, and insulin_human_v1.fasta are 
+sequences in the FASTA format.
+Information about the FASTA format can be found at
+<a href="http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml">
+http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml</a>.
+A file called test.fasta can be saved with the alignment. The alignment
+can be also saved as test.pretty which is a nicely formatted but
+not computer parseable version of the alignment. What follows
+is an example of performing an alignment of three sequences.
+
+<h5> Step 1. Download FASTA test sequences </h5>
+<p>Go to download page <a href="http://code.google.com/p/moltk/downloads/list">
+http://code.google.com/p/moltk/downloads/list</a> and download
+the three FASTA sequences: insulin_shark_v1.fasta, insulin_pig_v1.fasta, 
+and insulin_human_v1.fasta.
+
+<h5> Step 2. Start an alignment session </h5>
+<div id="code-box">% python -i 
+>>> import moltk </div> <!-- code-box -->
+<p></p>
+
+<h5> Step 3. Load test1.fasta sequence into seq1 </h5>
+<div id="code-box">>>> seq1 = moltk.load_fasta(" insulin_human_v1.fasta")</div>
+<p></p>
+
+<h5> Step 4. Load test2.fasta sequence into seq2 </h5>
+<div id="code-box">>>> seq2 = moltk.load_fasta("insulin_pig_v1.fasta")</div>
+<p></p>
+
+<h5> Step 5. Align seq1 and seq2 </h5>
+<div id="code-box">>>> align1 = moltk.align(seq1, seq2)</div>
+</pre>
+<p></p>
+
+<h5> Step 6. Display the alignment on the screen </h5>
+<div id="code-box">>>> print align1</div>
+<p></p>
+
+<h5> Step 7. Load test3.fasta sequence into seq3 </h5>
+<div id="code-box">>>> seq3 = moltk.load_fasta("insulin_shark_v1.fasta")</div>
+<p></p>
+
+<h5> Step 8. Align previous alignment of test1.fasta and 
+test2.fasta with test3.fasta </h5>
+<div id="code-box">>>> align2 = moltk.align(align1, seq3)</div>
+<p></p>
+
+<h5> Step 9. Save the alignment to a file </h5>
+<div id="code-box">>>> align2.write_fasta("test.fasta")</div>
+<p></p>
+<p>You can also save as test.pretty for a nicely formatted
+(but not computer parseable) version.
+<div id="code-box">>>> align2.write_pretty("test.pretty")</div>
+</p>
+
+<h5> Step 10. Display a table of pairwise sequence identities </h5>
+<div id="code-box">>>> print align2.id_table()</div>
+<p></p>
+
+<h5> Step 11. End your alignment session </h5>
+<div id="code-box">>>> quit()</div>
+<p></p>
+
+<h4> Scenario 2: Writing a python script to help automate 
+the alignment process </h4>
+
+<p></p>
+
+<h4> Scenario 3: Aligning 2 sequences and assessing significance </h4>
+
+<p></p>
+
+<h4> Scenario 4: Overlaying 2 tertiary structures </h4>
+
+<p></p>
+<h3> <a name="cxxtut">MolTK C++ Tutorial</a></h3>
+
+
+</div> <!-- column1 -->
+
+<div id="column2">
+
+    <h3>Search MolTK</h3>
+
+<div id="cse-search-form" style="width: 100%;">Loading</div>
+<script src="//www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('001946757810591683656:m4g2altbati');
+    customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.enableSearchboxOnly("http://www.google.com/cse?cx=001946757810591683656:m4g2altbati");
+    customSearchControl.draw('cse-search-form', options);
+  }, true);
+</script>
+<link rel="stylesheet" href="//www.google.com/cse/style/look/default.css" type="text/css" />
+<style type="text/css">
+  input.gsc-input {
+    border-color: #BCCDF0;
+  }
+  input.gsc-search-button {
+    border-color: #666666;
+    background-color: #CECECE;
+  }
+</style>
+
+     <h3>Resources</h3>
+     <ul>
+        <li><a href="http://code.google.com/p/moltk/downloads/list">Download MolTK</a>
+        <li><a href="tutorial.html">Tutorial</a>
+        <li><a href="http://groups.google.com/group/moltk-users">moltk-users group</a>
+        <li><a href="http://code.google.com/p/moltk/issues/list">Report problems or suggestions</a>
+        <li><a href="http://code.google.com/p/moltk/source/checkout">Get source code</a>
+     </ul>
+
+     <h3>API Documentation</h3>
+     <ul>
+       <li><a href="api_python/python_api.html">Python</a>
+       <li><a href="api_cxx/cxx_api.html">C++</a>
+     </ul>
+
+</div> <!-- column2 -->
+</div> <!-- content -->
+
+<div id="footer">
+  <p>Copyright &copy; 2011 Christopher M. Bruns. CSS Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+</div> <!-- footer -->
+
+
+</div> <!-- outer2 -->
+</div> <!-- outer -->
+
+</body>
+</html>
+
