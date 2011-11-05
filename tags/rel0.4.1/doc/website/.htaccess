@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteRule .*\.svn/.* - [F]
+ErrorDocument 404 /404.html
+

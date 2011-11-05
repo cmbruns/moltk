@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>moltk.Angle</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="moltk-module.html">Package&nbsp;moltk</a> ::
+        Class&nbsp;Angle
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="moltk.Angle-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Angle</h1><p class="nomargin-top"></p>
+<center>
+<center>  <map id="uml_class_diagram_for_moltk_an" name="uml_class_diagram_for_moltk_an">
+<area shape="rect" id="node1_17" href="moltk.Angle-class.html#__instance_size__" title="moltk.Angle.__instance_size__" alt="" coords="17,108,133,127"/>
+<area shape="rect" id="node1_18" href="moltk.Angle-class.html#value" title="moltk.Angle.value" alt="" coords="17,127,133,145"/>
+<area shape="rect" id="node1_19" href="moltk.Angle-class.html#__add__" title="__add__( (Angle)arg1, (Angle)arg2) &#45;&gt; object :" alt="" coords="17,148,133,167"/>
+<area shape="rect" id="node1_20" href="moltk.Angle-class.html#__div__" title="__div__( (Angle)arg1, (float)arg2) &#45;&gt; object :" alt="" coords="17,167,133,185"/>
+<area shape="rect" id="node1_21" href="moltk.Angle-class.html#__eq__" title="__eq__( (Angle)arg1, (Angle)arg2) &#45;&gt; object :" alt="" coords="17,185,133,204"/>
+<area shape="rect" id="node1_22" href="moltk.Angle-class.html#__ge__" title="__ge__( (Angle)arg1, (Angle)arg2) &#45;&gt; object :" alt="" coords="17,204,133,223"/>
+<area shape="rect" id="node1_23" href="moltk.Angle-class.html#__gt__" title="__gt__( (Angle)arg1, (Angle)arg2) &#45;&gt; object :" alt="" coords="17,223,133,241"/>
+<area shape="rect" id="node1_24" href="moltk.Angle-class.html#__iadd__" title="__iadd__( (object)arg1, (Angle)arg2) &#45;&gt; object :" alt="" coords="17,241,133,260"/>
+<area shape="rect" id="node1_25" href="moltk.Angle-class.html#__idiv__" title="__idiv__( (object)arg1, (float)arg2) &#45;&gt; object :" alt="" coords="17,260,133,279"/>
+<area shape="rect" id="node1_26" href="moltk.Angle-class.html#__imul__" title="__imul__( (object)arg1, (float)arg2) &#45;&gt; object :" alt="" coords="17,279,133,297"/>
+<area shape="rect" id="node1_27" href="moltk.Angle-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,297,133,316"/>
+<area shape="rect" id="node1_28" href="moltk.Angle-class.html#__isub__" title="__isub__( (object)arg1, (Angle)arg2) &#45;&gt; object :" alt="" coords="17,316,133,335"/>
+<area shape="rect" id="node1_29" href="moltk.Angle-class.html#__le__" title="__le__( (Angle)arg1, (Angle)arg2) &#45;&gt; object :" alt="" coords="17,335,133,353"/>
+<area shape="rect" id="node1_30" href="moltk.Angle-class.html#__lt__" title="__lt__( (Angle)arg1, (Angle)arg2) &#45;&gt; object :" alt="" coords="17,353,133,372"/>
+<area shape="rect" id="node1_31" href="moltk.Angle-class.html#__mul__" title="__mul__( (Angle)arg1, (float)arg2) &#45;&gt; object :" alt="" coords="17,372,133,391"/>
+<area shape="rect" id="node1_32" href="moltk.Angle-class.html#value_in_unit" title="value_in_unit( (Angle)arg1, (RadianUnit)arg0) &#45;&gt; float :" alt="" coords="17,409,133,428"/>
+<area shape="rect" id="node1" href="moltk.Angle-class.html" title="Quantity represents a physical value with a unit, such as 5.6 nanometers" alt="" coords="5,83,145,434"/>
+<area shape="rect" id="node2_33" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="17,39,133,57"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="5,6,145,63"/>
+</map>
+  <img src="uml_class_diagram_for_moltk_an.gif" alt='' usemap="#uml_class_diagram_for_moltk_an" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<pre class="literalblock">
+
+Quantity represents a physical value with a unit, such as 5.6 nanometers
+
+For efficiency, Quantity&lt;&gt; should compile to a double in C++.
+       This means:
+           no virtual methods
+           no data members other than value
+           unit is a class with a typedef
+       These restrictions need not apply to unit class, which should do
+       whatever it needs to, to be wrapped conveniently in python.
+
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__add__" class="summary-sig-name">__add__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __add__( (Angle)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__div__" class="summary-sig-name">__div__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __div__( (Angle)arg1, (float)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__eq__" class="summary-sig-name">__eq__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __eq__( (Angle)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__ge__" class="summary-sig-name">__ge__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __ge__( (Angle)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__gt__" class="summary-sig-name">__gt__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __gt__( (Angle)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__iadd__" class="summary-sig-name">__iadd__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __iadd__( (object)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__idiv__" class="summary-sig-name">__idiv__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __idiv__( (object)arg1, (float)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__imul__" class="summary-sig-name">__imul__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __imul__( (object)arg1, (float)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __init__( (object)arg1) -&gt; None :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__isub__" class="summary-sig-name">__isub__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __isub__( (object)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__le__" class="summary-sig-name">__le__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __le__( (Angle)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__lt__" class="summary-sig-name">__lt__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __lt__( (Angle)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__mul__" class="summary-sig-name">__mul__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __mul__( (Angle)arg1, (float)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__ne__" class="summary-sig-name">__ne__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __ne__( (Angle)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__neg__" class="summary-sig-name">__neg__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __neg__( (Angle)arg1) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__pos__" class="summary-sig-name">__pos__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __pos__( (Angle)arg1) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__reduce__" class="summary-sig-name">__reduce__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      helper for pickle</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__rmul__" class="summary-sig-name">__rmul__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __rmul__( (Angle)arg1, (float)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __str__( (Angle)arg1) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#__sub__" class="summary-sig-name">__sub__</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      __sub__( (Angle)arg1, (Angle)arg2) -&gt; object :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#assign" class="summary-sig-name">assign</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      assign( (Angle)arg1, (Angle)rhs) -&gt; Angle :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Angle-class.html#value_in_unit" class="summary-sig-name">value_in_unit</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      value_in_unit( (Angle)arg1, (RadianUnit)arg0) -&gt; float :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><i>unreachable</i>.instance</code></b>:
+      <code>__new__</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__instance_size__"></a><span class="summary-name">__instance_size__</span> = <code title="16">16</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk.Angle-class.html#value" class="summary-name">value</a>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__add__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__add__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Addition operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__add__( (Angle)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __add__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__div__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__div__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__div__( (Angle)arg1, (float)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __div__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},double)
+
+__div__( (Angle)arg1, (RadianUnit)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __div__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;)
+
+__div__( (Angle)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __div__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__eq__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__eq__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Equality operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__eq__( (Angle)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __eq__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__ge__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__ge__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Greater-than-or-equals operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__ge__( (Angle)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __ge__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__gt__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__gt__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Greater-than operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__gt__( (Angle)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __gt__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__iadd__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__iadd__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__iadd__( (object)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __iadd__(struct boost::python::back_reference&lt;struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; &amp;&gt;,struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__idiv__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__idiv__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__idiv__( (object)arg1, (float)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __idiv__(struct boost::python::back_reference&lt;struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; &amp;&gt;,double)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__imul__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__imul__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__imul__( (object)arg1, (float)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __imul__(struct boost::python::back_reference&lt;struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; &amp;&gt;,double)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__init__( (object)arg1) -&gt; None :
+
+    C++ signature :
+        void __init__(struct _object *)
+
+__init__( (object)arg1, (float)v, (RadianUnit)u) -&gt; None :
+
+    C++ signature :
+        void __init__(struct _object *,double,struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;)
+
+__init__( (object)arg1, (Angle)rhs) -&gt; None :
+
+    C++ signature :
+        void __init__(struct _object *,struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__isub__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__isub__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__isub__( (object)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __isub__(struct boost::python::back_reference&lt;struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; &amp;&gt;,struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__le__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__le__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Less-than-or-equals operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__le__( (Angle)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __le__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__lt__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__lt__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Less-than operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__lt__( (Angle)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __lt__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__mul__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__mul__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__mul__( (Angle)arg1, (float)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __mul__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},double)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__ne__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__ne__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__ne__( (Angle)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __ne__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__neg__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__neg__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__neg__( (Angle)arg1) -&gt; object :
+
+    C++ signature :
+        struct _object * __neg__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue})
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__pos__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__pos__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__pos__( (Angle)arg1) -&gt; object :
+
+    C++ signature :
+        struct _object * __pos__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue})
+
+__pos__( (Angle)arg1) -&gt; object :
+
+    C++ signature :
+        struct _object * __pos__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue})
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__reduce__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__reduce__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>helper for pickle</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__reduce__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__rmul__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__rmul__</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__rmul__( (Angle)arg1, (float)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __rmul__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},double)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__str__( (Angle)arg1) -&gt; object :
+
+    C++ signature :
+        struct _object * __str__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue})
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__sub__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__sub__</span>(<span class="sig-arg">...</span>)</span>
+    <br /><em class="fname">(Subtraction operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+__sub__( (Angle)arg1, (Angle)arg2) -&gt; object :
+
+    C++ signature :
+        struct _object * __sub__(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="assign"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">assign</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+assign( (Angle)arg1, (Angle)rhs) -&gt; Angle :
+
+    C++ signature :
+        struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue} assign(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="value_in_unit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">value_in_unit</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+value_in_unit( (Angle)arg1, (RadianUnit)arg0) -&gt; float :
+    
+     Proper way to extract value attribute - tell me the unit first.
+     TODO - unit conversion
+    
+
+    C++ signature :
+        double value_in_unit(struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;,double&gt; {lvalue},struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,1,0&gt; &gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="value"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">value</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="moltk-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov 04 20:07:18 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

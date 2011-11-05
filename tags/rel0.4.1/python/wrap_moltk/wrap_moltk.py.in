@@ -1,0 +1,88 @@
+#    MolTK is a Python and C++ toolkit for protein sequence/structure alignment and visualization
+#    Copyright (C) 2011  Christopher M. Bruns
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#   
+#    Commercial users should ask about our dual licensing model.
+#    For questions contact: cmbruns@rotatingpenguin.com
+
+from pyplusplus import module_builder
+from pyplusplus.module_builder.call_policies import *
+from doxygen_doc_extractor import doxygen_doc_extractor
+from pygccxml import declarations
+
+def wrap_moltk():
+    mb = module_builder.module_builder_t(
+        files = ["@MOLTK_WRAP_INCLUDE_FILES@",]
+        , gccxml_path = "@GCCXML_EXECUTABLE@"
+        , include_paths = ["@MOLTK_INCLUDE_DIR@"
+                         , "@Boost_INCLUDE_DIRS@"]
+        , indexing_suite_version = 2
+        , define_symbols = ["_HAS_TR1=0"])
+
+    wrap_custom(mb)
+    
+    extractor = doxygen_doc_extractor()
+    mb.build_code_creator(module_name = '_moltk', doc_extractor = extractor)
+    mb.split_module('@GENERATED_CODE_DIR@')
+
+
+def wrap_custom(mb):
+    # To force indexing_suite?
+    vec_int = mb.class_('vector<int>')
+    # vec_int.include();
+    ns_moltk = mb.namespace('moltk')
+    ns_moltk.include()
+    # Avoid exposing non-public members
+    for fn in mb.member_functions(lambda f: f.access_type != declarations.ACCESS_TYPES.PUBLIC):
+        fn.exclude()
+    for fn in mb.constructors(lambda f: f.access_type != declarations.ACCESS_TYPES.PUBLIC):
+        fn.exclude()
+    aligner = ns_moltk.class_('Aligner')
+    for cls_name in ['QueryPosition', 'TargetPosition']:
+        aligner.class_(cls_name).member_function('clone').call_policies = \
+            return_value_policy(manage_new_object)
+    aligner.add_property('endGapsFree', 
+         fget=aligner.member_functions('get_end_gaps_free')[1],
+         fset=aligner.member_functions('set_end_gaps_free')[1])
+    aligner.member_function('get_shared_aligner').call_policies = \
+         return_value_policy(reference_existing_object)
+    alignment = ns_moltk.class_('Alignment')
+    for fn_name in ['append_sequence', 'set_score']:
+         alignment.member_function(fn_name).call_policies = return_self()
+    estring = ns_moltk.class_('EString')
+    estring.member_function('append_run').call_policies = return_self()
+    for cls in ns_moltk.classes(lambda c: c.name.startswith('BaseVect')):
+        for fn_name in ['begin', 'end']:
+            cls.member_functions(fn_name).exclude()
+        cls.casting_operators().exclude()
+        cls.exclude()
+    mb.class_('_classes_to_instantiate').exclude() # hide wrapping hack
+    quaternion = ns_moltk.class_('Quaternion')
+    quaternion.member_functions('begin').exclude()
+    quaternion.member_functions('end').exclude()
+    quaternion.member_function('set_from_angle_axis').call_policies = return_self()
+    ns_moltk.class_('Rotation3D').member_functions(lambda f: f.name.startswith('set_from_')
+            ).call_policies = return_self()
+    biosequence = ns_moltk.class_('Biosequence')
+    ns_moltk.member_functions('load_fasta').call_policies = return_self()
+    biosequence.add_registration_code("""
+        def("__repr__", &::moltk::Biosequence::repr, "string representation")
+        """)
+    # vector3d = ns_moltk.class_('Vector3D')
+
+            
+if __name__ == '__main__':
+    wrap_moltk()
