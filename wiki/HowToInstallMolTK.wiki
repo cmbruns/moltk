@@ -4,11 +4,67 @@
 
 This document explains how to install MolTK.
 
+= How to Install the MolTK Application =
+The MolTK application won't be released until MolTK version 0.7.
 
-= How to install interactive MolTK Python module =
+= How to Install the Interactive MolTK Python Module =
 
-== Installing MolTK python module on Windows ==
+== Installing the MolTK python module for Windows ==
   * Install [http://www.python.org/download/ 32-bit Python 2.7]
   * Put python on your path
-     * Start -> Control Panel -> (System and Security) -> System -> Advanced System Settings -> Environment Variables (in Advanced tab) -> Edit "Path" in System variables -> Add ";C:\Python27" (without the quotation marks) onto the end of the current text in the Variable value field -> Click OK
+    Start -> Control Panel -> (System and Security) -> System -> Advanced System Settings -> Environment Variables (in Advanced tab) -> Edit "Path" in System variables -> Add ";C:\Python27" (without the quotation marks) onto the end of the current text in the Variable value field -> Click OK
   * Install the [http://code.google.com/p/moltk/downloads/list MolTK Python module for windows]
+
+== Installing the MolTK python module for Mac ==
+  * Install [http://www.python.org/download/ Python 2.6]
+  * The MolTK python module for Mac won't be released until MolTK version 0.6.
+
+== Installing the MolTK python module for Linux ==
+  * The MolTK python module for Linux won't be released until MolTK version 0.6.
+
+= How to Install the MolTK C++ SDK =
+The MolTK C++ SDK won't be released until MolTK version 0.5.
+
+= How to Build MolTK from Source Code =
+  * Only build from source if you cannot find a binary installer for your system.
+== Additional prerequisites for building MolTK from source code ==
+  * C++ compiler
+    # Windows
+      Use Visual Studio 9 (2008), if you intend to use the standard python 2.7 install.<br/>
+      http://www.microsoft.com/express/downloads/
+    # Mac
+      Use gcc.<br/>
+      You might need to install XCode developer tools to get gcc.
+    # Linux
+      Use gcc.
+  * Boost, including iostreams and python libraries
+    # Windows
+      Get it from http://www.boostpro.com/download/ to get prebuilt binary libraries.
+      Be sure to select the iostream and python libraries, and to select Visual Studio 9.  It might take several tries for the install to complete successfully.
+    # Mac
+      I like to build fat binaries supporting both 32-bit and 64-bit architectures.  So I build boost like:<br/>
+      ./bootstrap.sh --prefix=/usr/local<br/>
+      sudo ./b2 address-model=32_64 architecture=x86 variant=release link=shared,static install<br/>
+      <or to include PowerPC, which Python still does><br/>
+      sudo ./b2 address-model=32_64 architecture=combined variant=release link=shared,static install
+  * CMake
+     http://www.cmake.org
+
+= Extend MolTK/Regenerate Python Bindings =
+  * Only regenerate python bindings if you have changed the MolTK API.
+== Additional prerequisites for regenerating python bindings ==
+  * gccxml
+    (you might need to install cvs first)<br/>
+    cvs -d :pserver:anonymous@www.gccxml.org:/cvsroot/GCC_XML login
+      (respond with password gccxml) 
+    cvs -d :pserver:anonymous@www.gccxml.org:/cvsroot/GCC_XML co gccxml<br/>
+    (install using cmake)<br/>
+    (add location of gccxml.exe to your PATH)<br/>
+    (on windows: run gccxml_vcconfig.bat from install area)<br/>
+    On Windows, install to a directory without any space characters, i.e. NOT c:/Program Files/whatever
+  * pygccxml
+    svn checkout https://pygccxml.svn.sourceforge.net/svnroot/pygccxml/pygccxml_dev pygccxml<br/>
+    cd pygccxml<br/>
+    python setup.py build<br/>
+    python setup.py install<br/>
+    On windows, patch pygccxml/parser/source_reader.py method __create_command_line to NOT wrap command with double quotes.
