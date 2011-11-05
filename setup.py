@@ -85,9 +85,8 @@ def do_setup():
         CFLAGS.append('-D"_HAS_TR1=0"')
         moltk_sources.extend(glob.glob(os.path.join('python','wrap_moltk','generated_code_msvc','*.cpp')))
         include_dirs.append("./python/wrap_moltk/generated_code_msvc")
-        # Install microsoft redistributable for use by installer
         # Install shared boost python dll TODO
-        package_data['moltk'] = ['vcredist_x86.exe', 'boost_python-vc90-mt-1_47.dll']
+        package_data['moltk'] = ['boost_python-vc90-mt-1_47.dll']
     else:
         moltk_sources.extend(glob.glob(os.path.join('python','wrap_moltk','generated_code_gcc','*.cpp')))
         include_dirs.append("./python/wrap_moltk/generated_code_gcc")
@@ -95,7 +94,7 @@ def do_setup():
     library_dirs = [boost_lib_dir,]
     
     setup(name='MolTK',
-          version = '0.4.1',
+          version = '0.4.2',
           description = "Python API for moltk sequence/structure alignment/visualization tool kit.",
           author = "Christopher Bruns",
           author_email = "cmbruns@rotatingpenguin.com",

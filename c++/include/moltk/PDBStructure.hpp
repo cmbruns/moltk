@@ -24,7 +24,6 @@
 #define MOLTK_CHEM_PDB_STRUCTURE_H
 
 #include "moltk/Biosequence.hpp"
-#include "moltk/Printable.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -64,7 +63,9 @@ public:
     class Residue : public BaseBiosequence::BaseResidue
     {
     public:
+        /// Create a Residue with no atoms and undefined number and one letter code
         Residue() {}
+        /// Copy a Residue
         Residue(const Residue& rhs)
             : one_letter_code(rhs.one_letter_code)
             , residue_number(rhs.residue_number)

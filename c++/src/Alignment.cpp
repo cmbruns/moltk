@@ -390,7 +390,7 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
         }
         result.rows.push_back(newRow);
     }
-    result.set_score(a1.score() + a2.score());
+    result.set_score(a1.get_score() + a2.get_score());
 
     return result;
 }
@@ -443,10 +443,73 @@ Alignment& Alignment::load_fasta(const std::string& file_name)
     return *this;
 }
 
+const BaseBiosequence& Alignment::get_sequence(size_t index) const
+{
+    const Row& row = rows[index];
+    if (row.list == LIST_SEQUENCE)
+        return sequences[row.list_index];
+    else
+        return structures[row.list_index];
+}
+
+const EString& Alignment::get_estring(size_t index) const
+{
+    return rows[index].e_string;
+}
+
+const moltk::units::Information& Alignment::get_score() const 
+{
+    return m_score;
+}
+
+Alignment& Alignment::set_score(const moltk::units::Information& s) 
+{
+    m_score = s;
+    return *this;
+}
+
+/// Inefficient computation of sum-of-pairs score, for use in testing and debugging.
+units::Information Alignment::calc_explicit_sum_of_pairs_score() const
+{
+    moltk::units::Information result = 0.0 * moltk::units::bit;
+    const int nseq = get_number_of_sequences();
+    for (int i = 0; i < (nseq - 1); ++i)
+        for (int j = i + 1; j < nseq; ++j)
+            result += calc_explicit_pair_score(i, j);
+    return result;
+}
+
+/// Compute pair score between two sequences in this alignment
+units::Information Alignment::calc_explicit_pair_score(int i, int j) const
+{
+    moltk::units::Information result = 0.0 * moltk::units::bit;
+    const Row& seq1 = rows[i];
+    const Row& seq2 = rows[j];
+    assert(false);
+    return result;
+}
+
+std::string Alignment::repr() const
+{
+    std::ostringstream s;
+    s << "moltk.Alignment(\"\"\"" << endl;
+    write_fasta(s);
+    s << endl;
+    s << "\"\"\")";
+    return s.str();
+}
+
 
 ////////////////////
 // Global methods //
 ////////////////////
+
+std::ostream& moltk::operator<<(std::ostream& os, const moltk::Alignment& ali)
+{
+    ali.write_pretty(os);
+    return os;
+}
+
 
 Alignment moltk::load_fasta(const std::string& file_name)
 {
