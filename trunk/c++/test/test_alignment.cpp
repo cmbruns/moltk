@@ -25,18 +25,21 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
 #include "moltk/Alignment.hpp"
+#include "moltk/Aligner.hpp"
 
 using namespace moltk;
 using moltk::units::bit;
 
 BOOST_AUTO_TEST_CASE( test_alignment )
 {
-    Alignment a;
-
     // TODO - test calc_explicit_sum_of_pairs_score
-    Alignment a1("AAASGD");
+    Alignment a("AAASGD");
     // Sum of pairs should be zero with just one sequence
-    BOOST_CHECK_EQUAL(a1.get_score(), a1.calc_explicit_sum_of_pairs_score());
-    BOOST_CHECK_EQUAL(0.0 * bit, a1.calc_explicit_sum_of_pairs_score());
+    BOOST_CHECK_EQUAL(a.get_score(), a.calc_explicit_sum_of_pairs_score());
+    BOOST_CHECK_EQUAL(0.0 * bit, a.calc_explicit_sum_of_pairs_score());
+    // TODO More sum of pairs
+    Alignment a1("S");
+    Alignment a2 = align(a1, a1);
+    BOOST_CHECK_EQUAL(a2.get_score(), a2.calc_explicit_sum_of_pairs_score());
 }
 
