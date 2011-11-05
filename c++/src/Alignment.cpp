@@ -485,7 +485,7 @@ units::Information Alignment::calc_explicit_pair_score(int i, int j) const
     moltk::units::Information result = 0.0 * moltk::units::bit;
     const Row& seq1 = rows[i];
     const Row& seq2 = rows[j];
-    assert(false);
+    throw std::runtime_error("Alignment::calc_explicit_pair_score() not implemented yet");
     return result;
 }
 
