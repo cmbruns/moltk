@@ -76,7 +76,7 @@ public:
     public:
         Scorer() 
             : b_end_gaps_free(true) 
-            , default_gap_open_penalty(5.0 * moltk::units::bit)
+            , default_gap_open_penalty(8.0 * moltk::units::bit)
             , default_gap_extension_penalty(0.5 * moltk::units::bit)
         {}
         virtual std::vector<QueryPosition*> create_query_positions(const Alignment&) const = 0;
