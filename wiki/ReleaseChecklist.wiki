@@ -17,7 +17,6 @@
     # Test python installer
     # Check in regenerated content
   # Create an svn tag for release (e.g. rel_0.4.0)
- 
   # Web site:
     # {{{svn update}}} index.html area
     # {{{svn update}}} python API area
