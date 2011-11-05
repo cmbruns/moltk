@@ -3,12 +3,13 @@
 =Tasks to perform when creating a release of MolTK=
 
   # Print out this page to use it as a literal check list
-  # Check out a fresh working copy of MolTK in a new folder
+  # Check out a fresh working copy of MolTK in a new folder (rename or delete your old folder)
   # Set version number in top level CMakeLists.txt
   # Review User Manual for changes, including updating version number.
   # Update User Manual pdf
   # Add News item to website index.html
   # Windows:
+    # Make sure you are building in Release mode
     # Rebuild python module
     # Ensure all unit tests pass
     # Regenerate Python API documents
@@ -17,11 +18,13 @@
     # Test python installer
     # Check in regenerated content
   # Create an svn tag for release (e.g. rel_0.4.0)
-  # Web site:
-    # {{{svn update}}} index.html area
-    # {{{svn update}}} python API area
-    # {{{svn update}}} C++ API area
   # Google Code site:
     # Add User Manual to downloads (copy pdf with version number, delete after added to downloads)
     # Add Windows python installer to downloads
   # Test installer on a virgin virtual machine
+  # Web site:
+    # {{{svn update}}} moltk/index.html area
+    # {{{svn update}}} python API area
+    # {{{svn update}}} C++ API area
+  # Increment the version number in CMakeLists.txt and check it in
+  # Post a message to the moltk-users list
