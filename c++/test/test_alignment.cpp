@@ -34,12 +34,13 @@ BOOST_AUTO_TEST_CASE( test_alignment )
 {
     // TODO - test calc_explicit_sum_of_pairs_score
     Alignment a("AAASGD");
-    // Sum of pairs should be zero with just one sequence
+    // Sum of pairs should be zero with just one sequence - OK
     BOOST_CHECK_EQUAL(a.get_score(), a.calc_explicit_sum_of_pairs_score());
     BOOST_CHECK_EQUAL(0.0 * bit, a.calc_explicit_sum_of_pairs_score());
-    // TODO More sum of pairs
+    // Trivial sum of pairs with one letter, presumably no gaps
     Alignment a1("S");
     Alignment a2 = align(a1, a1);
+    BOOST_CHECK_EQUAL(2.0 * bit, a2.get_score());
     BOOST_CHECK_EQUAL(a2.get_score(), a2.calc_explicit_sum_of_pairs_score());
 }
 
