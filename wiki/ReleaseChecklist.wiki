@@ -2,29 +2,29 @@
 
 =Tasks to perform when creating a release of MolTK=
 
-  # Print out this page to use it as a literal check list
-  # Check out a fresh working copy of MolTK in a new folder (rename or delete your old folder)
-  # Set version number in top level CMakeLists.txt
-  # Review User Manual for changes, including updating version number.
-  # Update User Manual pdf
-  # Add News item to website index.html
-  # Windows:
-    # Make sure you are building in Release mode
-    # Rebuild python module
-    # Ensure all unit tests pass
-    # Regenerate Python API documents
-    # Regenerate C++ API documents
-    # Build python installer
-    # Test python installer
-    # Check in regenerated content
-  # Create an svn tag for release (e.g. rel_0.4.0)
-  # Google Code site:
-    # Add User Manual to downloads (copy pdf with version number, delete after added to downloads)
-    # Add Windows python installer to downloads
-  # Test installer on a virgin virtual machine
-  # Web site:
-    # {{{svn update}}} moltk/index.html area
-    # {{{svn update}}} python API area
-    # {{{svn update}}} C++ API area
-  # Increment the version number in CMakeLists.txt and check it in
-  # Post a message to the moltk-users list
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Print out this page to use it as a literal check list
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Check out a fresh working copy of MolTK in a new folder (rename or delete your old folder)
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Set version number in top level CMakeLists.txt
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Review User Manual for changes, including updating version number.
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Update User Manual pdf
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Add News item to website index.html
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Windows:
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Make sure you are building in Release mode
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Rebuild python module
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Ensure all unit tests pass
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Regenerate Python API documents
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Regenerate C++ API documents
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Build python installer
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Test python installer
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Check in regenerated content
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Create an svn tag for release (e.g. rel_0.4.0)
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Google Code site:
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Add User Manual to downloads (copy pdf with version number, delete after added to downloads)
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Add Windows python installer to downloads
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Test installer on a virgin virtual machine
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Web site:
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png {{{svn update}}} moltk/index.html area
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png {{{svn update}}} python API area
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png {{{svn update}}} C++ API area
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Increment the version number in CMakeLists.txt and check it in
+  # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Post a message to the moltk-users list
