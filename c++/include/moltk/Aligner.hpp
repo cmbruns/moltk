@@ -83,6 +83,14 @@ public:
         virtual std::vector<TargetPosition*> create_target_positions(const Alignment&) const = 0;
         bool get_end_gaps_free() const {return b_end_gaps_free;}
         void set_end_gaps_free(bool f) {b_end_gaps_free = f;}
+        /// Alignment score reduction for initiating an alignment gap.
+        Information get_default_gap_open_penalty() const {return default_gap_open_penalty;}
+        /// Set alignment score reduction for initiating an alignment gap.
+        void set_default_gap_open_penalty(Information penalty) {default_gap_open_penalty = penalty;}
+        /// Alignment score reduction for increasing the length of an alignment gap by one position.
+        Information get_default_gap_extension_penalty() const {return default_gap_extension_penalty;}
+        /// Set Alignment score reduction for increasing the length of an alignment gap by one position.
+        void set_default_gap_extension_penalty(Information penalty) {default_gap_extension_penalty = penalty;}
 
     protected:
         bool b_end_gaps_free;
@@ -144,8 +152,15 @@ public:
     // Alignment align(const Alignment&);
     Alignment align(const Alignment&, const Alignment&);
 
+    /// Whether alignment gaps before the start and after the end of a sequence are not penalized.
     bool get_end_gaps_free() const {return scorer->get_end_gaps_free();}
+    /// Choose whether alignment gaps before the start and after the end of a sequence are not penalized.
     void set_end_gaps_free(bool f) {scorer->set_end_gaps_free(f);}
+    /// Scorer object this Aligner uses to score alignments.
+    const Scorer& get_scorer() const {return *scorer;}
+    /// Scorer object this Aligner uses to score alignments.
+    Scorer& get_scorer() {return *scorer;}
+    Aligner& set_scorer(Scorer& scorer) {this->scorer = &scorer; return *this;}
 
     static const Scorer& get_default_scorer();
    /*!

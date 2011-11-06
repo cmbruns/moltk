@@ -164,8 +164,8 @@ void register_PDBStructure_class(){
                 , (void ( ::moltk::BaseBiosequence::* )( ::std::ostream & ) const)(&::moltk::BaseBiosequence::write_to_stream)
                 , (void ( PDBStructure_wrapper::Chain_wrapper::* )( ::std::ostream & ) const)(&PDBStructure_wrapper::Chain_wrapper::default_write_to_stream)
                 , ( bp::arg("os") ) );
-        bp::class_< PDBStructure_wrapper::Residue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "Residue", "\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n", bp::init< >("\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n") )    
-            .def( bp::init< moltk::PDBStructure::Residue const & >(( bp::arg("rhs") ), "\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n") )    
+        bp::class_< PDBStructure_wrapper::Residue_wrapper, bp::bases< moltk::BaseBiosequence::BaseResidue > >( "Residue", "\n Residue represents a single amino acid or nucleotide residue, or a small molecule,\n in a macromolecule structure.\n", bp::init< >("\n Create a Residue with no atoms and undefined number and one letter code\n") )    
+            .def( bp::init< moltk::PDBStructure::Residue const & >(( bp::arg("rhs") ), "\n Copy a Residue\n") )    
             .def( 
                 "get_one_letter_code"
                 , (char ( ::moltk::PDBStructure::Residue::* )(  ) const)(&::moltk::PDBStructure::Residue::get_one_letter_code)

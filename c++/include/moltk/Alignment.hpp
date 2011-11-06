@@ -124,9 +124,11 @@ public:
     /// Inefficient computation of sum-of-pairs score, for use in testing and debugging.
     units::Information calc_explicit_sum_of_pairs_score() const;
     /// Compute pair score between two sequences in this alignment
-    units::Information Alignment::calc_explicit_pair_score(int i, int j) const;
+    units::Information calc_explicit_pair_score(int i, int j) const;
     /// Low level python string representation of this Alignment
     std::string repr() const;
+    Alignment& set_pretty_width(int width) {pretty_width = width; return *this;}
+    int get_pretty_width() const {return pretty_width;}
 
 protected:
     std::vector<Biosequence> sequences;

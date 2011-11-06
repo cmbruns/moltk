@@ -21,9 +21,10 @@
 */
 
 // #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE BiosequenceUnitTest
+#define BOOST_TEST_MODULE AlignmentUnitTest
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/test/debug.hpp>
 #include "moltk/Alignment.hpp"
 #include "moltk/Aligner.hpp"
 
@@ -32,6 +33,7 @@ using moltk::units::bit;
 
 BOOST_AUTO_TEST_CASE( test_alignment )
 {
+    boost::debug::detect_memory_leaks(false);
     // TODO - test calc_explicit_sum_of_pairs_score
     Alignment a("AAASGD");
     // Sum of pairs should be zero with just one sequence - OK
