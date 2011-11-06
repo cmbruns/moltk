@@ -32,7 +32,7 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 || {{{SEQUOIA> weight}}} || ??? TODO || Apply sequence weights to alignment ||
 || {{{SEQUOIA> set epen 0.5}}} || {{{>>> moltk.Aligner.shared_aligner.scorer.default_gap_extension_penalty = 0.5 * moltk.bit}}} || Set gap extension penalty ||
 || {{{SEQUOIA> set gpen 10}}} || {{{>>> moltk.Aligner.shared_aligner.scorer.default_gap_open_penalty = 10.0 * moltk.bit}}} || Set gap opening penalty ||
-|| {{{SEQUOIA> set pretty_length 50}}} || ??? TODO || set sequence width of formatted alignments ||
+|| {{{SEQUOIA> set pretty_length 50}}} ||{{{>>> alignment.pretty_width = 50}}} || set sequence width of formatted alignments ||
 || {{{SEQUOIA> set random_seed 1}}} || ??? TODO || change seed for RANDOM command ||
 || {{{SEQUOIA> set suboptimal 0.1}}} || ??? TODO || parameter for allowing suboptimal alignments ||
 
