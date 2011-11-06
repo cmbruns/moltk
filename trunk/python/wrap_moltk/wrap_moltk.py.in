@@ -38,6 +38,54 @@ def wrap_moltk():
     mb.build_code_creator(module_name = '_moltk', doc_extractor = extractor)
     mb.split_module('@GENERATED_CODE_DIR@')
 
+def wrap_aligner(mb):
+    aligner = mb.namespace('moltk').class_('Aligner')
+    ### Call Policies for Aligner class ###
+    for cls_name in ['QueryPosition', 'TargetPosition']:
+        aligner.class_(cls_name).member_function('clone').call_policies = \
+            return_value_policy(manage_new_object)
+    aligner.member_function('get_shared_aligner').call_policies = \
+         return_value_policy(reference_existing_object)
+    # Don't delete Scorer before Aligner
+    aligner.member_function('set_scorer').call_policies = \
+         return_self(with_custodian_and_ward(1, 2))
+    aligner.member_functions('get_scorer').call_policies = \
+         return_value_policy(reference_existing_object)
+    ### Properties for Aligner class ###
+    aligner.add_static_property('shared_aligner', 
+         fget=aligner.member_functions('get_shared_aligner')[0],
+         doc='"global Aligner object used by moltk.align() command"')
+    aligner.add_property('end_gaps_free', 
+         fget=aligner.member_functions('get_end_gaps_free')[0],
+         fset=aligner.member_functions('set_end_gaps_free')[0])
+    aligner.add_property('scorer', 
+         fget=aligner.member_functions('get_scorer')[0],
+         fset=aligner.member_functions('set_scorer')[0])
+
+def wrap_scorer(mb):
+    scorer = mb.namespace('moltk').class_('Aligner').class_('Scorer')
+    scorer.add_property('end_gaps_free', 
+         fget=scorer.member_functions('get_end_gaps_free')[0],
+         fset=scorer.member_functions('set_end_gaps_free')[0])        
+    scorer.add_property('default_gap_open_penalty', 
+         fget=scorer.member_functions('get_default_gap_open_penalty')[0],
+         fset=scorer.member_functions('set_default_gap_open_penalty')[0])        
+    scorer.add_property('default_gap_extension_penalty', 
+         fget=scorer.member_functions('get_default_gap_extension_penalty')[0],
+         fset=scorer.member_functions('set_default_gap_extension_penalty')[0])        
+
+def wrap_alignment(mb):
+    alignment = mb.namespace('moltk').class_('Alignment')
+    for fn_name in ['append_sequence', 'set_score', 'set_pretty_width']:
+        alignment.member_function(fn_name).call_policies = return_self()    
+    alignment.add_property('pretty_width', 
+        fget=alignment.member_function('get_pretty_width'),
+        fset=alignment.member_function('set_pretty_width'))
+    alignment.add_registration_code("""
+        def("__repr__", 
+            &::moltk::Alignment::repr, 
+            "python low level string representation")
+        """)
 
 def wrap_custom(mb):
     # To force indexing_suite?
@@ -50,18 +98,9 @@ def wrap_custom(mb):
         fn.exclude()
     for fn in mb.constructors(lambda f: f.access_type != declarations.ACCESS_TYPES.PUBLIC):
         fn.exclude()
-    aligner = ns_moltk.class_('Aligner')
-    for cls_name in ['QueryPosition', 'TargetPosition']:
-        aligner.class_(cls_name).member_function('clone').call_policies = \
-            return_value_policy(manage_new_object)
-    aligner.add_property('endGapsFree', 
-         fget=aligner.member_functions('get_end_gaps_free')[1],
-         fset=aligner.member_functions('set_end_gaps_free')[1])
-    aligner.member_function('get_shared_aligner').call_policies = \
-         return_value_policy(reference_existing_object)
-    alignment = ns_moltk.class_('Alignment')
-    for fn_name in ['append_sequence', 'set_score']:
-         alignment.member_function(fn_name).call_policies = return_self()
+    wrap_alignment(mb)
+    wrap_aligner(mb)
+    wrap_scorer(mb)
     estring = ns_moltk.class_('EString')
     estring.member_function('append_run').call_policies = return_self()
     for cls in ns_moltk.classes(lambda c: c.name.startswith('BaseVect')):
@@ -79,7 +118,7 @@ def wrap_custom(mb):
     biosequence = ns_moltk.class_('Biosequence')
     ns_moltk.member_functions('load_fasta').call_policies = return_self()
     biosequence.add_registration_code("""
-        def("__repr__", &::moltk::Biosequence::repr, "string representation")
+        def("__repr__", &::moltk::Biosequence::repr, "python low level string representation")
         """)
     # vector3d = ns_moltk.class_('Vector3D')
 

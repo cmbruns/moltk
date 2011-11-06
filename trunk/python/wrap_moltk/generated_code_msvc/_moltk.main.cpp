@@ -46,8 +46,6 @@
 
 #include "generated_code_msvc/pdbstructure.pypp.hpp"
 
-#include "generated_code_msvc/printable.pypp.hpp"
-
 #include "generated_code_msvc/quaternion.pypp.hpp"
 
 #include "generated_code_msvc/querypositionlist.pypp.hpp"
@@ -90,8 +88,6 @@ BOOST_PYTHON_MODULE(_moltk){
     register_EString_class();
 
     register_PDBStructure_class();
-
-    register_Printable_class();
 
     register_Quaternion_class();
 
