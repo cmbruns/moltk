@@ -19,7 +19,7 @@ We intend for SEQUOIA users to have an easy time learning to use MolTK.  Interac
 || {{{SEQUOIA> print id ALIGN}}} || {{{>>> print align1.id_table()}}} || Display a table of pairwise sequence identities ||
 || {{{SEQUOIA> quit}}} || {{{>>> quit()}}} || End alignment session. ||
 || {{{SEQUOIA> @test.inp}}} || {{{>>> execfile("test.py")}}} || Run a script file you wrote ||
-|| {{{% sequoia < test.inp}}} || {{{% python test.py}}} || Run a script you wrote directly from a command prompt ||
+|| {{{% sequoia < test.inp}}} || {{{% python test.py}}} || Run a script you wrote, directly from a command prompt ||
 || {{{SEQUOIA> COMMENT This is a comment}}} || {{{ >>> # This is a comment}}} || Statement is ignored ||
 || {{{SEQUOIA> help <command>}}} || {{{>>> help(<command>)}}} || Access documentation about a command ||
 || {{{SEQUOIA> system <command>}}} || {{{>>> import os}}}<br>{{{>>> os.system("<command>")}}} || Issue an operating system command ||
