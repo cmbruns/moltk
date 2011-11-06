@@ -153,7 +153,7 @@ void register_Biosequence_class(){
             Biosequence_exposer.def( 
                 "repr"
                 , repr_function_type( &::moltk::Biosequence::repr )
-                , " repr is a helper for the python __repr__ method." );
+                , " Low level python string representation of this Biosequence" );
         
         }
         { //::moltk::Biosequence::write_fasta
@@ -202,7 +202,7 @@ void register_Biosequence_class(){
         
         }
         Biosequence_exposer.def( bp::self_ns::str( bp::self ) );
-        Biosequence_exposer.def("__repr__", &::moltk::Biosequence::repr, "string representation");
+        Biosequence_exposer.def("__repr__", &::moltk::Biosequence::repr, "python low level string representation");
     }
 
 }
