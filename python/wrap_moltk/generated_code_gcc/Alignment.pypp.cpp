@@ -10,7 +10,7 @@ void register_Alignment_class(){
 
     { //::moltk::Alignment
         typedef bp::class_< moltk::Alignment > Alignment_exposer_t;
-        Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", "\n Alignment represents a set of aligned macromolecule sequences and/or structures.\n", bp::init< >() );
+        Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", "\n Alignment represents a set of aligned macromolecule sequences and/or structures.\n", bp::init< >("\n Default constructor creates an empty Alignment\n") );
         bp::scope Alignment_scope( Alignment_exposer );
         bp::enum_< moltk::Alignment::List>("List")
             .value("LIST_SEQUENCE", moltk::Alignment::LIST_SEQUENCE)
@@ -18,15 +18,15 @@ void register_Alignment_class(){
             .export_values()
             ;
         bp::class_< moltk::Alignment::Row >( "Row", "\n Meta-data for one sequence in an Alignment\n" )    
-            .def_readwrite( "e_string", &moltk::Alignment::Row::e_string )    
-            .def_readwrite( "list", &moltk::Alignment::Row::list, "\n Meta-data for one sequence in an Alignment\n" )    
-            .def_readwrite( "list_index", &moltk::Alignment::Row::list_index )    
-            .def_readwrite( "sequence_weight", &moltk::Alignment::Row::sequence_weight );
-        Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("sequence") )) );
+            .def_readwrite( "e_string", &moltk::Alignment::Row::e_string, "\n gap pattern of this sequence\n" )    
+            .def_readwrite( "list", &moltk::Alignment::Row::list, "\n which list: sequences or structures?\n Meta-data for one sequence in an Alignment\n" )    
+            .def_readwrite( "list_index", &moltk::Alignment::Row::list_index, "\n index into either the structure or sequence list\n" )    
+            .def_readwrite( "sequence_weight", &moltk::Alignment::Row::sequence_weight, "\n relative contribution of this sequence to the alignment score\n" );
+        Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("sequence") ), "\n Create an alignment with exactly one sequence\n") );
         bp::implicitly_convertible< moltk::Biosequence const &, moltk::Alignment >();
-        Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("alignment_string") )) );
+        Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("alignment_string") ), "\n Create an alignment from fasta sequences or a single sequence string\n") );
         bp::implicitly_convertible< std::string const &, moltk::Alignment >();
-        Alignment_exposer.def( bp::init< char const * >(( bp::arg("alignment_string") )) );
+        Alignment_exposer.def( bp::init< char const * >(( bp::arg("alignment_string") ), "\n Create an alignment from fasta sequences or a single sequence string\n") );
         bp::implicitly_convertible< char const *, moltk::Alignment >();
         { //::moltk::Alignment::align
         
@@ -35,7 +35,8 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "align"
                 , align_function_type( &::moltk::Alignment::align )
-                , ( bp::arg("arg0"), bp::arg("arg1"), bp::arg("arg2") ) );
+                , ( bp::arg("arg0"), bp::arg("arg1"), bp::arg("arg2") )
+                , "\n Align two sequence alignments using a pair of precomputed EStrings.\n\n This methods is used to create the final Alignment after the dynamic\n programming alignment has completed.\n" );
         
         }
         { //::moltk::Alignment::append_sequence
@@ -46,7 +47,29 @@ void register_Alignment_class(){
                 "append_sequence"
                 , append_sequence_function_type( &::moltk::Alignment::append_sequence )
                 , ( bp::arg("sequence") )
-                , bp::return_self< >() );
+                , bp::return_self< >()
+                , "\n Add one sequence to the alignment.  Internally, gaps will be removed and encoded into an EString.\n" );
+        
+        }
+        { //::moltk::Alignment::calc_explicit_pair_score
+        
+            typedef ::moltk::units::Information ( ::moltk::Alignment::*calc_explicit_pair_score_function_type )( int,int ) const;
+            
+            Alignment_exposer.def( 
+                "calc_explicit_pair_score"
+                , calc_explicit_pair_score_function_type( &::moltk::Alignment::calc_explicit_pair_score )
+                , ( bp::arg("i"), bp::arg("j") )
+                , "\n Compute pair score between two sequences in this alignment\n" );
+        
+        }
+        { //::moltk::Alignment::calc_explicit_sum_of_pairs_score
+        
+            typedef ::moltk::units::Information ( ::moltk::Alignment::*calc_explicit_sum_of_pairs_score_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "calc_explicit_sum_of_pairs_score"
+                , calc_explicit_sum_of_pairs_score_function_type( &::moltk::Alignment::calc_explicit_sum_of_pairs_score )
+                , "\n Inefficient computation of sum-of-pairs score, for use in testing and debugging.\n" );
         
         }
         { //::moltk::Alignment::fasta
@@ -55,7 +78,8 @@ void register_Alignment_class(){
             
             Alignment_exposer.def( 
                 "fasta"
-                , fasta_function_type( &::moltk::Alignment::fasta ) );
+                , fasta_function_type( &::moltk::Alignment::fasta )
+                , "\n Create a string with Alignment in fasta format\n" );
         
         }
         { //::moltk::Alignment::get_estring
@@ -66,7 +90,8 @@ void register_Alignment_class(){
                 "get_estring"
                 , get_estring_function_type( &::moltk::Alignment::get_estring )
                 , ( bp::arg("index") )
-                , bp::return_value_policy< bp::copy_const_reference >() );
+                , bp::return_value_policy< bp::copy_const_reference >()
+                , "\n The gapping pattern of Row index\n" );
         
         }
         { //::moltk::Alignment::get_number_of_columns
@@ -75,7 +100,8 @@ void register_Alignment_class(){
             
             Alignment_exposer.def( 
                 "get_number_of_columns"
-                , get_number_of_columns_function_type( &::moltk::Alignment::get_number_of_columns ) );
+                , get_number_of_columns_function_type( &::moltk::Alignment::get_number_of_columns )
+                , "\n Number of columns (width) of sequence Alignment\n" );
         
         }
         { //::moltk::Alignment::get_number_of_sequences
@@ -84,7 +110,28 @@ void register_Alignment_class(){
             
             Alignment_exposer.def( 
                 "get_number_of_sequences"
-                , get_number_of_sequences_function_type( &::moltk::Alignment::get_number_of_sequences ) );
+                , get_number_of_sequences_function_type( &::moltk::Alignment::get_number_of_sequences )
+                , "\n get_number_of_sequences() includes combined number of both sequences and structures\n" );
+        
+        }
+        { //::moltk::Alignment::get_pretty_width
+        
+            typedef int ( ::moltk::Alignment::*get_pretty_width_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "get_pretty_width"
+                , get_pretty_width_function_type( &::moltk::Alignment::get_pretty_width ) );
+        
+        }
+        { //::moltk::Alignment::get_score
+        
+            typedef ::moltk::units::Information const & ( ::moltk::Alignment::*get_score_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "get_score"
+                , get_score_function_type( &::moltk::Alignment::get_score )
+                , bp::return_value_policy< bp::copy_const_reference >()
+                , "\n The precomputed total sum of pairs score of this Alignment\n" );
         
         }
         { //::moltk::Alignment::get_sequence
@@ -95,7 +142,8 @@ void register_Alignment_class(){
                 "get_sequence"
                 , get_sequence_function_type( &::moltk::Alignment::get_sequence )
                 , ( bp::arg("index") )
-                , bp::return_value_policy< bp::copy_const_reference >() );
+                , bp::return_value_policy< bp::copy_const_reference >()
+                , "\n Returns the particular sequence or structure at Row index\n" );
         
         }
         { //::moltk::Alignment::id_table
@@ -104,7 +152,8 @@ void register_Alignment_class(){
             
             Alignment_exposer.def( 
                 "id_table"
-                , id_table_function_type( &::moltk::Alignment::id_table ) );
+                , id_table_function_type( &::moltk::Alignment::id_table )
+                , "\n Create a string containing table of pairwise sequence identities\n" );
         
         }
         { //::moltk::Alignment::load_fasta
@@ -115,7 +164,8 @@ void register_Alignment_class(){
                 "load_fasta"
                 , load_fasta_function_type( &::moltk::Alignment::load_fasta )
                 , ( bp::arg("input_stream") )
-                , bp::return_self< >() );
+                , bp::return_self< >()
+                , "\n Load fasta format sequences from a C++ stream\n" );
         
         }
         { //::moltk::Alignment::load_fasta
@@ -126,7 +176,8 @@ void register_Alignment_class(){
                 "load_fasta"
                 , load_fasta_function_type( &::moltk::Alignment::load_fasta )
                 , ( bp::arg("file_name") )
-                , bp::return_self< >() );
+                , bp::return_self< >()
+                , "\n Load fasta sequences from named file\n" );
         
         }
         { //::moltk::Alignment::load_string
@@ -136,7 +187,8 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "load_string"
                 , load_string_function_type( &::moltk::Alignment::load_string )
-                , ( bp::arg("alignment_string") ) );
+                , ( bp::arg("alignment_string") )
+                , "\n Add sequences from fasta sequences or a single sequence string.\n" );
         
         }
         { //::moltk::Alignment::pretty
@@ -145,17 +197,29 @@ void register_Alignment_class(){
             
             Alignment_exposer.def( 
                 "pretty"
-                , pretty_function_type( &::moltk::Alignment::pretty ) );
+                , pretty_function_type( &::moltk::Alignment::pretty )
+                , "\n Create a string containing a pretty formatted alignment\n" );
         
         }
-        { //::moltk::Alignment::score
+        { //::moltk::Alignment::repr
         
-            typedef ::moltk::units::Information const & ( ::moltk::Alignment::*score_function_type )(  ) const;
+            typedef ::std::string ( ::moltk::Alignment::*repr_function_type )(  ) const;
             
             Alignment_exposer.def( 
-                "score"
-                , score_function_type( &::moltk::Alignment::score )
-                , bp::return_value_policy< bp::copy_const_reference >() );
+                "repr"
+                , repr_function_type( &::moltk::Alignment::repr )
+                , "\n Low level python string representation of this Alignment\n" );
+        
+        }
+        { //::moltk::Alignment::set_pretty_width
+        
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*set_pretty_width_function_type )( int ) ;
+            
+            Alignment_exposer.def( 
+                "set_pretty_width"
+                , set_pretty_width_function_type( &::moltk::Alignment::set_pretty_width )
+                , ( bp::arg("width") )
+                , bp::return_self< >() );
         
         }
         { //::moltk::Alignment::set_score
@@ -166,7 +230,8 @@ void register_Alignment_class(){
                 "set_score"
                 , set_score_function_type( &::moltk::Alignment::set_score )
                 , ( bp::arg("s") )
-                , bp::return_self< >() );
+                , bp::return_self< >()
+                , "\n Set the sum of pairs score for this Alignment.  Make sure you put the correct answer!\n" );
         
         }
         { //::moltk::Alignment::write_fasta
@@ -176,7 +241,8 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "write_fasta"
                 , write_fasta_function_type( &::moltk::Alignment::write_fasta )
-                , ( bp::arg("output_stream") ) );
+                , ( bp::arg("output_stream") )
+                , "\n Write Alignment in fasta format to a C++ stream\n" );
         
         }
         { //::moltk::Alignment::write_fasta
@@ -186,7 +252,8 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "write_fasta"
                 , write_fasta_function_type( &::moltk::Alignment::write_fasta )
-                , ( bp::arg("file_name") ) );
+                , ( bp::arg("file_name") )
+                , "\n Write Alignment in fasta format to a file\n" );
         
         }
         { //::moltk::Alignment::write_id_table
@@ -196,7 +263,8 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "write_id_table"
                 , write_id_table_function_type( &::moltk::Alignment::write_id_table )
-                , ( bp::arg("output_stream") ) );
+                , ( bp::arg("output_stream") )
+                , "\n Write table of pairwise sequence identities to a C++ stream\n" );
         
         }
         { //::moltk::Alignment::write_id_table
@@ -206,7 +274,8 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "write_id_table"
                 , write_id_table_function_type( &::moltk::Alignment::write_id_table )
-                , ( bp::arg("file_name") ) );
+                , ( bp::arg("file_name") )
+                , "\n Write table of pairwise sequence identities to a file\n" );
         
         }
         { //::moltk::Alignment::write_pretty
@@ -216,7 +285,8 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "write_pretty"
                 , write_pretty_function_type( &::moltk::Alignment::write_pretty )
-                , ( bp::arg("output_stream") ) );
+                , ( bp::arg("output_stream") )
+                , "\n Write a pretty formatted alignment to a C++ stream\n" );
         
         }
         { //::moltk::Alignment::write_pretty
@@ -226,10 +296,27 @@ void register_Alignment_class(){
             Alignment_exposer.def( 
                 "write_pretty"
                 , write_pretty_function_type( &::moltk::Alignment::write_pretty )
-                , ( bp::arg("file_name") ) );
+                , ( bp::arg("file_name") )
+                , "\n Write a pretty formatted alignment to a file\n" );
+        
+        }
+        { //property "pretty_width"[fget=::moltk::Alignment::get_pretty_width, fset=::moltk::Alignment::set_pretty_width]
+        
+            typedef int ( ::moltk::Alignment::*fget )(  ) const;
+            typedef ::moltk::Alignment & ( ::moltk::Alignment::*fset )( int ) ;
+            
+            Alignment_exposer.add_property( 
+                "pretty_width"
+                , fget( &::moltk::Alignment::get_pretty_width )
+                , bp::make_function( 
+                      fset( &::moltk::Alignment::set_pretty_width )
+                    , bp::return_self< >() )  );
         
         }
         Alignment_exposer.def( bp::self_ns::str( bp::self ) );
+        Alignment_exposer.def("__repr__", 
+                    &::moltk::Alignment::repr, 
+                    "python low level string representation");
     }
 
 }

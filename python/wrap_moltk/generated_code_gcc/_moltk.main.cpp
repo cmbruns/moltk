@@ -40,8 +40,6 @@
 
 #include "generated_code_gcc/PDBStructure.pypp.hpp"
 
-#include "generated_code_gcc/Printable.pypp.hpp"
-
 #include "generated_code_gcc/Quaternion.pypp.hpp"
 
 #include "generated_code_gcc/QueryPositionList.pypp.hpp"
@@ -90,8 +88,6 @@ BOOST_PYTHON_MODULE(_moltk){
     register_EString_class();
 
     register_PDBStructure_class();
-
-    register_Printable_class();
 
     register_Quaternion_class();
 
