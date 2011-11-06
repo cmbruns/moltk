@@ -151,30 +151,39 @@ add_custom_target(SetupPyBuild
 )
 add_dependencies(SetupPyBuild MoltkPyplusplusWrappers)
 
-
 ##################
 # setup.py bdist #
 ##################
 
 file(RELATIVE_PATH DIST_DIR "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/py_dist")
+file(RELATIVE_PATH BDIST_BASE "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/py_bdist")
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/py_dist")
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/py_bdist")
 set(RUN_SETUP_PY_BDIST "${CMAKE_CURRENT_BINARY_DIR}/RunSetupPyBdist.cmake")
 set(BDIST_OPT "bdist")
 if(MSVC)
+    # Binary installer for windows is created with "setup.py bdis_msi"
     set(BDIST_OPT "bdist_msi")
+elseif(UNIX)
+    # Does this system support RPM packaging?
+    find_program(RPM_EXECUTABLE rpm)
+    if(RPM_EXECUTABLE)
+        set(BDIST_OPT "bdist_rpm --bdist-base=${BDIST_BASE}")
+    endif(RPM_EXECUTABLE)
 endif()
 file(WRITE "${RUN_SETUP_PY_BDIST}"
 "
-################
-set(ENV{BOOST_PYTHON_LIBRARY} \"${Boost_PYTHON_LIBRARY_RELEASE}\")
-set(ENV{BOOST_IOSTREAMS_LIBRARY} \"${Boost_IOSTREAMS_LIBRARY_RELEASE}\")
-set(ENV{BOOST_INCLUDE_DIR} \"${Boost_INCLUDE_DIRS}\")
-execute_process(
-    COMMAND \"${PYTHON_EXECUTABLE}\" setup.py
-        build --build-base=${BUILD_BASE}
-        ${BDIST_OPT} --dist-dir=${DIST_DIR}
-    WORKING_DIRECTORY \"${CMAKE_SOURCE_DIR}\"
-)
-#################
+    ################
+    set(ENV{BOOST_PYTHON_LIBRARY} \"${Boost_PYTHON_LIBRARY_RELEASE}\")
+    set(ENV{BOOST_IOSTREAMS_LIBRARY} \"${Boost_IOSTREAMS_LIBRARY_RELEASE}\")
+    set(ENV{BOOST_INCLUDE_DIR} \"${Boost_INCLUDE_DIRS}\")
+    execute_process(
+        COMMAND \"${PYTHON_EXECUTABLE}\" setup.py
+            build --build-base=${BUILD_BASE}
+            ${BDIST_OPT} --dist-dir=${DIST_DIR}
+        WORKING_DIRECTORY \"${CMAKE_SOURCE_DIR}\"
+    )
+    #################
 "
 )
 
