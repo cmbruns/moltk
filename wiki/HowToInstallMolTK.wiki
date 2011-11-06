@@ -68,3 +68,13 @@ The MolTK C++ SDK won't be released until MolTK version 0.5.
     python setup.py build<br/>
     python setup.py install<br/>
     On windows, patch pygccxml/parser/source_reader.py method __create_command_line to NOT wrap command with double quotes.
+  * pyplusplus
+    svn checkout https://pygccxml.svn.sourceforge.net/svnroot/pygccxml/pyplusplus_dev pyplusplus<br/>
+    cd pyplusplus<br/>
+    python setup.py build<br/>
+    python setup.py install<br/>
+== Generate API documentation (optional) ==
+  * epydoc (for generating python API documentation)
+   http://sourceforge.net/projects/epydoc/files/epydoc/
+  * doxygen (C++ API documentation)
+  * dot (graphs and figures in API documentation)
