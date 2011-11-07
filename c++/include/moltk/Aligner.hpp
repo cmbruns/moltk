@@ -101,8 +101,8 @@ public:
     /// TracebackPointer help reconstruct the final alignment.
     enum TracebackPointer
     {
-        TRACEBACK_UP,
         TRACEBACK_UPLEFT,
+        TRACEBACK_UP,
         TRACEBACK_LEFT,
         TRACEBACK_DONE,
         TRACEBACK_NOT_INITIALIZED
