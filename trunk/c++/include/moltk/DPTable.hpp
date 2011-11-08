@@ -298,6 +298,24 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     typedef std::vector<RowType> TableType;
     typedef AlignmentResult<SCORE_TYPE> AlignmentResultType;
 
+    ~DPTable() {clear_positions();}
+
+    void clear_positions()
+    {
+        for (size_t i = 0; i < target_positions.size(); ++i)
+        {
+            delete target_positions[i];
+            target_positions[i] = NULL;
+        }
+        target_positions.clear();
+        for (size_t i = 0; i < query_positions.size(); ++i)
+        {
+            delete query_positions[i];
+            query_positions[i] = NULL;
+        }
+        query_positions.clear();
+    }
+
     void allocate()
     {
         // TODO - small memory version allocates just 2 or 3 rows.
@@ -330,6 +348,14 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                         *target_positions[i],
                         *query_positions[j]);
             }
+    }
+
+    AlignmentResultType align()
+    {
+        allocate();
+        initialize();
+        compute_recurrence();
+        return compute_traceback();
     }
 
     AlignmentResultType compute_traceback()

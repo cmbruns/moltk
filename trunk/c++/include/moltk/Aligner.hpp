@@ -43,10 +43,14 @@ public:
     typedef moltk::units::Information Information;
 
 
+    typedef dp::TargetPosition<Information, 1> TargetPosition;
+    typedef dp::QueryPosition<Information, 1> QueryPosition;
+
     /*!
      * QueryPosition is an alignment column specialized to efficiently compute
      * an alignment score with a TargetPosition.
      */
+    /*
     class QueryPosition // seq2
     {
         public:
@@ -55,9 +59,11 @@ public:
             virtual moltk::units::Information get_gap_open_penalty() const = 0;
             virtual moltk::units::Information get_gap_extension_penalty() const = 0;
     };
+    */
     /*! TargetPosition is an alignment column specialized to efficiently compute
      *  an alignment score with a QueryPosition.
      */
+    /*
     class TargetPosition // seq1
     {
         public:
@@ -67,6 +73,7 @@ public:
             virtual moltk::units::Information get_gap_open_penalty() const = 0;
             virtual moltk::units::Information get_gap_extension_penalty() const = 0;
     };
+    */
 
 
     /*! Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions
@@ -80,8 +87,8 @@ public:
             , default_gap_open_penalty(8.0 * moltk::units::bit)
             , default_gap_extension_penalty(0.5 * moltk::units::bit)
         {}
-        virtual std::vector<QueryPosition*> create_query_positions(const Alignment&) const = 0;
-        virtual std::vector<TargetPosition*> create_target_positions(const Alignment&) const = 0;
+        virtual std::vector<const QueryPosition*> create_query_positions(const Alignment&) const = 0;
+        virtual std::vector<const TargetPosition*> create_target_positions(const Alignment&) const = 0;
         bool get_end_gaps_free() const {return b_end_gaps_free;}
         void set_end_gaps_free(bool f) {b_end_gaps_free = f;}
         /// Alignment score reduction for initiating an alignment gap.
@@ -99,6 +106,7 @@ public:
         Information default_gap_extension_penalty;
     };
 
+    /*
     /// TracebackPointer help reconstruct the final alignment.
     enum TracebackPointer
     {
@@ -108,8 +116,10 @@ public:
         TRACEBACK_DONE,
         TRACEBACK_NOT_INITIALIZED
     };
+    */
 
 
+    /*
     /// An Aligner::Cell is one node in the dynamic programming table
     class Cell
     {
@@ -132,6 +142,7 @@ public:
     };
     typedef std::vector<Cell> DpRow;
     typedef std::vector<DpRow> DpTable;
+    */
 
 
     /// Aligner::Stage represents current state of an incomplete alignment
@@ -180,7 +191,7 @@ protected:
     // void compute_cell_recurrence_freeF(int i, int j);
     // void compute_cell_recurrence_freeEF(int i, int j);
     Alignment compute_traceback();
-    void clear_positions();
+    // void clear_positions();
     void clear_scorer();
 
     // Information gapOpenPenalty; // positive penalty (will be subtracted at gaps)
@@ -190,8 +201,8 @@ protected:
     size_t m; // length of sequence 1
     size_t n; // length of sequence 2
     // DpTable dp_table;
-    std::vector<TargetPosition*> seq1;
-    std::vector<QueryPosition*> seq2;
+    // std::vector<TargetPosition*> seq1;
+    // std::vector<QueryPosition*> seq2;
     Scorer* scorer;
     Alignment output_alignment;
     Alignment query_alignment;

@@ -35,6 +35,7 @@ using moltk::units::bit;
 // Aligner::Cell methods //
 ///////////////////////////
 
+/*
 units::Information Aligner::Cell::compute_v() const
 {
     TracebackPointer tp = compute_traceback_pointer();
@@ -58,6 +59,7 @@ Aligner::TracebackPointer Aligner::Cell::compute_traceback_pointer() const
     else
         return TRACEBACK_UP;
 }
+*/
 
 
 /////////////////////
@@ -71,7 +73,7 @@ Aligner::Aligner()
 /* virtual */
 Aligner::~Aligner()
 {
-    clear_positions();
+    // clear_positions();
     clear_scorer();
 }
 
@@ -83,8 +85,8 @@ void Aligner::init()
     // gapExtensionPenalty = 0.5 * bit;
     // m and n are lengths of input Biosequences
     // the PositionLists (seq1,seq2) and DpTable entries are actually +1 larger.
-    m = seq1.size() - 1;
-    n = seq2.size() - 1;
+    m = test_table.target_positions.size() - 1;
+    n = test_table.query_positions.size() - 1;
 }
 
 void Aligner::clear_scorer()
@@ -93,6 +95,7 @@ void Aligner::clear_scorer()
     scorer = NULL;
 }
 
+/*
 void Aligner::clear_positions() 
 {
     for (size_t i = 0; i < seq1.size(); ++i) 
@@ -108,27 +111,37 @@ void Aligner::clear_positions()
     }
     seq2.clear();
 }
+*/
 
 Alignment Aligner::align(const Alignment& s1, const Alignment& s2)
 {
-    clear_positions();
+    test_table.clear_positions();
     target_alignment = s1;
     query_alignment = s2;
     // Fill seq1, seq2
-    seq1.clear();
+    // seq1.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
     m = s1.get_number_of_columns();
-    seq1 = scorer->create_target_positions(s1);
+    test_table.target_positions = scorer->create_target_positions(s1);
 
-    seq2.clear();
+    // seq2.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
     n = s2.get_number_of_columns();
-    seq2 = scorer->create_query_positions(s2);
+    test_table.query_positions = scorer->create_query_positions(s2);
 
+    /*
     allocate_dp_table();
     initialize_dp_table();
     compute_recurrence();
-    output_alignment = compute_traceback();
+    */
+    dp::AlignmentResult<Information> alignment_result =
+            test_table.align();
+    output_alignment =
+            target_alignment.align(
+                    query_alignment,
+                    alignment_result.eString1,
+                    alignment_result.eString2);
+    output_alignment.set_score(output_alignment.get_score() + alignment_result.score);
     return output_alignment;
 }
 
