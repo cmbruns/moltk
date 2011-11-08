@@ -155,6 +155,7 @@ std::vector<POSB*> MatrixScorer::create_foo_positions(const Alignment& alignment
         // pos->scoresByResidueTypeIndex.assign(matrix.size(), 0.0 * bit);
         pos->gap_scorer.open_penalty = 0.0 * bit;
         pos->gap_scorer.extension_penalty = 0.0 * bit;
+        pos->index = col;
         result.push_back(pos);
     }
     // Add contributions from each residue of each sequence
