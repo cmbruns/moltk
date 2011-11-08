@@ -134,16 +134,23 @@ Alignment Aligner::align(const Alignment& s1, const Alignment& s2)
 
 void Aligner::allocate_dp_table()
 {
+    /*
     // TODO - small memory version allocates just 2 or 3 rows.
     dp_table.assign(m + 1, DpRow(n + 1));
+     */
+    test_table.allocate();
 }
 
 void Aligner::initialize_dp_table()
 {
+    /*
     for (size_t i = 0; i < dp_table.size(); ++i)
         initialize_dp_row(i, dp_table[i]);
+        */
+    test_table.initialize();
 }
 
+/*
 // single row initialization could come in handy during small memory alignment
 void Aligner::initialize_dp_row(size_t rowIndex, DpRow& row)
 {
@@ -195,16 +202,21 @@ void Aligner::compute_cell_recurrence(int i, int j)
     cell.v = cell.compute_v();
     //  << cell << endl;
 }
+*/
 
 void Aligner::compute_recurrence()
 {
+    /*
     for (size_t i = 1; i <= m; ++i)
         for (size_t j = 1; j <= n; ++j)
             compute_cell_recurrence(i, j);
+            */
+    test_table.compute_recurrence();
 }
 
 Alignment Aligner::compute_traceback()
 {
+    /*
     // Start at lower right of dynamic programming matrix.
     EString eString1;
     EString eString2;
@@ -250,8 +262,15 @@ Alignment Aligner::compute_traceback()
     eString2.reverse();
     // cerr << eString1 << eString2 << endl;
     // cerr << targetAlignment << queryAlignment;
-    Alignment result = target_alignment.align(query_alignment, eString1, eString2);
-    result.set_score(result.get_score() + alignmentScore);
+     *
+     */
+    dp::AlignmentResult<Information> alignment_result = test_table.compute_traceback();
+    Alignment result =
+            target_alignment.align(
+                    query_alignment,
+                    alignment_result.eString1,
+                    alignment_result.eString2);
+    result.set_score(result.get_score() + alignment_result.score);
     return result;
 }
 

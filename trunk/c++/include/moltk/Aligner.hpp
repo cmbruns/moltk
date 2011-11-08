@@ -173,12 +173,12 @@ protected:
     void init();
     void allocate_dp_table();
     void initialize_dp_table();
-    void initialize_dp_row(size_t rowIndex, DpRow& row);
+    // void initialize_dp_row(size_t rowIndex, DpRow& row);
     void compute_recurrence();
-    void compute_cell_recurrence(int i, int j);
-    void compute_cell_recurrence_freeE(int i, int j);
-    void compute_cell_recurrence_freeF(int i, int j);
-    void compute_cell_recurrence_freeEF(int i, int j);
+    // void compute_cell_recurrence(int i, int j);
+    // void compute_cell_recurrence_freeE(int i, int j);
+    // void compute_cell_recurrence_freeF(int i, int j);
+    // void compute_cell_recurrence_freeEF(int i, int j);
     Alignment compute_traceback();
     void clear_positions();
     void clear_scorer();
@@ -189,7 +189,7 @@ protected:
     bool b_local_aligner;
     size_t m; // length of sequence 1
     size_t n; // length of sequence 2
-    DpTable dp_table;
+    // DpTable dp_table;
     std::vector<TargetPosition*> seq1;
     std::vector<QueryPosition*> seq2;
     Scorer* scorer;
