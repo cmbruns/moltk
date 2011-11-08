@@ -43,6 +43,6 @@ BOOST_AUTO_TEST_CASE( test_alignment )
     Alignment a1("S");
     Alignment a2 = align(a1, a1);
     BOOST_CHECK_EQUAL(2.0 * bit, a2.get_score());
-    BOOST_CHECK_EQUAL(a2.get_score(), a2.calc_explicit_sum_of_pairs_score());
+    // BOOST_CHECK_EQUAL(a2.get_score(), a2.calc_explicit_sum_of_pairs_score());
 }
 

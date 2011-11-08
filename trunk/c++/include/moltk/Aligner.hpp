@@ -23,11 +23,12 @@
 #ifndef MOLTK_ALIGN_ALIGNER_H
 #define MOLTK_ALIGN_ALIGNER_H
 
-#include <iostream>
-#include <vector>
+#include "moltk/DPTable.hpp"
 #include "moltk/Alignment.hpp"
 #include "moltk/units.hpp"
 #include "moltk/Biosequence.hpp"
+#include <iostream>
+#include <vector>
 
 namespace moltk {
 

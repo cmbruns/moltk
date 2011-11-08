@@ -8,11 +8,18 @@
 #ifndef MOLTK_DPTABLE_HPP_
 #define MOLTK_DPTABLE_HPP_
 
+#include <vector>
+
 namespace moltk {
+/// Namespace for dynamic programming classes.
+/// 
+/// Many of theses classes use hard-to-read C++ template specializations,
+/// because we are trying to avoid the overhead of virtual functions and
+/// and branching logic in the time-critical inner loop of dynamic programming.
+namespace dp {
 
 // Various options that affect the details of the
 // dynamic programming alignment algorithm
-
 
 /// Fast O(n^2) memory use vs. 2X slower O(n) memory use.
 enum DPMemoryModel {
@@ -28,6 +35,7 @@ enum DPAlignType {
 };
 
 
+/// Global vs. local alignment
 enum DPAlignScale {
     DP_ALIGN_GLOBAL, ///< Global alignment (Needleman Wunsch)
     DP_ALIGN_LOCAL, ///< Local alignment (Smith Waterman)
@@ -56,8 +64,8 @@ template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information
 struct GapScorer
 {
 public:
-    SCORE_TYPE open_penalties[GAP_NSEGS];
-    SCORE_TYPE extension_penalties[GAP_NSEGS];
+    SCORE_TYPE open_penalties[GAP_NSEGS]; ///< Penalties for creating an insertion gap in a sequence alignment.
+    SCORE_TYPE extension_penalties[GAP_NSEGS]; ///< Penalties for extending an insertion gap by one position in a sequence alignment.
 };
 
 
@@ -66,15 +74,16 @@ template<typename SCORE_TYPE>
 struct GapScorer<SCORE_TYPE, 1>
 {
 public:
-    SCORE_TYPE open_penalty;
-    SCORE_TYPE extension_penalty;
+    SCORE_TYPE open_penalty; ///< Penalty for creating an insertion gap in a sequence alignment
+    SCORE_TYPE extension_penalty; ///< Penalty for extending an insertion gap by one position in a sequence alignment
 };
 
 
-/// Accumulated score for an alignment with a new insertion gap in one sequence
+/// Accumulated score for an alignment with a new insertion gap in one sequence.
+///
 /// Intended to encapsulate all logic associated with GAP_NSEGS and AlignType
 /// Corresponds to element E or F in Gusfield's chapter 11 recurrence.
-template<typename SCORE_TYPE, AlignType ALIGN_TYPE, int GAP_NSEGS>
+template<typename SCORE_TYPE, DPAlignType ALIGN_TYPE, int GAP_NSEGS>
 struct RunningGapScore;
 
 
@@ -157,9 +166,7 @@ template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information
          DPAlignType ALIGN_TYPE, ///< Whether alignment operands have preexisting gaps or not
          int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
          >
-struct DPTable
-{
-};
+struct DPTable;
 
 
 /// template specialization of DPTable for Affine alignment in large memory.
@@ -174,11 +181,12 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     {
         table.assign(number_of_rows, RowType(number_of_columns));
     }
+    // TODO - initialize, compute_recurrence, compute_traceback
 
     TableType table;
 };
 
 
-} // namespace moltk
+}} // namespace moltk::dp
 
 #endif /* MOLTK_DPTABLE_HPP_ */
