@@ -153,8 +153,8 @@ std::vector<POSB*> MatrixScorer::create_foo_positions(const Alignment& alignment
     {
         POS* pos = new POS();
         // pos->scoresByResidueTypeIndex.assign(matrix.size(), 0.0 * bit);
-        pos->gap_open_penalty = 0.0 * bit;
-        pos->gap_extension_penalty = 0.0 * bit;
+        pos->gap_scorer.open_penalty = 0.0 * bit;
+        pos->gap_scorer.extension_penalty = 0.0 * bit;
         result.push_back(pos);
     }
     // Add contributions from each residue of each sequence
@@ -169,8 +169,8 @@ std::vector<POSB*> MatrixScorer::create_foo_positions(const Alignment& alignment
             POS& pos = 
                 dynamic_cast<POS&>(*result[0]);
             // leave score zero, but set gap penalties
-            pos.gap_extension_penalty = gapFactor * default_gap_extension_penalty;
-            pos.gap_open_penalty = gapFactor * default_gap_open_penalty;
+            pos.gap_scorer.extension_penalty = gapFactor * default_gap_extension_penalty;
+            pos.gap_scorer.open_penalty = gapFactor * default_gap_open_penalty;
         }
         int colIx = -1;
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
@@ -196,8 +196,8 @@ std::vector<POSB*> MatrixScorer::create_foo_positions(const Alignment& alignment
             POS& pos = 
                 dynamic_cast<POS&>(*result[colIx + 1]);
             // Set gap penalties
-            pos.gap_extension_penalty = gapFactor * default_gap_extension_penalty;
-            pos.gap_open_penalty = gapFactor * default_gap_open_penalty;
+            pos.gap_scorer.extension_penalty = gapFactor * default_gap_extension_penalty;
+            pos.gap_scorer.open_penalty = gapFactor * default_gap_open_penalty;
         }
         assert(colIx == alignment.get_number_of_columns() - 1);
     }
@@ -208,9 +208,9 @@ std::vector<POSB*> MatrixScorer::create_foo_positions(const Alignment& alignment
 // in O(n) time, so that alignment score can be computed as quickly as possible
 // durint the O(n^2) alignment phase.
 /* virtual */
-std::vector<Aligner::TargetPosition*> MatrixScorer::create_target_positions(const Alignment& alignment) const
+std::vector<const Aligner::TargetPosition*> MatrixScorer::create_target_positions(const Alignment& alignment) const
 {
-    std::vector<Aligner::TargetPosition*> result = 
+    std::vector<Aligner::TargetPosition*> result =
         create_foo_positions<Aligner::TargetPosition, MatrixScorer::TargetPosition>(alignment);
 
     const size_t ncol = alignment.get_number_of_columns();
@@ -246,13 +246,18 @@ std::vector<Aligner::TargetPosition*> MatrixScorer::create_target_positions(cons
             // cerr << pos.scoresByResidueTypeIndex[17] << endl;
        }
     }
-    return result;
+
+    // Copy vector of non-const pointer to const pointer, now that we are done modifying them.
+    std::vector<const Aligner::TargetPosition*> result1;
+    for (int i = 0; i < result.size(); ++i)
+        result1.push_back(result[i]);
+    return result1;
 }
 
 /* virtual */
-std::vector<Aligner::QueryPosition*> MatrixScorer::create_query_positions(const Alignment& alignment) const
+std::vector<const Aligner::QueryPosition*> MatrixScorer::create_query_positions(const Alignment& alignment) const
 {
-    std::vector<Aligner::QueryPosition*> result = 
+    std::vector<Aligner::QueryPosition*> result =
         create_foo_positions<Aligner::QueryPosition, MatrixScorer::QueryPosition>(alignment);
 
     // queryWeightIndexByResTypeIndex helps coalesce multiple instances of the same residue in a column
@@ -299,7 +304,11 @@ std::vector<Aligner::QueryPosition*> MatrixScorer::create_query_positions(const 
     }
     */
 
-    return result;
+    // Copy vector of non-const pointer to const pointer, now that we are done modifying them.
+    std::vector<const Aligner::QueryPosition*> result1;
+    for (int i = 0; i < result.size(); ++i)
+        result1.push_back(result[i]);
+    return result1;
 }
 
 /* virtual */
@@ -328,18 +337,23 @@ Aligner::Position* MatrixScorer::createPosition(char sequenceLetter, bool bTermi
 ////////////////////////////////////
 
 /* virtual */
+/*
 MatrixScorer::QueryPosition* MatrixScorer::QueryPosition::clone() const
 {
     return new MatrixScorer::QueryPosition(*this);
 }
+*/
 
 /* virtual */
+/*
 MatrixScorer::TargetPosition* MatrixScorer::TargetPosition::clone() const
 {
     return new MatrixScorer::TargetPosition(*this);
 }
+*/
 
 /* virtual */
+/*
 units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosition& rhsParam) const
 {
     const TargetPosition& lhs = *this;
@@ -362,6 +376,7 @@ units::Information MatrixScorer::TargetPosition::score(const Aligner::QueryPosit
     }
     return result;
 }
+*/
 
 ////////////////////
 // Global methods //

@@ -41,11 +41,14 @@ public:
 
     explicit MatrixScorer(const std::string& matrix_string);
     explicit MatrixScorer(std::istream& matrix_stream);
-    std::vector<Aligner::QueryPosition*> create_query_positions(const Alignment& alignment) const;
-    std::vector<Aligner::TargetPosition*> create_target_positions(const Alignment& alignment) const;
+    std::vector<const Aligner::QueryPosition*> create_query_positions(const Alignment& alignment) const;
+    std::vector<const Aligner::TargetPosition*> create_target_positions(const Alignment& alignment) const;
     std::istream& load_stream(std::istream&);
 
     static const MatrixScorer& get_blosum62_scorer();
+
+    typedef Aligner::QueryPosition QueryPosition;
+    typedef Aligner::TargetPosition TargetPosition;
 
     /*!
      * QueryPosition represents an alignment/sequence column in the
@@ -55,6 +58,7 @@ public:
     // Query alignment should be shorter than target alignment for small-memory optimizaion.
     // Query alignment should have fewer/less-diverse sequences for scoring optimization.
      */
+    /*
     class QueryPosition : public Aligner::QueryPosition
     {
     public:
@@ -75,12 +79,14 @@ public:
         typedef std::vector< std::pair<size_t, double> > QueryWeights;
         QueryWeights residue_type_index_weights;
     };
+    */
 
 
     /*!
      * TargetPosition represents an alignment/sequence column in the
      * first of two sequences being scored by a MatrixScorer.
      */
+    /*
     class TargetPosition : public Aligner::TargetPosition
     {
     public:
@@ -95,6 +101,7 @@ public:
         // cache values for quick score lookup
         std::vector<Information> scores_by_residue_type_index;
     };
+    */
 
 protected:
     // create_foo_positions is a helper function to reduce redundancy between 
