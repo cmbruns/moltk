@@ -9,6 +9,7 @@
 #define MOLTK_DPTABLE_HPP_
 
 #include "moltk/EString.hpp"
+#include "moltk/units.hpp"
 #include <vector>
 #include <iostream>
 #include <stdexcept>
@@ -83,6 +84,33 @@ public:
 };
 
 
+/// Represents one column/residue in a sequence/alignment to be aligned.
+/// Optimized for fast scoring during alignment.
+/// Base class of QueryPosition and TargetPosition
+template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
+         int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
+         >
+struct AlignmentPosition
+{
+    GapScorer<SCORE_TYPE, GAP_NSEGS> gap_scorer;
+    size_t index;
+};
+
+
+/// Generic accumulated score in a DPCell
+template<typename SCORE_TYPE> struct RunningScore;
+template<class U, class Y> struct RunningScore<moltk::units::Quantity<U, Y> >
+{
+    typedef moltk::units::Quantity<U, Y> ScoreType;
+    ScoreType set_to_zero()
+    {
+        score = 0.0 * U::get_instance();
+        return score;
+    }
+    ScoreType score;
+};
+
+
 /// Accumulated score for an alignment with a new insertion gap in one sequence.
 ///
 /// Intended to encapsulate all logic associated with GAP_NSEGS and AlignType
@@ -95,23 +123,23 @@ struct RunningGapScore;
 template<typename SCORE_TYPE>
 struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
 {
+    typedef AlignmentPosition<SCORE_TYPE, 1> PositionType;
     /// Update from previous dynamic programming cell
-    void compute_recurrence(const RunningGapScore& pred, const SCORE_TYPE& v, const GapScorer<SCORE_TYPE, 1>& gap_scorer)
+    void compute_recurrence(
+            const RunningGapScore& pred,
+            const RunningScore<SCORE_TYPE>& v,
+            const AlignmentPosition<SCORE_TYPE, 1>& pos1,
+            const AlignmentPosition<SCORE_TYPE, 1>& pos2)
     {
-        score = std::max(pred.score, v - gap_scorer.open_penalty)
-                - gap_scorer.extension_penalty;
+        score = std::max(pred.score, v.score - pos1.gap_scorer.open_penalty)
+                - pos1.gap_scorer.extension_penalty;
     }
+    void initialize(const PositionType& pos1, const PositionType& pos2)
+    {
+        // TODO
+    }
+
     SCORE_TYPE score;
-};
-
-
-template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
-         int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
-         >
-struct AlignmentPosition
-{
-    GapScorer<SCORE_TYPE, GAP_NSEGS> gap_scorer;
-    size_t index;
 };
 
 
@@ -124,6 +152,16 @@ struct QueryPosition : public AlignmentPosition<SCORE_TYPE, GAP_NSEGS>
     typedef std::vector< std::pair<size_t, double> > QueryWeights;
     QueryWeights residue_type_index_weights;
 };
+
+
+template<typename SCORE_TYPE>
+SCORE_TYPE set_to_zero(SCORE_TYPE);
+
+template<class U, typename Y>
+moltk::units::Quantity<U,Y> set_to_zero(moltk::units::Quantity<U,Y>& q)
+{
+    q = 0.0 * U::get_instance();
+}
 
 
 template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
@@ -165,6 +203,7 @@ template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information
 struct DPCell
 {
     typedef RunningGapScore<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> GapScoreType;
+    typedef RunningScore<SCORE_TYPE> ScoreType;
     typedef TargetPosition<SCORE_TYPE, GAP_NSEGS> TargetPosType;
     typedef QueryPosition<SCORE_TYPE, GAP_NSEGS> QueryPosType;
 
@@ -176,34 +215,33 @@ struct DPCell
         e.initialize(pos1, pos2);
         f.initialize(pos2, pos1);
         if ((pos1.index != 0) && (pos2.index != 0))
-            v = set_to_zero(g);
+            v.score = g.set_to_zero();
         else if (0 == pos1.index)
-            v = e.score;
+            v.score = e.score;
         else if (0 == pos2.index)
-            v = f.score;
+            v.score = f.score;
     }
 
-    void compute_recurrence(const DPCell& left,
+    void compute_recurrence(const DPCell& up_left,
                             const DPCell& up,
-                            const DPCell& left_up,
-                            const SCORE_TYPE& score, // match score of positions i and j
-                            const GapScorer<SCORE_TYPE, GAP_NSEGS>& gap_score1, // score for insertion gap in sequence 1
-                            const GapScorer<SCORE_TYPE, GAP_NSEGS>& gap_score2) // score for insertion gap in sequence 2
+                            const DPCell& left,
+                            const TargetPosition<SCORE_TYPE, GAP_NSEGS>& pos1,
+                            const QueryPosition<SCORE_TYPE, GAP_NSEGS>& pos2) // score for insertion gap in sequence 2
     {
         // This recurrence comes from Gusfield chapter 11.
         // best score with ungapped alignment of i with j
-        g = left_up.v + score;
+        g.score = up_left.v.score + pos1.score(pos2);
         // best score with insertion gap in sequence 1
-        e.compute_recurrence(left.e, left.v, gap_score1);
+        e.compute_recurrence(left.e, left.v, pos1, pos2);
         // best score with insertion gap in sequence 2
-        f.compute_recurrence(up.f, up.v, gap_score2);
+        f.compute_recurrence(up.f, up.v, pos2, pos1);
         // best score overall
-        v = compute_v();
+        v.score = compute_v();
     }
 
     TracebackPointer compute_traceback_pointer() const
     {
-        if ( (g >= e.score) && (g >= f.score) )
+        if ( (g.score >= e.score) && (g.score >= f.score) )
             return TRACEBACK_UPLEFT;
         else if (e.score >= f.score)
             return TRACEBACK_LEFT;
@@ -217,7 +255,7 @@ struct DPCell
         switch(tp)
         {
         case TRACEBACK_UPLEFT:
-            return g;
+            return g.score;
         case TRACEBACK_LEFT:
             return e.score;
         default:
@@ -226,8 +264,8 @@ struct DPCell
     }
 
     // Gusfield nomenclature
-    SCORE_TYPE v; ///< V, best score through this cell
-    SCORE_TYPE g; ///< G, best ungapped score through this cell
+    ScoreType v; ///< V, best score through this cell
+    ScoreType g; ///< G, best ungapped score through this cell
     GapScoreType e; ///< E, best score with gap in sequence 1
     GapScoreType f; ///< F, best score with gap in sequence 2
 };
@@ -245,8 +283,8 @@ struct DPTable;
 template<typename SCORE_TYPE>
 struct AlignmentResult
 {
-    moltk::EString estring1;
-    moltk::EString estring2;
+    moltk::EString eString1;
+    moltk::EString eString2;
     SCORE_TYPE score;
 };
 
@@ -258,8 +296,9 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     typedef DPCell<SCORE_TYPE, ALIGN_TYPE, 1> CellType;
     typedef std::vector<CellType> RowType;
     typedef std::vector<RowType> TableType;
+    typedef AlignmentResult<SCORE_TYPE> AlignmentResultType;
 
-    void allocate(int number_of_rows, int number_of_columns)
+    void allocate()
     {
         // TODO - small memory version allocates just 2 or 3 rows.
         table.assign(num_rows(), RowType(num_columns()));
@@ -271,27 +310,34 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
         if (num_columns() < 1) return;
         // Left column
         for(size_t i = 1; i < num_rows(); ++i)
-            table[i][0].initialize(*query_positions[0]);
+            table[i][0].initialize(*target_positions[i],
+                                   *query_positions[0]);
         // Top row
         for(size_t j = 1; j < num_columns(); ++j)
-            table[0][j].initialize(*target_positions[0]);
+            table[0][j].initialize(*target_positions[0],
+                                   *query_positions[j]);
     }
 
     void compute_recurrence()
     {
         for (size_t i = 1; i < num_rows(); ++i)
             for (size_t j = 1; j < num_columns(); ++j)
+            {
                 table[i][j].compute_recurrence(
+                        table[i-1][j-1], // up_left
+                        table[i-1][j], // up
+                        table[i][j-1], // left
                         *target_positions[i],
                         *query_positions[j]);
+            }
     }
 
-    AlignmentResult<SCORE_TYPE> compute_traceback()
+    AlignmentResultType compute_traceback()
     {
-        AlignmentResult<SCORE_TYPE> result;
+        AlignmentResultType result;
         int i = num_rows() - 1;
         int j = num_columns() - 1;
-        result.score = table[i][j].v;
+        result.score = table[i][j].v.score;
         // cout << "final alignment score = " << dp_table[i][j].v << endl;
         TracebackPointer tracebackPointer = table[i][j].compute_traceback_pointer();
         while( (i > 0) || (j > 0) )
@@ -336,8 +382,8 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     size_t num_columns() const {return query_positions.size();}
 
     TableType table;
-    std::vector<const AlignmentPosition<SCORE_TYPE, 1>*> query_positions;
-    std::vector<const AlignmentPosition<SCORE_TYPE, 1>*> target_positions;
+    std::vector<const QueryPosition<SCORE_TYPE, 1>*> query_positions;
+    std::vector<const TargetPosition<SCORE_TYPE, 1>*> target_positions;
 };
 
 
