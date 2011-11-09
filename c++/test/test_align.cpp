@@ -41,6 +41,7 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     // boost::debug::break_memory_alloc(566);
     Aligner aligner;
     aligner.set_end_gaps_free(true);
+
     Alignment a1 = aligner.align("W", "W");
     cout << a1 << a1.get_score() << endl;
     BOOST_CHECK_EQUAL(a1.get_score(), 5.5 * bit);
@@ -54,7 +55,7 @@ BOOST_AUTO_TEST_CASE( test_aligner )
 
     Biosequence seq1("AACDEF");
     Biosequence seq2("ACEFG");
-    a = aligner.align(seq1, seq2);
-    cout << a << a.get_score() << endl;
+    Alignment a2 = aligner.align(seq1, seq2);
+    cout << a2 << a2.get_score() << endl;
 }
 

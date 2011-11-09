@@ -14,6 +14,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <cassert>
+#include <limits>
 
 namespace moltk {
 /// Namespace for dynamic programming classes.
@@ -107,6 +108,11 @@ template<class U, class Y> struct RunningScore<moltk::units::Quantity<U, Y> >
         score = 0.0 * U::get_instance();
         return score;
     }
+    ScoreType set_to_negative_infinity()
+    {
+        score = -numeric_limits<Y>::infinity() * U::get_instance();
+        return score;
+    }
     ScoreType score;
 };
 
@@ -136,7 +142,12 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
     }
     void initialize(const PositionType& pos1, const PositionType& pos2)
     {
-        // TODO
+        if (0 == pos2.index) {
+            set_to_negative_infinity(score);
+            return;
+        }
+        score = -(moltk::Real)pos2.index * pos2.gap_scorer.extension_penalty
+                -pos2.gap_scorer.open_penalty;
     }
 
     SCORE_TYPE score;
@@ -155,12 +166,24 @@ struct QueryPosition : public AlignmentPosition<SCORE_TYPE, GAP_NSEGS>
 
 
 template<typename SCORE_TYPE>
+SCORE_TYPE set_to_negative_infinity(SCORE_TYPE);
+
+template<class U, typename Y>
+moltk::units::Quantity<U,Y> set_to_negative_infinity(moltk::units::Quantity<U,Y>& q)
+{
+    q = -numeric_limits<Y>::infinity() * U::get_instance();
+    return q;
+}
+
+
+template<typename SCORE_TYPE>
 SCORE_TYPE set_to_zero(SCORE_TYPE);
 
 template<class U, typename Y>
 moltk::units::Quantity<U,Y> set_to_zero(moltk::units::Quantity<U,Y>& q)
 {
     q = 0.0 * U::get_instance();
+    return q;
 }
 
 
@@ -214,12 +237,15 @@ struct DPCell
             throw std::runtime_error("Only top and left of dynamic programming table can be initialized");
         e.initialize(pos1, pos2);
         f.initialize(pos2, pos1);
-        if ((pos1.index != 0) && (pos2.index != 0))
+        g.set_to_negative_infinity();
+        if ((0 == pos1.index) && (0 == pos2.index))
             v.score = g.set_to_zero();
-        else if (0 == pos1.index)
-            v.score = e.score;
         else if (0 == pos2.index)
+            v.score = e.score;
+        else if (0 == pos1.index)
             v.score = f.score;
+        else
+            assert(false);
     }
 
     void compute_recurrence(const DPCell& up_left,
@@ -326,6 +352,9 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     {
         if (num_rows() < 1) return;
         if (num_columns() < 1) return;
+        // top left corner
+        table[0][0].initialize(*target_positions[0],
+                               *query_positions[0]);
         // Left column
         for(size_t i = 1; i < num_rows(); ++i)
             table[i][0].initialize(*target_positions[i],
