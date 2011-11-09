@@ -180,6 +180,9 @@ public:
      */
     static Aligner& get_shared_aligner();
 
+    /// The actual dynamic programming table
+    dp::DPTable<Information, dp::DP_MEMORY_LARGE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, 1> test_table;
+
 protected:
     void init();
     void allocate_dp_table();
@@ -208,9 +211,6 @@ protected:
     Alignment query_alignment;
     Alignment target_alignment;
 
-    // temporary instantiation to help debug new template classes
-    // dp::DPCell<Information, dp::DP_ALIGN_SINGLE_SEQUENCES, 1> test_cell;
-    dp::DPTable<Information, dp::DP_MEMORY_LARGE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, 1> test_table;
 };
 
 /*

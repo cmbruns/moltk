@@ -35,7 +35,7 @@ enum DPMemoryModel {
 
 
 /// Whether alignment operands have preexisting gaps (e.g. alignments) or not (e.g. single sequences)
-enum DPAlignType {
+enum DPAlignGapping {
     DP_ALIGN_UNGAPPED_SEQUENCES, ///< Alignment with no preexisting gaps can be faster and truly optimal
     DP_ALIGN_GAPPED_ALIGNMENTS ///< Alignment of pregapped sequences is slower and heuristic (problem is NP-hard)
 };
@@ -110,7 +110,7 @@ template<class U, class Y> struct RunningScore<moltk::units::Quantity<U, Y> >
     }
     ScoreType set_to_negative_infinity()
     {
-        score = -numeric_limits<Y>::infinity() * U::get_instance();
+        score = -std::numeric_limits<Y>::infinity() * U::get_instance();
         return score;
     }
     ScoreType score;
@@ -121,7 +121,7 @@ template<class U, class Y> struct RunningScore<moltk::units::Quantity<U, Y> >
 ///
 /// Intended to encapsulate all logic associated with GAP_NSEGS and AlignType
 /// Corresponds to element E or F in Gusfield's chapter 11 recurrence.
-template<typename SCORE_TYPE, DPAlignType ALIGN_TYPE, int GAP_NSEGS>
+template<typename SCORE_TYPE, DPAlignGapping ALIGN_TYPE, int GAP_NSEGS>
 struct RunningGapScore;
 
 
@@ -142,7 +142,7 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
     }
     void initialize(const PositionType& pos1, const PositionType& pos2)
     {
-        if (0 == pos2.index) {
+        if (0 != pos1.index) {
             set_to_negative_infinity(score);
             return;
         }
@@ -171,7 +171,7 @@ SCORE_TYPE set_to_negative_infinity(SCORE_TYPE);
 template<class U, typename Y>
 moltk::units::Quantity<U,Y> set_to_negative_infinity(moltk::units::Quantity<U,Y>& q)
 {
-    q = -numeric_limits<Y>::infinity() * U::get_instance();
+    q = -std::numeric_limits<Y>::infinity() * U::get_instance();
     return q;
 }
 
@@ -220,7 +220,7 @@ struct TargetPosition : public AlignmentPosition<SCORE_TYPE, GAP_NSEGS>
 
 /// Generic node in dynamic programming table
 template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
-         DPAlignType ALIGN_TYPE, ///< Whether alignment operands have preexisting gaps or not
+         DPAlignGapping ALIGN_TYPE, ///< Whether alignment operands have preexisting gaps or not
          int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
          >
 struct DPCell
@@ -240,9 +240,9 @@ struct DPCell
         g.set_to_negative_infinity();
         if ((0 == pos1.index) && (0 == pos2.index))
             v.score = g.set_to_zero();
-        else if (0 == pos2.index)
+        else if (0 == pos2.index) // left column
             v.score = e.score;
-        else if (0 == pos1.index)
+        else if (0 == pos1.index) // top row
             v.score = f.score;
         else
             assert(false);
@@ -282,11 +282,12 @@ struct DPCell
         {
         case TRACEBACK_UPLEFT:
             return g.score;
+            break;
         case TRACEBACK_LEFT:
             return e.score;
-        default:
-            return f.score;
+            break;
         }
+        return f.score;
     }
 
     // Gusfield nomenclature
@@ -300,7 +301,7 @@ struct DPCell
 /// Generic dynamic programming table (not implemented yet...)
 template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
          DPMemoryModel MEMORY_MODEL, ///< Whether to use slower small memory alignment
-         DPAlignType ALIGN_TYPE, ///< Whether alignment operands have preexisting gaps or not
+         DPAlignGapping ALIGN_TYPE, ///< Whether alignment operands have preexisting gaps or not
          int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
          >
 struct DPTable;
@@ -316,7 +317,7 @@ struct AlignmentResult
 
 
 /// template specialization of DPTable for Affine alignment in large memory.
-template<typename SCORE_TYPE, DPAlignType ALIGN_TYPE>
+template<typename SCORE_TYPE, DPAlignGapping ALIGN_TYPE>
 struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
 {
     typedef DPCell<SCORE_TYPE, ALIGN_TYPE, 1> CellType;
@@ -435,6 +436,77 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
 
     size_t num_rows() const {return target_positions.size();}
     size_t num_columns() const {return query_positions.size();}
+
+    inline friend std::ostream& operator<<(std::ostream& os, const DPTable& t)
+    {
+        enum CellField{V, G, E, F};
+        os << "row\\col";
+        for (int j = 0; j < t.num_columns(); ++j)
+        {
+            // Top row of column indices
+            os.width(6);
+            os << j;
+        }
+        os << std::endl;
+        os << std::endl;
+        for(int i = 0; i < t.num_rows(); ++i)
+        {
+            // Print out one row
+            for (int e = V; e <= F; ++e)
+            {
+                // Print out one cell element
+                switch(e) {
+                    case V:
+                        // row number
+                        os.width(5);
+                        os << i;
+                        os.width(2);
+                        os << 'V';
+                        for (int j = 0; j < t.num_columns(); ++j)
+                        {
+                            os.width(6);
+                            os << t.table[i][j].v.score.value;
+                        }
+                        break;
+                    case G:
+                        os << "     ";
+                        os.width(2);
+                        os << 'G';
+                        for (int j = 0; j < t.num_columns(); ++j)
+                        {
+                            os.width(6);
+                            os << t.table[i][j].g.score.value;
+                        }
+                        break;
+                    case E:
+                        os << "     ";
+                        os.width(2);
+                        os << 'E';
+                        for (int j = 0; j < t.num_columns(); ++j)
+                        {
+                            os.width(6);
+                            os << t.table[i][j].e.score.value;
+                        }
+                        break;
+                    case F:
+                        os << "     ";
+                        os.width(2);
+                        os << 'F';
+                        for (int j = 0; j < t.num_columns(); ++j)
+                        {
+                            os.width(6);
+                            os << t.table[i][j].f.score.value;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                os << std::endl; // end of row/element
+            }
+            os << std::endl; // empty line between rows
+        }
+        return os;
+    }
 
     TableType table;
     std::vector<const QueryPosition<SCORE_TYPE, 1>*> query_positions;
