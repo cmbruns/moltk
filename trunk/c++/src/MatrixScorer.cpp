@@ -250,7 +250,7 @@ std::vector<const Aligner::TargetPosition*> MatrixScorer::create_target_position
 
     // Copy vector of non-const pointer to const pointer, now that we are done modifying them.
     std::vector<const Aligner::TargetPosition*> result1;
-    for (int i = 0; i < result.size(); ++i)
+    for (size_t i = 0; i < result.size(); ++i)
         result1.push_back(result[i]);
     return result1;
 }
@@ -307,7 +307,7 @@ std::vector<const Aligner::QueryPosition*> MatrixScorer::create_query_positions(
 
     // Copy vector of non-const pointer to const pointer, now that we are done modifying them.
     std::vector<const Aligner::QueryPosition*> result1;
-    for (int i = 0; i < result.size(); ++i)
+    for (size_t i = 0; i < result.size(); ++i)
         result1.push_back(result[i]);
     return result1;
 }
