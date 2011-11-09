@@ -55,6 +55,7 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     aligner.set_end_gaps_free(true);
     a = aligner.align("QS", "SD");
     cout << a << a.get_score() << endl;
+    cout << aligner.test_table << endl;
     BOOST_CHECK_EQUAL(a.get_score(), 2.0 * bit);
 
     Biosequence seq1("AACDEF");

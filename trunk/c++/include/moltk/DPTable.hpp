@@ -146,8 +146,8 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
             set_to_negative_infinity(score);
             return;
         }
-        score = -(moltk::Real)pos2.index * pos2.gap_scorer.extension_penalty
-                -pos2.gap_scorer.open_penalty;
+        score = -(moltk::Real)pos2.index * pos1.gap_scorer.extension_penalty
+                -pos1.gap_scorer.open_penalty;
     }
 
     SCORE_TYPE score;
@@ -237,15 +237,11 @@ struct DPCell
             throw std::runtime_error("Only top and left of dynamic programming table can be initialized");
         e.initialize(pos1, pos2);
         f.initialize(pos2, pos1);
-        g.set_to_negative_infinity();
-        if ((0 == pos1.index) && (0 == pos2.index))
-            v.score = g.set_to_zero();
-        else if (0 == pos2.index) // left column
-            v.score = e.score;
-        else if (0 == pos1.index) // top row
-            v.score = f.score;
+        if ((pos1.index == 0) && (pos2.index == 0))
+            g.set_to_zero();
         else
-            assert(false);
+            g.set_to_negative_infinity();
+        v.score = compute_v();
     }
 
     void compute_recurrence(const DPCell& up_left,
@@ -441,7 +437,7 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     {
         enum CellField{V, G, E, F};
         os << "row\\col";
-        for (int j = 0; j < t.num_columns(); ++j)
+        for (size_t j = 0; j < t.num_columns(); ++j)
         {
             // Top row of column indices
             os.width(6);
@@ -449,7 +445,7 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
         }
         os << std::endl;
         os << std::endl;
-        for(int i = 0; i < t.num_rows(); ++i)
+        for(size_t i = 0; i < t.num_rows(); ++i)
         {
             // Print out one row
             for (int e = V; e <= F; ++e)
@@ -462,9 +458,9 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                         os << i;
                         os.width(2);
                         os << 'V';
-                        for (int j = 0; j < t.num_columns(); ++j)
+                        for (size_t j = 0; j < t.num_columns(); ++j)
                         {
-                            os.width(6);
+                            os.width(8);
                             os << t.table[i][j].v.score.value;
                         }
                         break;
@@ -472,9 +468,9 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                         os << "     ";
                         os.width(2);
                         os << 'G';
-                        for (int j = 0; j < t.num_columns(); ++j)
+                        for (size_t j = 0; j < t.num_columns(); ++j)
                         {
-                            os.width(6);
+                            os.width(8);
                             os << t.table[i][j].g.score.value;
                         }
                         break;
@@ -482,9 +478,9 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                         os << "     ";
                         os.width(2);
                         os << 'E';
-                        for (int j = 0; j < t.num_columns(); ++j)
+                        for (size_t j = 0; j < t.num_columns(); ++j)
                         {
-                            os.width(6);
+                            os.width(8);
                             os << t.table[i][j].e.score.value;
                         }
                         break;
@@ -492,9 +488,9 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                         os << "     ";
                         os.width(2);
                         os << 'F';
-                        for (int j = 0; j < t.num_columns(); ++j)
+                        for (size_t j = 0; j < t.num_columns(); ++j)
                         {
-                            os.width(6);
+                            os.width(8);
                             os << t.table[i][j].f.score.value;
                         }
                         break;
