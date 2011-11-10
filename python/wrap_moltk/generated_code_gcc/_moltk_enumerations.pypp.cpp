@@ -8,6 +8,24 @@ namespace bp = boost::python;
 
 void register_enumerations(){
 
+    bp::enum_< moltk::dp::DPAlignGapping>("DPAlignGapping")
+        .value("DP_ALIGN_UNGAPPED_SEQUENCES", moltk::dp::DP_ALIGN_UNGAPPED_SEQUENCES)
+        .value("DP_ALIGN_GAPPED_ALIGNMENTS", moltk::dp::DP_ALIGN_GAPPED_ALIGNMENTS)
+        .export_values()
+        ;
+
+    bp::enum_< moltk::dp::DPAlignScale>("DPAlignScale")
+        .value("DP_ALIGN_GLOBAL", moltk::dp::DP_ALIGN_GLOBAL)
+        .value("DP_ALIGN_LOCAL", moltk::dp::DP_ALIGN_LOCAL)
+        .export_values()
+        ;
+
+    bp::enum_< moltk::dp::DPMemoryModel>("DPMemoryModel")
+        .value("DP_MEMORY_LARGE", moltk::dp::DP_MEMORY_LARGE)
+        .value("DP_MEMORY_SMALL", moltk::dp::DP_MEMORY_SMALL)
+        .export_values()
+        ;
+
     bp::enum_< moltk::units::DimensionIndex>("DimensionIndex")
         .value("DIMENSION_MASS", moltk::units::DIMENSION_MASS)
         .value("DIMENSION_LENGTH", moltk::units::DIMENSION_LENGTH)
@@ -16,6 +34,13 @@ void register_enumerations(){
         .value("DIMENSION_AMOUNT", moltk::units::DIMENSION_AMOUNT)
         .value("DIMENSION_ANGLE", moltk::units::DIMENSION_ANGLE)
         .value("DIMENSION_INFORMATION", moltk::units::DIMENSION_INFORMATION)
+        .export_values()
+        ;
+
+    bp::enum_< moltk::dp::TracebackPointer>("TracebackPointer")
+        .value("TRACEBACK_UPLEFT", moltk::dp::TRACEBACK_UPLEFT)
+        .value("TRACEBACK_UP", moltk::dp::TRACEBACK_UP)
+        .value("TRACEBACK_LEFT", moltk::dp::TRACEBACK_LEFT)
         .export_values()
         ;
 

@@ -164,7 +164,7 @@ set(BDIST_OPT "bdist")
 if(MSVC)
     # Binary installer for windows is created with "setup.py bdis_msi"
     set(BDIST_OPT "bdist_msi")
-elseif(UNIX)
+elseif(UNIX AND NOT APPLE)
     # Does this system support RPM packaging?
     find_program(RPM_EXECUTABLE rpm)
     if(RPM_EXECUTABLE)
