@@ -21,6 +21,7 @@
   # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Google Code site:
     # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Add User Manual to downloads (copy pdf with version number, delete after added to downloads)
     # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Add Windows python installer to downloads
+    # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Add source tarball to downloads
   # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Test installer on a virgin virtual machine
   # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png Web site:
     # http://moltk.rotatingpenguin.com/images/checkbox_unchecked.png {{{svn update}}} moltk/index.html area
