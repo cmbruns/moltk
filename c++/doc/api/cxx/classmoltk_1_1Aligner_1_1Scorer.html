@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.0</span>
+   &#160;<span id="projectnumber">0.4.2</span>
    </div>
    
   </td>
@@ -94,7 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="moltk::Aligner::Scorer" -->
-<p><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html" title="Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and Que...">Scorer</a> can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and QueryPositions, which can efficiently compute alignment scores.  
+<p>QueryPosition is an alignment column specialized to efficiently compute an alignment score with a TargetPosition.  
  <a href="classmoltk_1_1Aligner_1_1Scorer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Aligner_8hpp_source.html">Aligner.hpp</a>&gt;</code></p>
@@ -118,12 +118,20 @@ Collaboration diagram for moltk::Aligner::Scorer:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#acdd1d2e2c6d447444eba9155ff92f07b">Scorer</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual std::vector<br class="typebreak"/>
-&lt; <a class="el" href="classmoltk_1_1Aligner_1_1QueryPosition.html">QueryPosition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a090273ed5beeae79b7058f647a863d84">create_query_positions</a> (const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;) const =0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual std::vector<br class="typebreak"/>
-&lt; <a class="el" href="classmoltk_1_1Aligner_1_1TargetPosition.html">TargetPosition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#ac699ce5b5c5eb5d06d7875ae3bc6e881">create_target_positions</a> (const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;) const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; const <br class="typebreak"/>
+<a class="el" href="classmoltk_1_1Aligner.html#a919e45f4aa79b2df746f81e65c3c122c">QueryPosition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a1934ebea834e741cc07f6d863dd5910f">create_query_positions</a> (const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;) const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; const <br class="typebreak"/>
+<a class="el" href="classmoltk_1_1Aligner.html#aa110c27fb88b954bf18360f50ad23bb1">TargetPosition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a420778fb221136afde4ba61b1778c84d">create_target_positions</a> (const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;) const =0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a3a2423f141a527da14a45f1a19155333">get_end_gaps_free</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#aa163edd66b5c82b40a48803b0df20340">set_end_gaps_free</a> (bool f)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a566a3d93e556549bbe86c953b9711b90">get_default_gap_open_penalty</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> score reduction for initiating an alignment gap.  <a href="#a566a3d93e556549bbe86c953b9711b90"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#ace04554094ed9997395dd2d1ef243651">set_default_gap_open_penalty</a> (<a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> penalty)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set alignment score reduction for initiating an alignment gap.  <a href="#ace04554094ed9997395dd2d1ef243651"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#aab647817b02c7c92073db07b39618766">get_default_gap_extension_penalty</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> score reduction for increasing the length of an alignment gap by one position.  <a href="#aab647817b02c7c92073db07b39618766"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#af010e62c8d82ef395c68ce1ae1298310">set_default_gap_extension_penalty</a> (<a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> penalty)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> score reduction for increasing the length of an alignment gap by one position.  <a href="#af010e62c8d82ef395c68ce1ae1298310"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a6bee0834ae45e55a1e8752ce75852de0">b_end_gaps_free</a></td></tr>
@@ -131,7 +139,9 @@ Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a46b73514546c300654ca1d9c1cef7c44">default_gap_extension_penalty</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html" title="Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and Que...">Scorer</a> can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and QueryPositions, which can efficiently compute alignment scores. </p>
+<div class="textblock"><p>QueryPosition is an alignment column specialized to efficiently compute an alignment score with a TargetPosition. </p>
+<p>TargetPosition is an alignment column specialized to efficiently compute an alignment score with a QueryPosition.</p>
+<p><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html" title="QueryPosition is an alignment column specialized to efficiently compute an alignment score with a Tar...">Scorer</a> can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and QueryPositions, which can efficiently compute alignment scores. </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acdd1d2e2c6d447444eba9155ff92f07b"></a><!-- doxytag: member="moltk::Aligner::Scorer::Scorer" ref="acdd1d2e2c6d447444eba9155ff92f07b" args="()" -->
 <div class="memitem">
@@ -150,12 +160,12 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a090273ed5beeae79b7058f647a863d84"></a><!-- doxytag: member="moltk::Aligner::Scorer::create_query_positions" ref="a090273ed5beeae79b7058f647a863d84" args="(const Alignment &amp;) const =0" -->
+<a class="anchor" id="a1934ebea834e741cc07f6d863dd5910f"></a><!-- doxytag: member="moltk::Aligner::Scorer::create_query_positions" ref="a1934ebea834e741cc07f6d863dd5910f" args="(const Alignment &amp;) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt;<a class="el" href="classmoltk_1_1Aligner_1_1QueryPosition.html">QueryPosition</a>*&gt; moltk::Aligner::Scorer::create_query_positions </td>
+          <td class="memname">virtual std::vector&lt;const <a class="el" href="classmoltk_1_1Aligner.html#a919e45f4aa79b2df746f81e65c3c122c">QueryPosition</a>*&gt; moltk::Aligner::Scorer::create_query_positions </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -165,16 +175,16 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classmoltk_1_1MatrixScorer.html#a6732a8098d7e4811669934618d5ea1ef">moltk::MatrixScorer</a>.</p>
+<p>Implemented in <a class="el" href="classmoltk_1_1MatrixScorer.html#ab2fce5a533eabca4a3cbffce57ea1c57">moltk::MatrixScorer</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac699ce5b5c5eb5d06d7875ae3bc6e881"></a><!-- doxytag: member="moltk::Aligner::Scorer::create_target_positions" ref="ac699ce5b5c5eb5d06d7875ae3bc6e881" args="(const Alignment &amp;) const =0" -->
+<a class="anchor" id="a420778fb221136afde4ba61b1778c84d"></a><!-- doxytag: member="moltk::Aligner::Scorer::create_target_positions" ref="a420778fb221136afde4ba61b1778c84d" args="(const Alignment &amp;) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt;<a class="el" href="classmoltk_1_1Aligner_1_1TargetPosition.html">TargetPosition</a>*&gt; moltk::Aligner::Scorer::create_target_positions </td>
+          <td class="memname">virtual std::vector&lt;const <a class="el" href="classmoltk_1_1Aligner.html#aa110c27fb88b954bf18360f50ad23bb1">TargetPosition</a>*&gt; moltk::Aligner::Scorer::create_target_positions </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -184,7 +194,43 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classmoltk_1_1MatrixScorer.html#adadccdab70f7531e88e619a75dcf58c7">moltk::MatrixScorer</a>.</p>
+<p>Implemented in <a class="el" href="classmoltk_1_1MatrixScorer.html#aff31e3364e2f75ff92be06ef8483886a">moltk::MatrixScorer</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aab647817b02c7c92073db07b39618766"></a><!-- doxytag: member="moltk::Aligner::Scorer::get_default_gap_extension_penalty" ref="aab647817b02c7c92073db07b39618766" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> moltk::Aligner::Scorer::get_default_gap_extension_penalty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p><a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> score reduction for increasing the length of an alignment gap by one position. </p>
+
+</div>
+</div>
+<a class="anchor" id="a566a3d93e556549bbe86c953b9711b90"></a><!-- doxytag: member="moltk::Aligner::Scorer::get_default_gap_open_penalty" ref="a566a3d93e556549bbe86c953b9711b90" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a> moltk::Aligner::Scorer::get_default_gap_open_penalty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p><a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> score reduction for initiating an alignment gap. </p>
 
 </div>
 </div>
@@ -201,6 +247,44 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af010e62c8d82ef395c68ce1ae1298310"></a><!-- doxytag: member="moltk::Aligner::Scorer::set_default_gap_extension_penalty" ref="af010e62c8d82ef395c68ce1ae1298310" args="(Information penalty)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void moltk::Aligner::Scorer::set_default_gap_extension_penalty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td>
+          <td class="paramname"><em>penalty</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> score reduction for increasing the length of an alignment gap by one position. </p>
+
+</div>
+</div>
+<a class="anchor" id="ace04554094ed9997395dd2d1ef243651"></a><!-- doxytag: member="moltk::Aligner::Scorer::set_default_gap_open_penalty" ref="ace04554094ed9997395dd2d1ef243651" args="(Information penalty)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void moltk::Aligner::Scorer::set_default_gap_open_penalty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmoltk_1_1Aligner.html#a22df03b2c1450636a9ab52e28976c2b3">Information</a>&#160;</td>
+          <td class="paramname"><em>penalty</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set alignment score reduction for initiating an alignment gap. </p>
 
 </div>
 </div>

@@ -33,6 +33,7 @@
 
 using namespace moltk;
 using namespace moltk::units;
+using namespace moltk::dp;
 
 namespace pyplusplus { namespace aliases {
 
@@ -41,6 +42,13 @@ namespace pyplusplus { namespace aliases {
     typedef moltk::units::LengthDimension LengthDimension;
     typedef moltk::units::AreaDimension AreaDimension;
     typedef moltk::units::AngleDimension AngleDimension;
+
+    typedef moltk::dp::TargetPosition<Information,1> TargetPositionI1;
+    typedef moltk::dp::QueryPosition<Information,1> QueryPositionI1;
+    typedef std::vector<const TargetPositionI1 *> std_vector_TargetPositionI1;
+    typedef std::vector<const QueryPositionI1 *> std_vector_QueryPositionI1;
+    typedef moltk::dp::DPTable<Information,DP_MEMORY_LARGE,DP_ALIGN_UNGAPPED_SEQUENCES,1>
+        DPTableILU1;
 
     typedef std::vector<PDBStructure::Atom> AtomList;
     typedef Unit<InformationDimension> BitUnit;

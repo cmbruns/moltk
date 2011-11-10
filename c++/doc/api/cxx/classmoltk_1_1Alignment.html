@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.0</span>
+   &#160;<span id="projectnumber">0.4.2</span>
    </div>
    
   </td>
@@ -89,8 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#friends">Friends</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">moltk::Alignment Class Reference</div>  </div>
 </div>
@@ -104,6 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Collaboration diagram for moltk::Alignment:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmoltk_1_1Alignment__coll__graph.png" border="0" usemap="#moltk_1_1Alignment_coll__map" alt="Collaboration graph"/></div>
+<map name="moltk_1_1Alignment_coll__map" id="moltk_1_1Alignment_coll__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classmoltk_1_1Alignment-members.html">List of all members.</a></p>
@@ -122,30 +123,63 @@ Public Types</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a32d343d192cf39cb0f0968e26223af78">Alignment</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor creates an empty <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>.  <a href="#a32d343d192cf39cb0f0968e26223af78"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a880bde0789a4ed97ed7ce9fd238fd71c">Alignment</a> (const <a class="el" href="classmoltk_1_1Biosequence.html">Biosequence</a> &amp;sequence)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an alignment with exactly one sequence.  <a href="#a880bde0789a4ed97ed7ce9fd238fd71c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a81554da54922ffeae9428824b786b0a3">Alignment</a> (const std::string &amp;alignment_string)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an alignment from fasta sequences or a single sequence string.  <a href="#a81554da54922ffeae9428824b786b0a3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a42793c08a9b84d49d23d574405b477ea">Alignment</a> (const char *alignment_string)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an alignment from fasta sequences or a single sequence string.  <a href="#a42793c08a9b84d49d23d574405b477ea"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a7707218270b81f730c8be5d19763dc22">~Alignment</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete alignment (destructor)  <a href="#a7707218270b81f730c8be5d19763dc22"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#ad319bf0e8fdcb7b2de65fd7d03c7261d">append_sequence</a> (const <a class="el" href="classmoltk_1_1Biosequence.html">Biosequence</a> &amp;sequence)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add one sequence to the alignment. Internally, gaps will be removed and encoded into an <a class="el" href="classmoltk_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment.">EString</a>.  <a href="#ad319bf0e8fdcb7b2de65fd7d03c7261d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a1744a2bb15a68fd5eee6ad9f457f186f">load_string</a> (const std::string &amp;alignment_string)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add sequences from fasta sequences or a single sequence string.  <a href="#a1744a2bb15a68fd5eee6ad9f457f186f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a9fc6acdad2f8dc2e9a070b39dd391533">load_fasta</a> (std::istream &amp;input_stream)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Load fasta format sequences from a C++ stream.  <a href="#a9fc6acdad2f8dc2e9a070b39dd391533"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#aa75592aca10538670c26a05e2ec1dac3">load_fasta</a> (const std::string &amp;file_name)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Load fasta sequences from named file.  <a href="#aa75592aca10538670c26a05e2ec1dac3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a49b02248c0a05137369e26d826b9075f">write_pretty</a> (std::ostream &amp;output_stream) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a pretty formatted alignment to a C++ stream.  <a href="#a49b02248c0a05137369e26d826b9075f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#abc791f9f0f43a9be258c8a2f013a682a">write_pretty</a> (const std::string &amp;file_name) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a pretty formatted alignment to a file.  <a href="#abc791f9f0f43a9be258c8a2f013a682a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a2574c152a5662243f4626d4bb0de1ed3">pretty</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string containing a pretty formatted alignment.  <a href="#a2574c152a5662243f4626d4bb0de1ed3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a60122a64be28573829c1a956737c8c11">write_fasta</a> (std::ostream &amp;output_stream) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> in fasta format to a C++ stream.  <a href="#a60122a64be28573829c1a956737c8c11"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#afba7a1a9917567751bbe2b1ec68fd4e2">write_fasta</a> (const std::string &amp;file_name) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> in fasta format to a file.  <a href="#afba7a1a9917567751bbe2b1ec68fd4e2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a338529e9299d91018d134b130b26a6dd">fasta</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string with <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> in fasta format.  <a href="#a338529e9299d91018d134b130b26a6dd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a1ade7cd4b169cbf8bc72504cd973a13f">write_id_table</a> (std::ostream &amp;output_stream) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write table of pairwise sequence identities to a C++ stream.  <a href="#a1ade7cd4b169cbf8bc72504cd973a13f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#ab6e11bdbb183223b74b0937400615fbd">write_id_table</a> (const std::string &amp;file_name) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write table of pairwise sequence identities to a file.  <a href="#ab6e11bdbb183223b74b0937400615fbd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#adc61d7c6de21d88523c96423b2b1f408">id_table</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string containing table of pairwise sequence identities.  <a href="#adc61d7c6de21d88523c96423b2b1f408"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a628e15ff3478f591868bc1465109b04d">get_number_of_columns</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of columns (width) of sequence <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>.  <a href="#a628e15ff3478f591868bc1465109b04d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a2486341695c895251bd124357a21371c">get_number_of_sequences</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Alignment.html#a2486341695c895251bd124357a21371c" title="get_number_of_sequences() includes combined number of both sequences and structures">get_number_of_sequences()</a> includes combined number of both sequences and structures  <a href="#a2486341695c895251bd124357a21371c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a85b58270d404b46f62fc7eeed7e2b105">align</a> (const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;, const <a class="el" href="classmoltk_1_1Alignment.html#a3743461184a4c55f0e54e6ade1e9ef68">EString</a> &amp;, const <a class="el" href="classmoltk_1_1Alignment.html#a3743461184a4c55f0e54e6ade1e9ef68">EString</a> &amp;) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Align two sequence alignments using a pair of precomputed EStrings.  <a href="#a85b58270d404b46f62fc7eeed7e2b105"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmoltk_1_1BaseBiosequence.html">BaseBiosequence</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#aa27d71c83a6cb5d0584e9db931119045">get_sequence</a> (size_t index) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the particular sequence or structure at <a class="el" href="classmoltk_1_1Alignment_1_1Row.html" title="Meta-data for one sequence in an Alignment.">Row</a> index.  <a href="#aa27d71c83a6cb5d0584e9db931119045"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmoltk_1_1Alignment.html#a3743461184a4c55f0e54e6ade1e9ef68">EString</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a68e0607cad31d5eec46b90d81c62eed2">get_estring</a> (size_t index) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">moltk::units::Information</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#abde767106550bdb46c923146b3629c2f">score</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The gapping pattern of <a class="el" href="classmoltk_1_1Alignment_1_1Row.html" title="Meta-data for one sequence in an Alignment.">Row</a> index.  <a href="#a68e0607cad31d5eec46b90d81c62eed2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">moltk::units::Information</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a043c2999d1679e1a4f9c63816861e319">get_score</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The precomputed total sum of pairs score of this <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>.  <a href="#a043c2999d1679e1a4f9c63816861e319"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a110d140d99982b84a8545a23d51b8543">set_score</a> (const <a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">moltk::units::Information</a> &amp;s)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sum of pairs score for this <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>. Make sure you put the correct answer!  <a href="#a110d140d99982b84a8545a23d51b8543"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a93de5001f144850166e4470e143b5367">calc_explicit_sum_of_pairs_score</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Inefficient computation of sum-of-pairs score, for use in testing and debugging.  <a href="#a93de5001f144850166e4470e143b5367"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a48e5302d6fd583ccb7f40494409bc809">calc_explicit_pair_score</a> (int i, int j) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute pair score between two sequences in this alignment.  <a href="#a48e5302d6fd583ccb7f40494409bc809"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a419e166af480abe835e9e93c49023af6">repr</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Low level python string representation of this <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>.  <a href="#a419e166af480abe835e9e93c49023af6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#aefb89c9ef52a4f0d2d3607c362a9e933">set_pretty_width</a> (int width)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a7bf54c7c4b430f8b4ecd526ebb7202f5">get_pretty_width</a> () const </td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classmoltk_1_1Biosequence.html">Biosequence</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a78aa4d5f29a114e1a58b7f32eb98e24d">sequences</a></td></tr>
@@ -153,9 +187,6 @@ Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classmoltk_1_1Alignment_1_1Row.html">Row</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a4bac71883cd63ec6b766497640684a81">rows</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">moltk::units::Information</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#ad7f4499388720ae855277fe046bbea44">m_score</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#adf2beb6028be5a2ab437bb93aff90b61">pretty_width</a></td></tr>
-<tr><td colspan="2"><h2><a name="friends"></a>
-Friends</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html#a5c933bbcecb2459310f897119f11fda7">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;ali)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> represents a set of aligned macromolecule sequences and/or structures. </p>
@@ -188,8 +219,10 @@ Friends</h2></td></tr>
 <p>Whether a particular <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> member is a sequence or structure. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
 <tr><td valign="top"><em><a class="anchor" id="a6213f17d7957d5174e7af5627b649ac8a64315d2bea93b3770675d3a9bcbcfbbc"></a><!-- doxytag: member="LIST_SEQUENCE" ref="a6213f17d7957d5174e7af5627b649ac8a64315d2bea93b3770675d3a9bcbcfbbc" args="" -->LIST_SEQUENCE</em>&nbsp;</td><td>
+<p>Item belongs to the sequence list. </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a6213f17d7957d5174e7af5627b649ac8a9532ce6c3a8fccfd79b37fe279e387e7"></a><!-- doxytag: member="LIST_STRUCTURE" ref="a6213f17d7957d5174e7af5627b649ac8a9532ce6c3a8fccfd79b37fe279e387e7" args="" -->LIST_STRUCTURE</em>&nbsp;</td><td>
+<p>Item belongs to the structure list. </p>
 </td></tr>
 </table>
 </dd>
@@ -212,6 +245,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Default constructor creates an empty <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>. </p>
+
 </div>
 </div>
 <a class="anchor" id="a880bde0789a4ed97ed7ce9fd238fd71c"></a><!-- doxytag: member="moltk::Alignment::Alignment" ref="a880bde0789a4ed97ed7ce9fd238fd71c" args="(const Biosequence &amp;sequence)" -->
@@ -228,6 +263,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Create an alignment with exactly one sequence. </p>
 
 </div>
 </div>
@@ -246,6 +283,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Create an alignment from fasta sequences or a single sequence string. </p>
+
 </div>
 </div>
 <a class="anchor" id="a42793c08a9b84d49d23d574405b477ea"></a><!-- doxytag: member="moltk::Alignment::Alignment" ref="a42793c08a9b84d49d23d574405b477ea" args="(const char *alignment_string)" -->
@@ -263,6 +302,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Create an alignment from fasta sequences or a single sequence string. </p>
+
 </div>
 </div>
 <a class="anchor" id="a7707218270b81f730c8be5d19763dc22"></a><!-- doxytag: member="moltk::Alignment::~Alignment" ref="a7707218270b81f730c8be5d19763dc22" args="()" -->
@@ -278,6 +319,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Delete alignment (destructor) </p>
 
 </div>
 </div>
@@ -313,6 +356,9 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Align two sequence alignments using a pair of precomputed EStrings. </p>
+<p>This methods is used to create the final <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> after the dynamic programming alignment has completed. </p>
+
 </div>
 </div>
 <a class="anchor" id="ad319bf0e8fdcb7b2de65fd7d03c7261d"></a><!-- doxytag: member="moltk::Alignment::append_sequence" ref="ad319bf0e8fdcb7b2de65fd7d03c7261d" args="(const Biosequence &amp;sequence)" -->
@@ -330,6 +376,55 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Add one sequence to the alignment. Internally, gaps will be removed and encoded into an <a class="el" href="classmoltk_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment.">EString</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="a48e5302d6fd583ccb7f40494409bc809"></a><!-- doxytag: member="moltk::Alignment::calc_explicit_pair_score" ref="a48e5302d6fd583ccb7f40494409bc809" args="(int i, int j) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">units::Information</a> moltk::Alignment::calc_explicit_pair_score </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Compute pair score between two sequences in this alignment. </p>
+
+</div>
+</div>
+<a class="anchor" id="a93de5001f144850166e4470e143b5367"></a><!-- doxytag: member="moltk::Alignment::calc_explicit_sum_of_pairs_score" ref="a93de5001f144850166e4470e143b5367" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">units::Information</a> moltk::Alignment::calc_explicit_sum_of_pairs_score </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Inefficient computation of sum-of-pairs score, for use in testing and debugging. </p>
+
 </div>
 </div>
 <a class="anchor" id="a338529e9299d91018d134b130b26a6dd"></a><!-- doxytag: member="moltk::Alignment::fasta" ref="a338529e9299d91018d134b130b26a6dd" args="() const " -->
@@ -346,6 +441,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Create a string with <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> in fasta format. </p>
+
 </div>
 </div>
 <a class="anchor" id="a68e0607cad31d5eec46b90d81c62eed2"></a><!-- doxytag: member="moltk::Alignment::get_estring" ref="a68e0607cad31d5eec46b90d81c62eed2" args="(size_t index) const " -->
@@ -357,11 +454,13 @@ Friends</h2></td></tr>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const<code> [inline]</code></td>
+          <td> const</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>The gapping pattern of <a class="el" href="classmoltk_1_1Alignment_1_1Row.html" title="Meta-data for one sequence in an Alignment.">Row</a> index. </p>
 
 </div>
 </div>
@@ -379,6 +478,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Number of columns (width) of sequence <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>. </p>
+
 </div>
 </div>
 <a class="anchor" id="a2486341695c895251bd124357a21371c"></a><!-- doxytag: member="moltk::Alignment::get_number_of_sequences" ref="a2486341695c895251bd124357a21371c" args="() const " -->
@@ -395,6 +496,42 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p><a class="el" href="classmoltk_1_1Alignment.html#a2486341695c895251bd124357a21371c" title="get_number_of_sequences() includes combined number of both sequences and structures">get_number_of_sequences()</a> includes combined number of both sequences and structures </p>
+
+</div>
+</div>
+<a class="anchor" id="a7bf54c7c4b430f8b4ecd526ebb7202f5"></a><!-- doxytag: member="moltk::Alignment::get_pretty_width" ref="a7bf54c7c4b430f8b4ecd526ebb7202f5" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int moltk::Alignment::get_pretty_width </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a043c2999d1679e1a4f9c63816861e319"></a><!-- doxytag: member="moltk::Alignment::get_score" ref="a043c2999d1679e1a4f9c63816861e319" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">moltk::units::Information</a>&amp; moltk::Alignment::get_score </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The precomputed total sum of pairs score of this <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>. </p>
+
 </div>
 </div>
 <a class="anchor" id="aa27d71c83a6cb5d0584e9db931119045"></a><!-- doxytag: member="moltk::Alignment::get_sequence" ref="aa27d71c83a6cb5d0584e9db931119045" args="(size_t index) const " -->
@@ -406,11 +543,13 @@ Friends</h2></td></tr>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const<code> [inline]</code></td>
+          <td> const</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Returns the particular sequence or structure at <a class="el" href="classmoltk_1_1Alignment_1_1Row.html" title="Meta-data for one sequence in an Alignment.">Row</a> index. </p>
 
 </div>
 </div>
@@ -427,6 +566,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Create a string containing table of pairwise sequence identities. </p>
 
 </div>
 </div>
@@ -445,6 +586,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Load fasta format sequences from a C++ stream. </p>
+
 </div>
 </div>
 <a class="anchor" id="aa75592aca10538670c26a05e2ec1dac3"></a><!-- doxytag: member="moltk::Alignment::load_fasta" ref="aa75592aca10538670c26a05e2ec1dac3" args="(const std::string &amp;file_name)" -->
@@ -461,6 +604,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Load fasta sequences from named file. </p>
 
 </div>
 </div>
@@ -479,6 +624,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Add sequences from fasta sequences or a single sequence string. </p>
+
 </div>
 </div>
 <a class="anchor" id="a2574c152a5662243f4626d4bb0de1ed3"></a><!-- doxytag: member="moltk::Alignment::pretty" ref="a2574c152a5662243f4626d4bb0de1ed3" args="() const " -->
@@ -495,17 +642,38 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Create a string containing a pretty formatted alignment. </p>
+
 </div>
 </div>
-<a class="anchor" id="abde767106550bdb46c923146b3629c2f"></a><!-- doxytag: member="moltk::Alignment::score" ref="abde767106550bdb46c923146b3629c2f" args="() const " -->
+<a class="anchor" id="a419e166af480abe835e9e93c49023af6"></a><!-- doxytag: member="moltk::Alignment::repr" ref="a419e166af480abe835e9e93c49023af6" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">moltk::units::Information</a>&amp; moltk::Alignment::score </td>
+          <td class="memname">std::string moltk::Alignment::repr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const<code> [inline]</code></td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Low level python string representation of this <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="aefb89c9ef52a4f0d2d3607c362a9e933"></a><!-- doxytag: member="moltk::Alignment::set_pretty_width" ref="aefb89c9ef52a4f0d2d3607c362a9e933" args="(int width)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a>&amp; moltk::Alignment::set_pretty_width </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em></td><td>)</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -522,11 +690,13 @@ Friends</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">moltk::units::Information</a> &amp;&#160;</td>
           <td class="paramname"><em>s</em></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Set the sum of pairs score for this <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>. Make sure you put the correct answer! </p>
 
 </div>
 </div>
@@ -545,6 +715,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Write <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> in fasta format to a C++ stream. </p>
+
 </div>
 </div>
 <a class="anchor" id="afba7a1a9917567751bbe2b1ec68fd4e2"></a><!-- doxytag: member="moltk::Alignment::write_fasta" ref="afba7a1a9917567751bbe2b1ec68fd4e2" args="(const std::string &amp;file_name) const " -->
@@ -561,6 +733,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Write <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> in fasta format to a file. </p>
 
 </div>
 </div>
@@ -579,6 +753,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Write table of pairwise sequence identities to a C++ stream. </p>
+
 </div>
 </div>
 <a class="anchor" id="ab6e11bdbb183223b74b0937400615fbd"></a><!-- doxytag: member="moltk::Alignment::write_id_table" ref="ab6e11bdbb183223b74b0937400615fbd" args="(const std::string &amp;file_name) const " -->
@@ -595,6 +771,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Write table of pairwise sequence identities to a file. </p>
 
 </div>
 </div>
@@ -613,6 +791,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Write a pretty formatted alignment to a C++ stream. </p>
+
 </div>
 </div>
 <a class="anchor" id="abc791f9f0f43a9be258c8a2f013a682a"></a><!-- doxytag: member="moltk::Alignment::write_pretty" ref="abc791f9f0f43a9be258c8a2f013a682a" args="(const std::string &amp;file_name) const " -->
@@ -630,33 +810,7 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<hr/><h2>Friends And Related Function Documentation</h2>
-<a class="anchor" id="a5c933bbcecb2459310f897119f11fda7"></a><!-- doxytag: member="moltk::Alignment::operator&lt;&lt;" ref="a5c933bbcecb2459310f897119f11fda7" args="(std::ostream &amp;os, const Alignment &amp;ali)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>os</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;&#160;</td>
-          <td class="paramname"><em>ali</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [friend]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Write a pretty formatted alignment to a file. </p>
 
 </div>
 </div>

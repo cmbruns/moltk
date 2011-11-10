@@ -41,9 +41,6 @@ def wrap_moltk():
 def wrap_aligner(mb):
     aligner = mb.namespace('moltk').class_('Aligner')
     ### Call Policies for Aligner class ###
-    for cls_name in ['QueryPosition', 'TargetPosition']:
-        aligner.class_(cls_name).member_function('clone').call_policies = \
-            return_value_policy(manage_new_object)
     aligner.member_function('get_shared_aligner').call_policies = \
          return_value_policy(reference_existing_object)
     # Don't delete Scorer before Aligner

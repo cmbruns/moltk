@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classmoltk_1_1Alignment_1_1Row.html" title="Meta&#45;data for one sequence in an Alignment." alt="" coords="6,5,159,32"/>
+<area shape="rect" id="node1" href="$classmoltk_1_1BaseVector3D.html" title="BaseVector3D is a parent class for points and vectors." alt="" coords="6,5,199,32"/>
+<area shape="rect" id="node3" href="$classmoltk_1_1Vector3D__.html" title="Vector3D_&lt;&gt; is an arbitrary point or vector in 3&#45;space." alt="" coords="248,5,419,32"/>
 </map>
