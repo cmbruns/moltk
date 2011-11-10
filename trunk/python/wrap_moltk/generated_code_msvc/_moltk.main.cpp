@@ -32,6 +32,8 @@
 
 #include "generated_code_msvc/displacement.pypp.hpp"
 
+#include "generated_code_msvc/dptableilu1.pypp.hpp"
+
 #include "generated_code_msvc/estring.pypp.hpp"
 
 #include "generated_code_msvc/information.pypp.hpp"
@@ -48,8 +50,6 @@
 
 #include "generated_code_msvc/quaternion.pypp.hpp"
 
-#include "generated_code_msvc/querypositionlist.pypp.hpp"
-
 #include "generated_code_msvc/radianunit.pypp.hpp"
 
 #include "generated_code_msvc/rigidtransform.pypp.hpp"
@@ -58,7 +58,11 @@
 
 #include "generated_code_msvc/std_vector_int.pypp.hpp"
 
-#include "generated_code_msvc/targetpositionlist.pypp.hpp"
+#include "generated_code_msvc/std_vector_querypositioni1.pypp.hpp"
+
+#include "generated_code_msvc/std_vector_targetpositioni1.pypp.hpp"
+
+#include "generated_code_msvc/tabletype.pypp.hpp"
 
 #include "generated_code_msvc/unitvector3d.pypp.hpp"
 
@@ -69,9 +73,11 @@ namespace bp = boost::python;
 BOOST_PYTHON_MODULE(_moltk){
     register_enumerations();
 
-    register_TargetPositionList_class();
+    register_TableType_class();
 
-    register_QueryPositionList_class();
+    register_std_vector_TargetPositionI1_class();
+
+    register_std_vector_QueryPositionI1_class();
 
     register_std_vector_int_class();
 
@@ -100,6 +106,8 @@ BOOST_PYTHON_MODULE(_moltk){
     register_Vector3D_class();
 
     register_Displacement_class();
+
+    register_DPTableILU1_class();
 
     register_InformationDimension_class();
 

@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.0</span>
+   &#160;<span id="projectnumber">0.4.2</span>
    </div>
    
   </td>
@@ -92,6 +92,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1dp.html">dp</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>Namespace for dynamic programming classes. </p>
+<br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html">units</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>The <a class="el" href="namespacemoltk_1_1units.html" title="The moltk::units namespace contains physical Quantities, Units, and Dimensions.">moltk::units</a> namespace contains physical Quantities, Units, and Dimensions. </p>
 <br/></td></tr>
@@ -113,8 +116,6 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1MatrixScorer.html" title="MatrixScorer scores alignments using a residue type matrix such as BLOSUM62 or PAM250.">MatrixScorer</a> scores alignments using a residue type matrix such as BLOSUM62 or PAM250.  <a href="classmoltk_1_1MatrixScorer.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1PDBStructure.html">PDBStructure</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1PDBStructure.html" title="PDBStructure represents a macromolecule structure as found in a Protein Data Bank file...">PDBStructure</a> represents a macromolecule structure as found in a Protein Data Bank file.  <a href="classmoltk_1_1PDBStructure.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Printable.html">Printable</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Printable.html" title="moltk::Printable is an abstract base class to help streamline string conversion in the moltk python b...">moltk::Printable</a> is an abstract base class to help streamline string conversion in the moltk python bindings.  <a href="classmoltk_1_1Printable.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Quaternion.html">Quaternion</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Quaternion.html" title="Quaternion is an elegant 4-element representation of a 3D rotation.">Quaternion</a> is an elegant 4-element representation of a 3D rotation.  <a href="classmoltk_1_1Quaternion.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1RigidTransform.html">RigidTransform</a></td></tr>
@@ -140,8 +141,9 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html#a403bc85428d8dd3e1b17e60f2968dc1d">align</a> (const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;target_alignment, const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;query_alignment)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment.html">Alignment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html#a5d6a32006fb76447d32cde962b6ab1fb">load_fasta</a> (const std::string &amp;file_name)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">global load_fasta method helps get SEQUOIA-like conciseness in python.  <a href="#a5d6a32006fb76447d32cde962b6ab1fb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html#ad6796611c25785bb636344b8468dccd0">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classmoltk_1_1Alignment.html">Alignment</a> &amp;ali)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard print method for <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> produces pretty formatted output.  <a href="#ad6796611c25785bb636344b8468dccd0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html#a9d6101e75a7b6c533c256d3bceeae415">operator&gt;&gt;</a> (std::istream &amp;, <a class="el" href="classmoltk_1_1MatrixScorer.html">moltk::MatrixScorer</a> &amp;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html#aef749887c79b7809fd7f8d0b14dd1285">operator&lt;&lt;</a> (std::ostream &amp;output_stream, const <a class="el" href="classmoltk_1_1Printable.html">moltk::Printable</a> &amp;printable)</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class D , class Y &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Vector3D__.html">Vector3D_</a><br class="typebreak"/>
 &lt; <a class="el" href="structmoltk_1_1units_1_1Quantity.html">moltk::units::Quantity</a><br class="typebreak"/>
@@ -269,7 +271,7 @@ template&lt;class D , class Y &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aef749887c79b7809fd7f8d0b14dd1285"></a><!-- doxytag: member="moltk::operator&lt;&lt;" ref="aef749887c79b7809fd7f8d0b14dd1285" args="(std::ostream &amp;output_stream, const moltk::Printable &amp;printable)" -->
+<a class="anchor" id="ad6796611c25785bb636344b8468dccd0"></a><!-- doxytag: member="moltk::operator&lt;&lt;" ref="ad6796611c25785bb636344b8468dccd0" args="(std::ostream &amp;os, const Alignment &amp;ali)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -277,13 +279,13 @@ template&lt;class D , class Y &gt; </div>
           <td class="memname">std::ostream&amp; moltk::operator&lt;&lt; </td>
           <td>(</td>
           <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>output_stream</em>, </td>
+          <td class="paramname"><em>os</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classmoltk_1_1Printable.html">moltk::Printable</a> &amp;&#160;</td>
-          <td class="paramname"><em>printable</em>&#160;</td>
+          <td class="paramtype">const Alignment &amp;&#160;</td>
+          <td class="paramname"><em>ali</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -293,6 +295,8 @@ template&lt;class D , class Y &gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Standard print method for <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> produces pretty formatted output. </p>
 
 </div>
 </div>

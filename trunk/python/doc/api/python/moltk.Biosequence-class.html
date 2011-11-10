@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.2 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -65,7 +65,7 @@
 <center>  <map id="uml_class_diagram_for_moltk_bi" name="uml_class_diagram_for_moltk_bi">
 <area shape="rect" id="node1_17" href="moltk.Biosequence-class.html#__instance_size__" title="moltk.Biosequence.__instance_size__" alt="" coords="17,199,185,217"/>
 <area shape="rect" id="node1_18" href="moltk.Biosequence-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,220,185,239"/>
-<area shape="rect" id="node1_19" href="moltk.Biosequence-class.html#__repr__" title="__repr__( (Biosequence)arg1) &#45;&gt; str : &#160;&#160;&#160;&#160;string representation" alt="" coords="17,239,185,257"/>
+<area shape="rect" id="node1_19" href="moltk.Biosequence-class.html#__repr__" title="__repr__( (Biosequence)arg1) &#45;&gt; str : &#160;&#160;&#160;&#160;python low level string representation" alt="" coords="17,239,185,257"/>
 <area shape="rect" id="node1_20" href="moltk.Biosequence-class.html#__str__" title="__str__( (Biosequence)arg1) &#45;&gt; object :" alt="" coords="17,257,185,276"/>
 <area shape="rect" id="node1_21" href="moltk.Biosequence-class.html#fasta" title="fasta( (Biosequence)arg1) &#45;&gt; str : &#160;&#160;&#160;&#160;&#160;Create a string representing the sequence in fasta format." alt="" coords="17,276,185,295"/>
 <area shape="rect" id="node1_22" href="moltk.Biosequence-class.html#get_description" title="get_description( (Biosequence)arg1) &#45;&gt; str :" alt="" coords="17,295,185,313"/>
@@ -73,7 +73,7 @@
 <area shape="rect" id="node1_24" href="moltk.Biosequence-class.html#get_residue" title="get_residue( (Biosequence)arg1, (int)ix) &#45;&gt; BiosequenceResidue :" alt="" coords="17,332,185,351"/>
 <area shape="rect" id="node1_25" href="moltk.Biosequence-class.html#load_fasta" title="load_fasta( (Biosequence)arg1, (str)file_name) &#45;&gt; Biosequence :" alt="" coords="17,351,185,369"/>
 <area shape="rect" id="node1_26" href="moltk.Biosequence-class.html#load_stream" title="load_stream( (Biosequence)arg1, (object)is) &#45;&gt; None :" alt="" coords="17,369,185,388"/>
-<area shape="rect" id="node1_27" href="moltk.Biosequence-class.html#repr" title="repr( (Biosequence)arg1) &#45;&gt; str : &#160;&#160;&#160;&#160;&#160;repr is a helper for the python __repr__ method." alt="" coords="17,388,185,407"/>
+<area shape="rect" id="node1_27" href="moltk.Biosequence-class.html#repr" title="repr( (Biosequence)arg1) &#45;&gt; str : &#160;&#160;&#160;&#160;&#160;Low level python string representation of this Biosequence" alt="" coords="17,388,185,407"/>
 <area shape="rect" id="node1_28" href="moltk.Biosequence-class.html#write_fasta" title="write_fasta( (Biosequence)arg1, (object)os) &#45;&gt; None : &#160;&#160;&#160;&#160;&#160;Write sequence in fasta format to a C++ stream." alt="" coords="17,407,185,425"/>
 <area shape="rect" id="node1_29" href="moltk.Biosequence-class.html#write_sequence_string" title="write_sequence_string( (Biosequence)arg1, (object)os) &#45;&gt; None : &#160;&#160;&#160;&#160;&#160;Write a sequence string to a C++ stream." alt="" coords="17,425,185,444"/>
 <area shape="rect" id="node1_30" href="moltk.Biosequence-class.html#write_to_stream" title="write_to_stream( (Biosequence)arg1, (object)os) &#45;&gt; None :" alt="" coords="17,444,185,463"/>
@@ -157,7 +157,7 @@
         <tr>
           <td><span class="summary-sig"><a href="moltk.Biosequence-class.html#__repr__" class="summary-sig-name">__repr__</a>(<span class="summary-sig-arg">...</span>)</span><br />
       __repr__( (Biosequence)arg1) -&gt; str :
-    string representation</td>
+    python low level string representation</td>
           <td align="right" valign="top">
             
             
@@ -295,7 +295,7 @@
         <tr>
           <td><span class="summary-sig"><a href="moltk.Biosequence-class.html#repr" class="summary-sig-name">repr</a>(<span class="summary-sig-arg">...</span>)</span><br />
       repr( (Biosequence)arg1) -&gt; str :
-     repr is a helper for the python __repr__ method.</td>
+     Low level python string representation of this Biosequence</td>
           <td align="right" valign="top">
             
             
@@ -510,7 +510,7 @@ __init__( (object)arg1, (Biosequence)rhs) -&gt; None :
   <pre class="literalblock">
 
 __repr__( (Biosequence)arg1) -&gt; str :
-    string representation
+    python low level string representation
 
     C++ signature :
         class std::basic_string&lt;char,struct std::char_traits&lt;char&gt;,class std::allocator&lt;char&gt; &gt; __repr__(class moltk::Biosequence {lvalue})
@@ -743,7 +743,7 @@ load_stream( (Biosequence)arg1, (object)is) -&gt; None :
   <pre class="literalblock">
 
 repr( (Biosequence)arg1) -&gt; str :
-     repr is a helper for the python __repr__ method.
+     Low level python string representation of this Biosequence
 
     C++ signature :
         class std::basic_string&lt;char,struct std::char_traits&lt;char&gt;,class std::allocator&lt;char&gt; &gt; repr(class moltk::Biosequence {lvalue})
@@ -872,14 +872,14 @@ write_to_stream( (Biosequence)arg1, (object)os) -&gt; None :
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.2 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Nov 04 20:07:18 2011
+    Generated by Epydoc 3.0.1 on Wed Nov 09 19:05:01 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

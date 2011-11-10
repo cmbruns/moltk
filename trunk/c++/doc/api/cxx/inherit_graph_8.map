@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classmoltk_1_1BaseBiosequence_1_1BaseResidue.html" title="Parent class for macromolecule sequence residues (nucleotides or amino acids)" alt="" coords="6,31,258,57"/>
-<area shape="rect" id="node3" href="$classmoltk_1_1BiosequenceResidue.html" title="One residue in a macromolecule sequence (a nucleotide or amino acid)" alt="" coords="313,5,497,32"/>
-<area shape="rect" id="node5" href="$classmoltk_1_1PDBStructure_1_1Residue.html" title="Residue represents a single amino acid or nucleotide residue, or a small molecule, in a macromolecule structure." alt="" coords="307,56,504,83"/>
+<area shape="rect" id="node1" href="$structmoltk_1_1dp_1_1AlignmentPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned." alt="" coords="5,31,395,57"/>
+<area shape="rect" id="node3" href="$structmoltk_1_1dp_1_1QueryPosition.html" title="moltk::dp::QueryPosition\&lt; SCORE_TYPE, GAP_NSEGS \&gt;" alt="" coords="443,5,810,32"/>
+<area shape="rect" id="node5" href="$structmoltk_1_1dp_1_1TargetPosition.html" title="moltk::dp::TargetPosition\&lt; SCORE_TYPE, GAP_NSEGS \&gt;" alt="" coords="443,56,810,83"/>
 </map>

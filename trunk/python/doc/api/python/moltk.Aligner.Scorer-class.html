@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.2 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -63,19 +63,26 @@
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class Scorer</h1><p class="nomargin-top"></p>
 <center>
-<center>  <map id="uml_class_diagram_for_moltk_al_4" name="uml_class_diagram_for_moltk_al_4">
-<area shape="rect" id="node1_8" href="moltk.Aligner.Scorer-class.html#__instance_size__" title="moltk.Aligner.Scorer.__instance_size__" alt="" coords="17,108,180,127"/>
-<area shape="rect" id="node1_9" href="moltk.Aligner.Scorer-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,129,180,148"/>
-<area shape="rect" id="node1_10" href="moltk.Aligner.Scorer-class.html#__reduce__" title="helper for pickle" alt="" coords="17,148,180,167"/>
-<area shape="rect" id="node1_11" href="moltk.Aligner.Scorer-class.html#create_query_positions" title="create_query_positions( (Scorer)arg1, (Alignment)arg0) &#45;&gt; QueryPositionList :" alt="" coords="17,167,180,185"/>
-<area shape="rect" id="node1_12" href="moltk.Aligner.Scorer-class.html#create_target_positions" title="create_target_positions( (Scorer)arg1, (Alignment)arg0) &#45;&gt; TargetPositionList :" alt="" coords="17,185,180,204"/>
-<area shape="rect" id="node1_13" href="moltk.Aligner.Scorer-class.html#get_end_gaps_free" title="get_end_gaps_free( (Scorer)arg1) &#45;&gt; bool :" alt="" coords="17,204,180,223"/>
-<area shape="rect" id="node1_14" href="moltk.Aligner.Scorer-class.html#set_end_gaps_free" title="set_end_gaps_free( (Scorer)arg1, (bool)f) &#45;&gt; None :" alt="" coords="17,223,180,241"/>
-<area shape="rect" id="node1" href="moltk.Aligner.Scorer-class.html" title="Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and QueryPositions, which can efficiently compute alignment scores." alt="" coords="5,83,192,247"/>
-<area shape="rect" id="node2_15" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="40,39,156,57"/>
-<area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="27,6,167,63"/>
+<center>  <map id="uml_class_diagram_for_moltk_al_2" name="uml_class_diagram_for_moltk_al_2">
+<area shape="rect" id="node1_15" href="moltk.Aligner.Scorer-class.html#__instance_size__" title="moltk.Aligner.Scorer.__instance_size__" alt="" coords="17,108,248,127"/>
+<area shape="rect" id="node1_16" href="moltk.Aligner.Scorer-class.html#default_gap_extension_penalty" title="moltk.Aligner.Scorer.default_gap_extension_penalty" alt="" coords="17,127,248,145"/>
+<area shape="rect" id="node1_17" href="moltk.Aligner.Scorer-class.html#default_gap_open_penalty" title="moltk.Aligner.Scorer.default_gap_open_penalty" alt="" coords="17,145,248,164"/>
+<area shape="rect" id="node1_18" href="moltk.Aligner.Scorer-class.html#end_gaps_free" title="moltk.Aligner.Scorer.end_gaps_free" alt="" coords="17,164,248,183"/>
+<area shape="rect" id="node1_19" href="moltk.Aligner.Scorer-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,185,248,204"/>
+<area shape="rect" id="node1_20" href="moltk.Aligner.Scorer-class.html#__reduce__" title="helper for pickle" alt="" coords="17,204,248,223"/>
+<area shape="rect" id="node1_21" href="moltk.Aligner.Scorer-class.html#create_query_positions" title="create_query_positions( (Scorer)arg1, (Alignment)arg0) &#45;&gt; std_vector_QueryPositionI1 :" alt="" coords="17,223,248,241"/>
+<area shape="rect" id="node1_22" href="moltk.Aligner.Scorer-class.html#create_target_positions" title="create_target_positions( (Scorer)arg1, (Alignment)arg0) &#45;&gt; std_vector_TargetPositionI1 :" alt="" coords="17,241,248,260"/>
+<area shape="rect" id="node1_23" href="moltk.Aligner.Scorer-class.html#get_default_gap_extension_penalty" title="get_default_gap_extension_penalty( (Scorer)arg1) &#45;&gt; Information : &#160;&#160;&#160;&#160;&#160;Alignment score reduction for increasing the length of an alignment gap by one position." alt="" coords="17,260,248,279"/>
+<area shape="rect" id="node1_24" href="moltk.Aligner.Scorer-class.html#get_default_gap_open_penalty" title="get_default_gap_open_penalty( (Scorer)arg1) &#45;&gt; Information : &#160;&#160;&#160;&#160;&#160;Alignment score reduction for initiating an alignment gap." alt="" coords="17,279,248,297"/>
+<area shape="rect" id="node1_25" href="moltk.Aligner.Scorer-class.html#get_end_gaps_free" title="get_end_gaps_free( (Scorer)arg1) &#45;&gt; bool :" alt="" coords="17,297,248,316"/>
+<area shape="rect" id="node1_26" href="moltk.Aligner.Scorer-class.html#set_default_gap_extension_penalty" title="set_default_gap_extension_penalty( (Scorer)arg1, (Information)penalty) &#45;&gt; None : &#160;&#160;&#160;&#160;&#160;Set Alignment score reduction for increasing the length of an alignment gap by one position." alt="" coords="17,316,248,335"/>
+<area shape="rect" id="node1_27" href="moltk.Aligner.Scorer-class.html#set_default_gap_open_penalty" title="set_default_gap_open_penalty( (Scorer)arg1, (Information)penalty) &#45;&gt; None : &#160;&#160;&#160;&#160;&#160;Set alignment score reduction for initiating an alignment gap." alt="" coords="17,335,248,353"/>
+<area shape="rect" id="node1_28" href="moltk.Aligner.Scorer-class.html#set_end_gaps_free" title="set_end_gaps_free( (Scorer)arg1, (bool)f) &#45;&gt; None :" alt="" coords="17,353,248,372"/>
+<area shape="rect" id="node1" href="moltk.Aligner.Scorer-class.html" title="Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions and QueryPositions, which can efficiently compute alignment scores." alt="" coords="5,83,259,378"/>
+<area shape="rect" id="node2_29" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="75,39,191,57"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="62,6,202,63"/>
 </map>
-  <img src="uml_class_diagram_for_moltk_al_4.gif" alt='' usemap="#uml_class_diagram_for_moltk_al_4" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_moltk_al_2.gif" alt='' usemap="#uml_class_diagram_for_moltk_al_2" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
@@ -141,7 +148,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="moltk.Aligner.Scorer-class.html#create_query_positions" class="summary-sig-name">create_query_positions</a>(<span class="summary-sig-arg">...</span>)</span><br />
-      create_query_positions( (Scorer)arg1, (Alignment)arg0) -&gt; QueryPositionList :</td>
+      create_query_positions( (Scorer)arg1, (Alignment)arg0) -&gt; std_vector_QueryPositionI1 :</td>
           <td align="right" valign="top">
             
             
@@ -158,7 +165,43 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="moltk.Aligner.Scorer-class.html#create_target_positions" class="summary-sig-name">create_target_positions</a>(<span class="summary-sig-arg">...</span>)</span><br />
-      create_target_positions( (Scorer)arg1, (Alignment)arg0) -&gt; TargetPositionList :</td>
+      create_target_positions( (Scorer)arg1, (Alignment)arg0) -&gt; std_vector_TargetPositionI1 :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Aligner.Scorer-class.html#get_default_gap_extension_penalty" class="summary-sig-name">get_default_gap_extension_penalty</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      get_default_gap_extension_penalty( (Scorer)arg1) -&gt; Information :
+     Alignment score reduction for increasing the length of an alignment gap by one position.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Aligner.Scorer-class.html#get_default_gap_open_penalty" class="summary-sig-name">get_default_gap_open_penalty</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      get_default_gap_open_penalty( (Scorer)arg1) -&gt; Information :
+     Alignment score reduction for initiating an alignment gap.</td>
           <td align="right" valign="top">
             
             
@@ -176,6 +219,42 @@
         <tr>
           <td><span class="summary-sig"><a href="moltk.Aligner.Scorer-class.html#get_end_gaps_free" class="summary-sig-name">get_end_gaps_free</a>(<span class="summary-sig-arg">...</span>)</span><br />
       get_end_gaps_free( (Scorer)arg1) -&gt; bool :</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Aligner.Scorer-class.html#set_default_gap_extension_penalty" class="summary-sig-name">set_default_gap_extension_penalty</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      set_default_gap_extension_penalty( (Scorer)arg1, (Information)penalty) -&gt; None :
+     Set Alignment score reduction for increasing the length of an alignment gap by one position.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="moltk.Aligner.Scorer-class.html#set_default_gap_open_penalty" class="summary-sig-name">set_default_gap_open_penalty</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      set_default_gap_open_penalty( (Scorer)arg1, (Information)penalty) -&gt; None :
+     Set alignment score reduction for initiating an alignment gap.</td>
           <td align="right" valign="top">
             
             
@@ -264,6 +343,27 @@
     </table>
   </td>
 </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk.Aligner.Scorer-class.html#default_gap_extension_penalty" class="summary-name">default_gap_extension_penalty</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk.Aligner.Scorer-class.html#default_gap_open_penalty" class="summary-name">default_gap_open_penalty</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="moltk.Aligner.Scorer-class.html#end_gaps_free" class="summary-name">end_gaps_free</a>
+    </td>
+  </tr>
   <tr>
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
@@ -363,14 +463,14 @@ __init__( (object)arg1) -&gt; None :
   
   <pre class="literalblock">
 
-create_query_positions( (Scorer)arg1, (Alignment)arg0) -&gt; QueryPositionList :
+create_query_positions( (Scorer)arg1, (Alignment)arg0) -&gt; std_vector_QueryPositionI1 :
     
      Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions
      and QueryPositions, which can efficiently compute alignment scores.
     
 
     C++ signature :
-        class std::vector&lt;class moltk::Aligner::QueryPosition *,class std::allocator&lt;class moltk::Aligner::QueryPosition *&gt; &gt; create_query_positions(class moltk::Aligner::Scorer {lvalue},class moltk::Alignment)
+        class std::vector&lt;struct moltk::dp::QueryPosition&lt;struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,0,1&gt; &gt;,double&gt;,1&gt; const *,class std::allocator&lt;struct moltk::dp::QueryPosition&lt;struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,0,1&gt; &gt;,double&gt;,1&gt; const *&gt; &gt; create_query_positions(class moltk::Aligner::Scorer {lvalue},class moltk::Alignment)
 
 create_query_positions( (Scorer)arg1, (Alignment)arg2) -&gt; None :
 
@@ -398,15 +498,69 @@ create_query_positions( (Scorer)arg1, (Alignment)arg2) -&gt; None :
   
   <pre class="literalblock">
 
-create_target_positions( (Scorer)arg1, (Alignment)arg0) -&gt; TargetPositionList :
+create_target_positions( (Scorer)arg1, (Alignment)arg0) -&gt; std_vector_TargetPositionI1 :
 
     C++ signature :
-        class std::vector&lt;class moltk::Aligner::TargetPosition *,class std::allocator&lt;class moltk::Aligner::TargetPosition *&gt; &gt; create_target_positions(class moltk::Aligner::Scorer {lvalue},class moltk::Alignment)
+        class std::vector&lt;struct moltk::dp::TargetPosition&lt;struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,0,1&gt; &gt;,double&gt;,1&gt; const *,class std::allocator&lt;struct moltk::dp::TargetPosition&lt;struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,0,1&gt; &gt;,double&gt;,1&gt; const *&gt; &gt; create_target_positions(class moltk::Aligner::Scorer {lvalue},class moltk::Alignment)
 
 create_target_positions( (Scorer)arg1, (Alignment)arg2) -&gt; None :
 
     C++ signature :
         void create_target_positions(struct Aligner_wrapper::Scorer_wrapper {lvalue},class moltk::Alignment)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_default_gap_extension_penalty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_default_gap_extension_penalty</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+get_default_gap_extension_penalty( (Scorer)arg1) -&gt; Information :
+     Alignment score reduction for increasing the length of an alignment gap by one position.
+
+    C++ signature :
+        struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,0,1&gt; &gt;,double&gt; get_default_gap_extension_penalty(class moltk::Aligner::Scorer {lvalue})
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_default_gap_open_penalty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_default_gap_open_penalty</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+get_default_gap_open_penalty( (Scorer)arg1) -&gt; Information :
+     Alignment score reduction for initiating an alignment gap.
+
+    C++ signature :
+        struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,0,1&gt; &gt;,double&gt; get_default_gap_open_penalty(class moltk::Aligner::Scorer {lvalue})
 
 </pre>
   <dl class="fields">
@@ -433,6 +587,60 @@ get_end_gaps_free( (Scorer)arg1) -&gt; bool :
 
     C++ signature :
         bool get_end_gaps_free(class moltk::Aligner::Scorer {lvalue})
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_default_gap_extension_penalty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_default_gap_extension_penalty</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+set_default_gap_extension_penalty( (Scorer)arg1, (Information)penalty) -&gt; None :
+     Set Alignment score reduction for increasing the length of an alignment gap by one position.
+
+    C++ signature :
+        void set_default_gap_extension_penalty(class moltk::Aligner::Scorer {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,0,1&gt; &gt;,double&gt;)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_default_gap_open_penalty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_default_gap_open_penalty</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+set_default_gap_open_penalty( (Scorer)arg1, (Information)penalty) -&gt; None :
+     Set alignment score reduction for initiating an alignment gap.
+
+    C++ signature :
+        void set_default_gap_open_penalty(class moltk::Aligner::Scorer {lvalue},struct moltk::units::Quantity&lt;struct moltk::units::Unit&lt;struct moltk::units::Dimension&lt;0,0,0,0,0,0,1&gt; &gt;,double&gt;)
 
 </pre>
   <dl class="fields">
@@ -466,6 +674,76 @@ set_end_gaps_free( (Scorer)arg1, (bool)f) -&gt; None :
 </td></tr></table>
 </div>
 <br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="default_gap_extension_penalty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">default_gap_extension_penalty</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="default_gap_open_penalty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">default_gap_open_penalty</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="end_gaps_free"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">end_gaps_free</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
@@ -490,14 +768,14 @@ set_end_gaps_free( (Scorer)arg1, (bool)f) -&gt; None :
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.2 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Nov 04 20:07:17 2011
+    Generated by Epydoc 3.0.1 on Wed Nov 09 19:05:01 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.0</span>
+   &#160;<span id="projectnumber">0.4.2</span>
    </div>
    
   </td>
@@ -123,18 +123,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
 <li>g
-: <a class="el" href="classmoltk_1_1Aligner_1_1Cell.html#ac66f132d15e84f948a4b041d78c56f03">moltk::Aligner::Cell</a>
+: <a class="el" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8">moltk::dp::DPCell&lt; SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS &gt;</a>
 </li>
-<li>gap_extension_penalty
-: <a class="el" href="classmoltk_1_1MatrixScorer_1_1QueryPosition.html#a8e918b0d431d48be6d8f5dcbd9294093">moltk::MatrixScorer::QueryPosition</a>
-, <a class="el" href="classmoltk_1_1MatrixScorer_1_1TargetPosition.html#a2bf28e7f278dc41a844eeb17067be4bb">moltk::MatrixScorer::TargetPosition</a>
+<li>gap_scorer
+: <a class="el" href="structmoltk_1_1dp_1_1AlignmentPosition.html#a14ca58fd97e01e3f63ec29e00759f0bc">moltk::dp::AlignmentPosition&lt; SCORE_TYPE, GAP_NSEGS &gt;</a>
 </li>
-<li>gap_open_penalty
-: <a class="el" href="classmoltk_1_1MatrixScorer_1_1QueryPosition.html#a58acc0c7df51b60ffcf81ef1182574df">moltk::MatrixScorer::QueryPosition</a>
-, <a class="el" href="classmoltk_1_1MatrixScorer_1_1TargetPosition.html#ae29d8a56f5c10b484d754b79d9d1b8ea">moltk::MatrixScorer::TargetPosition</a>
+<li>GapScoreType
+: <a class="el" href="structmoltk_1_1dp_1_1DPCell.html#a21df740acc49e560bd19bcd56d79fae2">moltk::dp::DPCell&lt; SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS &gt;</a>
 </li>
 <li>get_blosum62_scorer()
 : <a class="el" href="classmoltk_1_1MatrixScorer.html#a58a29032f0c197845d1c1cabb4bf2d84">moltk::MatrixScorer</a>
+</li>
+<li>get_default_gap_extension_penalty()
+: <a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#aab647817b02c7c92073db07b39618766">moltk::Aligner::Scorer</a>
+</li>
+<li>get_default_gap_open_penalty()
+: <a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html#a566a3d93e556549bbe86c953b9711b90">moltk::Aligner::Scorer</a>
 </li>
 <li>get_default_scorer()
 : <a class="el" href="classmoltk_1_1Aligner.html#a7d364467fa46629a81c3adbcc2cd2692">moltk::Aligner</a>
@@ -149,18 +153,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>get_estring()
 : <a class="el" href="classmoltk_1_1Alignment.html#a68e0607cad31d5eec46b90d81c62eed2">moltk::Alignment</a>
 </li>
-<li>get_gap_extension_penalty()
-: <a class="el" href="classmoltk_1_1Aligner_1_1QueryPosition.html#a466b25d8775b6b874bcc3156f28070fe">moltk::Aligner::QueryPosition</a>
-, <a class="el" href="classmoltk_1_1Aligner_1_1TargetPosition.html#aaf13d881d1b6fab6b27ad31df722d70f">moltk::Aligner::TargetPosition</a>
-, <a class="el" href="classmoltk_1_1MatrixScorer_1_1QueryPosition.html#a6dd13920fe7322b872381e6d2f80f3ad">moltk::MatrixScorer::QueryPosition</a>
-, <a class="el" href="classmoltk_1_1MatrixScorer_1_1TargetPosition.html#a78d5d85f2e0502eee87c28e6b0b969d5">moltk::MatrixScorer::TargetPosition</a>
-</li>
-<li>get_gap_open_penalty()
-: <a class="el" href="classmoltk_1_1Aligner_1_1QueryPosition.html#a91e7d5b5631000c409593281abb9ee19">moltk::Aligner::QueryPosition</a>
-, <a class="el" href="classmoltk_1_1Aligner_1_1TargetPosition.html#a7327d83dc678f6c8970e07f50a15cbdd">moltk::Aligner::TargetPosition</a>
-, <a class="el" href="classmoltk_1_1MatrixScorer_1_1QueryPosition.html#a2dca485364b5b80dbc0a77ffe20af16a">moltk::MatrixScorer::QueryPosition</a>
-, <a class="el" href="classmoltk_1_1MatrixScorer_1_1TargetPosition.html#a763d419002cf6f6c2fca59d93391e945">moltk::MatrixScorer::TargetPosition</a>
-</li>
 <li>get_instance()
 : <a class="el" href="structmoltk_1_1units_1_1Unit.html#a826fc8257f93873c15845a01e465dfc3">moltk::units::Unit&lt; D &gt;</a>
 </li>
@@ -168,30 +160,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classmoltk_1_1Alignment.html#a628e15ff3478f591868bc1465109b04d">moltk::Alignment</a>
 </li>
 <li>get_number_of_residues()
-: <a class="el" href="classmoltk_1_1Biosequence.html#ac990688fe005304a3dd512a616017c71">moltk::Biosequence</a>
+: <a class="el" href="classmoltk_1_1PDBStructure_1_1Chain.html#acbde49bcc732f9830a3c1d60e37c0644">moltk::PDBStructure::Chain</a>
 , <a class="el" href="classmoltk_1_1BaseBiosequence.html#a837f45a8604c435855b00aa90ace5841">moltk::BaseBiosequence</a>
-, <a class="el" href="classmoltk_1_1PDBStructure_1_1Chain.html#acbde49bcc732f9830a3c1d60e37c0644">moltk::PDBStructure::Chain</a>
+, <a class="el" href="classmoltk_1_1Biosequence.html#ac990688fe005304a3dd512a616017c71">moltk::Biosequence</a>
 </li>
 <li>get_number_of_sequences()
 : <a class="el" href="classmoltk_1_1Alignment.html#a2486341695c895251bd124357a21371c">moltk::Alignment</a>
 </li>
 <li>get_one_letter_code()
-: <a class="el" href="classmoltk_1_1PDBStructure_1_1Residue.html#aed00039c0a6da6e4e5a83d23ec898c98">moltk::PDBStructure::Residue</a>
-, <a class="el" href="classmoltk_1_1BaseBiosequence_1_1BaseResidue.html#aca9c851b8f3d46dfe93ff6a316a51c59">moltk::BaseBiosequence::BaseResidue</a>
+: <a class="el" href="classmoltk_1_1BaseBiosequence_1_1BaseResidue.html#aca9c851b8f3d46dfe93ff6a316a51c59">moltk::BaseBiosequence::BaseResidue</a>
 , <a class="el" href="classmoltk_1_1BiosequenceResidue.html#a3bcbd7c24c5df4fa8d6b5e64c77ea136">moltk::BiosequenceResidue</a>
+, <a class="el" href="classmoltk_1_1PDBStructure_1_1Residue.html#aed00039c0a6da6e4e5a83d23ec898c98">moltk::PDBStructure::Residue</a>
+</li>
+<li>get_pretty_width()
+: <a class="el" href="classmoltk_1_1Alignment.html#a7bf54c7c4b430f8b4ecd526ebb7202f5">moltk::Alignment</a>
 </li>
 <li>get_record_type()
 : <a class="el" href="classmoltk_1_1PDBStructure_1_1Atom.html#a2284676e8460e244b9ac326a19b3e34f">moltk::PDBStructure::Atom</a>
 </li>
 <li>get_residue()
-: <a class="el" href="classmoltk_1_1PDBStructure_1_1Chain.html#a24980b95a88bb1476c283a6f91944a2c">moltk::PDBStructure::Chain</a>
-, <a class="el" href="classmoltk_1_1Biosequence.html#a7347126c11c30536dfc3b0214f0dcc44">moltk::Biosequence</a>
+: <a class="el" href="classmoltk_1_1Biosequence.html#a7347126c11c30536dfc3b0214f0dcc44">moltk::Biosequence</a>
+, <a class="el" href="classmoltk_1_1PDBStructure_1_1Chain.html#a24980b95a88bb1476c283a6f91944a2c">moltk::PDBStructure::Chain</a>
 , <a class="el" href="classmoltk_1_1BaseBiosequence.html#ae966c9bf162db00c2d5a4898170538af">moltk::BaseBiosequence</a>
 </li>
 <li>get_residue_number()
 : <a class="el" href="classmoltk_1_1BaseBiosequence_1_1BaseResidue.html#a21a653fddb38c2312eeca3f197e6bbc8">moltk::BaseBiosequence::BaseResidue</a>
 , <a class="el" href="classmoltk_1_1BiosequenceResidue.html#ad7a50af311f8d4d088fb2367e456569f">moltk::BiosequenceResidue</a>
 , <a class="el" href="classmoltk_1_1PDBStructure_1_1Residue.html#a95335a7d300e9821bdbffb7b3a35060e">moltk::PDBStructure::Residue</a>
+</li>
+<li>get_score()
+: <a class="el" href="classmoltk_1_1Alignment.html#a043c2999d1679e1a4f9c63816861e319">moltk::Alignment</a>
+</li>
+<li>get_scorer()
+: <a class="el" href="classmoltk_1_1Aligner.html#abf57843c3956c2ffbe098cd51110b30c">moltk::Aligner</a>
 </li>
 <li>get_sequence()
 : <a class="el" href="classmoltk_1_1Alignment.html#aa27d71c83a6cb5d0584e9db931119045">moltk::Alignment</a>

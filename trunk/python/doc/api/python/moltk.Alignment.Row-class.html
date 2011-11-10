@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.2 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -63,19 +63,19 @@
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class Row</h1><p class="nomargin-top"></p>
 <center>
-<center>  <map id="uml_class_diagram_for_moltk_al_10" name="uml_class_diagram_for_moltk_al_10">
+<center>  <map id="uml_class_diagram_for_moltk_al_6" name="uml_class_diagram_for_moltk_al_6">
 <area shape="rect" id="node1_8" href="moltk.Alignment.Row-class.html#__instance_size__" title="moltk.Alignment.Row.__instance_size__" alt="" coords="17,108,133,127"/>
-<area shape="rect" id="node1_9" href="moltk.Alignment.Row-class.html#e_string" title="moltk.Alignment.Row.e_string" alt="" coords="17,127,133,145"/>
-<area shape="rect" id="node1_10" href="moltk.Alignment.Row-class.html#list" title="Meta&#45;data for one sequence in an Alignment" alt="" coords="17,145,133,164"/>
-<area shape="rect" id="node1_11" href="moltk.Alignment.Row-class.html#list_index" title="moltk.Alignment.Row.list_index" alt="" coords="17,164,133,183"/>
-<area shape="rect" id="node1_12" href="moltk.Alignment.Row-class.html#sequence_weight" title="moltk.Alignment.Row.sequence_weight" alt="" coords="17,183,133,201"/>
+<area shape="rect" id="node1_9" href="moltk.Alignment.Row-class.html#e_string" title="gap pattern of this sequence" alt="" coords="17,127,133,145"/>
+<area shape="rect" id="node1_10" href="moltk.Alignment.Row-class.html#list" title="which list: sequences or structures? Meta&#45;data for one sequence in an &#160;Alignment" alt="" coords="17,145,133,164"/>
+<area shape="rect" id="node1_11" href="moltk.Alignment.Row-class.html#list_index" title="index into either the structure or sequence list" alt="" coords="17,164,133,183"/>
+<area shape="rect" id="node1_12" href="moltk.Alignment.Row-class.html#sequence_weight" title="relative contribution of this sequence to the alignment score" alt="" coords="17,183,133,201"/>
 <area shape="rect" id="node1_13" href="moltk.Alignment.Row-class.html#__init__" title="__init__( (object)arg1) &#45;&gt; None :" alt="" coords="17,204,133,223"/>
 <area shape="rect" id="node1_14" href="moltk.Alignment.Row-class.html#__reduce__" title="helper for pickle" alt="" coords="17,223,133,241"/>
 <area shape="rect" id="node1" href="moltk.Alignment.Row-class.html" title="Meta&#45;data for one sequence in an Alignment" alt="" coords="5,83,145,247"/>
 <area shape="rect" id="node2_15" href="javascript:void(0);" title="??.instance.__new__" alt="" coords="17,39,133,57"/>
 <area shape="rect" id="node2" href="javascript:void(0);" title="??.instance" alt="" coords="5,6,145,63"/>
 </map>
-  <img src="uml_class_diagram_for_moltk_al_10.gif" alt='' usemap="#uml_class_diagram_for_moltk_al_10" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_moltk_al_6.gif" alt='' usemap="#uml_class_diagram_for_moltk_al_6" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
@@ -198,7 +198,8 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="moltk.Alignment.Row-class.html#e_string" class="summary-name">e_string</a>
+        <a href="moltk.Alignment.Row-class.html#e_string" class="summary-name">e_string</a><br />
+      gap pattern of this sequence
     </td>
   </tr>
 <tr>
@@ -206,21 +207,24 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="moltk.Alignment.Row-class.html#list" class="summary-name">list</a><br />
-      Meta-data for one sequence in an Alignment
+      which list: sequences or structures? Meta-data for one sequence in an
+      Alignment
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="moltk.Alignment.Row-class.html#list_index" class="summary-name">list_index</a>
+        <a href="moltk.Alignment.Row-class.html#list_index" class="summary-name">list_index</a><br />
+      index into either the structure or sequence list
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="moltk.Alignment.Row-class.html#sequence_weight" class="summary-name">sequence_weight</a>
+        <a href="moltk.Alignment.Row-class.html#sequence_weight" class="summary-name">sequence_weight</a><br />
+      relative contribution of this sequence to the alignment score
     </td>
   </tr>
   <tr>
@@ -327,7 +331,7 @@ __init__( (object)arg1) -&gt; None :
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">e_string</h3>
-  
+  <p>gap pattern of this sequence</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
@@ -344,7 +348,8 @@ __init__( (object)arg1) -&gt; None :
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">list</h3>
-  <p>Meta-data for one sequence in an Alignment</p>
+  <p>which list: sequences or structures? Meta-data for one sequence in an 
+  Alignment</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
@@ -361,7 +366,7 @@ __init__( (object)arg1) -&gt; None :
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">list_index</h3>
-  
+  <p>index into either the structure or sequence list</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
@@ -378,7 +383,7 @@ __init__( (object)arg1) -&gt; None :
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">sequence_weight</h3>
-  
+  <p>relative contribution of this sequence to the alignment score</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>(<span class="summary-sig-arg">...</span>)</span>
@@ -414,14 +419,14 @@ __init__( (object)arg1) -&gt; None :
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.0 Documentation</a></th>
+            ><a class="navbar" target="_top" href="http://moltk.rotatingpenguin.com/">MolTK python API v0.4.2 Documentation</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Nov 04 20:07:18 2011
+    Generated by Epydoc 3.0.1 on Wed Nov 09 19:05:01 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

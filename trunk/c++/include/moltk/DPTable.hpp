@@ -286,6 +286,21 @@ struct DPCell
         return f.score;
     }
 
+    // operator== needed for vector storage
+    // TODO
+    bool operator==(const DPCell& rhs) const
+    {
+        if (v.score != rhs.v.score) return false;
+        if (g.score != rhs.g.score) return false;
+        if (e.score != rhs.e.score) return false;
+        if (f.score != rhs.f.score) return false;
+        return true;
+    }
+    bool operator<(const DPCell& rhs) const
+    {
+        return (v.score < rhs.v.score);
+    }
+
     // Gusfield nomenclature
     ScoreType v; ///< V, best score through this cell
     ScoreType g; ///< G, best ungapped score through this cell
