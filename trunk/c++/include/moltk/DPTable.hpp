@@ -279,11 +279,14 @@ struct DPCell
         case TRACEBACK_UPLEFT:
             return g.score;
             break;
+        case TRACEBACK_UP:
+            return f.score;
+            break;
         case TRACEBACK_LEFT:
             return e.score;
             break;
         }
-        return f.score;
+        return e.score;
     }
 
     // operator== needed for vector storage
