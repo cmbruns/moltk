@@ -97,7 +97,7 @@ def do_setup():
     library_dirs = [boost_lib_dir,]
     
     setup(name='moltk',
-          version = '0.4.2',
+          version = '0.4.3',
           description = "Python API for moltk sequence/structure alignment/visualization tool kit.",
           author = "Christopher Bruns",
           author_email = "cmbruns@rotatingpenguin.com",
