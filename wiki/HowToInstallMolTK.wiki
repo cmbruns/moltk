@@ -5,7 +5,7 @@
 This document explains how to install MolTK.
 
 = How to Install the MolTK Application =
-The MolTK application won't be released until MolTK version 0.7.
+Sorry; you cannot install the MolTK application yet.  The MolTK application won't be released until MolTK version 0.7.
 
 = How to Install the Interactive MolTK Python Module =
 
@@ -16,7 +16,7 @@ The MolTK application won't be released until MolTK version 0.7.
   * Install the [http://code.google.com/p/moltk/downloads/list MolTK Python module for windows]
 
 == Installing the MolTK python module for Mac ==
-  * Install [http://www.python.org/download/ Python 2.6]
+  * Most Macs in 2011 already have Python 2.6 installed.  If yours does not, install [http://www.python.org/download/ Python 2.6]
   * The MolTK python module for Mac won't be released until MolTK version 0.6.
 
 == Installing the MolTK python module for Linux ==
