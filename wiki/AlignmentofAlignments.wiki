@@ -24,8 +24,6 @@ This first example shows a single column indel between two alignments.
   * 'i' represents a new insertion gap
   * 'X' represents a non-gap residue
   * '{{{*}}}' highlights the column(s) where the main action occurs
-  * '+' shows where a new gap opening score should be applied
-  * '0' shows where a new gap opening score is unnecessary
 
 {{{
  alignment 1 (sequences a-d):
@@ -52,6 +50,9 @@ l) X---
 In alignment1, only sequence 'a)' has a new gap.  So our gap opening penalty only applies to sequence 'a)' in alignment 1.
 
 Consider each of the individual pairwise sequence alignments:
+
+  * '+' shows where a new gap opening score should be applied
+  * '0' shows where a new gap opening score is unnecessary
 
 {{{
     a    b    c    d
