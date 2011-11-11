@@ -1,0 +1,40 @@
+#summary Details of how to align two alignments.
+
+= Introduction =
+
+Alignment of two alignments, each containing internal gaps, is more complex than aligning two sequences.
+
+= Details =
+
+The problem of aligning two alignments optimally is NP-hard.  Therefore we will not do that.  But what we *can* do is ensure that the alignment score from our dynamic programming algorithm is the correct sum-of-pairs score for the resulting alignment.  So the score will be correct, even if it is not optimal.  This commitment to computing the correct score gives us some advantages:
+  # The steps where heuristics are applied can be more obvious, and hopefully more encapsulated, than if we produced an approximately correct score.
+  # The correct score permits sharper testing and debugging.
+
+== How do we produce this correct sum-of-pairs score? ==
+
+... by ensuring that our pairwise alignment score, gap extension score, and gap opening score are each computed correctly.  The gap opening score will turn out to be the tricky one.  So lets handle that one first.
+
+=== Gap opening score ===
+
+This first example shows a single column indel between two alignments.  
+  * '-' a preexisting gap
+  * 'i' a new insertion gap
+  * 'X' a non-gap residue
+
+{{{
+ alignment 1:
+a) XXiX
+b) XXi-
+c) X-iX
+d) X-i-
+
+ alignment 2:
+e) XXXX
+f) XXX-
+g) X-XX
+h) X-X-
+e) XX-X
+f) XX--
+g) X--X
+h) X---
+}}}
