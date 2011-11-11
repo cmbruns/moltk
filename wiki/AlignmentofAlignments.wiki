@@ -51,6 +51,8 @@ l) X---
 
 In alignment1, only sequence 'a)' has a new gap.  So our gap opening penalty only applies to sequence 'a)' in alignment 1.
 
+Consider each of the individual pairwise sequence alignments:
+
 {{{
     a    b    c    d
 
