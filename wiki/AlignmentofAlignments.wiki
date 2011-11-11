@@ -60,6 +60,7 @@ Consider each of the individual pairwise sequence alignments:
   * '+' shows where a new gap opening score should be applied at the (2,3) position in the recurrence algorithm.
   * '0' shows where a new gap opening score is unnecessary because there is no (net) gap.
   * '1' shows where a new gap opening score is unnecessary because the gap opening score would have already been assessed before position (2,3).
+  * '2' shows where a gap opening score will be assessed *later* in the recurrence.
 
 {{{
     a    b    c    d
@@ -74,25 +75,25 @@ f XXX- XXX- XXX- XXX-
 
   XXiX XXi- X-iX X-i-
 g X-XX X-XX X-XX X-XX
-    +    +    1    1 
+    1    1    +<   +< 
 
   XXiX XXi- X-iX X-i-
 h X-X- X-X- X-X- X-X-
-    +    +    1    1 
+    1    1    +<   +<
 
   XXiX XXi- X-iX X-i-
 i XX-X XX-X XX-X XX-X
-    +    +    1    1 
+    0>   2>   1    1 
 
   XXiX XXi- X-iX X-i-
 j XX-- XX-- XX-- XX--
-    +    +    1    1 
+    2>   0>   1    1 
 
   XXiX XXi- X-iX X-i-
 k X--X X--X X--X X--X
-    1    1    1    ? 
+    1    1    0>   2>
 
   XXiX XXi- X-iX X-i-
 l X--- X--- X--- X---
-    1    1    ?    0 
+    1    1    2>   0>
 }}}
