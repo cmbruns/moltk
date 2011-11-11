@@ -63,4 +63,28 @@ e XXXX XXXX XXXX XXXX
   XXiX XXi- X-iX X-i-
 f XXX- XXX- XXX- XXX-
     +    +    1    1 
+
+  XXiX XXi- X-iX X-i-
+g X-XX X-XX X-XX X-XX
+    +    +    1    1 
+
+  XXiX XXi- X-iX X-i-
+h X-X- X-X- X-X- X-X-
+    +    +    1    1 
+
+  XXiX XXi- X-iX X-i-
+i XX-X XX-X XX-X XX-X
+    +    +    1    1 
+
+  XXiX XXi- X-iX X-i-
+j XX-- XX-- XX-- XX--
+    +    +    1    1 
+
+  XXiX XXi- X-iX X-i-
+k X--X X--X X--X X--X
+    +    +    1    1 
+
+  XXiX XXi- X-iX X-i-
+l X--- X--- X--- X---
+    +    +    1    1 
 }}}
