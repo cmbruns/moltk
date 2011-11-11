@@ -4,8 +4,16 @@
 
 Alignment of two alignments, each containing internal gaps, is more complex than aligning two sequences.
 
+== Considerations ==
+
   * Sum-of-pairs score: the score of an alignment is the sum of the pairwise alignment scores between each pair of sequences in the alignment.
   * "Once a gap, always a gap": internal gaps within the two input alignments are unchanged in the output alignment.
+  * The following situation is treated as a single gap for scoring purposes:
+
+{{{
+XX--XXXX
+XXXX--XX
+}}}
 
 = Details =
 
@@ -50,7 +58,7 @@ l) X---
 Consider each of the individual pairwise sequence alignments:
 
   * '+' shows where a new gap opening score should be applied at the (2,3) position in the recurrence algorithm.
-  * '0' shows where a new gap opening score is unnecessary because there is no gap.
+  * '0' shows where a new gap opening score is unnecessary because there is no (net) gap.
   * '1' shows where a new gap opening score is unnecessary because the gap opening score would have already been assessed before position (2,3).
 
 {{{
@@ -82,9 +90,9 @@ j XX-- XX-- XX-- XX--
 
   XXiX XXi- X-iX X-i-
 k X--X X--X X--X X--X
-    +    +    1    1 
+    1    1    1    ? 
 
   XXiX XXi- X-iX X-i-
 l X--- X--- X--- X---
-    +    +    1    1 
+    1    1    ?    0 
 }}}
