@@ -4,8 +4,8 @@
 
 Alignment of two alignments, each containing internal gaps, is more complex than aligning two sequences.
 
-* Sum-of-pairs score: the score of an alignment is the sum of the pairwise alignment scores between each pair of sequences in the alignment.
-* "Once a gap, always a gap": internal gaps within the two input alignments are unchanged in the output alignment.
+  * Sum-of-pairs score: the score of an alignment is the sum of the pairwise alignment scores between each pair of sequences in the alignment.
+  * "Once a gap, always a gap": internal gaps within the two input alignments are unchanged in the output alignment.
 
 = Details =
 
