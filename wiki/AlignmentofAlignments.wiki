@@ -38,3 +38,5 @@ f) XX--
 g) X--X
 h) X---
 }}}
+
+In alignment1, only sequence 'a)' has a new gap.  So our gap opening penalty only applies to sequence 'a)' in alignment 1.  
