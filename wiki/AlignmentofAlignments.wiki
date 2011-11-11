@@ -17,26 +17,45 @@ The problem of aligning two alignments optimally is NP-hard.  Therefore we will 
 === Gap opening score ===
 
 This first example shows a single column indel between two alignments.  
-  * '-' a preexisting gap
-  * 'i' a new insertion gap
-  * 'X' a non-gap residue
+  * '-' represents a preexisting gap
+  * 'i' represents a new insertion gap
+  * 'X' represents a non-gap residue
+  * '{{{*}}}' highlights the column(s) where the main action occurs
+  * '+' shows where a new gap opening score should be applied
+  * '0' shows where a new gap opening score is unnecessary
 
 {{{
  alignment 1:
+     * 
 a) XXiX
 b) XXi-
 c) X-iX
 d) X-i-
+     * 
 
  alignment 2:
+     * 
 e) XXXX
 f) XXX-
 g) X-XX
 h) X-X-
-e) XX-X
-f) XX--
-g) X--X
-h) X---
+i) XX-X
+j) XX--
+k) X--X
+l) X---
+     * 
 }}}
 
-In alignment1, only sequence 'a)' has a new gap.  So our gap opening penalty only applies to sequence 'a)' in alignment 1.  
+In alignment1, only sequence 'a)' has a new gap.  So our gap opening penalty only applies to sequence 'a)' in alignment 1.
+
+{{{
+    a    b    c    d
+
+  XXiX XXi- X-iX X-i-
+e XXXX XXXX XXXX XXXX
+    +    0    0    0 
+
+  XXiX XXi- X-iX X-i-
+f XXX- XXX- XXX- XXX-
+    ?    ?    0    0 
+}}}
