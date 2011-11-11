@@ -15,7 +15,7 @@ The problem of aligning two alignments optimally is NP-hard.  Therefore we will 
 
 == How do we produce this correct sum-of-pairs score? ==
 
-... by ensuring that our pairwise alignment score, gap extension score, and gap opening score are each computed correctly.  The gap opening score will turn out to be the tricky one.  So lets handle that one first.
+... by ensuring that our pairwise alignment scores, gap extension scores, and gap opening scores are each computed correctly during the dynamic programming recurrence.  The gap opening score will turn out to be the tricky one.  So lets handle gap opening first, to get it out of the way.
 
 === Gap opening score ===
 
@@ -28,7 +28,7 @@ This first example shows a single column indel between two alignments.
   * '0' shows where a new gap opening score is unnecessary
 
 {{{
- alignment 1:
+ alignment 1 (sequences a-d):
      * 
 a) XXiX
 b) XXi-
@@ -36,7 +36,7 @@ c) X-iX
 d) X-i-
      * 
 
- alignment 2:
+ alignment 2 (sequences e-l):
      * 
 e) XXXX
 f) XXX-
