@@ -47,21 +47,20 @@ l) X---
      * 
 }}}
 
-In alignment1, only sequence 'a)' has a new gap.  So our gap opening penalty only applies to sequence 'a)' in alignment 1.
-
 Consider each of the individual pairwise sequence alignments:
 
-  * '+' shows where a new gap opening score should be applied
-  * '0' shows where a new gap opening score is unnecessary
+  * '+' shows where a new gap opening score should be applied at the (2,3) position in the recurrence algorithm.
+  * '0' shows where a new gap opening score is unnecessary because there is no gap.
+  * '1' shows where a new gap opening score is unnecessary because the gap opening score would have already been assessed before position (2,3).
 
 {{{
     a    b    c    d
 
   XXiX XXi- X-iX X-i-
 e XXXX XXXX XXXX XXXX
-    +    0    0    0 
+    +    +    1    1 
 
   XXiX XXi- X-iX X-i-
 f XXX- XXX- XXX- XXX-
-    ?    ?    0    0 
+    +    +    1    1 
 }}}
