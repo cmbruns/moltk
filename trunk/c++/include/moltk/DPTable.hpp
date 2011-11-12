@@ -99,21 +99,9 @@ struct AlignmentPosition
 
 
 /// Generic accumulated score in a DPCell
-template<typename SCORE_TYPE> struct RunningScore;
-template<class U, class Y> struct RunningScore<moltk::units::Quantity<U, Y> >
+template<typename SCORE_TYPE> struct RunningScore
 {
-    typedef moltk::units::Quantity<U, Y> ScoreType;
-    ScoreType set_to_zero()
-    {
-        score = 0.0 * U::get_instance();
-        return score;
-    }
-    ScoreType set_to_negative_infinity()
-    {
-        score = -std::numeric_limits<Y>::infinity() * U::get_instance();
-        return score;
-    }
-    ScoreType score;
+    SCORE_TYPE score;
 };
 
 
@@ -143,7 +131,7 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
     void initialize(const PositionType& pos1, const PositionType& pos2)
     {
         if (0 != pos1.index) {
-            set_to_negative_infinity(score);
+            score = -moltk::units::infinity<SCORE_TYPE>();
             return;
         }
         score = -(moltk::Real)pos2.index * pos1.gap_scorer.extension_penalty
@@ -164,29 +152,6 @@ struct QueryPosition : public AlignmentPosition<SCORE_TYPE, GAP_NSEGS>
     QueryWeights residue_type_index_weights;
 };
 
-
-template<typename SCORE_TYPE>
-SCORE_TYPE set_to_negative_infinity(SCORE_TYPE);
-
-template<class U, typename Y>
-moltk::units::Quantity<U,Y> set_to_negative_infinity(moltk::units::Quantity<U,Y>& q)
-{
-    q = -std::numeric_limits<Y>::infinity() * U::get_instance();
-    return q;
-}
-
-
-template<typename SCORE_TYPE>
-SCORE_TYPE set_to_zero(SCORE_TYPE);
-
-template<class U, typename Y>
-moltk::units::Quantity<U,Y> set_to_zero(moltk::units::Quantity<U,Y>& q)
-{
-    q = 0.0 * U::get_instance();
-    return q;
-}
-
-
 template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
          int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
          >
@@ -197,8 +162,7 @@ struct TargetPosition : public AlignmentPosition<SCORE_TYPE, GAP_NSEGS>
 
     SCORE_TYPE score(const QueryPosition& rhs) const
     {
-        SCORE_TYPE result;
-        set_to_zero(result);
+        SCORE_TYPE result = moltk::units::zero<SCORE_TYPE>();
         const TargetPosition& lhs = *this;
         typename QueryWeights::const_iterator i;
         const QueryWeights& queryWeights = rhs.residue_type_index_weights;
@@ -238,9 +202,9 @@ struct DPCell
         e.initialize(pos1, pos2);
         f.initialize(pos2, pos1);
         if ((pos1.index == 0) && (pos2.index == 0))
-            g.set_to_zero();
+            g.score = moltk::units::zero<SCORE_TYPE>();
         else
-            g.set_to_negative_infinity();
+            g.score = -moltk::units::infinity<SCORE_TYPE>();
         v.score = compute_v();
     }
 
