@@ -23,8 +23,11 @@
 #ifndef MOLTK_ALIGN_MATRIX_SCORER_H
 #define MOLTK_ALIGN_MATRIX_SCORER_H
 
-#include "moltk/Aligner.hpp"
+#include "moltk/DPPosition.hpp"
+#include "moltk/Alignment.hpp"
+#include "moltk/SubstitutionMatrix.hpp"
 #include "moltk/units.hpp"
+#include <string>
 #include <iostream>
 #include <vector>
 
@@ -34,86 +37,37 @@ namespace moltk {
  * MatrixScorer scores alignments using a residue type
  * matrix such as BLOSUM62 or PAM250.
  */
-class MatrixScorer : public Aligner::Scorer
+template<class SCORE_TYPE, int GAP_NSEGS>
+class MatrixScorer_
 {
 public:
-    typedef moltk::units::Information Information;
+    typedef SCORE_TYPE ScoreType;
+    typedef dp::DPPosition<SCORE_TYPE, GAP_NSEGS> QueryPosition;
+    typedef dp::DPPosition<SCORE_TYPE, GAP_NSEGS> TargetPosition;
 
-    explicit MatrixScorer(const std::string& matrix_string);
-    explicit MatrixScorer(std::istream& matrix_stream);
-    std::vector<const Aligner::QueryPosition*> create_query_positions(const Alignment& alignment) const;
-    std::vector<const Aligner::TargetPosition*> create_target_positions(const Alignment& alignment) const;
-    std::istream& load_stream(std::istream&);
-
-    static const MatrixScorer& get_blosum62_scorer();
-
-    typedef Aligner::QueryPosition QueryPosition;
-    typedef Aligner::TargetPosition TargetPosition;
-
-    /*!
-     * QueryPosition represents an alignment/sequence column in the
-     * second of two sequences being scored by a MatrixScorer.
-     *
-    // Query alignment appears after target alignment in combined alignment.
-    // Query alignment should be shorter than target alignment for small-memory optimizaion.
-    // Query alignment should have fewer/less-diverse sequences for scoring optimization.
-     */
-    /*
-    class QueryPosition : public Aligner::QueryPosition
-    {
-    public:
-
-        virtual QueryPosition* clone() const;
-        virtual Information get_gap_open_penalty() const {return gap_open_penalty;}
-        virtual Information get_gap_extension_penalty() const {return gap_extension_penalty;}
-        inline friend std::ostream& operator<<(std::ostream& os, const QueryPosition& p)
-        {
-            os << "op=" << p.get_gap_open_penalty();
-            os << ", ep=" << p.get_gap_extension_penalty();
-            return os;
-        }
-
-        Information gap_open_penalty;
-        Information gap_extension_penalty;
-        // cache values for quick score lookup
-        typedef std::vector< std::pair<size_t, double> > QueryWeights;
-        QueryWeights residue_type_index_weights;
-    };
-    */
-
-
-    /*!
-     * TargetPosition represents an alignment/sequence column in the
-     * first of two sequences being scored by a MatrixScorer.
-     */
-    /*
-    class TargetPosition : public Aligner::TargetPosition
-    {
-    public:
-
-        virtual TargetPosition* clone() const;
-        virtual moltk::units::Information score(const Aligner::QueryPosition& rhs) const;
-        virtual Information get_gap_open_penalty() const {return gap_open_penalty;}
-        virtual Information get_gap_extension_penalty() const {return gap_extension_penalty;}
-
-        Information gap_open_penalty;
-        Information gap_extension_penalty;
-        // cache values for quick score lookup
-        std::vector<Information> scores_by_residue_type_index;
-    };
-    */
+    explicit MatrixScorer_(const moltk::SubstitutionMatrix_<SCORE_TYPE>& matrix);
+    void create_positions(
+        std::vector<dp::DPPosition<SCORE_TYPE, GAP_NSEGS>*>& positions, 
+        const Alignment& alignment) const;
+    bool get_end_gaps_free() const {return b_end_gaps_free;}
+    void set_end_gaps_free(bool f) {b_end_gaps_free = f;}
+    /// Alignment score reduction for initiating an alignment gap.
+    SCORE_TYPE get_default_gap_open_penalty() const {return default_gap_open_penalty;}
+    /// Set alignment score reduction for initiating an alignment gap.
+    void set_default_gap_open_penalty(SCORE_TYPE penalty) {default_gap_open_penalty = penalty;}
+    /// Alignment score reduction for increasing the length of an alignment gap by one position.
+    SCORE_TYPE get_default_gap_extension_penalty() const {return default_gap_extension_penalty;}
+    /// Set Alignment score reduction for increasing the length of an alignment gap by one position.
+    void set_default_gap_extension_penalty(SCORE_TYPE penalty) {default_gap_extension_penalty = penalty;}
 
 protected:
-    // create_foo_positions is a helper function to reduce redundancy between 
-    // methods create_query_positions() and create_target_positions()
-    template<class POSB, class POS>
-    std::vector<POSB*> create_foo_positions(const Alignment& alignment) const;
-
-    std::vector<int> character_indices; // maps letters to matrix indices
-    std::vector< std::vector<Information> > matrix;
+    bool b_end_gaps_free;
+    SCORE_TYPE default_gap_open_penalty;
+    SCORE_TYPE default_gap_extension_penalty;
+    SubstitutionMatrix_<SCORE_TYPE> matrix;
 };
 
-std::istream& operator>>(std::istream&, moltk::MatrixScorer&);
+typedef MatrixScorer_<moltk::units::Information, 1> MatrixScorer;
 
 } // namespace moltk
 

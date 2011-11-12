@@ -36,32 +36,21 @@ using moltk::units::bit;
 /////////////////////
 
 Aligner::Aligner()
-    : scorer(NULL)
+    : scorer(SubstitutionMatrix::get_blosum62())
 {init();}
 
 /* virtual */
 Aligner::~Aligner()
-{
-    // clear_positions();
-    clear_scorer();
-}
+{}
 
 void Aligner::init()
 {
-    clear_scorer();
-    scorer = new MatrixScorer(MatrixScorer::get_blosum62_scorer());
     // gapOpenPenalty = 1.0 * bit; 
     // gapExtensionPenalty = 0.5 * bit;
     // m and n are lengths of input Biosequences
     // the PositionLists (seq1,seq2) and DpTable entries are actually +1 larger.
     m = test_table.target_positions.size() - 1;
     n = test_table.query_positions.size() - 1;
-}
-
-void Aligner::clear_scorer()
-{
-    delete scorer;
-    scorer = NULL;
 }
 
 /*
@@ -91,12 +80,12 @@ Alignment Aligner::align(const Alignment& s1, const Alignment& s2)
     // seq1.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
     m = s1.get_number_of_columns();
-    test_table.target_positions = scorer->create_target_positions(s1);
+    scorer.create_positions(test_table.target_positions, s1);
 
     // seq2.clear();
     // Create an extra Aligner::position at the very beginning, to hold left end gap data
     n = s2.get_number_of_columns();
-    test_table.query_positions = scorer->create_query_positions(s2);
+    scorer.create_positions(test_table.query_positions, s2);
 
     dp::AlignmentResult<Information> alignment_result =
             test_table.align();
@@ -119,11 +108,6 @@ Alignment Aligner::compute_traceback()
                     alignment_result.eString2);
     result.set_score(result.get_score() + alignment_result.score);
     return result;
-}
-
-/* static */
-const Aligner::Scorer& Aligner::get_default_scorer() {
-    return MatrixScorer::get_blosum62_scorer();
 }
 
 /* static */
