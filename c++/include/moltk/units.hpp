@@ -323,11 +323,14 @@ namespace units {
     struct value_finder {
         static T zero() {return T(0);}
         static T infinity() {return std::numeric_limits<T>::infinity();}
+        static T one() {return T(1);}
     };
     template<class T>
     T zero() {return value_finder<T>::zero();}
     template<class T>
     T infinity() {return value_finder<T>::infinity();}
+    template<class T>
+    T one() {return value_finder<T>::one();}
     // Specialized for Quantities
     template<class U, class Y>
     struct value_finder<Quantity<U,Y> > {
@@ -336,6 +339,7 @@ namespace units {
         typedef Quantity<UnitType,ValueType> QuantityType;
         static QuantityType zero() {return value_finder<ValueType>::zero() * UnitType::get_instance();}
         static QuantityType infinity() {return value_finder<ValueType>::infinity() * UnitType::get_instance();}
+        static QuantityType one() {return value_finder<ValueType>::one() * UnitType::get_instance();}
     };
 
 }} // namespace moltk::units

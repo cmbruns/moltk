@@ -8,8 +8,12 @@
 #ifndef MOLTK_DPTABLE_HPP_
 #define MOLTK_DPTABLE_HPP_
 
+#include "moltk/DPPosition.hpp"
+#include "moltk/MatrixScorer.hpp"
+#include "moltk/Alignment.hpp"
 #include "moltk/EString.hpp"
 #include "moltk/units.hpp"
+#include "moltk/dp_params.hpp"
 #include <vector>
 #include <iostream>
 #include <stdexcept>
@@ -17,6 +21,7 @@
 #include <limits>
 
 namespace moltk {
+
 /// Namespace for dynamic programming classes.
 /// 
 /// Many of theses classes use hard-to-read C++ template specializations,
@@ -24,78 +29,10 @@ namespace moltk {
 /// and branching logic in the time-critical inner loop of dynamic programming.
 namespace dp {
 
-// Various options that affect the details of the
-// dynamic programming alignment algorithm
-
-/// Fast O(n^2) memory use vs. 2X slower O(n) memory use.
-enum DPMemoryModel {
-    DP_MEMORY_LARGE, ///< Faster O(n^2) memory model
-    DP_MEMORY_SMALL ///< 2X slower O(n) memory model
-};
-
-
-/// Whether alignment operands have preexisting gaps (e.g. alignments) or not (e.g. single sequences)
-enum DPAlignGapping {
-    DP_ALIGN_UNGAPPED_SEQUENCES, ///< Alignment with no preexisting gaps can be faster and truly optimal
-    DP_ALIGN_GAPPED_ALIGNMENTS ///< Alignment of pregapped sequences is slower and heuristic (problem is NP-hard)
-};
-
-
-/// Global vs. local alignment
-enum DPAlignScale {
-    DP_ALIGN_GLOBAL, ///< Global alignment (Needleman Wunsch)
-    DP_ALIGN_LOCAL, ///< Local alignment (Smith Waterman)
-};
-
-
-/// TracebackPointer to help reconstruct the final alignment.
-enum TracebackPointer
-{
-    TRACEBACK_UPLEFT, // consume/align one column/residue from each of both alignments/sequences
-    TRACEBACK_UP, // consume/delete one column/residue of alignment/sequence 1
-    TRACEBACK_LEFT // consume/delete one column/residue of alignment/sequence 2
-};
-
-
 // Optimize speed by using template specializations to avoid
 // virtual methods and extra logic in inner loop of dynamic
 // programming algorithms.  (Most of the permutations are probably
 // not implemented yet...)
-
-
-/// Parameters for scoring indel gaps in sequence alignments
-template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
-         int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
-         >
-struct GapScorer
-{
-public:
-    SCORE_TYPE open_penalties[GAP_NSEGS]; ///< Penalties for creating an insertion gap in a sequence alignment.
-    SCORE_TYPE extension_penalties[GAP_NSEGS]; ///< Penalties for extending an insertion gap by one position in a sequence alignment.
-};
-
-
-/// template specialization for affine gap score function
-template<typename SCORE_TYPE>
-struct GapScorer<SCORE_TYPE, 1>
-{
-public:
-    SCORE_TYPE open_penalty; ///< Penalty for creating an insertion gap in a sequence alignment
-    SCORE_TYPE extension_penalty; ///< Penalty for extending an insertion gap by one position in a sequence alignment
-};
-
-
-/// Represents one column/residue in a sequence/alignment to be aligned.
-/// Optimized for fast scoring during alignment.
-/// Base class of QueryPosition and TargetPosition
-template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
-         int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
-         >
-struct AlignmentPosition
-{
-    GapScorer<SCORE_TYPE, GAP_NSEGS> gap_scorer;
-    size_t index;
-};
 
 
 /// Generic accumulated score in a DPCell
@@ -117,16 +54,16 @@ struct RunningGapScore;
 template<typename SCORE_TYPE>
 struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
 {
-    typedef AlignmentPosition<SCORE_TYPE, 1> PositionType;
+    typedef DPPosition<SCORE_TYPE, 1> PositionType;
     /// Update from previous dynamic programming cell
     void compute_recurrence(
             const RunningGapScore& pred,
             const RunningScore<SCORE_TYPE>& v,
-            const AlignmentPosition<SCORE_TYPE, 1>& pos1,
-            const AlignmentPosition<SCORE_TYPE, 1>& pos2)
+            const DPPosition<SCORE_TYPE, 1>& pos1,
+            const DPPosition<SCORE_TYPE, 1>& pos2)
     {
-        score = std::max(pred.score, v.score - pos1.gap_scorer.open_penalty)
-                - pos1.gap_scorer.extension_penalty;
+        score = std::max(pred.score, v.score - pos1.gap_score.open_penalty)
+                - pos1.gap_score.extension_penalty;
     }
     void initialize(const PositionType& pos1, const PositionType& pos2)
     {
@@ -134,51 +71,11 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
             score = -moltk::units::infinity<SCORE_TYPE>();
             return;
         }
-        score = -(moltk::Real)pos2.index * pos1.gap_scorer.extension_penalty
-                -pos1.gap_scorer.open_penalty;
+        score = -(moltk::Real)pos2.index * pos1.gap_score.extension_penalty
+                -pos1.gap_score.open_penalty;
     }
 
     SCORE_TYPE score;
-};
-
-
-template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
-         int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
-         >
-struct QueryPosition : public AlignmentPosition<SCORE_TYPE, GAP_NSEGS>
-{
-    // cache values for quick score lookup
-    typedef std::vector< std::pair<size_t, double> > QueryWeights;
-    QueryWeights residue_type_index_weights;
-};
-
-template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
-         int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
-         >
-struct TargetPosition : public AlignmentPosition<SCORE_TYPE, GAP_NSEGS>
-{
-    typedef QueryPosition<SCORE_TYPE, GAP_NSEGS> QueryPosition;
-    typedef typename QueryPosition::QueryWeights QueryWeights;
-
-    SCORE_TYPE score(const QueryPosition& rhs) const
-    {
-        SCORE_TYPE result = moltk::units::zero<SCORE_TYPE>();
-        const TargetPosition& lhs = *this;
-        typename QueryWeights::const_iterator i;
-        const QueryWeights& queryWeights = rhs.residue_type_index_weights;
-        for (i = queryWeights.begin();  i != queryWeights.end(); ++i)
-        {
-            double resTypeCount = i->second;
-            size_t resTypeIndex = i->first;
-            // cerr << "query weight count = " << resTypeCount;
-            // cerr << " index = " << resTypeIndex << endl;
-            result += resTypeCount * lhs.scores_by_residue_type_index[resTypeIndex];
-        }
-        return result;
-    }
-
-    // cache values for quick score lookup
-    std::vector<SCORE_TYPE> scores_by_residue_type_index;
 };
 
 
@@ -191,8 +88,8 @@ struct DPCell
 {
     typedef RunningGapScore<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> GapScoreType;
     typedef RunningScore<SCORE_TYPE> ScoreType;
-    typedef TargetPosition<SCORE_TYPE, GAP_NSEGS> TargetPosType;
-    typedef QueryPosition<SCORE_TYPE, GAP_NSEGS> QueryPosType;
+    typedef DPPosition<SCORE_TYPE, GAP_NSEGS> TargetPosType;
+    typedef DPPosition<SCORE_TYPE, GAP_NSEGS> QueryPosType;
 
     void initialize(const TargetPosType& pos1, const QueryPosType& pos2)
     {
@@ -211,8 +108,8 @@ struct DPCell
     void compute_recurrence(const DPCell& up_left,
                             const DPCell& up,
                             const DPCell& left,
-                            const TargetPosition<SCORE_TYPE, GAP_NSEGS>& pos1,
-                            const QueryPosition<SCORE_TYPE, GAP_NSEGS>& pos2) // score for insertion gap in sequence 2
+                            const DPPosition<SCORE_TYPE, GAP_NSEGS>& pos1,
+                            const DPPosition<SCORE_TYPE, GAP_NSEGS>& pos2) // score for insertion gap in sequence 2
     {
         // This recurrence comes from Gusfield chapter 11.
         // best score with ungapped alignment of i with j
@@ -358,14 +255,6 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
             }
     }
 
-    AlignmentResultType align()
-    {
-        allocate();
-        initialize();
-        compute_recurrence();
-        return compute_traceback();
-    }
-
     AlignmentResultType compute_traceback()
     {
         AlignmentResultType result;
@@ -412,14 +301,76 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
         return result;
     }
 
+    AlignmentResultType align()
+    {
+        allocate();
+        initialize();
+        compute_recurrence();
+        return compute_traceback();
+    }
+
+    moltk::Alignment_<SCORE_TYPE> align(const moltk::Alignment_<SCORE_TYPE>& s1, 
+                                 const moltk::Alignment_<SCORE_TYPE>& s2,
+                                 const moltk::MatrixScorer& scorer)
+    {
+        clear_positions();
+        target_positions = scorer->create_target_positions(s1);
+        query_positions = scorer->create_query_positions(s2);
+        AlignmentResult<SCORE_TYPE> alignment_result = align();
+        moltk::Alignment_<SCORE_TYPE> result = 
+            s1.align(s2, 
+                     alignment_result.eString1, 
+                     alignment_result.eString2);
+        result.set_score(result.get_score() + alignment_result.score);
+        return result;
+    }
+
     size_t num_rows() const {return target_positions.size();}
     size_t num_columns() const {return query_positions.size();}
 
+    /// Print out a summary of the positions and dynamic programming table for debugging
     inline friend std::ostream& operator<<(std::ostream& os, const DPTable& t)
     {
+        // print out first/target sequence
+        // Position index
+        os << " position";
+        for (size_t i = 0; i < t.target_positions.size(); ++i)
+        { 
+            os.width(7); os << i;
+        } 
+        os << endl;
+        // Open penalty
+        os << " gap open";
+        for (size_t i = 0; i < t.target_positions.size(); ++i)
+        { 
+            os.width(7); 
+            os << t.target_positions[i]->gap_score.open_penalty.value;
+        } 
+        os << endl;
+        // Extension penalty
+        os << "extension";
+        for (size_t i = 0; i < t.target_positions.size(); ++i)
+        { 
+            os.width(7); 
+            os << t.target_positions[i]->gap_score.extension_penalty.value;
+        } 
+        os << endl;
+
+        os << t.table;
+        return os;
+    }
+
+    /// Print out a summary of the dynamic programming table for debugging
+    inline friend std::ostream& operator<<(std::ostream& os, const TableType& t)
+    {
+        size_t num_rows = t.size();
+        if (num_rows < 1) return os;
+        size_t num_cols = t[0].size();
+        if (num_cols < 1) return os;
+
         enum CellField{V, G, E, F};
         os << "row\\col";
-        for (size_t j = 0; j < t.num_columns(); ++j)
+        for (size_t j = 0; j < num_cols; ++j)
         {
             // Top row of column indices
             os.width(6);
@@ -427,7 +378,7 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
         }
         os << std::endl;
         os << std::endl;
-        for(size_t i = 0; i < t.num_rows(); ++i)
+        for(size_t i = 0; i < num_rows; ++i)
         {
             // Print out one row
             for (int e = V; e <= F; ++e)
@@ -440,40 +391,40 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                         os << i;
                         os.width(2);
                         os << 'V';
-                        for (size_t j = 0; j < t.num_columns(); ++j)
+                        for (size_t j = 0; j < num_cols; ++j)
                         {
                             os.width(8);
-                            os << t.table[i][j].v.score.value;
+                            os << t[i][j].v.score.value;
                         }
                         break;
                     case G:
                         os << "     ";
                         os.width(2);
                         os << 'G';
-                        for (size_t j = 0; j < t.num_columns(); ++j)
+                        for (size_t j = 0; j < num_cols; ++j)
                         {
                             os.width(8);
-                            os << t.table[i][j].g.score.value;
+                            os << t[i][j].g.score.value;
                         }
                         break;
                     case E:
                         os << "     ";
                         os.width(2);
                         os << 'E';
-                        for (size_t j = 0; j < t.num_columns(); ++j)
+                        for (size_t j = 0; j < num_cols; ++j)
                         {
                             os.width(8);
-                            os << t.table[i][j].e.score.value;
+                            os << t[i][j].e.score.value;
                         }
                         break;
                     case F:
                         os << "     ";
                         os.width(2);
                         os << 'F';
-                        for (size_t j = 0; j < t.num_columns(); ++j)
+                        for (size_t j = 0; j < num_cols; ++j)
                         {
                             os.width(8);
-                            os << t.table[i][j].f.score.value;
+                            os << t[i][j].f.score.value;
                         }
                         break;
                     default:
@@ -487,8 +438,8 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     }
 
     TableType table;
-    std::vector<const QueryPosition<SCORE_TYPE, 1>*> query_positions;
-    std::vector<const TargetPosition<SCORE_TYPE, 1>*> target_positions;
+    std::vector<DPPosition<SCORE_TYPE, 1>*> query_positions;
+    std::vector<DPPosition<SCORE_TYPE, 1>*> target_positions;
 };
 
 

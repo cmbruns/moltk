@@ -27,6 +27,7 @@
 #include "moltk/Alignment.hpp"
 #include "moltk/units.hpp"
 #include "moltk/Biosequence.hpp"
+#include "moltk/MatrixScorer.hpp"
 #include <iostream>
 #include <vector>
 
@@ -43,12 +44,13 @@ public:
     typedef moltk::units::Information Information;
 
 
-    typedef dp::TargetPosition<Information, 1> TargetPosition;
-    typedef dp::QueryPosition<Information, 1> QueryPosition;
+    // typedef dp::TargetPosition<Information, 1> TargetPosition;
+    // typedef dp::QueryPosition<Information, 1> QueryPosition;
 
     /*! Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions
      * and QueryPositions, which can efficiently compute alignment scores.
      */
+    /*
     class Scorer
     {
     public:
@@ -86,6 +88,7 @@ public:
         STAGE_RECURRENCE_COMPUTED, // recurrence computed
         STAGE_TRACED // alignment computed
     };
+    */
 
 public:
     // Finally, the actual Aligner methods
@@ -95,16 +98,15 @@ public:
     Alignment align(const Alignment&, const Alignment&);
 
     /// Whether alignment gaps before the start and after the end of a sequence are not penalized.
-    bool get_end_gaps_free() const {return scorer->get_end_gaps_free();}
+    bool get_end_gaps_free() const {return scorer.get_end_gaps_free();}
     /// Choose whether alignment gaps before the start and after the end of a sequence are not penalized.
-    void set_end_gaps_free(bool f) {scorer->set_end_gaps_free(f);}
-    /// Scorer object this Aligner uses to score alignments.
-    const Scorer& get_scorer() const {return *scorer;}
-    /// Scorer object this Aligner uses to score alignments.
-    Scorer& get_scorer() {return *scorer;}
-    Aligner& set_scorer(Scorer& scorer) {this->scorer = &scorer; return *this;}
+    void set_end_gaps_free(bool f) {scorer.set_end_gaps_free(f);}
+    /// MatrixScorer object this Aligner uses to score alignments.
+    const MatrixScorer& get_scorer() const {return scorer;}
+    /// MatrixScorer object this Aligner uses to score alignments.
+    MatrixScorer& get_scorer() {return scorer;}
+    Aligner& set_scorer(const MatrixScorer& scorer) {this->scorer = scorer; return *this;}
 
-    static const Scorer& get_default_scorer();
    /*!
      * Global shared aligner object used by align() method.
      */
@@ -116,7 +118,6 @@ public:
 protected:
     void init();
     Alignment compute_traceback();
-    void clear_scorer();
 
     // Information gapOpenPenalty; // positive penalty (will be subtracted at gaps)
     // Information gapExtensionPenalty; // positive penalty (will be subtracted on extension)
@@ -127,7 +128,7 @@ protected:
     // DpTable dp_table;
     // std::vector<TargetPosition*> seq1;
     // std::vector<QueryPosition*> seq2;
-    Scorer* scorer;
+    MatrixScorer scorer;
     Alignment output_alignment;
     Alignment query_alignment;
     Alignment target_alignment;
