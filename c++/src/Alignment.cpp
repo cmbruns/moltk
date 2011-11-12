@@ -35,49 +35,56 @@ using namespace std;
 // Alignment methods //
 ///////////////////////
 
-Alignment::Alignment() 
-    : m_score(0.0 * moltk::units::bit) 
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>::Alignment_() 
+    : m_score(moltk::units::zero<SCORE_TYPE>()) 
     , pretty_width(50)
 {}
 
 /* implicit */
-Alignment::Alignment(const Biosequence& seq) 
- : m_score(0.0 * moltk::units::bit)
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>::Alignment_(const Biosequence& seq) 
+ : m_score(moltk::units::zero<SCORE_TYPE>())
  , pretty_width(50)
 {
     append_sequence(seq);
 }
 
 /* implicit */ 
-Alignment::Alignment(const std::string& s)
- : m_score(0.0 * moltk::units::bit)
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>::Alignment_(const std::string& s)
+ : m_score(moltk::units::zero<SCORE_TYPE>())
  , pretty_width(50)
 {
     load_string(s);
 }
 
 /* implicit */ 
-Alignment::Alignment(const char* str)
- : m_score(0.0 * moltk::units::bit)
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>::Alignment_(const char* str)
+ : m_score(moltk::units::zero<SCORE_TYPE>())
  , pretty_width(50)
 {
     std::string s(str);
     load_string(s);
 }
 
-size_t Alignment::get_number_of_columns() const
+template<class SCORE_TYPE>
+size_t Alignment_<SCORE_TYPE>::get_number_of_columns() const
 {
     if (rows.size() == 0) return 0;
     return rows[0].e_string.total_length();
 }
 
-void Alignment::load_string(const std::string& s)
+template<class SCORE_TYPE>
+void Alignment_<SCORE_TYPE>::load_string(const std::string& s)
 {
     Biosequence b(s);
     append_sequence(b);
 }
 
-Alignment& Alignment::append_sequence(const Biosequence& seq)
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::append_sequence(const Biosequence& seq)
 {
     sequences.push_back(seq);
     Row row = {
@@ -89,7 +96,8 @@ Alignment& Alignment::append_sequence(const Biosequence& seq)
     return *this;
 }
 
-void Alignment::write_fasta(std::ostream& output_stream) const
+template<class SCORE_TYPE>
+void Alignment_<SCORE_TYPE>::write_fasta(std::ostream& output_stream) const
 {
     for (size_t rowIx = 0; rowIx < rows.size(); ++rowIx) 
     {
@@ -116,7 +124,8 @@ void Alignment::write_fasta(std::ostream& output_stream) const
     }
 }
 
-void Alignment::write_fasta(const std::string& file_name) const
+template<class SCORE_TYPE>
+void Alignment_<SCORE_TYPE>::write_fasta(const std::string& file_name) const
 {
     ofstream output_stream;
     output_stream.open(file_name.c_str());
@@ -128,14 +137,16 @@ void Alignment::write_fasta(const std::string& file_name) const
     write_fasta(output_stream);
 }
 
-std::string Alignment::fasta() const
+template<class SCORE_TYPE>
+std::string Alignment_<SCORE_TYPE>::fasta() const
 {
     ostringstream output_stream;
     write_fasta(output_stream);
     return output_stream.str();
 }
 
-void Alignment::write_pretty(std::ostream& os) const
+template<class SCORE_TYPE>
+void Alignment_<SCORE_TYPE>::write_pretty(std::ostream& os) const
 {
     size_t n_cols = get_number_of_columns();
     size_t n_seqs = get_number_of_sequences();
@@ -245,7 +256,8 @@ void Alignment::write_pretty(std::ostream& os) const
     }
 }
 
-void Alignment::write_pretty(const std::string& file_name) const
+template<class SCORE_TYPE>
+void Alignment_<SCORE_TYPE>::write_pretty(const std::string& file_name) const
 {
     ofstream output_stream;
     output_stream.open(file_name.c_str());
@@ -257,14 +269,16 @@ void Alignment::write_pretty(const std::string& file_name) const
     write_pretty(output_stream);
 }
     
-std::string Alignment::pretty() const
+template<class SCORE_TYPE>
+std::string Alignment_<SCORE_TYPE>::pretty() const
 {
     ostringstream output_stream;
     write_pretty(output_stream);
     return output_stream.str();
 }
 
-void Alignment::write_id_table(std::ostream& output_stream) const
+template<class SCORE_TYPE>
+void Alignment_<SCORE_TYPE>::write_id_table(std::ostream& output_stream) const
 {
     size_t n_seq = get_number_of_sequences();
 
@@ -330,7 +344,9 @@ void Alignment::write_id_table(std::ostream& output_stream) const
         output_stream << endl;
     }
 }
-void Alignment::write_id_table(const std::string& file_name) const
+
+template<class SCORE_TYPE>
+void Alignment_<SCORE_TYPE>::write_id_table(const std::string& file_name) const
 {
     ofstream output_stream;
     output_stream.open(file_name.c_str());
@@ -341,21 +357,24 @@ void Alignment::write_id_table(const std::string& file_name) const
     }
     write_id_table(output_stream);
 }
-std::string Alignment::id_table() const
+
+template<class SCORE_TYPE>
+std::string Alignment_<SCORE_TYPE>::id_table() const
 {
     ostringstream output_stream;
     write_id_table(output_stream);
     return output_stream.str();
 }
 
-Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString& e2) const
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE> Alignment_<SCORE_TYPE>::align(const Alignment_<SCORE_TYPE>& a2, const EString& e1, const EString& e2) const
 {
-    const Alignment& a1 = *this;
+    const Alignment_<SCORE_TYPE>& a1 = *this;
     // cerr << *this;
     // cerr << a2;
     // cerr << e1 << endl;
     // cerr << e2 << endl;
-    Alignment result;
+    Alignment_<SCORE_TYPE> result;
     // Add sequences from first alignment
     for (size_t r = 0; r < rows.size(); ++r)
     {
@@ -395,7 +414,8 @@ Alignment Alignment::align(const Alignment& a2, const EString& e1, const EString
     return result;
 }
 
-Alignment& Alignment::load_fasta(std::istream& input_stream)
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::load_fasta(std::istream& input_stream)
 {
     while(! input_stream.eof()) {
         Biosequence sequence;
@@ -430,7 +450,8 @@ Alignment& Alignment::load_fasta(std::istream& input_stream)
     return *this;
 }
 
-Alignment& Alignment::load_fasta(const std::string& file_name)
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::load_fasta(const std::string& file_name)
 {
     ifstream fasta_stream;
     fasta_stream.open(file_name.c_str());
@@ -443,7 +464,8 @@ Alignment& Alignment::load_fasta(const std::string& file_name)
     return *this;
 }
 
-const BaseBiosequence& Alignment::get_sequence(size_t index) const
+template<class SCORE_TYPE>
+const BaseBiosequence& Alignment_<SCORE_TYPE>::get_sequence(size_t index) const
 {
     const Row& row = rows[index];
     if (row.list == LIST_SEQUENCE)
@@ -452,26 +474,30 @@ const BaseBiosequence& Alignment::get_sequence(size_t index) const
         return structures[row.list_index];
 }
 
-const EString& Alignment::get_estring(size_t index) const
+template<class SCORE_TYPE>
+const EString& Alignment_<SCORE_TYPE>::get_estring(size_t index) const
 {
     return rows[index].e_string;
 }
 
-const moltk::units::Information& Alignment::get_score() const 
+template<class SCORE_TYPE>
+const SCORE_TYPE& Alignment_<SCORE_TYPE>::get_score() const 
 {
     return m_score;
 }
 
-Alignment& Alignment::set_score(const moltk::units::Information& s) 
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::set_score(const SCORE_TYPE& s) 
 {
     m_score = s;
     return *this;
 }
 
 /// Inefficient computation of sum-of-pairs score, for use in testing and debugging.
-units::Information Alignment::calc_explicit_sum_of_pairs_score() const
+template<class SCORE_TYPE>
+SCORE_TYPE Alignment_<SCORE_TYPE>::calc_explicit_sum_of_pairs_score() const
 {
-    moltk::units::Information result = 0.0 * moltk::units::bit;
+    SCORE_TYPE result = 0.0 * moltk::units::bit;
     const int nseq = get_number_of_sequences();
     for (int i = 0; i < (nseq - 1); ++i)
         for (int j = i + 1; j < nseq; ++j)
@@ -480,16 +506,18 @@ units::Information Alignment::calc_explicit_sum_of_pairs_score() const
 }
 
 /// Compute pair score between two sequences in this alignment
-units::Information Alignment::calc_explicit_pair_score(int i, int j) const
+template<class SCORE_TYPE>
+SCORE_TYPE Alignment_<SCORE_TYPE>::calc_explicit_pair_score(int i, int j) const
 {
-    moltk::units::Information result = 0.0 * moltk::units::bit;
+    SCORE_TYPE result = 0.0 * moltk::units::bit;
     const Row& seq1 = rows[i];
     const Row& seq2 = rows[j];
     throw std::runtime_error("Alignment::calc_explicit_pair_score() not implemented yet");
     return result;
 }
 
-std::string Alignment::repr() const
+template<class SCORE_TYPE>
+std::string Alignment_<SCORE_TYPE>::repr() const
 {
     std::ostringstream s;
     s << "moltk.Alignment(\"\"\"" << endl;
@@ -504,13 +532,6 @@ std::string Alignment::repr() const
 // Global methods //
 ////////////////////
 
-std::ostream& moltk::operator<<(std::ostream& os, const moltk::Alignment& ali)
-{
-    ali.write_pretty(os);
-    return os;
-}
-
-
 Alignment moltk::load_fasta(const std::string& file_name)
 {
     Alignment result;
@@ -518,3 +539,6 @@ Alignment moltk::load_fasta(const std::string& file_name)
     return result;
 }
 
+
+// Instantiate
+template class Alignment_<moltk::units::Information>;

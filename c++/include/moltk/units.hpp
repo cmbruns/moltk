@@ -317,6 +317,27 @@ namespace units {
     inline Real sin(const Angle& angle) {return std::sin(angle.value_in_unit(radian));}
     inline Real cos(const Angle& angle) {return std::cos(angle.value_in_unit(radian));}
 
+    // methods to help template classes get zero or infinity values from quantities, ints, and doubles
+    // for ints, doubles, and other built in types
+    template<class T>
+    struct value_finder {
+        static T zero() {return T(0);}
+        static T infinity() {return std::numeric_limits<T>::infinity();}
+    };
+    template<class T>
+    T zero() {return value_finder<T>::zero();}
+    template<class T>
+    T infinity() {return value_finder<T>::infinity();}
+    // Specialized for Quantities
+    template<class U, class Y>
+    struct value_finder<Quantity<U,Y> > {
+        typedef Y ValueType;
+        typedef U UnitType;
+        typedef Quantity<UnitType,ValueType> QuantityType;
+        static QuantityType zero() {return value_finder<ValueType>::zero() * UnitType::get_instance();}
+        static QuantityType infinity() {return value_finder<ValueType>::infinity() * UnitType::get_instance();}
+    };
+
 }} // namespace moltk::units
 
 

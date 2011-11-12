@@ -46,36 +46,6 @@ public:
     typedef dp::TargetPosition<Information, 1> TargetPosition;
     typedef dp::QueryPosition<Information, 1> QueryPosition;
 
-    /*!
-     * QueryPosition is an alignment column specialized to efficiently compute
-     * an alignment score with a TargetPosition.
-     */
-    /*
-    class QueryPosition // seq2
-    {
-        public:
-            virtual QueryPosition* clone() const = 0;
-            virtual ~QueryPosition() {}
-            virtual moltk::units::Information get_gap_open_penalty() const = 0;
-            virtual moltk::units::Information get_gap_extension_penalty() const = 0;
-    };
-    */
-    /*! TargetPosition is an alignment column specialized to efficiently compute
-     *  an alignment score with a QueryPosition.
-     */
-    /*
-    class TargetPosition // seq1
-    {
-        public:
-            virtual TargetPosition* clone() const = 0;
-            virtual ~TargetPosition() {}
-            virtual moltk::units::Information score(const QueryPosition& rhs) const = 0;
-            virtual moltk::units::Information get_gap_open_penalty() const = 0;
-            virtual moltk::units::Information get_gap_extension_penalty() const = 0;
-    };
-    */
-
-
     /*! Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions
      * and QueryPositions, which can efficiently compute alignment scores.
      */
@@ -106,45 +76,6 @@ public:
         Information default_gap_extension_penalty;
     };
 
-    /*
-    /// TracebackPointer help reconstruct the final alignment.
-    enum TracebackPointer
-    {
-        TRACEBACK_UPLEFT,
-        TRACEBACK_UP,
-        TRACEBACK_LEFT,
-        TRACEBACK_DONE,
-        TRACEBACK_NOT_INITIALIZED
-    };
-    */
-
-
-    /*
-    /// An Aligner::Cell is one node in the dynamic programming table
-    class Cell
-    {
-    public:
-        TracebackPointer compute_traceback_pointer() const;
-        moltk::units::Information compute_v() const;
-
-        // Gusfield nomenclature
-        moltk::units::Information v; ///< V, best score through this cell
-        moltk::units::Information g; ///< G, best ungapped score through this cell
-        moltk::units::Information e; ///< E, best score with gap in sequence 1
-        moltk::units::Information f; ///< F, best score with gap in sequence 2
-
-        inline friend std::ostream& operator<<(std::ostream& os, const Cell& c)
-        {
-            os << "Cell(v=" << c.v << ", g=" << c.g;
-            os << ", e=" << c.e << ", f=" << c.f << ")";
-            return os;
-        }
-    };
-    typedef std::vector<Cell> DpRow;
-    typedef std::vector<DpRow> DpTable;
-    */
-
-
     /// Aligner::Stage represents current state of an incomplete alignment
     enum Stage {
         STAGE_EMPTY, // have nothing
@@ -155,7 +86,6 @@ public:
         STAGE_RECURRENCE_COMPUTED, // recurrence computed
         STAGE_TRACED // alignment computed
     };
-
 
 public:
     // Finally, the actual Aligner methods
@@ -185,16 +115,7 @@ public:
 
 protected:
     void init();
-    void allocate_dp_table();
-    void initialize_dp_table();
-    // void initialize_dp_row(size_t rowIndex, DpRow& row);
-    void compute_recurrence();
-    // void compute_cell_recurrence(int i, int j);
-    // void compute_cell_recurrence_freeE(int i, int j);
-    // void compute_cell_recurrence_freeF(int i, int j);
-    // void compute_cell_recurrence_freeEF(int i, int j);
     Alignment compute_traceback();
-    // void clear_positions();
     void clear_scorer();
 
     // Information gapOpenPenalty; // positive penalty (will be subtracted at gaps)
