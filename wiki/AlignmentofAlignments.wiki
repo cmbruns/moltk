@@ -108,9 +108,14 @@ or
 {{{
 X-X
 X--
+  *
 }}}
 or
-{{{X-----X
+{{{
+X-----X
 X------
+      *
 }}}
 etc.
+
+Algorithmic intuition suggests that we do not want to be looking back arbitrarily far to determine whether a situation like this is occurring.  But maybe we can track a parameter describing "number of positions since the previous non-gap character" during the recurrence.  For each sequence.  For each recurrence type.  Ouch.  The alignment time is probably going to technically be O(k*m*n) anyway, and I doubt this approach will exceed that.  But we want to keep that k out of there as much as possible.  So let's try clustering and compressing the sequence distance to previous non-gap information, in a manner analogous to the EString representation of gapping pattern.  For each input sequence 1, 2, and each recurrence state V, G, E, F, store a sorted vector of <distance, sequence count> pairs describing the distance to the previous non-gap.  
