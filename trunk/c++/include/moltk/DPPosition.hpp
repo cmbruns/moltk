@@ -8,6 +8,7 @@
 #ifndef MOLTK_DPPOSITION_HPP_
 #define MOLTK_DPPOSITION_HPP_
 
+#include "moltk/units.hpp"
 #include <vector>
 
 namespace moltk {

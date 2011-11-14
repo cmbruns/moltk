@@ -314,8 +314,8 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                                  const moltk::MatrixScorer& scorer)
     {
         clear_positions();
-        target_positions = scorer->create_target_positions(s1);
-        query_positions = scorer->create_query_positions(s2);
+        scorer.create_positions(s1, target_positions);
+        scorer.create_positions(s2, query_positions);
         AlignmentResult<SCORE_TYPE> alignment_result = align();
         moltk::Alignment_<SCORE_TYPE> result = 
             s1.align(s2, 
@@ -329,113 +329,11 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     size_t num_columns() const {return query_positions.size();}
 
     /// Print out a summary of the positions and dynamic programming table for debugging
-    inline friend std::ostream& operator<<(std::ostream& os, const DPTable& t)
-    {
-        // print out first/target sequence
-        // Position index
-        os << " position";
-        for (size_t i = 0; i < t.target_positions.size(); ++i)
-        { 
-            os.width(7); os << i;
-        } 
-        os << endl;
-        // Open penalty
-        os << " gap open";
-        for (size_t i = 0; i < t.target_positions.size(); ++i)
-        { 
-            os.width(7); 
-            os << t.target_positions[i]->gap_score.open_penalty.value;
-        } 
-        os << endl;
-        // Extension penalty
-        os << "extension";
-        for (size_t i = 0; i < t.target_positions.size(); ++i)
-        { 
-            os.width(7); 
-            os << t.target_positions[i]->gap_score.extension_penalty.value;
-        } 
-        os << endl;
-
-        os << t.table;
-        return os;
-    }
+    template<>
+    friend std::ostream& operator<<(std::ostream& os, const DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>& t);
 
     /// Print out a summary of the dynamic programming table for debugging
-    inline friend std::ostream& operator<<(std::ostream& os, const TableType& t)
-    {
-        size_t num_rows = t.size();
-        if (num_rows < 1) return os;
-        size_t num_cols = t[0].size();
-        if (num_cols < 1) return os;
-
-        enum CellField{V, G, E, F};
-        os << "row\\col";
-        for (size_t j = 0; j < num_cols; ++j)
-        {
-            // Top row of column indices
-            os.width(6);
-            os << j;
-        }
-        os << std::endl;
-        os << std::endl;
-        for(size_t i = 0; i < num_rows; ++i)
-        {
-            // Print out one row
-            for (int e = V; e <= F; ++e)
-            {
-                // Print out one cell element
-                switch(e) {
-                    case V:
-                        // row number
-                        os.width(5);
-                        os << i;
-                        os.width(2);
-                        os << 'V';
-                        for (size_t j = 0; j < num_cols; ++j)
-                        {
-                            os.width(8);
-                            os << t[i][j].v.score.value;
-                        }
-                        break;
-                    case G:
-                        os << "     ";
-                        os.width(2);
-                        os << 'G';
-                        for (size_t j = 0; j < num_cols; ++j)
-                        {
-                            os.width(8);
-                            os << t[i][j].g.score.value;
-                        }
-                        break;
-                    case E:
-                        os << "     ";
-                        os.width(2);
-                        os << 'E';
-                        for (size_t j = 0; j < num_cols; ++j)
-                        {
-                            os.width(8);
-                            os << t[i][j].e.score.value;
-                        }
-                        break;
-                    case F:
-                        os << "     ";
-                        os.width(2);
-                        os << 'F';
-                        for (size_t j = 0; j < num_cols; ++j)
-                        {
-                            os.width(8);
-                            os << t[i][j].f.score.value;
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                os << std::endl; // end of row/element
-            }
-            os << std::endl; // empty line between rows
-        }
-        return os;
-    }
+    friend std::ostream& operator<<(std::ostream& os, const TableType& t);
 
     TableType table;
     std::vector<DPPosition<SCORE_TYPE, 1>*> query_positions;
