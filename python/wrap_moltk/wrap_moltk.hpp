@@ -43,10 +43,8 @@ namespace pyplusplus { namespace aliases {
     typedef moltk::units::AreaDimension AreaDimension;
     typedef moltk::units::AngleDimension AngleDimension;
 
-    typedef moltk::dp::TargetPosition<Information,1> TargetPositionI1;
-    typedef moltk::dp::QueryPosition<Information,1> QueryPositionI1;
-    typedef std::vector<const TargetPositionI1 *> std_vector_TargetPositionI1;
-    typedef std::vector<const QueryPositionI1 *> std_vector_QueryPositionI1;
+    typedef moltk::dp::DPPosition<Information,1> DPPositionI1;
+    typedef std::vector<const DPPositionI1 *> std_vector_DPPositionI1;
     typedef moltk::dp::DPTable<Information,DP_MEMORY_LARGE,DP_ALIGN_UNGAPPED_SEQUENCES,1>
         DPTableILU1;
 
@@ -58,8 +56,7 @@ namespace pyplusplus { namespace aliases {
     typedef Unit<AngleDimension> RadianUnit;
     typedef Quantity<RadianUnit> Angle;
     typedef std::vector<int> std_vector_int;
-    typedef std::vector<Aligner::QueryPosition*> QueryPositionList;
-    typedef std::vector<Aligner::TargetPosition*> TargetPositionList;
+    typedef std::vector<dp::DPPosition*> DPPositionList;
     typedef Vector3D_< moltk::Real > Vector3D;
     typedef Vector3D_< moltk::units::Length > Displacement;
     typedef BaseVector3D< double > BaseVector3D_double;
