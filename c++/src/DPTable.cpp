@@ -7,12 +7,14 @@
 
 #include "moltk/DPTable.hpp"
 
+using moltk::units::Information;
+
 namespace moltk { namespace dp {
 
 /// Print out a summary of the dynamic programming table for debugging
-template<typename SCORE_TYPE,DPMemoryModel MEMORY_MODEL,DPAlignGapping ALIGN_TYPE,int GAP_NSEGS>
+template<typename SCORE_TYPE,DPAlignGapping ALIGN_TYPE,int GAP_NSEGS>
 std::ostream& operator<<(std::ostream& os, 
-        const moltk::dp::DPTable<SCORE_TYPE,MEMORY_MODEL,ALIGN_TYPE,GAP_NSEGS>::TableType& t)
+        const std::vector<std::vector<moltk::dp::DPCell<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> > >& t)
 {
     size_t num_rows = t.size();
     if (num_rows < 1) return os;
@@ -89,7 +91,7 @@ std::ostream& operator<<(std::ostream& os,
 }
 
 /// Print out a summary of the positions and dynamic programming table for debugging
-template<typename SCORE_TYPE,DPMemoryModel MEMORY_MODEL,DPAlignGapping ALIGN_TYPE,int GAP_NSEGS>
+template<typename SCORE_TYPE, DPMemoryModel MEMORY_MODEL, DPAlignGapping ALIGN_TYPE, int GAP_NSEGS>
 std::ostream& operator<<(std::ostream& os, 
         const moltk::dp::DPTable<SCORE_TYPE,MEMORY_MODEL,ALIGN_TYPE,GAP_NSEGS>& t)
 {
@@ -122,6 +124,15 @@ std::ostream& operator<<(std::ostream& os,
     return os;
 }
 
-}} // namespace moltk::dp
+/*
+template std::ostream& operator<<(
+     std::ostream& os, 
+     const DPTable<Information,DP_MEMORY_LARGE,DP_ALIGN_UNGAPPED_SEQUENCES,1>::TableType& t);
+*/
 
-#endif /* MOLTK_DPTABLE_HPP_ */
+// Instantiate
+template std::ostream& operator<<(
+     std::ostream& os, 
+     const moltk::dp::DPTable<moltk::units::Information, moltk::dp::DP_MEMORY_LARGE, moltk::dp::DP_ALIGN_UNGAPPED_SEQUENCES, 1>& t);
+
+}} // namespace moltk::dp
