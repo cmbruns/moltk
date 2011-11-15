@@ -329,17 +329,23 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     size_t num_columns() const {return query_positions.size();}
 
     /// Print out a summary of the positions and dynamic programming table for debugging
-    template<>
-    friend std::ostream& operator<<(std::ostream& os, const DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>& t);
+    // friend std::ostream& operator<<(std::ostream& os, const DPTable& t);
 
     /// Print out a summary of the dynamic programming table for debugging
-    friend std::ostream& operator<<(std::ostream& os, const TableType& t);
+    // friend std::ostream& operator<<(std::ostream& os, const TableType& t);
 
     TableType table;
     std::vector<DPPosition<SCORE_TYPE, 1>*> query_positions;
     std::vector<DPPosition<SCORE_TYPE, 1>*> target_positions;
 };
 
+template<typename SCORE_TYPE, DPMemoryModel MEMORY_MODEL, DPAlignGapping ALIGN_TYPE, int GAP_NSEGS>
+std::ostream& operator<<(std::ostream& os, 
+        const moltk::dp::DPTable<SCORE_TYPE,MEMORY_MODEL,ALIGN_TYPE,GAP_NSEGS>& t);
+
+template<typename SCORE_TYPE,DPAlignGapping ALIGN_TYPE,int GAP_NSEGS>
+std::ostream& operator<<(std::ostream& os, 
+        const std::vector<std::vector<moltk::dp::DPCell<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> > >&);
 
 }} // namespace moltk::dp
 
