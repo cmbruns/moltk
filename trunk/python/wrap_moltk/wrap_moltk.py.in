@@ -60,29 +60,31 @@ def wrap_aligner(mb):
          fset=aligner.member_functions('set_scorer')[0])
 
 def wrap_scorer(mb):
-    scorer = mb.namespace('moltk').class_('Aligner').class_('Scorer')
-    scorer.add_property('end_gaps_free', 
-         fget=scorer.member_functions('get_end_gaps_free')[0],
-         fset=scorer.member_functions('set_end_gaps_free')[0])        
-    scorer.add_property('default_gap_open_penalty', 
-         fget=scorer.member_functions('get_default_gap_open_penalty')[0],
-         fset=scorer.member_functions('set_default_gap_open_penalty')[0])        
-    scorer.add_property('default_gap_extension_penalty', 
-         fget=scorer.member_functions('get_default_gap_extension_penalty')[0],
-         fset=scorer.member_functions('set_default_gap_extension_penalty')[0])        
+    for scorer in mb.namespace('moltk').classes(lambda c: c.name.startswith('MatrixScorer_')):
+        # scorer = mb.namespace('moltk').class_('MatrixScorer_<>')
+        scorer.add_property('end_gaps_free', 
+             fget=scorer.member_functions('get_end_gaps_free')[0],
+             fset=scorer.member_functions('set_end_gaps_free')[0])        
+        scorer.add_property('default_gap_open_penalty', 
+             fget=scorer.member_functions('get_default_gap_open_penalty')[0],
+             fset=scorer.member_functions('set_default_gap_open_penalty')[0])        
+        scorer.add_property('default_gap_extension_penalty', 
+             fget=scorer.member_functions('get_default_gap_extension_penalty')[0],
+             fset=scorer.member_functions('set_default_gap_extension_penalty')[0])        
 
 def wrap_alignment(mb):
-    alignment = mb.namespace('moltk').class_('Alignment')
-    for fn_name in ['append_sequence', 'set_score', 'set_pretty_width']:
-        alignment.member_function(fn_name).call_policies = return_self()    
-    alignment.add_property('pretty_width', 
-        fget=alignment.member_function('get_pretty_width'),
-        fset=alignment.member_function('set_pretty_width'))
-    alignment.add_registration_code("""
-        def("__repr__", 
-            &::moltk::Alignment::repr, 
-            "python low level string representation")
-        """)
+    for alignment in mb.namespace('moltk').classes(lambda cls: cls.name.startswith('Alignment_')):
+        # alignment = mb.namespace('moltk').class_('Alignment')
+        for fn_name in ['append_sequence', 'set_score', 'set_pretty_width']:
+            alignment.member_function(fn_name).call_policies = return_self()    
+        alignment.add_property('pretty_width', 
+            fget=alignment.member_function('get_pretty_width'),
+            fset=alignment.member_function('set_pretty_width'))
+        alignment.add_registration_code("""
+            def("__repr__", 
+                &::moltk::Alignment::repr, 
+                "python low level string representation")
+            """)
 
 def wrap_custom(mb):
     # To force indexing_suite?
