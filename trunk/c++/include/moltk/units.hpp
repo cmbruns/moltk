@@ -32,6 +32,7 @@
 #include <cmath>
 #include <memory>
 #include <cassert>
+#include <limits>
 
 namespace moltk {
 /*!
