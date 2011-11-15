@@ -56,7 +56,7 @@ namespace pyplusplus { namespace aliases {
     typedef Unit<AngleDimension> RadianUnit;
     typedef Quantity<RadianUnit> Angle;
     typedef std::vector<int> std_vector_int;
-    typedef std::vector<dp::DPPosition*> DPPositionList;
+    typedef std::vector<dp::DPPosition<Information,1>*> DPPositionList;
     typedef Vector3D_< moltk::Real > Vector3D;
     typedef Vector3D_< moltk::units::Length > Displacement;
     typedef BaseVector3D< double > BaseVector3D_double;
