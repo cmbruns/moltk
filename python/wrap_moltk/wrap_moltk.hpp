@@ -51,6 +51,7 @@ namespace pyplusplus { namespace aliases {
     typedef std::vector<PDBStructure::Atom> AtomList;
     typedef Unit<InformationDimension> BitUnit;
     typedef Quantity<BitUnit> Information;
+    typedef std::vector<Information> std_vector_Information;
     typedef Unit<LengthDimension> NanometerUnit;
     typedef Quantity<NanometerUnit> Length;
     typedef Unit<AngleDimension> RadianUnit;
@@ -65,6 +66,7 @@ namespace pyplusplus { namespace aliases {
     struct _classes_to_instantiate 
     {
         // instantiate classes
+        Alignment alignment;
         Vector3D vector3D;
         UnitVector3D unitVector3D;
         // instantiate methods

@@ -37,78 +37,14 @@ using moltk::units::bit;
 
 Aligner::Aligner()
     : scorer(SubstitutionMatrix::get_blosum62())
-{init();}
-
-/* virtual */
-Aligner::~Aligner()
 {}
 
-void Aligner::init()
-{
-    // gapOpenPenalty = 1.0 * bit; 
-    // gapExtensionPenalty = 0.5 * bit;
-    // m and n are lengths of input Biosequences
-    // the PositionLists (seq1,seq2) and DpTable entries are actually +1 larger.
-    m = test_table.target_positions.size() - 1;
-    n = test_table.query_positions.size() - 1;
-}
-
-/*
-void Aligner::clear_positions() 
-{
-    for (size_t i = 0; i < seq1.size(); ++i) 
-    {
-        delete seq1[i];
-        seq1[i] = NULL;
-    }
-    seq1.clear();
-    for (size_t i = 0; i < seq2.size(); ++i) 
-    {
-        delete seq2[i];
-        seq2[i] = NULL;
-    }
-    seq2.clear();
-}
-*/
 
 Alignment Aligner::align(const Alignment& s1, const Alignment& s2)
 {
-    test_table.clear_positions();
-    target_alignment = s1;
-    query_alignment = s2;
-    // Fill seq1, seq2
-    // seq1.clear();
-    // Create an extra Aligner::position at the very beginning, to hold left end gap data
-    m = s1.get_number_of_columns();
-    scorer.create_positions(test_table.target_positions, s1);
-
-    // seq2.clear();
-    // Create an extra Aligner::position at the very beginning, to hold left end gap data
-    n = s2.get_number_of_columns();
-    scorer.create_positions(test_table.query_positions, s2);
-
-    dp::AlignmentResult<Information> alignment_result =
-            test_table.align();
-    output_alignment =
-            target_alignment.align(
-                    query_alignment,
-                    alignment_result.eString1,
-                    alignment_result.eString2);
-    output_alignment.set_score(output_alignment.get_score() + alignment_result.score);
-    return output_alignment;
+    return test_table.align(s1, s2, scorer);
 }
 
-Alignment Aligner::compute_traceback()
-{
-    dp::AlignmentResult<Information> alignment_result = test_table.compute_traceback();
-    Alignment result =
-            target_alignment.align(
-                    query_alignment,
-                    alignment_result.eString1,
-                    alignment_result.eString2);
-    result.set_score(result.get_score() + alignment_result.score);
-    return result;
-}
 
 /* static */
 Aligner& Aligner::get_shared_aligner()

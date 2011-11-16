@@ -52,9 +52,6 @@ def wrap_aligner(mb):
     aligner.add_static_property('shared_aligner', 
          fget=aligner.member_functions('get_shared_aligner')[0],
          doc='"global Aligner object used by moltk.align() command"')
-    aligner.add_property('end_gaps_free', 
-         fget=aligner.member_functions('get_end_gaps_free')[0],
-         fset=aligner.member_functions('set_end_gaps_free')[0])
     aligner.add_property('scorer', 
          fget=aligner.member_functions('get_scorer')[0],
          fset=aligner.member_functions('set_scorer')[0])
@@ -100,6 +97,8 @@ def wrap_custom(mb):
     wrap_alignment(mb)
     wrap_aligner(mb)
     wrap_scorer(mb)
+    for s in ns_moltk.classes(lambda c: c.name.startswith('SubstitutionMatrix_')):
+        s.member_function('load_stream').exclude()
     estring = ns_moltk.class_('EString')
     estring.member_function('append_run').call_policies = return_self()
     for cls in ns_moltk.classes(lambda c: c.name.startswith('BaseVect')):

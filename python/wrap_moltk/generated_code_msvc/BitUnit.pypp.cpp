@@ -23,8 +23,6 @@ void register_BitUnit_class(){
             , ( bp::arg("os") ) )    
         .staticmethod( "get_instance" )    
         .staticmethod( "write_name" )    
-        .staticmethod( "write_symbol" )    
-        .def( bp::other< int >() * bp::self )    
-        .def( bp::other< double >() * bp::self );
+        .staticmethod( "write_symbol" );
 
 }

@@ -314,8 +314,8 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                                  const moltk::MatrixScorer& scorer)
     {
         clear_positions();
-        scorer.create_positions(s1, target_positions);
-        scorer.create_positions(s2, query_positions);
+        scorer.create_positions(target_positions, s1);
+        scorer.create_positions(query_positions, s2);
         AlignmentResult<SCORE_TYPE> alignment_result = align();
         moltk::Alignment_<SCORE_TYPE> result = 
             s1.align(s2, 
