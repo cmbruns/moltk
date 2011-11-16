@@ -6,181 +6,12 @@
 
 namespace bp = boost::python;
 
-struct Aligner_wrapper : moltk::Aligner, bp::wrapper< moltk::Aligner > {
-
-    Aligner_wrapper(moltk::Aligner const & arg )
-    : moltk::Aligner( arg )
-      , bp::wrapper< moltk::Aligner >(){
-        // copy constructor
-        
-    }
-
-    struct Scorer_wrapper : moltk::Aligner::Scorer, bp::wrapper< moltk::Aligner::Scorer > {
-    
-        Scorer_wrapper( )
-        : moltk::Aligner::Scorer( )
-          , bp::wrapper< moltk::Aligner::Scorer >(){
-            // null constructor
-        
-        }
-    
-        virtual ::std::vector< moltk::dp::QueryPosition<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1> const* > create_query_positions( ::moltk::Alignment const & arg0 ) const {
-            bp::override func_create_query_positions = this->get_override( "create_query_positions" );
-            return func_create_query_positions( boost::ref(arg0) );
-        }
-    
-        virtual ::std::vector< moltk::dp::TargetPosition<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1> const* > create_target_positions( ::moltk::Alignment const & arg0 ) const {
-            bp::override func_create_target_positions = this->get_override( "create_target_positions" );
-            return func_create_target_positions( boost::ref(arg0) );
-        }
-    
-    };
-
-    Aligner_wrapper( )
-    : moltk::Aligner( )
-      , bp::wrapper< moltk::Aligner >(){
-        // null constructor
-    
-    }
-
-};
-
 void register_Aligner_class(){
 
     { //::moltk::Aligner
-        typedef bp::class_< Aligner_wrapper > Aligner_exposer_t;
-        Aligner_exposer_t Aligner_exposer = Aligner_exposer_t( "Aligner", "\n The Aligner class creates macromolecule sequence alignments and structure alignments.\n", bp::init< >() );
+        typedef bp::class_< moltk::Aligner > Aligner_exposer_t;
+        Aligner_exposer_t Aligner_exposer = Aligner_exposer_t( "Aligner", "\n The Aligner class creates macromolecule sequence alignments and structure alignments.\n", bp::init< >("\n Construct an Aligner with default parameters and no Alignments yet\n") );
         bp::scope Aligner_scope( Aligner_exposer );
-        bp::enum_< moltk::Aligner::Stage>("Stage")
-            .value("STAGE_EMPTY", moltk::Aligner::STAGE_EMPTY)
-            .value("STAGE_SCORER", moltk::Aligner::STAGE_SCORER)
-            .value("STAGE_SEQUENCE", moltk::Aligner::STAGE_SEQUENCE)
-            .value("STAGE_ALLOCATED", moltk::Aligner::STAGE_ALLOCATED)
-            .value("STAGE_TABLE_INITIALIZED", moltk::Aligner::STAGE_TABLE_INITIALIZED)
-            .value("STAGE_RECURRENCE_COMPUTED", moltk::Aligner::STAGE_RECURRENCE_COMPUTED)
-            .value("STAGE_TRACED", moltk::Aligner::STAGE_TRACED)
-            .export_values()
-            ;
-        { //::moltk::Aligner::Scorer
-            typedef bp::class_< Aligner_wrapper::Scorer_wrapper, boost::noncopyable > Scorer_exposer_t;
-            Scorer_exposer_t Scorer_exposer = Scorer_exposer_t( "Scorer", "\n Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions\n and QueryPositions, which can efficiently compute alignment scores.\n", bp::init< >("\n Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions\n and QueryPositions, which can efficiently compute alignment scores.\n") );
-            bp::scope Scorer_scope( Scorer_exposer );
-            { //::moltk::Aligner::Scorer::create_query_positions
-            
-                typedef ::std::vector<moltk::dp::QueryPosition<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1> const*, std::allocator<moltk::dp::QueryPosition<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1> const*> > ( ::moltk::Aligner::Scorer::*create_query_positions_function_type )( ::moltk::Alignment const & ) const;
-                
-                Scorer_exposer.def( 
-                    "create_query_positions"
-                    , bp::pure_virtual( create_query_positions_function_type(&::moltk::Aligner::Scorer::create_query_positions) )
-                    , ( bp::arg("arg0") )
-                    , "\n Scorer can convert, in O(m+n) time, dumb sequence and structure residues into TargetPositions\n and QueryPositions, which can efficiently compute alignment scores.\n" );
-            
-            }
-            { //::moltk::Aligner::Scorer::create_target_positions
-            
-                typedef ::std::vector<moltk::dp::TargetPosition<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1> const*, std::allocator<moltk::dp::TargetPosition<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1> const*> > ( ::moltk::Aligner::Scorer::*create_target_positions_function_type )( ::moltk::Alignment const & ) const;
-                
-                Scorer_exposer.def( 
-                    "create_target_positions"
-                    , bp::pure_virtual( create_target_positions_function_type(&::moltk::Aligner::Scorer::create_target_positions) )
-                    , ( bp::arg("arg0") ) );
-            
-            }
-            { //::moltk::Aligner::Scorer::get_default_gap_extension_penalty
-            
-                typedef ::moltk::units::Information ( ::moltk::Aligner::Scorer::*get_default_gap_extension_penalty_function_type )(  ) const;
-                
-                Scorer_exposer.def( 
-                    "get_default_gap_extension_penalty"
-                    , get_default_gap_extension_penalty_function_type( &::moltk::Aligner::Scorer::get_default_gap_extension_penalty )
-                    , " Alignment score reduction for increasing the length of an alignment gap by one position." );
-            
-            }
-            { //::moltk::Aligner::Scorer::get_default_gap_open_penalty
-            
-                typedef ::moltk::units::Information ( ::moltk::Aligner::Scorer::*get_default_gap_open_penalty_function_type )(  ) const;
-                
-                Scorer_exposer.def( 
-                    "get_default_gap_open_penalty"
-                    , get_default_gap_open_penalty_function_type( &::moltk::Aligner::Scorer::get_default_gap_open_penalty )
-                    , " Alignment score reduction for initiating an alignment gap." );
-            
-            }
-            { //::moltk::Aligner::Scorer::get_end_gaps_free
-            
-                typedef bool ( ::moltk::Aligner::Scorer::*get_end_gaps_free_function_type )(  ) const;
-                
-                Scorer_exposer.def( 
-                    "get_end_gaps_free"
-                    , get_end_gaps_free_function_type( &::moltk::Aligner::Scorer::get_end_gaps_free ) );
-            
-            }
-            { //::moltk::Aligner::Scorer::set_default_gap_extension_penalty
-            
-                typedef void ( ::moltk::Aligner::Scorer::*set_default_gap_extension_penalty_function_type )( ::moltk::units::Information ) ;
-                
-                Scorer_exposer.def( 
-                    "set_default_gap_extension_penalty"
-                    , set_default_gap_extension_penalty_function_type( &::moltk::Aligner::Scorer::set_default_gap_extension_penalty )
-                    , ( bp::arg("penalty") )
-                    , " Set Alignment score reduction for increasing the length of an alignment gap by one position." );
-            
-            }
-            { //::moltk::Aligner::Scorer::set_default_gap_open_penalty
-            
-                typedef void ( ::moltk::Aligner::Scorer::*set_default_gap_open_penalty_function_type )( ::moltk::units::Information ) ;
-                
-                Scorer_exposer.def( 
-                    "set_default_gap_open_penalty"
-                    , set_default_gap_open_penalty_function_type( &::moltk::Aligner::Scorer::set_default_gap_open_penalty )
-                    , ( bp::arg("penalty") )
-                    , " Set alignment score reduction for initiating an alignment gap." );
-            
-            }
-            { //::moltk::Aligner::Scorer::set_end_gaps_free
-            
-                typedef void ( ::moltk::Aligner::Scorer::*set_end_gaps_free_function_type )( bool ) ;
-                
-                Scorer_exposer.def( 
-                    "set_end_gaps_free"
-                    , set_end_gaps_free_function_type( &::moltk::Aligner::Scorer::set_end_gaps_free )
-                    , ( bp::arg("f") ) );
-            
-            }
-            { //property "end_gaps_free"[fget=::moltk::Aligner::Scorer::get_end_gaps_free, fset=::moltk::Aligner::Scorer::set_end_gaps_free]
-            
-                typedef bool ( ::moltk::Aligner::Scorer::*fget )(  ) const;
-                typedef void ( ::moltk::Aligner::Scorer::*fset )( bool ) ;
-                
-                Scorer_exposer.add_property( 
-                    "end_gaps_free"
-                    , fget( &::moltk::Aligner::Scorer::get_end_gaps_free )
-                    , fset( &::moltk::Aligner::Scorer::set_end_gaps_free ) );
-            
-            }
-            { //property "default_gap_open_penalty"[fget=::moltk::Aligner::Scorer::get_default_gap_open_penalty, fset=::moltk::Aligner::Scorer::set_default_gap_open_penalty]
-            
-                typedef ::moltk::units::Information ( ::moltk::Aligner::Scorer::*fget )(  ) const;
-                typedef void ( ::moltk::Aligner::Scorer::*fset )( ::moltk::units::Information ) ;
-                
-                Scorer_exposer.add_property( 
-                    "default_gap_open_penalty"
-                    , fget( &::moltk::Aligner::Scorer::get_default_gap_open_penalty )
-                    , fset( &::moltk::Aligner::Scorer::set_default_gap_open_penalty ) );
-            
-            }
-            { //property "default_gap_extension_penalty"[fget=::moltk::Aligner::Scorer::get_default_gap_extension_penalty, fset=::moltk::Aligner::Scorer::set_default_gap_extension_penalty]
-            
-                typedef ::moltk::units::Information ( ::moltk::Aligner::Scorer::*fget )(  ) const;
-                typedef void ( ::moltk::Aligner::Scorer::*fset )( ::moltk::units::Information ) ;
-                
-                Scorer_exposer.add_property( 
-                    "default_gap_extension_penalty"
-                    , fget( &::moltk::Aligner::Scorer::get_default_gap_extension_penalty )
-                    , fset( &::moltk::Aligner::Scorer::set_default_gap_extension_penalty ) );
-            
-            }
-        }
         { //::moltk::Aligner::align
         
             typedef ::moltk::Alignment ( ::moltk::Aligner::*align_function_type )( ::moltk::Alignment const &,::moltk::Alignment const & ) ;
@@ -191,46 +22,26 @@ void register_Aligner_class(){
                 , ( bp::arg("arg0"), bp::arg("arg1") ) );
         
         }
-        { //::moltk::Aligner::get_default_scorer
-        
-            typedef ::moltk::Aligner::Scorer const & ( *get_default_scorer_function_type )(  );
-            
-            Aligner_exposer.def( 
-                "get_default_scorer"
-                , get_default_scorer_function_type( &::moltk::Aligner::get_default_scorer )
-                , bp::return_value_policy< bp::copy_const_reference >() );
-        
-        }
-        { //::moltk::Aligner::get_end_gaps_free
-        
-            typedef bool ( ::moltk::Aligner::*get_end_gaps_free_function_type )(  ) const;
-            
-            Aligner_exposer.def( 
-                "get_end_gaps_free"
-                , get_end_gaps_free_function_type( &::moltk::Aligner::get_end_gaps_free )
-                , " Whether alignment gaps before the start and after the end of a sequence are not penalized." );
-        
-        }
         { //::moltk::Aligner::get_scorer
         
-            typedef ::moltk::Aligner::Scorer const & ( ::moltk::Aligner::*get_scorer_function_type )(  ) const;
+            typedef ::moltk::MatrixScorer const & ( ::moltk::Aligner::*get_scorer_function_type )(  ) const;
             
             Aligner_exposer.def( 
                 "get_scorer"
                 , get_scorer_function_type( &::moltk::Aligner::get_scorer )
                 , bp::return_value_policy< bp::reference_existing_object >()
-                , " Scorer object this Aligner uses to score alignments." );
+                , "\n scorer computes alignment scores.\n" );
         
         }
         { //::moltk::Aligner::get_scorer
         
-            typedef ::moltk::Aligner::Scorer & ( ::moltk::Aligner::*get_scorer_function_type )(  ) ;
+            typedef ::moltk::MatrixScorer & ( ::moltk::Aligner::*get_scorer_function_type )(  ) ;
             
             Aligner_exposer.def( 
                 "get_scorer"
                 , get_scorer_function_type( &::moltk::Aligner::get_scorer )
                 , bp::return_value_policy< bp::reference_existing_object >()
-                , " Scorer object this Aligner uses to score alignments." );
+                , "\n MatrixScorer object this Aligner uses to score alignments.\n" );
         
         }
         { //::moltk::Aligner::get_shared_aligner
@@ -241,23 +52,12 @@ void register_Aligner_class(){
                 "get_shared_aligner"
                 , get_shared_aligner_function_type( &::moltk::Aligner::get_shared_aligner )
                 , bp::return_value_policy< bp::reference_existing_object >()
-                , " Global shared aligner object used by align() method." );
-        
-        }
-        { //::moltk::Aligner::set_end_gaps_free
-        
-            typedef void ( ::moltk::Aligner::*set_end_gaps_free_function_type )( bool ) ;
-            
-            Aligner_exposer.def( 
-                "set_end_gaps_free"
-                , set_end_gaps_free_function_type( &::moltk::Aligner::set_end_gaps_free )
-                , ( bp::arg("f") )
-                , " Choose whether alignment gaps before the start and after the end of a sequence are not penalized." );
+                , "\n Global shared aligner object used by align() method.\n" );
         
         }
         { //::moltk::Aligner::set_scorer
         
-            typedef ::moltk::Aligner & ( ::moltk::Aligner::*set_scorer_function_type )( ::moltk::Aligner::Scorer & ) ;
+            typedef ::moltk::Aligner & ( ::moltk::Aligner::*set_scorer_function_type )( ::moltk::MatrixScorer const & ) ;
             
             Aligner_exposer.def( 
                 "set_scorer"
@@ -266,8 +66,7 @@ void register_Aligner_class(){
                 , bp::return_self< bp::with_custodian_and_ward< 1, 2 > >() );
         
         }
-        Aligner_exposer.def_readwrite( "test_table", &moltk::Aligner::test_table, " The actual dynamic programming table" );
-        Aligner_exposer.staticmethod( "get_default_scorer" );
+        Aligner_exposer.def_readwrite( "test_table", &moltk::Aligner::test_table, "\n The actual dynamic programming table\n" );
         Aligner_exposer.staticmethod( "get_shared_aligner" );
         { //property "shared_aligner"[fget=::moltk::Aligner::get_shared_aligner]
         
@@ -281,21 +80,10 @@ void register_Aligner_class(){
                 , "global Aligner object used by moltk.align() command" );
         
         }
-        { //property "end_gaps_free"[fget=::moltk::Aligner::Scorer::get_end_gaps_free, fset=::moltk::Aligner::Scorer::set_end_gaps_free]
-        
-            typedef bool ( ::moltk::Aligner::Scorer::*fget )(  ) const;
-            typedef void ( ::moltk::Aligner::Scorer::*fset )( bool ) ;
-            
-            Aligner_exposer.add_property( 
-                "end_gaps_free"
-                , fget( &::moltk::Aligner::Scorer::get_end_gaps_free )
-                , fset( &::moltk::Aligner::Scorer::set_end_gaps_free ) );
-        
-        }
         { //property "scorer"[fget=::moltk::Aligner::get_scorer, fset=::moltk::Aligner::set_scorer]
         
-            typedef ::moltk::Aligner::Scorer const & ( ::moltk::Aligner::*fget )(  ) const;
-            typedef ::moltk::Aligner & ( ::moltk::Aligner::*fset )( ::moltk::Aligner::Scorer & ) ;
+            typedef ::moltk::MatrixScorer const & ( ::moltk::Aligner::*fget )(  ) const;
+            typedef ::moltk::Aligner & ( ::moltk::Aligner::*fset )( ::moltk::MatrixScorer const & ) ;
             
             Aligner_exposer.add_property( 
                 "scorer"

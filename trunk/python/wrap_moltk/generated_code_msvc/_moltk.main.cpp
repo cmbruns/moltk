@@ -32,6 +32,8 @@
 
 #include "generated_code_msvc/displacement.pypp.hpp"
 
+#include "generated_code_msvc/dppositionlist.pypp.hpp"
+
 #include "generated_code_msvc/dptableilu1.pypp.hpp"
 
 #include "generated_code_msvc/estring.pypp.hpp"
@@ -43,6 +45,8 @@
 #include "generated_code_msvc/length.pypp.hpp"
 
 #include "generated_code_msvc/lengthdimension.pypp.hpp"
+
+#include "generated_code_msvc/matrixscorer.pypp.hpp"
 
 #include "generated_code_msvc/nanometerunit.pypp.hpp"
 
@@ -56,11 +60,11 @@
 
 #include "generated_code_msvc/rotation3d.pypp.hpp"
 
+#include "generated_code_msvc/std_vector_information.pypp.hpp"
+
 #include "generated_code_msvc/std_vector_int.pypp.hpp"
 
-#include "generated_code_msvc/std_vector_querypositioni1.pypp.hpp"
-
-#include "generated_code_msvc/std_vector_targetpositioni1.pypp.hpp"
+#include "generated_code_msvc/substitutionmatrix.pypp.hpp"
 
 #include "generated_code_msvc/tabletype.pypp.hpp"
 
@@ -75,9 +79,9 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_TableType_class();
 
-    register_std_vector_TargetPositionI1_class();
+    register_std_vector_Information_class();
 
-    register_std_vector_QueryPositionI1_class();
+    register_DPPositionList_class();
 
     register_std_vector_int_class();
 
@@ -93,6 +97,8 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_EString_class();
 
+    register_MatrixScorer_class();
+
     register_PDBStructure_class();
 
     register_Quaternion_class();
@@ -100,6 +106,8 @@ BOOST_PYTHON_MODULE(_moltk){
     register_RigidTransform_class();
 
     register_Rotation3D_class();
+
+    register_SubstitutionMatrix_class();
 
     register_UnitVector3D_class();
 

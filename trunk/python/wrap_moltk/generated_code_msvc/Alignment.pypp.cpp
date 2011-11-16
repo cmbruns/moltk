@@ -8,315 +8,337 @@ namespace bp = boost::python;
 
 void register_Alignment_class(){
 
-    { //::moltk::Alignment
-        typedef bp::class_< moltk::Alignment > Alignment_exposer_t;
-        Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", "\n Alignment represents a set of aligned macromolecule sequences and/or structures.\n", bp::init< >("\n Default constructor creates an empty Alignment\n") );
+    { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >
+        typedef bp::class_< moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > > Alignment_exposer_t;
+        Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", "\n Alignment represents a set of aligned macromolecule sequences and/or structures.\n", bp::init< >("\n Default constructor creates an empty Alignment_\n") );
         bp::scope Alignment_scope( Alignment_exposer );
-        bp::enum_< moltk::Alignment::List>("List")
-            .value("LIST_SEQUENCE", moltk::Alignment::LIST_SEQUENCE)
-            .value("LIST_STRUCTURE", moltk::Alignment::LIST_STRUCTURE)
+        bp::enum_< moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::List>("List")
+            .value("LIST_SEQUENCE", moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::LIST_SEQUENCE)
+            .value("LIST_STRUCTURE", moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::LIST_STRUCTURE)
             .export_values()
             ;
-        bp::class_< moltk::Alignment::Row >( "Row", "\n Meta-data for one sequence in an Alignment\n" )    
-            .def_readwrite( "e_string", &moltk::Alignment::Row::e_string, "\n gap pattern of this sequence\n" )    
-            .def_readwrite( "list", &moltk::Alignment::Row::list, "\n which list: sequences or structures?\n Meta-data for one sequence in an Alignment\n" )    
-            .def_readwrite( "list_index", &moltk::Alignment::Row::list_index, "\n index into either the structure or sequence list\n" )    
-            .def_readwrite( "sequence_weight", &moltk::Alignment::Row::sequence_weight, "\n relative contribution of this sequence to the alignment score\n" );
         Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("sequence") ), "\n Create an alignment with exactly one sequence\n") );
-        bp::implicitly_convertible< moltk::Biosequence const &, moltk::Alignment >();
+        bp::implicitly_convertible< moltk::Biosequence const &, moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > >();
         Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("alignment_string") ), "\n Create an alignment from fasta sequences or a single sequence string\n") );
-        bp::implicitly_convertible< std::string const &, moltk::Alignment >();
+        bp::implicitly_convertible< std::string const &, moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > >();
         Alignment_exposer.def( bp::init< char const * >(( bp::arg("alignment_string") ), "\n Create an alignment from fasta sequences or a single sequence string\n") );
-        bp::implicitly_convertible< char const *, moltk::Alignment >();
-        { //::moltk::Alignment::align
+        bp::implicitly_convertible< char const *, moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > >();
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::align
         
-            typedef ::moltk::Alignment ( ::moltk::Alignment::*align_function_type )( ::moltk::Alignment const &,::moltk::EString const &,::moltk::EString const & ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > ( exported_class_t::*align_function_type )( ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const &,::moltk::EString const &,::moltk::EString const & ) const;
             
             Alignment_exposer.def( 
                 "align"
-                , align_function_type( &::moltk::Alignment::align )
+                , align_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::align )
                 , ( bp::arg("arg0"), bp::arg("arg1"), bp::arg("arg2") )
-                , "\n Align two sequence alignments using a pair of precomputed EStrings.\n\n This methods is used to create the final Alignment after the dynamic\n programming alignment has completed.\n" );
+                , "\n Align two sequence alignments using a pair of precomputed EStrings.\n\n This methods is used to create the final Alignment_ after the dynamic\n programming alignment has completed.\n" );
         
         }
-        { //::moltk::Alignment::append_sequence
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::append_sequence
         
-            typedef ::moltk::Alignment & ( ::moltk::Alignment::*append_sequence_function_type )( ::moltk::Biosequence const & ) ;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > & ( exported_class_t::*append_sequence_function_type )( ::moltk::Biosequence const & ) ;
             
             Alignment_exposer.def( 
                 "append_sequence"
-                , append_sequence_function_type( &::moltk::Alignment::append_sequence )
+                , append_sequence_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::append_sequence )
                 , ( bp::arg("sequence") )
                 , bp::return_self< >()
                 , "\n Add one sequence to the alignment.  Internally, gaps will be removed and encoded into an EString.\n" );
         
         }
-        { //::moltk::Alignment::calc_explicit_pair_score
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::calc_explicit_pair_score
         
-            typedef ::moltk::units::Information ( ::moltk::Alignment::*calc_explicit_pair_score_function_type )( int,int ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*calc_explicit_pair_score_function_type )( int,int ) const;
             
             Alignment_exposer.def( 
                 "calc_explicit_pair_score"
-                , calc_explicit_pair_score_function_type( &::moltk::Alignment::calc_explicit_pair_score )
+                , calc_explicit_pair_score_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::calc_explicit_pair_score )
                 , ( bp::arg("i"), bp::arg("j") )
                 , "\n Compute pair score between two sequences in this alignment\n" );
         
         }
-        { //::moltk::Alignment::calc_explicit_sum_of_pairs_score
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::calc_explicit_sum_of_pairs_score
         
-            typedef ::moltk::units::Information ( ::moltk::Alignment::*calc_explicit_sum_of_pairs_score_function_type )(  ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*calc_explicit_sum_of_pairs_score_function_type )(  ) const;
             
             Alignment_exposer.def( 
                 "calc_explicit_sum_of_pairs_score"
-                , calc_explicit_sum_of_pairs_score_function_type( &::moltk::Alignment::calc_explicit_sum_of_pairs_score )
+                , calc_explicit_sum_of_pairs_score_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::calc_explicit_sum_of_pairs_score )
                 , "\n Inefficient computation of sum-of-pairs score, for use in testing and debugging.\n" );
         
         }
-        { //::moltk::Alignment::fasta
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::fasta
         
-            typedef ::std::string ( ::moltk::Alignment::*fasta_function_type )(  ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::std::string ( exported_class_t::*fasta_function_type )(  ) const;
             
             Alignment_exposer.def( 
                 "fasta"
-                , fasta_function_type( &::moltk::Alignment::fasta )
-                , "\n Create a string with Alignment in fasta format\n" );
+                , fasta_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::fasta )
+                , "\n Create a string with Alignment_ in fasta format\n" );
         
         }
-        { //::moltk::Alignment::get_estring
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_estring
         
-            typedef ::moltk::EString const & ( ::moltk::Alignment::*get_estring_function_type )( ::size_t ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::EString const & ( exported_class_t::*get_estring_function_type )( ::size_t ) const;
             
             Alignment_exposer.def( 
                 "get_estring"
-                , get_estring_function_type( &::moltk::Alignment::get_estring )
+                , get_estring_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_estring )
                 , ( bp::arg("index") )
                 , bp::return_value_policy< bp::copy_const_reference >()
                 , "\n The gapping pattern of Row index\n" );
         
         }
-        { //::moltk::Alignment::get_number_of_columns
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_number_of_columns
         
-            typedef ::size_t ( ::moltk::Alignment::*get_number_of_columns_function_type )(  ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::size_t ( exported_class_t::*get_number_of_columns_function_type )(  ) const;
             
             Alignment_exposer.def( 
                 "get_number_of_columns"
-                , get_number_of_columns_function_type( &::moltk::Alignment::get_number_of_columns )
-                , "\n Number of columns (width) of sequence Alignment\n" );
+                , get_number_of_columns_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_number_of_columns )
+                , "\n Number of columns (width) of sequence Alignment_\n" );
         
         }
-        { //::moltk::Alignment::get_number_of_sequences
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_number_of_sequences
         
-            typedef ::size_t ( ::moltk::Alignment::*get_number_of_sequences_function_type )(  ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::size_t ( exported_class_t::*get_number_of_sequences_function_type )(  ) const;
             
             Alignment_exposer.def( 
                 "get_number_of_sequences"
-                , get_number_of_sequences_function_type( &::moltk::Alignment::get_number_of_sequences )
+                , get_number_of_sequences_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_number_of_sequences )
                 , "\n get_number_of_sequences() includes combined number of both sequences and structures\n" );
         
         }
-        { //::moltk::Alignment::get_pretty_width
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_pretty_width
         
-            typedef int ( ::moltk::Alignment::*get_pretty_width_function_type )(  ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef int ( exported_class_t::*get_pretty_width_function_type )(  ) const;
             
             Alignment_exposer.def( 
                 "get_pretty_width"
-                , get_pretty_width_function_type( &::moltk::Alignment::get_pretty_width ) );
+                , get_pretty_width_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_pretty_width ) );
         
         }
-        { //::moltk::Alignment::get_score
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_score
         
-            typedef ::moltk::units::Information const & ( ::moltk::Alignment::*get_score_function_type )(  ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > const & ( exported_class_t::*get_score_function_type )(  ) const;
             
             Alignment_exposer.def( 
                 "get_score"
-                , get_score_function_type( &::moltk::Alignment::get_score )
+                , get_score_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_score )
                 , bp::return_value_policy< bp::copy_const_reference >()
-                , "\n The precomputed total sum of pairs score of this Alignment\n" );
+                , "\n The precomputed total sum of pairs score of this Alignment_\n" );
         
         }
-        { //::moltk::Alignment::get_sequence
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_sequence
         
-            typedef ::moltk::BaseBiosequence const & ( ::moltk::Alignment::*get_sequence_function_type )( ::size_t ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::BaseBiosequence const & ( exported_class_t::*get_sequence_function_type )( ::size_t ) const;
             
             Alignment_exposer.def( 
                 "get_sequence"
-                , get_sequence_function_type( &::moltk::Alignment::get_sequence )
+                , get_sequence_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_sequence )
                 , ( bp::arg("index") )
                 , bp::return_value_policy< bp::copy_const_reference >()
                 , "\n Returns the particular sequence or structure at Row index\n" );
         
         }
-        { //::moltk::Alignment::id_table
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::id_table
         
-            typedef ::std::string ( ::moltk::Alignment::*id_table_function_type )(  ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::std::string ( exported_class_t::*id_table_function_type )(  ) const;
             
             Alignment_exposer.def( 
                 "id_table"
-                , id_table_function_type( &::moltk::Alignment::id_table )
+                , id_table_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::id_table )
                 , "\n Create a string containing table of pairwise sequence identities\n" );
         
         }
-        { //::moltk::Alignment::load_fasta
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_fasta
         
-            typedef ::moltk::Alignment & ( ::moltk::Alignment::*load_fasta_function_type )( ::std::istream & ) ;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > & ( exported_class_t::*load_fasta_function_type )( ::std::basic_istream< char, std::char_traits< char > > & ) ;
             
             Alignment_exposer.def( 
                 "load_fasta"
-                , load_fasta_function_type( &::moltk::Alignment::load_fasta )
+                , load_fasta_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_fasta )
                 , ( bp::arg("input_stream") )
                 , bp::return_self< >()
                 , "\n Load fasta format sequences from a C++ stream\n" );
         
         }
-        { //::moltk::Alignment::load_fasta
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_fasta
         
-            typedef ::moltk::Alignment & ( ::moltk::Alignment::*load_fasta_function_type )( ::std::string const & ) ;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > & ( exported_class_t::*load_fasta_function_type )( ::std::string const & ) ;
             
             Alignment_exposer.def( 
                 "load_fasta"
-                , load_fasta_function_type( &::moltk::Alignment::load_fasta )
+                , load_fasta_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_fasta )
                 , ( bp::arg("file_name") )
                 , bp::return_self< >()
                 , "\n Load fasta sequences from named file\n" );
         
         }
-        { //::moltk::Alignment::load_string
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_string
         
-            typedef void ( ::moltk::Alignment::*load_string_function_type )( ::std::string const & ) ;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef void ( exported_class_t::*load_string_function_type )( ::std::string const & ) ;
             
             Alignment_exposer.def( 
                 "load_string"
-                , load_string_function_type( &::moltk::Alignment::load_string )
+                , load_string_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_string )
                 , ( bp::arg("alignment_string") )
                 , "\n Add sequences from fasta sequences or a single sequence string.\n" );
         
         }
-        { //::moltk::Alignment::pretty
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::pretty
         
-            typedef ::std::string ( ::moltk::Alignment::*pretty_function_type )(  ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::std::string ( exported_class_t::*pretty_function_type )(  ) const;
             
             Alignment_exposer.def( 
                 "pretty"
-                , pretty_function_type( &::moltk::Alignment::pretty )
+                , pretty_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::pretty )
                 , "\n Create a string containing a pretty formatted alignment\n" );
         
         }
-        { //::moltk::Alignment::repr
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::repr
         
-            typedef ::std::string ( ::moltk::Alignment::*repr_function_type )(  ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::std::string ( exported_class_t::*repr_function_type )(  ) const;
             
             Alignment_exposer.def( 
                 "repr"
-                , repr_function_type( &::moltk::Alignment::repr )
-                , "\n Low level python string representation of this Alignment\n" );
+                , repr_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::repr )
+                , "\n Low level python string representation of this Alignment_\n" );
         
         }
-        { //::moltk::Alignment::set_pretty_width
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::set_pretty_width
         
-            typedef ::moltk::Alignment & ( ::moltk::Alignment::*set_pretty_width_function_type )( int ) ;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > & ( exported_class_t::*set_pretty_width_function_type )( int ) ;
             
             Alignment_exposer.def( 
                 "set_pretty_width"
-                , set_pretty_width_function_type( &::moltk::Alignment::set_pretty_width )
+                , set_pretty_width_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::set_pretty_width )
                 , ( bp::arg("width") )
                 , bp::return_self< >() );
         
         }
-        { //::moltk::Alignment::set_score
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::set_score
         
-            typedef ::moltk::Alignment & ( ::moltk::Alignment::*set_score_function_type )( ::moltk::units::Information const & ) ;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > & ( exported_class_t::*set_score_function_type )( ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > const & ) ;
             
             Alignment_exposer.def( 
                 "set_score"
-                , set_score_function_type( &::moltk::Alignment::set_score )
+                , set_score_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::set_score )
                 , ( bp::arg("s") )
                 , bp::return_self< >()
-                , "\n Set the sum of pairs score for this Alignment.  Make sure you put the correct answer!\n" );
+                , "\n Set the sum of pairs score for this Alignment_.  Make sure you put the correct answer!\n" );
         
         }
-        { //::moltk::Alignment::write_fasta
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_fasta
         
-            typedef void ( ::moltk::Alignment::*write_fasta_function_type )( ::std::ostream & ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef void ( exported_class_t::*write_fasta_function_type )( ::std::basic_ostream< char, std::char_traits< char > > & ) const;
             
             Alignment_exposer.def( 
                 "write_fasta"
-                , write_fasta_function_type( &::moltk::Alignment::write_fasta )
+                , write_fasta_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_fasta )
                 , ( bp::arg("output_stream") )
-                , "\n Write Alignment in fasta format to a C++ stream\n" );
+                , "\n Write Alignment_ in fasta format to a C++ stream\n" );
         
         }
-        { //::moltk::Alignment::write_fasta
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_fasta
         
-            typedef void ( ::moltk::Alignment::*write_fasta_function_type )( ::std::string const & ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef void ( exported_class_t::*write_fasta_function_type )( ::std::string const & ) const;
             
             Alignment_exposer.def( 
                 "write_fasta"
-                , write_fasta_function_type( &::moltk::Alignment::write_fasta )
+                , write_fasta_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_fasta )
                 , ( bp::arg("file_name") )
-                , "\n Write Alignment in fasta format to a file\n" );
+                , "\n Write Alignment_ in fasta format to a file\n" );
         
         }
-        { //::moltk::Alignment::write_id_table
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_id_table
         
-            typedef void ( ::moltk::Alignment::*write_id_table_function_type )( ::std::ostream & ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef void ( exported_class_t::*write_id_table_function_type )( ::std::basic_ostream< char, std::char_traits< char > > & ) const;
             
             Alignment_exposer.def( 
                 "write_id_table"
-                , write_id_table_function_type( &::moltk::Alignment::write_id_table )
+                , write_id_table_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_id_table )
                 , ( bp::arg("output_stream") )
                 , "\n Write table of pairwise sequence identities to a C++ stream\n" );
         
         }
-        { //::moltk::Alignment::write_id_table
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_id_table
         
-            typedef void ( ::moltk::Alignment::*write_id_table_function_type )( ::std::string const & ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef void ( exported_class_t::*write_id_table_function_type )( ::std::string const & ) const;
             
             Alignment_exposer.def( 
                 "write_id_table"
-                , write_id_table_function_type( &::moltk::Alignment::write_id_table )
+                , write_id_table_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_id_table )
                 , ( bp::arg("file_name") )
                 , "\n Write table of pairwise sequence identities to a file\n" );
         
         }
-        { //::moltk::Alignment::write_pretty
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_pretty
         
-            typedef void ( ::moltk::Alignment::*write_pretty_function_type )( ::std::ostream & ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef void ( exported_class_t::*write_pretty_function_type )( ::std::basic_ostream< char, std::char_traits< char > > & ) const;
             
             Alignment_exposer.def( 
                 "write_pretty"
-                , write_pretty_function_type( &::moltk::Alignment::write_pretty )
+                , write_pretty_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_pretty )
                 , ( bp::arg("output_stream") )
                 , "\n Write a pretty formatted alignment to a C++ stream\n" );
         
         }
-        { //::moltk::Alignment::write_pretty
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_pretty
         
-            typedef void ( ::moltk::Alignment::*write_pretty_function_type )( ::std::string const & ) const;
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef void ( exported_class_t::*write_pretty_function_type )( ::std::string const & ) const;
             
             Alignment_exposer.def( 
                 "write_pretty"
-                , write_pretty_function_type( &::moltk::Alignment::write_pretty )
+                , write_pretty_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_pretty )
                 , ( bp::arg("file_name") )
                 , "\n Write a pretty formatted alignment to a file\n" );
         
         }
-        { //property "pretty_width"[fget=::moltk::Alignment::get_pretty_width, fset=::moltk::Alignment::set_pretty_width]
+        { //property "pretty_width"[fget=::moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::get_pretty_width, fset=::moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::set_pretty_width]
         
-            typedef int ( ::moltk::Alignment::*fget )(  ) const;
-            typedef ::moltk::Alignment & ( ::moltk::Alignment::*fset )( int ) ;
+            typedef moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> > exported_class_t;
+            
+            typedef int ( exported_class_t::*fget )(  ) const;
+            typedef ::moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> > & ( exported_class_t::*fset )( int ) ;
             
             Alignment_exposer.add_property( 
                 "pretty_width"
-                , fget( &::moltk::Alignment::get_pretty_width )
+                , fget( &::moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::get_pretty_width )
                 , bp::make_function( 
-                      fset( &::moltk::Alignment::set_pretty_width )
+                      fset( &::moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::set_pretty_width )
                     , bp::return_self< >() )  );
         
         }
         Alignment_exposer.def( bp::self_ns::str( bp::self ) );
         Alignment_exposer.def("__repr__", 
-            &::moltk::Alignment::repr, 
-            "python low level string representation");
+                &::moltk::Alignment::repr, 
+                "python low level string representation");
     }
 
 }
