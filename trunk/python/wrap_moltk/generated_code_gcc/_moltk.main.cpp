@@ -24,6 +24,8 @@
 
 #include "generated_code_gcc/BitUnit.pypp.hpp"
 
+#include "generated_code_gcc/DPPositionList.pypp.hpp"
+
 #include "generated_code_gcc/DPTableILU1.pypp.hpp"
 
 #include "generated_code_gcc/Displacement.pypp.hpp"
@@ -38,6 +40,8 @@
 
 #include "generated_code_gcc/LengthDimension.pypp.hpp"
 
+#include "generated_code_gcc/MatrixScorer.pypp.hpp"
+
 #include "generated_code_gcc/NanometerUnit.pypp.hpp"
 
 #include "generated_code_gcc/PDBStructure.pypp.hpp"
@@ -49,6 +53,8 @@
 #include "generated_code_gcc/RigidTransform.pypp.hpp"
 
 #include "generated_code_gcc/Rotation3D.pypp.hpp"
+
+#include "generated_code_gcc/SubstitutionMatrix.pypp.hpp"
 
 #include "generated_code_gcc/TableType.pypp.hpp"
 
@@ -62,9 +68,7 @@
 
 #include "generated_code_gcc/_moltk_global_variables.pypp.hpp"
 
-#include "generated_code_gcc/std_vector_QueryPositionI1.pypp.hpp"
-
-#include "generated_code_gcc/std_vector_TargetPositionI1.pypp.hpp"
+#include "generated_code_gcc/std_vector_Information.pypp.hpp"
 
 #include "generated_code_gcc/std_vector_int.pypp.hpp"
 
@@ -75,9 +79,9 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_TableType_class();
 
-    register_std_vector_TargetPositionI1_class();
+    register_std_vector_Information_class();
 
-    register_std_vector_QueryPositionI1_class();
+    register_DPPositionList_class();
 
     register_std_vector_int_class();
 
@@ -93,6 +97,8 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_EString_class();
 
+    register_MatrixScorer_class();
+
     register_PDBStructure_class();
 
     register_Quaternion_class();
@@ -100,6 +106,8 @@ BOOST_PYTHON_MODULE(_moltk){
     register_RigidTransform_class();
 
     register_Rotation3D_class();
+
+    register_SubstitutionMatrix_class();
 
     register_UnitVector3D_class();
 
