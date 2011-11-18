@@ -102,6 +102,7 @@ def do_setup():
           author = "Christopher Bruns",
           author_email = "cmbruns@rotatingpenguin.com",
           url = "http://moltk.rotatingpenguin.com/",
+          scripts = ['python/scripts/MolTK.py',],
           package_dir = package_dir, # sources are under python subdirectory
           packages = packages,
           package_data = package_data,
