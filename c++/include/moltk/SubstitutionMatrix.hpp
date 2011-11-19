@@ -49,6 +49,8 @@ public:
     explicit SubstitutionMatrix_(std::istream& matrix_stream, double bits_per_entry = 1.0);
     std::istream& load_stream(std::istream&, double bits_per_entry = 1.0);
 
+    /// Look up score of two residue one-letter-codes in the matrix
+    SCORE_TYPE score(char residue1, char residue2) const;
     /// Get matrix row by integer index
     const RowType& operator[](size_t ix) const {return matrix[ix];}
     /// Get matrix row by integer index

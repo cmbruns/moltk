@@ -13,6 +13,30 @@ void register_MatrixScorer_class(){
         MatrixScorer_exposer_t MatrixScorer_exposer = MatrixScorer_exposer_t( "MatrixScorer", "\n MatrixScorer scores alignments using a residue type\n matrix such as BLOSUM62 or PAM250.\n", bp::init< moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const & >(( bp::arg("matrix") )) );
         bp::scope MatrixScorer_scope( MatrixScorer_exposer );
         bp::implicitly_convertible< moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const &, moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > >();
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::calc_explicit_pair_score
+        
+            typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*calc_explicit_pair_score_function_type )( int,int,::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const & ) const;
+            
+            MatrixScorer_exposer.def( 
+                "calc_explicit_pair_score"
+                , calc_explicit_pair_score_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::calc_explicit_pair_score )
+                , ( bp::arg("i"), bp::arg("j"), bp::arg("alignment") )
+                , "\n Compute pair score between two sequences in an alignment\n" );
+        
+        }
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::calc_explicit_sum_of_pairs_score
+        
+            typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*calc_explicit_sum_of_pairs_score_function_type )( ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const & ) const;
+            
+            MatrixScorer_exposer.def( 
+                "calc_explicit_sum_of_pairs_score"
+                , calc_explicit_sum_of_pairs_score_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::calc_explicit_sum_of_pairs_score )
+                , ( bp::arg("alignment") )
+                , "\n Inefficient computation of sum-of-pairs score, for use in testing and debugging.\n" );
+        
+        }
         { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::create_positions
         
             typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
@@ -24,25 +48,25 @@ void register_MatrixScorer_class(){
                 , ( bp::arg("positions"), bp::arg("alignment") ) );
         
         }
-        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_default_gap_extension_penalty
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_default_gap_extension_score
         
             typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
-            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*get_default_gap_extension_penalty_function_type )(  ) const;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*get_default_gap_extension_score_function_type )(  ) const;
             
             MatrixScorer_exposer.def( 
-                "get_default_gap_extension_penalty"
-                , get_default_gap_extension_penalty_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_default_gap_extension_penalty )
+                "get_default_gap_extension_score"
+                , get_default_gap_extension_score_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_default_gap_extension_score )
                 , "\n Alignment score reduction for increasing the length of an alignment gap by one position.\n" );
         
         }
-        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_default_gap_open_penalty
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_default_gap_open_score
         
             typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
-            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*get_default_gap_open_penalty_function_type )(  ) const;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*get_default_gap_open_score_function_type )(  ) const;
             
             MatrixScorer_exposer.def( 
-                "get_default_gap_open_penalty"
-                , get_default_gap_open_penalty_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_default_gap_open_penalty )
+                "get_default_gap_open_score"
+                , get_default_gap_open_score_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_default_gap_open_score )
                 , "\n Alignment score reduction for initiating an alignment gap.\n" );
         
         }
@@ -56,27 +80,39 @@ void register_MatrixScorer_class(){
                 , get_end_gaps_free_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_end_gaps_free ) );
         
         }
-        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_default_gap_extension_penalty
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::score
         
             typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
-            typedef void ( exported_class_t::*set_default_gap_extension_penalty_function_type )( ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ) ;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*score_function_type )( char,char ) const;
             
             MatrixScorer_exposer.def( 
-                "set_default_gap_extension_penalty"
-                , set_default_gap_extension_penalty_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_default_gap_extension_penalty )
-                , ( bp::arg("penalty") )
+                "score"
+                , score_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::score )
+                , ( bp::arg("residue1"), bp::arg("residue2") )
+                , "\n Look up score of two residue one-letter-codes in the matrix\n" );
+        
+        }
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_default_gap_extension_score
+        
+            typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
+            typedef void ( exported_class_t::*set_default_gap_extension_score_function_type )( ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ) ;
+            
+            MatrixScorer_exposer.def( 
+                "set_default_gap_extension_score"
+                , set_default_gap_extension_score_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_default_gap_extension_score )
+                , ( bp::arg("score") )
                 , "\n Set Alignment score reduction for increasing the length of an alignment gap by one position.\n" );
         
         }
-        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_default_gap_open_penalty
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_default_gap_open_score
         
             typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
-            typedef void ( exported_class_t::*set_default_gap_open_penalty_function_type )( ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ) ;
+            typedef void ( exported_class_t::*set_default_gap_open_score_function_type )( ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ) ;
             
             MatrixScorer_exposer.def( 
-                "set_default_gap_open_penalty"
-                , set_default_gap_open_penalty_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_default_gap_open_penalty )
-                , ( bp::arg("penalty") )
+                "set_default_gap_open_score"
+                , set_default_gap_open_score_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_default_gap_open_score )
+                , ( bp::arg("score") )
                 , "\n Set alignment score reduction for initiating an alignment gap.\n" );
         
         }
@@ -104,7 +140,7 @@ void register_MatrixScorer_class(){
                 , fset( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_end_gaps_free ) );
         
         }
-        { //property "default_gap_open_penalty"[fget=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_default_gap_open_penalty, fset=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_default_gap_open_penalty]
+        { //property "default_gap_open_score"[fget=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_default_gap_open_score, fset=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_default_gap_open_score]
         
             typedef moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1> exported_class_t;
             
@@ -112,12 +148,12 @@ void register_MatrixScorer_class(){
             typedef void ( exported_class_t::*fset )( ::moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> ) ;
             
             MatrixScorer_exposer.add_property( 
-                "default_gap_open_penalty"
-                , fget( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_default_gap_open_penalty )
-                , fset( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_default_gap_open_penalty ) );
+                "default_gap_open_score"
+                , fget( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_default_gap_open_score )
+                , fset( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_default_gap_open_score ) );
         
         }
-        { //property "default_gap_extension_penalty"[fget=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_default_gap_extension_penalty, fset=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_default_gap_extension_penalty]
+        { //property "default_gap_extension_score"[fget=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_default_gap_extension_score, fset=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_default_gap_extension_score]
         
             typedef moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1> exported_class_t;
             
@@ -125,9 +161,9 @@ void register_MatrixScorer_class(){
             typedef void ( exported_class_t::*fset )( ::moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> ) ;
             
             MatrixScorer_exposer.add_property( 
-                "default_gap_extension_penalty"
-                , fget( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_default_gap_extension_penalty )
-                , fset( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_default_gap_extension_penalty ) );
+                "default_gap_extension_score"
+                , fget( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_default_gap_extension_score )
+                , fset( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_default_gap_extension_score ) );
         
         }
     }

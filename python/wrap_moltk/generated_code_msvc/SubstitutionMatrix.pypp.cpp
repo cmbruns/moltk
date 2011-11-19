@@ -74,6 +74,18 @@ void register_SubstitutionMatrix_class(){
                 , "\n Get matrix row by integer index\n" );
         
         }
+        { //::moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::score
+        
+            typedef moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*score_function_type )( char,char ) const;
+            
+            SubstitutionMatrix_exposer.def( 
+                "score"
+                , score_function_type( &::moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::score )
+                , ( bp::arg("residue1"), bp::arg("residue2") )
+                , "\n Look up score of two residue one-letter-codes in the matrix\n" );
+        
+        }
         { //::moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::size
         
             typedef moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;

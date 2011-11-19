@@ -61,8 +61,8 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
             const DPPosition<SCORE_TYPE, 1>& pos1,
             const DPPosition<SCORE_TYPE, 1>& pos2)
     {
-        score = std::max(pred.score, v.score - pos1.gap_score.open_penalty)
-                - pos1.gap_score.extension_penalty;
+        score = std::max(pred.score, v.score + pos1.gap_score.open_score)
+                + pos1.gap_score.extension_score;
     }
     void initialize(const PositionType& pos1, const PositionType& pos2)
     {
@@ -70,8 +70,8 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
             score = -moltk::units::infinity<SCORE_TYPE>();
             return;
         }
-        score = -(moltk::Real)pos2.index * pos1.gap_score.extension_penalty
-                -pos1.gap_score.open_penalty;
+        score = (moltk::Real)pos2.index * pos1.gap_score.extension_score
+                + pos1.gap_score.open_score;
     }
 
     SCORE_TYPE score;
