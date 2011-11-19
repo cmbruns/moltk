@@ -10,11 +10,11 @@ namespace bp = boost::python;
 
 void register_TableType_class(){
 
-    { //::std::vector< std::vector< moltk::dp::DPCell<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, (moltk::dp::DPAlignGapping)0, 1> > >
-        typedef bp::class_< std::vector< std::vector< moltk::dp::DPCell<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, (moltk::dp::DPAlignGapping)0, 1> > > > TableType_exposer_t;
+    { //::std::vector< std::vector< moltk::dp::DPCell<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, (moltk::dp::DPAlignGapping)1, 1> > >
+        typedef bp::class_< std::vector< std::vector< moltk::dp::DPCell<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, (moltk::dp::DPAlignGapping)1, 1> > > > TableType_exposer_t;
         TableType_exposer_t TableType_exposer = TableType_exposer_t( "TableType" );
         bp::scope TableType_scope( TableType_exposer );
-        TableType_exposer.def( bp::indexing::vector_suite< std::vector< std::vector< moltk::dp::DPCell<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, (moltk::dp::DPAlignGapping)0, 1> > > >() );
+        TableType_exposer.def( bp::indexing::vector_suite< std::vector< std::vector< moltk::dp::DPCell<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, (moltk::dp::DPAlignGapping)1, 1> > > >() );
     }
 
 }

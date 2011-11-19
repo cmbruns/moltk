@@ -91,71 +91,106 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00015"></a>00015 <span class="preprocessor"></span><span class="preprocessor">#define MOLTK_DPPOSITION_HPP_</span>
 <a name="l00016"></a>00016 <span class="preprocessor"></span>
 <a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com...">moltk/units.hpp</a>&quot;</span>
-<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;vector&gt;</span>
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020 <span class="keyword">namespace </span>moltk {
-<a name="l00021"></a>00021 
-<a name="l00027"></a>00027 <span class="keyword">namespace </span>dp {
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029 <span class="comment">// Optimize speed by using template specializations to avoid</span>
-<a name="l00030"></a>00030 <span class="comment">// virtual methods and extra logic in inner loop of dynamic</span>
-<a name="l00031"></a>00031 <span class="comment">// programming algorithms.  (Most of the permutations are probably</span>
-<a name="l00032"></a>00032 <span class="comment">// not implemented yet...)</span>
-<a name="l00033"></a>00033 
+<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;<a class="code" href="dp__params_8hpp.html" title="Defines options that affect the details of the dynamic programming sequence alignment algorithm...">moltk/dp_params.hpp</a>&quot;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="keyword">namespace </span>moltk {
+<a name="l00022"></a>00022 
+<a name="l00028"></a>00028 <span class="keyword">namespace </span>dp {
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 <span class="comment">// Optimize speed by using template specializations to avoid</span>
+<a name="l00031"></a>00031 <span class="comment">// virtual methods and extra logic in inner loop of dynamic</span>
+<a name="l00032"></a>00032 <span class="comment">// programming algorithms.  (Most of the permutations are probably</span>
+<a name="l00033"></a>00033 <span class="comment">// not implemented yet...)</span>
 <a name="l00034"></a>00034 
-<a name="l00036"></a>00036 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
-<a name="l00037"></a>00037          <span class="keywordtype">int</span> GAP_NSEGS 
-<a name="l00038"></a>00038          &gt;
-<a name="l00039"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore.html">00039</a> <span class="keyword">struct </span><a class="code" href="structmoltk_1_1dp_1_1GapScore.html" title="Parameters for scoring indel gaps in sequence alignments.">GapScore</a>
-<a name="l00040"></a>00040 {
-<a name="l00041"></a>00041 <span class="keyword">public</span>:
-<a name="l00042"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore.html#a9feedc029525367aad2523a8d0faacae">00042</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1GapScore.html#a9feedc029525367aad2523a8d0faacae" title="Penalties for creating an insertion gap in a sequence alignment.">open_penalties</a>[GAP_NSEGS]; 
-<a name="l00043"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore.html#a070815af7e6eeedf2403262135cc4b1b">00043</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1GapScore.html#a070815af7e6eeedf2403262135cc4b1b" title="Penalties for extending an insertion gap by one position in a sequence alignment.">extension_penalties</a>[GAP_NSEGS]; 
-<a name="l00044"></a>00044 };
-<a name="l00045"></a>00045 
+<a name="l00035"></a>00035 
+<a name="l00037"></a>00037 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
+<a name="l00038"></a>00038          <span class="keywordtype">int</span> GAP_NSEGS 
+<a name="l00039"></a>00039          &gt;
+<a name="l00040"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore.html">00040</a> <span class="keyword">struct </span><a class="code" href="structmoltk_1_1dp_1_1GapScore.html" title="Parameters for scoring indel gaps in sequence alignments.">GapScore</a>
+<a name="l00041"></a>00041 {
+<a name="l00042"></a>00042 <span class="keyword">public</span>:
+<a name="l00043"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore.html#a9feedc029525367aad2523a8d0faacae">00043</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1GapScore.html#a9feedc029525367aad2523a8d0faacae" title="Penalties for creating an insertion gap in a sequence alignment.">open_penalties</a>[GAP_NSEGS]; 
+<a name="l00044"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore.html#a070815af7e6eeedf2403262135cc4b1b">00044</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1GapScore.html#a070815af7e6eeedf2403262135cc4b1b" title="Penalties for extending an insertion gap by one position in a sequence alignment.">extension_penalties</a>[GAP_NSEGS]; 
+<a name="l00045"></a>00045 };
 <a name="l00046"></a>00046 
-<a name="l00048"></a>00048 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE&gt;
-<a name="l00049"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html">00049</a> <span class="keyword">struct </span><a class="code" href="structmoltk_1_1dp_1_1GapScore.html" title="Parameters for scoring indel gaps in sequence alignments.">GapScore</a>&lt;SCORE_TYPE, 1&gt;
-<a name="l00050"></a>00050 {
-<a name="l00051"></a>00051 <span class="keyword">public</span>:
-<a name="l00052"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html#ac24f575197ec7bf84af487774d6be35a">00052</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html#ac24f575197ec7bf84af487774d6be35a" title="Penalty for creating an insertion gap in a sequence alignment.">open_score</a>; 
-<a name="l00053"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html#ae2711119af3ca77c215731c5cca4fc85">00053</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html#ae2711119af3ca77c215731c5cca4fc85" title="Penalty for extending an insertion gap by one position in a sequence alignment.">extension_score</a>; 
-<a name="l00054"></a>00054 };
-<a name="l00055"></a>00055 
+<a name="l00047"></a>00047 
+<a name="l00049"></a>00049 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE&gt;
+<a name="l00050"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html">00050</a> <span class="keyword">struct </span><a class="code" href="structmoltk_1_1dp_1_1GapScore.html" title="Parameters for scoring indel gaps in sequence alignments.">GapScore</a>&lt;SCORE_TYPE, 1&gt;
+<a name="l00051"></a>00051 {
+<a name="l00052"></a>00052 <span class="keyword">public</span>:
+<a name="l00053"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html#ac24f575197ec7bf84af487774d6be35a">00053</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html#ac24f575197ec7bf84af487774d6be35a" title="Penalty for creating an insertion gap in a sequence alignment.">open_score</a>; 
+<a name="l00054"></a><a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html#ae2711119af3ca77c215731c5cca4fc85">00054</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1GapScore_3_01SCORE__TYPE_00_011_01_4.html#ae2711119af3ca77c215731c5cca4fc85" title="Penalty for extending an insertion gap by one position in a sequence alignment.">extension_score</a>; 
+<a name="l00055"></a>00055 };
 <a name="l00056"></a>00056 
-<a name="l00060"></a>00060 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
-<a name="l00061"></a>00061          <span class="keywordtype">int</span> GAP_NSEGS 
-<a name="l00062"></a>00062          &gt;
-<a name="l00063"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition.html">00063</a> <span class="keyword">struct </span><a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">DPPosition</a>
-<a name="l00064"></a>00064 {
-<a name="l00065"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a6c9d2a819bf47e8d528515ae5e50b76c">00065</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a6c9d2a819bf47e8d528515ae5e50b76c">score</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">DPPosition</a>&amp; rhs)<span class="keyword"> const</span>
-<a name="l00066"></a>00066 <span class="keyword">    </span>{
-<a name="l00067"></a>00067         SCORE_TYPE result = moltk::units::zero&lt;SCORE_TYPE&gt;();
-<a name="l00068"></a>00068         <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">DPPosition</a>&amp; lhs = *<span class="keyword">this</span>;
-<a name="l00069"></a>00069         <span class="keyword">typename</span> QueryWeights::const_iterator i;
-<a name="l00070"></a>00070         <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#aeb15730874a6f5d85e0d32904261b49a">QueryWeights</a>&amp; queryWeights = rhs.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a0700d8fa079f759c4e245bfcc6e70b84">query_residue_type_index_weights</a>;
-<a name="l00071"></a>00071         <span class="keywordflow">for</span> (i = queryWeights.begin();  i != queryWeights.end(); ++i)
-<a name="l00072"></a>00072         {
-<a name="l00073"></a>00073             <span class="keywordtype">double</span> resTypeCount = i-&gt;second;
-<a name="l00074"></a>00074             <span class="keywordtype">size_t</span> resTypeIndex = i-&gt;first;
-<a name="l00075"></a>00075             result += resTypeCount * lhs.target_scores_by_residue_type_index[resTypeIndex];
-<a name="l00076"></a>00076         }
-<a name="l00077"></a>00077         <span class="keywordflow">return</span> result;
-<a name="l00078"></a>00078     }
-<a name="l00079"></a>00079 
-<a name="l00080"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a7d6fd734f914f0dcc7053fef29559c31">00080</a>     <a class="code" href="structmoltk_1_1dp_1_1GapScore.html" title="Parameters for scoring indel gaps in sequence alignments.">GapScore&lt;SCORE_TYPE, GAP_NSEGS&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a7d6fd734f914f0dcc7053fef29559c31">gap_score</a>;
-<a name="l00081"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a2a103ccb80aaed13fb3b93e2e2e58e20">00081</a>     <span class="keywordtype">size_t</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a2a103ccb80aaed13fb3b93e2e2e58e20" title="column number of this position">index</a>; 
-<a name="l00082"></a>00082     <span class="comment">// query cache for score calculation</span>
-<a name="l00083"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#aeb15730874a6f5d85e0d32904261b49a">00083</a>     <span class="keyword">typedef</span> std::vector&lt; std::pair&lt;size_t, double&gt; &gt; <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#aeb15730874a6f5d85e0d32904261b49a">QueryWeights</a>;
-<a name="l00084"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a0700d8fa079f759c4e245bfcc6e70b84">00084</a>     <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#aeb15730874a6f5d85e0d32904261b49a">QueryWeights</a> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a0700d8fa079f759c4e245bfcc6e70b84">query_residue_type_index_weights</a>;
-<a name="l00085"></a>00085     <span class="comment">// target cache for score calculation</span>
-<a name="l00086"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#af8a662f27e0956010e768680c9e3becf">00086</a>     std::vector&lt;SCORE_TYPE&gt; <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#af8a662f27e0956010e768680c9e3becf">target_scores_by_residue_type_index</a>;
-<a name="l00087"></a>00087 };
-<a name="l00088"></a>00088 
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090 }} <span class="comment">// namespace moltk::dp</span>
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092 <span class="preprocessor">#endif </span><span class="comment">/* MOLTK_DPPOSITION_HPP_ */</span>
+<a name="l00057"></a>00057 
+<a name="l00061"></a>00061 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
+<a name="l00062"></a>00062          <a class="code" href="namespacemoltk_1_1dp.html#ae2384a91af43f1f96d02fa69319a0a8a" title="Whether alignment operands have preexisting gaps (e.g. alignments) or not (e.g. single sequences)...">dp::DPAlignGapping</a> DP_ALIGN_TYPE,
+<a name="l00063"></a>00063          <span class="keywordtype">int</span> GAP_NSEGS 
+<a name="l00064"></a>00064          &gt;
+<a name="l00065"></a>00065 <span class="keyword">struct </span>DPPosition;
+<a name="l00066"></a>00066 
+<a name="l00068"></a>00068 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
+<a name="l00069"></a>00069          <span class="keywordtype">int</span> GAP_NSEGS 
+<a name="l00070"></a>00070          &gt;
+<a name="l00071"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html">00071</a> <span class="keyword">struct </span>DPPosition&lt;SCORE_TYPE, dp::<a class="code" href="namespacemoltk_1_1dp.html#ae2384a91af43f1f96d02fa69319a0a8aad39f6552ff8d735f2b69a72f560d8c90" title="Alignment of pregapped sequences is slower and heuristic (problem is NP-hard)">DP_ALIGN_GAPPED_ALIGNMENTS</a>, GAP_NSEGS&gt;
+<a name="l00072"></a>00072 {
+<a name="l00073"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#acd68283be0040d5183e50ebd224d6600">00073</a>     SCORE_TYPE score(<span class="keyword">const</span> DPPosition&amp; rhs)<span class="keyword"> const</span>
+<a name="l00074"></a>00074 <span class="keyword">    </span>{
+<a name="l00075"></a>00075         SCORE_TYPE result = moltk::units::zero&lt;SCORE_TYPE&gt;();
+<a name="l00076"></a>00076         <span class="keyword">const</span> DPPosition&amp; lhs = *<span class="keyword">this</span>;
+<a name="l00077"></a>00077         <span class="keyword">typename</span> QueryWeights::const_iterator i;
+<a name="l00078"></a>00078         <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#ab75550e508ea9804405aa9400bafdb19">QueryWeights</a>&amp; queryWeights = rhs.query_residue_type_index_weights;
+<a name="l00079"></a>00079         <span class="keywordflow">for</span> (i = queryWeights.begin();  i != queryWeights.end(); ++i)
+<a name="l00080"></a>00080         {
+<a name="l00081"></a>00081             <span class="keywordtype">double</span> resTypeCount = i-&gt;second;
+<a name="l00082"></a>00082             <span class="keywordtype">size_t</span> resTypeIndex = i-&gt;first;
+<a name="l00083"></a>00083             result += resTypeCount * lhs.target_scores_by_residue_type_index[resTypeIndex];
+<a name="l00084"></a>00084         }
+<a name="l00085"></a>00085         <span class="keywordflow">return</span> result;
+<a name="l00086"></a>00086     }
+<a name="l00087"></a>00087 
+<a name="l00088"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#a7e0e60ba283915c7455ed3ecbe3f3cf3">00088</a>     <a class="code" href="structmoltk_1_1dp_1_1GapScore.html" title="Parameters for scoring indel gaps in sequence alignments.">GapScore&lt;SCORE_TYPE, GAP_NSEGS&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#a7e0e60ba283915c7455ed3ecbe3f3cf3">gap_score</a>;
+<a name="l00089"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#a9ec521cd2e480623015d70abe23fd97c">00089</a>     <span class="keywordtype">size_t</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#a9ec521cd2e480623015d70abe23fd97c" title="column number of this position">index</a>; 
+<a name="l00090"></a>00090     <span class="comment">// query cache for score calculation</span>
+<a name="l00091"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#ab75550e508ea9804405aa9400bafdb19">00091</a>     <span class="keyword">typedef</span> std::vector&lt; std::pair&lt;size_t, double&gt; &gt; <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#ab75550e508ea9804405aa9400bafdb19">QueryWeights</a>;
+<a name="l00092"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#a452c100474707a26a22c3cfcc66a7b60">00092</a>     <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#ab75550e508ea9804405aa9400bafdb19">QueryWeights</a> <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#a452c100474707a26a22c3cfcc66a7b60">query_residue_type_index_weights</a>;
+<a name="l00093"></a>00093     <span class="comment">// target cache for score calculation</span>
+<a name="l00094"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#ab18850c77a8b837392b3112722e317da">00094</a>     std::vector&lt;SCORE_TYPE&gt; <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html#ab18850c77a8b837392b3112722e317da">target_scores_by_residue_type_index</a>;
+<a name="l00095"></a>00095 };
+<a name="l00096"></a>00096 
+<a name="l00098"></a>00098 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
+<a name="l00099"></a>00099          <span class="keywordtype">int</span> GAP_NSEGS 
+<a name="l00100"></a>00100          &gt;
+<a name="l00101"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html">00101</a> <span class="keyword">struct </span>DPPosition&lt;SCORE_TYPE, dp::<a class="code" href="namespacemoltk_1_1dp.html#ae2384a91af43f1f96d02fa69319a0a8aa19b182379f9aee058d724619e502727c" title="Alignment with no preexisting gaps can be faster and truly optimal.">DP_ALIGN_UNGAPPED_SEQUENCES</a>, GAP_NSEGS&gt;
+<a name="l00102"></a>00102 {
+<a name="l00103"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#a28c8711e96b0ee8696f6e7436360a90d">00103</a>     SCORE_TYPE score(<span class="keyword">const</span> DPPosition&amp; rhs)<span class="keyword"> const</span>
+<a name="l00104"></a>00104 <span class="keyword">    </span>{
+<a name="l00105"></a>00105         SCORE_TYPE result = moltk::units::zero&lt;SCORE_TYPE&gt;();
+<a name="l00106"></a>00106         <span class="keyword">const</span> DPPosition&amp; lhs = *<span class="keyword">this</span>;
+<a name="l00107"></a>00107         <span class="keyword">typename</span> QueryWeights::const_iterator i;
+<a name="l00108"></a>00108         <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#af8e6a7d850c326059bc7785aaeef0cb4">QueryWeights</a>&amp; queryWeights = rhs.query_residue_type_index_weights;
+<a name="l00109"></a>00109         <span class="keywordflow">for</span> (i = queryWeights.begin();  i != queryWeights.end(); ++i)
+<a name="l00110"></a>00110         {
+<a name="l00111"></a>00111             <span class="keywordtype">double</span> resTypeCount = i-&gt;second;
+<a name="l00112"></a>00112             <span class="keywordtype">size_t</span> resTypeIndex = i-&gt;first;
+<a name="l00113"></a>00113             result += resTypeCount * lhs.target_scores_by_residue_type_index[resTypeIndex];
+<a name="l00114"></a>00114         }
+<a name="l00115"></a>00115         <span class="keywordflow">return</span> result;
+<a name="l00116"></a>00116     }
+<a name="l00117"></a>00117 
+<a name="l00118"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#aa50261e7c331d85a5f1828824c0f2961">00118</a>     <a class="code" href="structmoltk_1_1dp_1_1GapScore.html" title="Parameters for scoring indel gaps in sequence alignments.">GapScore&lt;SCORE_TYPE, GAP_NSEGS&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#aa50261e7c331d85a5f1828824c0f2961">gap_score</a>;
+<a name="l00119"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#a8406700a74a939ac9732fcbf6da83a1b">00119</a>     <span class="keywordtype">size_t</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#a8406700a74a939ac9732fcbf6da83a1b" title="column number of this position">index</a>; 
+<a name="l00120"></a>00120     <span class="comment">// query cache for score calculation</span>
+<a name="l00121"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#af8e6a7d850c326059bc7785aaeef0cb4">00121</a>     <span class="keyword">typedef</span> std::vector&lt; std::pair&lt;size_t, double&gt; &gt; <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#af8e6a7d850c326059bc7785aaeef0cb4">QueryWeights</a>;
+<a name="l00122"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#a4c9bac0ed963c8c1e1f442453f2e2084">00122</a>     <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#af8e6a7d850c326059bc7785aaeef0cb4">QueryWeights</a> <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#a4c9bac0ed963c8c1e1f442453f2e2084">query_residue_type_index_weights</a>;
+<a name="l00123"></a>00123     <span class="comment">// target cache for score calculation</span>
+<a name="l00124"></a><a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#a7c1eb245d8e63ca00cfe4f06ad781a45">00124</a>     std::vector&lt;SCORE_TYPE&gt; <a class="code" href="structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__UNGAPPED__SEQUENCES_00_01GAP__NSEGS_01_4.html#a7c1eb245d8e63ca00cfe4f06ad781a45">target_scores_by_residue_type_index</a>;
+<a name="l00125"></a>00125 };
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127 }} <span class="comment">// namespace moltk::dp</span>
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129 <span class="preprocessor">#endif </span><span class="comment">/* MOLTK_DPPOSITION_HPP_ */</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->

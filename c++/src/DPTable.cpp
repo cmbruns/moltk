@@ -135,4 +135,8 @@ template std::ostream& operator<<(
      std::ostream& os, 
      const moltk::dp::DPTable<moltk::units::Information, moltk::dp::DP_MEMORY_LARGE, moltk::dp::DP_ALIGN_UNGAPPED_SEQUENCES, 1>& t);
 
+template std::ostream& operator<<(
+     std::ostream& os, 
+     const moltk::dp::DPTable<moltk::units::Information, moltk::dp::DP_MEMORY_LARGE, moltk::dp::DP_ALIGN_GAPPED_ALIGNMENTS, 1>& t);
+
 }} // namespace moltk::dp

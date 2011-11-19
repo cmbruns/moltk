@@ -43,10 +43,16 @@ namespace pyplusplus { namespace aliases {
     typedef moltk::units::AreaDimension AreaDimension;
     typedef moltk::units::AngleDimension AngleDimension;
 
-    typedef moltk::dp::DPPosition<Information,1> DPPositionI1;
-    typedef std::vector<const DPPositionI1 *> std_vector_DPPositionI1;
+    typedef moltk::dp::DPPosition<Information, dp::DP_ALIGN_UNGAPPED_SEQUENCES, 1> DPPositionIU1;
+    typedef moltk::dp::DPPosition<Information, dp::DP_ALIGN_GAPPED_ALIGNMENTS, 1> DPPositionIG1;
+    typedef std::vector<const DPPositionIU1 *> std_vector_constDPPositionIU1;
+    typedef std::vector<const DPPositionIG1 *> std_vector_constDPPositionIG1;
+    typedef std::vector<DPPositionIU1 *> std_vector_DPPositionIU1;
+    typedef std::vector<DPPositionIG1 *> std_vector_DPPositionIG1;
     typedef moltk::dp::DPTable<Information,DP_MEMORY_LARGE,DP_ALIGN_UNGAPPED_SEQUENCES,1>
         DPTableILU1;
+    typedef moltk::dp::DPTable<Information,DP_MEMORY_LARGE,DP_ALIGN_GAPPED_ALIGNMENTS,1>
+        DPTableILG1;
 
     typedef std::vector<PDBStructure::Atom> AtomList;
     typedef Unit<InformationDimension> BitUnit;
@@ -57,7 +63,7 @@ namespace pyplusplus { namespace aliases {
     typedef Unit<AngleDimension> RadianUnit;
     typedef Quantity<RadianUnit> Angle;
     typedef std::vector<int> std_vector_int;
-    typedef std::vector<dp::DPPosition<Information,1>*> DPPositionList;
+    // typedef std::vector<dp::DPPosition<Information,1>*> DPPositionList;
     typedef Vector3D_< moltk::Real > Vector3D;
     typedef Vector3D_< moltk::units::Length > Displacement;
     typedef BaseVector3D< double > BaseVector3D_double;

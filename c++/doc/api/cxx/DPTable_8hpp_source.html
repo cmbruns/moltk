@@ -118,296 +118,322 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00053"></a>00053 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE&gt;
 <a name="l00054"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html">00054</a> <span class="keyword">struct </span>RunningGapScore&lt;SCORE_TYPE, <a class="code" href="namespacemoltk_1_1dp.html#ae2384a91af43f1f96d02fa69319a0a8aa19b182379f9aee058d724619e502727c" title="Alignment with no preexisting gaps can be faster and truly optimal.">DP_ALIGN_UNGAPPED_SEQUENCES</a>, 1&gt;
 <a name="l00055"></a>00055 {
-<a name="l00056"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a6f69440d15287f463453b440653bacfd">00056</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html">DPPosition&lt;SCORE_TYPE, 1&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a6f69440d15287f463453b440653bacfd">PositionType</a>;
-<a name="l00058"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#ac86f3786d5a0f705fd82e7e84e29a44e">00058</a>     <span class="keywordtype">void</span> compute_recurrence(
+<a name="l00056"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#afbddd3a694bbe408e1b446714c02068a">00056</a>     <span class="keyword">typedef</span> DPPosition&lt;SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1&gt; <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#afbddd3a694bbe408e1b446714c02068a">PositionType</a>;
+<a name="l00058"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a310947e8334e160a9cfa7b153e6ceacd">00058</a>     <span class="keywordtype">void</span> compute_recurrence(
 <a name="l00059"></a>00059             <span class="keyword">const</span> RunningGapScore&amp; pred,
 <a name="l00060"></a>00060             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningScore.html" title="Generic accumulated score in a DPCell.">RunningScore&lt;SCORE_TYPE&gt;</a>&amp; v,
-<a name="l00061"></a>00061             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html">DPPosition&lt;SCORE_TYPE, 1&gt;</a>&amp; pos1,
-<a name="l00062"></a>00062             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html">DPPosition&lt;SCORE_TYPE, 1&gt;</a>&amp; pos2)
+<a name="l00061"></a>00061             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#afbddd3a694bbe408e1b446714c02068a">PositionType</a>&amp; pos1,
+<a name="l00062"></a>00062             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#afbddd3a694bbe408e1b446714c02068a">PositionType</a>&amp; pos2)
 <a name="l00063"></a>00063     {
-<a name="l00064"></a>00064         score = std::max(pred.score, v.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> + pos1.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a7d6fd734f914f0dcc7053fef29559c31">gap_score</a>.open_score)
-<a name="l00065"></a>00065                 + pos1.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a7d6fd734f914f0dcc7053fef29559c31">gap_score</a>.extension_score;
+<a name="l00064"></a>00064         score = std::max(pred.score, v.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> + pos1.gap_score.open_score)
+<a name="l00065"></a>00065                 + pos1.gap_score.extension_score;
 <a name="l00066"></a>00066     }
-<a name="l00067"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a2b6eb6f4b151efe3f413ef86b44bb142">00067</a>     <span class="keywordtype">void</span> initialize(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html">PositionType</a>&amp; pos1, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html">PositionType</a>&amp; pos2)
+<a name="l00067"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a2b6eb6f4b151efe3f413ef86b44bb142">00067</a>     <span class="keywordtype">void</span> initialize(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#afbddd3a694bbe408e1b446714c02068a">PositionType</a>&amp; pos1, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#afbddd3a694bbe408e1b446714c02068a">PositionType</a>&amp; pos2)
 <a name="l00068"></a>00068     {
-<a name="l00069"></a>00069         <span class="keywordflow">if</span> (0 != pos1.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a2a103ccb80aaed13fb3b93e2e2e58e20" title="column number of this position">index</a>) {
+<a name="l00069"></a>00069         <span class="keywordflow">if</span> (0 != pos1.index) {
 <a name="l00070"></a>00070             score = -moltk::units::infinity&lt;SCORE_TYPE&gt;();
 <a name="l00071"></a>00071             <span class="keywordflow">return</span>;
 <a name="l00072"></a>00072         }
-<a name="l00073"></a>00073         score = (<a class="code" href="namespacemoltk.html#afe6fbd8f5686b34143c2742fcc97292c" title="Real represents a real number, such as 5.6.">moltk::Real</a>)pos2.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a2a103ccb80aaed13fb3b93e2e2e58e20" title="column number of this position">index</a> * pos1.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a7d6fd734f914f0dcc7053fef29559c31">gap_score</a>.extension_score
-<a name="l00074"></a>00074                 + pos1.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a7d6fd734f914f0dcc7053fef29559c31">gap_score</a>.open_score;
+<a name="l00073"></a>00073         score = (<a class="code" href="namespacemoltk.html#afe6fbd8f5686b34143c2742fcc97292c" title="Real represents a real number, such as 5.6.">moltk::Real</a>)pos2.index * pos1.gap_score.extension_score
+<a name="l00074"></a>00074                 + pos1.gap_score.open_score;
 <a name="l00075"></a>00075     }
 <a name="l00076"></a>00076 
 <a name="l00077"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a4f927e74dfc33e81d635b08e074d7582">00077</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a4f927e74dfc33e81d635b08e074d7582">score</a>;
 <a name="l00078"></a>00078 };
 <a name="l00079"></a>00079 
 <a name="l00080"></a>00080 
-<a name="l00082"></a>00082 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
-<a name="l00083"></a>00083          <a class="code" href="namespacemoltk_1_1dp.html#ae2384a91af43f1f96d02fa69319a0a8a" title="Whether alignment operands have preexisting gaps (e.g. alignments) or not (e.g. single sequences)...">DPAlignGapping</a> ALIGN_TYPE, 
-<a name="l00084"></a>00084          <span class="keywordtype">int</span> GAP_NSEGS 
-<a name="l00085"></a>00085          &gt;
-<a name="l00086"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html">00086</a> <span class="keyword">struct </span><a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>
-<a name="l00087"></a>00087 {
-<a name="l00088"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a21df740acc49e560bd19bcd56d79fae2">00088</a>     <span class="keyword">typedef</span> RunningGapScore&lt;SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS&gt; <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a21df740acc49e560bd19bcd56d79fae2">GapScoreType</a>;
-<a name="l00089"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ac40c80edc23e440bd171baa037a06448">00089</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1RunningScore.html" title="Generic accumulated score in a DPCell.">RunningScore&lt;SCORE_TYPE&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ac40c80edc23e440bd171baa037a06448">ScoreType</a>;
-<a name="l00090"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa0d83b0352ac17b75d57fc5219b4979a">00090</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">DPPosition&lt;SCORE_TYPE, GAP_NSEGS&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa0d83b0352ac17b75d57fc5219b4979a">TargetPosType</a>;
-<a name="l00091"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a0071a27cbe41c688dea42ed2ba7c2315">00091</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">DPPosition&lt;SCORE_TYPE, GAP_NSEGS&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a0071a27cbe41c688dea42ed2ba7c2315">QueryPosType</a>;
-<a name="l00092"></a>00092 
-<a name="l00093"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a1be9d6597dca44fecb19e30d0cb7d429">00093</a>     <span class="keywordtype">void</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a1be9d6597dca44fecb19e30d0cb7d429">initialize</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">TargetPosType</a>&amp; pos1, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">QueryPosType</a>&amp; pos2)
-<a name="l00094"></a>00094     {
-<a name="l00095"></a>00095         <span class="comment">// only initialize top row and column</span>
-<a name="l00096"></a>00096         <span class="keywordflow">if</span> ((pos1.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a2a103ccb80aaed13fb3b93e2e2e58e20" title="column number of this position">index</a> != 0) &amp;&amp; (pos2.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a2a103ccb80aaed13fb3b93e2e2e58e20" title="column number of this position">index</a> != 0))
-<a name="l00097"></a>00097             <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Only top and left of dynamic programming table can be initialized&quot;</span>);
-<a name="l00098"></a>00098         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.initialize(pos1, pos2);
-<a name="l00099"></a>00099         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.initialize(pos2, pos1);
-<a name="l00100"></a>00100         <span class="keywordflow">if</span> ((pos1.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a2a103ccb80aaed13fb3b93e2e2e58e20" title="column number of this position">index</a> == 0) &amp;&amp; (pos2.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a2a103ccb80aaed13fb3b93e2e2e58e20" title="column number of this position">index</a> == 0))
-<a name="l00101"></a>00101             <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = moltk::units::zero&lt;SCORE_TYPE&gt;();
-<a name="l00102"></a>00102         <span class="keywordflow">else</span>
-<a name="l00103"></a>00103             <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = -moltk::units::infinity&lt;SCORE_TYPE&gt;();
-<a name="l00104"></a>00104         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a2f7cedff7cedcfa22f32335a4f4ebfae">compute_v</a>();
-<a name="l00105"></a>00105     }
-<a name="l00106"></a>00106 
-<a name="l00107"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a4a8fde81e7a314b5dddf39177db9b008">00107</a>     <span class="keywordtype">void</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a4a8fde81e7a314b5dddf39177db9b008">compute_recurrence</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; up_left,
-<a name="l00108"></a>00108                             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; up,
-<a name="l00109"></a>00109                             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; left,
-<a name="l00110"></a>00110                             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">DPPosition&lt;SCORE_TYPE, GAP_NSEGS&gt;</a>&amp; pos1,
-<a name="l00111"></a>00111                             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">DPPosition&lt;SCORE_TYPE, GAP_NSEGS&gt;</a>&amp; pos2) <span class="comment">// score for insertion gap in sequence 2</span>
-<a name="l00112"></a>00112     {
-<a name="l00113"></a>00113         <span class="comment">// This recurrence comes from Gusfield chapter 11.</span>
-<a name="l00114"></a>00114         <span class="comment">// best score with ungapped alignment of i with j</span>
-<a name="l00115"></a>00115         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = up_left.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> + pos1.<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html#a6c9d2a819bf47e8d528515ae5e50b76c">score</a>(pos2);
-<a name="l00116"></a>00116         <span class="comment">// best score with insertion gap in sequence 1</span>
-<a name="l00117"></a>00117         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.compute_recurrence(left.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>, left.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>, pos1, pos2);
-<a name="l00118"></a>00118         <span class="comment">// best score with insertion gap in sequence 2</span>
-<a name="l00119"></a>00119         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.compute_recurrence(up.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>, up.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>, pos2, pos1);
-<a name="l00120"></a>00120         <span class="comment">// best score overall</span>
-<a name="l00121"></a>00121         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a2f7cedff7cedcfa22f32335a4f4ebfae">compute_v</a>();
-<a name="l00122"></a>00122     }
-<a name="l00123"></a>00123 
-<a name="l00124"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a1a68a243df895f0e49e833f17e78ca64">00124</a>     <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0c" title="TracebackPointer to help reconstruct the final alignment.">TracebackPointer</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a1a68a243df895f0e49e833f17e78ca64">compute_traceback_pointer</a>()<span class="keyword"> const</span>
-<a name="l00125"></a>00125 <span class="keyword">    </span>{
-<a name="l00126"></a>00126         <span class="keywordflow">if</span> ( (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> &gt;= <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score) &amp;&amp; (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> &gt;= <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score) )
-<a name="l00127"></a>00127             <span class="keywordflow">return</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca9d2fbcded45ce4a53f3dfc4d93ae9f42">TRACEBACK_UPLEFT</a>;
-<a name="l00128"></a>00128         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score &gt;= <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score)
-<a name="l00129"></a>00129             <span class="keywordflow">return</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca448324d993ba9dd1c87753515d34d6ee">TRACEBACK_LEFT</a>;
+<a name="l00082"></a>00082 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE&gt;
+<a name="l00083"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html">00083</a> <span class="keyword">struct </span>RunningGapScore&lt;SCORE_TYPE, <a class="code" href="namespacemoltk_1_1dp.html#ae2384a91af43f1f96d02fa69319a0a8aad39f6552ff8d735f2b69a72f560d8c90" title="Alignment of pregapped sequences is slower and heuristic (problem is NP-hard)">DP_ALIGN_GAPPED_ALIGNMENTS</a>, 1&gt;
+<a name="l00084"></a>00084 {
+<a name="l00085"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#a2f062578ee4fc0f8cab0b190fd4fbe1b">00085</a>     <span class="keyword">typedef</span> DPPosition&lt;SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1&gt; <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#a2f062578ee4fc0f8cab0b190fd4fbe1b">PositionType</a>;
+<a name="l00087"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#ac1d23fe9e3497c926a91fa599e7163cc">00087</a>     <span class="keywordtype">void</span> compute_recurrence(
+<a name="l00088"></a>00088             <span class="keyword">const</span> RunningGapScore&amp; pred,
+<a name="l00089"></a>00089             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningScore.html" title="Generic accumulated score in a DPCell.">RunningScore&lt;SCORE_TYPE&gt;</a>&amp; v,
+<a name="l00090"></a>00090             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#a2f062578ee4fc0f8cab0b190fd4fbe1b">PositionType</a>&amp; pos1,
+<a name="l00091"></a>00091             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#a2f062578ee4fc0f8cab0b190fd4fbe1b">PositionType</a>&amp; pos2)
+<a name="l00092"></a>00092     {
+<a name="l00093"></a>00093         score = std::max(pred.score, v.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> + pos1.gap_score.open_score)
+<a name="l00094"></a>00094                 + pos1.gap_score.extension_score;
+<a name="l00095"></a>00095     }
+<a name="l00096"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#a9054465cc94ccd3ddacfa2c44e363832">00096</a>     <span class="keywordtype">void</span> initialize(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#a2f062578ee4fc0f8cab0b190fd4fbe1b">PositionType</a>&amp; pos1, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#a2f062578ee4fc0f8cab0b190fd4fbe1b">PositionType</a>&amp; pos2)
+<a name="l00097"></a>00097     {
+<a name="l00098"></a>00098         <span class="keywordflow">if</span> (0 != pos1.index) {
+<a name="l00099"></a>00099             score = -moltk::units::infinity&lt;SCORE_TYPE&gt;();
+<a name="l00100"></a>00100             <span class="keywordflow">return</span>;
+<a name="l00101"></a>00101         }
+<a name="l00102"></a>00102         score = (<a class="code" href="namespacemoltk.html#afe6fbd8f5686b34143c2742fcc97292c" title="Real represents a real number, such as 5.6.">moltk::Real</a>)pos2.index * pos1.gap_score.extension_score
+<a name="l00103"></a>00103                 + pos1.gap_score.open_score;
+<a name="l00104"></a>00104     }
+<a name="l00105"></a>00105 
+<a name="l00106"></a><a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#a44d662dc9b3b6a78e987fae51442f20a">00106</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__GAPPED__ALIGNMENTS_00_011_01_4.html#a44d662dc9b3b6a78e987fae51442f20a">score</a>;
+<a name="l00107"></a>00107 };
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109 
+<a name="l00111"></a>00111 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
+<a name="l00112"></a>00112          <a class="code" href="namespacemoltk_1_1dp.html#ae2384a91af43f1f96d02fa69319a0a8a" title="Whether alignment operands have preexisting gaps (e.g. alignments) or not (e.g. single sequences)...">DPAlignGapping</a> ALIGN_TYPE, 
+<a name="l00113"></a>00113          <span class="keywordtype">int</span> GAP_NSEGS 
+<a name="l00114"></a>00114          &gt;
+<a name="l00115"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html">00115</a> <span class="keyword">struct </span><a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>
+<a name="l00116"></a>00116 {
+<a name="l00117"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a21df740acc49e560bd19bcd56d79fae2">00117</a>     <span class="keyword">typedef</span> RunningGapScore&lt;SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS&gt; <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a21df740acc49e560bd19bcd56d79fae2">GapScoreType</a>;
+<a name="l00118"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ac40c80edc23e440bd171baa037a06448">00118</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1RunningScore.html" title="Generic accumulated score in a DPCell.">RunningScore&lt;SCORE_TYPE&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ac40c80edc23e440bd171baa037a06448">ScoreType</a>;
+<a name="l00119"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ab76338d510755a760bb6606d1f2bbfac">00119</a>     <span class="keyword">typedef</span> DPPosition&lt;SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS&gt; <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ab76338d510755a760bb6606d1f2bbfac">PositionType</a>;
+<a name="l00120"></a>00120 
+<a name="l00121"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a9dedd33524f19ae37abdaf4eac5471ff">00121</a>     <span class="keywordtype">void</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a9dedd33524f19ae37abdaf4eac5471ff">initialize</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ab76338d510755a760bb6606d1f2bbfac">PositionType</a>&amp; pos1, <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ab76338d510755a760bb6606d1f2bbfac">PositionType</a>&amp; pos2)
+<a name="l00122"></a>00122     {
+<a name="l00123"></a>00123         <span class="comment">// only initialize top row and column</span>
+<a name="l00124"></a>00124         <span class="keywordflow">if</span> ((pos1.index != 0) &amp;&amp; (pos2.index != 0))
+<a name="l00125"></a>00125             <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Only top and left of dynamic programming table can be initialized&quot;</span>);
+<a name="l00126"></a>00126         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.initialize(pos1, pos2);
+<a name="l00127"></a>00127         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.initialize(pos2, pos1);
+<a name="l00128"></a>00128         <span class="keywordflow">if</span> ((pos1.index == 0) &amp;&amp; (pos2.index == 0))
+<a name="l00129"></a>00129             <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = moltk::units::zero&lt;SCORE_TYPE&gt;();
 <a name="l00130"></a>00130         <span class="keywordflow">else</span>
-<a name="l00131"></a>00131             <span class="keywordflow">return</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0cab17ffddcd5713d8a8d67ebfcff4fccdc">TRACEBACK_UP</a>;
-<a name="l00132"></a>00132     }
-<a name="l00133"></a>00133 
-<a name="l00134"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a2f7cedff7cedcfa22f32335a4f4ebfae">00134</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a2f7cedff7cedcfa22f32335a4f4ebfae">compute_v</a>()<span class="keyword"> const</span>
-<a name="l00135"></a>00135 <span class="keyword">    </span>{
-<a name="l00136"></a>00136         <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0c" title="TracebackPointer to help reconstruct the final alignment.">TracebackPointer</a> tp = <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a1a68a243df895f0e49e833f17e78ca64">compute_traceback_pointer</a>();
-<a name="l00137"></a>00137         <span class="keywordflow">switch</span>(tp)
-<a name="l00138"></a>00138         {
-<a name="l00139"></a>00139         <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca9d2fbcded45ce4a53f3dfc4d93ae9f42">TRACEBACK_UPLEFT</a>:
-<a name="l00140"></a>00140             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a>;
-<a name="l00141"></a>00141             <span class="keywordflow">break</span>;
-<a name="l00142"></a>00142         <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0cab17ffddcd5713d8a8d67ebfcff4fccdc">TRACEBACK_UP</a>:
-<a name="l00143"></a>00143             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score;
-<a name="l00144"></a>00144             <span class="keywordflow">break</span>;
-<a name="l00145"></a>00145         <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca448324d993ba9dd1c87753515d34d6ee">TRACEBACK_LEFT</a>:
-<a name="l00146"></a>00146             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score;
-<a name="l00147"></a>00147             <span class="keywordflow">break</span>;
-<a name="l00148"></a>00148         }
-<a name="l00149"></a>00149         <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score;
+<a name="l00131"></a>00131             <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = -moltk::units::infinity&lt;SCORE_TYPE&gt;();
+<a name="l00132"></a>00132         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a2f7cedff7cedcfa22f32335a4f4ebfae">compute_v</a>();
+<a name="l00133"></a>00133     }
+<a name="l00134"></a>00134 
+<a name="l00135"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#adb11a1e507b3af0aed8adfe0f19b13c4">00135</a>     <span class="keywordtype">void</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#adb11a1e507b3af0aed8adfe0f19b13c4">compute_recurrence</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; up_left,
+<a name="l00136"></a>00136                             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; up,
+<a name="l00137"></a>00137                             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; left,
+<a name="l00138"></a>00138                             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ab76338d510755a760bb6606d1f2bbfac">PositionType</a>&amp; pos1,
+<a name="l00139"></a>00139                             <span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#ab76338d510755a760bb6606d1f2bbfac">PositionType</a>&amp; pos2) <span class="comment">// score for insertion gap in sequence 2</span>
+<a name="l00140"></a>00140     {
+<a name="l00141"></a>00141         <span class="comment">// This recurrence comes from Gusfield chapter 11.</span>
+<a name="l00142"></a>00142         <span class="comment">// best score with ungapped alignment of i with j</span>
+<a name="l00143"></a>00143         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = up_left.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> + pos1.score(pos2);
+<a name="l00144"></a>00144         <span class="comment">// best score with insertion gap in sequence 1</span>
+<a name="l00145"></a>00145         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.compute_recurrence(left.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>, left.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>, pos1, pos2);
+<a name="l00146"></a>00146         <span class="comment">// best score with insertion gap in sequence 2</span>
+<a name="l00147"></a>00147         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.compute_recurrence(up.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>, up.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>, pos2, pos1);
+<a name="l00148"></a>00148         <span class="comment">// best score overall</span>
+<a name="l00149"></a>00149         <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> = <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a2f7cedff7cedcfa22f32335a4f4ebfae">compute_v</a>();
 <a name="l00150"></a>00150     }
 <a name="l00151"></a>00151 
-<a name="l00152"></a>00152     <span class="comment">// operator== needed for vector storage</span>
-<a name="l00153"></a>00153     <span class="comment">// TODO</span>
-<a name="l00154"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a40748cbda17ec478a01f45c82446994d">00154</a>     <span class="keywordtype">bool</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a40748cbda17ec478a01f45c82446994d">operator==</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; rhs)<span class="keyword"> const</span>
-<a name="l00155"></a>00155 <span class="keyword">    </span>{
-<a name="l00156"></a>00156         <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> != rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00157"></a>00157         <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> != rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00158"></a>00158         <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score != rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00159"></a>00159         <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score != rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00160"></a>00160         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00161"></a>00161     }
-<a name="l00162"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a55ec1a019ea6d35c32db9b30610dea6d">00162</a>     <span class="keywordtype">bool</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a55ec1a019ea6d35c32db9b30610dea6d">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; rhs)<span class="keyword"> const</span>
+<a name="l00152"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a1a68a243df895f0e49e833f17e78ca64">00152</a>     <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0c" title="TracebackPointer to help reconstruct the final alignment.">TracebackPointer</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a1a68a243df895f0e49e833f17e78ca64">compute_traceback_pointer</a>()<span class="keyword"> const</span>
+<a name="l00153"></a>00153 <span class="keyword">    </span>{
+<a name="l00154"></a>00154         <span class="keywordflow">if</span> ( (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> &gt;= <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score) &amp;&amp; (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> &gt;= <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score) )
+<a name="l00155"></a>00155             <span class="keywordflow">return</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca9d2fbcded45ce4a53f3dfc4d93ae9f42">TRACEBACK_UPLEFT</a>;
+<a name="l00156"></a>00156         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score &gt;= <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score)
+<a name="l00157"></a>00157             <span class="keywordflow">return</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca448324d993ba9dd1c87753515d34d6ee">TRACEBACK_LEFT</a>;
+<a name="l00158"></a>00158         <span class="keywordflow">else</span>
+<a name="l00159"></a>00159             <span class="keywordflow">return</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0cab17ffddcd5713d8a8d67ebfcff4fccdc">TRACEBACK_UP</a>;
+<a name="l00160"></a>00160     }
+<a name="l00161"></a>00161 
+<a name="l00162"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a2f7cedff7cedcfa22f32335a4f4ebfae">00162</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a2f7cedff7cedcfa22f32335a4f4ebfae">compute_v</a>()<span class="keyword"> const</span>
 <a name="l00163"></a>00163 <span class="keyword">    </span>{
-<a name="l00164"></a>00164         <span class="keywordflow">return</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> &lt; rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a>);
-<a name="l00165"></a>00165     }
-<a name="l00166"></a>00166 
-<a name="l00167"></a>00167     <span class="comment">// Gusfield nomenclature</span>
-<a name="l00168"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63">00168</a>     <a class="code" href="structmoltk_1_1dp_1_1RunningScore.html" title="Generic accumulated score in a DPCell.">ScoreType</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>; 
-<a name="l00169"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8">00169</a>     <a class="code" href="structmoltk_1_1dp_1_1RunningScore.html" title="Generic accumulated score in a DPCell.">ScoreType</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>; 
-<a name="l00170"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6">00170</a>     <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a21df740acc49e560bd19bcd56d79fae2">GapScoreType</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>; 
-<a name="l00171"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd">00171</a>     <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a21df740acc49e560bd19bcd56d79fae2">GapScoreType</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>; 
-<a name="l00172"></a>00172 };
-<a name="l00173"></a>00173 
-<a name="l00174"></a>00174 
-<a name="l00176"></a>00176 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
-<a name="l00177"></a>00177          <a class="code" href="namespacemoltk_1_1dp.html#a3847dc6be50dae17fff97f2d922647fe" title="Fast O(n^2) memory use vs. 2X slower O(n) memory use.">DPMemoryModel</a> MEMORY_MODEL, 
-<a name="l00178"></a>00178          <a class="code" href="namespacemoltk_1_1dp.html#ae2384a91af43f1f96d02fa69319a0a8a" title="Whether alignment operands have preexisting gaps (e.g. alignments) or not (e.g. single sequences)...">DPAlignGapping</a> ALIGN_TYPE, 
-<a name="l00179"></a>00179          <span class="keywordtype">int</span> GAP_NSEGS 
-<a name="l00180"></a>00180          &gt;
-<a name="l00181"></a>00181 <span class="keyword">struct </span>DPTable;
-<a name="l00182"></a>00182 
-<a name="l00183"></a>00183 
-<a name="l00186"></a>00186 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE&gt;
-<a name="l00187"></a><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html">00187</a> <span class="keyword">struct </span><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResult</a>
-<a name="l00188"></a>00188 {
-<a name="l00189"></a><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">00189</a>     <a class="code" href="classmoltk_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment.">moltk::EString</a> <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>;
-<a name="l00190"></a><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">00190</a>     <a class="code" href="classmoltk_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment.">moltk::EString</a> <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>;
-<a name="l00191"></a><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a8a554558c4efa955f56e4855be1e8136">00191</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a8a554558c4efa955f56e4855be1e8136">score</a>;
-<a name="l00192"></a>00192 };
-<a name="l00193"></a>00193 
+<a name="l00164"></a>00164         <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0c" title="TracebackPointer to help reconstruct the final alignment.">TracebackPointer</a> tp = <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a1a68a243df895f0e49e833f17e78ca64">compute_traceback_pointer</a>();
+<a name="l00165"></a>00165         <span class="keywordflow">switch</span>(tp)
+<a name="l00166"></a>00166         {
+<a name="l00167"></a>00167         <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca9d2fbcded45ce4a53f3dfc4d93ae9f42">TRACEBACK_UPLEFT</a>:
+<a name="l00168"></a>00168             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a>;
+<a name="l00169"></a>00169             <span class="keywordflow">break</span>;
+<a name="l00170"></a>00170         <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0cab17ffddcd5713d8a8d67ebfcff4fccdc">TRACEBACK_UP</a>:
+<a name="l00171"></a>00171             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score;
+<a name="l00172"></a>00172             <span class="keywordflow">break</span>;
+<a name="l00173"></a>00173         <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca448324d993ba9dd1c87753515d34d6ee">TRACEBACK_LEFT</a>:
+<a name="l00174"></a>00174             <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score;
+<a name="l00175"></a>00175             <span class="keywordflow">break</span>;
+<a name="l00176"></a>00176         }
+<a name="l00177"></a>00177         <span class="keywordflow">return</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score;
+<a name="l00178"></a>00178     }
+<a name="l00179"></a>00179 
+<a name="l00180"></a>00180     <span class="comment">// operator== needed for vector storage</span>
+<a name="l00181"></a>00181     <span class="comment">// TODO</span>
+<a name="l00182"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a40748cbda17ec478a01f45c82446994d">00182</a>     <span class="keywordtype">bool</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a40748cbda17ec478a01f45c82446994d">operator==</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; rhs)<span class="keyword"> const</span>
+<a name="l00183"></a>00183 <span class="keyword">    </span>{
+<a name="l00184"></a>00184         <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> != rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00185"></a>00185         <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> != rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00186"></a>00186         <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score != rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>.score) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00187"></a>00187         <span class="keywordflow">if</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score != rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>.score) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00188"></a>00188         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00189"></a>00189     }
+<a name="l00190"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a55ec1a019ea6d35c32db9b30610dea6d">00190</a>     <span class="keywordtype">bool</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a55ec1a019ea6d35c32db9b30610dea6d">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell</a>&amp; rhs)<span class="keyword"> const</span>
+<a name="l00191"></a>00191 <span class="keyword">    </span>{
+<a name="l00192"></a>00192         <span class="keywordflow">return</span> (<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a> &lt; rhs.<a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>.<a class="code" href="structmoltk_1_1dp_1_1RunningScore.html#a5814258bbf4fee728de4eb83486b32ed">score</a>);
+<a name="l00193"></a>00193     }
 <a name="l00194"></a>00194 
-<a name="l00196"></a>00196 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, DPAlignGapping ALIGN_TYPE&gt;
-<a name="l00197"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html">00197</a> <span class="keyword">struct </span>DPTable&lt;SCORE_TYPE, <a class="code" href="namespacemoltk_1_1dp.html#a3847dc6be50dae17fff97f2d922647feab8548c282fd21547171c41cb000859b2" title="Faster O(n^2) memory model.">DP_MEMORY_LARGE</a>, ALIGN_TYPE, 1&gt;
-<a name="l00198"></a>00198 {
-<a name="l00199"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a5d11d8cf9dfe39375d3e80e50c3788f4">00199</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell&lt;SCORE_TYPE, ALIGN_TYPE, 1&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a5d11d8cf9dfe39375d3e80e50c3788f4">CellType</a>;
-<a name="l00200"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aed0a8969b07c42d57cdf1fc7cf80a1ee">00200</a>     <span class="keyword">typedef</span> std::vector&lt;CellType&gt; <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aed0a8969b07c42d57cdf1fc7cf80a1ee">RowType</a>;
-<a name="l00201"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7d4e3dab063bd13056a7b952a8779231">00201</a>     <span class="keyword">typedef</span> std::vector&lt;RowType&gt; <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7d4e3dab063bd13056a7b952a8779231">TableType</a>;
-<a name="l00202"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aa9ae91f67a7f0e7f32be524106fcafc2">00202</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResult&lt;SCORE_TYPE&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aa9ae91f67a7f0e7f32be524106fcafc2">AlignmentResultType</a>;
-<a name="l00203"></a>00203 
-<a name="l00204"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#ae089f00ef3ddcb9e68ec7eea9532197c">00204</a>     <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#ae089f00ef3ddcb9e68ec7eea9532197c">~DPTable</a>() {clear_positions();}
-<a name="l00205"></a>00205 
-<a name="l00206"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a2a7e5308cf114962fc28069eac3bc255">00206</a>     <span class="keywordtype">void</span> clear_positions()
-<a name="l00207"></a>00207     {
-<a name="l00208"></a>00208         <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; target_positions.size(); ++i)
-<a name="l00209"></a>00209         {
-<a name="l00210"></a>00210             <span class="keyword">delete</span> target_positions[i];
-<a name="l00211"></a>00211             target_positions[i] = NULL;
-<a name="l00212"></a>00212         }
-<a name="l00213"></a>00213         target_positions.clear();
-<a name="l00214"></a>00214         <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; query_positions.size(); ++i)
-<a name="l00215"></a>00215         {
-<a name="l00216"></a>00216             <span class="keyword">delete</span> query_positions[i];
-<a name="l00217"></a>00217             query_positions[i] = NULL;
-<a name="l00218"></a>00218         }
-<a name="l00219"></a>00219         query_positions.clear();
-<a name="l00220"></a>00220     }
+<a name="l00195"></a>00195     <span class="comment">// Gusfield nomenclature</span>
+<a name="l00196"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63">00196</a>     <a class="code" href="structmoltk_1_1dp_1_1RunningScore.html" title="Generic accumulated score in a DPCell.">ScoreType</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aa46b7ac2c0aebc170df9229b714cab63" title="V, best score through this cell.">v</a>; 
+<a name="l00197"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8">00197</a>     <a class="code" href="structmoltk_1_1dp_1_1RunningScore.html" title="Generic accumulated score in a DPCell.">ScoreType</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a046ff4044916a1c22506e9db6e6ee5d8" title="G, best ungapped score through this cell.">g</a>; 
+<a name="l00198"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6">00198</a>     <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a21df740acc49e560bd19bcd56d79fae2">GapScoreType</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#af62bf28ecf418b8270fe93086e1c77e6" title="E, best score with gap in sequence 1.">e</a>; 
+<a name="l00199"></a><a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd">00199</a>     <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#a21df740acc49e560bd19bcd56d79fae2">GapScoreType</a> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html#aaa778620770caf52a6551edea6ee6dfd" title="F, best score with gap in sequence 2.">f</a>; 
+<a name="l00200"></a>00200 };
+<a name="l00201"></a>00201 
+<a name="l00202"></a>00202 
+<a name="l00204"></a>00204 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, 
+<a name="l00205"></a>00205          <a class="code" href="namespacemoltk_1_1dp.html#a3847dc6be50dae17fff97f2d922647fe" title="Fast O(n^2) memory use vs. 2X slower O(n) memory use.">DPMemoryModel</a> MEMORY_MODEL, 
+<a name="l00206"></a>00206          <a class="code" href="namespacemoltk_1_1dp.html#ae2384a91af43f1f96d02fa69319a0a8a" title="Whether alignment operands have preexisting gaps (e.g. alignments) or not (e.g. single sequences)...">DPAlignGapping</a> ALIGN_TYPE, 
+<a name="l00207"></a>00207          <span class="keywordtype">int</span> GAP_NSEGS 
+<a name="l00208"></a>00208          &gt;
+<a name="l00209"></a>00209 <span class="keyword">struct </span>DPTable;
+<a name="l00210"></a>00210 
+<a name="l00211"></a>00211 
+<a name="l00214"></a>00214 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE&gt;
+<a name="l00215"></a><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html">00215</a> <span class="keyword">struct </span><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResult</a>
+<a name="l00216"></a>00216 {
+<a name="l00217"></a><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">00217</a>     <a class="code" href="classmoltk_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment.">moltk::EString</a> <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>;
+<a name="l00218"></a><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">00218</a>     <a class="code" href="classmoltk_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment.">moltk::EString</a> <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>;
+<a name="l00219"></a><a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a8a554558c4efa955f56e4855be1e8136">00219</a>     SCORE_TYPE <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a8a554558c4efa955f56e4855be1e8136">score</a>;
+<a name="l00220"></a>00220 };
 <a name="l00221"></a>00221 
-<a name="l00222"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7030b83eb0d14d747161738c61c066db">00222</a>     <span class="keywordtype">void</span> allocate()
-<a name="l00223"></a>00223     {
-<a name="l00224"></a>00224         <span class="comment">// TODO - small memory version allocates just 2 or 3 rows.</span>
-<a name="l00225"></a>00225         table.assign(num_rows(), <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aed0a8969b07c42d57cdf1fc7cf80a1ee">RowType</a>(num_columns()));
-<a name="l00226"></a>00226     }
-<a name="l00227"></a>00227 
-<a name="l00228"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a4d7434e959c1a7d1ac139afc2ae030bc">00228</a>     <span class="keywordtype">void</span> initialize()
-<a name="l00229"></a>00229     {
-<a name="l00230"></a>00230         <span class="keywordflow">if</span> (num_rows() &lt; 1) <span class="keywordflow">return</span>;
-<a name="l00231"></a>00231         <span class="keywordflow">if</span> (num_columns() &lt; 1) <span class="keywordflow">return</span>;
-<a name="l00232"></a>00232         <span class="comment">// top left corner</span>
-<a name="l00233"></a>00233         table[0][0].initialize(*target_positions[0],
-<a name="l00234"></a>00234                                *query_positions[0]);
-<a name="l00235"></a>00235         <span class="comment">// Left column</span>
-<a name="l00236"></a>00236         <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 1; i &lt; num_rows(); ++i)
-<a name="l00237"></a>00237             table[i][0].initialize(*target_positions[i],
-<a name="l00238"></a>00238                                    *query_positions[0]);
-<a name="l00239"></a>00239         <span class="comment">// Top row</span>
-<a name="l00240"></a>00240         <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> j = 1; j &lt; num_columns(); ++j)
-<a name="l00241"></a>00241             table[0][j].initialize(*target_positions[0],
-<a name="l00242"></a>00242                                    *query_positions[j]);
-<a name="l00243"></a>00243     }
-<a name="l00244"></a>00244 
-<a name="l00245"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aedad0f68f7c4e5d3ea6ebbcba3850662">00245</a>     <span class="keywordtype">void</span> compute_recurrence()
-<a name="l00246"></a>00246     {
-<a name="l00247"></a>00247         <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; num_rows(); ++i)
-<a name="l00248"></a>00248             <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 1; j &lt; num_columns(); ++j)
-<a name="l00249"></a>00249             {
-<a name="l00250"></a>00250                 table[i][j].compute_recurrence(
-<a name="l00251"></a>00251                         table[i-1][j-1], <span class="comment">// up_left</span>
-<a name="l00252"></a>00252                         table[i-1][j], <span class="comment">// up</span>
-<a name="l00253"></a>00253                         table[i][j-1], <span class="comment">// left</span>
-<a name="l00254"></a>00254                         *target_positions[i],
-<a name="l00255"></a>00255                         *query_positions[j]);
-<a name="l00256"></a>00256             }
-<a name="l00257"></a>00257     }
-<a name="l00258"></a>00258 
-<a name="l00259"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#afa3f529f00fe88880b32116828027b95">00259</a>     <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResultType</a> compute_traceback()
-<a name="l00260"></a>00260     {
-<a name="l00261"></a>00261         <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResultType</a> result;
-<a name="l00262"></a>00262         <span class="keywordtype">int</span> i = num_rows() - 1;
-<a name="l00263"></a>00263         <span class="keywordtype">int</span> j = num_columns() - 1;
-<a name="l00264"></a>00264         result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a8a554558c4efa955f56e4855be1e8136">score</a> = table[i][j].v.score;
-<a name="l00265"></a>00265         <span class="comment">// cout &lt;&lt; &quot;final alignment score = &quot; &lt;&lt; dp_table[i][j].v &lt;&lt; endl;</span>
-<a name="l00266"></a>00266         <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0c" title="TracebackPointer to help reconstruct the final alignment.">TracebackPointer</a> tracebackPointer = table[i][j].compute_traceback_pointer();
-<a name="l00267"></a>00267         <span class="keywordflow">while</span>( (i &gt; 0) || (j &gt; 0) )
-<a name="l00268"></a>00268         {
-<a name="l00269"></a>00269             <span class="comment">// cout &lt;&lt; &quot;traceback[&quot; &lt;&lt; i &lt;&lt; &quot;][&quot; &lt;&lt; j &lt;&lt; &quot;]&quot; &lt;&lt; endl;</span>
-<a name="l00270"></a>00270             <span class="keywordflow">switch</span>(tracebackPointer)
-<a name="l00271"></a>00271             {
-<a name="l00272"></a>00272             <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca9d2fbcded45ce4a53f3dfc4d93ae9f42">TRACEBACK_UPLEFT</a>:
-<a name="l00273"></a>00273                 --i; --j;
-<a name="l00274"></a>00274                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(1);
-<a name="l00275"></a>00275                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(1);
-<a name="l00276"></a>00276                 <span class="comment">// cout &lt;&lt; &quot;upleft&quot; &lt;&lt; endl;</span>
-<a name="l00277"></a>00277                 <span class="keywordflow">break</span>;
-<a name="l00278"></a>00278             <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0cab17ffddcd5713d8a8d67ebfcff4fccdc">TRACEBACK_UP</a>:
-<a name="l00279"></a>00279                 --i;
-<a name="l00280"></a>00280                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(1);
-<a name="l00281"></a>00281                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(-1);
-<a name="l00282"></a>00282                 <span class="comment">// cout &lt;&lt; &quot;up&quot; &lt;&lt; endl;</span>
-<a name="l00283"></a>00283                 <span class="keywordflow">break</span>;
-<a name="l00284"></a>00284             <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca448324d993ba9dd1c87753515d34d6ee">TRACEBACK_LEFT</a>:
-<a name="l00285"></a>00285                 --j;
-<a name="l00286"></a>00286                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(-1);
-<a name="l00287"></a>00287                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(1);
-<a name="l00288"></a>00288                 <span class="comment">// cout &lt;&lt; &quot;left&quot; &lt;&lt; endl;</span>
-<a name="l00289"></a>00289                 <span class="keywordflow">break</span>;
-<a name="l00290"></a>00290             <span class="keywordflow">default</span>:
-<a name="l00291"></a>00291                 std::cerr &lt;&lt; <span class="stringliteral">&quot;Traceback error!&quot;</span> &lt;&lt; std::endl;
-<a name="l00292"></a>00292                 assert(<span class="keyword">false</span>);
-<a name="l00293"></a>00293                 <span class="keywordflow">break</span>;
-<a name="l00294"></a>00294             }
-<a name="l00295"></a>00295             tracebackPointer = table[i][j].compute_traceback_pointer();
-<a name="l00296"></a>00296         }
-<a name="l00297"></a>00297         assert(i == 0);
-<a name="l00298"></a>00298         assert(j == 0);
-<a name="l00299"></a>00299         <span class="comment">// OK, the sequences are actually backwards here</span>
-<a name="l00300"></a>00300         result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>.<a class="code" href="classmoltk_1_1EString.html#a586773d72e57fe5a86ecaf3ae61aeabc">reverse</a>();
-<a name="l00301"></a>00301         result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>.<a class="code" href="classmoltk_1_1EString.html#a586773d72e57fe5a86ecaf3ae61aeabc">reverse</a>();
-<a name="l00302"></a>00302         <span class="keywordflow">return</span> result;
-<a name="l00303"></a>00303     }
-<a name="l00304"></a>00304 
-<a name="l00305"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a87b8f257e4325d3f4bab04d1d2497b2d">00305</a>     <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResultType</a> <a class="code" href="namespacemoltk.html#a403bc85428d8dd3e1b17e60f2968dc1d">align</a>()
-<a name="l00306"></a>00306     {
-<a name="l00307"></a>00307         allocate();
-<a name="l00308"></a>00308         initialize();
-<a name="l00309"></a>00309         compute_recurrence();
-<a name="l00310"></a>00310         <span class="keywordflow">return</span> compute_traceback();
-<a name="l00311"></a>00311     }
-<a name="l00312"></a>00312 
-<a name="l00313"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a21f347e4275f735f98a8999b989b3ba2">00313</a>     <a class="code" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">moltk::Alignment_&lt;SCORE_TYPE&gt;</a> <a class="code" href="namespacemoltk.html#a403bc85428d8dd3e1b17e60f2968dc1d">align</a>(<span class="keyword">const</span> <a class="code" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">moltk::Alignment_&lt;SCORE_TYPE&gt;</a>&amp; s1, 
-<a name="l00314"></a>00314                                  <span class="keyword">const</span> <a class="code" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">moltk::Alignment_&lt;SCORE_TYPE&gt;</a>&amp; s2,
-<a name="l00315"></a>00315                                  <span class="keyword">const</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer</a>&amp; scorer)
-<a name="l00316"></a>00316     {
-<a name="l00317"></a>00317         clear_positions();
-<a name="l00318"></a>00318         scorer.<a class="code" href="classmoltk_1_1MatrixScorer__.html#a65bcb5c028affd49b3f5dff07b0e3653">create_positions</a>(target_positions, s1);
-<a name="l00319"></a>00319         scorer.<a class="code" href="classmoltk_1_1MatrixScorer__.html#a65bcb5c028affd49b3f5dff07b0e3653">create_positions</a>(query_positions, s2);
-<a name="l00320"></a>00320         <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResult&lt;SCORE_TYPE&gt;</a> alignment_result = <a class="code" href="namespacemoltk.html#a403bc85428d8dd3e1b17e60f2968dc1d">align</a>();
-<a name="l00321"></a>00321         <a class="code" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">moltk::Alignment_&lt;SCORE_TYPE&gt;</a> result = 
-<a name="l00322"></a>00322             s1.<a class="code" href="classmoltk_1_1Alignment__.html#a1cf784f435f461b69d2cb6fed194e1c8" title="Align two sequence alignments using a pair of precomputed EStrings.">align</a>(s2, 
-<a name="l00323"></a>00323                      alignment_result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>, 
-<a name="l00324"></a>00324                      alignment_result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>);
-<a name="l00325"></a>00325         result.<a class="code" href="classmoltk_1_1Alignment__.html#a42cec9b9709afe53383953f3f687d16c" title="Set the sum of pairs score for this Alignment_. Make sure you put the correct answer!">set_score</a>(result.<a class="code" href="classmoltk_1_1Alignment__.html#a14c87e3b0fbf3fc6ddaffb74f18aa539" title="The precomputed total sum of pairs score of this Alignment_.">get_score</a>() + alignment_result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a8a554558c4efa955f56e4855be1e8136">score</a>);
-<a name="l00326"></a>00326         <span class="keywordflow">return</span> result;
-<a name="l00327"></a>00327     }
-<a name="l00328"></a>00328 
-<a name="l00329"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#ae278b5e48764ad0ecd4b833ac52b4577">00329</a>     <span class="keywordtype">size_t</span> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#ae278b5e48764ad0ecd4b833ac52b4577">num_rows</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> target_positions.size();}
-<a name="l00330"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#abb5e597dda753e8361ccaef2d5fa5aa8">00330</a>     <span class="keywordtype">size_t</span> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#abb5e597dda753e8361ccaef2d5fa5aa8">num_columns</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> query_positions.size();}
-<a name="l00331"></a>00331 
-<a name="l00333"></a>00333     <span class="comment">// friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const DPTable&amp; t);</span>
-<a name="l00334"></a>00334 
-<a name="l00336"></a>00336     <span class="comment">// friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const TableType&amp; t);</span>
-<a name="l00337"></a>00337 
-<a name="l00338"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a0aaff051f5c99bf16b58f4fc75b8bdc5">00338</a>     <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7d4e3dab063bd13056a7b952a8779231">TableType</a> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a0aaff051f5c99bf16b58f4fc75b8bdc5" title="Print out a summary of the positions and dynamic programming table for debugging.">table</a>;
-<a name="l00339"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a4ee166c7458cf99585b2804b93e2bef9">00339</a>     std::vector&lt;DPPosition&lt;SCORE_TYPE, 1&gt;*&gt; <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a4ee166c7458cf99585b2804b93e2bef9">query_positions</a>;
-<a name="l00340"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7cf3967048704d2fa0250427344ede8c">00340</a>     std::vector&lt;DPPosition&lt;SCORE_TYPE, 1&gt;*&gt; <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7cf3967048704d2fa0250427344ede8c">target_positions</a>;
-<a name="l00341"></a>00341 };
-<a name="l00342"></a>00342 
-<a name="l00343"></a>00343 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, DPMemoryModel MEMORY_MODEL, DPAlignGapping ALIGN_TYPE, <span class="keywordtype">int</span> GAP_NSEGS&gt;
-<a name="l00344"></a>00344 std::ostream&amp; <a class="code" href="namespacemoltk_1_1dp.html#a77b7e3ce0c9cfe4b90734b8466b1c782">operator&lt;&lt;</a>(std::ostream&amp; os, 
-<a name="l00345"></a>00345         <span class="keyword">const</span> moltk::dp::DPTable&lt;SCORE_TYPE,MEMORY_MODEL,ALIGN_TYPE,GAP_NSEGS&gt;&amp; t);
-<a name="l00346"></a>00346 
-<a name="l00347"></a>00347 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE,DPAlignGapping ALIGN_TYPE,<span class="keywordtype">int</span> GAP_NSEGS&gt;
-<a name="l00348"></a>00348 std::ostream&amp; <a class="code" href="namespacemoltk_1_1dp.html#a77b7e3ce0c9cfe4b90734b8466b1c782">operator&lt;&lt;</a>(std::ostream&amp; os, 
-<a name="l00349"></a>00349         <span class="keyword">const</span> std::vector&lt;std::vector&lt;<a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">moltk::dp::DPCell&lt;SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS&gt;</a> &gt; &gt;&amp;);
-<a name="l00350"></a>00350 
-<a name="l00351"></a>00351 }} <span class="comment">// namespace moltk::dp</span>
-<a name="l00352"></a>00352 
-<a name="l00353"></a>00353 <span class="preprocessor">#endif </span><span class="comment">/* MOLTK_DPTABLE_HPP_ */</span>
+<a name="l00222"></a>00222 
+<a name="l00224"></a>00224 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, DPAlignGapping ALIGN_TYPE&gt;
+<a name="l00225"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html">00225</a> <span class="keyword">struct </span>DPTable&lt;SCORE_TYPE, <a class="code" href="namespacemoltk_1_1dp.html#a3847dc6be50dae17fff97f2d922647feab8548c282fd21547171c41cb000859b2" title="Faster O(n^2) memory model.">DP_MEMORY_LARGE</a>, ALIGN_TYPE, 1&gt;
+<a name="l00226"></a>00226 {
+<a name="l00227"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a5d11d8cf9dfe39375d3e80e50c3788f4">00227</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">DPCell&lt;SCORE_TYPE, ALIGN_TYPE, 1&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a5d11d8cf9dfe39375d3e80e50c3788f4">CellType</a>;
+<a name="l00228"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aed0a8969b07c42d57cdf1fc7cf80a1ee">00228</a>     <span class="keyword">typedef</span> std::vector&lt;CellType&gt; <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aed0a8969b07c42d57cdf1fc7cf80a1ee">RowType</a>;
+<a name="l00229"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7d4e3dab063bd13056a7b952a8779231">00229</a>     <span class="keyword">typedef</span> std::vector&lt;RowType&gt; <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7d4e3dab063bd13056a7b952a8779231">TableType</a>;
+<a name="l00230"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aa9ae91f67a7f0e7f32be524106fcafc2">00230</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResult&lt;SCORE_TYPE&gt;</a> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aa9ae91f67a7f0e7f32be524106fcafc2">AlignmentResultType</a>;
+<a name="l00231"></a>00231 
+<a name="l00232"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#ae089f00ef3ddcb9e68ec7eea9532197c">00232</a>     <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#ae089f00ef3ddcb9e68ec7eea9532197c">~DPTable</a>() {clear_positions();}
+<a name="l00233"></a>00233 
+<a name="l00234"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a2a7e5308cf114962fc28069eac3bc255">00234</a>     <span class="keywordtype">void</span> clear_positions()
+<a name="l00235"></a>00235     {
+<a name="l00236"></a>00236         <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; target_positions.size(); ++i)
+<a name="l00237"></a>00237         {
+<a name="l00238"></a>00238             <span class="keyword">delete</span> target_positions[i];
+<a name="l00239"></a>00239             target_positions[i] = NULL;
+<a name="l00240"></a>00240         }
+<a name="l00241"></a>00241         target_positions.clear();
+<a name="l00242"></a>00242         <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; query_positions.size(); ++i)
+<a name="l00243"></a>00243         {
+<a name="l00244"></a>00244             <span class="keyword">delete</span> query_positions[i];
+<a name="l00245"></a>00245             query_positions[i] = NULL;
+<a name="l00246"></a>00246         }
+<a name="l00247"></a>00247         query_positions.clear();
+<a name="l00248"></a>00248     }
+<a name="l00249"></a>00249 
+<a name="l00250"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7030b83eb0d14d747161738c61c066db">00250</a>     <span class="keywordtype">void</span> allocate()
+<a name="l00251"></a>00251     {
+<a name="l00252"></a>00252         <span class="comment">// TODO - small memory version allocates just 2 or 3 rows.</span>
+<a name="l00253"></a>00253         table.assign(num_rows(), <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aed0a8969b07c42d57cdf1fc7cf80a1ee">RowType</a>(num_columns()));
+<a name="l00254"></a>00254     }
+<a name="l00255"></a>00255 
+<a name="l00256"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a4d7434e959c1a7d1ac139afc2ae030bc">00256</a>     <span class="keywordtype">void</span> initialize()
+<a name="l00257"></a>00257     {
+<a name="l00258"></a>00258         <span class="keywordflow">if</span> (num_rows() &lt; 1) <span class="keywordflow">return</span>;
+<a name="l00259"></a>00259         <span class="keywordflow">if</span> (num_columns() &lt; 1) <span class="keywordflow">return</span>;
+<a name="l00260"></a>00260         <span class="comment">// top left corner</span>
+<a name="l00261"></a>00261         table[0][0].initialize(*target_positions[0],
+<a name="l00262"></a>00262                                *query_positions[0]);
+<a name="l00263"></a>00263         <span class="comment">// Left column</span>
+<a name="l00264"></a>00264         <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 1; i &lt; num_rows(); ++i)
+<a name="l00265"></a>00265             table[i][0].initialize(*target_positions[i],
+<a name="l00266"></a>00266                                    *query_positions[0]);
+<a name="l00267"></a>00267         <span class="comment">// Top row</span>
+<a name="l00268"></a>00268         <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> j = 1; j &lt; num_columns(); ++j)
+<a name="l00269"></a>00269             table[0][j].initialize(*target_positions[0],
+<a name="l00270"></a>00270                                    *query_positions[j]);
+<a name="l00271"></a>00271     }
+<a name="l00272"></a>00272 
+<a name="l00273"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aedad0f68f7c4e5d3ea6ebbcba3850662">00273</a>     <span class="keywordtype">void</span> compute_recurrence()
+<a name="l00274"></a>00274     {
+<a name="l00275"></a>00275         <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; num_rows(); ++i)
+<a name="l00276"></a>00276             <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 1; j &lt; num_columns(); ++j)
+<a name="l00277"></a>00277             {
+<a name="l00278"></a>00278                 table[i][j].compute_recurrence(
+<a name="l00279"></a>00279                         table[i-1][j-1], <span class="comment">// up_left</span>
+<a name="l00280"></a>00280                         table[i-1][j], <span class="comment">// up</span>
+<a name="l00281"></a>00281                         table[i][j-1], <span class="comment">// left</span>
+<a name="l00282"></a>00282                         *target_positions[i],
+<a name="l00283"></a>00283                         *query_positions[j]);
+<a name="l00284"></a>00284             }
+<a name="l00285"></a>00285     }
+<a name="l00286"></a>00286 
+<a name="l00287"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#afa3f529f00fe88880b32116828027b95">00287</a>     <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResultType</a> compute_traceback()
+<a name="l00288"></a>00288     {
+<a name="l00289"></a>00289         <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResultType</a> result;
+<a name="l00290"></a>00290         <span class="keywordtype">int</span> i = num_rows() - 1;
+<a name="l00291"></a>00291         <span class="keywordtype">int</span> j = num_columns() - 1;
+<a name="l00292"></a>00292         result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a8a554558c4efa955f56e4855be1e8136">score</a> = table[i][j].v.score;
+<a name="l00293"></a>00293         <span class="comment">// cout &lt;&lt; &quot;final alignment score = &quot; &lt;&lt; dp_table[i][j].v &lt;&lt; endl;</span>
+<a name="l00294"></a>00294         <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0c" title="TracebackPointer to help reconstruct the final alignment.">TracebackPointer</a> tracebackPointer = table[i][j].compute_traceback_pointer();
+<a name="l00295"></a>00295         <span class="keywordflow">while</span>( (i &gt; 0) || (j &gt; 0) )
+<a name="l00296"></a>00296         {
+<a name="l00297"></a>00297             <span class="comment">// cout &lt;&lt; &quot;traceback[&quot; &lt;&lt; i &lt;&lt; &quot;][&quot; &lt;&lt; j &lt;&lt; &quot;]&quot; &lt;&lt; endl;</span>
+<a name="l00298"></a>00298             <span class="keywordflow">switch</span>(tracebackPointer)
+<a name="l00299"></a>00299             {
+<a name="l00300"></a>00300             <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca9d2fbcded45ce4a53f3dfc4d93ae9f42">TRACEBACK_UPLEFT</a>:
+<a name="l00301"></a>00301                 --i; --j;
+<a name="l00302"></a>00302                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(1);
+<a name="l00303"></a>00303                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(1);
+<a name="l00304"></a>00304                 <span class="comment">// cout &lt;&lt; &quot;upleft&quot; &lt;&lt; endl;</span>
+<a name="l00305"></a>00305                 <span class="keywordflow">break</span>;
+<a name="l00306"></a>00306             <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0cab17ffddcd5713d8a8d67ebfcff4fccdc">TRACEBACK_UP</a>:
+<a name="l00307"></a>00307                 --i;
+<a name="l00308"></a>00308                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(1);
+<a name="l00309"></a>00309                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(-1);
+<a name="l00310"></a>00310                 <span class="comment">// cout &lt;&lt; &quot;up&quot; &lt;&lt; endl;</span>
+<a name="l00311"></a>00311                 <span class="keywordflow">break</span>;
+<a name="l00312"></a>00312             <span class="keywordflow">case</span> <a class="code" href="namespacemoltk_1_1dp.html#acda879cd7560136dfc3f46cf568aff0ca448324d993ba9dd1c87753515d34d6ee">TRACEBACK_LEFT</a>:
+<a name="l00313"></a>00313                 --j;
+<a name="l00314"></a>00314                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(-1);
+<a name="l00315"></a>00315                 result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>.<a class="code" href="classmoltk_1_1EString.html#aef861c7800f5665af4af9eab4a791795">append_run</a>(1);
+<a name="l00316"></a>00316                 <span class="comment">// cout &lt;&lt; &quot;left&quot; &lt;&lt; endl;</span>
+<a name="l00317"></a>00317                 <span class="keywordflow">break</span>;
+<a name="l00318"></a>00318             <span class="keywordflow">default</span>:
+<a name="l00319"></a>00319                 std::cerr &lt;&lt; <span class="stringliteral">&quot;Traceback error!&quot;</span> &lt;&lt; std::endl;
+<a name="l00320"></a>00320                 assert(<span class="keyword">false</span>);
+<a name="l00321"></a>00321                 <span class="keywordflow">break</span>;
+<a name="l00322"></a>00322             }
+<a name="l00323"></a>00323             tracebackPointer = table[i][j].compute_traceback_pointer();
+<a name="l00324"></a>00324         }
+<a name="l00325"></a>00325         assert(i == 0);
+<a name="l00326"></a>00326         assert(j == 0);
+<a name="l00327"></a>00327         <span class="comment">// OK, the sequences are actually backwards here</span>
+<a name="l00328"></a>00328         result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>.<a class="code" href="classmoltk_1_1EString.html#a586773d72e57fe5a86ecaf3ae61aeabc">reverse</a>();
+<a name="l00329"></a>00329         result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>.<a class="code" href="classmoltk_1_1EString.html#a586773d72e57fe5a86ecaf3ae61aeabc">reverse</a>();
+<a name="l00330"></a>00330         <span class="keywordflow">return</span> result;
+<a name="l00331"></a>00331     }
+<a name="l00332"></a>00332 
+<a name="l00333"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a87b8f257e4325d3f4bab04d1d2497b2d">00333</a>     <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResultType</a> <a class="code" href="namespacemoltk.html#a403bc85428d8dd3e1b17e60f2968dc1d">align</a>()
+<a name="l00334"></a>00334     {
+<a name="l00335"></a>00335         allocate();
+<a name="l00336"></a>00336         initialize();
+<a name="l00337"></a>00337         compute_recurrence();
+<a name="l00338"></a>00338         <span class="keywordflow">return</span> compute_traceback();
+<a name="l00339"></a>00339     }
+<a name="l00340"></a>00340 
+<a name="l00341"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a21f347e4275f735f98a8999b989b3ba2">00341</a>     <a class="code" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">moltk::Alignment_&lt;SCORE_TYPE&gt;</a> <a class="code" href="namespacemoltk.html#a403bc85428d8dd3e1b17e60f2968dc1d">align</a>(<span class="keyword">const</span> <a class="code" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">moltk::Alignment_&lt;SCORE_TYPE&gt;</a>&amp; s1, 
+<a name="l00342"></a>00342                                  <span class="keyword">const</span> <a class="code" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">moltk::Alignment_&lt;SCORE_TYPE&gt;</a>&amp; s2,
+<a name="l00343"></a>00343                                  <span class="keyword">const</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer</a>&amp; scorer)
+<a name="l00344"></a>00344     {
+<a name="l00345"></a>00345         clear_positions();
+<a name="l00346"></a>00346         scorer.<a class="code" href="classmoltk_1_1MatrixScorer__.html#a08105eea98536c8b5766d1b2f6a9b145" title="Create precached data structures for alignment of two individual sequences.">create_positions</a>(target_positions, s1);
+<a name="l00347"></a>00347         scorer.<a class="code" href="classmoltk_1_1MatrixScorer__.html#a08105eea98536c8b5766d1b2f6a9b145" title="Create precached data structures for alignment of two individual sequences.">create_positions</a>(query_positions, s2);
+<a name="l00348"></a>00348         <a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html" title="Gap structure and score of a pairwise sequence alignment, used as an intermediate value during sequen...">AlignmentResult&lt;SCORE_TYPE&gt;</a> alignment_result = <a class="code" href="namespacemoltk.html#a403bc85428d8dd3e1b17e60f2968dc1d">align</a>();
+<a name="l00349"></a>00349         <a class="code" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">moltk::Alignment_&lt;SCORE_TYPE&gt;</a> result = 
+<a name="l00350"></a>00350             s1.<a class="code" href="classmoltk_1_1Alignment__.html#a1cf784f435f461b69d2cb6fed194e1c8" title="Align two sequence alignments using a pair of precomputed EStrings.">align</a>(s2, 
+<a name="l00351"></a>00351                      alignment_result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a6c76ec9b71ae8f8951779dc502e5d0c3">eString1</a>, 
+<a name="l00352"></a>00352                      alignment_result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a161ff0842e4aab4856065e40b69c2b72">eString2</a>);
+<a name="l00353"></a>00353         result.<a class="code" href="classmoltk_1_1Alignment__.html#a42cec9b9709afe53383953f3f687d16c" title="Set the sum of pairs score for this Alignment_. Make sure you put the correct answer!">set_score</a>(result.<a class="code" href="classmoltk_1_1Alignment__.html#a14c87e3b0fbf3fc6ddaffb74f18aa539" title="The precomputed total sum of pairs score of this Alignment_.">get_score</a>() + alignment_result.<a class="code" href="structmoltk_1_1dp_1_1AlignmentResult.html#a8a554558c4efa955f56e4855be1e8136">score</a>);
+<a name="l00354"></a>00354         <span class="keywordflow">return</span> result;
+<a name="l00355"></a>00355     }
+<a name="l00356"></a>00356 
+<a name="l00357"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#ae278b5e48764ad0ecd4b833ac52b4577">00357</a>     <span class="keywordtype">size_t</span> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#ae278b5e48764ad0ecd4b833ac52b4577">num_rows</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> target_positions.size();}
+<a name="l00358"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#abb5e597dda753e8361ccaef2d5fa5aa8">00358</a>     <span class="keywordtype">size_t</span> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#abb5e597dda753e8361ccaef2d5fa5aa8">num_columns</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> query_positions.size();}
+<a name="l00359"></a>00359 
+<a name="l00361"></a>00361     <span class="comment">// friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const DPTable&amp; t);</span>
+<a name="l00362"></a>00362 
+<a name="l00364"></a>00364     <span class="comment">// friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const TableType&amp; t);</span>
+<a name="l00365"></a>00365 
+<a name="l00366"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a0aaff051f5c99bf16b58f4fc75b8bdc5">00366</a>     <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a7d4e3dab063bd13056a7b952a8779231">TableType</a> <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a0aaff051f5c99bf16b58f4fc75b8bdc5" title="Print out a summary of the positions and dynamic programming table for debugging.">table</a>;
+<a name="l00367"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aedce8c28f14fc59d5bcfda67e8e6c6ca">00367</a>     std::vector&lt;DPPosition&lt;SCORE_TYPE, ALIGN_TYPE, 1&gt;*&gt; <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#aedce8c28f14fc59d5bcfda67e8e6c6ca">query_positions</a>;
+<a name="l00368"></a><a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a1bc69b4945577e1a2c8a8fa30af096a0">00368</a>     std::vector&lt;DPPosition&lt;SCORE_TYPE, ALIGN_TYPE, 1&gt;*&gt; <a class="code" href="structmoltk_1_1dp_1_1DPTable_3_01SCORE__TYPE_00_01DP__MEMORY__LARGE_00_01ALIGN__TYPE_00_011_01_4.html#a1bc69b4945577e1a2c8a8fa30af096a0">target_positions</a>;
+<a name="l00369"></a>00369 };
+<a name="l00370"></a>00370 
+<a name="l00371"></a>00371 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE, DPMemoryModel MEMORY_MODEL, DPAlignGapping ALIGN_TYPE, <span class="keywordtype">int</span> GAP_NSEGS&gt;
+<a name="l00372"></a>00372 std::ostream&amp; <a class="code" href="namespacemoltk_1_1dp.html#a77b7e3ce0c9cfe4b90734b8466b1c782">operator&lt;&lt;</a>(std::ostream&amp; os, 
+<a name="l00373"></a>00373         <span class="keyword">const</span> moltk::dp::DPTable&lt;SCORE_TYPE,MEMORY_MODEL,ALIGN_TYPE,GAP_NSEGS&gt;&amp; t);
+<a name="l00374"></a>00374 
+<a name="l00375"></a>00375 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> SCORE_TYPE,DPAlignGapping ALIGN_TYPE,<span class="keywordtype">int</span> GAP_NSEGS&gt;
+<a name="l00376"></a>00376 std::ostream&amp; <a class="code" href="namespacemoltk_1_1dp.html#a77b7e3ce0c9cfe4b90734b8466b1c782">operator&lt;&lt;</a>(std::ostream&amp; os, 
+<a name="l00377"></a>00377         <span class="keyword">const</span> std::vector&lt;std::vector&lt;<a class="code" href="structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table.">moltk::dp::DPCell&lt;SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS&gt;</a> &gt; &gt;&amp;);
+<a name="l00378"></a>00378 
+<a name="l00379"></a>00379 }} <span class="comment">// namespace moltk::dp</span>
+<a name="l00380"></a>00380 
+<a name="l00381"></a>00381 <span class="preprocessor">#endif </span><span class="comment">/* MOLTK_DPTABLE_HPP_ */</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->

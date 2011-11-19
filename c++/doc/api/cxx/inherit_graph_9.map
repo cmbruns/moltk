@@ -1,3 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned." alt="" coords="5,5,355,32"/>
+<area shape="rect" id="node1" href="$structmoltk_1_1dp_1_1DPPosition_3_01SCORE__TYPE_00_01dp_1_1DP__ALIGN__GAPPED__ALIGNMENTS_00_01GAP__NSEGS_01_4.html" title="Specialization of alignment column cache for alignment of alignments." alt="" coords="5,5,600,32"/>
 </map>

@@ -86,7 +86,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle">
@@ -106,17 +105,14 @@ Collaboration diagram for moltk::MatrixScorer_&lt; SCORE_TYPE, GAP_NSEGS &gt;:</
 
 <p><a href="classmoltk_1_1MatrixScorer__-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a81f6c7b3c16cbb5847e4e85ce4923632">ScoreType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">dp::DPPosition</a><br class="typebreak"/>
-&lt; SCORE_TYPE, GAP_NSEGS &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#adbe0cd19675e73b48d663c073f5f36cf">QueryPosition</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">dp::DPPosition</a><br class="typebreak"/>
-&lt; SCORE_TYPE, GAP_NSEGS &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a9099b84fb6fdd3936f70e2120aa57225">TargetPosition</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a093911098a3e0b7ad665a0cf2a5c6447">MatrixScorer_</a> (const <a class="el" href="classmoltk_1_1SubstitutionMatrix__.html">moltk::SubstitutionMatrix_</a>&lt; SCORE_TYPE &gt; &amp;<a class="el" href="classmoltk_1_1MatrixScorer__.html#a4bf1242ff86ad47455d09ce4df1a18e7">matrix</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a65bcb5c028affd49b3f5dff07b0e3653">create_positions</a> (std::vector&lt; <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">dp::DPPosition</a>&lt; SCORE_TYPE, GAP_NSEGS &gt; * &gt; &amp;positions, const <a class="el" href="namespacemoltk.html#a2d7910ca714d56deeca1e4219cd80721">Alignment</a> &amp;alignment) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a MatrixScorer using a particular substitution matrix.  <a href="#a093911098a3e0b7ad665a0cf2a5c6447"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a08105eea98536c8b5766d1b2f6a9b145">create_positions</a> (std::vector&lt; dp::DPPosition&lt; SCORE_TYPE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS &gt; * &gt; &amp;positions, const <a class="el" href="namespacemoltk.html#a2d7910ca714d56deeca1e4219cd80721">Alignment</a> &amp;alignment) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create precached data structures for alignment of two individual sequences.  <a href="#a08105eea98536c8b5766d1b2f6a9b145"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a6d0e8213f712b0fe14b6b82f472c17be">create_positions</a> (std::vector&lt; dp::DPPosition&lt; SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS &gt; * &gt; &amp;positions, const <a class="el" href="namespacemoltk.html#a2d7910ca714d56deeca1e4219cd80721">Alignment</a> &amp;alignment) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create precached data structures for alignment of two alignments.  <a href="#a6d0e8213f712b0fe14b6b82f472c17be"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a0d7def4e72c6e4263cb9506a1055978b">get_end_gaps_free</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#abe3caf1c15a2e325c7bd942b38fa8295">set_end_gaps_free</a> (bool f)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a74e1d7a6961120ce14f0097b88907514">get_default_gap_open_score</a> () const </td></tr>
@@ -145,53 +141,7 @@ Protected Attributes</h2></td></tr>
 class moltk::MatrixScorer_&lt; SCORE_TYPE, GAP_NSEGS &gt;</h3>
 
 <p>MatrixScorer scores alignments using a residue type matrix such as BLOSUM62 or PAM250. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="adbe0cd19675e73b48d663c073f5f36cf"></a><!-- doxytag: member="moltk::MatrixScorer_::QueryPosition" ref="adbe0cd19675e73b48d663c073f5f36cf" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">dp::DPPosition</a>&lt;SCORE_TYPE, GAP_NSEGS&gt; <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::<a class="el" href="classmoltk_1_1MatrixScorer__.html#adbe0cd19675e73b48d663c073f5f36cf">QueryPosition</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a81f6c7b3c16cbb5847e4e85ce4923632"></a><!-- doxytag: member="moltk::MatrixScorer_::ScoreType" ref="a81f6c7b3c16cbb5847e4e85ce4923632" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::<a class="el" href="classmoltk_1_1MatrixScorer__.html#a81f6c7b3c16cbb5847e4e85ce4923632">ScoreType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9099b84fb6fdd3936f70e2120aa57225"></a><!-- doxytag: member="moltk::MatrixScorer_::TargetPosition" ref="a9099b84fb6fdd3936f70e2120aa57225" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">dp::DPPosition</a>&lt;SCORE_TYPE, GAP_NSEGS&gt; <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::<a class="el" href="classmoltk_1_1MatrixScorer__.html#a9099b84fb6fdd3936f70e2120aa57225">TargetPosition</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a093911098a3e0b7ad665a0cf2a5c6447"></a><!-- doxytag: member="moltk::MatrixScorer_::MatrixScorer_" ref="a093911098a3e0b7ad665a0cf2a5c6447" args="(const moltk::SubstitutionMatrix_&lt; SCORE_TYPE &gt; &amp;matrix)" -->
 <div class="memitem">
 <div class="memproto">
@@ -208,6 +158,8 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Create a MatrixScorer using a particular substitution matrix. </p>
 
 </div>
 </div>
@@ -270,7 +222,7 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a65bcb5c028affd49b3f5dff07b0e3653"></a><!-- doxytag: member="moltk::MatrixScorer_::create_positions" ref="a65bcb5c028affd49b3f5dff07b0e3653" args="(std::vector&lt; dp::DPPosition&lt; SCORE_TYPE, GAP_NSEGS &gt; * &gt; &amp;positions, const Alignment &amp;alignment) const " -->
+<a class="anchor" id="a08105eea98536c8b5766d1b2f6a9b145"></a><!-- doxytag: member="moltk::MatrixScorer_::create_positions" ref="a08105eea98536c8b5766d1b2f6a9b145" args="(std::vector&lt; dp::DPPosition&lt; SCORE_TYPE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS &gt; * &gt; &amp;positions, const Alignment &amp;alignment) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -279,7 +231,7 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::create_positions </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">dp::DPPosition</a>&lt; SCORE_TYPE, GAP_NSEGS &gt; * &gt; &amp;&#160;</td>
+          <td class="paramtype">std::vector&lt; dp::DPPosition&lt; SCORE_TYPE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS &gt; * &gt; &amp;&#160;</td>
           <td class="paramname"><em>positions</em>, </td>
         </tr>
         <tr>
@@ -296,6 +248,39 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Create precached data structures for alignment of two individual sequences. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6d0e8213f712b0fe14b6b82f472c17be"></a><!-- doxytag: member="moltk::MatrixScorer_::create_positions" ref="a6d0e8213f712b0fe14b6b82f472c17be" args="(std::vector&lt; dp::DPPosition&lt; SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS &gt; * &gt; &amp;positions, const Alignment &amp;alignment) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::create_positions </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; dp::DPPosition&lt; SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS &gt; * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacemoltk.html#a2d7910ca714d56deeca1e4219cd80721">Alignment</a> &amp;&#160;</td>
+          <td class="paramname"><em>alignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create precached data structures for alignment of two alignments. </p>
 
 </div>
 </div>

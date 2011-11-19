@@ -32,9 +32,7 @@
 
 #include "generated_code_msvc/displacement.pypp.hpp"
 
-#include "generated_code_msvc/dppositionlist.pypp.hpp"
-
-#include "generated_code_msvc/dptableilu1.pypp.hpp"
+#include "generated_code_msvc/dptableilg1.pypp.hpp"
 
 #include "generated_code_msvc/estring.pypp.hpp"
 
@@ -60,6 +58,10 @@
 
 #include "generated_code_msvc/rotation3d.pypp.hpp"
 
+#include "generated_code_msvc/std_vector_dppositionig1.pypp.hpp"
+
+#include "generated_code_msvc/std_vector_dppositioniu1.pypp.hpp"
+
 #include "generated_code_msvc/std_vector_information.pypp.hpp"
 
 #include "generated_code_msvc/std_vector_int.pypp.hpp"
@@ -81,7 +83,9 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_std_vector_Information_class();
 
-    register_DPPositionList_class();
+    register_std_vector_DPPositionIU1_class();
+
+    register_std_vector_DPPositionIG1_class();
 
     register_std_vector_int_class();
 
@@ -115,7 +119,7 @@ BOOST_PYTHON_MODULE(_moltk){
 
     register_Displacement_class();
 
-    register_DPTableILU1_class();
+    register_DPTableILG1_class();
 
     register_InformationDimension_class();
 

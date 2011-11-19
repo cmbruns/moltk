@@ -53,13 +53,42 @@ struct RunningGapScore;
 template<typename SCORE_TYPE>
 struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
 {
-    typedef DPPosition<SCORE_TYPE, 1> PositionType;
+    typedef DPPosition<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1> PositionType;
     /// Update from previous dynamic programming cell
     void compute_recurrence(
             const RunningGapScore& pred,
             const RunningScore<SCORE_TYPE>& v,
-            const DPPosition<SCORE_TYPE, 1>& pos1,
-            const DPPosition<SCORE_TYPE, 1>& pos2)
+            const PositionType& pos1,
+            const PositionType& pos2)
+    {
+        score = std::max(pred.score, v.score + pos1.gap_score.open_score)
+                + pos1.gap_score.extension_score;
+    }
+    void initialize(const PositionType& pos1, const PositionType& pos2)
+    {
+        if (0 != pos1.index) {
+            score = -moltk::units::infinity<SCORE_TYPE>();
+            return;
+        }
+        score = (moltk::Real)pos2.index * pos1.gap_score.extension_score
+                + pos1.gap_score.open_score;
+    }
+
+    SCORE_TYPE score;
+};
+
+
+/// Template specialization for alignment of alignments affine gap running score (E or F in Gusfield recurrence)
+template<typename SCORE_TYPE>
+struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
+{
+    typedef DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1> PositionType;
+    /// Update from previous dynamic programming cell
+    void compute_recurrence(
+            const RunningGapScore& pred,
+            const RunningScore<SCORE_TYPE>& v,
+            const PositionType& pos1,
+            const PositionType& pos2)
     {
         score = std::max(pred.score, v.score + pos1.gap_score.open_score)
                 + pos1.gap_score.extension_score;
@@ -87,10 +116,9 @@ struct DPCell
 {
     typedef RunningGapScore<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> GapScoreType;
     typedef RunningScore<SCORE_TYPE> ScoreType;
-    typedef DPPosition<SCORE_TYPE, GAP_NSEGS> TargetPosType;
-    typedef DPPosition<SCORE_TYPE, GAP_NSEGS> QueryPosType;
+    typedef DPPosition<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> PositionType;
 
-    void initialize(const TargetPosType& pos1, const QueryPosType& pos2)
+    void initialize(const PositionType& pos1, const PositionType& pos2)
     {
         // only initialize top row and column
         if ((pos1.index != 0) && (pos2.index != 0))
@@ -107,8 +135,8 @@ struct DPCell
     void compute_recurrence(const DPCell& up_left,
                             const DPCell& up,
                             const DPCell& left,
-                            const DPPosition<SCORE_TYPE, GAP_NSEGS>& pos1,
-                            const DPPosition<SCORE_TYPE, GAP_NSEGS>& pos2) // score for insertion gap in sequence 2
+                            const PositionType& pos1,
+                            const PositionType& pos2) // score for insertion gap in sequence 2
     {
         // This recurrence comes from Gusfield chapter 11.
         // best score with ungapped alignment of i with j
@@ -336,8 +364,8 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     // friend std::ostream& operator<<(std::ostream& os, const TableType& t);
 
     TableType table;
-    std::vector<DPPosition<SCORE_TYPE, 1>*> query_positions;
-    std::vector<DPPosition<SCORE_TYPE, 1>*> target_positions;
+    std::vector<DPPosition<SCORE_TYPE, ALIGN_TYPE, 1>*> query_positions;
+    std::vector<DPPosition<SCORE_TYPE, ALIGN_TYPE, 1>*> target_positions;
 };
 
 template<typename SCORE_TYPE, DPMemoryModel MEMORY_MODEL, DPAlignGapping ALIGN_TYPE, int GAP_NSEGS>

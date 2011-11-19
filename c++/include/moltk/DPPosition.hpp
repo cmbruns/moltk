@@ -15,6 +15,7 @@
 #define MOLTK_DPPOSITION_HPP_
 
 #include "moltk/units.hpp"
+#include "moltk/dp_params.hpp"
 #include <vector>
 
 namespace moltk {
@@ -58,9 +59,16 @@ public:
 /// Optimized for fast scoring during alignment.
 /// Base class of QueryPosition and TargetPosition
 template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
+         dp::DPAlignGapping DP_ALIGN_TYPE,
          int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
          >
-struct DPPosition
+struct DPPosition;
+
+/// Specialization of alignment column cache for alignment of alignments
+template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
+         int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
+         >
+struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
 {
     SCORE_TYPE score(const DPPosition& rhs) const
     {
@@ -86,6 +94,36 @@ struct DPPosition
     std::vector<SCORE_TYPE> target_scores_by_residue_type_index;
 };
 
+/// Specialization of alignment column cache for alignment two individual sequences
+template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
+         int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
+         >
+struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS>
+{
+    SCORE_TYPE score(const DPPosition& rhs) const
+    {
+        SCORE_TYPE result = moltk::units::zero<SCORE_TYPE>();
+        const DPPosition& lhs = *this;
+        typename QueryWeights::const_iterator i;
+        const QueryWeights& queryWeights = rhs.query_residue_type_index_weights;
+        for (i = queryWeights.begin();  i != queryWeights.end(); ++i)
+        {
+            double resTypeCount = i->second;
+            size_t resTypeIndex = i->first;
+            result += resTypeCount * lhs.target_scores_by_residue_type_index[resTypeIndex];
+        }
+        return result;
+    }
+
+    GapScore<SCORE_TYPE, GAP_NSEGS> gap_score;
+    size_t index; ///< column number of this position
+    // query cache for score calculation
+    // TODO - this is two sequence case, do don't need to cache all this stuff
+    typedef std::vector< std::pair<size_t, double> > QueryWeights;
+    QueryWeights query_residue_type_index_weights;
+    // target cache for score calculation
+    std::vector<SCORE_TYPE> target_scores_by_residue_type_index;
+};
 
 }} // namespace moltk::dp
 
