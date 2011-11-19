@@ -1,10 +1,11 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$DPPosition_8hpp.html" title="Templated classes GapScore and DPPosition to efficiently represent sequence residues during alignment..." alt="" coords="111,155,259,181"/>
-<area shape="rect" id="node21" href="$Alignment_8hpp.html" title="Alignment class representing a sequence alignment." alt="" coords="512,80,653,107"/>
-<area shape="rect" id="node36" href="$SubstitutionMatrix_8hpp.html" title="SubstitutionMatrix class for look up of residue alignment scores." alt="" coords="335,155,523,181"/>
-<area shape="rect" id="node5" href="$units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com..." alt="" coords="217,229,327,256"/>
+<area shape="rect" id="node3" href="$DPPosition_8hpp.html" title="Templated classes GapScore and DPPosition to efficiently represent sequence residues during alignment..." alt="" coords="106,155,253,181"/>
+<area shape="rect" id="node23" href="$Alignment_8hpp.html" title="Alignment class representing a sequence alignment." alt="" coords="507,80,648,107"/>
+<area shape="rect" id="node38" href="$SubstitutionMatrix_8hpp.html" title="SubstitutionMatrix class for look up of residue alignment scores." alt="" coords="330,155,517,181"/>
+<area shape="rect" id="node5" href="$units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com..." alt="" coords="225,229,335,256"/>
+<area shape="rect" id="node19" href="$dp__params_8hpp.html" title="Defines options that affect the details of the dynamic programming sequence alignment algorithm..." alt="" coords="53,229,200,256"/>
 <area shape="rect" id="node7" href="$Real_8hpp.html" title="typedef for real number representation in MolTK" alt="" coords="315,304,424,331"/>
-<area shape="rect" id="node23" href="$EString_8hpp.html" title="EString class compact representation of aligned sequence gap structure." alt="" coords="697,229,823,256"/>
-<area shape="rect" id="node28" href="$PDBStructure_8hpp.html" title="Macromolecular atomic structure classes." alt="" coords="548,155,711,181"/>
-<area shape="rect" id="node30" href="$Biosequence_8hpp.html" title="Biosequence class representing macromolecule sequences." alt="" coords="462,229,620,256"/>
+<area shape="rect" id="node25" href="$EString_8hpp.html" title="EString class compact representation of aligned sequence gap structure." alt="" coords="697,229,823,256"/>
+<area shape="rect" id="node30" href="$PDBStructure_8hpp.html" title="Macromolecular atomic structure classes." alt="" coords="543,155,705,181"/>
+<area shape="rect" id="node32" href="$Biosequence_8hpp.html" title="Biosequence class representing macromolecule sequences." alt="" coords="462,229,620,256"/>
 </map>

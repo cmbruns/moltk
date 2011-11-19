@@ -42,13 +42,15 @@ template<class SCORE_TYPE, int GAP_NSEGS>
 class MatrixScorer_
 {
 public:
-    typedef SCORE_TYPE ScoreType;
-    typedef dp::DPPosition<SCORE_TYPE, GAP_NSEGS> QueryPosition;
-    typedef dp::DPPosition<SCORE_TYPE, GAP_NSEGS> TargetPosition;
-
+    /// Create a MatrixScorer using a particular substitution matrix
     explicit MatrixScorer_(const moltk::SubstitutionMatrix_<SCORE_TYPE>& matrix);
+    /// Create precached data structures for alignment of two individual sequences
     void create_positions(
-        std::vector<dp::DPPosition<SCORE_TYPE, GAP_NSEGS>*>& positions, 
+        std::vector<dp::DPPosition<SCORE_TYPE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS>*>& positions, 
+        const Alignment& alignment) const;
+    /// Create precached data structures for alignment of two alignments
+    void create_positions(
+        std::vector<dp::DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>*>& positions, 
         const Alignment& alignment) const;
     bool get_end_gaps_free() const {return b_end_gaps_free;}
     void set_end_gaps_free(bool f) {b_end_gaps_free = f;}

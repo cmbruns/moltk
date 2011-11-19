@@ -10,7 +10,7 @@ void register_MatrixScorer_class(){
 
     { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >
         typedef bp::class_< moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > > MatrixScorer_exposer_t;
-        MatrixScorer_exposer_t MatrixScorer_exposer = MatrixScorer_exposer_t( "MatrixScorer", "\n MatrixScorer scores alignments using a residue type\n matrix such as BLOSUM62 or PAM250.\n", bp::init< moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const & >(( bp::arg("matrix") )) );
+        MatrixScorer_exposer_t MatrixScorer_exposer = MatrixScorer_exposer_t( "MatrixScorer", "\n MatrixScorer scores alignments using a residue type\n matrix such as BLOSUM62 or PAM250.\n", bp::init< moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const & >(( bp::arg("matrix") ), "\n Create a MatrixScorer using a particular substitution matrix\n") );
         bp::scope MatrixScorer_scope( MatrixScorer_exposer );
         bp::implicitly_convertible< moltk::SubstitutionMatrix_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const &, moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > >();
         { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::calc_explicit_pair_score
@@ -40,12 +40,25 @@ void register_MatrixScorer_class(){
         { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::create_positions
         
             typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
-            typedef void ( exported_class_t::*create_positions_function_type )( ::std::vector< moltk::dp::DPPosition<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>* > &,::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const & ) const;
+            typedef void ( exported_class_t::*create_positions_function_type )( ::std::vector< moltk::dp::DPPosition<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, DP_ALIGN_UNGAPPED_SEQUENCES, 1>* > &,::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const & ) const;
             
             MatrixScorer_exposer.def( 
                 "create_positions"
                 , create_positions_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::create_positions )
-                , ( bp::arg("positions"), bp::arg("alignment") ) );
+                , ( bp::arg("positions"), bp::arg("alignment") )
+                , "\n Create precached data structures for alignment of two individual sequences\n" );
+        
+        }
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::create_positions
+        
+            typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
+            typedef void ( exported_class_t::*create_positions_function_type )( ::std::vector< moltk::dp::DPPosition<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, (moltk::dp::DPAlignGapping)1, 1>* > &,::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > const & ) const;
+            
+            MatrixScorer_exposer.def( 
+                "create_positions"
+                , create_positions_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::create_positions )
+                , ( bp::arg("positions"), bp::arg("alignment") )
+                , "\n Create precached data structures for alignment of two alignments\n" );
         
         }
         { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_default_gap_extension_score

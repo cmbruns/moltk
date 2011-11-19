@@ -1,18 +1,18 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$Aligner_8hpp.html" title="Aligner class for aligning Biosequences and Alignments using a MatrixScorer." alt="" coords="309,80,432,107"/>
-<area shape="rect" id="node53" href="$RigidTransform_8hpp.html" title="RigidTransform class representing rotation and translation between coordinate frames." alt="" coords="470,80,639,107"/>
-<area shape="rect" id="node5" href="$DPTable_8hpp.html" title="Templated classes encapsulating dynamic programming sequence alignment algorithms." alt="" coords="278,155,409,181"/>
-<area shape="rect" id="node7" href="$MatrixScorer_8hpp.html" title="MatrixScorer class to efficiently compare DPPositions during alignment." alt="" coords="265,229,423,256"/>
-<area shape="rect" id="node47" href="$dp__params_8hpp.html" title="Defines options that affect the details of the dynamic programming sequence alignment algorithm..." alt="" coords="95,229,241,256"/>
-<area shape="rect" id="node9" href="$DPPosition_8hpp.html" title="Templated classes GapScore and DPPosition to efficiently represent sequence residues during alignment..." alt="" coords="429,304,576,331"/>
-<area shape="rect" id="node27" href="$Alignment_8hpp.html" title="Alignment class representing a sequence alignment." alt="" coords="263,304,404,331"/>
-<area shape="rect" id="node42" href="$SubstitutionMatrix_8hpp.html" title="SubstitutionMatrix class for look up of residue alignment scores." alt="" coords="50,304,237,331"/>
-<area shape="rect" id="node11" href="$units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com..." alt="" coords="597,379,707,405"/>
-<area shape="rect" id="node13" href="$Real_8hpp.html" title="typedef for real number representation in MolTK" alt="" coords="844,453,953,480"/>
-<area shape="rect" id="node29" href="$EString_8hpp.html" title="EString class compact representation of aligned sequence gap structure." alt="" coords="47,453,173,480"/>
-<area shape="rect" id="node34" href="$PDBStructure_8hpp.html" title="Macromolecular atomic structure classes." alt="" coords="248,379,411,405"/>
-<area shape="rect" id="node36" href="$Biosequence_8hpp.html" title="Biosequence class representing macromolecule sequences." alt="" coords="250,453,408,480"/>
-<area shape="rect" id="node55" href="$Rotation3D_8hpp.html" title="Rotation3D class representing a 3D rotation matrix." alt="" coords="536,155,683,181"/>
-<area shape="rect" id="node57" href="$Quaternion_8hpp.html" title="Quaternion class with stable four element representation of a rotation in 3D." alt="" coords="569,229,716,256"/>
-<area shape="rect" id="node59" href="$Vector3D_8hpp.html" title="Vector3D class representing points or vectors in 3&#45;space." alt="" coords="601,304,703,331"/>
+<area shape="rect" id="node3" href="$Aligner_8hpp.html" title="Aligner class for aligning Biosequences and Alignments using a MatrixScorer." alt="" coords="243,80,365,107"/>
+<area shape="rect" id="node54" href="$RigidTransform_8hpp.html" title="RigidTransform class representing rotation and translation between coordinate frames." alt="" coords="422,80,591,107"/>
+<area shape="rect" id="node5" href="$DPTable_8hpp.html" title="Templated classes encapsulating dynamic programming sequence alignment algorithms." alt="" coords="174,155,305,181"/>
+<area shape="rect" id="node7" href="$MatrixScorer_8hpp.html" title="MatrixScorer class to efficiently compare DPPositions during alignment." alt="" coords="321,229,479,256"/>
+<area shape="rect" id="node25" href="$dp__params_8hpp.html" title="Defines options that affect the details of the dynamic programming sequence alignment algorithm..." alt="" coords="49,379,196,405"/>
+<area shape="rect" id="node9" href="$DPPosition_8hpp.html" title="Templated classes GapScore and DPPosition to efficiently represent sequence residues during alignment..." alt="" coords="159,304,307,331"/>
+<area shape="rect" id="node29" href="$Alignment_8hpp.html" title="Alignment class representing a sequence alignment." alt="" coords="544,304,685,331"/>
+<area shape="rect" id="node44" href="$SubstitutionMatrix_8hpp.html" title="SubstitutionMatrix class for look up of residue alignment scores." alt="" coords="331,304,519,331"/>
+<area shape="rect" id="node11" href="$units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com..." alt="" coords="709,379,819,405"/>
+<area shape="rect" id="node13" href="$Real_8hpp.html" title="typedef for real number representation in MolTK" alt="" coords="1067,453,1176,480"/>
+<area shape="rect" id="node31" href="$EString_8hpp.html" title="EString class compact representation of aligned sequence gap structure." alt="" coords="373,453,499,480"/>
+<area shape="rect" id="node36" href="$PDBStructure_8hpp.html" title="Macromolecular atomic structure classes." alt="" coords="521,379,684,405"/>
+<area shape="rect" id="node38" href="$Biosequence_8hpp.html" title="Biosequence class representing macromolecule sequences." alt="" coords="523,453,681,480"/>
+<area shape="rect" id="node56" href="$Rotation3D_8hpp.html" title="Rotation3D class representing a 3D rotation matrix." alt="" coords="563,155,709,181"/>
+<area shape="rect" id="node58" href="$Quaternion_8hpp.html" title="Quaternion class with stable four element representation of a rotation in 3D." alt="" coords="596,229,743,256"/>
+<area shape="rect" id="node60" href="$Vector3D_8hpp.html" title="Vector3D class representing points or vectors in 3&#45;space." alt="" coords="712,304,813,331"/>
 </map>

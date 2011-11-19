@@ -57,7 +57,7 @@ public:
     static Aligner& get_shared_aligner();
 
     /// The actual dynamic programming table
-    dp::DPTable<moltk::units::Information, dp::DP_MEMORY_LARGE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, 1> test_table;
+    dp::DPTable<moltk::units::Information, dp::DP_MEMORY_LARGE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, 1> test_table;
 
 protected:
     MatrixScorer scorer;
