@@ -1,5 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structmoltk_1_1dp_1_1AlignmentPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned." alt="" coords="5,31,395,57"/>
-<area shape="rect" id="node3" href="$structmoltk_1_1dp_1_1QueryPosition.html" title="moltk::dp::QueryPosition\&lt; SCORE_TYPE, GAP_NSEGS \&gt;" alt="" coords="443,5,810,32"/>
-<area shape="rect" id="node5" href="$structmoltk_1_1dp_1_1TargetPosition.html" title="moltk::dp::TargetPosition\&lt; SCORE_TYPE, GAP_NSEGS \&gt;" alt="" coords="443,56,810,83"/>
+<area shape="rect" id="node1" href="$structmoltk_1_1dp_1_1DPCell.html" title="Generic node in dynamic programming table." alt="" coords="5,5,416,32"/>
 </map>

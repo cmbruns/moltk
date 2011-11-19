@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.4.3</span>
    </div>
    
   </td>
@@ -88,25 +88,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">moltk/units.hpp File Reference</div>  </div>
 </div>
 <div class="contents">
+
+<p>templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and computation.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="Real_8hpp_source.html">moltk/Real.hpp</a>&quot;</code><br/>
 <code>#include &quot;boost/utility.hpp&quot;</code><br/>
 <code>#include &lt;string&gt;</code><br/>
-<code>#include &lt;cmath&gt;</code><br/>
 <code>#include &lt;memory&gt;</code><br/>
-<code>#include &lt;cassert&gt;</code><br/>
+<code>#include &lt;limits&gt;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for units.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="units_8hpp__incl.png" border="0" usemap="#moltk_2units_8hpp" alt=""/></div>
 <map name="moltk_2units_8hpp" id="moltk_2units_8hpp">
-<area shape="rect" id="node3" href="Real_8hpp.html" title="moltk/Real.hpp" alt="" coords="5,80,115,107"/></map>
+<area shape="rect" id="node3" href="Real_8hpp.html" title="typedef for real number representation in MolTK" alt="" coords="5,80,115,107"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="units_8hpp__dep__incl.png" border="0" usemap="#moltk_2units_8hppdep" alt=""/></div>
 <map name="moltk_2units_8hppdep" id="moltk_2units_8hppdep">
-<area shape="rect" id="node3" href="Aligner_8hpp.html" title="moltk/Aligner.hpp" alt="" coords="122,155,245,181"/><area shape="rect" id="node5" href="MatrixScorer_8hpp.html" title="moltk/MatrixScorer.hpp" alt="" coords="221,229,378,256"/><area shape="rect" id="node9" href="Alignment_8hpp.html" title="moltk/Alignment.hpp" alt="" coords="26,80,167,107"/><area shape="rect" id="node12" href="DPTable_8hpp.html" title="moltk/DPTable.hpp" alt="" coords="192,80,323,107"/><area shape="rect" id="node16" href="Vector3D_8hpp.html" title="moltk/Vector3D.hpp" alt="" coords="400,80,537,107"/><area shape="rect" id="node20" href="Rotation3D_8hpp.html" title="moltk/Rotation3D.hpp" alt="" coords="546,229,693,256"/><area shape="rect" id="node7" href="moltk_8hpp.html" title="moltk.hpp" alt="" coords="437,379,515,405"/><area shape="rect" id="node18" href="Quaternion_8hpp.html" title="moltk/Quaternion.hpp" alt="" coords="505,155,651,181"/><area shape="rect" id="node22" href="RigidTransform_8hpp.html" title="moltk/RigidTransform.hpp" alt="" coords="453,304,622,331"/></map>
+<area shape="rect" id="node3" href="Alignment_8hpp.html" title="Alignment class representing a sequence alignment." alt="" coords="5,80,147,107"/><area shape="rect" id="node13" href="DPPosition_8hpp.html" title="Templated classes GapScore and DPPosition to efficiently represent sequence residues during alignment..." alt="" coords="171,80,319,107"/><area shape="rect" id="node16" href="Vector3D_8hpp.html" title="Vector3D class representing points or vectors in 3&#45;space." alt="" coords="555,80,692,107"/><area shape="rect" id="node25" href="SubstitutionMatrix_8hpp.html" title="SubstitutionMatrix class for look up of residue alignment scores." alt="" coords="343,80,531,107"/><area shape="rect" id="node5" href="MatrixScorer_8hpp.html" title="MatrixScorer class to efficiently compare DPPositions during alignment." alt="" coords="217,155,375,181"/><area shape="rect" id="node7" href="DPTable_8hpp.html" title="Templated classes encapsulating dynamic programming sequence alignment algorithms." alt="" coords="283,229,415,256"/><area shape="rect" id="node9" href="Aligner_8hpp.html" title="Aligner class for aligning Biosequences and Alignments using a MatrixScorer." alt="" coords="301,304,424,331"/><area shape="rect" id="node11" href="moltk_8hpp.html" title="Top level include that includes the rest of the moltk C++ API." alt="" coords="411,379,489,405"/><area shape="rect" id="node18" href="Quaternion_8hpp.html" title="Quaternion class with stable four element representation of a rotation in 3D." alt="" coords="500,155,647,181"/><area shape="rect" id="node20" href="Rotation3D_8hpp.html" title="Rotation3D class representing a 3D rotation matrix." alt="" coords="493,229,640,256"/><area shape="rect" id="node22" href="RigidTransform_8hpp.html" title="RigidTransform class representing rotation and translation between coordinate frames." alt="" coords="455,304,624,331"/></map>
 </div>
 </div>
 <p><a href="units_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -119,6 +121,10 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structmoltk_1_1units_1_1Unit.html" title="Unit represents a unit of measure, such as gram, nanometer, or second.">Unit</a> represents a unit of measure, such as gram, nanometer, or second.  <a href="structmoltk_1_1units_1_1Unit.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Quantity.html">moltk::units::Quantity&lt; U, Y &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;.">Quantity</a> represents a physical value with a unit, such as "5.6 nanometers".  <a href="structmoltk_1_1units_1_1Quantity.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1value__finder.html">moltk::units::value_finder&lt; T &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generalized templated methods to help template classes get zero or infinity values from both moltk::units::Quantities and built in types such as ints and doubles.  <a href="structmoltk_1_1units_1_1value__finder.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1value__finder_3_01Quantity_3_01U_00_01Y_01_4_01_4.html">moltk::units::value_finder&lt; Quantity&lt; U, Y &gt; &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Template specialization for zero and infinit <a class="el" href="structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;.">Quantity</a> values.  <a href="structmoltk_1_1units_1_1value__finder_3_01Quantity_3_01U_00_01Y_01_4_01_4.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html">moltk</a></td></tr>
@@ -174,13 +180,21 @@ Functions</h2></td></tr>
 ::SquareType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ac37533c25584c87bd737f25a9e214ef5">moltk::units::operator*</a> (const Quantity&lt; Unit&lt; D &gt;, Y &gt; &amp;lhs, const Quantity&lt; Unit&lt; D &gt;, Y &gt; &amp;rhs)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ac050671e9310a1b41bd10ceef0ffa3be">moltk::units::sin</a> (const Angle &amp;angle)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#aee4bd73aa460f5124d4025406ead2998">moltk::units::cos</a> (const Angle &amp;angle)</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a22d4035fd41ff891bccacc586a36e710">moltk::units::zero</a> ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a76395cb1d45dbcaa9accc68be8ce7eb8">moltk::units::infinity</a> ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a29d270dad4eda7c96c9995f7ba8e421f">moltk::units::one</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const BitUnit &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a602a3e9be116d69627ba824da7d22e72">moltk::units::bit</a> = BitUnit::get_instance()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const NanometerUnit &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#afe1d41f95fc042a8d19d25b877415b2d">moltk::units::nanometer</a> = NanometerUnit::get_instance()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const RadianUnit &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a516154a0a09f1ce7437b739ce48e0409">moltk::units::radian</a> = RadianUnit::get_instance()</td></tr>
 </table>
-</div>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and computation. </p>
+</div></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"

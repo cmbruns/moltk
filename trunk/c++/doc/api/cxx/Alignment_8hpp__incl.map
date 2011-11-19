@@ -1,7 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$EString_8hpp.html" title="moltk/EString.hpp" alt="" coords="30,80,156,107"/>
-<area shape="rect" id="node9" href="$Biosequence_8hpp.html" title="moltk/Biosequence.hpp" alt="" coords="235,155,393,181"/>
-<area shape="rect" id="node18" href="$PDBStructure_8hpp.html" title="moltk/PDBStructure.hpp" alt="" coords="232,80,395,107"/>
-<area shape="rect" id="node24" href="$Real_8hpp.html" title="moltk/Real.hpp" alt="" coords="944,155,1053,181"/>
-<area shape="rect" id="node28" href="$units_8hpp.html" title="moltk/units.hpp" alt="" coords="619,80,729,107"/>
+<area shape="rect" id="node3" href="$EString_8hpp.html" title="EString class compact representation of aligned sequence gap structure." alt="" coords="5,155,131,181"/>
+<area shape="rect" id="node9" href="$PDBStructure_8hpp.html" title="Macromolecular atomic structure classes." alt="" coords="153,80,316,107"/>
+<area shape="rect" id="node17" href="$units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com..." alt="" coords="449,80,559,107"/>
+<area shape="rect" id="node11" href="$Biosequence_8hpp.html" title="Biosequence class representing macromolecule sequences." alt="" coords="155,155,313,181"/>
+<area shape="rect" id="node19" href="$Real_8hpp.html" title="typedef for real number representation in MolTK" alt="" coords="699,155,808,181"/>
 </map>

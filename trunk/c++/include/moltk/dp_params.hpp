@@ -3,6 +3,12 @@
  *
  */
 
+/*!
+ * \file
+ * Defines options that affect the details of the dynamic programming sequence alignment algorithm.
+ */
+
+
 #ifndef MOLTK_DP_PARAMS_HPP_
 #define MOLTK_DP_PARAMS_HPP_
 

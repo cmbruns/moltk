@@ -5,20 +5,19 @@
  *      Author: brunsc
  */
 
+/*!
+ * \file
+ * Templated classes encapsulating dynamic programming sequence alignment algorithms.
+ */
+
+
 #ifndef MOLTK_DPTABLE_HPP_
 #define MOLTK_DPTABLE_HPP_
 
-#include "moltk/DPPosition.hpp"
 #include "moltk/MatrixScorer.hpp"
-#include "moltk/Alignment.hpp"
-#include "moltk/EString.hpp"
-#include "moltk/units.hpp"
 #include "moltk/dp_params.hpp"
-#include <vector>
-#include <iostream>
 #include <stdexcept>
 #include <cassert>
-#include <limits>
 
 namespace moltk {
 
@@ -182,6 +181,8 @@ template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information
 struct DPTable;
 
 
+/// Gap structure and score of a pairwise sequence alignment, 
+/// used as an intermediate value during sequence alignment.
 template<typename SCORE_TYPE>
 struct AlignmentResult
 {

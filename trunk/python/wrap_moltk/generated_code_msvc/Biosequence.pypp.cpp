@@ -66,13 +66,13 @@ void register_Biosequence_class(){
 
     { //::moltk::Biosequence
         typedef bp::class_< Biosequence_wrapper, bp::bases< moltk::BaseBiosequence > > Biosequence_exposer_t;
-        Biosequence_exposer_t Biosequence_exposer = Biosequence_exposer_t( "Biosequence", "\n A macromolecule sequence (DNA or RNA or protein)\n", bp::init< >() );
+        Biosequence_exposer_t Biosequence_exposer = Biosequence_exposer_t( "Biosequence", "\n A macromolecule sequence (DNA or RNA or protein)\n", bp::init< >("\n Create an empty sequence\n") );
         bp::scope Biosequence_scope( Biosequence_exposer );
-        Biosequence_exposer.def( bp::init< std::string const &, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" )) );
+        Biosequence_exposer.def( bp::init< std::string const &, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" ), "\n Create a sequence from a one-letter-code string\n") );
         bp::implicitly_convertible< std::string const &, moltk::Biosequence >();
-        Biosequence_exposer.def( bp::init< char const *, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" )) );
+        Biosequence_exposer.def( bp::init< char const *, bp::optional< std::string const & > >(( bp::arg("sequence"), bp::arg("description")="" ), "\n Create a sequence from a one-letter-code string\n") );
         bp::implicitly_convertible< char const *, moltk::Biosequence >();
-        Biosequence_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("rhs") )) );
+        Biosequence_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("rhs") ), "\n Copy a sequence\n") );
         { //::moltk::Biosequence::fasta
         
             typedef ::std::string ( ::moltk::Biosequence::*fasta_function_type )(  ) const;
@@ -89,7 +89,8 @@ void register_Biosequence_class(){
             
             Biosequence_exposer.def( 
                 "get_description"
-                , get_description_function_type( &::moltk::Biosequence::get_description ) );
+                , get_description_function_type( &::moltk::Biosequence::get_description )
+                , " Description string of this sequence." );
         
         }
         { //::moltk::Biosequence::get_number_of_residues
@@ -122,7 +123,8 @@ void register_Biosequence_class(){
                 "load_fasta"
                 , load_fasta_function_type( &::moltk::Biosequence::load_fasta )
                 , ( bp::arg("file_name") )
-                , bp::return_self< >() );
+                , bp::return_self< >()
+                , " Populate a sequence from a string in fasta format" );
         
         }
         { //::moltk::Biosequence::load_fasta
@@ -133,7 +135,8 @@ void register_Biosequence_class(){
                 "load_fasta"
                 , load_fasta_function_type( &::moltk::Biosequence::load_fasta )
                 , ( bp::arg("is") )
-                , bp::return_self< >() );
+                , bp::return_self< >()
+                , " Populate a sequence from a C++ stream in fasta format" );
         
         }
         { //::moltk::Biosequence::load_stream
@@ -143,7 +146,8 @@ void register_Biosequence_class(){
             Biosequence_exposer.def( 
                 "load_stream"
                 , load_stream_function_type( &::moltk::Biosequence::load_stream )
-                , ( bp::arg("is") ) );
+                , ( bp::arg("is") )
+                , " Sequence destructor" );
         
         }
         { //::moltk::Biosequence::repr

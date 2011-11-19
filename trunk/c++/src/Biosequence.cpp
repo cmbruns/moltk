@@ -31,6 +31,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <cassert>
+#include <sstream>
 
 using namespace std;
 

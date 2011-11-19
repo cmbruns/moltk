@@ -20,10 +20,14 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * RigidTransform class representing rotation and translation between coordinate frames
+ */
+
 #ifndef MOLTK_RIGID_TRANSFORM_HPP
 #define MOLTK_RIGID_TRANSFORM_HPP
 
-#include "moltk/Vector3D.hpp"
 #include "moltk/Rotation3D.hpp"
 
 namespace moltk {

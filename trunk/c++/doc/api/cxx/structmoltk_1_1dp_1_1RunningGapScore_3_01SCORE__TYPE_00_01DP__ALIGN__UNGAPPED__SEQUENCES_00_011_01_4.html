@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.4.3</span>
    </div>
    
   </td>
@@ -104,13 +104,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1dp_1_1AlignmentPosition.html">AlignmentPosition</a><br class="typebreak"/>
-&lt; SCORE_TYPE, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#aa9f6f5c20453e4830102f110179f1ca5">PositionType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">DPPosition</a>&lt; SCORE_TYPE, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a6f69440d15287f463453b440653bacfd">PositionType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a0ad218b5a9f3eb5652d2a53cc45eb041">compute_recurrence</a> (const RunningGapScore &amp;pred, const RunningScore&lt; SCORE_TYPE &gt; &amp;v, const <a class="el" href="structmoltk_1_1dp_1_1AlignmentPosition.html">AlignmentPosition</a>&lt; SCORE_TYPE, 1 &gt; &amp;pos1, const <a class="el" href="structmoltk_1_1dp_1_1AlignmentPosition.html">AlignmentPosition</a>&lt; SCORE_TYPE, 1 &gt; &amp;pos2)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Update from previous dynamic programming cell.  <a href="#a0ad218b5a9f3eb5652d2a53cc45eb041"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a2b6eb6f4b151efe3f413ef86b44bb142">initialize</a> (const <a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#aa9f6f5c20453e4830102f110179f1ca5">PositionType</a> &amp;pos1, const <a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#aa9f6f5c20453e4830102f110179f1ca5">PositionType</a> &amp;pos2)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#ac86f3786d5a0f705fd82e7e84e29a44e">compute_recurrence</a> (const RunningGapScore &amp;pred, const <a class="el" href="structmoltk_1_1dp_1_1RunningScore.html">RunningScore</a>&lt; SCORE_TYPE &gt; &amp;v, const <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">DPPosition</a>&lt; SCORE_TYPE, 1 &gt; &amp;pos1, const <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">DPPosition</a>&lt; SCORE_TYPE, 1 &gt; &amp;pos2)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Update from previous dynamic programming cell.  <a href="#ac86f3786d5a0f705fd82e7e84e29a44e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a2b6eb6f4b151efe3f413ef86b44bb142">initialize</a> (const <a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a6f69440d15287f463453b440653bacfd">PositionType</a> &amp;pos1, const <a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a6f69440d15287f463453b440653bacfd">PositionType</a> &amp;pos2)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a4f927e74dfc33e81d635b08e074d7582">score</a></td></tr>
@@ -121,14 +120,14 @@ struct moltk::dp::RunningGapScore&lt; SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1
 
 <p>Template specialization for single sequence affine gap running score (E or F in Gusfield recurrence) </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="aa9f6f5c20453e4830102f110179f1ca5"></a><!-- doxytag: member="moltk::dp::RunningGapScore&lt; SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1 &gt;::PositionType" ref="aa9f6f5c20453e4830102f110179f1ca5" args="" -->
+<a class="anchor" id="a6f69440d15287f463453b440653bacfd"></a><!-- doxytag: member="moltk::dp::RunningGapScore&lt; SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1 &gt;::PositionType" ref="a6f69440d15287f463453b440653bacfd" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename SCORE_TYPE &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="structmoltk_1_1dp_1_1AlignmentPosition.html">AlignmentPosition</a>&lt;SCORE_TYPE, 1&gt; moltk::dp::RunningGapScore&lt; SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1 &gt;::<a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#aa9f6f5c20453e4830102f110179f1ca5">PositionType</a></td>
+          <td class="memname">typedef <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">DPPosition</a>&lt;SCORE_TYPE, 1&gt; moltk::dp::RunningGapScore&lt; SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1 &gt;::<a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a6f69440d15287f463453b440653bacfd">PositionType</a></td>
         </tr>
       </table>
 </div>
@@ -137,7 +136,7 @@ template&lt;typename SCORE_TYPE &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a0ad218b5a9f3eb5652d2a53cc45eb041"></a><!-- doxytag: member="moltk::dp::RunningGapScore&lt; SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1 &gt;::compute_recurrence" ref="a0ad218b5a9f3eb5652d2a53cc45eb041" args="(const RunningGapScore &amp;pred, const RunningScore&lt; SCORE_TYPE &gt; &amp;v, const AlignmentPosition&lt; SCORE_TYPE, 1 &gt; &amp;pos1, const AlignmentPosition&lt; SCORE_TYPE, 1 &gt; &amp;pos2)" -->
+<a class="anchor" id="ac86f3786d5a0f705fd82e7e84e29a44e"></a><!-- doxytag: member="moltk::dp::RunningGapScore&lt; SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1 &gt;::compute_recurrence" ref="ac86f3786d5a0f705fd82e7e84e29a44e" args="(const RunningGapScore &amp;pred, const RunningScore&lt; SCORE_TYPE &gt; &amp;v, const DPPosition&lt; SCORE_TYPE, 1 &gt; &amp;pos1, const DPPosition&lt; SCORE_TYPE, 1 &gt; &amp;pos2)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -152,19 +151,19 @@ template&lt;typename SCORE_TYPE &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const RunningScore&lt; SCORE_TYPE &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1dp_1_1RunningScore.html">RunningScore</a>&lt; SCORE_TYPE &gt; &amp;&#160;</td>
           <td class="paramname"><em>v</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structmoltk_1_1dp_1_1AlignmentPosition.html">AlignmentPosition</a>&lt; SCORE_TYPE, 1 &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">DPPosition</a>&lt; SCORE_TYPE, 1 &gt; &amp;&#160;</td>
           <td class="paramname"><em>pos1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structmoltk_1_1dp_1_1AlignmentPosition.html">AlignmentPosition</a>&lt; SCORE_TYPE, 1 &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">DPPosition</a>&lt; SCORE_TYPE, 1 &gt; &amp;&#160;</td>
           <td class="paramname"><em>pos2</em>&#160;</td>
         </tr>
         <tr>
@@ -189,13 +188,13 @@ template&lt;typename SCORE_TYPE &gt; </div>
         <tr>
           <td class="memname">void moltk::dp::RunningGapScore&lt; SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1 &gt;::initialize </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#aa9f6f5c20453e4830102f110179f1ca5">PositionType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a6f69440d15287f463453b440653bacfd">PositionType</a> &amp;&#160;</td>
           <td class="paramname"><em>pos1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#aa9f6f5c20453e4830102f110179f1ca5">PositionType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structmoltk_1_1dp_1_1RunningGapScore_3_01SCORE__TYPE_00_01DP__ALIGN__UNGAPPED__SEQUENCES_00_011_01_4.html#a6f69440d15287f463453b440653bacfd">PositionType</a> &amp;&#160;</td>
           <td class="paramname"><em>pos2</em>&#160;</td>
         </tr>
         <tr>

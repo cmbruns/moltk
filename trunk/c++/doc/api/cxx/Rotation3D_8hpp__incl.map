@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$Quaternion_8hpp.html" title="moltk/Quaternion.hpp" alt="" coords="208,80,354,107"/>
-<area shape="rect" id="node7" href="$units_8hpp.html" title="moltk/units.hpp" alt="" coords="226,229,336,256"/>
-<area shape="rect" id="node9" href="$Real_8hpp.html" title="moltk/Real.hpp" alt="" coords="430,304,540,331"/>
-<area shape="rect" id="node5" href="$Vector3D_8hpp.html" title="Vector3D.hpp" alt="" coords="230,155,332,181"/>
+<area shape="rect" id="node3" href="$Quaternion_8hpp.html" title="Quaternion class with stable four element representation of a rotation in 3D." alt="" coords="232,80,379,107"/>
+<area shape="rect" id="node5" href="$Vector3D_8hpp.html" title="Vector3D class representing points or vectors in 3&#45;space." alt="" coords="255,155,356,181"/>
+<area shape="rect" id="node7" href="$units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com..." alt="" coords="250,229,360,256"/>
+<area shape="rect" id="node9" href="$Real_8hpp.html" title="typedef for real number representation in MolTK" alt="" coords="5,304,115,331"/>
 </map>

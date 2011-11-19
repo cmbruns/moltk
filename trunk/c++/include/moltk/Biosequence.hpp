@@ -20,6 +20,11 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * Biosequence class representing macromolecule sequences
+ */
+
 /*
  * Biosequence.h
  *
@@ -30,10 +35,9 @@
 #ifndef BIOSEQUENCE_H_
 #define BIOSEQUENCE_H_
 
-#include <sstream>
+#include <iostream>
 #include <vector>
 #include <string>
-#include <iterator>
 
 namespace moltk
 {
@@ -105,16 +109,27 @@ public:
     typedef BiosequenceResidue Residue;
 
 public:
+    /// Create an empty sequence
     Biosequence() {}
+    /// Create a sequence from a one-letter-code string
     Biosequence(const std::string& sequence, const std::string& description = "");
+    /// Create a sequence from a one-letter-code string
     Biosequence(const char * sequence, const std::string& description = "");
+    /// Copy a sequence
     Biosequence(const Biosequence& rhs);
+    /// Sequence destructor
     virtual ~Biosequence() {}
     void load_stream(std::istream& is);
+    /// Populate a sequence from a string in fasta format
     Biosequence& load_fasta(const std::string& file_name);
+    /// Populate a sequence from a C++ stream in fasta format
     Biosequence& load_fasta(std::istream& is);
+    /// Number of residues (amino acids or nucleotides) in this molecule
     size_t get_number_of_residues() const { return size(); }
+    /// Return residue at particular index position.  Starts at zero.
+    /// This is *not* necessarily the residue number.
     const Residue& get_residue(size_t ix) const { return (*this)[ix]; }
+    /// Description string of this sequence.
     std::string get_description() const {return description;}
 
     /*!
@@ -138,12 +153,14 @@ public:
     /// Low level python string representation of this Biosequence
     std::string repr() const;
 
+    /// Write sequence to a C++ stream in fasta format.
     inline friend std::ostream& operator<<(std::ostream& os, const Biosequence& seq)
     {
         seq.write_sequence_string(os);
         return os;
     }
 
+    /// Read sequence from a C++ stream in fasta format
     inline friend std::istream& operator>>(std::istream& is, Biosequence& seq)
     {
         seq.load_stream(is);

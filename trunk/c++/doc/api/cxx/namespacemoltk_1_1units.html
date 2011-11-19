@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.4.3</span>
    </div>
    
   </td>
@@ -105,6 +105,10 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structmoltk_1_1units_1_1Unit.html" title="Unit represents a unit of measure, such as gram, nanometer, or second.">Unit</a> represents a unit of measure, such as gram, nanometer, or second.  <a href="structmoltk_1_1units_1_1Unit.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;.">Quantity</a> represents a physical value with a unit, such as "5.6 nanometers".  <a href="structmoltk_1_1units_1_1Quantity.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1value__finder.html">value_finder</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generalized templated methods to help template classes get zero or infinity values from both moltk::units::Quantities and built in types such as ints and doubles.  <a href="structmoltk_1_1units_1_1value__finder.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoltk_1_1units_1_1value__finder_3_01Quantity_3_01U_00_01Y_01_4_01_4.html">value_finder&lt; Quantity&lt; U, Y &gt; &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Template specialization for zero and infinit <a class="el" href="structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;.">Quantity</a> values.  <a href="structmoltk_1_1units_1_1value__finder_3_01Quantity_3_01U_00_01Y_01_4_01_4.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structmoltk_1_1units_1_1Dimension.html">Dimension</a>&lt; 0, 0, 0, 0, 0, 0, 0 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ad1f08edba26688bdf12c25384d9155cf">DimensionlessDimension</a></td></tr>
@@ -152,6 +156,12 @@ Functions</h2></td></tr>
 ::SquareType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ac37533c25584c87bd737f25a9e214ef5">operator*</a> (const <a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt;, Y &gt; &amp;lhs, const <a class="el" href="structmoltk_1_1units_1_1Quantity.html">Quantity</a>&lt; <a class="el" href="structmoltk_1_1units_1_1Unit.html">Unit</a>&lt; D &gt;, Y &gt; &amp;rhs)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk.html#afe6fbd8f5686b34143c2742fcc97292c">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#ac050671e9310a1b41bd10ceef0ffa3be">sin</a> (const <a class="el" href="namespacemoltk_1_1units.html#a0f80bfeb5b82472c01b5611877ab75eb">Angle</a> &amp;angle)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemoltk.html#afe6fbd8f5686b34143c2742fcc97292c">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#aee4bd73aa460f5124d4025406ead2998">cos</a> (const <a class="el" href="namespacemoltk_1_1units.html#a0f80bfeb5b82472c01b5611877ab75eb">Angle</a> &amp;angle)</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a22d4035fd41ff891bccacc586a36e710">zero</a> ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a76395cb1d45dbcaa9accc68be8ce7eb8">infinity</a> ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a29d270dad4eda7c96c9995f7ba8e421f">one</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespacemoltk_1_1units.html#a7ffc3778dcfa8f3ab61be0266d7705db">BitUnit</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk_1_1units.html#a602a3e9be116d69627ba824da7d22e72">bit</a> = BitUnit::get_instance()</td></tr>
@@ -396,6 +406,42 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a76395cb1d45dbcaa9accc68be8ce7eb8"></a><!-- doxytag: member="moltk::units::infinity" ref="a76395cb1d45dbcaa9accc68be8ce7eb8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T moltk::units::infinity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a29d270dad4eda7c96c9995f7ba8e421f"></a><!-- doxytag: member="moltk::units::one" ref="a29d270dad4eda7c96c9995f7ba8e421f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T moltk::units::one </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ae70e223abf96ece060ee5f9abdcd4a51"></a><!-- doxytag: member="moltk::units::operator*" ref="ae70e223abf96ece060ee5f9abdcd4a51" args="(const Y &amp;lhs, const Unit&lt; D &gt; &amp;rhs)" -->
 <div class="memitem">
 <div class="memproto">
@@ -511,6 +557,24 @@ template&lt;class Y , class D &gt; </div>
           <td>(</td>
           <td class="paramtype">const Quantity&lt; Unit&lt; D &gt;, Y &gt;&#160;</td>
           <td class="paramname"><em>q</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a22d4035fd41ff891bccacc586a36e710"></a><!-- doxytag: member="moltk::units::zero" ref="a22d4035fd41ff891bccacc586a36e710" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T moltk::units::zero </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>

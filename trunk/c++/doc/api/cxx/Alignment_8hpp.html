@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.4.3</span>
    </div>
    
   </td>
@@ -80,55 +80,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">moltk/Alignment.hpp File Reference</div>  </div>
 </div>
 <div class="contents">
+
+<p>Alignment class representing a sequence alignment.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="EString_8hpp_source.html">moltk/EString.hpp</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="Biosequence_8hpp_source.html">moltk/Biosequence.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="PDBStructure_8hpp_source.html">moltk/PDBStructure.hpp</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="Real_8hpp_source.html">moltk/Real.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="units_8hpp_source.html">moltk/units.hpp</a>&quot;</code><br/>
-<code>#include &lt;iostream&gt;</code><br/>
-<code>#include &lt;string&gt;</code><br/>
-<code>#include &lt;vector&gt;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Alignment.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="Alignment_8hpp__incl.png" border="0" usemap="#moltk_2Alignment_8hpp" alt=""/></div>
 <map name="moltk_2Alignment_8hpp" id="moltk_2Alignment_8hpp">
-<area shape="rect" id="node3" href="EString_8hpp.html" title="moltk/EString.hpp" alt="" coords="30,80,156,107"/><area shape="rect" id="node9" href="Biosequence_8hpp.html" title="moltk/Biosequence.hpp" alt="" coords="235,155,393,181"/><area shape="rect" id="node18" href="PDBStructure_8hpp.html" title="moltk/PDBStructure.hpp" alt="" coords="232,80,395,107"/><area shape="rect" id="node24" href="Real_8hpp.html" title="moltk/Real.hpp" alt="" coords="944,155,1053,181"/><area shape="rect" id="node28" href="units_8hpp.html" title="moltk/units.hpp" alt="" coords="619,80,729,107"/></map>
+<area shape="rect" id="node3" href="EString_8hpp.html" title="EString class compact representation of aligned sequence gap structure." alt="" coords="5,155,131,181"/><area shape="rect" id="node9" href="PDBStructure_8hpp.html" title="Macromolecular atomic structure classes." alt="" coords="153,80,316,107"/><area shape="rect" id="node17" href="units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com..." alt="" coords="449,80,559,107"/><area shape="rect" id="node11" href="Biosequence_8hpp.html" title="Biosequence class representing macromolecule sequences." alt="" coords="155,155,313,181"/><area shape="rect" id="node19" href="Real_8hpp.html" title="typedef for real number representation in MolTK" alt="" coords="699,155,808,181"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="Alignment_8hpp__dep__incl.png" border="0" usemap="#moltk_2Alignment_8hppdep" alt=""/></div>
 <map name="moltk_2Alignment_8hppdep" id="moltk_2Alignment_8hppdep">
-<area shape="rect" id="node3" href="Aligner_8hpp.html" title="moltk/Aligner.hpp" alt="" coords="93,80,216,107"/><area shape="rect" id="node5" href="MatrixScorer_8hpp.html" title="moltk/MatrixScorer.hpp" alt="" coords="5,155,163,181"/><area shape="rect" id="node7" href="moltk_8hpp.html" title="moltk.hpp" alt="" coords="187,155,265,181"/></map>
+<area shape="rect" id="node3" href="MatrixScorer_8hpp.html" title="MatrixScorer class to efficiently compare DPPositions during alignment." alt="" coords="5,80,163,107"/><area shape="rect" id="node5" href="DPTable_8hpp.html" title="Templated classes encapsulating dynamic programming sequence alignment algorithms." alt="" coords="18,155,149,181"/><area shape="rect" id="node7" href="Aligner_8hpp.html" title="Aligner class for aligning Biosequences and Alignments using a MatrixScorer." alt="" coords="23,229,145,256"/><area shape="rect" id="node9" href="moltk_8hpp.html" title="Top level include that includes the rest of the moltk C++ API." alt="" coords="45,304,123,331"/></map>
 </div>
 </div>
 <p><a href="Alignment_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment.html">moltk::Alignment</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> represents a set of aligned macromolecule sequences and/or structures.  <a href="classmoltk_1_1Alignment.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment_1_1Row.html">moltk::Alignment::Row</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-data for one sequence in an <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>.  <a href="classmoltk_1_1Alignment_1_1Row.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment__.html">moltk::Alignment_&lt; SCORE_TYPE &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Alignment represents a set of aligned macromolecule sequences and/or structures.  <a href="classmoltk_1_1Alignment__.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment___1_1Row.html">moltk::Alignment_&lt; SCORE_TYPE &gt;::Row</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-data for one sequence in an <a class="el" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment_</a>.  <a href="classmoltk_1_1Alignment___1_1Row.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html">moltk</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>The moltk namespace contains everything in the MolTK C++ API. </p>
 <br/></td></tr>
+<tr><td colspan="2"><h2><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef Alignment_<br class="typebreak"/>
+&lt; <a class="el" href="namespacemoltk_1_1units.html#a84d2541f1ab08c8ae38bea32fa7b33ca">moltk::units::Information</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html#a2d7910ca714d56deeca1e4219cd80721">moltk::Alignment</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Alignment&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html#a5d6a32006fb76447d32cde962b6ab1fb">moltk::load_fasta</a> (const std::string &amp;file_name)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">global load_fasta method helps get SEQUOIA-like conciseness in python.  <a href="#a5d6a32006fb76447d32cde962b6ab1fb"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html#ad6796611c25785bb636344b8468dccd0">moltk::operator&lt;&lt;</a> (std::ostream &amp;os, const Alignment &amp;ali)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard print method for <a class="el" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a> produces pretty formatted output.  <a href="#ad6796611c25785bb636344b8468dccd0"></a><br/></td></tr>
 </table>
-</div>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>Alignment class representing a sequence alignment. </p>
+</div></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"

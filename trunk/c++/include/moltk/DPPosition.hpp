@@ -5,6 +5,12 @@
  *      Author: brunsc
  */
 
+/*!
+ * \file
+ * Templated classes GapScore and DPPosition to efficiently represent sequence residues during alignment.
+ */
+
+
 #ifndef MOLTK_DPPOSITION_HPP_
 #define MOLTK_DPPOSITION_HPP_
 

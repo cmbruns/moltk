@@ -20,16 +20,15 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ *  \file
+ *  Aligner class for aligning Biosequences and Alignments using a MatrixScorer.
+ */
+
 #ifndef MOLTK_ALIGN_ALIGNER_H
 #define MOLTK_ALIGN_ALIGNER_H
 
 #include "moltk/DPTable.hpp"
-#include "moltk/Alignment.hpp"
-#include "moltk/units.hpp"
-#include "moltk/Biosequence.hpp"
-#include "moltk/MatrixScorer.hpp"
-#include <iostream>
-#include <vector>
 
 namespace moltk {
 

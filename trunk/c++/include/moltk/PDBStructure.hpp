@@ -20,13 +20,15 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * Macromolecular atomic structure classes
+ */
+
 #ifndef MOLTK_CHEM_PDB_STRUCTURE_H
 #define MOLTK_CHEM_PDB_STRUCTURE_H
 
 #include "moltk/Biosequence.hpp"
-#include <iostream>
-#include <vector>
-#include <string>
 
 namespace moltk {
 

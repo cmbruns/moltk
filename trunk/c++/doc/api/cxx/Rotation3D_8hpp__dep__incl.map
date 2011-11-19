@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$RigidTransform_8hpp.html" title="moltk/RigidTransform.hpp" alt="" coords="5,80,173,107"/>
-<area shape="rect" id="node5" href="$moltk_8hpp.html" title="moltk.hpp" alt="" coords="111,155,189,181"/>
+<area shape="rect" id="node3" href="$RigidTransform_8hpp.html" title="RigidTransform class representing rotation and translation between coordinate frames." alt="" coords="5,80,173,107"/>
+<area shape="rect" id="node5" href="$moltk_8hpp.html" title="Top level include that includes the rest of the moltk C++ API." alt="" coords="50,155,128,181"/>
 </map>

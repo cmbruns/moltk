@@ -20,6 +20,11 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and computation.
+ */
+
 #ifndef MOLTK_UNITS_H
 #define MOLTK_UNITS_H
 
@@ -29,9 +34,7 @@
 #include "moltk/Real.hpp"
 #include "boost/utility.hpp"
 #include <string>
-#include <cmath>
 #include <memory>
-#include <cassert>
 #include <limits>
 
 namespace moltk {
@@ -318,8 +321,8 @@ namespace units {
     inline Real sin(const Angle& angle) {return std::sin(angle.value_in_unit(radian));}
     inline Real cos(const Angle& angle) {return std::cos(angle.value_in_unit(radian));}
 
-    // methods to help template classes get zero or infinity values from quantities, ints, and doubles
-    // for ints, doubles, and other built in types
+    /// Generalized templated methods to help template classes get zero or infinity values from 
+    /// both moltk::units::Quantities and built in types such as ints and doubles
     template<class T>
     struct value_finder {
         static T zero() {return T(0);}
@@ -332,7 +335,7 @@ namespace units {
     T infinity() {return value_finder<T>::infinity();}
     template<class T>
     T one() {return value_finder<T>::one();}
-    // Specialized for Quantities
+    /// Template specialization for zero and infinit Quantity values
     template<class U, class Y>
     struct value_finder<Quantity<U,Y> > {
         typedef Y ValueType;
