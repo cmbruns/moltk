@@ -117,6 +117,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1SubstitutionMatrix__.html#adad5f64fb51e6d416823c831f9ebdfc4">SubstitutionMatrix_</a> (const std::string &amp;matrix_string, double bits_per_entry=1.0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1SubstitutionMatrix__.html#ad203d839a955f6cf1e2346993a7f6da8">SubstitutionMatrix_</a> (std::istream &amp;matrix_stream, double bits_per_entry=1.0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1SubstitutionMatrix__.html#a2e2383d4b434b8c15ae55305a5e669fe">load_stream</a> (std::istream &amp;, double bits_per_entry=1.0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1SubstitutionMatrix__.html#a4eb58b41b9fef4021dd842b463d5d479">score</a> (char residue1, char residue2) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Look up score of two residue one-letter-codes in the matrix.  <a href="#a4eb58b41b9fef4021dd842b463d5d479"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmoltk_1_1SubstitutionMatrix__.html#a5355d273a0a93e5ca33524f7b1d4ddb7">RowType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1SubstitutionMatrix__.html#accd89e9d75caf9ec7146c670c49687aa">operator[]</a> (size_t ix) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get matrix row by integer index.  <a href="#accd89e9d75caf9ec7146c670c49687aa"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmoltk_1_1SubstitutionMatrix__.html#a5355d273a0a93e5ca33524f7b1d4ddb7">RowType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1SubstitutionMatrix__.html#ac8bb03143da135cc66c82a09a7c71daf">operator[]</a> (char c) const </td></tr>
@@ -355,6 +357,37 @@ template&lt;class SCORE_TYPE&gt; </div>
 <div class="memdoc">
 
 <p>Get matrix row by integer index. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4eb58b41b9fef4021dd842b463d5d479"></a><!-- doxytag: member="moltk::SubstitutionMatrix_::score" ref="a4eb58b41b9fef4021dd842b463d5d479" args="(char residue1, char residue2) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SCORE_TYPE&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1SubstitutionMatrix__.html">moltk::SubstitutionMatrix_</a>&lt; SCORE_TYPE &gt;::score </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>residue1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>residue2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Look up score of two residue one-letter-codes in the matrix. </p>
 
 </div>
 </div>

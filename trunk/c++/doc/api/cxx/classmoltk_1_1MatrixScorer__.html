@@ -119,19 +119,25 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a65bcb5c028affd49b3f5dff07b0e3653">create_positions</a> (std::vector&lt; <a class="el" href="structmoltk_1_1dp_1_1DPPosition.html">dp::DPPosition</a>&lt; SCORE_TYPE, GAP_NSEGS &gt; * &gt; &amp;positions, const <a class="el" href="namespacemoltk.html#a2d7910ca714d56deeca1e4219cd80721">Alignment</a> &amp;alignment) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a0d7def4e72c6e4263cb9506a1055978b">get_end_gaps_free</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#abe3caf1c15a2e325c7bd942b38fa8295">set_end_gaps_free</a> (bool f)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#af371dde80aaf6fad411ce2115a92153c">get_default_gap_open_penalty</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Alignment score reduction for initiating an alignment gap.  <a href="#af371dde80aaf6fad411ce2115a92153c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a0ec10dee34d5516e4f788a1eaa1db8ed">set_default_gap_open_penalty</a> (SCORE_TYPE penalty)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set alignment score reduction for initiating an alignment gap.  <a href="#a0ec10dee34d5516e4f788a1eaa1db8ed"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#ac1ee5395460b5275cb42abfbe64b9d35">get_default_gap_extension_penalty</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Alignment score reduction for increasing the length of an alignment gap by one position.  <a href="#ac1ee5395460b5275cb42abfbe64b9d35"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a52b8d0fc61a7876a600c0a839eedc043">set_default_gap_extension_penalty</a> (SCORE_TYPE penalty)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Alignment score reduction for increasing the length of an alignment gap by one position.  <a href="#a52b8d0fc61a7876a600c0a839eedc043"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a74e1d7a6961120ce14f0097b88907514">get_default_gap_open_score</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Alignment score reduction for initiating an alignment gap.  <a href="#a74e1d7a6961120ce14f0097b88907514"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a6dce77af635e8e89b12eb632f88371f2">set_default_gap_open_score</a> (SCORE_TYPE score)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set alignment score reduction for initiating an alignment gap.  <a href="#a6dce77af635e8e89b12eb632f88371f2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#ad4f161927c9c6f2491b345c24a120ac7">get_default_gap_extension_score</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Alignment score reduction for increasing the length of an alignment gap by one position.  <a href="#ad4f161927c9c6f2491b345c24a120ac7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#ae7fdb188444d50d14267783fd3bcba88">set_default_gap_extension_score</a> (SCORE_TYPE score)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Alignment score reduction for increasing the length of an alignment gap by one position.  <a href="#ae7fdb188444d50d14267783fd3bcba88"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#ab90650541e6f63c72b6a20a1480b2de7">score</a> (char residue1, char residue2) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Look up score of two residue one-letter-codes in the matrix.  <a href="#ab90650541e6f63c72b6a20a1480b2de7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#adbe9a587fd12d874ebe5edcdc9531d6d">calc_explicit_sum_of_pairs_score</a> (const <a class="el" href="classmoltk_1_1Alignment__.html">Alignment_</a>&lt; SCORE_TYPE &gt; &amp;alignment) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Inefficient computation of sum-of-pairs score, for use in testing and debugging.  <a href="#adbe9a587fd12d874ebe5edcdc9531d6d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a6369337ff8f5877031de76db62c2c3bf">calc_explicit_pair_score</a> (int i, int j, const <a class="el" href="classmoltk_1_1Alignment__.html">Alignment_</a>&lt; SCORE_TYPE &gt; &amp;alignment) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute pair score between two sequences in an alignment.  <a href="#a6369337ff8f5877031de76db62c2c3bf"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a69dc9913654f395b8a6912cd5866edc7">b_end_gaps_free</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a2c84b871efbdbfedaf1158a5d8e9faf7">default_gap_open_penalty</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a1683eba129f30cb66740df4e5876ad81">default_gap_extension_penalty</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#aa6e2fb51837602663ca39a4ba1b9fa3f">default_gap_open_score</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#ae46f2161ce2413aa901cfe80d79b4ac3">default_gap_extension_score</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1SubstitutionMatrix__.html">SubstitutionMatrix_</a>&lt; SCORE_TYPE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1MatrixScorer__.html#a4bf1242ff86ad47455d09ce4df1a18e7">matrix</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -206,6 +212,64 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a6369337ff8f5877031de76db62c2c3bf"></a><!-- doxytag: member="moltk::MatrixScorer_::calc_explicit_pair_score" ref="a6369337ff8f5877031de76db62c2c3bf" args="(int i, int j, const Alignment_&lt; SCORE_TYPE &gt; &amp;alignment) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::calc_explicit_pair_score </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classmoltk_1_1Alignment__.html">Alignment_</a>&lt; SCORE_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>alignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Compute pair score between two sequences in an alignment. </p>
+
+</div>
+</div>
+<a class="anchor" id="adbe9a587fd12d874ebe5edcdc9531d6d"></a><!-- doxytag: member="moltk::MatrixScorer_::calc_explicit_sum_of_pairs_score" ref="adbe9a587fd12d874ebe5edcdc9531d6d" args="(const Alignment_&lt; SCORE_TYPE &gt; &amp;alignment) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::calc_explicit_sum_of_pairs_score </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmoltk_1_1Alignment__.html">Alignment_</a>&lt; SCORE_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>alignment</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Inefficient computation of sum-of-pairs score, for use in testing and debugging. </p>
+
+</div>
+</div>
 <a class="anchor" id="a65bcb5c028affd49b3f5dff07b0e3653"></a><!-- doxytag: member="moltk::MatrixScorer_::create_positions" ref="a65bcb5c028affd49b3f5dff07b0e3653" args="(std::vector&lt; dp::DPPosition&lt; SCORE_TYPE, GAP_NSEGS &gt; * &gt; &amp;positions, const Alignment &amp;alignment) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -235,14 +299,14 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac1ee5395460b5275cb42abfbe64b9d35"></a><!-- doxytag: member="moltk::MatrixScorer_::get_default_gap_extension_penalty" ref="ac1ee5395460b5275cb42abfbe64b9d35" args="() const " -->
+<a class="anchor" id="ad4f161927c9c6f2491b345c24a120ac7"></a><!-- doxytag: member="moltk::MatrixScorer_::get_default_gap_extension_score" ref="ad4f161927c9c6f2491b345c24a120ac7" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::get_default_gap_extension_penalty </td>
+          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::get_default_gap_extension_score </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const<code> [inline]</code></td>
@@ -255,14 +319,14 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af371dde80aaf6fad411ce2115a92153c"></a><!-- doxytag: member="moltk::MatrixScorer_::get_default_gap_open_penalty" ref="af371dde80aaf6fad411ce2115a92153c" args="() const " -->
+<a class="anchor" id="a74e1d7a6961120ce14f0097b88907514"></a><!-- doxytag: member="moltk::MatrixScorer_::get_default_gap_open_score" ref="a74e1d7a6961120ce14f0097b88907514" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::get_default_gap_open_penalty </td>
+          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::get_default_gap_open_score </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const<code> [inline]</code></td>
@@ -293,17 +357,48 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a52b8d0fc61a7876a600c0a839eedc043"></a><!-- doxytag: member="moltk::MatrixScorer_::set_default_gap_extension_penalty" ref="a52b8d0fc61a7876a600c0a839eedc043" args="(SCORE_TYPE penalty)" -->
+<a class="anchor" id="ab90650541e6f63c72b6a20a1480b2de7"></a><!-- doxytag: member="moltk::MatrixScorer_::score" ref="ab90650541e6f63c72b6a20a1480b2de7" args="(char residue1, char residue2) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::set_default_gap_extension_penalty </td>
+          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::score </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>residue1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>residue2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Look up score of two residue one-letter-codes in the matrix. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae7fdb188444d50d14267783fd3bcba88"></a><!-- doxytag: member="moltk::MatrixScorer_::set_default_gap_extension_score" ref="ae7fdb188444d50d14267783fd3bcba88" args="(SCORE_TYPE score)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::set_default_gap_extension_score </td>
           <td>(</td>
           <td class="paramtype">SCORE_TYPE&#160;</td>
-          <td class="paramname"><em>penalty</em></td><td>)</td>
+          <td class="paramname"><em>score</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
@@ -314,17 +409,17 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0ec10dee34d5516e4f788a1eaa1db8ed"></a><!-- doxytag: member="moltk::MatrixScorer_::set_default_gap_open_penalty" ref="a0ec10dee34d5516e4f788a1eaa1db8ed" args="(SCORE_TYPE penalty)" -->
+<a class="anchor" id="a6dce77af635e8e89b12eb632f88371f2"></a><!-- doxytag: member="moltk::MatrixScorer_::set_default_gap_open_score" ref="a6dce77af635e8e89b12eb632f88371f2" args="(SCORE_TYPE score)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::set_default_gap_open_penalty </td>
+          <td class="memname">void <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::set_default_gap_open_score </td>
           <td>(</td>
           <td class="paramtype">SCORE_TYPE&#160;</td>
-          <td class="paramname"><em>penalty</em></td><td>)</td>
+          <td class="paramname"><em>score</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
@@ -370,14 +465,14 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1683eba129f30cb66740df4e5876ad81"></a><!-- doxytag: member="moltk::MatrixScorer_::default_gap_extension_penalty" ref="a1683eba129f30cb66740df4e5876ad81" args="" -->
+<a class="anchor" id="ae46f2161ce2413aa901cfe80d79b4ac3"></a><!-- doxytag: member="moltk::MatrixScorer_::default_gap_extension_score" ref="ae46f2161ce2413aa901cfe80d79b4ac3" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::<a class="el" href="classmoltk_1_1MatrixScorer__.html#a1683eba129f30cb66740df4e5876ad81">default_gap_extension_penalty</a><code> [protected]</code></td>
+          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::<a class="el" href="classmoltk_1_1MatrixScorer__.html#ae46f2161ce2413aa901cfe80d79b4ac3">default_gap_extension_score</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -385,14 +480,14 @@ template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2c84b871efbdbfedaf1158a5d8e9faf7"></a><!-- doxytag: member="moltk::MatrixScorer_::default_gap_open_penalty" ref="a2c84b871efbdbfedaf1158a5d8e9faf7" args="" -->
+<a class="anchor" id="aa6e2fb51837602663ca39a4ba1b9fa3f"></a><!-- doxytag: member="moltk::MatrixScorer_::default_gap_open_score" ref="aa6e2fb51837602663ca39a4ba1b9fa3f" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SCORE_TYPE, int GAP_NSEGS&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::<a class="el" href="classmoltk_1_1MatrixScorer__.html#a2c84b871efbdbfedaf1158a5d8e9faf7">default_gap_open_penalty</a><code> [protected]</code></td>
+          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1MatrixScorer__.html">moltk::MatrixScorer_</a>&lt; SCORE_TYPE, GAP_NSEGS &gt;::<a class="el" href="classmoltk_1_1MatrixScorer__.html#aa6e2fb51837602663ca39a4ba1b9fa3f">default_gap_open_score</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>

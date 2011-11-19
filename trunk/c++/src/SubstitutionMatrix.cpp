@@ -61,6 +61,15 @@ SubstitutionMatrix_<SCORE_TYPE>::SubstitutionMatrix_(std::istream& matrixStream,
     load_stream(matrixStream, bits_per_entry);
 }
 
+/// Look up score of two residue one-letter-codes in the matrix
+template<class SCORE_TYPE>
+SCORE_TYPE SubstitutionMatrix_<SCORE_TYPE>::score(char residue1, char residue2) const
+{
+    int index1 = character_indices[residue1];
+    int index2 = character_indices[residue2];
+    return matrix[index1][index2];
+}
+
 template<class SCORE_TYPE>
 istream& SubstitutionMatrix_<SCORE_TYPE>::load_stream(istream& is, double bits_per_entry)
 {

@@ -62,12 +62,12 @@ def wrap_scorer(mb):
         scorer.add_property('end_gaps_free', 
              fget=scorer.member_functions('get_end_gaps_free')[0],
              fset=scorer.member_functions('set_end_gaps_free')[0])        
-        scorer.add_property('default_gap_open_penalty', 
-             fget=scorer.member_functions('get_default_gap_open_penalty')[0],
-             fset=scorer.member_functions('set_default_gap_open_penalty')[0])        
-        scorer.add_property('default_gap_extension_penalty', 
-             fget=scorer.member_functions('get_default_gap_extension_penalty')[0],
-             fset=scorer.member_functions('set_default_gap_extension_penalty')[0])        
+        scorer.add_property('default_gap_open_score', 
+             fget=scorer.member_functions('get_default_gap_open_score')[0],
+             fset=scorer.member_functions('set_default_gap_open_score')[0])        
+        scorer.add_property('default_gap_extension_score', 
+             fget=scorer.member_functions('get_default_gap_extension_score')[0],
+             fset=scorer.member_functions('set_default_gap_extension_score')[0])        
 
 def wrap_alignment(mb):
     for alignment in mb.namespace('moltk').classes(lambda cls: cls.name.startswith('Alignment_')):

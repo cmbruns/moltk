@@ -171,10 +171,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The precomputed total sum of pairs score of this <a class="el" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment_</a>.  <a href="#a14c87e3b0fbf3fc6ddaffb74f18aa539"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment__.html">Alignment_</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment__.html#a42cec9b9709afe53383953f3f687d16c">set_score</a> (const SCORE_TYPE &amp;s)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sum of pairs score for this <a class="el" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment_</a>. Make sure you put the correct answer!  <a href="#a42cec9b9709afe53383953f3f687d16c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment__.html#a439ba98163f21ee28f9ed90f4d1c18f6">calc_explicit_sum_of_pairs_score</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Inefficient computation of sum-of-pairs score, for use in testing and debugging.  <a href="#a439ba98163f21ee28f9ed90f4d1c18f6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">SCORE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment__.html#a720f27e15b0839789edba0784e5e84f8">calc_explicit_pair_score</a> (int i, int j) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute pair score between two sequences in this alignment.  <a href="#a720f27e15b0839789edba0784e5e84f8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment__.html#a825baa50931639decf5b6989801412f2">repr</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Low level python string representation of this <a class="el" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment_</a>.  <a href="#a825baa50931639decf5b6989801412f2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Alignment__.html">Alignment_</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Alignment__.html#a0a7ba36b2af5bc886e8bcbc4fbdb4400">set_pretty_width</a> (int width)</td></tr>
@@ -400,57 +396,6 @@ template&lt;class SCORE_TYPE&gt; </div>
 <div class="memdoc">
 
 <p>Add one sequence to the alignment. Internally, gaps will be removed and encoded into an <a class="el" href="classmoltk_1_1EString.html" title="A compact representation of the gapping pattern for one sequence in an alignment.">EString</a>. </p>
-
-</div>
-</div>
-<a class="anchor" id="a720f27e15b0839789edba0784e5e84f8"></a><!-- doxytag: member="moltk::Alignment_::calc_explicit_pair_score" ref="a720f27e15b0839789edba0784e5e84f8" args="(int i, int j) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SCORE_TYPE&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1Alignment__.html">moltk::Alignment_</a>&lt; SCORE_TYPE &gt;::calc_explicit_pair_score </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>j</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Compute pair score between two sequences in this alignment. </p>
-
-</div>
-</div>
-<a class="anchor" id="a439ba98163f21ee28f9ed90f4d1c18f6"></a><!-- doxytag: member="moltk::Alignment_::calc_explicit_sum_of_pairs_score" ref="a439ba98163f21ee28f9ed90f4d1c18f6" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SCORE_TYPE&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SCORE_TYPE <a class="el" href="classmoltk_1_1Alignment__.html">moltk::Alignment_</a>&lt; SCORE_TYPE &gt;::calc_explicit_sum_of_pairs_score </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Inefficient computation of sum-of-pairs score, for use in testing and debugging. </p>
 
 </div>
 </div>

@@ -53,18 +53,25 @@ public:
     bool get_end_gaps_free() const {return b_end_gaps_free;}
     void set_end_gaps_free(bool f) {b_end_gaps_free = f;}
     /// Alignment score reduction for initiating an alignment gap.
-    SCORE_TYPE get_default_gap_open_penalty() const {return default_gap_open_penalty;}
+    SCORE_TYPE get_default_gap_open_score() const {return default_gap_open_score;}
     /// Set alignment score reduction for initiating an alignment gap.
-    void set_default_gap_open_penalty(SCORE_TYPE penalty) {default_gap_open_penalty = penalty;}
+    void set_default_gap_open_score(SCORE_TYPE score) {default_gap_open_score = score;}
     /// Alignment score reduction for increasing the length of an alignment gap by one position.
-    SCORE_TYPE get_default_gap_extension_penalty() const {return default_gap_extension_penalty;}
+    SCORE_TYPE get_default_gap_extension_score() const {return default_gap_extension_score;}
     /// Set Alignment score reduction for increasing the length of an alignment gap by one position.
-    void set_default_gap_extension_penalty(SCORE_TYPE penalty) {default_gap_extension_penalty = penalty;}
+    void set_default_gap_extension_score(SCORE_TYPE score) {default_gap_extension_score = score;}
+
+    /// Look up score of two residue one-letter-codes in the matrix
+    SCORE_TYPE score(char residue1, char residue2) const {return matrix.score(residue1, residue2);}
+    /// Inefficient computation of sum-of-pairs score, for use in testing and debugging.
+    SCORE_TYPE calc_explicit_sum_of_pairs_score(const Alignment_<SCORE_TYPE>& alignment) const;
+    /// Compute pair score between two sequences in an alignment
+    SCORE_TYPE calc_explicit_pair_score(int i, int j, const Alignment_<SCORE_TYPE>& alignment) const;
 
 protected:
     bool b_end_gaps_free;
-    SCORE_TYPE default_gap_open_penalty;
-    SCORE_TYPE default_gap_extension_penalty;
+    SCORE_TYPE default_gap_open_score;
+    SCORE_TYPE default_gap_extension_score;
     SubstitutionMatrix_<SCORE_TYPE> matrix;
 };
 

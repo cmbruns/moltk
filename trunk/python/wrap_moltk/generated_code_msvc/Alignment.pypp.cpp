@@ -48,29 +48,6 @@ void register_Alignment_class(){
                 , "\n Add one sequence to the alignment.  Internally, gaps will be removed and encoded into an EString.\n" );
         
         }
-        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::calc_explicit_pair_score
-        
-            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
-            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*calc_explicit_pair_score_function_type )( int,int ) const;
-            
-            Alignment_exposer.def( 
-                "calc_explicit_pair_score"
-                , calc_explicit_pair_score_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::calc_explicit_pair_score )
-                , ( bp::arg("i"), bp::arg("j") )
-                , "\n Compute pair score between two sequences in this alignment\n" );
-        
-        }
-        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::calc_explicit_sum_of_pairs_score
-        
-            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
-            typedef ::moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > ( exported_class_t::*calc_explicit_sum_of_pairs_score_function_type )(  ) const;
-            
-            Alignment_exposer.def( 
-                "calc_explicit_sum_of_pairs_score"
-                , calc_explicit_sum_of_pairs_score_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::calc_explicit_sum_of_pairs_score )
-                , "\n Inefficient computation of sum-of-pairs score, for use in testing and debugging.\n" );
-        
-        }
         { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::fasta
         
             typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;

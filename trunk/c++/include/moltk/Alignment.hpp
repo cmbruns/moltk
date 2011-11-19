@@ -122,10 +122,6 @@ public:
     const SCORE_TYPE& get_score() const;
     /// Set the sum of pairs score for this Alignment_.  Make sure you put the correct answer!
     Alignment_& set_score(const SCORE_TYPE& s);
-    /// Inefficient computation of sum-of-pairs score, for use in testing and debugging.
-    SCORE_TYPE calc_explicit_sum_of_pairs_score() const;
-    /// Compute pair score between two sequences in this alignment
-    SCORE_TYPE calc_explicit_pair_score(int i, int j) const;
     /// Low level python string representation of this Alignment_
     std::string repr() const;
     Alignment_& set_pretty_width(int width) {pretty_width = width; return *this;}

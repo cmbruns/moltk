@@ -493,29 +493,6 @@ Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::set_score(const SCORE_TYPE& s)
     return *this;
 }
 
-/// Inefficient computation of sum-of-pairs score, for use in testing and debugging.
-template<class SCORE_TYPE>
-SCORE_TYPE Alignment_<SCORE_TYPE>::calc_explicit_sum_of_pairs_score() const
-{
-    SCORE_TYPE result = 0.0 * moltk::units::bit;
-    const int nseq = get_number_of_sequences();
-    for (int i = 0; i < (nseq - 1); ++i)
-        for (int j = i + 1; j < nseq; ++j)
-            result += calc_explicit_pair_score(i, j);
-    return result;
-}
-
-/// Compute pair score between two sequences in this alignment
-template<class SCORE_TYPE>
-SCORE_TYPE Alignment_<SCORE_TYPE>::calc_explicit_pair_score(int i, int j) const
-{
-    SCORE_TYPE result = 0.0 * moltk::units::bit;
-    const Row& seq1 = rows[i];
-    const Row& seq2 = rows[j];
-    throw std::runtime_error("Alignment::calc_explicit_pair_score() not implemented yet");
-    return result;
-}
-
 template<class SCORE_TYPE>
 std::string Alignment_<SCORE_TYPE>::repr() const
 {

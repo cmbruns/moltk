@@ -103,20 +103,20 @@ std::ostream& operator<<(std::ostream& os,
         os.width(7); os << i;
     }
     os << std::endl;
-    // Open penalty
+    // Open score
     os << " gap open";
     for (size_t i = 0; i < t.target_positions.size(); ++i)
     {
         os.width(7);
-        os << t.target_positions[i]->gap_score.open_penalty.value;
+        os << t.target_positions[i]->gap_score.open_score.value;
     }
     os << std::endl;
-    // Extension penalty
+    // Extension score
     os << "extension";
     for (size_t i = 0; i < t.target_positions.size(); ++i)
     {
         os.width(7);
-        os << t.target_positions[i]->gap_score.extension_penalty.value;
+        os << t.target_positions[i]->gap_score.extension_score.value;
     }
     os << std::endl;
 

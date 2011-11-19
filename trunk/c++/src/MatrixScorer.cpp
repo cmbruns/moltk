@@ -33,8 +33,8 @@ template<class SCORE_TYPE, int GAP_NSEGS>
 /* explicit */
 MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::MatrixScorer_(const SubstitutionMatrix_<SCORE_TYPE>& matrixParam)
     : matrix(matrixParam)
-    , default_gap_open_penalty(8.0 * moltk::units::one<SCORE_TYPE>())
-    , default_gap_extension_penalty(0.5 * moltk::units::one<SCORE_TYPE>())
+    , default_gap_open_score(-8.0 * moltk::units::one<SCORE_TYPE>())
+    , default_gap_extension_score(-0.5 * moltk::units::one<SCORE_TYPE>())
 {}
 
 template<class SCORE_TYPE, int GAP_NSEGS>
@@ -56,8 +56,8 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(std::vector<dp::DPPo
     for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
     {
         POS* pos = new POS();
-        pos->gap_score.open_penalty = moltk::units::zero<SCORE_TYPE>();
-        pos->gap_score.extension_penalty = moltk::units::zero<SCORE_TYPE>();
+        pos->gap_score.open_score = moltk::units::zero<SCORE_TYPE>();
+        pos->gap_score.extension_score = moltk::units::zero<SCORE_TYPE>();
         pos->index = col;
         pos->target_scores_by_residue_type_index.assign(matrix.size(), moltk::units::zero<SCORE_TYPE>());
         result.push_back(pos);
@@ -74,8 +74,8 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(std::vector<dp::DPPo
             POS& pos = 
                 dynamic_cast<POS&>(*result[0]);
             // leave score zero, but set gap penalties
-            pos.gap_score.extension_penalty = gapFactor * default_gap_extension_penalty;
-            pos.gap_score.open_penalty = gapFactor * default_gap_open_penalty;
+            pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
+            pos.gap_score.open_score = gapFactor * default_gap_open_score;
         }
         int colIx = -1;
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
@@ -101,8 +101,8 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(std::vector<dp::DPPo
             POS& pos = 
                 dynamic_cast<POS&>(*result[colIx + 1]);
             // Set gap penalties
-            pos.gap_score.extension_penalty = gapFactor * default_gap_extension_penalty;
-            pos.gap_score.open_penalty = gapFactor * default_gap_open_penalty;
+            pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
+            pos.gap_score.open_score = gapFactor * default_gap_open_score;
             if (eResIx >= 0) 
             { // eResIx is an actual residue number
                 const BaseBiosequence::BaseResidue& res = seq.get_residue(eResIx);
@@ -127,6 +127,70 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(std::vector<dp::DPPo
         }
         assert(colIx == alignment.get_number_of_columns() - 1);
     }
+}
+
+/// Inefficient computation of sum-of-pairs score, for use in testing and debugging.
+template<class SCORE_TYPE, int GAP_NSEGS>
+SCORE_TYPE MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::calc_explicit_sum_of_pairs_score(const Alignment_<SCORE_TYPE>& alignment) const
+{
+    SCORE_TYPE result = moltk::units::zero<SCORE_TYPE>();
+    const int nseq = alignment.get_number_of_sequences();
+    for (int i = 0; i < (nseq - 1); ++i)
+        for (int j = i + 1; j < nseq; ++j)
+        {
+            // TODO - scale by sequence weight
+            result += calc_explicit_pair_score(i, j, alignment);
+        }
+    return result;
+}
+
+/// Compute pair score between two sequences in an alignment
+template<class SCORE_TYPE, int GAP_NSEGS>
+SCORE_TYPE MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::calc_explicit_pair_score(int i, int j, const Alignment_<SCORE_TYPE>& alignment) const
+{
+    const MatrixScorer_<SCORE_TYPE, GAP_NSEGS>& scorer = *this;
+    SCORE_TYPE result = moltk::units::zero<SCORE_TYPE>();
+    // Loop over estrings
+    EString::const_iterator e1 = alignment.get_estring(i).begin();
+    EString::const_iterator e2 = alignment.get_estring(j).begin();
+    const BaseBiosequence& seq1 = alignment.get_sequence(i);
+    const BaseBiosequence& seq2 = alignment.get_sequence(j);
+    bool b_was_gap = false; // did the previous column contain exactly one gap?
+    bool b_end_gap_1 = true; // Are we in an end gap (left or right) of sequence 1?
+    bool b_end_gap_2 = true; // Are we in an end gap (left or right) of sequence 2?
+    while(e1 != alignment.get_estring(i).end())
+    {
+        // Ignore positions where both sequences have gaps
+        if ( (*e1 < 0) && (*e2 < 0) ) 
+            ; 
+        // Neither sequence has a gap - use match score
+        else if ( (*e1 >= 0) && (*e2 >= 0) ) 
+        {
+            char c1 = seq1.get_residue(*e1).get_one_letter_code();
+            char c2 = seq2.get_residue(*e2).get_one_letter_code();
+            result += scorer.score(c1, c2);
+            b_was_gap = false;
+            b_end_gap_1 = (*e1 == (seq1.get_number_of_residues() - 1));
+            b_end_gap_2 = (*e2 == (seq2.get_number_of_residues() - 1));
+        }
+        else
+        {
+            Real gap_factor = 1.0;
+            if (b_end_gaps_free) {
+                if (b_end_gap_1 && (*e1 < 0))
+                    gap_factor = 0.0;
+                if (b_end_gap_2 && (*e2 < 0))
+                    gap_factor = 0.0;
+            }
+            result += gap_factor * default_gap_extension_score;
+            if (! b_was_gap)
+                result += gap_factor * default_gap_open_score;
+            b_was_gap = true;
+        }
+        ++e1;
+        ++e2;
+    }
+    return result;
 }
 
 template class MatrixScorer_<moltk::units::Information, 1>;

@@ -49,8 +49,8 @@ template<typename SCORE_TYPE>
 struct GapScore<SCORE_TYPE, 1>
 {
 public:
-    SCORE_TYPE open_penalty; ///< Penalty for creating an insertion gap in a sequence alignment
-    SCORE_TYPE extension_penalty; ///< Penalty for extending an insertion gap by one position in a sequence alignment
+    SCORE_TYPE open_score; ///< Penalty for creating an insertion gap in a sequence alignment
+    SCORE_TYPE extension_score; ///< Penalty for extending an insertion gap by one position in a sequence alignment
 };
 
 
