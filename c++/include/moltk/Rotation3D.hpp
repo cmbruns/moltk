@@ -20,12 +20,15 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * Rotation3D class representing a 3D rotation matrix
+ */
+
 #ifndef MOLTK_ROTATION3D_HPP
 #define MOLTK_ROTATION3D_HPP
 
 #include "moltk/Quaternion.hpp"
-#include "moltk/Real.hpp"
-#include "moltk/units.hpp"
 
 namespace moltk {
 

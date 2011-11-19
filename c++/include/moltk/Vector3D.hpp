@@ -20,6 +20,11 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * Vector3D class representing points or vectors in 3-space.
+ */
+
 #ifndef MOLTK_VEC3_HPP
 #define MOLTK_VEC3_HPP
 

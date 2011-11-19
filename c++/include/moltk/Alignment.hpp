@@ -20,17 +20,17 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ *  \file
+ *  Alignment class representing a sequence alignment
+ */
+
 #ifndef MOLTK_ALIGN_ALIGNMENT_H
 #define MOLTK_ALIGN_ALIGNMENT_H
 
 #include "moltk/EString.hpp"
-#include "moltk/Biosequence.hpp"
 #include "moltk/PDBStructure.hpp"
-#include "moltk/Real.hpp"
 #include "moltk/units.hpp"
-#include <iostream>
-#include <string>
-#include <vector>
 
 namespace moltk {
 

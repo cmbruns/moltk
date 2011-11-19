@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.4.3</span>
    </div>
    
   </td>
@@ -102,89 +102,47 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00020"></a>00020 <span class="comment">    For questions contact: cmbruns@rotatingpenguin.com</span>
 <a name="l00021"></a>00021 <span class="comment">*/</span>
 <a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="preprocessor">#ifndef MOLTK_ALIGN_MATRIX_SCORER_H</span>
-<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#define MOLTK_ALIGN_MATRIX_SCORER_H</span>
-<a name="l00025"></a>00025 <span class="preprocessor"></span>
-<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="Aligner_8hpp.html">moltk/Aligner.hpp</a>&quot;</span>
-<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;<a class="code" href="units_8hpp.html">moltk/units.hpp</a>&quot;</span>
-<a name="l00028"></a>00028 <span class="preprocessor">#include &lt;iostream&gt;</span>
-<a name="l00029"></a>00029 <span class="preprocessor">#include &lt;vector&gt;</span>
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031 <span class="keyword">namespace </span>moltk {
-<a name="l00032"></a>00032 
-<a name="l00037"></a><a class="code" href="classmoltk_1_1MatrixScorer.html">00037</a> <span class="keyword">class </span><a class="code" href="classmoltk_1_1MatrixScorer.html" title="MatrixScorer scores alignments using a residue type matrix such as BLOSUM62 or PAM250.">MatrixScorer</a> : <span class="keyword">public</span> <a class="code" href="classmoltk_1_1Aligner.html" title="The Aligner class creates macromolecule sequence alignments and structure alignments.">Aligner</a>::Scorer
-<a name="l00038"></a>00038 {
-<a name="l00039"></a>00039 <span class="keyword">public</span>:
-<a name="l00040"></a><a class="code" href="classmoltk_1_1MatrixScorer.html#ab2547e83ca5136945352ab5ef008de4b">00040</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;.">moltk::units::Information</a> <a class="code" href="classmoltk_1_1MatrixScorer.html#ab2547e83ca5136945352ab5ef008de4b">Information</a>;
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042     <span class="keyword">explicit</span> <a class="code" href="classmoltk_1_1MatrixScorer.html#a679c59d57d0d690fc2add4204b15deb6">MatrixScorer</a>(<span class="keyword">const</span> std::string&amp; matrix_string);
-<a name="l00043"></a>00043     <span class="keyword">explicit</span> <a class="code" href="classmoltk_1_1MatrixScorer.html#a679c59d57d0d690fc2add4204b15deb6">MatrixScorer</a>(std::istream&amp; matrix_stream);
-<a name="l00044"></a>00044     std::vector&lt;const Aligner::QueryPosition*&gt; <a class="code" href="classmoltk_1_1MatrixScorer.html#ab2fce5a533eabca4a3cbffce57ea1c57">create_query_positions</a>(<span class="keyword">const</span> <a class="code" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>&amp; alignment) <span class="keyword">const</span>;
-<a name="l00045"></a>00045     std::vector&lt;const Aligner::TargetPosition*&gt; <a class="code" href="classmoltk_1_1MatrixScorer.html#aff31e3364e2f75ff92be06ef8483886a">create_target_positions</a>(<span class="keyword">const</span> <a class="code" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>&amp; alignment) <span class="keyword">const</span>;
-<a name="l00046"></a>00046     std::istream&amp; <a class="code" href="classmoltk_1_1MatrixScorer.html#a24d6950d643f55e6613755404c0c305b">load_stream</a>(std::istream&amp;);
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="classmoltk_1_1MatrixScorer.html" title="MatrixScorer scores alignments using a residue type matrix such as BLOSUM62 or PAM250.">MatrixScorer</a>&amp; <a class="code" href="classmoltk_1_1MatrixScorer.html#a58a29032f0c197845d1c1cabb4bf2d84">get_blosum62_scorer</a>();
-<a name="l00049"></a>00049 
-<a name="l00050"></a><a class="code" href="classmoltk_1_1MatrixScorer.html#a83d3f1f673ddcec92470dec227e45efb">00050</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1QueryPosition.html">Aligner::QueryPosition</a> <a class="code" href="classmoltk_1_1MatrixScorer.html#a83d3f1f673ddcec92470dec227e45efb">QueryPosition</a>;
-<a name="l00051"></a><a class="code" href="classmoltk_1_1MatrixScorer.html#ac8e38f1a2d614785361c981cadaaa489">00051</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1TargetPosition.html">Aligner::TargetPosition</a> <a class="code" href="classmoltk_1_1MatrixScorer.html#ac8e38f1a2d614785361c981cadaaa489">TargetPosition</a>;
-<a name="l00052"></a>00052 
-<a name="l00061"></a>00061     <span class="comment">/*</span>
-<a name="l00062"></a>00062 <span class="comment">    class QueryPosition : public Aligner::QueryPosition</span>
-<a name="l00063"></a>00063 <span class="comment">    {</span>
-<a name="l00064"></a>00064 <span class="comment">    public:</span>
-<a name="l00065"></a>00065 <span class="comment"></span>
-<a name="l00066"></a>00066 <span class="comment">        virtual QueryPosition* clone() const;</span>
-<a name="l00067"></a>00067 <span class="comment">        virtual Information get_gap_open_penalty() const {return gap_open_penalty;}</span>
-<a name="l00068"></a>00068 <span class="comment">        virtual Information get_gap_extension_penalty() const {return gap_extension_penalty;}</span>
-<a name="l00069"></a>00069 <span class="comment">        inline friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const QueryPosition&amp; p)</span>
-<a name="l00070"></a>00070 <span class="comment">        {</span>
-<a name="l00071"></a>00071 <span class="comment">            os &lt;&lt; &quot;op=&quot; &lt;&lt; p.get_gap_open_penalty();</span>
-<a name="l00072"></a>00072 <span class="comment">            os &lt;&lt; &quot;, ep=&quot; &lt;&lt; p.get_gap_extension_penalty();</span>
-<a name="l00073"></a>00073 <span class="comment">            return os;</span>
-<a name="l00074"></a>00074 <span class="comment">        }</span>
-<a name="l00075"></a>00075 <span class="comment"></span>
-<a name="l00076"></a>00076 <span class="comment">        Information gap_open_penalty;</span>
-<a name="l00077"></a>00077 <span class="comment">        Information gap_extension_penalty;</span>
-<a name="l00078"></a>00078 <span class="comment">        // cache values for quick score lookup</span>
-<a name="l00079"></a>00079 <span class="comment">        typedef std::vector&lt; std::pair&lt;size_t, double&gt; &gt; QueryWeights;</span>
-<a name="l00080"></a>00080 <span class="comment">        QueryWeights residue_type_index_weights;</span>
-<a name="l00081"></a>00081 <span class="comment">    };</span>
-<a name="l00082"></a>00082 <span class="comment">    */</span>
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084 
-<a name="l00089"></a>00089     <span class="comment">/*</span>
-<a name="l00090"></a>00090 <span class="comment">    class TargetPosition : public Aligner::TargetPosition</span>
-<a name="l00091"></a>00091 <span class="comment">    {</span>
-<a name="l00092"></a>00092 <span class="comment">    public:</span>
-<a name="l00093"></a>00093 <span class="comment"></span>
-<a name="l00094"></a>00094 <span class="comment">        virtual TargetPosition* clone() const;</span>
-<a name="l00095"></a>00095 <span class="comment">        virtual moltk::units::Information score(const Aligner::QueryPosition&amp; rhs) const;</span>
-<a name="l00096"></a>00096 <span class="comment">        virtual Information get_gap_open_penalty() const {return gap_open_penalty;}</span>
-<a name="l00097"></a>00097 <span class="comment">        virtual Information get_gap_extension_penalty() const {return gap_extension_penalty;}</span>
-<a name="l00098"></a>00098 <span class="comment"></span>
-<a name="l00099"></a>00099 <span class="comment">        Information gap_open_penalty;</span>
-<a name="l00100"></a>00100 <span class="comment">        Information gap_extension_penalty;</span>
-<a name="l00101"></a>00101 <span class="comment">        // cache values for quick score lookup</span>
-<a name="l00102"></a>00102 <span class="comment">        std::vector&lt;Information&gt; scores_by_residue_type_index;</span>
-<a name="l00103"></a>00103 <span class="comment">    };</span>
-<a name="l00104"></a>00104 <span class="comment">    */</span>
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106 <span class="keyword">protected</span>:
-<a name="l00107"></a>00107     <span class="comment">// create_foo_positions is a helper function to reduce redundancy between </span>
-<a name="l00108"></a>00108     <span class="comment">// methods create_query_positions() and create_target_positions()</span>
-<a name="l00109"></a>00109     <span class="keyword">template</span>&lt;<span class="keyword">class</span> POSB, <span class="keyword">class</span> POS&gt;
-<a name="l00110"></a>00110     std::vector&lt;POSB*&gt; <a class="code" href="classmoltk_1_1MatrixScorer.html#aef587746f1419b9b985ee68ff1455f04" title="QueryPosition represents an alignment/sequence column in the second of two sequences being scored by ...">create_foo_positions</a>(<span class="keyword">const</span> <a class="code" href="classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>&amp; alignment) <span class="keyword">const</span>;
-<a name="l00111"></a>00111 
-<a name="l00112"></a><a class="code" href="classmoltk_1_1MatrixScorer.html#a6a1606c15fde892eedd8bcd83d2b4350">00112</a>     std::vector&lt;int&gt; <a class="code" href="classmoltk_1_1MatrixScorer.html#a6a1606c15fde892eedd8bcd83d2b4350">character_indices</a>; <span class="comment">// maps letters to matrix indices</span>
-<a name="l00113"></a><a class="code" href="classmoltk_1_1MatrixScorer.html#ac6fdcde81452d3f0c853b09d0c07f4a9">00113</a>     std::vector&lt; std::vector&lt;Information&gt; &gt; <a class="code" href="classmoltk_1_1MatrixScorer.html#ac6fdcde81452d3f0c853b09d0c07f4a9">matrix</a>;
-<a name="l00114"></a>00114 };
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116 std::istream&amp; <a class="code" href="namespacemoltk.html#a9d6101e75a7b6c533c256d3bceeae415">operator&gt;&gt;</a>(std::istream&amp;, <a class="code" href="classmoltk_1_1MatrixScorer.html" title="MatrixScorer scores alignments using a residue type matrix such as BLOSUM62 or PAM250.">moltk::MatrixScorer</a>&amp;);
-<a name="l00117"></a>00117 
-<a name="l00118"></a>00118 } <span class="comment">// namespace moltk</span>
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120 <span class="preprocessor">#endif // MOLTK_ALIGN_MATRIX_SCORER_H</span>
-<a name="l00121"></a>00121 <span class="preprocessor"></span>
+<a name="l00028"></a>00028 <span class="preprocessor">#ifndef MOLTK_ALIGN_MATRIX_SCORER_H</span>
+<a name="l00029"></a>00029 <span class="preprocessor"></span><span class="preprocessor">#define MOLTK_ALIGN_MATRIX_SCORER_H</span>
+<a name="l00030"></a>00030 <span class="preprocessor"></span>
+<a name="l00031"></a>00031 <span class="preprocessor">#include &quot;<a class="code" href="DPPosition_8hpp.html" title="Templated classes GapScore and DPPosition to efficiently represent sequence residues during alignment...">moltk/DPPosition.hpp</a>&quot;</span>
+<a name="l00032"></a>00032 <span class="preprocessor">#include &quot;<a class="code" href="Alignment_8hpp.html" title="Alignment class representing a sequence alignment.">moltk/Alignment.hpp</a>&quot;</span>
+<a name="l00033"></a>00033 <span class="preprocessor">#include &quot;<a class="code" href="SubstitutionMatrix_8hpp.html" title="SubstitutionMatrix class for look up of residue alignment scores.">moltk/SubstitutionMatrix.hpp</a>&quot;</span>
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 <span class="keyword">namespace </span>moltk {
+<a name="l00036"></a>00036 
+<a name="l00041"></a>00041 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SCORE_TYPE, <span class="keywordtype">int</span> GAP_NSEGS&gt;
+<a name="l00042"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html">00042</a> <span class="keyword">class </span><a class="code" href="classmoltk_1_1MatrixScorer__.html" title="MatrixScorer scores alignments using a residue type matrix such as BLOSUM62 or PAM250.">MatrixScorer_</a>
+<a name="l00043"></a>00043 {
+<a name="l00044"></a>00044 <span class="keyword">public</span>:
+<a name="l00045"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#a81f6c7b3c16cbb5847e4e85ce4923632">00045</a>     <span class="keyword">typedef</span> SCORE_TYPE <a class="code" href="classmoltk_1_1MatrixScorer__.html#a81f6c7b3c16cbb5847e4e85ce4923632">ScoreType</a>;
+<a name="l00046"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#adbe0cd19675e73b48d663c073f5f36cf">00046</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">dp::DPPosition&lt;SCORE_TYPE, GAP_NSEGS&gt;</a> <a class="code" href="classmoltk_1_1MatrixScorer__.html#adbe0cd19675e73b48d663c073f5f36cf">QueryPosition</a>;
+<a name="l00047"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#a9099b84fb6fdd3936f70e2120aa57225">00047</a>     <span class="keyword">typedef</span> <a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">dp::DPPosition&lt;SCORE_TYPE, GAP_NSEGS&gt;</a> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a9099b84fb6fdd3936f70e2120aa57225">TargetPosition</a>;
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049     <span class="keyword">explicit</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a093911098a3e0b7ad665a0cf2a5c6447">MatrixScorer_</a>(<span class="keyword">const</span> <a class="code" href="classmoltk_1_1SubstitutionMatrix__.html" title="SubstitutionMatrix scores alignments using a residue type matrix such as BLOSUM62 or PAM250...">moltk::SubstitutionMatrix_&lt;SCORE_TYPE&gt;</a>&amp; <a class="code" href="classmoltk_1_1MatrixScorer__.html#a4bf1242ff86ad47455d09ce4df1a18e7">matrix</a>);
+<a name="l00050"></a>00050     <span class="keywordtype">void</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a65bcb5c028affd49b3f5dff07b0e3653">create_positions</a>(
+<a name="l00051"></a>00051         std::vector&lt;<a class="code" href="structmoltk_1_1dp_1_1DPPosition.html" title="Represents one column/residue in a sequence/alignment to be aligned.">dp::DPPosition&lt;SCORE_TYPE, GAP_NSEGS&gt;</a>*&gt;&amp; positions, 
+<a name="l00052"></a>00052         <span class="keyword">const</span> <a class="code" href="classmoltk_1_1Alignment__.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures.">Alignment</a>&amp; alignment) <span class="keyword">const</span>;
+<a name="l00053"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#a0d7def4e72c6e4263cb9506a1055978b">00053</a>     <span class="keywordtype">bool</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a0d7def4e72c6e4263cb9506a1055978b">get_end_gaps_free</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a69dc9913654f395b8a6912cd5866edc7">b_end_gaps_free</a>;}
+<a name="l00054"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#abe3caf1c15a2e325c7bd942b38fa8295">00054</a>     <span class="keywordtype">void</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#abe3caf1c15a2e325c7bd942b38fa8295">set_end_gaps_free</a>(<span class="keywordtype">bool</span> f) {<a class="code" href="classmoltk_1_1MatrixScorer__.html#a69dc9913654f395b8a6912cd5866edc7">b_end_gaps_free</a> = f;}
+<a name="l00056"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#af371dde80aaf6fad411ce2115a92153c">00056</a>     SCORE_TYPE <a class="code" href="classmoltk_1_1MatrixScorer__.html#af371dde80aaf6fad411ce2115a92153c" title="Alignment score reduction for initiating an alignment gap.">get_default_gap_open_penalty</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a2c84b871efbdbfedaf1158a5d8e9faf7">default_gap_open_penalty</a>;}
+<a name="l00058"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#a0ec10dee34d5516e4f788a1eaa1db8ed">00058</a>     <span class="keywordtype">void</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a0ec10dee34d5516e4f788a1eaa1db8ed" title="Set alignment score reduction for initiating an alignment gap.">set_default_gap_open_penalty</a>(SCORE_TYPE penalty) {<a class="code" href="classmoltk_1_1MatrixScorer__.html#a2c84b871efbdbfedaf1158a5d8e9faf7">default_gap_open_penalty</a> = penalty;}
+<a name="l00060"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#ac1ee5395460b5275cb42abfbe64b9d35">00060</a>     SCORE_TYPE <a class="code" href="classmoltk_1_1MatrixScorer__.html#ac1ee5395460b5275cb42abfbe64b9d35" title="Alignment score reduction for increasing the length of an alignment gap by one position.">get_default_gap_extension_penalty</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a1683eba129f30cb66740df4e5876ad81">default_gap_extension_penalty</a>;}
+<a name="l00062"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#a52b8d0fc61a7876a600c0a839eedc043">00062</a>     <span class="keywordtype">void</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a52b8d0fc61a7876a600c0a839eedc043" title="Set Alignment score reduction for increasing the length of an alignment gap by one position...">set_default_gap_extension_penalty</a>(SCORE_TYPE penalty) {<a class="code" href="classmoltk_1_1MatrixScorer__.html#a1683eba129f30cb66740df4e5876ad81">default_gap_extension_penalty</a> = penalty;}
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064 <span class="keyword">protected</span>:
+<a name="l00065"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#a69dc9913654f395b8a6912cd5866edc7">00065</a>     <span class="keywordtype">bool</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a69dc9913654f395b8a6912cd5866edc7">b_end_gaps_free</a>;
+<a name="l00066"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#a2c84b871efbdbfedaf1158a5d8e9faf7">00066</a>     SCORE_TYPE <a class="code" href="classmoltk_1_1MatrixScorer__.html#a2c84b871efbdbfedaf1158a5d8e9faf7">default_gap_open_penalty</a>;
+<a name="l00067"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#a1683eba129f30cb66740df4e5876ad81">00067</a>     SCORE_TYPE <a class="code" href="classmoltk_1_1MatrixScorer__.html#a1683eba129f30cb66740df4e5876ad81">default_gap_extension_penalty</a>;
+<a name="l00068"></a><a class="code" href="classmoltk_1_1MatrixScorer__.html#a4bf1242ff86ad47455d09ce4df1a18e7">00068</a>     <a class="code" href="classmoltk_1_1SubstitutionMatrix__.html" title="SubstitutionMatrix scores alignments using a residue type matrix such as BLOSUM62 or PAM250...">SubstitutionMatrix_&lt;SCORE_TYPE&gt;</a> <a class="code" href="classmoltk_1_1MatrixScorer__.html#a4bf1242ff86ad47455d09ce4df1a18e7">matrix</a>;
+<a name="l00069"></a>00069 };
+<a name="l00070"></a>00070 
+<a name="l00071"></a><a class="code" href="namespacemoltk.html#a29b017023af90d3aa2eb917cfdbc59ac">00071</a> <span class="keyword">typedef</span> <a class="code" href="classmoltk_1_1MatrixScorer__.html">MatrixScorer_&lt;moltk::units::Information, 1&gt;</a> <a class="code" href="namespacemoltk.html#a29b017023af90d3aa2eb917cfdbc59ac">MatrixScorer</a>;
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073 } <span class="comment">// namespace moltk</span>
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 <span class="preprocessor">#endif // MOLTK_ALIGN_MATRIX_SCORER_H</span>
+<a name="l00076"></a>00076 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->

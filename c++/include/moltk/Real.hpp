@@ -20,6 +20,11 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * typedef for real number representation in MolTK
+ */
+
 #ifndef MOLTK_REAL_H
 #define MOLTK_REAL_H
 

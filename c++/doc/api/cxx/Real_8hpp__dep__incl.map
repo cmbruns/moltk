@@ -1,12 +1,14 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$Alignment_8hpp.html" title="moltk/Alignment.hpp" alt="" coords="675,155,816,181"/>
-<area shape="rect" id="node9" href="$moltk_8hpp.html" title="moltk.hpp" alt="" coords="217,453,295,480"/>
-<area shape="rect" id="node11" href="$Rotation3D_8hpp.html" title="moltk/Rotation3D.hpp" alt="" coords="60,304,207,331"/>
-<area shape="rect" id="node17" href="$units_8hpp.html" title="moltk/units.hpp" alt="" coords="374,80,484,107"/>
-<area shape="rect" id="node5" href="$Aligner_8hpp.html" title="moltk/Aligner.hpp" alt="" coords="523,229,645,256"/>
-<area shape="rect" id="node7" href="$MatrixScorer_8hpp.html" title="moltk/MatrixScorer.hpp" alt="" coords="416,304,573,331"/>
-<area shape="rect" id="node13" href="$RigidTransform_8hpp.html" title="moltk/RigidTransform.hpp" alt="" coords="171,379,340,405"/>
-<area shape="rect" id="node21" href="$DPTable_8hpp.html" title="moltk/DPTable.hpp" alt="" coords="518,155,649,181"/>
-<area shape="rect" id="node25" href="$Vector3D_8hpp.html" title="moltk/Vector3D.hpp" alt="" coords="254,155,391,181"/>
-<area shape="rect" id="node27" href="$Quaternion_8hpp.html" title="moltk/Quaternion.hpp" alt="" coords="144,229,291,256"/>
+<area shape="rect" id="node3" href="$units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com..." alt="" coords="286,80,396,107"/>
+<area shape="rect" id="node5" href="$Alignment_8hpp.html" title="Alignment class representing a sequence alignment." alt="" coords="5,155,147,181"/>
+<area shape="rect" id="node15" href="$DPPosition_8hpp.html" title="Templated classes GapScore and DPPosition to efficiently represent sequence residues during alignment..." alt="" coords="171,155,319,181"/>
+<area shape="rect" id="node18" href="$Vector3D_8hpp.html" title="Vector3D class representing points or vectors in 3&#45;space." alt="" coords="555,155,692,181"/>
+<area shape="rect" id="node27" href="$SubstitutionMatrix_8hpp.html" title="SubstitutionMatrix class for look up of residue alignment scores." alt="" coords="343,155,531,181"/>
+<area shape="rect" id="node7" href="$MatrixScorer_8hpp.html" title="MatrixScorer class to efficiently compare DPPositions during alignment." alt="" coords="217,229,375,256"/>
+<area shape="rect" id="node9" href="$DPTable_8hpp.html" title="Templated classes encapsulating dynamic programming sequence alignment algorithms." alt="" coords="283,304,415,331"/>
+<area shape="rect" id="node11" href="$Aligner_8hpp.html" title="Aligner class for aligning Biosequences and Alignments using a MatrixScorer." alt="" coords="301,379,424,405"/>
+<area shape="rect" id="node13" href="$moltk_8hpp.html" title="Top level include that includes the rest of the moltk C++ API." alt="" coords="411,453,489,480"/>
+<area shape="rect" id="node20" href="$Quaternion_8hpp.html" title="Quaternion class with stable four element representation of a rotation in 3D." alt="" coords="500,229,647,256"/>
+<area shape="rect" id="node22" href="$Rotation3D_8hpp.html" title="Rotation3D class representing a 3D rotation matrix." alt="" coords="493,304,640,331"/>
+<area shape="rect" id="node24" href="$RigidTransform_8hpp.html" title="RigidTransform class representing rotation and translation between coordinate frames." alt="" coords="455,379,624,405"/>
 </map>

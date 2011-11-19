@@ -43,7 +43,15 @@ if(MOLTK_REGENERATE_CPP_API_DOCS)
         set(HAVE_DOT YES)
     endif()
     configure_file(Doxyfile.in ${DOXY_CONFIG} @ONLY )
+    # Remove previous documentation files before generating new ones
+    file(GLOB OLD_DOCS 
+        RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/api" 
+        "api/cxx/*.html" "api/cxx/*.png" "api/cxx/*.md5")
+    # message("${OLD_DOCS}")
+    string(REPLACE ";" " " OLD_DOCS "${OLD_DOCS}")
+    # message("${OLD_DOCS}")
     add_custom_target(MoltkCxxApiDocs ALL
+        COMMAND ${CMAKE_COMMAND} -E remove "${OLD_DOCS}"
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXY_CONFIG}
         COMMAND ${CMAKE_COMMAND} -E copy tabs.css cxx/tabs.css
         COMMAND ${CMAKE_COMMAND} -E copy doxygen.css cxx/doxygen.css

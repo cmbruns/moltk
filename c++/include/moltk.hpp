@@ -20,6 +20,11 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * Top level include that includes the rest of the moltk C++ API
+ */
+
 /*! \mainpage MolTK: Python and C++ tools for protein sequence/structure alignment and visualization
 
 \section whatismoltk What is MolTK?
@@ -77,10 +82,5 @@ There are three faces of MolTK; in order from easiest-to-use to most-powerful:
  */
 namespace moltk {}
 
-#include "moltk/Real.hpp"
-#include "moltk/Biosequence.hpp"
 #include "moltk/Aligner.hpp"
-#include "moltk/PDBStructure.hpp"
-#include "moltk/Vector3D.hpp"
-#include "moltk/Rotation3D.hpp"
 #include "moltk/RigidTransform.hpp"

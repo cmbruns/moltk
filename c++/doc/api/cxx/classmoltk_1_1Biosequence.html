@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.4.3</span>
    </div>
    
   </td>
@@ -122,16 +122,26 @@ Public Types</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#aee6ad5187962781881788888f69167fb">Biosequence</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an empty sequence.  <a href="#aee6ad5187962781881788888f69167fb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a6201adf152e6fe433ce97ca17fd07211">Biosequence</a> (const std::string &amp;sequence, const std::string &amp;<a class="el" href="classmoltk_1_1Biosequence.html#a686fd896dd4c0996dcd7c98368178bc9">description</a>=&quot;&quot;)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sequence from a one-letter-code string.  <a href="#a6201adf152e6fe433ce97ca17fd07211"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a549ec19e3cf8e09f9bcb402bb6728a6f">Biosequence</a> (const char *sequence, const std::string &amp;<a class="el" href="classmoltk_1_1Biosequence.html#a686fd896dd4c0996dcd7c98368178bc9">description</a>=&quot;&quot;)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sequence from a one-letter-code string.  <a href="#a549ec19e3cf8e09f9bcb402bb6728a6f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a28917bc01df6b7d3fa995476b7258404">Biosequence</a> (const <a class="el" href="classmoltk_1_1Biosequence.html">Biosequence</a> &amp;rhs)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a sequence.  <a href="#a28917bc01df6b7d3fa995476b7258404"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a2fe7b008000e37c494f64d720651b165">~Biosequence</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence destructor.  <a href="#a2fe7b008000e37c494f64d720651b165"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a9ed5ae7e9926b9b1034fdad564a56dcd">load_stream</a> (std::istream &amp;is)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Biosequence.html">Biosequence</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a44a245f0fe1ad46f81c2d1fb243b0bec">load_fasta</a> (const std::string &amp;file_name)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a sequence from a string in fasta format.  <a href="#a44a245f0fe1ad46f81c2d1fb243b0bec"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoltk_1_1Biosequence.html">Biosequence</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a4ffb7ea7260285d41d360ff7229e7f8e">load_fasta</a> (std::istream &amp;is)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a sequence from a C++ stream in fasta format.  <a href="#a4ffb7ea7260285d41d360ff7229e7f8e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#ac990688fe005304a3dd512a616017c71">get_number_of_residues</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of residues (amino acids or nucleotides) in this molecule.  <a href="#ac990688fe005304a3dd512a616017c71"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmoltk_1_1Biosequence.html#ad5da6959d153abf84e135e4f21e68a8d">Residue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a7347126c11c30536dfc3b0214f0dcc44">get_residue</a> (size_t ix) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Return residue at particular index position.  <a href="#a7347126c11c30536dfc3b0214f0dcc44"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a8290cae93ff500228664fbb4666777a3">get_description</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Description string of this sequence.  <a href="#a8290cae93ff500228664fbb4666777a3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a443c6178002614e5dc4215360cd5d206">write_fasta</a> (std::ostream &amp;os) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write sequence in fasta format to a C++ stream.  <a href="#a443c6178002614e5dc4215360cd5d206"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#afe8bf9a3ac2efbea3f1a63137bce682f">write_fasta</a> (const std::string &amp;file_name) const </td></tr>
@@ -148,7 +158,9 @@ Protected Attributes</h2></td></tr>
 <tr><td colspan="2"><h2><a name="friends"></a>
 Friends</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a71b3d56cc0f8f3c90957efd3592ddd0b">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classmoltk_1_1Biosequence.html">Biosequence</a> &amp;seq)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write sequence to a C++ stream in fasta format.  <a href="#a71b3d56cc0f8f3c90957efd3592ddd0b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Biosequence.html#a8e8f8370f1a4769c9ce2e6ae0f44fa1e">operator&gt;&gt;</a> (std::istream &amp;is, <a class="el" href="classmoltk_1_1Biosequence.html">Biosequence</a> &amp;seq)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read sequence from a C++ stream in fasta format.  <a href="#a8e8f8370f1a4769c9ce2e6ae0f44fa1e"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>A macromolecule sequence (DNA or RNA or protein) </p>
@@ -181,6 +193,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Create an empty sequence. </p>
+
 </div>
 </div>
 <a class="anchor" id="a6201adf152e6fe433ce97ca17fd07211"></a><!-- doxytag: member="moltk::Biosequence::Biosequence" ref="a6201adf152e6fe433ce97ca17fd07211" args="(const std::string &amp;sequence, const std::string &amp;description=&quot;&quot;)" -->
@@ -207,6 +221,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Create a sequence from a one-letter-code string. </p>
 
 </div>
 </div>
@@ -235,6 +251,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Create a sequence from a one-letter-code string. </p>
+
 </div>
 </div>
 <a class="anchor" id="a28917bc01df6b7d3fa995476b7258404"></a><!-- doxytag: member="moltk::Biosequence::Biosequence" ref="a28917bc01df6b7d3fa995476b7258404" args="(const Biosequence &amp;rhs)" -->
@@ -252,6 +270,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Copy a sequence. </p>
+
 </div>
 </div>
 <a class="anchor" id="a2fe7b008000e37c494f64d720651b165"></a><!-- doxytag: member="moltk::Biosequence::~Biosequence" ref="a2fe7b008000e37c494f64d720651b165" args="()" -->
@@ -267,6 +287,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Sequence destructor. </p>
 
 </div>
 </div>
@@ -303,6 +325,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Description string of this sequence. </p>
+
 </div>
 </div>
 <a class="anchor" id="ac990688fe005304a3dd512a616017c71"></a><!-- doxytag: member="moltk::Biosequence::get_number_of_residues" ref="ac990688fe005304a3dd512a616017c71" args="() const " -->
@@ -318,6 +342,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Number of residues (amino acids or nucleotides) in this molecule. </p>
 
 <p>Implements <a class="el" href="classmoltk_1_1BaseBiosequence.html#a837f45a8604c435855b00aa90ace5841">moltk::BaseBiosequence</a>.</p>
 
@@ -338,6 +364,9 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Return residue at particular index position. </p>
+<p>Starts at zero. This is *not* necessarily the residue number. </p>
+
 <p>Implements <a class="el" href="classmoltk_1_1BaseBiosequence.html#ae966c9bf162db00c2d5a4898170538af">moltk::BaseBiosequence</a>.</p>
 
 </div>
@@ -357,6 +386,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Populate a sequence from a string in fasta format. </p>
+
 </div>
 </div>
 <a class="anchor" id="a4ffb7ea7260285d41d360ff7229e7f8e"></a><!-- doxytag: member="moltk::Biosequence::load_fasta" ref="a4ffb7ea7260285d41d360ff7229e7f8e" args="(std::istream &amp;is)" -->
@@ -373,6 +404,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Populate a sequence from a C++ stream in fasta format. </p>
 
 </div>
 </div>
@@ -495,6 +528,8 @@ Friends</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Write sequence to a C++ stream in fasta format. </p>
+
 </div>
 </div>
 <a class="anchor" id="a8e8f8370f1a4769c9ce2e6ae0f44fa1e"></a><!-- doxytag: member="moltk::Biosequence::operator&gt;&gt;" ref="a8e8f8370f1a4769c9ce2e6ae0f44fa1e" args="(std::istream &amp;is, Biosequence &amp;seq)" -->
@@ -521,6 +556,8 @@ Friends</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Read sequence from a C++ stream in fasta format. </p>
 
 </div>
 </div>

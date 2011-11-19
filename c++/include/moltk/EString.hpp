@@ -20,6 +20,12 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * EString class compact representation of aligned sequence gap structure.
+ */
+
+
 #ifndef MOLTK_ESTRING_HPP
 #define MOLTK_ESTRING_HPP
 

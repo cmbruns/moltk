@@ -20,16 +20,17 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * MatrixScorer class to efficiently compare DPPositions during alignment
+ */
+
 #ifndef MOLTK_ALIGN_MATRIX_SCORER_H
 #define MOLTK_ALIGN_MATRIX_SCORER_H
 
 #include "moltk/DPPosition.hpp"
 #include "moltk/Alignment.hpp"
 #include "moltk/SubstitutionMatrix.hpp"
-#include "moltk/units.hpp"
-#include <string>
-#include <iostream>
-#include <vector>
 
 namespace moltk {
 

@@ -20,6 +20,11 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * Raw data for BLOSUM62 and PAM250 protein residue alignment scoring matrices
+ */
+
 #ifndef MOLTK_SUBSTITUTION_MATRIX_DATA_HPP_
 #define MOLTK_SUBSTITUTION_MATRIX_DATA_HPP_
 

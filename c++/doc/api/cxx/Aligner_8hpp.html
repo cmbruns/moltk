@@ -29,7 +29,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">MolTK C++ API
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.4.3</span>
    </div>
    
   </td>
@@ -85,25 +85,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">moltk/Aligner.hpp File Reference</div>  </div>
 </div>
 <div class="contents">
+
+<p>Aligner class for aligning Biosequences and Alignments using a MatrixScorer.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="DPTable_8hpp_source.html">moltk/DPTable.hpp</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="Alignment_8hpp_source.html">moltk/Alignment.hpp</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="units_8hpp_source.html">moltk/units.hpp</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="Biosequence_8hpp_source.html">moltk/Biosequence.hpp</a>&quot;</code><br/>
-<code>#include &lt;iostream&gt;</code><br/>
-<code>#include &lt;vector&gt;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Aligner.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="Aligner_8hpp__incl.png" border="0" usemap="#moltk_2Aligner_8hpp" alt=""/></div>
 <map name="moltk_2Aligner_8hpp" id="moltk_2Aligner_8hpp">
-<area shape="rect" id="node3" href="DPTable_8hpp.html" title="moltk/DPTable.hpp" alt="" coords="514,80,645,107"/><area shape="rect" id="node11" href="units_8hpp.html" title="moltk/units.hpp" alt="" coords="375,155,485,181"/><area shape="rect" id="node33" href="Alignment_8hpp.html" title="moltk/Alignment.hpp" alt="" coords="751,80,892,107"/><area shape="rect" id="node36" href="Biosequence_8hpp.html" title="moltk/Biosequence.hpp" alt="" coords="1137,229,1295,256"/><area shape="rect" id="node5" href="EString_8hpp.html" title="moltk/EString.hpp" alt="" coords="714,155,840,181"/><area shape="rect" id="node13" href="Real_8hpp.html" title="moltk/Real.hpp" alt="" coords="377,229,487,256"/><area shape="rect" id="node44" href="PDBStructure_8hpp.html" title="moltk/PDBStructure.hpp" alt="" coords="967,155,1129,181"/></map>
+<area shape="rect" id="node3" href="DPTable_8hpp.html" title="Templated classes encapsulating dynamic programming sequence alignment algorithms." alt="" coords="607,80,739,107"/><area shape="rect" id="node5" href="MatrixScorer_8hpp.html" title="MatrixScorer class to efficiently compare DPPositions during alignment." alt="" coords="351,155,508,181"/><area shape="rect" id="node45" href="dp__params_8hpp.html" title="Defines options that affect the details of the dynamic programming sequence alignment algorithm..." alt="" coords="532,155,679,181"/><area shape="rect" id="node7" href="DPPosition_8hpp.html" title="Templated classes GapScore and DPPosition to efficiently represent sequence residues during alignment..." alt="" coords="111,304,259,331"/><area shape="rect" id="node25" href="Alignment_8hpp.html" title="Alignment class representing a sequence alignment." alt="" coords="512,229,653,256"/><area shape="rect" id="node40" href="SubstitutionMatrix_8hpp.html" title="SubstitutionMatrix class for look up of residue alignment scores." alt="" coords="335,304,523,331"/><area shape="rect" id="node9" href="units_8hpp.html" title="templated Dimension, Unit, and Quantity classes for type safe scientific dimensional analysis and com..." alt="" coords="217,379,327,405"/><area shape="rect" id="node11" href="Real_8hpp.html" title="typedef for real number representation in MolTK" alt="" coords="315,453,424,480"/><area shape="rect" id="node27" href="EString_8hpp.html" title="EString class compact representation of aligned sequence gap structure." alt="" coords="697,379,823,405"/><area shape="rect" id="node32" href="PDBStructure_8hpp.html" title="Macromolecular atomic structure classes." alt="" coords="548,304,711,331"/><area shape="rect" id="node34" href="Biosequence_8hpp.html" title="Biosequence class representing macromolecule sequences." alt="" coords="462,379,620,405"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="Aligner_8hpp__dep__incl.png" border="0" usemap="#moltk_2Aligner_8hppdep" alt=""/></div>
 <map name="moltk_2Aligner_8hppdep" id="moltk_2Aligner_8hppdep">
-<area shape="rect" id="node3" href="MatrixScorer_8hpp.html" title="moltk/MatrixScorer.hpp" alt="" coords="5,80,163,107"/><area shape="rect" id="node5" href="moltk_8hpp.html" title="moltk.hpp" alt="" coords="187,80,265,107"/></map>
+<area shape="rect" id="node3" href="moltk_8hpp.html" title="Top level include that includes the rest of the moltk C++ API." alt="" coords="27,80,105,107"/></map>
 </div>
 </div>
 <p><a href="Aligner_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -112,8 +110,6 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner.html">moltk::Aligner</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classmoltk_1_1Aligner.html" title="The Aligner class creates macromolecule sequence alignments and structure alignments.">Aligner</a> class creates macromolecule sequence alignments and structure alignments.  <a href="classmoltk_1_1Aligner.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoltk_1_1Aligner_1_1Scorer.html">moltk::Aligner::Scorer</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">QueryPosition is an alignment column specialized to efficiently compute an alignment score with a TargetPosition.  <a href="classmoltk_1_1Aligner_1_1Scorer.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html">moltk</a></td></tr>
@@ -123,7 +119,9 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Alignment&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoltk.html#a403bc85428d8dd3e1b17e60f2968dc1d">moltk::align</a> (const Alignment &amp;target_alignment, const Alignment &amp;query_alignment)</td></tr>
 </table>
-</div>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>Aligner class for aligning Biosequences and Alignments using a MatrixScorer. </p>
+</div></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"

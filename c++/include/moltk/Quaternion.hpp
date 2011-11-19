@@ -20,6 +20,11 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * Quaternion class with stable four element representation of a rotation in 3D
+ */
+
 #ifndef MOLTK_QUATERNION_HPP
 #define MOLTK_QUATERNION_HPP
 

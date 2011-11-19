@@ -20,11 +20,15 @@
     For questions contact: cmbruns@rotatingpenguin.com
 */
 
+/*!
+ * \file
+ * SubstitutionMatrix class for look up of residue alignment scores
+ */
+
 #ifndef MOLTK_SUBSTITUTION_MATRIX_HPP_
 #define MOLTK_SUBSTITUTION_MATRIX_HPP_
 
 #include "moltk/units.hpp"
-#include <string>
 #include <iostream>
 #include <vector>
 

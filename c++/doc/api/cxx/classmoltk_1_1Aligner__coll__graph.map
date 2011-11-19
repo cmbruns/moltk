@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classmoltk_1_1Alignment.html" title="Alignment represents a set of aligned macromolecule sequences and/or structures." alt="" coords="596,80,716,107"/>
-<area shape="rect" id="node10" href="$classmoltk_1_1Aligner_1_1Scorer.html" title="QueryPosition is an alignment column specialized to efficiently compute an alignment score with a Tar..." alt="" coords="582,135,730,161"/>
-<area shape="rect" id="node12" href="$structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;." alt="" coords="143,164,340,191"/>
+<area shape="rect" id="node2" href="$classmoltk_1_1MatrixScorer__.html" title="moltk::MatrixScorer_\&lt; moltk::units::Information, 1 \&gt;" alt="" coords="886,37,1207,64"/>
+<area shape="rect" id="node4" href="$structmoltk_1_1units_1_1Quantity.html" title="Quantity represents a physical value with a unit, such as &quot;5.6 nanometers&quot;." alt="" coords="391,12,588,39"/>
+<area shape="rect" id="node8" href="$classmoltk_1_1SubstitutionMatrix__.html" title="moltk::SubstitutionMatrix_\&lt; moltk::units::Information \&gt;" alt="" coords="321,63,658,89"/>
 </map>

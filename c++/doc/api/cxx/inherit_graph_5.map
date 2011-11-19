@@ -1,5 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classmoltk_1_1BaseBiosequence_1_1BaseResidue.html" title="Parent class for macromolecule sequence residues (nucleotides or amino acids)" alt="" coords="6,31,258,57"/>
-<area shape="rect" id="node3" href="$classmoltk_1_1BiosequenceResidue.html" title="One residue in a macromolecule sequence (a nucleotide or amino acid)" alt="" coords="313,5,497,32"/>
-<area shape="rect" id="node5" href="$classmoltk_1_1PDBStructure_1_1Residue.html" title="Residue represents a single amino acid or nucleotide residue, or a small molecule, in a macromolecule structure." alt="" coords="307,56,504,83"/>
+<area shape="rect" id="node1" href="$classmoltk_1_1BaseVector3D.html" title="BaseVector3D is a parent class for points and vectors." alt="" coords="6,5,199,32"/>
+<area shape="rect" id="node3" href="$classmoltk_1_1Vector3D__.html" title="Vector3D_&lt;&gt; is an arbitrary point or vector in 3&#45;space." alt="" coords="248,5,419,32"/>
 </map>

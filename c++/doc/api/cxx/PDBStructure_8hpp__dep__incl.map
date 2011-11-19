@@ -1,6 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$Alignment_8hpp.html" title="moltk/Alignment.hpp" alt="" coords="48,80,189,107"/>
-<area shape="rect" id="node9" href="$moltk_8hpp.html" title="moltk.hpp" alt="" coords="187,229,265,256"/>
-<area shape="rect" id="node5" href="$Aligner_8hpp.html" title="moltk/Aligner.hpp" alt="" coords="57,155,180,181"/>
-<area shape="rect" id="node7" href="$MatrixScorer_8hpp.html" title="moltk/MatrixScorer.hpp" alt="" coords="5,229,163,256"/>
+<area shape="rect" id="node3" href="$Alignment_8hpp.html" title="Alignment class representing a sequence alignment." alt="" coords="16,80,157,107"/>
+<area shape="rect" id="node5" href="$MatrixScorer_8hpp.html" title="MatrixScorer class to efficiently compare DPPositions during alignment." alt="" coords="8,155,165,181"/>
+<area shape="rect" id="node7" href="$DPTable_8hpp.html" title="Templated classes encapsulating dynamic programming sequence alignment algorithms." alt="" coords="21,229,152,256"/>
+<area shape="rect" id="node9" href="$Aligner_8hpp.html" title="Aligner class for aligning Biosequences and Alignments using a MatrixScorer." alt="" coords="25,304,148,331"/>
+<area shape="rect" id="node11" href="$moltk_8hpp.html" title="Top level include that includes the rest of the moltk C++ API." alt="" coords="47,379,125,405"/>
 </map>
