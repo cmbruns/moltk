@@ -35,6 +35,7 @@ MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::MatrixScorer_(const SubstitutionMatrix_<SC
     : matrix(matrixParam)
     , default_gap_open_score(-8.0 * moltk::units::one<SCORE_TYPE>())
     , default_gap_extension_score(-0.5 * moltk::units::one<SCORE_TYPE>())
+    , end_gap_factor(0.0)
 {}
 
 /// Alignment of alignments
@@ -43,10 +44,11 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
     std::vector<dp::DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>*>& result, 
     const Alignment& alignment) const
 {
-    typedef dp::DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS> POS;
+    typedef dp::DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS> PositionType;
 
-    // TODO - release old memory in result
-    result.clear();
+    // Ensure table.clear_positions() was called before create_positions()
+    assert(result.size() == 0);
+
     const size_t ncol = alignment.get_number_of_columns();
     const size_t nseq = alignment.get_number_of_sequences();
     if (ncol <= 0) return;
@@ -58,11 +60,13 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
     // Initialize positions with zero-scoring initial profile
     for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
     {
-        POS* pos = new POS();
+        PositionType* pos = new PositionType();
         pos->gap_score.open_score = moltk::units::zero<SCORE_TYPE>();
         pos->gap_score.extension_score = moltk::units::zero<SCORE_TYPE>();
         pos->index = col;
         pos->target_scores_by_residue_type_index.assign(matrix.size(), moltk::units::zero<SCORE_TYPE>());
+        pos->extension_gap_score = moltk::units::zero<SCORE_TYPE>();
+        pos->nongap_count = 0;
         result.push_back(pos);
     }
     // Add contributions from each residue of each sequence
@@ -70,12 +74,10 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
     {
         // Special treatment for position zero, which corresponds to column -1
         // end gaps free?
-        double gapFactor = 1.0;
-        if (get_end_gaps_free())
-            gapFactor = 0.0; // Always starts at a left end gap
+        double gapFactor = end_gap_factor; // at first we are always at an end
         {
-            POS& pos = 
-                dynamic_cast<POS&>(*result[0]);
+            PositionType& pos = 
+                dynamic_cast<PositionType&>(*result[0]);
             // leave score zero, but set gap penalties
             pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
             pos.gap_score.open_score = gapFactor * default_gap_open_score;
@@ -92,17 +94,16 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
                 // This cannot be a left end-gap, but it could be
                 // a right end gap.
                 gapFactor = 1.0;
-                if (   get_end_gaps_free() 
-                    && (eResIx >= ((int)seq.get_number_of_residues() - 1) ) )
+                if (eResIx >= ((int)seq.get_number_of_residues() - 1))
                 {
-                    gapFactor = 0.0;
+                    gapFactor = end_gap_factor;
                 }
                 assert(eResIx <= ((int)seq.get_number_of_residues() - 1));
             }
             ++colIx;
             // Position[i+1] represents column i
-            POS& pos = 
-                dynamic_cast<POS&>(*result[colIx + 1]);
+            PositionType& pos = 
+                dynamic_cast<PositionType&>(*result[colIx + 1]);
             // Set gap penalties
             pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
             pos.gap_score.open_score = gapFactor * default_gap_open_score;
@@ -139,10 +140,11 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
     std::vector<dp::DPPosition<SCORE_TYPE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS>*>& result, 
     const Alignment& alignment) const
 {
-    typedef dp::DPPosition<SCORE_TYPE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS> POS;
+    typedef dp::DPPosition<SCORE_TYPE, dp::DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS> PositionType;
 
-    // TODO - release old memory in result
-    result.clear();
+    // Ensure table.clear_positions() was called before create_positions()
+    assert(result.size() == 0);
+
     const size_t ncol = alignment.get_number_of_columns();
     const size_t nseq = alignment.get_number_of_sequences();
     if (ncol <= 0) return;
@@ -154,7 +156,7 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
     // Initialize positions with zero-scoring initial profile
     for (size_t col = 0; col <= ncol; ++col) // One more position than there are columns
     {
-        POS* pos = new POS();
+        PositionType* pos = new PositionType();
         pos->gap_score.open_score = moltk::units::zero<SCORE_TYPE>();
         pos->gap_score.extension_score = moltk::units::zero<SCORE_TYPE>();
         pos->index = col;
@@ -166,12 +168,10 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
     {
         // Special treatment for position zero, which corresponds to column -1
         // end gaps free?
-        double gapFactor = 1.0;
-        if (get_end_gaps_free())
-            gapFactor = 0.0; // Always starts at a left end gap
+        double gapFactor = end_gap_factor;
         {
-            POS& pos = 
-                dynamic_cast<POS&>(*result[0]);
+            PositionType& pos = 
+                dynamic_cast<PositionType&>(*result[0]);
             // leave score zero, but set gap penalties
             pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
             pos.gap_score.open_score = gapFactor * default_gap_open_score;
@@ -188,17 +188,16 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
                 // This cannot be a left end-gap, but it could be
                 // a right end gap.
                 gapFactor = 1.0;
-                if (   get_end_gaps_free() 
-                    && (eResIx >= ((int)seq.get_number_of_residues() - 1) ) )
+                if (eResIx >= ((int)seq.get_number_of_residues() - 1))
                 {
-                    gapFactor = 0.0;
+                    gapFactor = end_gap_factor;
                 }
                 assert(eResIx <= ((int)seq.get_number_of_residues() - 1));
             }
             ++colIx;
             // Position[i+1] represents column i
-            POS& pos = 
-                dynamic_cast<POS&>(*result[colIx + 1]);
+            PositionType& pos = 
+                dynamic_cast<PositionType&>(*result[colIx + 1]);
             // Set gap penalties
             pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
             pos.gap_score.open_score = gapFactor * default_gap_open_score;
@@ -275,12 +274,10 @@ SCORE_TYPE MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::calc_explicit_pair_score(int i,
         else
         {
             Real gap_factor = 1.0;
-            if (b_end_gaps_free) {
-                if (b_end_gap_1 && (*e1 < 0))
-                    gap_factor = 0.0;
-                if (b_end_gap_2 && (*e2 < 0))
-                    gap_factor = 0.0;
-            }
+            if (b_end_gap_1 && (*e1 < 0))
+                gap_factor = end_gap_factor;
+            if (b_end_gap_2 && (*e2 < 0))
+                gap_factor = end_gap_factor;
             result += gap_factor * default_gap_extension_score;
             if (! b_was_gap)
                 result += gap_factor * default_gap_open_score;

@@ -83,14 +83,14 @@ void register_MatrixScorer_class(){
                 , "\n Alignment score reduction for initiating an alignment gap.\n" );
         
         }
-        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_end_gaps_free
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_end_gap_factor
         
             typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
-            typedef bool ( exported_class_t::*get_end_gaps_free_function_type )(  ) const;
+            typedef ::moltk::Real ( exported_class_t::*get_end_gap_factor_function_type )(  ) const;
             
             MatrixScorer_exposer.def( 
-                "get_end_gaps_free"
-                , get_end_gaps_free_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_end_gaps_free ) );
+                "get_end_gap_factor"
+                , get_end_gap_factor_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::get_end_gap_factor ) );
         
         }
         { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::score
@@ -129,28 +129,28 @@ void register_MatrixScorer_class(){
                 , "\n Set alignment score reduction for initiating an alignment gap.\n" );
         
         }
-        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_end_gaps_free
+        { //::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_end_gap_factor
         
             typedef moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 > exported_class_t;
-            typedef void ( exported_class_t::*set_end_gaps_free_function_type )( bool ) ;
+            typedef void ( exported_class_t::*set_end_gap_factor_function_type )( ::moltk::Real ) ;
             
             MatrixScorer_exposer.def( 
-                "set_end_gaps_free"
-                , set_end_gaps_free_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_end_gaps_free )
-                , ( bp::arg("f") ) );
+                "set_end_gap_factor"
+                , set_end_gap_factor_function_type( &::moltk::MatrixScorer_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double >, 1 >::set_end_gap_factor )
+                , ( bp::arg("factor") ) );
         
         }
-        { //property "end_gaps_free"[fget=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_end_gaps_free, fset=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_end_gaps_free]
+        { //property "end_gap_factor"[fget=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_end_gap_factor, fset=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_end_gap_factor]
         
             typedef moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1> exported_class_t;
             
-            typedef bool ( exported_class_t::*fget )(  ) const;
-            typedef void ( exported_class_t::*fset )( bool ) ;
+            typedef ::moltk::Real ( exported_class_t::*fget )(  ) const;
+            typedef void ( exported_class_t::*fset )( ::moltk::Real ) ;
             
             MatrixScorer_exposer.add_property( 
-                "end_gaps_free"
-                , fget( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_end_gaps_free )
-                , fset( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_end_gaps_free ) );
+                "end_gap_factor"
+                , fget( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_end_gap_factor )
+                , fset( &::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_end_gap_factor ) );
         
         }
         { //property "default_gap_open_score"[fget=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::get_default_gap_open_score, fset=::moltk::MatrixScorer_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double>, 1>::set_default_gap_open_score]

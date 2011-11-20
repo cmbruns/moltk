@@ -92,6 +92,15 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
     QueryWeights query_residue_type_index_weights;
     // target cache for score calculation
     std::vector<SCORE_TYPE> target_scores_by_residue_type_index;
+
+    // Internal gap extension scores
+    /// Number of gaps in column, weighted by sequence weights and end-gappiness
+    // TODO - populate and use these values
+    SCORE_TYPE extension_gap_score;
+    /// Number of non-gap residues, weighted by sequence weights
+    Real nongap_count;
+
+    // TODO Internal gap open scores (that's the hard part...)
 };
 
 /// Specialization of alignment column cache for alignment two individual sequences

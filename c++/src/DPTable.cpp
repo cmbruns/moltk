@@ -124,12 +124,6 @@ std::ostream& operator<<(std::ostream& os,
     return os;
 }
 
-/*
-template std::ostream& operator<<(
-     std::ostream& os, 
-     const DPTable<Information,DP_MEMORY_LARGE,DP_ALIGN_UNGAPPED_SEQUENCES,1>::TableType& t);
-*/
-
 // Instantiate
 template std::ostream& operator<<(
      std::ostream& os, 

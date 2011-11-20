@@ -357,12 +357,6 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
     size_t num_rows() const {return target_positions.size();}
     size_t num_columns() const {return query_positions.size();}
 
-    /// Print out a summary of the positions and dynamic programming table for debugging
-    // friend std::ostream& operator<<(std::ostream& os, const DPTable& t);
-
-    /// Print out a summary of the dynamic programming table for debugging
-    // friend std::ostream& operator<<(std::ostream& os, const TableType& t);
-
     TableType table;
     std::vector<DPPosition<SCORE_TYPE, ALIGN_TYPE, 1>*> query_positions;
     std::vector<DPPosition<SCORE_TYPE, ALIGN_TYPE, 1>*> target_positions;

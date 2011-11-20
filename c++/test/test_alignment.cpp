@@ -22,12 +22,14 @@
 
 // #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE AlignmentUnitTest
+#include "moltk/Alignment.hpp"
+#include "moltk/Aligner.hpp"
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/test/debug.hpp>
-#include "moltk/Alignment.hpp"
-#include "moltk/Aligner.hpp"
+#include <iostream>
 
+using namespace std;
 using namespace moltk;
 using moltk::units::bit;
 
@@ -43,6 +45,7 @@ BOOST_AUTO_TEST_CASE( test_alignment )
     // Trivial sum of pairs with one letter, presumably no gaps
     Alignment a1("S");
     Alignment a2 = align(a1, a1);
+    cout << Aligner::get_shared_aligner().test_table << endl;
     BOOST_CHECK_EQUAL(2.0 * bit, a2.get_score());
     BOOST_CHECK_EQUAL(a2.get_score(), scorer.calc_explicit_sum_of_pairs_score(a2));
 }
