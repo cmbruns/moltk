@@ -93,6 +93,6 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     scorer.set_end_gap_factor(1.0);
     test_matchy_alignment_score(scorer); // works with penalized end gaps 91b
     scorer.set_end_gap_factor(0.0);
-    test_matchy_alignment_score(scorer); // fails 99b 98b
+    test_matchy_alignment_score(scorer); // works 98b
     // TODO - add in gap opening score
 }

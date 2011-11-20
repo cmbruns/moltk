@@ -104,6 +104,19 @@ void register_Alignment_class(){
                 , get_pretty_width_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_pretty_width ) );
         
         }
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_row
+        
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::Row const & ( exported_class_t::*get_row_function_type )( int ) const;
+            
+            Alignment_exposer.def( 
+                "get_row"
+                , get_row_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_row )
+                , ( bp::arg("index") )
+                , bp::return_value_policy< bp::copy_const_reference >()
+                , "\n Access internal Alignment::Row data structure\n" );
+        
+        }
         { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_score
         
             typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
@@ -166,16 +179,30 @@ void register_Alignment_class(){
                 , "\n Load fasta sequences from named file\n" );
         
         }
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_fasta_string
+        
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > & ( exported_class_t::*load_fasta_string_function_type )( ::std::string const & ) ;
+            
+            Alignment_exposer.def( 
+                "load_fasta_string"
+                , load_fasta_string_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_fasta_string )
+                , ( bp::arg("fasta_string") )
+                , bp::return_self< >()
+                , "\n Append sequences from a string containing fasta sequences\n" );
+        
+        }
         { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_string
         
             typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
-            typedef void ( exported_class_t::*load_string_function_type )( ::std::string const & ) ;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > & ( exported_class_t::*load_string_function_type )( ::std::string const & ) ;
             
             Alignment_exposer.def( 
                 "load_string"
                 , load_string_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::load_string )
                 , ( bp::arg("alignment_string") )
-                , "\n Add sequences from fasta sequences or a single sequence string.\n" );
+                , bp::return_self< >()
+                , "\n Add one sequence from a single sequence string.\n" );
         
         }
         { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::pretty
