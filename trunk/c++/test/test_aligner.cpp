@@ -82,16 +82,17 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     cout << al3 << endl;
 
     // Test for alignment of alignments
-    {
-        // Gaps are arrange to efficiently cover all pair interactions (-X XX, -X -X, etc)
-        MatrixScorer& scorer = Aligner::get_shared_aligner().get_scorer();
-        // Start by debugging match score only
-        scorer.set_default_gap_open_score(0.0 * bit);
-        scorer.set_default_gap_extension_score(0.0 * bit);
-        test_matchy_alignment_score(scorer); // this works
-        // Add in gap extension score
-        scorer.set_default_gap_extension_score(-0.5 * bit);
-        test_matchy_alignment_score(scorer); // fails
-        // TODO - add in gap opening score
-    }
+    // Gaps are arranged to efficiently cover all pair interactions (-X XX, -X -X, etc)
+    MatrixScorer& scorer = Aligner::get_shared_aligner().get_scorer();
+    // Start by debugging match score only
+    scorer.set_default_gap_open_score(0.0 * bit);
+    scorer.set_default_gap_extension_score(0.0 * bit);
+    test_matchy_alignment_score(scorer); // this works 102b
+    // Add in gap extension score
+    scorer.set_default_gap_extension_score(-0.5 * bit);
+    scorer.set_end_gap_factor(1.0);
+    test_matchy_alignment_score(scorer); // works with penalized end gaps 91b
+    scorer.set_end_gap_factor(0.0);
+    test_matchy_alignment_score(scorer); // fails 99b 98b
+    // TODO - add in gap opening score
 }

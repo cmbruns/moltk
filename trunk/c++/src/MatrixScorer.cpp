@@ -70,22 +70,27 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
         result.push_back(pos);
     }
     // Add contributions from each residue of each sequence
+    // Loop over sequences first
     for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
     {
+        double seq_weight = alignment.get_row(seqIx).sequence_weight;
+
         // Special treatment for position zero, which corresponds to column -1
         // end gaps free?
-        double gapFactor = end_gap_factor; // at first we are always at an end
+        double gap_factor = end_gap_factor; // at first we are always at an end
         {
             PositionType& pos = 
                 dynamic_cast<PositionType&>(*result[0]);
             // leave score zero, but set gap penalties
-            pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
-            pos.gap_score.open_score = gapFactor * default_gap_open_score;
+            pos.gap_score.extension_score += seq_weight * gap_factor * default_gap_extension_score;
+            pos.gap_score.open_score += seq_weight * gap_factor * default_gap_open_score;
         }
+
         int colIx = -1;
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
         const EString& eString = alignment.get_estring(seqIx);
         EString::const_iterator e;
+        // Inner loop over columns in this sequence
         for (e = eString.begin(); e != eString.end(); ++e) 
         {
             int eResIx = *e;
@@ -93,10 +98,10 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
                 // Is this an end gap?
                 // This cannot be a left end-gap, but it could be
                 // a right end gap.
-                gapFactor = 1.0;
+                gap_factor = 1.0;
                 if (eResIx >= ((int)seq.get_number_of_residues() - 1))
                 {
-                    gapFactor = end_gap_factor;
+                    gap_factor = end_gap_factor;
                 }
                 assert(eResIx <= ((int)seq.get_number_of_residues() - 1));
             }
@@ -105,8 +110,8 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
             PositionType& pos = 
                 dynamic_cast<PositionType&>(*result[colIx + 1]);
             // Set gap penalties
-            pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
-            pos.gap_score.open_score = gapFactor * default_gap_open_score;
+            pos.gap_score.extension_score += seq_weight * gap_factor * default_gap_extension_score;
+            pos.gap_score.open_score += seq_weight * gap_factor * default_gap_open_score;
             if (eResIx >= 0) 
             { // eResIx is an actual residue number
                 const BaseBiosequence::BaseResidue& res = seq.get_residue(eResIx);
@@ -114,9 +119,8 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
                 // Target side
                 // loop over scoring matrix positions
                 for (size_t m = 0; m < matrix.size(); ++m) {
-                    pos.target_scores_by_residue_type_index[m] += matrix[resTypeIndex][m];
+                    pos.target_scores_by_residue_type_index[m] += seq_weight * matrix[resTypeIndex][m];
                 }
-
                 // Query side
                 std::map<size_t, size_t>& qmap = 
                     queryWeightIndexByResTypeIndexByColumn[colIx];
@@ -126,7 +130,15 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
                     pos.query_residue_type_index_weights.push_back( 
                         std::pair<size_t, double>(resTypeIndex, 0.0) );
                 }
-                pos.query_residue_type_index_weights[qmap[resTypeIndex]].second += 1.0;
+                pos.query_residue_type_index_weights[qmap[resTypeIndex]].second += seq_weight;
+
+                // cache for nongap/gap extension score
+                pos.nongap_count += seq_weight;
+            }
+            else
+            {
+                // cache count of internal gap characters at this position
+                pos.extension_gap_score += seq_weight * gap_factor * default_gap_extension_score;
             }
         }
         assert(colIx == alignment.get_number_of_columns() - 1);
@@ -168,13 +180,13 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
     {
         // Special treatment for position zero, which corresponds to column -1
         // end gaps free?
-        double gapFactor = end_gap_factor;
+        double gap_factor = end_gap_factor;
         {
             PositionType& pos = 
                 dynamic_cast<PositionType&>(*result[0]);
             // leave score zero, but set gap penalties
-            pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
-            pos.gap_score.open_score = gapFactor * default_gap_open_score;
+            pos.gap_score.extension_score = gap_factor * default_gap_extension_score;
+            pos.gap_score.open_score = gap_factor * default_gap_open_score;
         }
         int colIx = -1;
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
@@ -187,10 +199,10 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
                 // Is this an end gap?
                 // This cannot be a left end-gap, but it could be
                 // a right end gap.
-                gapFactor = 1.0;
+                gap_factor = 1.0;
                 if (eResIx >= ((int)seq.get_number_of_residues() - 1))
                 {
-                    gapFactor = end_gap_factor;
+                    gap_factor = end_gap_factor;
                 }
                 assert(eResIx <= ((int)seq.get_number_of_residues() - 1));
             }
@@ -199,8 +211,8 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
             PositionType& pos = 
                 dynamic_cast<PositionType&>(*result[colIx + 1]);
             // Set gap penalties
-            pos.gap_score.extension_score = gapFactor * default_gap_extension_score;
-            pos.gap_score.open_score = gapFactor * default_gap_open_score;
+            pos.gap_score.extension_score = gap_factor * default_gap_extension_score;
+            pos.gap_score.open_score = gap_factor * default_gap_open_score;
             if (eResIx >= 0) 
             { // eResIx is an actual residue number
                 const BaseBiosequence::BaseResidue& res = seq.get_residue(eResIx);
@@ -271,8 +283,15 @@ SCORE_TYPE MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::calc_explicit_pair_score(int i,
             b_end_gap_1 = (*e1 == (seq1.get_number_of_residues() - 1));
             b_end_gap_2 = (*e2 == (seq2.get_number_of_residues() - 1));
         }
+        // One position has a gap, the other does not - so score a gap
         else
         {
+            // update end gap status
+            if (*e1 >= 0)
+                b_end_gap_1 = (*e1 == (seq1.get_number_of_residues() - 1));
+            if (*e2 >= 0)
+                b_end_gap_2 = (*e2 == (seq2.get_number_of_residues() - 1));
+            // compute gap score
             Real gap_factor = 1.0;
             if (b_end_gap_1 && (*e1 < 0))
                 gap_factor = end_gap_factor;

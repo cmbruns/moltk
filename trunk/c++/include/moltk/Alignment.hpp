@@ -124,6 +124,8 @@ public:
     const SCORE_TYPE& get_score() const;
     /// Set the sum of pairs score for this Alignment_.  Make sure you put the correct answer!
     Alignment_& set_score(const SCORE_TYPE& s);
+    /// Access internal Alignment::Row data structure
+    const Row& get_row(int index) const {return rows[index];}
     /// Low level python string representation of this Alignment_
     std::string repr() const;
     Alignment_& set_pretty_width(int width) {pretty_width = width; return *this;}

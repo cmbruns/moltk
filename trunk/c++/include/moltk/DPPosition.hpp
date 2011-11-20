@@ -74,6 +74,7 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
     {
         SCORE_TYPE result = moltk::units::zero<SCORE_TYPE>();
         const DPPosition& lhs = *this;
+        // nongap/nongap score
         typename QueryWeights::const_iterator i;
         const QueryWeights& queryWeights = rhs.query_residue_type_index_weights;
         for (i = queryWeights.begin();  i != queryWeights.end(); ++i)
@@ -82,6 +83,12 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
             size_t resTypeIndex = i->first;
             result += resTypeCount * lhs.target_scores_by_residue_type_index[resTypeIndex];
         }
+        // TODO gap/nongap score
+        // TODO gap/nongap gap extension score
+        result += lhs.extension_gap_score * rhs.nongap_count;
+        result += rhs.extension_gap_score * lhs.nongap_count;
+        // TDOO gap/nongap gap open score
+        // gap/gap score is always zero, so requires no case here
         return result;
     }
 
