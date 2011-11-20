@@ -75,8 +75,8 @@ file(GLOB_RECURSE MOLTK_SOURCES "c++/src/*.cpp")
 # because python module depends on C++ libraries.
 add_subdirectory(c++)
 
-set(MOLTK_BUILD_PYTHON_MODULE ON CACHE BOOL "Whether to create moltk python module")
-if(MOLTK_BUILD_PYTHON_MODULE)
+set(MOLTK_PYTHON_BUILD_MODULE ON CACHE BOOL "Whether to create moltk python module")
+if(MOLTK_PYTHON_BUILD_MODULE)
     # Want shared library for boost python
     set(Boost_USE_STATIC_LIBS OFF)
     find_package(Boost COMPONENTS python REQUIRED)

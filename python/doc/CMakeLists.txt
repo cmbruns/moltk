@@ -28,8 +28,8 @@ install(DIRECTORY "${PYTHON_API_DIR}/python"
 # python_api.html is just a shortcut to the epydoc index.html.
 install(FILES "python_api.html" DESTINATION "doc")
 # Python API documentation generated with epydoc
-set(MOLTK_REGENERATE_PYTHON_API_DOCS OFF CACHE BOOL "Whether to (re)generate moltk python API html documents using epydoc")
-if(MOLTK_REGENERATE_PYTHON_API_DOCS)
+set(MOLTK_DOC_API_REGENERATE_PYTHON OFF CACHE BOOL "Whether to (re)generate moltk python API html documents using epydoc")
+if(MOLTK_DOC_API_REGENERATE_PYTHON)
     find_file(EPYDOC_SCRIPT 
         NAMES epydoc.py epydoc
         PATHS

@@ -75,8 +75,10 @@ public:
     ~Alignment_() {}
     /// Add one sequence to the alignment.  Internally, gaps will be removed and encoded into an EString.
     Alignment_& append_sequence(const Biosequence& sequence);
-    /// Add sequences from fasta sequences or a single sequence string.
-    void load_string(const std::string& alignment_string);
+    /// Add one sequence from a single sequence string.
+    Alignment_& load_string(const std::string& alignment_string);
+    /// Append sequences from a string containing fasta sequences
+    Alignment_& load_fasta_string(const std::string& fasta_string);
     /// Load fasta format sequences from a C++ stream
     Alignment_& load_fasta(std::istream& input_stream);
     /// Load fasta sequences from named file
