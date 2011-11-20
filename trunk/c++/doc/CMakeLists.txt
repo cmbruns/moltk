@@ -28,8 +28,8 @@ install(DIRECTORY "${DOXYGEN_API_DIR}/cxx"
 # cxx_api.html is just a shortcut to the Doxygen index.html.
 install(FILES "cxx_api.html" DESTINATION "doc")
 
-set(MOLTK_REGENERATE_CPP_API_DOCS OFF CACHE BOOL "Whether to (re)generate moltk C++ API html documents using Doxygen")
-if(MOLTK_REGENERATE_CPP_API_DOCS)
+set(MOLTK_DOC_API_REGENERATE_CPP OFF CACHE BOOL "Whether to (re)generate moltk C++ API html documents using Doxygen")
+if(MOLTK_DOC_API_REGENERATE_CPP)
     # Doxygen is a program for generating API documentation files from source code comments.
     find_package(Doxygen REQUIRED)
     mark_as_advanced(CLEAR DOXYGEN_EXECUTABLE)

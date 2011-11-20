@@ -109,6 +109,8 @@ void Biosequence::load_stream(std::istream& is)
     char peek = is.peek();
     while ((peek != '>') && is) {
         getline(is, line);
+        // Avoid parsing final line twice
+        if ((!is) && (is.gcount() == 0)) break; // end of file with nothing read
         for (size_t i = 0; i < line.length(); ++i) 
         {
             push_back( Residue(line[i], residueNumber+1) );

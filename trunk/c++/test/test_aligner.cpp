@@ -28,7 +28,42 @@
 #include <iostream>
 
 using namespace moltk;
+using moltk::units::Information;
+using moltk::units::bit;
 using namespace std;
+
+// Alignment with internal gaps but no new gaps
+void test_matchy_alignment_score(const MatrixScorer& scorer) {
+    Alignment a1, a2;
+    a1.load_fasta_string(
+        ">1\n"
+        "C--PW\n"
+        ">2\n"
+        "CHFPW\n"
+        );
+    a2.load_fasta_string(
+        ">3\n"
+        "----W\n"
+        ">4\n"
+        "CH-P-\n"
+        ">5\n"
+        "-HF--\n"
+        ">6\n"
+        "C-FPW\n"
+        ">7\n"
+        "CHFPW\n"
+        );
+    Alignment a3 = align(a1, a2);
+    cout << a3 << endl;
+    // We expect this net_score to equal the alignment score
+    Information net_score = 
+        scorer.calc_explicit_sum_of_pairs_score(a3)
+        - scorer.calc_explicit_sum_of_pairs_score(a1)
+        - scorer.calc_explicit_sum_of_pairs_score(a2);
+    cout << net_score << endl;
+    cout << a3.get_score() << endl;
+    BOOST_CHECK_EQUAL(net_score, a3.get_score());
+}
 
 BOOST_AUTO_TEST_CASE( test_aligner )
 {
@@ -45,4 +80,18 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     cout << al2 << endl;
     Alignment al3 = align(seq3, al1);
     cout << al3 << endl;
+
+    // Test for alignment of alignments
+    {
+        // Gaps are arrange to efficiently cover all pair interactions (-X XX, -X -X, etc)
+        MatrixScorer& scorer = Aligner::get_shared_aligner().get_scorer();
+        // Start by debugging match score only
+        scorer.set_default_gap_open_score(0.0 * bit);
+        scorer.set_default_gap_extension_score(0.0 * bit);
+        test_matchy_alignment_score(scorer); // this works
+        // Add in gap extension score
+        scorer.set_default_gap_extension_score(-0.5 * bit);
+        test_matchy_alignment_score(scorer); // fails
+        // TODO - add in gap opening score
+    }
 }

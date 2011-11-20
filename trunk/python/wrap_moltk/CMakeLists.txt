@@ -34,8 +34,8 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/${GENERATED_CODE_DIR}")
 # (optionally) regenerate python binding source code
 # TODO - consider doing this at configure time, with EXEC_PROGRAM()
 
-set(MOLTK_REGENERATE_PYTHON_BINDINGS OFF CACHE BOOL "Whether to (re)generated C++ code for moltk python bindings")
-if(MOLTK_REGENERATE_PYTHON_BINDINGS)
+set(MOLTK_PYTHON_REGENERATE_BINDINGS OFF CACHE BOOL "Whether to (re)generated C++ code for moltk python bindings")
+if(MOLTK_PYTHON_REGENERATE_BINDINGS)
     # Generate bindings with pyplusplus
     set(WRAP_MOLTK_PY ${CMAKE_CURRENT_BINARY_DIR}/wrap_moltk.py)
     find_program(GCCXML_EXECUTABLE # needed by wrap_moltk.py.in

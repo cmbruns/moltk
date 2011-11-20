@@ -77,10 +77,11 @@ size_t Alignment_<SCORE_TYPE>::get_number_of_columns() const
 }
 
 template<class SCORE_TYPE>
-void Alignment_<SCORE_TYPE>::load_string(const std::string& s)
+Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::load_string(const std::string& s)
 {
     Biosequence b(s);
     append_sequence(b);
+    return *this;
 }
 
 template<class SCORE_TYPE>
@@ -461,6 +462,14 @@ Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::load_fasta(const std::string& fi
         throw std::runtime_error(msg.c_str());
     }
     load_fasta(fasta_stream);
+    return *this;
+}
+
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::load_fasta_string(const std::string& fasta_string)
+{
+    istringstream is(fasta_string);
+    load_fasta(is);
     return *this;
 }
 
