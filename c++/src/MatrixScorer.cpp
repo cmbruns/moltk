@@ -270,6 +270,12 @@ SCORE_TYPE MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::calc_explicit_pair_score(int i,
     bool b_end_gap_2 = true; // Are we in an end gap (left or right) of sequence 2?
     while(e1 != alignment.get_estring(i).end())
     {
+        // Update end gap status
+        if (*e1 >= 0)
+            b_end_gap_1 = (*e1 == (seq1.get_number_of_residues() - 1));
+        if (*e2 >= 0)
+            b_end_gap_2 = (*e2 == (seq2.get_number_of_residues() - 1));
+
         // Ignore positions where both sequences have gaps
         if ( (*e1 < 0) && (*e2 < 0) ) 
             ; 
@@ -280,26 +286,21 @@ SCORE_TYPE MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::calc_explicit_pair_score(int i,
             char c2 = seq2.get_residue(*e2).get_one_letter_code();
             result += scorer.score(c1, c2);
             b_was_gap = false;
-            b_end_gap_1 = (*e1 == (seq1.get_number_of_residues() - 1));
-            b_end_gap_2 = (*e2 == (seq2.get_number_of_residues() - 1));
         }
         // One position has a gap, the other does not - so score a gap
         else
         {
-            // update end gap status
-            if (*e1 >= 0)
-                b_end_gap_1 = (*e1 == (seq1.get_number_of_residues() - 1));
-            if (*e2 >= 0)
-                b_end_gap_2 = (*e2 == (seq2.get_number_of_residues() - 1));
             // compute gap score
             Real gap_factor = 1.0;
             if (b_end_gap_1 && (*e1 < 0))
                 gap_factor = end_gap_factor;
             if (b_end_gap_2 && (*e2 < 0))
                 gap_factor = end_gap_factor;
-            result += gap_factor * default_gap_extension_score;
+            // gap opening
             if (! b_was_gap)
                 result += gap_factor * default_gap_open_score;
+            // gap extension
+            result += gap_factor * default_gap_extension_score;
             b_was_gap = true;
         }
         ++e1;
