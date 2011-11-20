@@ -52,8 +52,8 @@ public:
     void create_positions(
         std::vector<dp::DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>*>& positions, 
         const Alignment& alignment) const;
-    bool get_end_gaps_free() const {return b_end_gaps_free;}
-    void set_end_gaps_free(bool f) {b_end_gaps_free = f;}
+    Real get_end_gap_factor() const {return end_gap_factor;}
+    void set_end_gap_factor(Real factor) {end_gap_factor = factor;}
     /// Alignment score reduction for initiating an alignment gap.
     SCORE_TYPE get_default_gap_open_score() const {return default_gap_open_score;}
     /// Set alignment score reduction for initiating an alignment gap.
@@ -71,7 +71,8 @@ public:
     SCORE_TYPE calc_explicit_pair_score(int i, int j, const Alignment_<SCORE_TYPE>& alignment) const;
 
 protected:
-    bool b_end_gaps_free;
+    // bool b_end_gaps_free;
+    Real end_gap_factor;
     SCORE_TYPE default_gap_open_score;
     SCORE_TYPE default_gap_extension_score;
     SubstitutionMatrix_<SCORE_TYPE> matrix;

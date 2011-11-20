@@ -59,9 +59,9 @@ def wrap_aligner(mb):
 def wrap_scorer(mb):
     for scorer in mb.namespace('moltk').classes(lambda c: c.name.startswith('MatrixScorer_')):
         # scorer = mb.namespace('moltk').class_('MatrixScorer_<>')
-        scorer.add_property('end_gaps_free', 
-             fget=scorer.member_functions('get_end_gaps_free')[0],
-             fset=scorer.member_functions('set_end_gaps_free')[0])        
+        scorer.add_property('end_gap_factor', 
+             fget=scorer.member_functions('get_end_gap_factor')[0],
+             fset=scorer.member_functions('set_end_gap_factor')[0])        
         scorer.add_property('default_gap_open_score', 
              fget=scorer.member_functions('get_default_gap_open_score')[0],
              fset=scorer.member_functions('set_default_gap_open_score')[0])        
