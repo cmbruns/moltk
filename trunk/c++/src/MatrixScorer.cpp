@@ -32,10 +32,10 @@ using namespace moltk;
 template<class SCORE_TYPE, int GAP_NSEGS>
 /* explicit */
 MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::MatrixScorer_(const SubstitutionMatrix_<SCORE_TYPE>& matrixParam)
-    : matrix(matrixParam)
+    : end_gap_factor(0.0)
     , default_gap_open_score(-8.0 * moltk::units::one<SCORE_TYPE>())
     , default_gap_extension_score(-0.5 * moltk::units::one<SCORE_TYPE>())
-    , end_gap_factor(0.0)
+    , matrix(matrixParam)
 {}
 
 /// Alignment of alignments
@@ -272,9 +272,9 @@ SCORE_TYPE MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::calc_explicit_pair_score(int i,
     {
         // Update end gap status
         if (*e1 >= 0)
-            b_end_gap_1 = (*e1 == (seq1.get_number_of_residues() - 1));
+            b_end_gap_1 = (*e1 == ((int)seq1.get_number_of_residues() - 1));
         if (*e2 >= 0)
-            b_end_gap_2 = (*e2 == (seq2.get_number_of_residues() - 1));
+            b_end_gap_2 = (*e2 == ((int)seq2.get_number_of_residues() - 1));
 
         // Ignore positions where both sequences have gaps
         if ( (*e1 < 0) && (*e2 < 0) ) 
