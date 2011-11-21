@@ -43,3 +43,7 @@ class MoltkApp(QApplication):
         self.mainWindow.show()
         self.exec_()
         sys.exit()
+
+        
+if '__main__' == __name__:
+    MoltkApp()
