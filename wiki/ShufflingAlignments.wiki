@@ -1,0 +1,46 @@
+#summary How to shuffle sequence alignments
+
+= Introduction =
+
+The following algorithm for shuffling sequence alignments preserves
+
+  * The exact number of each residue type
+  * The exact co-distribution of residues within columns
+  * The exact total number of gaps
+  * The exact total number of end gaps
+  * The exact average gap length
+  * The exact total number of gap characters
+  * The approximate distribution of hydrophobic residues
+  * The approximate distribution of conserved columns
+
+The algorithm does not necessarily preserve:
+
+  * The exact sequence of residues in each sequence.
+  * The exact distribution of gap lengths.
+  * The proportion of the total gap length residing in end-gaps
+
+  # If sequence weighting is used, sort the sequences in the alignment in order of sequence weight.
+  # For each column, store the following information in a data structure
+    # The gap pattern of the column
+    # An ordered list of the non-gap characters in the column
+    # The gap pattern of the subsequent column in the original alignment
+    # The consensus residue type of the column as one of the following categories ("hydrophobicity") (For nucleotide sequences, use an actual nucleotide for the consensus):
+      # FWY (aromatic)
+      # CILMV (hydrophobic)
+      # AGPST (small)
+      # DENQKRH (polar)
+    # The degree of sequence conservation in the column in one of three categories ("conservation"):
+      # Less conserved than average
+      # About average
+      # More conserved than average
+  # Train two Markov chains for hydrophobicity and conservation from the sequence of columns in the original alignment.
+  # Assort the columns into groups with the same number of gap characters in each column.
+  # Begin the shuffled alignment by removing one randomly chosen column from the group possessing the same number of gap characters as the first column of the original alignment.  Use this column as the first column of the shuffled alignment.
+  # Choose each subsequent column as follows:
+    # Choose a column at random
+      * with the same number of gaps as the column that followed the previous column in the original alignment.
+      * with the probability of choosing each column based on the joint probability of conservation and hydrophobicity from the previous column.  As columns are removed, the probability will need to be biased by the distribution of properties remaining in the bin.
+    # Distribute the non-gap characters of the new column to match the permuted gap pattern stored in the subsequent-column-pattern attribute of the previous column.
+  # The final column should magically have the same number of gap characters as the final column of the original alignment did.
+
+A more conservative approach would be to keep the original alignment gapping structure completely intact.  But there is likely to be true useful significant similarity in the original gapping pattern.
