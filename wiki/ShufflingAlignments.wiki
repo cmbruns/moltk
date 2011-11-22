@@ -34,13 +34,13 @@ The algorithm does not necessarily preserve:
       # Less conserved than average
       # About average
       # More conserved than average
-  # Train two Markov chains for hydrophobicity and conservation from the sequence of columns in the original alignment.
+  # Train two Markov chains: one for hydrophobicity, and one for conservation, from the sequence of columns in the original alignment.
   # Assort the columns into groups with the same number of gap characters in each column.
   # Begin the shuffled alignment by removing one randomly chosen column from the group possessing the same number of gap characters as the first column of the original alignment.  Use this column as the first column of the shuffled alignment.
   # Choose each subsequent column as follows:
-    # Choose a column at random
+    # Choose a column at random, subject to the following conditions:
       * with the same number of gaps as the column that followed the previous column in the original alignment.
-      * with the probability of choosing each column based on the joint probability of conservation and hydrophobicity from the previous column.  As columns are removed, the probability will need to be biased by the distribution of properties remaining in the bin, as the distribution begins to vary from the original distribution.
+      * with the probability of choosing each column based on the joint probability of conservation and hydrophobicity from the previous column.  As columns are removed, this probability will need to be biased by the distribution of properties remaining in the bin, as the distribution begins to vary from the original distribution.
     # Distribute the gap and non-gap characters of the new column to match the (permuted version of the) gap pattern stored in the subsequent-column-pattern attribute of the previous column.
 
 A more conservative approach would be to keep the original alignment gapping structure completely intact.  But there is likely to be true useful significant similarity in the original gapping pattern.
