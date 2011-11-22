@@ -20,7 +20,7 @@ The algorithm does not necessarily preserve:
   * The proportion of the total gap length residing in end-gaps
   * The number of right end gaps
 
-  # If sequence weighting is used, first sort the sequences in the alignment in order of sequence weight.
+  # If sequence weighting is used, first sort the sequences in the alignment in order of sequence weight.  This will help reduce the impact of some residues moving to nearby sequences during shuffling.
   # For each column, store the following information in a data structure
     # The gap pattern of the column
     # An ordered list of the non-gap characters in the column
