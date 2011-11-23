@@ -513,6 +513,21 @@ std::string Alignment_<SCORE_TYPE>::repr() const
     return s.str();
 }
 
+/// Create a shuffled version of this alignment to help estimate significance
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE> Alignment_<SCORE_TYPE>::shuffle() const
+{
+    // TODO
+    // 1 - Arrange sequences in order of increasing weight
+    // 2 - Store column data
+    // 3 - Train Markov chains for hydrophobicity and conservation
+    // 4 - Choose first column of shuffled alignment
+    // 5 - Choose subsequence columns
+    // 6 - Construct final shuffled alignment
+    // TODO
+    throw std::runtime_error("shuffle() is not implemented yet");
+}
+
 
 ////////////////////
 // Global methods //
