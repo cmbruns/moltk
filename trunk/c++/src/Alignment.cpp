@@ -26,6 +26,8 @@
 #include <stdexcept>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
+#include <map>
 
 using namespace moltk;
 using namespace std;
@@ -513,17 +515,100 @@ std::string Alignment_<SCORE_TYPE>::repr() const
     return s.str();
 }
 
+
+// TODO - put all this helper stuff into an AlignmentShuffler class
+
+template<typename STATE_TYPE>
+struct FiniteMarkovChain
+{
+    /// Generator
+    STATE_TYPE emit(const STATE_TYPE& previous_state) const;
+    /// Training
+    FiniteMarkovChain& add_count(const STATE_TYPE& state1, const STATE_TYPE& state2, Real count = 1.0)
+    {
+        if (transition_counts.find(state1) == transition_counts.end())
+            transition_counts[state1] = std::map<STATE_TYPE, Real>();
+        if (transition_counts[state1].find(state2) == transition_counts[state1].end())
+            transition_counts[state1][state2] = 0.0;
+        transition_counts[state1][state2] += count;
+    }
+
+protected:
+    /// transition_probabilities must sum to one for a particular start state
+    std::map< STATE_TYPE, std::map<STATE_TYPE, Real> > transition_probablilities;
+    /// transition_counts are used to train transition_probabilities
+    std::map< STATE_TYPE, std::map<STATE_TYPE, Real> > transition_counts;
+};
+
+/// Helper comparison functor for sorting aligned sequences by weight
+/// used by Alignment::shuffle()
+template<class SCORE_TYPE>
+struct has_lesser_weight
+{
+    has_lesser_weight(const Alignment_<SCORE_TYPE>& a) :a(a) {}
+    bool operator()(int i, int j) {
+        return a.get_row(i).sequence_weight < a.get_row(j).sequence_weight;
+    }
+    const Alignment_<SCORE_TYPE>& a;
+};
+
+
+struct ShuffleableColumn
+{
+    EString gap_pattern;
+};
+
+
 /// Create a shuffled version of this alignment to help estimate significance
 template<class SCORE_TYPE>
 Alignment_<SCORE_TYPE> Alignment_<SCORE_TYPE>::shuffle() const
 {
+    enum HydrophobicityState {
+        HYDROPHOBIC_CILM,
+        AROMATIC_FYW,
+        SMALL_AGPST,
+        POLAR_DENQKRH
+    };
+
+    enum ConservationState {
+        MORE_CONSERVED,
+        REGULAR_CONSERVED,
+        LESS_CONSERVED
+    };
+
+    // 1.Arrange sequences in order of increasing weight
+    //    initialize order to original order
+    int nseq = get_number_of_sequences();
+    vector<int> sequence_order(nseq);
+    for (int i = 0; i < nseq; ++i)
+        sequence_order[i] = i; // initialize to original order
+    //    sort indices by weight
+    std::sort(sequence_order.begin(), sequence_order.end(), has_lesser_weight<SCORE_TYPE>(*this));
     // TODO
-    // 1 - Arrange sequences in order of increasing weight
-    // 2 - Store column data
-    // 3 - Train Markov chains for hydrophobicity and conservation
-    // 4 - Choose first column of shuffled alignment
-    // 5 - Choose subsequence columns
-    // 6 - Construct final shuffled alignment
+    // 2.Store column data
+    int ncol = get_number_of_columns();
+    std::vector<ShuffleableColumn> original_columns(ncol);
+    for (int s = 0; s < nseq; ++s)
+    {
+        const Row& row = get_row(s);
+        EString::const_iterator e = row.e_string.begin();
+        for (int c = 0; c < ncol; ++c)
+        {
+            assert(e != row.e_string.end());
+            ShuffleableColumn& column = original_columns[c];
+            if (*e >= 0)
+                column.gap_pattern << 1;
+            else
+                column.gap_pattern << -1;
+            // TODO
+            ++e;
+        }
+        assert(e == row.e_string.end());
+    }
+    // 3.Train Markov chains for hydrophobicity and conservation
+    // 4.Choose first column of shuffled alignment
+    // 5.Choose subsequent columns
+    // 6.Construct final shuffled alignment
     // TODO
     throw std::runtime_error("shuffle() is not implemented yet");
 }
