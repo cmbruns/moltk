@@ -126,6 +126,10 @@ public:
     Alignment_& set_score(const SCORE_TYPE& s);
     /// Access internal Alignment::Row data structure
     const Row& get_row(int index) const {return rows[index];}
+
+    /// Create a shuffled version of this alignment to help estimate significance
+    Alignment_ shuffle() const;
+
     /// Low level python string representation of this Alignment_
     std::string repr() const;
     Alignment_& set_pretty_width(int width) {pretty_width = width; return *this;}
