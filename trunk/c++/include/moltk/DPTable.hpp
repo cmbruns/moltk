@@ -214,6 +214,7 @@ struct DPTable;
 template<typename SCORE_TYPE>
 struct AlignmentResult
 {
+    AlignmentResult() {score = moltk::units::zero<SCORE_TYPE>();}
     moltk::EString eString1;
     moltk::EString eString2;
     SCORE_TYPE score;
@@ -289,6 +290,8 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
         AlignmentResultType result;
         int i = num_rows() - 1;
         int j = num_columns() - 1;
+        if (i < 0) return result;
+        if (j < 0) return result;
         result.score = table[i][j].v.score;
         // cout << "final alignment score = " << dp_table[i][j].v << endl;
         TracebackPointer tracebackPointer = table[i][j].compute_traceback_pointer();
