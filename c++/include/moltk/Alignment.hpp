@@ -42,23 +42,32 @@ class Alignment_
 {
 public:
 
-
-    /// Whether a particular Alignment_ member is a sequence or structure.
-    enum List {
-        LIST_SEQUENCE, ///< Item belongs to the sequence list
-        LIST_STRUCTURE ///< Item belongs to the structure list
-    };
-
-    typedef moltk::EString EString;
-
     /// Meta-data for one sequence in an Alignment_
     class Row
     {
     public:
-        List list; ///< which list: sequences or structures?
-        int list_index; ///< index into either the structure or sequence list
+        enum Type {
+            TYPE_SEQUENCE,
+            TYPE_STRUCTURE
+        };
+
+        Row(const Biosequence& sequence);
+        Row(const PDBStructure::Chain& structure);
+        Row(const Row& rhs);
+        ~Row();
+        Row& operator=(const Row& rhs);
+
+        const BaseBiosequence& get_sequence() const;
+        BaseBiosequence& get_sequence();
+        std::string get_description() const;
+
         Real sequence_weight; ///< relative contribution of this sequence to the alignment score
         EString e_string; ///< gap pattern of this sequence
+
+    protected:
+        PDBStructure::Chain* structure;
+        Biosequence* sequence;
+        Type type; ///< sequence or structure?
     };
 
 
@@ -126,6 +135,8 @@ public:
     Alignment_& set_score(const SCORE_TYPE& s);
     /// Access internal Alignment::Row data structure
     const Row& get_row(int index) const {return rows[index];}
+    /// Access internal Alignment::Row data structure
+    Row& get_row(int index) {return rows[index];}
 
     /// Create a shuffled version of this alignment to help estimate significance
     Alignment_ shuffle() const;
@@ -140,8 +151,6 @@ public:
     }
 
 protected:
-    std::vector<Biosequence> sequences;
-    std::vector<PDBStructure::Chain> structures;
     std::vector<Row> rows;
     SCORE_TYPE m_score;
     int pretty_width;

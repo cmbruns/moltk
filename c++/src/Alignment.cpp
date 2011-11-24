@@ -89,13 +89,7 @@ Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::load_string(const std::string& s
 template<class SCORE_TYPE>
 Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::append_sequence(const Biosequence& seq)
 {
-    sequences.push_back(seq);
-    Row row = {
-        LIST_SEQUENCE,
-        0,
-        1.0,
-        EString().append_run(seq.size()) };
-    rows.push_back(row);
+    rows.push_back(Row(seq));
     return *this;
 }
 
@@ -105,15 +99,8 @@ void Alignment_<SCORE_TYPE>::write_fasta(std::ostream& output_stream) const
     for (size_t rowIx = 0; rowIx < rows.size(); ++rowIx) 
     {
         const Row& row = rows[rowIx];
-        const BaseBiosequence* seq;
-        if (row.list == LIST_SEQUENCE) {
-            seq = &sequences[row.list_index];
-            output_stream << '>' << sequences[row.list_index].get_description() << endl;
-        }
-        else {
-            seq = &structures[row.list_index];
-            output_stream << "> structure" << endl;
-        }
+        const BaseBiosequence* seq = &row.get_sequence();
+        output_stream << '>' << row.get_description() << endl;
         EString::const_iterator i = row.e_string.begin();
         while(i != row.e_string.end()) {
             int resIx = *i;
@@ -169,11 +156,7 @@ void Alignment_<SCORE_TYPE>::write_pretty(std::ostream& os) const
         }
         const Row& row = rows[rowIx];
         iseq[rowIx] = row.e_string.begin(); // initialize iterators
-        if (row.list == LIST_SEQUENCE) {
-            os << sequences[row.list_index].get_description();
-        }
-        else
-            os << "structure";
+        os << row.get_description();
         os << endl;
     }
 
@@ -211,10 +194,7 @@ void Alignment_<SCORE_TYPE>::write_pretty(std::ostream& os) const
             }
             const Row& row = rows[s];
             const BaseBiosequence* seq;
-            if (row.list == LIST_SEQUENCE)
-                seq = &sequences[row.list_index];
-            else
-                seq = &structures[row.list_index];
+            seq = &row.get_sequence();
             // sequence characters
             for(size_t col = start_col; col <= end_col; ++col)
             {
@@ -381,35 +361,15 @@ Alignment_<SCORE_TYPE> Alignment_<SCORE_TYPE>::align(const Alignment_<SCORE_TYPE
     // Add sequences from first alignment
     for (size_t r = 0; r < rows.size(); ++r)
     {
-        const Row& row = rows[r];
-        Row newRow(row);
+        Row newRow(a1.rows[r]);
         newRow.e_string = e1 * newRow.e_string;
-        if (row.list == LIST_SEQUENCE) {
-            result.sequences.push_back(sequences[row.list_index]);
-            assert(result.sequences.size() - 1 == newRow.list_index);
-        }
-        else {
-            assert(row.list == LIST_STRUCTURE);
-            result.structures.push_back(structures[row.list_index]);
-            assert(result.structures.size() - 1 == newRow.list_index);
-        }
         result.rows.push_back(newRow);
     }
     // Add sequences from second alignment
     for (size_t r = 0; r < a2.rows.size(); ++r)
     {
-        const Row& row = a2.rows[r];
-        Row newRow(row);
+        Row newRow(a2.rows[r]);
         newRow.e_string = e2 * newRow.e_string;
-        if (row.list == LIST_SEQUENCE) {
-            result.sequences.push_back(a2.sequences[row.list_index]);
-            newRow.list_index = result.sequences.size() - 1;
-        }
-        else {
-            assert(row.list == LIST_STRUCTURE);
-            result.structures.push_back(a2.structures[row.list_index]);
-            newRow.list_index = result.structures.size() - 1;
-        }
         result.rows.push_back(newRow);
     }
     result.set_score(a1.get_score() + a2.get_score());
@@ -442,12 +402,8 @@ Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::load_fasta(std::istream& input_s
                 compressed_sequence.push_back(*r);
             }
         }
-        Row row;
-        row.list = LIST_SEQUENCE;
-        row.list_index = sequences.size();
-        row.sequence_weight = 1.0; // TODO
+        Row row(compressed_sequence);
         row.e_string = e_string;
-        sequences.push_back(compressed_sequence);
         rows.push_back(row);
     }
     return *this;
@@ -478,11 +434,7 @@ Alignment_<SCORE_TYPE>& Alignment_<SCORE_TYPE>::load_fasta_string(const std::str
 template<class SCORE_TYPE>
 const BaseBiosequence& Alignment_<SCORE_TYPE>::get_sequence(size_t index) const
 {
-    const Row& row = rows[index];
-    if (row.list == LIST_SEQUENCE)
-        return sequences[row.list_index];
-    else
-        return structures[row.list_index];
+    return rows[index].get_sequence();
 }
 
 template<class SCORE_TYPE>
@@ -611,6 +563,119 @@ Alignment_<SCORE_TYPE> Alignment_<SCORE_TYPE>::shuffle() const
     // 6.Construct final shuffled alignment
     // TODO
     throw std::runtime_error("shuffle() is not implemented yet");
+}
+
+
+////////////////////////////
+// Alignment::Row methods //
+////////////////////////////
+
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>::Row::Row(const Biosequence& sequence_param)
+    : structure(NULL)
+    , sequence(new Biosequence(sequence_param))
+    , type(TYPE_SEQUENCE)
+    , sequence_weight(1.0)
+{
+    e_string << sequence->get_number_of_residues();
+}
+
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>::Row::Row(const PDBStructure::Chain& structure_param)
+    : structure(new PDBStructure::Chain(structure_param))
+    , sequence(NULL)
+    , type(TYPE_STRUCTURE)
+    , sequence_weight(1.0)
+{
+    e_string << structure->get_number_of_residues();
+}
+
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>::Row::Row(const Row& rhs)
+    : structure(NULL)
+    , sequence(NULL)
+    , type(rhs.type)
+    , sequence_weight(rhs.sequence_weight)
+    , e_string(rhs.e_string)
+{
+    switch(type) {
+        case TYPE_STRUCTURE:
+            structure = new PDBStructure::Chain(*rhs.structure);
+            break;
+        case TYPE_SEQUENCE:
+            sequence = new Biosequence(*rhs.sequence);
+            break;
+    }
+}
+
+template<class SCORE_TYPE>
+Alignment_<SCORE_TYPE>::Row::~Row()
+{
+    switch(type) {
+        case TYPE_STRUCTURE:
+            delete structure;
+            break;
+        case TYPE_SEQUENCE:
+            delete sequence;
+            break;
+    }
+}
+
+template<class SCORE_TYPE>
+typename Alignment_<SCORE_TYPE>::Row& Alignment_<SCORE_TYPE>::Row::operator=(const typename Alignment_<SCORE_TYPE>::Row& rhs)
+{
+    structure = NULL;
+    sequence = NULL;
+    sequence_weight = rhs.sequence_weight;
+    type = rhs.type;
+    e_string = rhs.e_string;
+    switch(type) {
+        case TYPE_STRUCTURE:
+            structure = new PDBStructure::Chain(*rhs.structure);
+            break;
+        case TYPE_SEQUENCE:
+            sequence = new Biosequence(*rhs.sequence);
+            break;
+    }
+    return *this;
+}
+
+template<class SCORE_TYPE>
+const BaseBiosequence& Alignment_<SCORE_TYPE>::Row::get_sequence() const
+{
+    switch(type) {
+        case TYPE_STRUCTURE:
+            assert(structure);
+            return *structure;
+            break;
+    }
+    assert(sequence);
+    return *sequence;
+}
+
+template<class SCORE_TYPE>
+BaseBiosequence& Alignment_<SCORE_TYPE>::Row::get_sequence()
+{
+    switch(type) {
+        case TYPE_STRUCTURE:
+            assert(structure);
+            return *structure;
+            break;
+    }
+    assert(sequence);
+    return *sequence;
+}
+
+template<class SCORE_TYPE>
+std::string Alignment_<SCORE_TYPE>::Row::get_description() const
+{
+    switch(type) {
+        case TYPE_STRUCTURE:
+            return "structure"; // TODO
+            break;
+    }
+    assert(sequence);
+    return sequence->get_description();
 }
 
 
