@@ -34,9 +34,56 @@ namespace dp {
 // not implemented yet...)
 
 
+// (forward declaration for use by RunningScore)
+/// Generic node in dynamic programming table
+template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information, etc.
+         DPAlignGapping ALIGN_TYPE, ///< Whether alignment operands have preexisting gaps or not
+         int GAP_NSEGS ///< Number of piecewise segments in gap function (1 for affine)
+         >
+struct DPCell;
+
+
+/// Accumulated score for a sub-alignment with aligned positions i,j.
 /// Generic accumulated score in a DPCell
-template<typename SCORE_TYPE> struct RunningScore
+///
+/// Corresponds to element G in Gusfield's chapter 11 recurrence.
+template<typename SCORE_TYPE, DPAlignGapping ALIGN_TYPE>
+struct RunningScore;
+
+
+/// Template specialization single sequence affine gap running score
+template<typename SCORE_TYPE>
+struct RunningScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES>
 {
+    template<int GAP_NSEGS>
+    void compute_recurrence(
+        const DPCell<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS>& up_left,
+        const DPPosition<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS>& pos1,
+        const DPPosition<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, GAP_NSEGS>& pos2)
+    {
+        score = up_left.v.score + pos1.score(pos2);
+    }
+
+    SCORE_TYPE score;
+};
+
+
+/// Template specialization single sequence affine gap running score
+template<typename SCORE_TYPE>
+struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
+{
+    template<int GAP_NSEGS>
+    void compute_recurrence(
+        const DPCell<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& up_left,
+        const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1,
+        const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2)
+    {
+        score = up_left.v.score + pos1.score(pos2);
+        // gap-opening component is applied here
+        if (up_left.v.score == up_left.g.score) // match-match state
+            score += pos1.gap_open_after_match_score(pos2);
+    }
+
     SCORE_TYPE score;
 };
 
@@ -57,7 +104,7 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
     /// Update from previous dynamic programming cell
     void compute_recurrence(
             const RunningGapScore& pred,
-            const RunningScore<SCORE_TYPE>& v,
+            const RunningScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES>& v,
             const PositionType& pos1,
             const PositionType& pos2)
     {
@@ -86,7 +133,7 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
     /// Update from previous dynamic programming cell
     void compute_recurrence(
             const RunningGapScore& pred,
-            const RunningScore<SCORE_TYPE>& v,
+            const RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>& v,
             const PositionType& pos1,
             const PositionType& pos2)
     {
@@ -115,7 +162,7 @@ template<typename SCORE_TYPE, ///< Type of score value, e.g. double, Information
 struct DPCell
 {
     typedef RunningGapScore<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> GapScoreType;
-    typedef RunningScore<SCORE_TYPE> ScoreType;
+    typedef RunningScore<SCORE_TYPE, ALIGN_TYPE> ScoreType;
     typedef DPPosition<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> PositionType;
 
     void initialize(const PositionType& pos1, const PositionType& pos2)
@@ -140,7 +187,7 @@ struct DPCell
     {
         // This recurrence comes from Gusfield chapter 11.
         // best score with ungapped alignment of i with j
-        g.score = up_left.v.score + pos1.score(pos2);
+        g.compute_recurrence(up_left, pos1, pos2);
         // best score with insertion gap in sequence 1
         e.compute_recurrence(left.e, left.v, pos1, pos2);
         // best score with insertion gap in sequence 2

@@ -91,20 +91,23 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     scorer.set_default_gap_open_score(0.0 * bit);
     scorer.set_default_gap_extension_score(0.0 * bit);
     score = test_matchy_alignment_score(scorer); // this works 102b
-    // BOOST_CHECK_EQUAL(102.0 * bit, score);
+    BOOST_CHECK_EQUAL(102.0 * bit, score);
     // Add in gap extension score
     scorer.set_default_gap_extension_score(-0.5 * bit);
     scorer.set_end_gap_factor(1.0);
     score = test_matchy_alignment_score(scorer); // works with penalized end gaps 91b
-    // BOOST_CHECK_EQUAL(91.0 * bit, score);
+    BOOST_CHECK_EQUAL(91.0 * bit, score);
     scorer.set_end_gap_factor(0.0);
     score = test_matchy_alignment_score(scorer); // works 98b
-    // BOOST_CHECK_EQUAL(98.0 * bit, score);
-    // TODO - add in gap opening score
+    BOOST_CHECK_EQUAL(98.0 * bit, score);
+    // add in gap opening score
     scorer.set_end_gap_factor(1.0);
     scorer.set_default_gap_open_score(0.0 * bit);
     score = test_matchy_alignment_score(scorer);
     scorer.set_default_gap_open_score(-8.0 * bit);
     score = test_matchy_alignment_score(scorer);
     // cout << Aligner::get_shared_aligner().test_table << endl;
+    scorer.set_end_gap_factor(0.0);
+    score = test_matchy_alignment_score(scorer);
+    // TODO - test scores of alignments containing new gaps
 }

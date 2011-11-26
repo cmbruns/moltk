@@ -84,12 +84,23 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
             size_t resTypeIndex = i->first;
             result += resTypeCount * lhs.target_scores_by_residue_type_index[resTypeIndex];
         }
-        // TODO gap/nongap score
+        // gap/nongap score
         //   gap/nongap gap extension score
         result += lhs.extension_gap_score * rhs.nongap_count;
         result += rhs.extension_gap_score * lhs.nongap_count;
-        //   TODO gap/nongap gap open score
+        //   gap/nongap gap open score
+        //     (gap open score is computed in recurrence, where it belongs
+        // gap/gap score is always zero, so requires no case here
+        return result;
+    }
+
+    /// Gap opening component of alignment score after a match-match sequence
+    SCORE_TYPE gap_open_after_match_score(const DPPosition& rhs) const
+    {
+        SCORE_TYPE result = moltk::units::zero<SCORE_TYPE>();
+        const DPPosition& lhs = *this;
         std::map<int, Real>::const_iterator ci;
+        // left with right...
         for (ci = lhs.insertion_close_lengths.begin(); ci != lhs.insertion_close_lengths.end(); ++ci)
         {
             typename std::map<int, SCORE_TYPE>::const_iterator ii = rhs.insertion_lengths.find(ci->first);
@@ -99,6 +110,7 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
                 result += ci->second * ii->second;
             }
         }
+        // ...plus right with left
         for (ci = rhs.insertion_close_lengths.begin(); ci != rhs.insertion_close_lengths.end(); ++ci)
         {
             typename std::map<int, SCORE_TYPE>::const_iterator ii = lhs.insertion_lengths.find(ci->first);
@@ -107,9 +119,7 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
                 // std::cout << "gap open " << lhs.index << ", " << rhs.index << ", " << ci->second << ", " << ii->second << endl;
                 result += ci->second * ii->second;
             }
-        }
-        // gap/gap score is always zero, so requires no case here
-        return result;
+        }        return result;
     }
 
     GapScore<SCORE_TYPE, GAP_NSEGS> gap_score;
