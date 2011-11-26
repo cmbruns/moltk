@@ -51,7 +51,7 @@ template<typename SCORE_TYPE, DPAlignGapping ALIGN_TYPE>
 struct RunningScore;
 
 
-/// Template specialization single sequence affine gap running score
+/// Template specialization for affine-gap alignment of single sequences running score
 template<typename SCORE_TYPE>
 struct RunningScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES>
 {
@@ -68,7 +68,7 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES>
 };
 
 
-/// Template specialization single sequence affine gap running score
+/// Template specialization affine-gap alignment-of-alignments running score
 template<typename SCORE_TYPE>
 struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
 {
@@ -82,6 +82,7 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
         // gap-opening component is applied here
         if (up_left.v.score == up_left.g.score) // match-match state
             score += pos1.gap_open_after_match_score(pos2);
+        // TODO - insertion-match gap opening score
     }
 
     SCORE_TYPE score;
@@ -111,6 +112,7 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
         score = std::max(pred.score, v.score + pos1.gap_score.open_score)
                 + pos1.gap_score.extension_score;
     }
+
     void initialize(const PositionType& pos1, const PositionType& pos2)
     {
         if (0 != pos1.index) {
@@ -138,8 +140,9 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
             const PositionType& pos2)
     {
         score = std::max(pred.score, v.score + pos1.gap_score.open_score)
-                + pos1.gap_score.extension_score;
+                + pos1.gap_score.extension_score * pos2.nongap_count;
     }
+
     void initialize(const PositionType& pos1, const PositionType& pos2)
     {
         if (0 != pos1.index) {

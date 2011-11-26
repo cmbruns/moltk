@@ -66,6 +66,38 @@ Information test_matchy_alignment_score(const MatrixScorer& scorer) {
     return a3.get_score();
 }
 
+// Alignment with one new internal gap
+Information test_insertion_alignment_score(const MatrixScorer& scorer) {
+    Alignment a1, a2;
+    a1.load_fasta_string(
+        ">1a\n"
+        "CHFAAAAPWC\n"
+        ">2a\n"
+        "CH---A--WC\n"
+        ">3a\n"
+        "CHF-A-A-WC\n"
+        ">4a\n"
+        "CH-A-A-PWC\n"
+        );
+    a2.load_fasta_string(
+        ">1b\n"
+        "CHFPWC\n"
+        ">2b\n"
+        "CH--WC\n"
+        );
+    Alignment a3 = align(a1, a2);
+    cout << a3 << endl;
+    // We expect this net_score to equal the alignment score
+    Information net_score = 
+        scorer.calc_explicit_sum_of_pairs_score(a3)
+        - scorer.calc_explicit_sum_of_pairs_score(a1)
+        - scorer.calc_explicit_sum_of_pairs_score(a2);
+    cout << net_score << endl;
+    cout << a3.get_score() << endl;
+    BOOST_CHECK_EQUAL(net_score, a3.get_score());
+    return a3.get_score();
+}
+
 BOOST_AUTO_TEST_CASE( test_aligner )
 {
     boost::debug::detect_memory_leaks(false);
@@ -110,4 +142,15 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     scorer.set_end_gap_factor(0.0);
     score = test_matchy_alignment_score(scorer);
     // TODO - test scores of alignments containing new gaps
+    // Easiest case: no gap scores and end gaps same as internal gaps
+    scorer.set_end_gap_factor(1.0);
+    scorer.set_default_gap_open_score(0.0 * bit);
+    scorer.set_default_gap_extension_score(0.0 * bit);
+    score = test_insertion_alignment_score(scorer);
+    // Add in extension gap scores, but not open gap scores
+    scorer.set_default_gap_extension_score(-0.5 * bit);
+    score = test_insertion_alignment_score(scorer);
+    // Add in gap open score
+    scorer.set_default_gap_open_score(-8.0 * bit);
+    score = test_insertion_alignment_score(scorer);
 }
