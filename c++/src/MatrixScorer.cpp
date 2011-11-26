@@ -84,11 +84,19 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
             // leave score zero, but set gap penalties
             pos.gap_score.extension_score += seq_weight * gap_factor * default_gap_extension_score;
             pos.gap_score.open_score += seq_weight * gap_factor * default_gap_open_score;
+            // Gap opening cache - every sequence has an insertion of length zero at the beginning
+            if (pos.gap_score.open_score != moltk::units::zero<SCORE_TYPE>())
+            {
+                if(pos.insertion_lengths.find(0) == pos.insertion_lengths.end())
+                    pos.insertion_lengths[0] = moltk::units::zero<SCORE_TYPE>();
+                pos.insertion_lengths[0] += pos.gap_score.open_score;
+            }
         }
 
         int colIx = -1;
         const BaseBiosequence& seq = alignment.get_sequence(seqIx);
         const EString& eString = alignment.get_estring(seqIx);
+        int internal_gap_length = 0;
         EString::const_iterator e;
         // Inner loop over columns in this sequence
         for (e = eString.begin(); e != eString.end(); ++e) 
@@ -134,11 +142,25 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
 
                 // cache for nongap/gap extension score
                 pos.nongap_count += seq_weight;
+                // cache for gap open score
+                if (internal_gap_length > 0) // gap close
+                {
+                    int close_length = internal_gap_length + 1;
+                    if (pos.insertion_close_lengths.find(close_length) == pos.insertion_close_lengths.end())
+                        pos.insertion_close_lengths[close_length] = 0.0;
+                    pos.insertion_close_lengths[close_length] += seq_weight;
+                }
+                internal_gap_length = 0;
             }
             else
             {
                 // cache count of internal gap characters at this position
                 pos.extension_gap_score += seq_weight * gap_factor * default_gap_extension_score;
+                // cache for gap open score
+                ++internal_gap_length;
+                if (pos.insertion_lengths.find(internal_gap_length) == pos.insertion_lengths.end())
+                    pos.insertion_lengths[internal_gap_length] = moltk::units::zero<SCORE_TYPE>();
+                pos.insertion_lengths[internal_gap_length] += pos.gap_score.open_score;
             }
         }
         assert(colIx == alignment.get_number_of_columns() - 1);

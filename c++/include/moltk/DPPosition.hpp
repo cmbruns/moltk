@@ -17,6 +17,7 @@
 #include "moltk/units.hpp"
 #include "moltk/dp_params.hpp"
 #include <vector>
+#include <map>
 
 namespace moltk {
 
@@ -84,10 +85,23 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
             result += resTypeCount * lhs.target_scores_by_residue_type_index[resTypeIndex];
         }
         // TODO gap/nongap score
-        // TODO gap/nongap gap extension score
+        //   gap/nongap gap extension score
         result += lhs.extension_gap_score * rhs.nongap_count;
         result += rhs.extension_gap_score * lhs.nongap_count;
-        // TDOO gap/nongap gap open score
+        //   TODO gap/nongap gap open score
+        std::map<int, Real>::const_iterator ci;
+        for (ci = lhs.insertion_close_lengths.begin(); ci != lhs.insertion_close_lengths.end(); ++ci)
+        {
+            std::map<int, SCORE_TYPE>::const_iterator ii = rhs.insertion_lengths.find(ci->first);
+            if (ii != rhs.insertion_lengths.end())
+                result += ci->second * ii->second;
+        }
+        for (ci = rhs.insertion_close_lengths.begin(); ci != rhs.insertion_close_lengths.end(); ++ci)
+        {
+            std::map<int, SCORE_TYPE>::const_iterator ii = lhs.insertion_lengths.find(ci->first);
+            if (ii != lhs.insertion_lengths.end())
+                result += ci->second * ii->second;
+        }
         // gap/gap score is always zero, so requires no case here
         return result;
     }
@@ -102,12 +116,13 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
 
     // Internal gap extension scores
     /// Number of gaps in column, weighted by sequence weights and end-gappiness
-    // TODO - populate and use these values
     SCORE_TYPE extension_gap_score;
     /// Number of non-gap residues, weighted by sequence weights
     Real nongap_count;
 
-    // TODO Internal gap open scores (that's the hard part...)
+    // Internal gap open scores
+    std::map<int, SCORE_TYPE> insertion_lengths; ///< count of sequences with gap of length n up through this position
+    std::map<int, Real> insertion_close_lengths; ///< count of sequences with gap of length n-1 ending at previous position
 };
 
 /// Specialization of alignment column cache for alignment two individual sequences

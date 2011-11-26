@@ -73,7 +73,8 @@ def wrap_alignment(mb):
     for alignment in mb.namespace('moltk').classes(lambda cls: cls.name.startswith('Alignment_')):
         # alignment = mb.namespace('moltk').class_('Alignment')
         for fn_name in ['append_sequence', 'set_score', 'set_pretty_width', 'load_string', 'load_fasta_string']:
-            alignment.member_function(fn_name).call_policies = return_self()    
+            alignment.member_function(fn_name).call_policies = return_self()
+        alignment.member_functions('get_row').call_policies = return_internal_reference()
         alignment.add_property('pretty_width', 
             fget=alignment.member_function('get_pretty_width'),
             fset=alignment.member_function('set_pretty_width'))
