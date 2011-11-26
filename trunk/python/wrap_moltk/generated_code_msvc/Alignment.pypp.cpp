@@ -12,11 +12,6 @@ void register_Alignment_class(){
         typedef bp::class_< moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > > Alignment_exposer_t;
         Alignment_exposer_t Alignment_exposer = Alignment_exposer_t( "Alignment", "\n Alignment represents a set of aligned macromolecule sequences and/or structures.\n", bp::init< >("\n Default constructor creates an empty Alignment_\n") );
         bp::scope Alignment_scope( Alignment_exposer );
-        bp::enum_< moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::List>("List")
-            .value("LIST_SEQUENCE", moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::LIST_SEQUENCE)
-            .value("LIST_STRUCTURE", moltk::Alignment_<moltk::units::Quantity<moltk::units::Unit<moltk::units::Dimension<0, 0, 0, 0, 0, 0, 1> >, double> >::LIST_STRUCTURE)
-            .export_values()
-            ;
         Alignment_exposer.def( bp::init< moltk::Biosequence const & >(( bp::arg("sequence") ), "\n Create an alignment with exactly one sequence\n") );
         bp::implicitly_convertible< moltk::Biosequence const &, moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > >();
         Alignment_exposer.def( bp::init< std::string const & >(( bp::arg("alignment_string") ), "\n Create an alignment from fasta sequences or a single sequence string\n") );
@@ -113,7 +108,20 @@ void register_Alignment_class(){
                 "get_row"
                 , get_row_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_row )
                 , ( bp::arg("index") )
-                , bp::return_value_policy< bp::copy_const_reference >()
+                , bp::return_internal_reference< >()
+                , "\n Access internal Alignment::Row data structure\n" );
+        
+        }
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_row
+        
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::Row & ( exported_class_t::*get_row_function_type )( int ) ;
+            
+            Alignment_exposer.def( 
+                "get_row"
+                , get_row_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::get_row )
+                , ( bp::arg("index") )
+                , bp::return_internal_reference< >()
                 , "\n Access internal Alignment::Row data structure\n" );
         
         }
@@ -250,6 +258,17 @@ void register_Alignment_class(){
                 , ( bp::arg("s") )
                 , bp::return_self< >()
                 , "\n Set the sum of pairs score for this Alignment_.  Make sure you put the correct answer!\n" );
+        
+        }
+        { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::shuffle
+        
+            typedef moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > exported_class_t;
+            typedef ::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > > ( exported_class_t::*shuffle_function_type )(  ) const;
+            
+            Alignment_exposer.def( 
+                "shuffle"
+                , shuffle_function_type( &::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::shuffle )
+                , "\n Create a shuffled version of this alignment to help estimate significance\n" );
         
         }
         { //::moltk::Alignment_< moltk::units::Quantity< moltk::units::Unit< moltk::units::Dimension< 0, 0, 0, 0, 0, 0, 1 > >, double > >::write_fasta

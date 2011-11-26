@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     score = test_matchy_alignment_score(scorer); // works 98b
     BOOST_CHECK_EQUAL(98.0 * bit, score);
     // TODO - add in gap opening score
-    scorer.set_default_gap_open_score(8.0 * bit);
+    scorer.set_default_gap_open_score(-8.0 * bit);
     scorer.set_end_gap_factor(1.0);
     score = test_matchy_alignment_score(scorer);
 }
