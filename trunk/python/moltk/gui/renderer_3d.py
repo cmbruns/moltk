@@ -21,11 +21,16 @@
 # Do not import anything from PySide.QtGui in this file,
 # to help avoid mixing QtGui thread with OpenGL thread.
 from __future__ import division
-from moltk import Rotation3D
 from PySide import QtCore
 from PySide.QtCore import QObject
 from OpenGL.GL import *
 from OpenGL.GLU import *
+# Avoid red errors in eclipse by explicitly listing OpenGL imports
+from OpenGL.GL import glClearColor, glEnable, glDepthMask, glCullFace, glClear, glMatrixMode, glPushMatrix, \
+    glPopMatrix, glLoadIdentity, glTranslatef, glRotatef, glViewport
+from OpenGL.GL import GL_DEPTH_TEST, GL_TRUE, GL_CULL_FACE, GL_BACK, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, \
+    GL_PROJECTION, GL_MODELVIEW
+from OpenGL.GLU import gluPerspective
 
 class Renderer3D(QObject):
     """
