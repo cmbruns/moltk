@@ -22,7 +22,7 @@
 # to help avoid mixing QtGui thread with OpenGL thread.
 from __future__ import division
 from renderer_3d import Renderer3D
-from moltk import Displacement, Rotation3D, Vector3D, UnitVector3D, radian
+from moltk import Rotation3D, UnitVector3D, radian
 from PySide import QtCore
 from PySide.QtOpenGL import QGLWidget
 import math

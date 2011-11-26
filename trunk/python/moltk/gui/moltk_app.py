@@ -19,8 +19,7 @@
 #    For questions contact: cmbruns@rotatingpenguin.com
 
 import sys
-from PySide.QtCore import *
-from PySide.QtGui import *
+from PySide.QtGui import QMainWindow, QApplication
 from moltk_ui import Ui_MoltkMainWindow
 import platform
 
@@ -43,7 +42,3 @@ class MoltkApp(QApplication):
         self.mainWindow.show()
         self.exec_()
         sys.exit()
-
-        
-if '__main__' == __name__:
-    MoltkApp()
