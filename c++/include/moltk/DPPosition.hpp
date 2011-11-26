@@ -92,15 +92,21 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
         std::map<int, Real>::const_iterator ci;
         for (ci = lhs.insertion_close_lengths.begin(); ci != lhs.insertion_close_lengths.end(); ++ci)
         {
-            std::map<int, SCORE_TYPE>::const_iterator ii = rhs.insertion_lengths.find(ci->first);
+            typename std::map<int, SCORE_TYPE>::const_iterator ii = rhs.insertion_lengths.find(ci->first);
             if (ii != rhs.insertion_lengths.end())
+            {
+                // std::cout << "gap open " << lhs.index << ", " << rhs.index << ", " << ci->second << ", " << ii->second << endl;
                 result += ci->second * ii->second;
+            }
         }
         for (ci = rhs.insertion_close_lengths.begin(); ci != rhs.insertion_close_lengths.end(); ++ci)
         {
-            std::map<int, SCORE_TYPE>::const_iterator ii = lhs.insertion_lengths.find(ci->first);
+            typename std::map<int, SCORE_TYPE>::const_iterator ii = lhs.insertion_lengths.find(ci->first);
             if (ii != lhs.insertion_lengths.end())
+            {
+                // std::cout << "gap open " << lhs.index << ", " << rhs.index << ", " << ci->second << ", " << ii->second << endl;
                 result += ci->second * ii->second;
+            }
         }
         // gap/gap score is always zero, so requires no case here
         return result;

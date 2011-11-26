@@ -74,6 +74,14 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
     for (size_t seqIx = 0; seqIx < nseq; ++seqIx) 
     {
         double seq_weight = alignment.get_row(seqIx).sequence_weight;
+        int internal_gap_length = 0;
+
+        // Peek at first position before choosing gap opening penalty
+        const BaseBiosequence& seq = alignment.get_sequence(seqIx);
+        const EString& eString = alignment.get_estring(seqIx);
+        EString::const_iterator e = eString.begin();
+        bool previous_gap = false; // was previous position a gap?
+        bool current_gap = (*e < 0); // is this a gap position?
 
         // Special treatment for position zero, which corresponds to column -1
         // end gaps free?
@@ -83,7 +91,8 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
                 dynamic_cast<PositionType&>(*result[0]);
             // leave score zero, but set gap penalties
             pos.gap_score.extension_score += seq_weight * gap_factor * default_gap_extension_score;
-            pos.gap_score.open_score += seq_weight * gap_factor * default_gap_open_score;
+            if (! current_gap)
+                pos.gap_score.open_score += seq_weight * gap_factor * default_gap_open_score;
             // Gap opening cache - every sequence has an insertion of length zero at the beginning
             if (pos.gap_score.open_score != moltk::units::zero<SCORE_TYPE>())
             {
@@ -94,11 +103,8 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
         }
 
         int colIx = -1;
-        const BaseBiosequence& seq = alignment.get_sequence(seqIx);
-        const EString& eString = alignment.get_estring(seqIx);
-        int internal_gap_length = 0;
-        EString::const_iterator e;
         // Inner loop over columns in this sequence
+        current_gap = false;
         for (e = eString.begin(); e != eString.end(); ++e) 
         {
             int eResIx = *e;
@@ -117,11 +123,10 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
             // Position[i+1] represents column i
             PositionType& pos = 
                 dynamic_cast<PositionType&>(*result[colIx + 1]);
-            // Set gap penalties
-            pos.gap_score.extension_score += seq_weight * gap_factor * default_gap_extension_score;
-            pos.gap_score.open_score += seq_weight * gap_factor * default_gap_open_score;
+            previous_gap = current_gap;
             if (eResIx >= 0) 
             { // eResIx is an actual residue number
+                current_gap = false;
                 const BaseBiosequence::BaseResidue& res = seq.get_residue(eResIx);
                 size_t resTypeIndex = matrix.get_character_indices()[res.get_one_letter_code()];
                 // Target side
@@ -143,7 +148,7 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
                 // cache for nongap/gap extension score
                 pos.nongap_count += seq_weight;
                 // cache for gap open score
-                if (internal_gap_length > 0) // gap close
+                // if (internal_gap_length > 0) // gap close - even if gap length is zero
                 {
                     int close_length = internal_gap_length + 1;
                     if (pos.insertion_close_lengths.find(close_length) == pos.insertion_close_lengths.end())
@@ -154,14 +159,23 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
             }
             else
             {
+                current_gap = true;
                 // cache count of internal gap characters at this position
                 pos.extension_gap_score += seq_weight * gap_factor * default_gap_extension_score;
                 // cache for gap open score
                 ++internal_gap_length;
-                if (pos.insertion_lengths.find(internal_gap_length) == pos.insertion_lengths.end())
-                    pos.insertion_lengths[internal_gap_length] = moltk::units::zero<SCORE_TYPE>();
-                pos.insertion_lengths[internal_gap_length] += pos.gap_score.open_score;
+                SCORE_TYPE open_score = seq_weight * gap_factor * default_gap_open_score;
+                if (open_score != moltk::units::zero<SCORE_TYPE>()) // optimization
+                {
+                    if (pos.insertion_lengths.find(internal_gap_length) == pos.insertion_lengths.end())
+                        pos.insertion_lengths[internal_gap_length] = moltk::units::zero<SCORE_TYPE>();
+                    pos.insertion_lengths[internal_gap_length] += open_score;
+                }
             }
+            // Set gap penalties
+            pos.gap_score.extension_score += seq_weight * gap_factor * default_gap_extension_score;
+            if (! (previous_gap || current_gap)) // no opening penalty where there is already a gap
+                pos.gap_score.open_score += seq_weight * gap_factor * default_gap_open_score;
         }
         assert(colIx == alignment.get_number_of_columns() - 1);
     }

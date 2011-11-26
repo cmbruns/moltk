@@ -8,6 +8,7 @@
 #include "moltk/DPTable.hpp"
 
 using moltk::units::Information;
+using namespace std;
 
 namespace moltk { namespace dp {
 
@@ -96,6 +97,7 @@ std::ostream& operator<<(std::ostream& os,
         const moltk::dp::DPTable<SCORE_TYPE,MEMORY_MODEL,ALIGN_TYPE,GAP_NSEGS>& t)
 {
     // print out first/target sequence
+    os << "First/Target alignment" << std::endl;
     // Position index
     os << " position";
     for (size_t i = 0; i < t.target_positions.size(); ++i)
@@ -118,6 +120,34 @@ std::ostream& operator<<(std::ostream& os,
         os.width(7);
         os << t.target_positions[i]->gap_score.extension_score.value;
     }
+    os << std::endl;
+    os << std::endl;
+
+    // print out second/query sequence
+    os << "Second/Query alignment" << endl;
+    // Position index
+    os << " position";
+    for (size_t i = 0; i < t.query_positions.size(); ++i)
+    {
+        os.width(7); os << i;
+    }
+    os << std::endl;
+    // Open score
+    os << " gap open";
+    for (size_t i = 0; i < t.query_positions.size(); ++i)
+    {
+        os.width(7);
+        os << t.query_positions[i]->gap_score.open_score.value;
+    }
+    os << std::endl;
+    // Extension score
+    os << "extension";
+    for (size_t i = 0; i < t.query_positions.size(); ++i)
+    {
+        os.width(7);
+        os << t.query_positions[i]->gap_score.extension_score.value;
+    }
+    os << std::endl;
     os << std::endl;
 
     os << t.table;
