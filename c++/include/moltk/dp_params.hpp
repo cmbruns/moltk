@@ -48,9 +48,10 @@ enum DPAlignScale {
 /// TracebackPointer to help reconstruct the final alignment.
 enum TracebackPointer
 {
-    TRACEBACK_UPLEFT, // consume/align one column/residue from each of both alignments/sequences
-    TRACEBACK_UP, // consume/delete one column/residue of alignment/sequence 1
-    TRACEBACK_LEFT // consume/delete one column/residue of alignment/sequence 2
+    TRACEBACK_UPLEFT, ///< consume/align one column/residue from each of both alignments/sequences
+    TRACEBACK_UP, ///< consume/delete one column/residue of alignment/sequence 1
+    TRACEBACK_LEFT, ///< consume/delete one column/residue of alignment/sequence 2
+    TRACEBACK_NONE ///< unknown or non applicable
 };
 
 

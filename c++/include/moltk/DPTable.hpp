@@ -78,10 +78,16 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
         const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1,
         const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2)
     {
+        /*score = std::max(std::max(
+                up_left.e.score,
+                up_left.f.score),
+                up_left.g.score + pos1.gap_open_after_match_score(pos2))
+            + pos1.score(pos2);
+            */
         score = up_left.v.score + pos1.score(pos2);
         // gap-opening component is applied here
         if (up_left.v.score == up_left.g.score) // match-match state
-            score += pos1.gap_open_after_match_score(pos2);
+           score += pos1.gap_open_after_match_score(pos2);
         // TODO - insertion-match gap opening score
     }
 
@@ -199,7 +205,7 @@ struct DPCell
         v.score = compute_v();
     }
 
-    TracebackPointer compute_traceback_pointer() const
+    TracebackPointer compute_traceback_pointer(TracebackPointer previous_pointer) const
     {
         if ( (g.score >= e.score) && (g.score >= f.score) )
             return TRACEBACK_UPLEFT;
@@ -211,7 +217,7 @@ struct DPCell
 
     SCORE_TYPE compute_v() const
     {
-        TracebackPointer tp = compute_traceback_pointer();
+        TracebackPointer tp = compute_traceback_pointer(TRACEBACK_NONE);
         switch(tp)
         {
         case TRACEBACK_UPLEFT:
@@ -344,11 +350,12 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
         if (j < 0) return result;
         result.score = table[i][j].v.score;
         // cout << "final alignment score = " << dp_table[i][j].v << endl;
-        TracebackPointer tracebackPointer = table[i][j].compute_traceback_pointer();
+        TracebackPointer previous_pointer = TRACEBACK_NONE;
+        TracebackPointer traceback_pointer = table[i][j].compute_traceback_pointer(previous_pointer);
         while( (i > 0) || (j > 0) )
         {
             // cout << "traceback[" << i << "][" << j << "]" << endl;
-            switch(tracebackPointer)
+            switch(traceback_pointer)
             {
             case TRACEBACK_UPLEFT:
                 --i; --j;
@@ -373,7 +380,9 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                 assert(false);
                 break;
             }
-            tracebackPointer = table[i][j].compute_traceback_pointer();
+            TracebackPointer p = previous_pointer;
+            previous_pointer = traceback_pointer;
+            traceback_pointer = table[i][j].compute_traceback_pointer(p);
         }
         assert(i == 0);
         assert(j == 0);
