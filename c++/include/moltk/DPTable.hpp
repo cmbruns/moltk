@@ -52,6 +52,7 @@ struct RunningScore;
 
 
 /// Template specialization for affine-gap alignment of single sequences running score
+/// Corresponds to element G in Gusfield's chapter 11 recurrence.
 template<typename SCORE_TYPE>
 struct RunningScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES>
 {
@@ -68,7 +69,38 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES>
 };
 
 
+/// Non-localness of gap_open scores requires that we store second-order
+/// traceback pointers.  ScoreTrio class helps manage that second level.
+/// Set of scores from three paths leading to a particular DPCell element
+template<typename SCORE_TYPE>
+struct ScoreTrio
+{
+    SCORE_TYPE from_g;
+    SCORE_TYPE from_e;
+    SCORE_TYPE from_f;
+
+    SCORE_TYPE max() const
+    {
+        if ((from_g >= from_e) && (from_g >= from_f))
+            return from_g;
+        if (from_e >= from_f)
+            return from_e;
+        return from_f;
+    }
+
+    TracebackPointer upstream_traceback_pointer() const
+    {
+        if ((from_g >= from_e) && (from_g >= from_f))
+            return TRACEBACK_UPLEFT;
+        if (from_e >= from_f)
+            return TRACEBACK_LEFT;
+        return TRACEBACK_UP;
+    }
+};
+
+
 /// Template specialization affine-gap alignment-of-alignments running score
+/// Corresponds to element G in Gusfield's chapter 11 recurrence.
 template<typename SCORE_TYPE>
 struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
 {
@@ -78,17 +110,25 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
         const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1,
         const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2)
     {
-        /*score = std::max(std::max(
-                up_left.e.score,
-                up_left.f.score),
-                up_left.g.score + pos1.gap_open_after_match_score(pos2))
-            + pos1.score(pos2);
-            */
-        score = up_left.v.score + pos1.score(pos2);
-        // gap-opening component is applied here
+        score = calc_upstream_scores(up_left, pos1, pos2).max();
+    }
+
+    template<int GAP_NSEGS>
+    ScoreTrio<SCORE_TYPE> calc_upstream_scores(
+            const DPCell<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& up_left,
+            const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1,
+            const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2) const
+    {
+        ScoreTrio<SCORE_TYPE> result;
+        SCORE_TYPE s = pos1.score(pos2);
+        // TODO - incorporate open-after-match directly into result.from_g
         if (up_left.v.score == up_left.g.score) // match-match state
-           score += pos1.gap_open_after_match_score(pos2);
-        // TODO - insertion-match gap opening score
+           s += pos1.gap_open_after_match_score(pos2);
+        result.from_g = up_left.g.score + s;
+        result.from_e = up_left.e.score + s;
+        result.from_f = up_left.f.score + s;
+
+        return result;
     }
 
     SCORE_TYPE score;
