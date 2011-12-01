@@ -124,9 +124,9 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
         // TODO - incorporate open-after-match directly into result.from_g
         if (up_left.v.score == up_left.g.score) // match-match state
            s += pos1.gap_open_after_match_score(pos2);
-        result.from_g = up_left.g.score + s;
-        result.from_e = up_left.e.score + s;
-        result.from_f = up_left.f.score + s;
+        result.from_g = up_left.g.score + pos1.score(pos2) + pos1.gap_open_after_match_score(pos2);
+        result.from_e = up_left.e.score + pos1.score(pos2);
+        result.from_f = up_left.f.score + pos1.score(pos2);
 
         return result;
     }
