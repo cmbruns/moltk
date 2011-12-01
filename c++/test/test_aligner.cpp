@@ -36,22 +36,15 @@ using namespace std;
 Information test_matchy_alignment_score(const MatrixScorer& scorer) {
     Alignment a1, a2;
     a1.load_fasta_string(
-        ">1\n"
-        "C--PW\n"
-        ">2\n"
-        "CHFPW\n"
+        // ">1\nC--PW\n"
+        ">2\nCHFPW\n"
         );
     a2.load_fasta_string(
-        ">3\n"
-        "----W\n"
-        ">4\n"
-        "CH-P-\n"
-        ">5\n"
-        "-HF--\n"
-        ">6\n"
-        "C-FPW\n"
-        ">7\n"
-        "CHFPW\n"
+        ">3\n----W\n"
+        // ">4\nCH-P-\n"
+        ">5\n-HF--\n"
+        // ">6\nC-FPW\n"
+        ">7\nCHFPW\n"
         );
     Alignment a3 = align(a1, a2);
     cout << a3 << endl;
@@ -101,6 +94,7 @@ Information test_insertion_alignment_score(const MatrixScorer& scorer) {
 BOOST_AUTO_TEST_CASE( test_aligner )
 {
     boost::debug::detect_memory_leaks(false);
+    /*
     Aligner a;
     // Sequoia 3 sequence alignment paradigm
     Alignment seq1 = load_fasta("sequences/sod1_Hsap.fasta");
@@ -113,12 +107,17 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     cout << al2 << endl;
     Alignment al3 = align(seq3, al1);
     cout << al3 << endl;
+    */
 
     // Test for alignment of alignments
     // Gaps are arranged to efficiently cover all pair interactions (-X XX, -X -X, etc)
     MatrixScorer& scorer = Aligner::get_shared_aligner().get_scorer();
+    scorer.set_default_gap_extension_score(-0.5 * bit);
+    scorer.set_default_gap_open_score(-8.0 * bit);
+    scorer.set_end_gap_factor(0.0);
     Information score;
 
+    /*
     // Start by debugging match score only
     scorer.set_default_gap_open_score(0.0 * bit);
     scorer.set_default_gap_extension_score(0.0 * bit);
@@ -136,11 +135,17 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     scorer.set_end_gap_factor(1.0);
     scorer.set_default_gap_open_score(0.0 * bit);
     score = test_matchy_alignment_score(scorer);
+    */
     scorer.set_default_gap_open_score(-8.0 * bit);
+    scorer.set_default_gap_extension_score(0.0 * bit);
+    scorer.set_end_gap_factor(1.0);
     score = test_matchy_alignment_score(scorer);
-    // cout << Aligner::get_shared_aligner().test_table << endl;
+    cout << Aligner::get_shared_aligner().test_table << endl;
+
+    /*
     scorer.set_end_gap_factor(0.0);
     score = test_matchy_alignment_score(scorer);
+
     // TODO - test scores of alignments containing new gaps
     // Easiest case: no gap scores and end gaps same as internal gaps
     scorer.set_end_gap_factor(1.0);
@@ -153,4 +158,5 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     // Add in gap open score
     scorer.set_default_gap_open_score(-8.0 * bit);
     score = test_insertion_alignment_score(scorer);
+    */
 }
