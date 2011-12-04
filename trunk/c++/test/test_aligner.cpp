@@ -36,15 +36,24 @@ using namespace std;
 Information test_matchy_alignment_score(const MatrixScorer& scorer) {
     Alignment a1, a2;
     a1.load_fasta_string(
-        // ">1\nC--PW\n"
+        ">1\nC--PW\n"
         ">2\nCHFPW\n"
+        /*
+        ">1\nC-\n"
+        ">2\nCH\n"
+        */
         );
     a2.load_fasta_string(
         ">3\n----W\n"
-        // ">4\nCH-P-\n"
+        ">4\nCH-P-\n"
         ">5\n-HF--\n"
-        // ">6\nC-FPW\n"
+        ">6\nC-FPW\n"
         ">7\nCHFPW\n"
+        /*
+        ">3\n-H\n"
+        ">5\n-H\n"
+        ">7\nCH\n"
+        */
         );
     Alignment a3 = align(a1, a2);
     cout << a3 << endl;
@@ -63,20 +72,14 @@ Information test_matchy_alignment_score(const MatrixScorer& scorer) {
 Information test_insertion_alignment_score(const MatrixScorer& scorer) {
     Alignment a1, a2;
     a1.load_fasta_string(
-        ">1a\n"
-        "CHFAAAAPWC\n"
-        ">2a\n"
-        "CH---A--WC\n"
-        ">3a\n"
-        "CHF-A-A-WC\n"
-        ">4a\n"
-        "CH-A-A-PWC\n"
+        ">1a\nCHFAAAAPWC\n"
+        ">2a\nCH---A--WC\n"
+        // ">3a\nCHF-A-A-WC\n"
+        // ">4a\nCH-A-A-PWC\n"
         );
     a2.load_fasta_string(
-        ">1b\n"
-        "CHFPWC\n"
-        ">2b\n"
-        "CH--WC\n"
+        ">1b\nCHFPWC\n"
+        // ">2b\nCH--WC\n"
         );
     Alignment a3 = align(a1, a2);
     cout << a3 << endl;
@@ -94,7 +97,6 @@ Information test_insertion_alignment_score(const MatrixScorer& scorer) {
 BOOST_AUTO_TEST_CASE( test_aligner )
 {
     boost::debug::detect_memory_leaks(false);
-    /*
     Aligner a;
     // Sequoia 3 sequence alignment paradigm
     Alignment seq1 = load_fasta("sequences/sod1_Hsap.fasta");
@@ -107,7 +109,6 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     cout << al2 << endl;
     Alignment al3 = align(seq3, al1);
     cout << al3 << endl;
-    */
 
     // Test for alignment of alignments
     // Gaps are arranged to efficiently cover all pair interactions (-X XX, -X -X, etc)
@@ -117,7 +118,6 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     scorer.set_end_gap_factor(0.0);
     Information score;
 
-    /*
     // Start by debugging match score only
     scorer.set_default_gap_open_score(0.0 * bit);
     scorer.set_default_gap_extension_score(0.0 * bit);
@@ -131,18 +131,18 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     scorer.set_end_gap_factor(0.0);
     score = test_matchy_alignment_score(scorer); // works 98b
     BOOST_CHECK_EQUAL(98.0 * bit, score);
-    // add in gap opening score
     scorer.set_end_gap_factor(1.0);
     scorer.set_default_gap_open_score(0.0 * bit);
     score = test_matchy_alignment_score(scorer);
-    */
+
+    /* 
+    // add in gap opening score
     scorer.set_default_gap_open_score(-8.0 * bit);
     scorer.set_default_gap_extension_score(0.0 * bit);
     scorer.set_end_gap_factor(1.0);
     score = test_matchy_alignment_score(scorer);
     cout << Aligner::get_shared_aligner().test_table << endl;
 
-    /*
     scorer.set_end_gap_factor(0.0);
     score = test_matchy_alignment_score(scorer);
 
@@ -157,6 +157,6 @@ BOOST_AUTO_TEST_CASE( test_aligner )
     score = test_insertion_alignment_score(scorer);
     // Add in gap open score
     scorer.set_default_gap_open_score(-8.0 * bit);
-    score = test_insertion_alignment_score(scorer);
+    score = test_insertion_alignment_score(scorer); // fails
     */
 }
