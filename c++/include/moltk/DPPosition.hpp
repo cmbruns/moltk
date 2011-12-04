@@ -119,7 +119,29 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
                 // std::cout << "gap open " << lhs.index << ", " << rhs.index << ", " << ci->second << ", " << ii->second << endl;
                 result += ci->second * ii->second;
             }
-        }        return result;
+        }        
+        return result;
+    }
+
+    /// Gap opening component of alignment score after a new insertion after right hand side position
+    SCORE_TYPE gap_open_after_insertion_score(const DPPosition& rhs, int insertion_length) const
+    {
+        SCORE_TYPE result = moltk::units::zero<SCORE_TYPE>();
+        const DPPosition& lhs = *this;
+        std::map<int, Real>::const_iterator ci;
+        // left with right...
+        for (ci = lhs.insertion_close_lengths.begin(); ci != lhs.insertion_close_lengths.end(); ++ci)
+        {
+            int len = ci->first - insertion_length;  // include insertion length into comparison
+            if (len < 0) continue;
+            typename std::map<int, SCORE_TYPE>::const_iterator ii = rhs.insertion_lengths.find(len);
+            if (ii != rhs.insertion_lengths.end())
+            {
+                // std::cout << "gap open " << lhs.index << ", " << rhs.index << ", " << ci->second << ", " << ii->second << endl;
+                result += ci->second * ii->second;
+            }
+        }      
+        return result;
     }
 
     GapScore<SCORE_TYPE, GAP_NSEGS> gap_score;

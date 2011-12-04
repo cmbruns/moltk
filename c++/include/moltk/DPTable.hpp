@@ -110,7 +110,21 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
         const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1,
         const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2)
     {
-        score = calc_upstream_scores(up_left, pos1, pos2).max();
+        upstream_scores = calc_upstream_scores(up_left, pos1, pos2);
+        score = upstream_scores.max();
+    }
+
+    template<int GAP_NSEGS>
+    void initialize(
+        const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1, 
+        const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2)
+    {
+        upstream_scores.from_g = -moltk::units::infinity<SCORE_TYPE>();
+        upstream_scores.from_e = -moltk::units::infinity<SCORE_TYPE>();
+        upstream_scores.from_f = -moltk::units::infinity<SCORE_TYPE>();
+        score = -moltk::units::infinity<SCORE_TYPE>();
+        if ((0 == pos1.index) && (0 == pos2.index))
+            score = upstream_scores.from_g = moltk::units::zero<SCORE_TYPE>();
     }
 
     template<int GAP_NSEGS>
@@ -121,17 +135,20 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
     {
         ScoreTrio<SCORE_TYPE> result;
         SCORE_TYPE s = pos1.score(pos2);
-        // TODO - incorporate open-after-match directly into result.from_g
-        if (up_left.v.score == up_left.g.score) // match-match state
-           s += pos1.gap_open_after_match_score(pos2);
-        result.from_g = up_left.g.score + pos1.score(pos2) + pos1.gap_open_after_match_score(pos2);
-        result.from_e = up_left.e.score + pos1.score(pos2);
-        result.from_f = up_left.f.score + pos1.score(pos2);
+        result.from_g = up_left.g.score + pos1.score(pos2)
+            + pos1.gap_open_after_match_score(pos2);
+        result.from_e = up_left.e.score + pos1.score(pos2)
+            + pos1.gap_open_after_match_score(pos2); // TODO - this is wrong - placeholder until insertion scores are correct
+            // + pos1.gap_open_after_insertion_score(pos2, up_left.e.gap_length); // TODO - or reverse pos1/pos2?
+        result.from_f = up_left.f.score + pos1.score(pos2)
+            + pos1.gap_open_after_match_score(pos2); // TODO - this is wrong- placeholder until insertion scores are correct
+            // + pos2.gap_open_after_insertion_score(pos1, up_left.f.gap_length); // TODO - or reverse pos1/pos2?
 
         return result;
     }
 
     SCORE_TYPE score;
+    ScoreTrio<SCORE_TYPE> upstream_scores;
 };
 
 
@@ -161,12 +178,14 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
 
     void initialize(const PositionType& pos1, const PositionType& pos2)
     {
-        if (0 != pos1.index) {
+        // Upper left cell E,F are -infinity
+        // Top row F -infinity
+        // Left column E -infinity
+        if ( (0 != pos1.index) || (0 == pos2.index) )
             score = -moltk::units::infinity<SCORE_TYPE>();
-            return;
-        }
-        score = (moltk::Real)pos2.index * pos1.gap_score.extension_score
-                + pos1.gap_score.open_score;
+        else
+            score = (moltk::Real)pos2.index * pos1.gap_score.extension_score
+                    + pos1.gap_score.open_score;
     }
 
     SCORE_TYPE score;
@@ -177,29 +196,59 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
 template<typename SCORE_TYPE>
 struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
 {
-    typedef DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1> PositionType;
     /// Update from previous dynamic programming cell
+    template<int GAP_NSEGS>
     void compute_recurrence(
-            const RunningGapScore& pred,
-            const RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>& v,
-            const PositionType& pos1,
-            const PositionType& pos2)
+            const DPCell<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pred,
+            const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1,
+            const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2)
     {
+        /*
         score = std::max(pred.score, v.score + pos1.gap_score.open_score)
                 + pos1.gap_score.extension_score * pos2.nongap_count;
+                */
+        upstream_scores = calc_upstream_scores(pred, pos1, pos2);
+        score = upstream_scores.max();
     }
 
-    void initialize(const PositionType& pos1, const PositionType& pos2)
+    template<int GAP_NSEGS>
+    void initialize(
+        const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1, 
+        const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2)
     {
-        if (0 != pos1.index) {
+        // Upper left cell E,F are -infinity
+        // Top row F -infinity
+        // Left column E -infinity
+        if ( (0 != pos1.index) || (0 == pos2.index) )
             score = -moltk::units::infinity<SCORE_TYPE>();
-            return;
-        }
-        score = (moltk::Real)pos2.index * pos1.gap_score.extension_score
-                + pos1.gap_score.open_score;
+        else
+            score = (moltk::Real)pos2.index * pos1.gap_score.extension_score
+                    + pos1.gap_score.open_score;
+        gap_length = pos2.index;
+        upstream_scores.from_g = -moltk::units::infinity<SCORE_TYPE>();
+        upstream_scores.from_e = -moltk::units::infinity<SCORE_TYPE>();
+        upstream_scores.from_f = -moltk::units::infinity<SCORE_TYPE>();
+    }
+
+    template<int GAP_NSEGS>
+    ScoreTrio<SCORE_TYPE> calc_upstream_scores(
+            const DPCell<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pred,
+            const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1,
+            const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2) const
+    {
+        SCORE_TYPE extension = pos1.gap_score.extension_score * pos2.nongap_count;
+        ScoreTrio<SCORE_TYPE> result;
+        result.from_g = pred.g.score + extension + pos2.gap_open_after_insertion_score(pos1, 1);
+        // TODO - gap open score run lengths correction should not be symmetric like this
+        // TODO - run length correction will be wrong for multiple-gap situations.
+        result.from_e = pred.e.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.e.gap_length + 1);
+        result.from_f = pred.e.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.f.gap_length + 1);
+        return result;
     }
 
     SCORE_TYPE score;
+    ScoreTrio<SCORE_TYPE> upstream_scores;
+    int gap_length;
 };
 
 
@@ -221,10 +270,7 @@ struct DPCell
             throw std::runtime_error("Only top and left of dynamic programming table can be initialized");
         e.initialize(pos1, pos2);
         f.initialize(pos2, pos1);
-        if ((pos1.index == 0) && (pos2.index == 0))
-            g.score = moltk::units::zero<SCORE_TYPE>();
-        else
-            g.score = -moltk::units::infinity<SCORE_TYPE>();
+        g.initialize(pos1, pos2);
         v.score = compute_v();
     }
 
@@ -238,14 +284,14 @@ struct DPCell
         // best score with ungapped alignment of i with j
         g.compute_recurrence(up_left, pos1, pos2);
         // best score with insertion gap in sequence 1
-        e.compute_recurrence(left.e, left.v, pos1, pos2);
+        e.compute_recurrence(left, pos1, pos2);
         // best score with insertion gap in sequence 2
-        f.compute_recurrence(up.f, up.v, pos2, pos1);
+        f.compute_recurrence(up, pos2, pos1);
         // best score overall
         v.score = compute_v();
     }
 
-    TracebackPointer compute_traceback_pointer(TracebackPointer previous_pointer) const
+    TracebackPointer compute_traceback_pointer() const
     {
         if ( (g.score >= e.score) && (g.score >= f.score) )
             return TRACEBACK_UPLEFT;
@@ -255,9 +301,26 @@ struct DPCell
             return TRACEBACK_UP;
     }
 
+    TracebackPointer compute_upstream_traceback_pointer(TracebackPointer current_pointer) const
+    {
+        switch(current_pointer)
+        {
+        case TRACEBACK_UPLEFT:
+            return g.upstream_scores.upstream_traceback_pointer();
+        case TRACEBACK_LEFT:
+            return e.upstream_scores.upstream_traceback_pointer();
+        case TRACEBACK_UP:
+            return f.upstream_scores.upstream_traceback_pointer();
+        case TRACEBACK_NONE:
+            throw runtime_error("Cannot compute upstream traceback pointer from TRACEBACK_NONE");
+        }
+        assert(false); // should not get this far
+        return TRACEBACK_NONE; // 
+    }
+
     SCORE_TYPE compute_v() const
     {
-        TracebackPointer tp = compute_traceback_pointer(TRACEBACK_NONE);
+        TracebackPointer tp = compute_traceback_pointer();
         switch(tp)
         {
         case TRACEBACK_UPLEFT:
@@ -390,8 +453,8 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
         if (j < 0) return result;
         result.score = table[i][j].v.score;
         // cout << "final alignment score = " << dp_table[i][j].v << endl;
-        TracebackPointer previous_pointer = TRACEBACK_NONE;
-        TracebackPointer traceback_pointer = table[i][j].compute_traceback_pointer(previous_pointer);
+        TracebackPointer traceback_pointer = table[i][j].compute_traceback_pointer();
+        TracebackPointer upstream_pointer = table[i][j].compute_upstream_traceback_pointer(traceback_pointer);
         while( (i > 0) || (j > 0) )
         {
             // cout << "traceback[" << i << "][" << j << "]" << endl;
@@ -420,9 +483,8 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
                 assert(false);
                 break;
             }
-            TracebackPointer p = previous_pointer;
-            previous_pointer = traceback_pointer;
-            traceback_pointer = table[i][j].compute_traceback_pointer(p);
+            traceback_pointer = upstream_pointer;
+            upstream_pointer = table[i][j].compute_upstream_traceback_pointer(upstream_pointer);
         }
         assert(i == 0);
         assert(j == 0);

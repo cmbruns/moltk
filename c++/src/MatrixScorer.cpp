@@ -286,6 +286,7 @@ SCORE_TYPE MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::calc_explicit_sum_of_pairs_scor
         {
             // TODO - scale by sequence weight
             result += calc_explicit_pair_score(i, j, alignment);
+            // cout << "pair score " << i << ", " << j << ", " << result << endl;
         }
     return result;
 }
