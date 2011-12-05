@@ -214,7 +214,8 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
     template<int GAP_NSEGS>
     void initialize(
         const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1, 
-        const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2)
+        const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2,
+        const SCORE_TYPE& previous_score) ///< score from upstream cell
     {
         // Upper left cell E,F are -infinity
         // Top row F -infinity
@@ -222,8 +223,9 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
         if ( (0 != pos1.index) || (0 == pos2.index) )
             score = -moltk::units::infinity<SCORE_TYPE>();
         else
-            score = (moltk::Real)pos2.index * pos1.gap_score.extension_score
-                    + pos1.gap_score.open_score;
+            score = previous_score +
+                    pos1.gap_score.extension_score * pos2.nongap_count +
+                    + pos2.gap_open_after_insertion_score(pos1, pos2.index);
         gap_length = pos2.index;
         upstream_scores.from_g = -moltk::units::infinity<SCORE_TYPE>();
         upstream_scores.from_e = -moltk::units::infinity<SCORE_TYPE>();
@@ -242,7 +244,7 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
         // TODO - gap open score run lengths correction should not be symmetric like this
         // TODO - run length correction will be wrong for multiple-gap situations.
         result.from_e = pred.e.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.e.gap_length + 1);
-        result.from_f = pred.e.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.f.gap_length + 1);
+        result.from_f = pred.f.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.f.gap_length + 1);
         return result;
     }
 
@@ -268,8 +270,8 @@ struct DPCell
         // only initialize top row and column
         if ((pos1.index != 0) && (pos2.index != 0))
             throw std::runtime_error("Only top and left of dynamic programming table can be initialized");
-        e.initialize(pos1, pos2);
-        f.initialize(pos2, pos1);
+        // e.initialize(pos1, pos2); // initialized in DPTable::initialize() method
+        // f.initialize(pos2, pos1); // initialized in DPTable::initialize() method
         g.initialize(pos1, pos2);
         v.score = compute_v();
     }
@@ -418,16 +420,38 @@ struct DPTable<SCORE_TYPE, DP_MEMORY_LARGE, ALIGN_TYPE, 1>
         if (num_rows() < 1) return;
         if (num_columns() < 1) return;
         // top left corner
+        table[0][0].e.score = -moltk::units::infinity<SCORE_TYPE>();
+        table[0][0].f.score = -moltk::units::infinity<SCORE_TYPE>();
         table[0][0].initialize(*target_positions[0],
                                *query_positions[0]);
         // Left column
-        for(size_t i = 1; i < num_rows(); ++i)
+        SCORE_TYPE previous_score = moltk::units::zero<SCORE_TYPE>();
+        for(size_t i = 1; i < num_rows(); ++i) 
+        {
+            // end gap scores need to be integrated, so populate them here
+            table[i][0].f.initialize(*query_positions[0],
+                                     *target_positions[i],
+                                     previous_score);
+            previous_score = table[i][0].f.score;
+            table[i][0].e.score = -moltk::units::infinity<SCORE_TYPE>();
+            // initialize the other fields. must come after f initialization
             table[i][0].initialize(*target_positions[i],
                                    *query_positions[0]);
+        }
         // Top row
+        previous_score = moltk::units::zero<SCORE_TYPE>();
         for(size_t j = 1; j < num_columns(); ++j)
+        {
+            // TODO - end gap scores need to be integrated, so populate them here
+            table[0][j].e.initialize(*target_positions[0],
+                                     *query_positions[j],
+                                     previous_score);
+            previous_score = table[0][j].e.score;
+            table[0][j].f.score = -moltk::units::infinity<SCORE_TYPE>();
+            //  initialize the other fields. must come after e initialization
             table[0][j].initialize(*target_positions[0],
                                    *query_positions[j]);
+        }
     }
 
     void compute_recurrence()
