@@ -124,7 +124,9 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
         upstream_scores.from_f = -moltk::units::infinity<SCORE_TYPE>();
         score = -moltk::units::infinity<SCORE_TYPE>();
         if ((0 == pos1.index) && (0 == pos2.index))
+        {
             score = upstream_scores.from_g = moltk::units::zero<SCORE_TYPE>();
+        }
     }
 
     template<int GAP_NSEGS>
@@ -149,6 +151,9 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
 
     SCORE_TYPE score;
     ScoreTrio<SCORE_TYPE> upstream_scores;
+    // For tracking gap open scores
+    std::map<int, int> target_gap_length_map; ///< maps unaligned upstream gap length to current gap length
+    std::map<int, int> query_gap_length_map; ///< maps unaligned upstream gap length to current gap length
 };
 
 
@@ -251,6 +256,9 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
     SCORE_TYPE score;
     ScoreTrio<SCORE_TYPE> upstream_scores;
     int gap_length;
+    // For tracking gap open scores
+    std::map<int, int> target_gap_length_map; ///< maps unaligned upstream gap length to current gap length
+    std::map<int, int> query_gap_length_map; ///< maps unaligned upstream gap length to current gap length
 };
 
 
