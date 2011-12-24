@@ -41,8 +41,8 @@ p {margin-top: 10px;margin-bottom: 10px;}
 .x-c-s #colright {float:left;position:relative;right:100%;width:200%;}
 .x-c-s #col1wrap {float:left;left:50%;position:relative;width:50%;}
 .x-c-s #col3 {float:right;position:relative;}
-.s-c-s .ctr-color1, .s-c-s .ckl-color1, .s-c-x .ckl-color1, .x-c-s .cdr-color1 {background: #eee;}
-.s-c-s .ctr-color2, .s-c-s .ckl-color2, .s-c-x .ckl-color2, .x-c-s .cdr-color2, li.header {background: #d1e0e7;}
+.s-c-s .ctr-color1, .s-c-s .ckl-color1, .s-c-x .ckl-color1, .x-c-s .cdr-color1 {background: #fefef2;}
+.s-c-s .ctr-color2, .s-c-s .ckl-color2, .s-c-x .ckl-color2, .x-c-s .cdr-color2, li.header {background: #556b2f;}
 .s-c-s #col1pad, .s-c-x #colright, .x-c-s #colright, #wrapper, body {background: #fff;}
 .cols1 {display: block;float: none;margin: 0;width: 100%;}
 .cols2 {width: 49%;overflow: hidden;}
@@ -74,7 +74,7 @@ li.header  {
 }
 
 li.row,li.row:hover {
-    background-color: #F5F7F8;
+    background-color: #fefef2;
     border-bottom: 1px solid #E3E9EC;
 }
 
@@ -87,7 +87,7 @@ table.table1 tbody tr,table.table1 tbody td {
 }
 
 li.row.bg2,li.row.bg2:hover,table.table1 tbody tr.bg2,table1 tbody tr.bg2:hover {
-     background-color: #F5F7F8;
+     background-color: #fefef2;
 }
 li.row.bg1,li.row.bg1:hover,table.table1 tbody tr.bg1,table1 tbody tr.bg1:hover {
      background-color: #FFFFFF;
@@ -209,20 +209,20 @@ dd.lastpost {
     white-space: nowrap;
 }
 div.panel.bg3   {
-    background-color: #EFEFEF;
+    background-color: #fefef2;
 }
 #tabs .activetab a {
     border: 0px none;
 }
 #simple-wrap .panel,.cp-mini {
-    background-color: #F4F4F4;
+    background-color: #fefef2;
 }
 #simple-wrap  tr.bg1 {
-     background-color: #F4F4F4;
+     background-color: #fefef2;
 }
 
 #simple-wrap  tr.bg2 {
-     background-color: #F4F4F4;
+     background-color: #fefef2;
 }
 
 .postprofile { 
@@ -230,11 +230,11 @@ border-left-color: #BCBCBC;
 }
 
 #cp-main .pm {
-    background-color: #f9f9f9;
+    background-color: #fefef2;
 }
 
 #navigation #active-subsection a {
-background-color: #F9F9F9;
+background-color: #fefef2;
 background-image:none;
 }
 
