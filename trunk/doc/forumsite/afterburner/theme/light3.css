@@ -41,7 +41,7 @@ p {margin-top:10px;margin-bottom:10px;}
 .x-c-s #col1wrap {float:left;left:50%;position:relative;width:50%;}
 .x-c-s #col3 {float:right;position:relative;}
 .s-c-s .ctr-color1, .s-c-s .ckl-color1, .s-c-x .ckl-color1, .x-c-s .cdr-color1 {background:#eee;}
-.s-c-s .ctr-color2, .s-c-s .ckl-color2, .s-c-x .ckl-color2, .x-c-s .cdr-color2 {background:#d1e0e7;}
+.s-c-s .ctr-color2, .s-c-s .ckl-color2, .s-c-x .ckl-color2, .x-c-s .cdr-color2 {background:#556b2f;}
 .s-c-s #col1pad, .s-c-x #colright, .x-c-s #colright, #wrapper, body {background:#fff;}
 .cols1 {display:block;float:none;margin:0;width:100%;}
 .cols2 {width:49%;overflow:hidden;}

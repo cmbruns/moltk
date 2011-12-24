@@ -117,9 +117,9 @@ div.post.bg2 {background-color:#fffacd;}
 .module-title {font-size:110%;font-weight:bold;margin:0;padding:7px 15px 5px;}
 .module-body {padding:10px 15px 25px;}
 .color1 .module-title {background:url(images/light4.png) 0 -204px repeat-x;border-bottom:1px solid #ddd;color:black;}
-li.header dt, li.header dd,#page-body li.header dt a:link {color:black;}
+li.header dt, li.header dd,#page-body li.header dt a {color:white;}
 .color1 .module-body {border-top:1px solid #fff;}
-.color2 .module-title {background:url(images/light4.png) 0 -136px repeat-x;border-bottom:1px solid #fffacd;color:#556b2f;}
+.color2 .module-title {background:url(images/light4.png) 0 -136px repeat-x;border-bottom:1px solid #fffacd;color:black;}
 .color2 .module-body {border-top:1px solid #fffacd;}
 #colmask .m_menu {background:black;color:#fff;}
 #colmask .m_menu .module-title {background:url(images/light4.png) 0 -0px repeat-x;border-bottom:1px solid #556b2f;color:#fff;}
