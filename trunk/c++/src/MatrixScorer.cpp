@@ -67,6 +67,7 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
         pos->target_scores_by_residue_type_index.assign(matrix.size(), moltk::units::zero<SCORE_TYPE>());
         pos->extension_gap_score = moltk::units::zero<SCORE_TYPE>();
         pos->nongap_count = 0;
+        pos->insertion_lengths[0] = moltk::units::zero<SCORE_TYPE>(); // TODO - remove this, for optimization, when all is working.
         result.push_back(pos);
     }
     // Add contributions from each residue of each sequence
@@ -94,7 +95,7 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
             if (! current_gap)
                 pos.gap_score.open_score += seq_weight * gap_factor * default_gap_open_score;
             // Gap opening cache - every sequence has an insertion of length zero at the beginning
-            if (pos.gap_score.open_score != moltk::units::zero<SCORE_TYPE>())
+            // if (pos.gap_score.open_score != moltk::units::zero<SCORE_TYPE>()) // TODO - uncomment for efficiency once its all working
             {
                 if(pos.insertion_lengths.find(0) == pos.insertion_lengths.end())
                     pos.insertion_lengths[0] = moltk::units::zero<SCORE_TYPE>();
@@ -176,8 +177,27 @@ void MatrixScorer_<SCORE_TYPE, GAP_NSEGS>::create_positions(
             pos.gap_score.extension_score += seq_weight * gap_factor * default_gap_extension_score;
             if (! (previous_gap || current_gap)) // no opening penalty where there is already a gap
                 pos.gap_score.open_score += seq_weight * gap_factor * default_gap_open_score;
+            // Store histogram of gap lengths, for use in gap open score accounting
+            if (pos.insertion_lengths.find(internal_gap_length) == pos.insertion_lengths.end())
+                pos.insertion_lengths[internal_gap_length] = moltk::units::zero<SCORE_TYPE>();
+            pos.insertion_lengths[internal_gap_length] += seq_weight * gap_factor * default_gap_open_score;
         }
         assert(colIx == alignment.get_number_of_columns() - 1);
+    }
+
+    // Second pass - initialize relevant_gap_lengths data structure
+    for (size_t c = 0; c < result.size(); ++c)
+    {
+        PositionType& pos = dynamic_cast<PositionType&>(*result[c]);
+        // 1) Insert keys from insertion_lengths
+        ;
+        for (std::map<int, SCORE_TYPE>::const_iterator ix = pos.insertion_lengths.begin(); 
+                    ix != pos.insertion_lengths.end(); ++ix)
+            pos.relevant_gap_lengths.insert(ix->first);
+        // 2) Insert keys from insertion_close_lengths
+        for (std::map<int, Real>::const_iterator ix = pos.insertion_close_lengths.begin(); 
+                    ix != pos.insertion_close_lengths.end(); ++ix)
+            pos.relevant_gap_lengths.insert(ix->first);
     }
 }
 
