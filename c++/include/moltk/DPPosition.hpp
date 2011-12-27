@@ -18,6 +18,7 @@
 #include "moltk/dp_params.hpp"
 #include <vector>
 #include <map>
+#include <set>
 
 namespace moltk {
 
@@ -159,8 +160,9 @@ struct DPPosition<SCORE_TYPE, dp::DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>
     Real nongap_count;
 
     // Internal gap open scores
-    std::map<int, SCORE_TYPE> insertion_lengths; ///< count of sequences with gap of length n up through this position
+    std::map<int, SCORE_TYPE> insertion_lengths; ///< count of sequences with gap of length n up through this position (including length zero)
     std::map<int, Real> insertion_close_lengths; ///< count of sequences with gap of length n-1 ending at previous position
+    std::set<int> relevant_gap_lengths; ///< combined keys of insertion_lengths and insertion_close_lengths
 };
 
 /// Specialization of alignment column cache for alignment two individual sequences

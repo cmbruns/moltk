@@ -126,6 +126,15 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
         if ((0 == pos1.index) && (0 == pos2.index))
         {
             score = upstream_scores.from_g = moltk::units::zero<SCORE_TYPE>();
+            // In upper left cell, all sequence gaps are length zero,
+            // and map to zero length, including new gaps (since there are none)
+            gap_length_map[0][0] = 0;
+            gap_length_map[1][0] = 0;
+            // Positions should each have one insertion set, of length zero
+            assert(pos1.insertion_lengths.size() == 1);
+            assert(pos1.insertion_lengths.find(0) != pos1.insertion_lengths.end());
+            assert(pos2.insertion_lengths.size() == 1);
+            assert(pos2.insertion_lengths.find(0) != pos2.insertion_lengths.end());
         }
     }
 
@@ -152,8 +161,7 @@ struct RunningScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS>
     SCORE_TYPE score;
     ScoreTrio<SCORE_TYPE> upstream_scores;
     // For tracking gap open scores
-    std::map<int, int> target_gap_length_map; ///< maps unaligned upstream gap length to current gap length
-    std::map<int, int> query_gap_length_map; ///< maps unaligned upstream gap length to current gap length
+    std::map<int, int> gap_length_map[2]; ///< maps unaligned upstream gap length to current gap length; 0:target; 1:query
 };
 
 
@@ -197,11 +205,25 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_UNGAPPED_SEQUENCES, 1>
 };
 
 
+/// Whether an alignment insertion is in sequence 1 or sequence 2.
+enum InsertionParity {
+    INSERT_1_TARGET_E = 0,
+    INSERT_2_QUERY_F = 1
+};
+
+
 /// Template specialization for alignment of alignments affine gap running score (E or F in Gusfield recurrence)
 template<typename SCORE_TYPE>
 struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
 {
+    typedef std::map<int, int> GapLengthMap;
+
+    RunningGapScore(InsertionParity insertion_parity)
+        : insertion_parity(insertion_parity)
+    {}
+
     /// Update from previous dynamic programming cell
+    /// NOTE: pos1 and pos2 arguments are swapped in F vs E scores
     template<int GAP_NSEGS>
     void compute_recurrence(
             const DPCell<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pred,
@@ -214,6 +236,88 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
                 */
         upstream_scores = calc_upstream_scores(pred, pos1, pos2);
         score = upstream_scores.max();
+        // Find predecessor gap map
+        // swap positions for insertion in seq2
+        const GapLengthMap& pred1_map = 
+            get_predecessor_gap_length_map(pred, (insertion_parity != INSERT_1_TARGET_E));
+        const GapLengthMap& pred2_map = 
+            get_predecessor_gap_length_map(pred, (insertion_parity == INSERT_1_TARGET_E));
+        update_gap_length_map(pred1_map, pred2_map, pos1, pos2); // for accounting gap openings
+    }
+
+    // Get the gap_length_map corresponding to the track back cell entry in the upstream cell pred
+    template<int GAP_NSEGS>
+    const GapLengthMap& get_predecessor_gap_length_map(
+            const DPCell<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pred,
+            bool flip_sequence_parity)
+    {
+        // Handle cell elements E and F symmetrically
+        int index1 = 0;
+        int index2 = 1;
+        if (flip_sequence_parity) {
+            index2 = 0;
+            index1 = 1;
+        }
+        switch (upstream_scores.upstream_traceback_pointer()) {
+        case TRACEBACK_LEFT:
+            return pred.e.gap_length_map[index1];
+            break;
+        case TRACEBACK_UP:
+            return pred.f.gap_length_map[index2];
+            break;
+        case TRACEBACK_UPLEFT:
+            return pred.g.gap_length_map[index1];
+            break;
+        default:
+            assert(false);
+            return pred.g.gap_length_map[index1];
+            break;
+        }
+    }
+
+    // Compute mapping of DPPosition gap size, to actual aligned gap size
+    template<int GAP_NSEGS>
+    void update_gap_length_map(
+            const GapLengthMap& pred1, // target gap length map of upstream cell element
+            const GapLengthMap& pred2, // query gap length map of upstream cell element
+            const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos1,
+            const DPPosition<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, GAP_NSEGS>& pos2)
+    {
+        // Switch query and target results for F vs. E
+        GapLengthMap& glm1 = gap_length_map[0];
+        GapLengthMap& glm2 = gap_length_map[1];
+
+        // Pos1, the sequence with the insertion, maintains a steady number of gap length entries
+        if (pos1.relevant_gap_lengths.size() != pred1.size()) { // temporary testing TODO
+            assert(pos1.relevant_gap_lengths.size() == pred1.size());
+        }
+        std::set<int>::const_iterator posIx;
+        for (posIx = pos1.relevant_gap_lengths.begin(); posIx != pos1.relevant_gap_lengths.end(); ++posIx)
+        {
+            const int original_insertion_size = *posIx;
+            if (pred1.find(original_insertion_size) == pred1.end()) { // TODO testing
+                assert(pred1.find(original_insertion_size) != pred1.end());
+            }
+            glm1[original_insertion_size] = pred1.find(original_insertion_size)->second + 1; // insertion length has increased by 1
+        }
+
+        // Pos2, the sequence with the deletion, might have a different size map
+        // Only include entries for gap lengths that actually occur in the input sequences (filter).
+        for (posIx = pos2.relevant_gap_lengths.begin(); posIx != pos2.relevant_gap_lengths.end(); ++posIx)
+        {
+            const int original_insertion_size = *posIx;
+            // add new entry for zero
+            if (0 == original_insertion_size) {
+                glm2[0] = 0; // gap size zero is still zero at this point
+            }
+            else {
+                if (pred2.find(original_insertion_size - 1) == pred2.end()) {// TODO remove
+                    assert(pred2.find(original_insertion_size - 1) != pred2.end());
+                }
+                glm2[original_insertion_size] = 
+                    pred2.find(original_insertion_size - 1)->second + 1;
+            }
+        }
     }
 
     template<int GAP_NSEGS>
@@ -231,10 +335,20 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
             score = previous_score +
                     pos1.gap_score.extension_score * pos2.nongap_count +
                     + pos2.gap_open_after_insertion_score(pos1, pos2.index);
-        gap_length = pos2.index;
         upstream_scores.from_g = -moltk::units::infinity<SCORE_TYPE>();
         upstream_scores.from_e = -moltk::units::infinity<SCORE_TYPE>();
         upstream_scores.from_f = -moltk::units::infinity<SCORE_TYPE>();
+        gap_length = pos2.index;
+        // TODO - initialize foo_gap_length_map, for accounting gap open scores
+        const std::set<int>& rgl1 = pos1.relevant_gap_lengths;
+        const std::set<int>& rgl2 = pos2.relevant_gap_lengths;
+        std::map<int, int>& glm1 = gap_length_map[0];
+        std::map<int, int>& glm2 = gap_length_map[1];
+        std::set<int>::const_iterator i;
+        for (i = rgl1.begin(); i != rgl1.end(); ++i)
+            glm1[*i] = *i + gap_length; // insertion in first sequence
+        for (i = rgl2.begin(); i != rgl2.end(); ++i)
+            glm2[*i] = *i; // deletion in second sequence, gap lengths are correct
     }
 
     template<int GAP_NSEGS>
@@ -248,17 +362,28 @@ struct RunningGapScore<SCORE_TYPE, DP_ALIGN_GAPPED_ALIGNMENTS, 1>
         result.from_g = pred.g.score + extension + pos2.gap_open_after_insertion_score(pos1, 1);
         // TODO - gap open score run lengths correction should not be symmetric like this
         // TODO - run length correction will be wrong for multiple-gap situations.
-        result.from_e = pred.e.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.e.gap_length + 1);
-        result.from_f = pred.f.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.f.gap_length + 1);
+        // TODO - distinguish E from F
+        // TODO - use cell-based gap lengths for gap opening correction
+        switch(insertion_parity) 
+        {
+        case INSERT_1_TARGET_E:
+            result.from_e = pred.e.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.e.gap_length + 1);
+            result.from_f = pred.f.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.f.gap_length + 1);
+            break;
+        case INSERT_2_QUERY_F:
+            result.from_e = pred.e.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.e.gap_length + 1);
+            result.from_f = pred.f.score + extension + pos2.gap_open_after_insertion_score(pos1, pred.f.gap_length + 1);
+            break;
+        }
         return result;
     }
 
     SCORE_TYPE score;
     ScoreTrio<SCORE_TYPE> upstream_scores;
     int gap_length;
+    InsertionParity insertion_parity;
     // For tracking gap open scores
-    std::map<int, int> target_gap_length_map; ///< maps unaligned upstream gap length to current gap length
-    std::map<int, int> query_gap_length_map; ///< maps unaligned upstream gap length to current gap length
+    GapLengthMap gap_length_map[2]; ///< 0: insertion sequence; 1: deletion sequence
 };
 
 
@@ -272,6 +397,11 @@ struct DPCell
     typedef RunningGapScore<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> GapScoreType;
     typedef RunningScore<SCORE_TYPE, ALIGN_TYPE> ScoreType;
     typedef DPPosition<SCORE_TYPE, ALIGN_TYPE, GAP_NSEGS> PositionType;
+
+    DPCell()
+        : e(INSERT_1_TARGET_E)
+        , f(INSERT_2_QUERY_F)
+    {}
 
     void initialize(const PositionType& pos1, const PositionType& pos2)
     {
