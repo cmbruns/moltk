@@ -21,6 +21,7 @@
 import sys
 from PySide.QtGui import QMainWindow, QApplication
 from moltk_ui import Ui_MoltkMainWindow
+from moltk.gui.gl.example_2_1_renderer import Example2_1Renderer
 import platform
 
 class MoltkMainWindow(QMainWindow):
@@ -28,6 +29,8 @@ class MoltkMainWindow(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.ui = Ui_MoltkMainWindow()
         self.ui.setupUi(self)
+        # TODO rename widget_3 to structure_canvas
+        self.ui.widget_3.set_renderer(Example2_1Renderer())
         # work around Mac menubar bug
         # http://bugs.pyside.org/show_bug.cgi?id=907
         if 'Darwin' == platform.system():

@@ -20,18 +20,9 @@
 
 # Do not import PyOpenGL in this file,
 # to help avoid mixing QtGui thread with OpenGL thread.
-from __future__ import division
-from structure_renderer import StructureRenderer
+
 from canvas_3d import Canvas3D
 
 class StructureCanvas(Canvas3D):
-    """
-    Widget for displaying 3D molecule structure in the MolTK GUI.
-    
-    Don't put OpenGL calls in this class, because all OpenGL calls
-    must be called from a dedicated OpenGL thread.
-    """
-        
-    def create_renderer(self):
-        return StructureRenderer(self, self)
+    pass
 
