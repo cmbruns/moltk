@@ -31,7 +31,7 @@ class StructureCanvas(Canvas3D):
     Don't put OpenGL calls in this class, because all OpenGL calls
     must be called from a dedicated OpenGL thread.
     """
-    def __init__(self, parent = None):
-        Canvas3D.__init__(self, parent)
-        self.renderer = StructureRenderer(self, self)
+        
+    def create_renderer(self):
+        return StructureRenderer(self, self)
 
