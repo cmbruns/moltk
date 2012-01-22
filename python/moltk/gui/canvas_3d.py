@@ -36,52 +36,55 @@ class Canvas3D(QGLWidget):
     """
     def __init__(self, parent = None):
         QGLWidget.__init__(self, parent)
-        self.renderer = Renderer3D(self, self)
-        self.oldMousePos = None
+        self.renderer = self.create_renderer()
+        self.old_mouse_position = None
         self.rotation = Rotation3D()
 
+    def create_renderer(self):
+        return Renderer3D(self, self)
+    
     # Because we want all OpenGL operations in a separate thread,
     # we need to override paintEvent and resizeEvent to 
     # avoid unwanted GUI thread OpenGL calls
     def paintEvent(self, event):
         self.doneCurrent()
-        self.paintCalled.emit()
+        self.paint_called.emit()
 
     def resizeEvent(self, event):
         self.doneCurrent()
-        self.resizeCalled.emit(event.size().width(), event.size().height())
+        self.resize_called.emit(event.size().width(), event.size().height())
 
     def mouseMoveEvent(self, event):
-        if self.oldMousePos:
-            dPos = event.pos() - self.oldMousePos
+        if self.old_mouse_position:
+            d_pos = event.pos() - self.old_mouse_position
             #
-            dx = dPos.x()
-            dy = dPos.y()
-            # self.rotY.emit(dx * 0.20)
+            d_x = d_pos.x()
+            d_y = d_pos.y()
+            # self.rot_y.emit(d_x * 0.20)
             #
-            rotAnglePerPixel = 2.0 * 3.14159 / (self.width() + self.height() / 2.0)
-            rotAnglePerPixel = rotAnglePerPixel * radian
-            dragDistance = math.sqrt(dx*dx + dy*dy)
-            rotAngle = dragDistance * rotAnglePerPixel
-            rotAxis = UnitVector3D(dy, dx, 0)
-            dragRotation = Rotation3D()
-            dragRotation.set_from_angle_about_unit_vector(rotAngle, rotAxis)
+            rot_angle_per_pixel = 2.0 * 3.14159 / (self.width() + self.height() / 2.0)
+            rot_angle_per_pixel = rot_angle_per_pixel * radian
+            drag_distance = math.sqrt(d_x*d_x + d_y*d_y)
+            rot_angle = drag_distance * rot_angle_per_pixel
+            rot_axis = UnitVector3D(d_y, d_x, 0)
+            drag_rotation = Rotation3D()
+            drag_rotation.set_from_angle_about_unit_vector(rot_angle, rot_axis)
             # print "rotation0 = ", self.rotation
-            # print "dragRotation = ", dragRotation
-            self.rotation = dragRotation * self.rotation
+            # print "drag_rotation = ", drag_rotation
+            self.rotation = drag_rotation * self.rotation
             # print "rotation1 = ", self.rotation
             # print self.rotation
-            self.rotationChanged.emit(self)
+            self.rotation_changed.emit(self)
         # print event.pos()
-        self.oldMousePos = event.pos()
+        self.old_mouse_position = event.pos()
 
     def mousePressEvent(self, event):
-        self.oldMousePos = None
+        self.old_mouse_position = None
 
     def mouseReleaseEvent(self, event):
-        self.oldMousePos = None
+        self.old_mouse_position = None
 
-    paintCalled = QtCore.Signal()
-    resizeCalled = QtCore.Signal(int, int)
-    rotY = QtCore.Signal(float)
-    rotationChanged = QtCore.Signal(QGLWidget)
+    paint_called = QtCore.Signal()
+    resize_called = QtCore.Signal(int, int)
+    rot_y = QtCore.Signal(float)
+    rotation_changed = QtCore.Signal(QGLWidget)
