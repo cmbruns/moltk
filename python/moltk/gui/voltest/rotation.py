@@ -8,8 +8,13 @@ from math import cos, sin, sqrt
 
 
 class UnitVec3:
-    def __init__(self):
-        self.data = (1.0, 0.0, 0.0)
+    def __init__(self, val=[1.0, 0.0, 0.0]):
+        v = Vec3(val)
+        n2 = v.normSqr()
+        if (n2 <= 0):
+            raise ValueError("Cannot create UnitVec3 from zero length vector")
+        v /= sqrt(n2)
+        self.data = (v[0], v[1], v[2])
         
     def __str__(self):
         return str(self.data)
@@ -46,7 +51,7 @@ class UnitVec3:
 
 
 class Vec3(UnitVec3):
-    def __init__(self, val):
+    def __init__(self, val=[0,0,0]):
         self.data = [1.0*val[x] for x in range(3)]
         
     def __setitem__(self, key, value):
@@ -103,3 +108,6 @@ class Rotation:
     
     def __len__(self):
         return len(self._rows) # should be 3
+
+def test():
+    assert 'b' is 'b'
