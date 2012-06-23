@@ -4,10 +4,11 @@ Created on Jun 19, 2012
 @author: brunsc
 '''
 
+from teapotactor import TeapotActor
 import glrenderer
+from PySide import QtCore
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from OpenGL.GLUT import *
 
 class PyVolRenderer(glrenderer.GlRenderer):
     def init_gl(self):
@@ -28,7 +29,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
         gluLookAt(0, 0, -10, # camera
                   0, 0, 0, # focus
                   0, 1, 0) # up vector
-        print self.gl_widget.doubleBuffer()
+        self.teapot = TeapotActor()
 
     def orient_camera(self, w, h):
         "update projection matrix, especially when aspect ratio changes"
@@ -38,9 +39,9 @@ class PyVolRenderer(glrenderer.GlRenderer):
         gluPerspective (40.0, # aperture angle in degrees
                         w/float(h), # aspect ratio
                         1.0, # near clip
-                        10.0) # far clip
+                        20.0) # far clip
         glPopAttrib() # restore GL_MATRIX_MODE
-          
+
     def resize_gl(self, w, h):
         # print "resize", w, h
         self.orient_camera(w, h)
@@ -48,11 +49,9 @@ class PyVolRenderer(glrenderer.GlRenderer):
     def paint_gl(self):
         glDrawBuffer(GL_BACK)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        self.paint_teapot()
-        
-    def paint_teapot(self):
-        glPushAttrib(GL_POLYGON_BIT) # remember current GL_FRONT_FACE indictor
-        glFrontFace(GL_CW) # teapot polygon vertex order is opposite to modern convention
-        glColor3f(0.2, 0.2, 0.5) # paint it blue
-        glutSolidTeapot(2.0) # thank you GLUT tool kit
-        glPopAttrib() # restore GL_FRONT_FACE
+        self.teapot.paint()
+
+    @QtCore.Slot(float)
+    def rotate_y(self, angle):
+        self.teapot.rotate_y(angle)
+        self.update_requested.emit()

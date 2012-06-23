@@ -5,13 +5,18 @@ Created on Jun 20, 2012
 '''
 
 from rotation import Rotation, Vec3
+from PySide import QtCore
+from PySide.QtCore import QObject
 from math import sqrt, pi
 
-class Trackball:
-    def __init__(self):
+class Trackball(QObject):
+    def __init__(self, parent=None):
+        QObject.__init__(self, parent)
         self.rotation = Rotation()
         self.old_pos = None
         
+    y_rotated = QtCore.Signal(float)
+
     def mouseMoveEvent(self, event, windowSize):
         if self.old_pos is not None:
             dx = event.pos() - self.old_pos
@@ -21,9 +26,13 @@ class Trackball:
             # Dragging the whole window size would be 180 degrees
             angle = pi * sqrt(x*x + y*y) / w
             axis = Vec3([y, x, 0]).unit() # orthogonal to drag direction
-            print axis, angle
+            # print axis, angle
             r = Rotation().set_from_angle_about_unit_vector(angle, axis)
-            print r
+            # print r
+            # Just y rotation for testing
+            if 0 != x:
+                rot_y = pi * x / w
+                self.y_rotated.emit(rot_y)
         self.old_pos = event.pos()
         
     def mousePressEvent(self, event):

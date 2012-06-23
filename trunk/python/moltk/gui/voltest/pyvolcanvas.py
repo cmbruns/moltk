@@ -24,6 +24,7 @@ class PyVolCanvas(QGLWidget):
         self.renderer.set_gl_widget(self)
         self.renderer.moveToThread(self.opengl_thread)
         self.opengl_thread.start()
+        self.trackball.y_rotated.connect(self.renderer.rotate_y)
         
     def paintEvent(self, event):
         self.doneCurrent()
@@ -44,7 +45,6 @@ class PyVolCanvas(QGLWidget):
     
     # Delegate mouse events to trackball class
     def mouseMoveEvent(self, event):
-        # print "mouse move", event.pos()
         self.trackball.mouseMoveEvent(event, self.size())
         
     def mousePressEvent(self, event):
