@@ -13,11 +13,13 @@ class GlRenderer(QObject):
         QObject.__init__(self, None)
         self.gl_widget = None
         self.b_is_initialized = False
+        self.paint_event_needs_flush = False
         
     def set_gl_widget(self, gl_widget):
         self.gl_widget = gl_widget
         gl_widget.paint_requested.connect(self._paint_gl)
         gl_widget.resize_requested.connect(self._resize_gl)
+        self.update_requested.connect(gl_widget.update)
         
     @QtCore.Slot()
     def _resize_gl(self, w, h):
@@ -36,6 +38,10 @@ class GlRenderer(QObject):
         # print "_paint_gl"
         if not self.gl_widget:
             return
+        if self.paint_event_needs_flush:
+            return
+        self.paint_event_needs_flush = True
+        QtCore.QCoreApplication.processEvents() # flush out pending paint events
         self.gl_widget.makeCurrent()
         if not self.b_is_initialized:
             self.init_gl()
@@ -43,6 +49,9 @@ class GlRenderer(QObject):
         self.paint_gl()
         self.gl_widget.swapBuffers()
         self.gl_widget.doneCurrent()
+        self.paint_event_needs_flush = False
+
+    update_requested = QtCore.Signal()
 
     # Override this
     def paint_gl(self):
