@@ -16,6 +16,9 @@ class UnitVec3:
         v /= sqrt(n2)
         self.data = (v[0], v[1], v[2])
         
+    def __eq__(self, other):
+        return self[:] == other[:]
+    
     def __str__(self):
         return str(self.data)
 
