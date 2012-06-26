@@ -8,12 +8,16 @@ from math import pi
 class TeapotActor(QObject):
     def __init__(self):
         self.rot_y = 0.0
+        self.zoom_ratio = 1.0
         
     def paint(self):
         glPushAttrib(GL_POLYGON_BIT | GL_TRANSFORM_BIT) # remember current GL_FRONT_FACE indictor
         glMatrixMode(GL_MODELVIEW)
         glPushMatrix()
         glRotated(self.rot_y * 180.0 / pi, 0, 1, 0)
+        z = self.zoom_ratio
+        if z != 1.0:
+            glScaled(z, z, z)
         glFrontFace(GL_CW) # teapot polygon vertex order is opposite to modern convention
         glColor3f(0.2, 0.2, 0.5) # paint it blue
         glutSolidTeapot(2.0) # thank you GLUT tool kit
@@ -23,4 +27,8 @@ class TeapotActor(QObject):
     @QtCore.Slot(float)
     def rotate_y(self, angle):
         self.rot_y += angle
+        
+    @QtCore.Slot(float)
+    def zoom(self, ratio):
+        self.zoom_ratio *= ratio
     
