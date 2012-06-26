@@ -16,6 +16,7 @@ class Trackball(QObject):
         self.old_pos = None
         
     y_rotated = QtCore.Signal(float)
+    zoomed = QtCore.Signal(float)
 
     def mouseMoveEvent(self, event, windowSize):
         if self.old_pos is not None:
@@ -40,3 +41,8 @@ class Trackball(QObject):
         
     def mouseReleaseEvent(self, event):
         self.old_pos = None
+        
+    def wheelEvent(self, event):
+        degrees = event.delta() / 8.0
+        zoom_ratio = 2.0 ** (-degrees / 200.0)
+        self.zoomed.emit(zoom_ratio)

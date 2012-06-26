@@ -52,6 +52,11 @@ class PyVolRenderer(glrenderer.GlRenderer):
         self.teapot.paint()
 
     @QtCore.Slot(float)
+    def zoom(self, ratio):
+        self.teapot.zoom(ratio)
+        self.update_requested.emit()
+
+    @QtCore.Slot(float)
     def rotate_y(self, angle):
         self.teapot.rotate_y(angle)
         self.update_requested.emit()
