@@ -5,6 +5,7 @@ Created on Jun 20, 2012
 '''
 
 from rotation import Rotation, Vec3
+import rotation
 from PySide import QtCore
 from PySide.QtCore import QObject
 from math import sqrt, pi
@@ -16,6 +17,7 @@ class Trackball(QObject):
         self.old_pos = None
         
     y_rotated = QtCore.Signal(float)
+    xyz_rotated = QtCore.Signal(float, float, float)
     zoomed = QtCore.Signal(float)
 
     def mouseMoveEvent(self, event, windowSize):
@@ -29,6 +31,13 @@ class Trackball(QObject):
             axis = Vec3([y, x, 0]).unit() # orthogonal to drag direction
             # print axis, angle
             r = Rotation().set_from_angle_about_unit_vector(angle, axis)
+            rotx, roty, rotz = r.convert_three_axes_rotation_to_three_angles(
+                                        rotation.BodyRotationSequence,
+                                        rotation.XAxis, 
+                                        rotation.YAxis, 
+                                        rotation.ZAxis)
+            self.xyz_rotated.emit(rotx, roty, rotz)
+            # print rotx, roty, rotz
             # print r
             # Just y rotation for testing
             if 0 != x:
