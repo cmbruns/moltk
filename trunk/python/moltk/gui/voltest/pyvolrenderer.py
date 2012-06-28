@@ -60,3 +60,8 @@ class PyVolRenderer(glrenderer.GlRenderer):
     def rotate_y(self, angle):
         self.teapot.rotate_y(angle)
         self.update_requested.emit()
+        
+    @QtCore.Slot(float, float, float)
+    def rotate_xyz(self, rotx, roty, rotz):
+        self.teapot.rotate_xyz(rotx, roty, rotz)
+        self.update_requested.emit()

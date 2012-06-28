@@ -28,6 +28,10 @@ class TeapotActor(QObject):
     def rotate_y(self, angle):
         self.rot_y += angle
         
+    @QtCore.Slot(float, float, float)
+    def rotate_xyz(self, rotx, roty, rotz):
+        print "teapot", rotx, roty, rotz
+        
     @QtCore.Slot(float)
     def zoom(self, ratio):
         self.zoom_ratio *= ratio
