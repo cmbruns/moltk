@@ -27,6 +27,7 @@ class PyVolCanvas(QGLWidget):
         # self.trackball.y_rotated.connect(self.renderer.rotate_y)
         self.trackball.rotation_incremented.connect(self.renderer.increment_rotation)
         self.trackball.zoom_incremented.connect(self.renderer.increment_zoom)
+        self.trackball.pixel_translated.connect(self.renderer.translate_pixel)
         
     def paintEvent(self, event):
         self.doneCurrent()
@@ -54,6 +55,9 @@ class PyVolCanvas(QGLWidget):
         
     def mouseReleaseEvent(self, event):
         self.trackball.mouseReleaseEvent(event)
+        
+    def mouseDoubleClickEvent(self, event):
+        self.trackball.mouseDoubleClickEvent(event, self.size())
         
     def wheelEvent(self, event):
         self.trackball.wheelEvent(event)

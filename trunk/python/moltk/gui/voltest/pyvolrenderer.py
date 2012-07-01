@@ -52,3 +52,8 @@ class PyVolRenderer(glrenderer.GlRenderer):
     def increment_rotation(self, r):
         self.camera_position.increment_rotation(r)
         self.update()
+        
+    @QtCore.Slot(int, int, int)
+    def translate_pixel(self, x, y, z):
+        self.camera_position.translate_pixel(x, y, z)
+        self.update()
