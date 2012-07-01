@@ -26,7 +26,7 @@ class PyVolCanvas(QGLWidget):
         self.opengl_thread.start()
         # self.trackball.y_rotated.connect(self.renderer.rotate_y)
         self.trackball.rotation_incremented.connect(self.renderer.increment_rotation)
-        self.trackball.zoom_changed.connect(self.renderer.zoom)
+        self.trackball.zoom_incremented.connect(self.renderer.increment_zoom)
         
     def paintEvent(self, event):
         self.doneCurrent()

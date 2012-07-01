@@ -9,6 +9,10 @@ from PySide import QtCore
 from OpenGL.GL import glViewport
 
 class GlRenderer(QObject):
+    "GlRenderer make OpenGL calls in a separate thread on behalf of a QGLWidget"
+    
+    update_requested = QtCore.Signal()
+
     def __init__(self):
         QObject.__init__(self, None)
         self.gl_widget = None
@@ -30,7 +34,6 @@ class GlRenderer(QObject):
         if not self.b_is_initialized:
             self.init_gl()
             self.b_is_initialized = True
-        glViewport(0, 0, w, h)
         self.resize_gl(w, h)
         self.gl_widget.doneCurrent()
 
@@ -54,8 +57,6 @@ class GlRenderer(QObject):
     def update(self):
         self.update_requested.emit()
 
-    update_requested = QtCore.Signal()
-
     # Override this
     def paint_gl(self):
         pass
@@ -67,4 +68,3 @@ class GlRenderer(QObject):
     # Override this
     def init_gl(self):
         pass
-    
