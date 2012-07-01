@@ -5,12 +5,18 @@ Created on Jun 19, 2012
 '''
 
 from teapotactor import TeapotActor
+from camera import CameraPosition
+from rotation import Rotation
 import glrenderer
 from PySide import QtCore
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
 class PyVolRenderer(glrenderer.GlRenderer):
+    def __init__(self):
+        glrenderer.GlRenderer.__init__(self)
+        self.camera_position = CameraPosition()
+        
     def init_gl(self):
         # print "init_gl"
         glEnable(GL_DEPTH_TEST)
@@ -43,25 +49,26 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glPopAttrib() # restore GL_MATRIX_MODE
 
     def resize_gl(self, w, h):
-        # print "resize", w, h
+        print "resize", w, h
         self.orient_camera(w, h)
         
     def paint_gl(self):
         glDrawBuffer(GL_BACK)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        self.teapot.paint()
+        with self.camera_position:
+            self.teapot.paint()
 
     @QtCore.Slot(float)
     def zoom(self, ratio):
         self.teapot.zoom(ratio)
-        self.update_requested.emit()
+        self.update()
 
     @QtCore.Slot(float)
     def rotate_y(self, angle):
         self.teapot.rotate_y(angle)
-        self.update_requested.emit()
-        
-    @QtCore.Slot(float, float, float)
-    def rotate_xyz(self, rotx, roty, rotz):
-        self.teapot.rotate_xyz(rotx, roty, rotz)
-        self.update_requested.emit()
+        self.update()
+
+    @QtCore.Slot(Rotation)
+    def increment_rotation(self, r):
+        self.camera_position.increment_rotation(r)
+        self.update()

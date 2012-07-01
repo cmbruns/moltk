@@ -16,29 +16,25 @@ class Trackball(QObject):
         self.rotation = Rotation()
         self.old_pos = None
         
+    rotation_incremented = QtCore.Signal(rotation.Rotation)
+    zoom_changed = QtCore.Signal(float)
     y_rotated = QtCore.Signal(float)
-    xyz_rotated = QtCore.Signal(float, float, float)
-    zoomed = QtCore.Signal(float)
 
     def mouseMoveEvent(self, event, windowSize):
         if self.old_pos is not None:
             dx = event.pos() - self.old_pos
             x = dx.x()
             y = dx.y()
+            # Compute rotation
             w = (windowSize.width() + windowSize.height()) / 2.0
             # Dragging the whole window size would be 180 degrees
             angle = pi * sqrt(x*x + y*y) / w
-            axis = Vec3([y, x, 0]).unit() # orthogonal to drag direction
+            if 0.0 == angle:
+                return # no rotation
+            axis = Vec3([-y, x, 0]).unit() # orthogonal to drag direction
             # print axis, angle
             r = Rotation().set_from_angle_about_unit_vector(angle, axis)
-            rotx, roty, rotz = r.convert_three_axes_rotation_to_three_angles(
-                                        rotation.BodyRotationSequence,
-                                        rotation.XAxis, 
-                                        rotation.YAxis, 
-                                        rotation.ZAxis)
-            self.xyz_rotated.emit(rotx, roty, rotz)
-            # print rotx, roty, rotz
-            # print r
+            self.rotation_incremented.emit(r)
             # Just y rotation for testing
             if 0 != x:
                 rot_y = pi * x / w
@@ -54,4 +50,4 @@ class Trackball(QObject):
     def wheelEvent(self, event):
         degrees = event.delta() / 8.0
         zoom_ratio = 2.0 ** (-degrees / 200.0)
-        self.zoomed.emit(zoom_ratio)
+        self.zoom_changed.emit(zoom_ratio)
