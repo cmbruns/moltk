@@ -4,8 +4,9 @@ Created on Jun 20, 2012
 @author: brunsc
 '''
 
-from math import cos, sin, sqrt, atan2
+from math import cos, sin, sqrt, atan2, pi
 from sys import float_info
+from PySide.QtCore import QObject
 
 
 class UnitVec3:
@@ -52,6 +53,18 @@ class UnitVec3:
     
     def norm(self):
         return sqrt(self.normSqr())
+    
+    @property
+    def x(self):
+        return self[0]
+
+    @property
+    def y(self):
+        return self[1]
+
+    @property
+    def z(self):
+        return self[2]
 
 
 class Vec3(UnitVec3):
@@ -66,8 +79,10 @@ class Vec3(UnitVec3):
 
 
 class Quaternion:
-    def __init__(self, angle=0.0, unit_vector=None):
-        if unit_vector is None:
+    def __init__(self, angle=0.0, unit_vector=None, components=None):
+        if components is not None:
+            self._q = tuple(components[0:4])
+        elif unit_vector is None:
             self._q = (1.0, 0.0, 0.0, 0.0)
         else:
             ca2 = cos(angle/2.0)
@@ -85,6 +100,28 @@ class Quaternion:
 
     def __getitem__(self, key):
         return self._q[key]
+    
+    def to_angle_axis(self):
+        ca2  = self[0]            # cos(a/2)
+        sa2v = self[1:4]          # sin(a/2) * v
+        sa2  = Vec3(sa2v).norm()  # sa2 is always >= 0
+        # TODO: what is the right value to use here?? Norms can be
+        # much less than eps and still OK -- this is 1e-32 in double.
+        if sa2 < float_info.epsilon:
+            return [0.0, [1.0, 0.0, 0.0] ] # no rotation, x axis
+        # Use atan2.  Do NOT just use acos(q[0]) to calculate the rotation angle!!!
+        # Otherwise results are numerical garbage anywhere near zero (or less near).
+        angle = 2.0 * atan2(sa2, ca2)
+        # Since sa2>=0, atan2 returns a value between 0 and pi, which is then
+        # multiplied by 2 which means the angle is between 0 and 2pi.
+        # We want an angle in the range:  -pi < angle <= pi range.
+        # E.g., instead of rotating 359 degrees clockwise, rotate -1 degree counterclockwise.
+        if angle > pi:
+            angle -= 2.0 * pi
+        # Normalize the axis part of the return value
+        axis = [sa2v[i]/sa2 for i in range(3)]
+        # Return (angle/axis)
+        return [angle, axis]
     
 
 class CoordinateAxis:
@@ -129,18 +166,36 @@ ZAxis = CoordinateAxis._axes[2]
 BodyRotationSequence=0
 SpaceRotationSequence = 1
 
-
-class Rotation:
-    def __init__(self):
-        self._rows = ((1.0, 0.0, 0.0),
-                      (0.0, 1.0, 0.0),
-                      (0.0, 0.0, 1.0))
+# Derive from object because new-style class required for use as signal argument
+class Rotation(object):
+    def __init__(self, rows=None):
+        if rows is None:
+            self._rows = ((1.0, 0.0, 0.0),
+                          (0.0, 1.0, 0.0),
+                          (0.0, 0.0, 1.0))
+        else:
+            self._rows = (tuple(rows[0][0:3]),
+                          tuple(rows[1][0:3]),
+                          tuple(rows[2][0:3]))
 
     def __len__(self):
         return len(self._rows) # should be 3
     
     def __getitem__(self, key):
         return self._rows[key]
+    
+    def __mul__(self, rhs):
+        assert 3 == len(rhs)
+        if 3 == len(rhs[0]):
+            # rot*rot
+            result = [[0.0,0.0,0.0],[0.0,0.0,0.0],[0.0,0.0,0.0]]
+            for i in range(3):
+                for j in range(3):
+                    for k in range(3):
+                        result[i][j] += self[i][k] * rhs[k][j]
+            return Rotation(rows=result)
+        else:
+            assert(False) # TODO rot*vec multiplication        
 
     def __str__(self):
         return str(self._rows)
@@ -238,7 +293,7 @@ class Rotation:
         theta2 =  atan2( plusMinus*R[i][k], Rsum ) # Rsum = abs(cos(theta2)) is inherently positive
     
         # There is a "singularity" when cos(theta2) == 0
-        if Rsum > 4.0*float_info.epsilon:
+        if Rsum > 4.0 * float_info.epsilon:
             theta1 =  atan2( minusPlus*R[j][k], R[k][k] )
             theta3 =  atan2( minusPlus*R[i][j], R[i][i] )
         elif plusMinus*R[i][k] > 0.0:
@@ -258,6 +313,47 @@ class Rotation:
         # -pi/2 <=  theta2  <=  +pi/2   (Rsum is inherently positive)
         # -pi   <=  theta3  <=  +pi
         return [theta1, theta2, theta3]
+    
+    def to_angle_axis(self):
+        return self.to_quaternion().to_angle_axis()
+    
+    def trace(self):
+        R = self
+        return sum([R[i][i] for i in range(3)])
+        
+    def to_quaternion(self):
+        R = self
+        q = [0.0, 0.0, 0.0, 0.0]
+        # Check if the trace is larger than any diagonal
+        tr = R.trace()
+        if tr >= R[0][0] and tr >= R[1][1] and tr >= R[2][2]:
+            q[0] = 1 + tr
+            q[1] = R[2][1] - R[1][2]
+            q[2] = R[0][2] - R[2][0]
+            q[3] = R[1][0] - R[0][1]
+        # Check if R[0][0] is largest along the diagonal
+        elif R[0][0] >= R[1][1] and R[0][0] >= R[2][2]:
+            q[0] = R[2][1] - R[1][2]
+            q[1] = 1 - (tr - 2.0 * R[0][0])
+            q[2] = R[0][1] + R[1][0]
+            q[3] = R[0][2] + R[2][0]
+        # Check if R[1][1] is largest along the diagonal
+        elif R[1][1] >= R[2][2]:
+            q[0] = R[0][2] - R[2][0]
+            q[1] = R[0][1] + R[1][0]
+            q[2] = 1 - (tr - 2.0 * R[1][1])
+            q[3] = R[1][2] + R[2][1]
+        # R[2][2] is largest along the diagonal
+        else:
+            q[0] = R[1][0] - R[0][1]
+            q[1] = R[0][2] + R[2][0]
+            q[2] = R[1][2] + R[2][1]
+            q[3] = 1 - (tr - 2.0 * R[2][2])
+        scale = sqrt(sum([ q[i]*q[i] for i in range(4) ])) # norm
+        if q[0] < 0.0:
+            scale = -scale   # canonicalize
+        q = [q[i]/scale for i in range(4)]
+        return Quaternion(components=q)
 
 def test():
     assert 'b' is 'b'

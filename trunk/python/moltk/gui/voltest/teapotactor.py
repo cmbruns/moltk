@@ -1,4 +1,3 @@
-
 from PySide.QtCore import QObject
 from PySide import QtCore
 from OpenGL.GL import *

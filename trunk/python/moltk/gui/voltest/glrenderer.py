@@ -51,6 +51,9 @@ class GlRenderer(QObject):
         self.gl_widget.doneCurrent()
         self.paint_event_needs_flush = False
 
+    def update(self):
+        self.update_requested.emit()
+
     update_requested = QtCore.Signal()
 
     # Override this
