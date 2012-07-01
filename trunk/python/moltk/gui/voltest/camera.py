@@ -50,26 +50,18 @@ class CameraPosition(QtCore.QObject):
         glPushMatrix()
         glLoadIdentity()
         
+        c_f = Vec3([0, 0, -d]) # camera in focus frame
+        c_g = self.rotation * c_f # camera in ground_frame
+        # For unrestricted rotation, rotate "up" vector too
+        u_f = Vec3([0, 1, 0])
+        u_g = self.rotation * u_f
         # Camera distance and focus position
         # Notice that all zooming is accomplished with camera position,
         # i.e. no glScaled(...) here
-        gluLookAt(0, 0, -d, # camera
-                  0, 0, 0, # focus
-                  0, 1, 0) # up vector
-        
-        f = self.focus_in_ground
-        glTranslated(-f.x, -f.y, -f.z)
-        
-        # Rotation about focus
-        if 0.0 != self.rotAngle:
-            glRotated(self.rotAngle * 180.0 / pi,
-                      self.rotAxis[0],
-                      self.rotAxis[1],
-                      self.rotAxis[2])
-            
-        # f = ~self.rotation * self.focus_in_ground
-        # glTranslated(-f.x, -f.y, -f.z) 
-        
+        f_g = self.focus_in_ground
+        gluLookAt(c_g.x, c_g.y, c_g.z, # camera in ground
+                  f_g.x, f_g.y, f_g.z, # focus in ground
+                  u_g.x, u_g.y, u_g.z) # up vector
         return self
     
     def __exit__(self, type, value, tb):
@@ -83,7 +75,7 @@ class CameraPosition(QtCore.QObject):
     
     @QtCore.Slot(Rotation)
     def increment_rotation(self, r):
-        self.rotation = r * self.rotation
+        self.rotation = self.rotation * ~r
 
     @QtCore.Slot(float)
     def increment_zoom(self, ratio):
@@ -97,7 +89,7 @@ class CameraPosition(QtCore.QObject):
         glunits_per_pixel = (self.distance_to_focus_in_ground / 
                              self.distance_to_screen_in_pixels)
         dx = Vec3([x, y, z]) * glunits_per_pixel
-        self.focus_in_ground += dx
+        self.focus_in_ground += self.rotation * dx
 
     @QtCore.Slot(int, int)
     def set_window_size_in_pixels(self, w, h):
