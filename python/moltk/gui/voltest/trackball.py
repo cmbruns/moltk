@@ -8,23 +8,40 @@ from rotation import Rotation, Vec3
 import rotation
 from PySide import QtCore
 from PySide.QtCore import QObject
+from PySide.QtCore import Qt
 from math import sqrt, pi
 
 class Trackball(QObject):
-    def __init__(self, parent=None):
-        QObject.__init__(self, parent)
-        self.rotation = Rotation()
-        self.old_pos = None
-        
+    "Trackball converts mouse events into rotation/translation/scale signals"
+
     rotation_incremented = QtCore.Signal(Rotation)
     zoom_incremented = QtCore.Signal(float)
+    pixel_translated = QtCore.Signal(int, int, int)
+
+    def __init__(self, parent=None):
+        QObject.__init__(self, parent)
+        self.old_pos = None
 
     def mouseMoveEvent(self, event, windowSize):
-        if self.old_pos is not None:
-            dx = event.pos() - self.old_pos
-            x = dx.x()
-            y = dx.y()
-            # Compute rotation
+        if self.old_pos is None:
+            # Without a previous position, we cannot compute the change
+            self.old_pos = event.pos()
+            return
+        dx = event.pos() - self.old_pos
+        x = dx.x()
+        y = dx.y()
+        self.old_pos = event.pos()
+        # Press shift to translate rather than rotate
+        doTranslate = False
+        if event.modifiers() & Qt.ShiftModifier: # shift-drag to translate
+            doTranslate = True
+        if event.buttons() & Qt.MidButton: # middle-drag to translate
+            doTranslate = True
+        if doTranslate:
+            # Translate view
+            self.pixel_translated.emit(x, y, 0)
+        else:
+            # Rotate like a trackball
             w = (windowSize.width() + windowSize.height()) / 2.0
             # Dragging the whole window size would be 180 degrees
             angle = pi * sqrt(x*x + y*y) / w
@@ -34,7 +51,12 @@ class Trackball(QObject):
             # print axis, angle
             r = Rotation().set_from_angle_about_unit_vector(angle, axis)
             self.rotation_incremented.emit(r)
-        self.old_pos = event.pos()
+        
+    def mouseDoubleClickEvent(self, event, windowSize):
+        "center view when double click occurs"
+        dx = event.pos().x() - windowSize.width() / 2.0
+        dy = event.pos().y() - windowSize.height() / 2.0
+        self.pixel_translated.emit(-dx, -dy, 0)
         
     def mousePressEvent(self, event):
         self.old_pos = None

@@ -9,7 +9,7 @@ from sys import float_info
 from PySide.QtCore import QObject
 
 
-class UnitVec3:
+class UnitVec3(object):
     def __init__(self, val=[1.0, 0.0, 0.0]):
         v = Vec3(val)
         n2 = v.normSqr()
@@ -41,6 +41,12 @@ class UnitVec3:
     
     def __div__(self, rhs):
         return Vec3([self[x]/rhs for x in range(3)])
+    
+    def __add__(self, rhs):
+        return Vec3([self[x] + rhs[x] for x in range(3)])
+    
+    def __sub__(self, rhs):
+        return Vec3([self[x] - rhs[x] for x in range(3)])
     
     def unit(self):
         return self
@@ -184,18 +190,30 @@ class Rotation(object):
     def __getitem__(self, key):
         return self._rows[key]
     
+    def __invert__(self):
+        "The inverse of a Rotation is its transpose"
+        R = self
+        return Rotation(((R[0][0], R[1][0], R[2][0]),
+                        (R[0][1], R[1][1], R[2][1]),
+                        (R[0][2], R[1][2], R[2][2])))
+        
     def __mul__(self, rhs):
         assert 3 == len(rhs)
-        if 3 == len(rhs[0]):
-            # rot*rot
+        try:
+            len(rhs[0]) # TypeError if vector
+            # rotation * rotation
             result = [[0.0,0.0,0.0],[0.0,0.0,0.0],[0.0,0.0,0.0]]
             for i in range(3):
                 for j in range(3):
                     for k in range(3):
                         result[i][j] += self[i][k] * rhs[k][j]
             return Rotation(rows=result)
-        else:
-            assert(False) # TODO rot*vec multiplication        
+        except TypeError:
+            result = [0.0, 0.0, 0.0]
+            for i in range(3):
+                for j in range(3):
+                    result[i] += self[i][j] * rhs[j]
+            return Vec3(result)
 
     def __str__(self):
         return str(self._rows)
