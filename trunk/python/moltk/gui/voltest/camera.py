@@ -1,5 +1,6 @@
 from rotation import *
 from PySide import QtCore
+from PySide.QtGui import QApplication
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from math import pi, atan2
@@ -11,8 +12,9 @@ class CameraPosition(QtCore.QObject):
         self.focus_in_ground = Vec3([0,0,0])
         # Human/real-space/user measures:
         self.window_size_in_pixels = [640.0, 480.0] # will be overwritten on first resize event
-        # TODO - initialize sceen size to correct value
-        self.screen_size_in_pixels = [1920.0, 1080.0]
+        # initialize sceen size to correct value
+        dt = QApplication.desktop()
+        self.screen_size_in_pixels = [dt.width(), dt.height()]
         # distance measured for my home desktop monitor
         # 2.5 should not change dynamically, unless we do head tracking
         self.distance_to_screen_in_pixels = 2.5 * self.screen_size_in_pixels[1]
