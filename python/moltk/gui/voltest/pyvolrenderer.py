@@ -32,6 +32,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, [1.0, 1.0, 1.0, 0.0])
         glEnable(GL_LIGHTING)
         glEnable(GL_LIGHT0)
+        glEnable(GL_CULL_FACE)
 
     def resize_gl(self, w, h):
         self.camera_position.set_window_size_in_pixels(w, h)
