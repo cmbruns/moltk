@@ -13,14 +13,13 @@ class CameraPosition(QtCore.QObject):
         # Human/real-space/user measures:
         self.window_size_in_pixels = [640.0, 480.0] # will be overwritten on first resize event
         # initialize sceen size to correct value
-        dt = QApplication.desktop()
-        self.screen_size_in_pixels = [dt.width(), dt.height()]
-        # distance measured for my home desktop monitor
         # 2.5 should not change dynamically, unless we do head tracking
-        self.distance_to_screen_in_pixels = 2.5 * self.screen_size_in_pixels[1]
+        self.distance_to_screen_in_screen_heights = 2.5
+        dt = QApplication.desktop()
+        self.set_screen_size_in_pixels(dt.width(), dt.height())
         # Object/ground/gl-units measures:
         self.distance_to_focus_in_ground = 10.0 # changes with zoom level
-        
+
     @property
     def rotation(self):
         return self._R_gf
@@ -96,5 +95,14 @@ class CameraPosition(QtCore.QObject):
     @QtCore.Slot(int, int)
     def set_window_size_in_pixels(self, w, h):
         # keep roughly the same view as before by zooming
-        self.increment_zoom(h / self.window_size_in_pixels[1])
+        old_h = self.window_size_in_pixels[1]
+        if old_h is not None:
+            self.increment_zoom(h / old_h)
         self.window_size_in_pixels = [1.0*w, 1.0*h]
+        
+    @QtCore.Slot(int, int)
+    def set_screen_size_in_pixels(self, w, h):
+        if 0 == h:
+            return
+        self.screen_size_in_pixels = [1.0*w, 1.0*h]
+        self.distance_to_screen_in_pixels = self.distance_to_screen_in_screen_heights * self.screen_size_in_pixels[1]

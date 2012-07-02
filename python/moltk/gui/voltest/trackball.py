@@ -57,7 +57,7 @@ class Trackball(QObject):
         dx = event.pos().x() - windowSize.width() / 2.0
         dy = event.pos().y() - windowSize.height() / 2.0
         self.pixel_translated.emit(-dx, -dy, 0)
-        
+
     def mousePressEvent(self, event):
         self.old_pos = None
         
