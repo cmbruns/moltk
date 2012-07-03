@@ -4,6 +4,7 @@ Created on Jun 19, 2012
 @author: brunsc
 '''
 
+from glut_sphere_actor import GlutSphereActor
 from teapotactor import TeapotActor
 from camera import CameraPosition
 from rotation import Rotation
@@ -17,6 +18,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glrenderer.GlRenderer.__init__(self)
         self.camera_position = CameraPosition()
         self.teapot = TeapotActor()
+        self.glut_sphere = GlutSphereActor()
         
     def init_gl(self):
         # print "init_gl"
@@ -42,7 +44,21 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glDrawBuffer(GL_BACK)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         with self.camera_position:
-            self.teapot.paint()
+            # self.teapot.paint()
+            glColor3f(0.2, 0.2, 0.5) # paint it blue
+            glPushMatrix()
+            glTranslate(4.0, 0, 0)
+            for p in range(5):
+                # Leave a spot for shader sphere
+                if 3 != p:
+                    self.glut_sphere.paint()
+                glTranslate(-2.0, 0, 0)
+            glPopMatrix()
+            # TODO put shader sphere here
+            glColor3f(0.4, 0.4, 0.2)
+            glTranslate(-2.0, 0, 0)
+            self.glut_sphere.paint()
+            # glutSolidSphere(1.2, 20, 20)
 
     @QtCore.Slot(float)
     def increment_zoom(self, ratio):

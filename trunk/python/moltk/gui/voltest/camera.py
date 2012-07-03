@@ -14,11 +14,11 @@ class CameraPosition(QtCore.QObject):
         self.window_size_in_pixels = [640.0, 480.0] # will be overwritten on first resize event
         # initialize sceen size to correct value
         # 2.5 should not change dynamically, unless we do head tracking
-        self.distance_to_screen_in_screen_heights = 2.5
+        self.distance_to_screen_in_screen_heights = 1.8
         dt = QApplication.desktop()
         self.set_screen_size_in_pixels(dt.width(), dt.height())
         # Object/ground/gl-units measures:
-        self.distance_to_focus_in_ground = 10.0 # changes with zoom level
+        self.distance_to_focus_in_ground = 25.0 # changes with zoom level
 
     @property
     def rotation(self):
@@ -63,6 +63,7 @@ class CameraPosition(QtCore.QObject):
         gluLookAt(c_g.x, c_g.y, c_g.z, # camera in ground
                   f_g.x, f_g.y, f_g.z, # focus in ground
                   u_g.x, u_g.y, u_g.z) # up vector
+        glMatrixMode(GL_MODELVIEW)
         return self
     
     def __exit__(self, type, value, tb):
