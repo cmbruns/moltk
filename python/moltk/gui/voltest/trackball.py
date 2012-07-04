@@ -39,7 +39,7 @@ class Trackball(QObject):
             doTranslate = True
         if doTranslate:
             # Translate view
-            self.pixel_translated.emit(x, y, 0)
+            self.pixel_translated.emit(-x, y, 0)
         else:
             # Rotate like a trackball
             w = (windowSize.width() + windowSize.height()) / 2.0
@@ -47,7 +47,7 @@ class Trackball(QObject):
             angle = pi * sqrt(x*x + y*y) / w
             if 0.0 == angle:
                 return # no rotation
-            axis = Vec3([-y, x, 0]).unit() # orthogonal to drag direction
+            axis = Vec3([y, x, 0]).unit() # orthogonal to drag direction
             # print axis, angle
             r = Rotation().set_from_angle_about_unit_vector(angle, axis)
             self.rotation_incremented.emit(r)
@@ -56,7 +56,7 @@ class Trackball(QObject):
         "center view when double click occurs"
         dx = event.pos().x() - windowSize.width() / 2.0
         dy = event.pos().y() - windowSize.height() / 2.0
-        self.pixel_translated.emit(-dx, -dy, 0)
+        self.pixel_translated.emit(dx, -dy, 0)
 
     def mousePressEvent(self, event):
         self.old_pos = None
