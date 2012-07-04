@@ -12,7 +12,7 @@ class Actor(object):
 
 class GlutSphereActor(Actor):
     def paint_gl(self):
-        glutSolidSphere(1.0, 20, 20)
+        glutSolidSphere(1.0, 200, 200)
 
 
 class TeapotActor(Actor):
@@ -92,36 +92,72 @@ class SphereImposterShaderProgram(ShaderProgram):
     def __init__(self):
         ShaderProgram.__init__(self)
         self.vertex_shader = """
+// TODO should be uniform
+varying mat4 cameraToClipMatrix;
+
 varying vec2 position_in_quad;
 varying vec4 position_in_eye;
+varying float front_z;
+varying float back_z;
 void main()
 {
+    float radius = 1.0;
+    
     // We store a quad as 4 points with the same vertex, but different normals.
     // Reconstruct the quad by adding the normal to the vertex.
     vec4 corner_offset = vec4(gl_Normal, 0);
     position_in_quad = gl_Normal.xy; // to help fragment shader compute edge
     // Keep the quad oriented toward the screen by not rotating corner_offset.
     position_in_eye = gl_ModelViewMatrix * gl_Vertex + corner_offset;
+    cameraToClipMatrix = gl_ProjectionMatrix;
+    vec4 front_v = (cameraToClipMatrix * (position_in_eye + vec4(0, 0, radius, 0)));
+    vec4 back_v = (cameraToClipMatrix * (position_in_eye + vec4(0, 0, -radius, 0)));
+    front_z = ((front_v.z / front_v.w) + 1.0) * 0.5;
+    back_z = ((back_v.z / back_v.w) + 1.0) * 0.5;
     
     gl_Position = gl_ProjectionMatrix * position_in_eye; // in screen
 }
 """
         self.fragment_shader = """
+// TODO should be uniform
+varying mat4 cameraToClipMatrix;
+
 varying vec2 position_in_quad;
 varying vec4 position_in_eye;
+varying float front_z;
+varying float back_z;
 void main()
 {
+    // check depth clip
+    if (front_z < 0.0)
+       discard;
+    if (back_z > 1.0)
+        discard;
+    
     // check radius for sphere edge
-    float len2 = length(position_in_quad);
+    float len2 = dot(position_in_quad, position_in_quad);
     if (len2 >= 1.0)
         discard; // I fell off the edge!
 
     // compute normal
     float z = sqrt(1.0 - len2); // out-of-screen component of normal
     // TODO - this normal assume orthographic, we want perspective
-    vec3 normal_in_eye = vec3(position_in_quad, z);
     vec4 position_in_eye2 = position_in_eye;
     position_in_eye2.z += z; // emboss from quad
+    vec3 normal_in_eye = vec3(position_in_quad, z);
+    
+    // Correct depth for Z buffer
+    vec4 depth_vec = cameraToClipMatrix * position_in_eye2;
+    float depth = ((depth_vec.z / depth_vec.w) + 1.0) * 0.5;
+    if (depth <= 0.0) { // front clip
+        // clip to reveal a solid core
+        // tiny offset so neighboring clipped spheres overlap correctly
+        gl_FragDepth = 0.0 + 1e-6 * len2;
+        normal_in_eye = vec3(0, 0, 1); // slice it flat
+    }
+    else {
+        gl_FragDepth = depth;
+    }
     
     // DIFFUSE
     // from http://www.davidcornette.com/glsl/glsl.html
@@ -140,15 +176,15 @@ void main()
     if (gl_FrontMaterial.shininess != 0.0)
         specular = gl_LightSource[0].specular * 
             gl_FrontMaterial.specular * 
-            pow(max(0.0, dot(r, v)), gl_FrontMaterial.shininess);
+            // TODO - Seems I have to divide by 5 to get the same effect as fixed pipeline
+            pow(max(0.0, dot(r, v)), 0.20 * gl_FrontMaterial.shininess);
     
     // AMBIENT
     vec4 ambient =  gl_LightSource[0].ambient * gl_FrontMaterial.ambient;
 
     vec4 sceneColor = gl_FrontLightModelProduct.sceneColor;
     
-    // TODO - is ambient off?
-    gl_FragColor = sceneColor + ambient + diffuse + specular;
+    gl_FragColor = sceneColor + ambient + diffuse + specular;    
 }
 """
 
@@ -191,17 +227,17 @@ class FiveBallScene(Actor):
     def paint_gl(self):
             glColor3f(0.2, 0.2, 0.5) # paint spheres blue
             glPushMatrix()
-            glTranslate(-4.0, 0, 0)
+            glTranslate(-3.0, 0, 0)
             for p in range(5):
                 # Leave a spot for shader sphere
                 if 3 != p:
                     self.glut_sphere.paint_gl()
-                glTranslate(2.0, 0, 0)
+                glTranslate(1.5, 0, 0)
             glPopMatrix()
             # TODO put shader sphere here
             # glColor3f(0.8, 0.8, 0.2) # yellow
             glPushMatrix()
-            glTranslate(2.0, 0, 0)
+            glTranslate(1.5, 0, 0)
             self.sphere_imposter.paint_gl()
             glPopMatrix()
 
