@@ -1,5 +1,3 @@
-import OpenGL
-OpenGL.FORWARD_COMPATIBLE_ONLY = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
@@ -94,17 +92,22 @@ class SphereImposterShaderProgram(ShaderProgram):
     def __init__(self):
         ShaderProgram.__init__(self)
         self.vertex_shader = """
+varying vec2 face_position;
 void main()
 {
-    // expand corners of the quad using direction stored in the normal
-    // TODO - we want a billboard effect
+    // We encode the quad corner offsets from the center in the vertex normal
+    // Keep the quad oriented toward the screen
     vec4 corner_offset = gl_ProjectionMatrix * vec4(gl_Normal, 0);
+    face_position = gl_Normal.xy;
     gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex + corner_offset;
 }
 """
         self.fragment_shader = """
+varying vec2 face_position;
 void main()
 {
+    if (length(face_position) > 1.0)
+        discard;
     gl_FragColor = vec4(0.8, 0, 0, 1);
 }
 """
