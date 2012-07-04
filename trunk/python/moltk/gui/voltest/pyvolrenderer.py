@@ -25,7 +25,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glEnable(GL_COLOR_MATERIAL)
         glMaterialfv(GL_FRONT, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
         glMaterialfv(GL_FRONT, GL_SHININESS, [50.0])
-        glLightfv(GL_LIGHT0, GL_POSITION, [-1.0, 1.0, 1.0, 0.0])
+        glLightfv(GL_LIGHT0, GL_POSITION, [-100.0, 100.0, 100.0, 0.0])
         glLightfv(GL_LIGHT0, GL_DIFFUSE, [1.0, 1.0, 1.0, 1.0])
         glLightfv(GL_LIGHT0, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, [1.0, 1.0, 1.0, 0.0])
