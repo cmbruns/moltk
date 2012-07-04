@@ -92,23 +92,63 @@ class SphereImposterShaderProgram(ShaderProgram):
     def __init__(self):
         ShaderProgram.__init__(self)
         self.vertex_shader = """
-varying vec2 face_position;
+varying vec2 position_in_quad;
+varying vec4 position_in_eye;
 void main()
 {
-    // We encode the quad corner offsets from the center in the vertex normal
-    // Keep the quad oriented toward the screen
-    vec4 corner_offset = gl_ProjectionMatrix * vec4(gl_Normal, 0);
-    face_position = gl_Normal.xy;
-    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex + corner_offset;
+    // We store a quad as 4 points with the same vertex, but different normals.
+    // Reconstruct the quad by adding the normal to the vertex.
+    vec4 corner_offset = vec4(gl_Normal, 0);
+    position_in_quad = gl_Normal.xy; // to help fragment shader compute edge
+    // Keep the quad oriented toward the screen by not rotating corner_offset.
+    position_in_eye = gl_ModelViewMatrix * gl_Vertex + corner_offset;
+    
+    gl_Position = gl_ProjectionMatrix * position_in_eye; // in screen
 }
 """
         self.fragment_shader = """
-varying vec2 face_position;
+varying vec2 position_in_quad;
+varying vec4 position_in_eye;
 void main()
 {
-    if (length(face_position) > 1.0)
-        discard;
-    gl_FragColor = vec4(0.8, 0, 0, 1);
+    // check radius for sphere edge
+    float len2 = length(position_in_quad);
+    if (len2 >= 1.0)
+        discard; // I fell off the edge!
+
+    // compute normal
+    float z = sqrt(1.0 - len2); // out-of-screen component of normal
+    // TODO - this normal assume orthographic, we want perspective
+    vec3 normal_in_eye = vec3(position_in_quad, z);
+    vec4 position_in_eye2 = position_in_eye;
+    position_in_eye2.z += z; // emboss from quad
+    
+    // DIFFUSE
+    // from http://www.davidcornette.com/glsl/glsl.html
+    
+    vec4 s = -normalize(position_in_eye2 - gl_LightSource[0].position);
+    vec3 lightvec_in_eye = s.xyz;
+    
+    vec3 n = normalize(normal_in_eye);
+    vec3 r = normalize(-reflect(lightvec_in_eye, n));
+    vec3 v = normalize(-position_in_eye2.xyz);
+    vec4 diffuse = gl_FrontMaterial.diffuse * max(0.0, dot(n, s.xyz)) * gl_LightSource[0].diffuse;
+    
+    // Use Lambertian shading model
+    vec4 specular = vec4(0,0,0,0);
+    // SPECULAR
+    if (gl_FrontMaterial.shininess != 0.0)
+        specular = gl_LightSource[0].specular * 
+            gl_FrontMaterial.specular * 
+            pow(max(0.0, dot(r, v)), gl_FrontMaterial.shininess);
+    
+    // AMBIENT
+    vec4 ambient =  gl_LightSource[0].ambient * gl_FrontMaterial.ambient;
+
+    vec4 sceneColor = gl_FrontLightModelProduct.sceneColor;
+    
+    // TODO - is ambient off?
+    gl_FragColor = sceneColor + ambient + diffuse + specular;
 }
 """
 
@@ -159,7 +199,7 @@ class FiveBallScene(Actor):
                 glTranslate(2.0, 0, 0)
             glPopMatrix()
             # TODO put shader sphere here
-            glColor3f(0.8, 0.8, 0.2) # yellow
+            # glColor3f(0.8, 0.8, 0.2) # yellow
             glPushMatrix()
             glTranslate(2.0, 0, 0)
             self.sphere_imposter.paint_gl()
