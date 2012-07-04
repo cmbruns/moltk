@@ -24,12 +24,14 @@ class PyVolCanvas(QGLWidget):
     def set_gl_renderer(self, renderer):
         self.renderer = renderer
         self.renderer.set_gl_widget(self)
-        self.renderer.moveToThread(self.opengl_thread)
-        self.opengl_thread.start()
+        bUseSeparateOpenGLThread = False
+        if bUseSeparateOpenGLThread:
+            self.renderer.moveToThread(self.opengl_thread)
+            self.opengl_thread.start()
         self.trackball.rotation_incremented.connect(self.renderer.increment_rotation)
         self.trackball.zoom_incremented.connect(self.renderer.increment_zoom)
         self.trackball.pixel_translated.connect(self.renderer.translate_pixel)
-        
+
     def paintEvent(self, event):
         self.doneCurrent()
         self.paint_requested.emit()

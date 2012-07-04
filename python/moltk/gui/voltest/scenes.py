@@ -1,3 +1,5 @@
+import OpenGL
+OpenGL.FORWARD_COMPATIBLE_ONLY = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
@@ -25,23 +27,29 @@ class TeapotActor(Actor):
 
 
 class ShaderProgram:
+    "Base class for shader programs."
     def __init__(self):
+        self.previous_program = 0
+        self.shader_program = 0
         self.vertex_shader = """
 void main()
 {
-    // gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-    gl_Position = ftransform();
-}        
+    // pass through shader
+    gl_FrontColor = gl_Color;
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+}       
 """
         self.fragment_shader = """
 void main()
 {
-    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+    // pass through shader
+    gl_FragColor = gl_Color;
 }
 """
 
     def init_gl(self):  
-        print "creating shaders"
+        # print "creating shaders"
         self.vs = glCreateShader(GL_VERTEX_SHADER)
         self.fs = glCreateShader(GL_FRAGMENT_SHADER)
         glShaderSource(self.vs, self.vertex_shader)
@@ -59,52 +67,72 @@ void main()
         glAttachShader(self.shader_program, self.fs)
         glLinkProgram(self.shader_program)
 
-    def use(self):
-        glUseProgram(self.shader_program)
-        
-    def end(self):
-        glUseProgram(0)
-
     def __enter__(self):
-        self.use()
+        self.previous_program = glGetIntegerv(GL_CURRENT_PROGRAM)
+        try:
+            glUseProgram(self.shader_program)   
+        except OpenGL.error.GLError:
+            print glGetProgramInfoLog(self.shader_program)
+            raise
         
     def __exit__(self, type, value, tb):
-        self.end()
+        glUseProgram(self.previous_program)
 
 
 class GreenShaderProgram(ShaderProgram):
     def __init__(self):
         ShaderProgram.__init__(self)
+        self.fragment_shader = """
+void main()
+{
+    gl_FragColor = vec4(0, 0.8, 0, 1);
+}
+"""
+
+
+class SphereImposterShaderProgram(ShaderProgram):
+    def __init__(self):
+        ShaderProgram.__init__(self)
         self.vertex_shader = """
 void main()
 {
-    gl_Position = ftransform();
-}        
+    // expand corners of the quad using direction stored in the normal
+    // TODO - we want a billboard effect
+    vec4 corner_offset = gl_ProjectionMatrix * vec4(gl_Normal, 0);
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex + corner_offset;
+}
 """
         self.fragment_shader = """
 void main()
 {
-    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    gl_FragColor = vec4(0.8, 0, 0, 1);
 }
 """
 
 
 class SphereImposter(Actor):
+    "SphereImposter is still just a stub.  Eventually it will draw as sphere using shaders"
     def __init__(self):
         Actor.__init__(self)
-        self.shader_program = GreenShaderProgram()
+        # self.shader_program = GreenShaderProgram()
+        # self.shader_program = ShaderProgram()
+        self.shader_program = SphereImposterShaderProgram()
 
     def init_gl(self):
         self.shader_program.init_gl()
         pass
-        
+
     def paint_gl(self):
         with self.shader_program:
             glBegin(GL_TRIANGLE_STRIP)
-            glVertex3f(-1, -1, 0)
-            glVertex3f( 1, -1, 0)
-            glVertex3f(-1,  1, 0)
-            # glVertex3f( 1,  1, 0)
+            glNormal3f(-1, -1, 0)
+            glVertex3f(0,0,0)
+            glNormal3f( 1, -1, 0)
+            glVertex3f(0,0,0)
+            glNormal3f(-1,  1, 0)
+            glVertex3f(0,0,0)
+            glNormal3f( 1,  1, 0)
+            glVertex3f(0,0,0)
             glEnd()
 
 

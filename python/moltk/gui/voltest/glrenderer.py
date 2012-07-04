@@ -44,7 +44,8 @@ class GlRenderer(QObject):
         if self.paint_event_needs_flush:
             return
         self.paint_event_needs_flush = True
-        QtCore.QCoreApplication.processEvents() # flush out pending paint events
+        # Only processEvents() if we use a separate OpenGL thread
+        # QtCore.QCoreApplication.processEvents() # flush out pending paint events
         self.gl_widget.makeCurrent()
         if not self.b_is_initialized:
             self.init_gl()
