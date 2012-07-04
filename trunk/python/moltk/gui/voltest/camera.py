@@ -51,7 +51,7 @@ class CameraPosition(QtCore.QObject):
         glPushMatrix()
         glLoadIdentity()
         
-        c_f = Vec3([0, 0, -d]) # camera in focus frame
+        c_f = Vec3([0, 0, d]) # camera in focus frame
         c_g = self.rotation * c_f # camera in ground_frame
         # For unrestricted rotation, rotate "up" vector too
         u_f = Vec3([0, 1, 0])

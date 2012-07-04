@@ -4,8 +4,6 @@ Created on Jun 19, 2012
 @author: brunsc
 '''
 
-from glut_sphere_actor import GlutSphereActor
-from teapotactor import TeapotActor
 from camera import CameraPosition
 from rotation import Rotation
 import glrenderer
@@ -17,8 +15,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
     def __init__(self):
         glrenderer.GlRenderer.__init__(self)
         self.camera_position = CameraPosition()
-        self.teapot = TeapotActor()
-        self.glut_sphere = GlutSphereActor()
+        self.actors = []
         
     def init_gl(self):
         # print "init_gl"
@@ -28,13 +25,15 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glEnable(GL_COLOR_MATERIAL)
         glMaterialfv(GL_FRONT, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
         glMaterialfv(GL_FRONT, GL_SHININESS, [50.0])
-        glLightfv(GL_LIGHT0, GL_POSITION, [1.0, 1.0, 1.0, 0.0])
+        glLightfv(GL_LIGHT0, GL_POSITION, [-1.0, 1.0, 1.0, 0.0])
         glLightfv(GL_LIGHT0, GL_DIFFUSE, [1.0, 1.0, 1.0, 1.0])
         glLightfv(GL_LIGHT0, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, [1.0, 1.0, 1.0, 0.0])
         glEnable(GL_LIGHTING)
         glEnable(GL_LIGHT0)
         # glEnable(GL_CULL_FACE)
+        for actor in self.actors:
+            actor.init_gl()
 
     def resize_gl(self, w, h):
         self.camera_position.set_window_size_in_pixels(w, h)
@@ -44,21 +43,8 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glDrawBuffer(GL_BACK)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         with self.camera_position:
-            # self.teapot.paint()
-            glColor3f(0.2, 0.2, 0.5) # paint it blue
-            glPushMatrix()
-            glTranslate(4.0, 0, 0)
-            for p in range(5):
-                # Leave a spot for shader sphere
-                if 3 != p:
-                    self.glut_sphere.paint()
-                glTranslate(-2.0, 0, 0)
-            glPopMatrix()
-            # TODO put shader sphere here
-            glColor3f(0.4, 0.4, 0.2)
-            glTranslate(-2.0, 0, 0)
-            self.glut_sphere.paint()
-            # glutSolidSphere(1.2, 20, 20)
+            for actor in self.actors:
+                actor.paint_gl()
 
     @QtCore.Slot(float)
     def increment_zoom(self, ratio):
