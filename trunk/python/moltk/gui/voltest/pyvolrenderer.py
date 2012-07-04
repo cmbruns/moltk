@@ -31,7 +31,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, [1.0, 1.0, 1.0, 0.0])
         glEnable(GL_LIGHTING)
         glEnable(GL_LIGHT0)
-        # glEnable(GL_CULL_FACE)
+        glEnable(GL_CULL_FACE)
         for actor in self.actors:
             actor.init_gl()
 
