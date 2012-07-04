@@ -14,6 +14,8 @@ class PyVolCanvas(QGLWidget):
     
     def __init__(self, parent=None):
         QGLWidget.__init__(self, parent)
+        self.setAutoBufferSwap(False)
+        self.resize(640, 480)
         self.opengl_thread = QThread()
         QCoreApplication.instance().aboutToQuit.connect(self.clean_up_before_quit)
         self.trackball = Trackball()
@@ -24,7 +26,6 @@ class PyVolCanvas(QGLWidget):
         self.renderer.set_gl_widget(self)
         self.renderer.moveToThread(self.opengl_thread)
         self.opengl_thread.start()
-        # self.trackball.y_rotated.connect(self.renderer.rotate_y)
         self.trackball.rotation_incremented.connect(self.renderer.increment_rotation)
         self.trackball.zoom_incremented.connect(self.renderer.increment_zoom)
         self.trackball.pixel_translated.connect(self.renderer.translate_pixel)
