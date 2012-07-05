@@ -12,7 +12,7 @@ class Actor(object):
 
 class GlutSphereActor(Actor):
     def paint_gl(self):
-        glutSolidSphere(1.0, 200, 200)
+        glutSolidSphere(1.0, 20, 20)
 
 
 class TeapotActor(Actor):
@@ -97,24 +97,22 @@ varying mat4 cameraToClipMatrix;
 
 varying vec2 position_in_quad;
 varying vec4 position_in_eye;
-varying float front_z;
-varying float back_z;
+varying vec4 sphere_center_in_eye;
+varying float tangent_distance_squared; // precompute for use in ray casting
 void main()
 {
-    float radius = 1.0;
-    
     // We store a quad as 4 points with the same vertex, but different normals.
     // Reconstruct the quad by adding the normal to the vertex.
-    vec4 corner_offset = vec4(gl_Normal, 0);
     position_in_quad = gl_Normal.xy; // to help fragment shader compute edge
+    float radius = gl_Normal.z;
+    vec4 corner_offset = vec4(radius * position_in_quad, 0, 0);
     // Keep the quad oriented toward the screen by not rotating corner_offset.
-    position_in_eye = gl_ModelViewMatrix * gl_Vertex + corner_offset;
+    sphere_center_in_eye = gl_ModelViewMatrix * gl_Vertex;
+    position_in_eye = sphere_center_in_eye + corner_offset;
     cameraToClipMatrix = gl_ProjectionMatrix;
-    vec4 front_v = (cameraToClipMatrix * (position_in_eye + vec4(0, 0, radius, 0)));
-    vec4 back_v = (cameraToClipMatrix * (position_in_eye + vec4(0, 0, -radius, 0)));
-    front_z = ((front_v.z / front_v.w) + 1.0) * 0.5;
-    back_z = ((back_v.z / back_v.w) + 1.0) * 0.5;
-    
+    float d2 = dot(sphere_center_in_eye.xyz, sphere_center_in_eye.xyz);
+    tangent_distance_squared = d2 - radius*radius;
+
     gl_Position = gl_ProjectionMatrix * position_in_eye; // in screen
 }
 """
@@ -124,36 +122,43 @@ varying mat4 cameraToClipMatrix;
 
 varying vec2 position_in_quad;
 varying vec4 position_in_eye;
-varying float front_z;
-varying float back_z;
+varying vec4 sphere_center_in_eye;
+varying float tangent_distance_squared; // precompute for use in ray casting
 void main()
 {
-    // check depth clip
-    if (front_z < 0.0)
-       discard;
-    if (back_z > 1.0)
-        discard;
+    // Ray casting for actual surface point
+    // Use quadratic equation - factor of 2 is elided
+    float a = dot(position_in_eye.xyz, position_in_eye.xyz);
+    float b = dot(position_in_eye.xyz, sphere_center_in_eye.xyz);
+    float c = tangent_distance_squared;
+    float det = b*b - a*c;
+    if (det <= 0.0)
+        discard;  // No tangent? past sphere edge
+    float alpha1 = (b - sqrt(det))/a;
+    float alpha2 = (b + sqrt(det))/a;
+    vec4 surface_in_eye = vec4(alpha1 * position_in_eye.xyz, 1);
     
-    // check radius for sphere edge
-    float len2 = dot(position_in_quad, position_in_quad);
-    if (len2 >= 1.0)
-        discard; // I fell off the edge!
-
-    // compute normal
-    float z = sqrt(1.0 - len2); // out-of-screen component of normal
-    // TODO - this normal assume orthographic, we want perspective
-    vec4 position_in_eye2 = position_in_eye;
-    position_in_eye2.z += z; // emboss from quad
-    vec3 normal_in_eye = vec3(position_in_quad, z);
+    // cull depth
+    vec4 depth_vec = cameraToClipMatrix * surface_in_eye;
+    float depth = ((depth_vec.z / depth_vec.w) + 1.0) * 0.5;
+    if (depth >= 1.0)
+        discard; // front of sphere is behind back clip plane
+    
+    vec4 back_surface_in_eye = vec4(alpha2 * position_in_eye.xyz, 1);
+    depth_vec = cameraToClipMatrix * back_surface_in_eye;
+    float depth2 = ((depth_vec.z / depth_vec.w) + 1.0) * 0.5;
+    if (depth2 <= 0.0)
+        discard; // back of sphere is in front of front clip plane
+    
+    vec3 normal_in_eye = normalize(surface_in_eye.xyz - sphere_center_in_eye.xyz);
     
     // Correct depth for Z buffer
-    vec4 depth_vec = cameraToClipMatrix * position_in_eye2;
-    float depth = ((depth_vec.z / depth_vec.w) + 1.0) * 0.5;
-    if (depth <= 0.0) { // front clip
+    if (depth <= 0.0) { // front clip bisects this sphere, show solid core
         // clip to reveal a solid core
         // tiny offset so neighboring clipped spheres overlap correctly
+        float len2 = dot(position_in_eye.xy, position_in_eye.xy);
         gl_FragDepth = 0.0 + 1e-6 * len2;
-        normal_in_eye = vec3(0, 0, 1); // slice it flat
+        normal_in_eye = vec3(0, 0, 1); // slice it flat against screen
     }
     else {
         gl_FragDepth = depth;
@@ -162,12 +167,12 @@ void main()
     // DIFFUSE
     // from http://www.davidcornette.com/glsl/glsl.html
     
-    vec4 s = -normalize(position_in_eye2 - gl_LightSource[0].position);
+    vec4 s = -normalize(surface_in_eye - gl_LightSource[0].position);
     vec3 lightvec_in_eye = s.xyz;
     
     vec3 n = normalize(normal_in_eye);
     vec3 r = normalize(-reflect(lightvec_in_eye, n));
-    vec3 v = normalize(-position_in_eye2.xyz);
+    vec3 v = normalize(-surface_in_eye.xyz);
     vec4 diffuse = gl_FrontMaterial.diffuse * max(0.0, dot(n, s.xyz)) * gl_LightSource[0].diffuse;
     
     // Use Lambertian shading model
@@ -190,27 +195,33 @@ void main()
 
 
 class SphereImposter(Actor):
-    "SphereImposter is still just a stub.  Eventually it will draw as sphere using shaders"
     def __init__(self):
         Actor.__init__(self)
-        # self.shader_program = GreenShaderProgram()
-        # self.shader_program = ShaderProgram()
         self.shader_program = SphereImposterShaderProgram()
 
     def init_gl(self):
         self.shader_program.init_gl()
-        pass
 
     def paint_gl(self):
         with self.shader_program:
-            glBegin(GL_TRIANGLE_STRIP)
-            glNormal3f(-1, -1, 0)
+            # two triangles
+            radius = 1.0
+            glBegin(GL_TRIANGLES)
+            #
+            # Normals are not normals
+            # Normal encodes quad corner direction in x,y, and radius in z
+            glNormal3f(-1, -1, radius)
             glVertex3f(0,0,0)
-            glNormal3f( 1, -1, 0)
+            glNormal3f( 1, -1, radius)
             glVertex3f(0,0,0)
-            glNormal3f(-1,  1, 0)
+            glNormal3f(-1,  1, radius)
             glVertex3f(0,0,0)
-            glNormal3f( 1,  1, 0)
+            #
+            glNormal3f( 1, -1, radius)
+            glVertex3f(0,0,0)
+            glNormal3f( 1,  1, radius)
+            glVertex3f(0,0,0)
+            glNormal3f(-1,  1, radius)
             glVertex3f(0,0,0)
             glEnd()
 
