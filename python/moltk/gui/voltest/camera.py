@@ -45,8 +45,8 @@ class CameraPosition(QtCore.QObject):
                               self.distance_to_screen_in_pixels)))
         gluPerspective (aperture, # vertical aperture angle in degrees
                         w / h, # aspect ratio
-                        d / 5.0, # near clip
-                        5.0 * d) # far clip
+                        0.8 * d, # near clip
+                        1.2 * d) # far clip
         glMatrixMode(GL_MODELVIEW)
         glPushMatrix()
         glLoadIdentity()
