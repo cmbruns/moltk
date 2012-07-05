@@ -95,7 +95,6 @@ class SphereImposterShaderProgram(ShaderProgram):
 // TODO should be uniform
 varying mat4 cameraToClipMatrix;
 
-varying vec2 position_in_quad;
 varying vec4 position_in_eye;
 varying vec4 sphere_center_in_eye;
 varying float tangent_distance_squared; // precompute for use in ray casting
@@ -103,15 +102,27 @@ void main()
 {
     // We store a quad as 4 points with the same vertex, but different normals.
     // Reconstruct the quad by adding the normal to the vertex.
-    position_in_quad = gl_Normal.xy; // to help fragment shader compute edge
     float radius = gl_Normal.z;
-    vec4 corner_offset = vec4(radius * position_in_quad, 0, 0);
-    // Keep the quad oriented toward the screen by not rotating corner_offset.
     sphere_center_in_eye = gl_ModelViewMatrix * gl_Vertex;
-    position_in_eye = sphere_center_in_eye + corner_offset;
-    cameraToClipMatrix = gl_ProjectionMatrix;
+    vec4 eye_direction = normalize(vec4(-sphere_center_in_eye.xyz, 0));
+    // push quad back to the far back of the sphere, to avoid near clipping
+    vec4 quad_center_in_eye = sphere_center_in_eye - radius * eye_direction;
+    // orient quad perpendicular to eye direction (this rotates normal by about 90 degrees, but that's OK)
+    vec4 corner_offset = normalize(vec4(cross(vec3(gl_Normal.xy,0), eye_direction.xyz),0));
+    // scale the corner distance
+    //  a) - by sqrt(2) because it's a corner sqrt(1*1 + 1*1)
+    //  b) - by radius because that's how big the sphere is
+    //  c) - by (d+r)/sqrt(d^2-r^2) because of recessed quad position, plus bulge of horizon tangent
+    //  d) - by 1.05 because it's too small toward the edge of the screen
+    float r = radius;
     float d2 = dot(sphere_center_in_eye.xyz, sphere_center_in_eye.xyz);
+    float d = sqrt(d2);
     tangent_distance_squared = d2 - radius*radius;
+    float corner_scale = 1.05 * 1.41421356 * r*(d+r)/sqrt(tangent_distance_squared);
+    corner_offset = corner_scale * corner_offset;
+    // Keep the quad oriented toward the eye by not rotating corner_offset.
+    position_in_eye = quad_center_in_eye + corner_offset;
+    cameraToClipMatrix = gl_ProjectionMatrix;
 
     gl_Position = gl_ProjectionMatrix * position_in_eye; // in screen
 }
@@ -120,7 +131,6 @@ void main()
 // TODO should be uniform
 varying mat4 cameraToClipMatrix;
 
-varying vec2 position_in_quad;
 varying vec4 position_in_eye;
 varying vec4 sphere_center_in_eye;
 varying float tangent_distance_squared; // precompute for use in ray casting
