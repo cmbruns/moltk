@@ -110,10 +110,11 @@ void main()
     // orient quad perpendicular to eye direction (this rotates normal by about 90 degrees, but that's OK)
     vec4 corner_offset = normalize(vec4(cross(vec3(gl_Normal.xy,0), eye_direction.xyz),0));
     // scale the corner distance
-    //  a) - by sqrt(2) because it's a corner sqrt(1*1 + 1*1)
+    //  a) - by sqrt(2) because it's a corner: sqrt(1*1 + 1*1)
     //  b) - by radius because that's how big the sphere is
-    //  c) - by (d+r)/sqrt(d^2-r^2) because of recessed quad position, plus bulge of horizon tangent
-    //  d) - by 1.05 because it's too small toward the edge of the screen
+    //  c) - by (d+r)/d because of recessed quad position, 
+    //  d) - by d/sqrt(d^2-r^2) for bulge of horizon tangent
+    //  e) - by 1.05 because it's too small toward the edge of the screen for some reason
     float r = radius;
     float d2 = dot(sphere_center_in_eye.xyz, sphere_center_in_eye.xyz);
     float d = sqrt(d2);
