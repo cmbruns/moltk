@@ -66,5 +66,5 @@ class Trackball(QObject):
         
     def wheelEvent(self, event):
         degrees = event.delta() / 8.0
-        zoom_ratio = 2.0 ** (-degrees / 200.0)
+        zoom_ratio = 2.0 ** (-degrees / 100.0)
         self.zoom_incremented.emit(zoom_ratio)
