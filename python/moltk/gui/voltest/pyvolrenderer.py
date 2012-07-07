@@ -4,6 +4,7 @@ Created on Jun 19, 2012
 @author: brunsc
 '''
 
+from scenes import sphereImposterShaderProgram
 from camera import CameraPosition
 from rotation import Rotation
 import glrenderer
@@ -16,6 +17,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glrenderer.GlRenderer.__init__(self)
         self.camera_position = CameraPosition()
         self.actors = []
+        self.shader = sphereImposterShaderProgram
         
     def init_gl(self):
         # print "init_gl"
@@ -32,6 +34,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glEnable(GL_LIGHTING)
         glEnable(GL_LIGHT0)
         glEnable(GL_CULL_FACE)
+        self.shader.init_gl()
         for actor in self.actors:
             actor.init_gl()
 

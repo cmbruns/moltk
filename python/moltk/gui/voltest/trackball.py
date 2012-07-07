@@ -43,8 +43,8 @@ class Trackball(QObject):
         else:
             # Rotate like a trackball
             w = (windowSize.width() + windowSize.height()) / 2.0
-            # Dragging the whole window size would be 180 degrees
-            angle = pi * sqrt(x*x + y*y) / w
+            # Dragging the whole window size would be 360 degrees
+            angle = 2.0 * pi * sqrt(x*x + y*y) / w
             if 0.0 == angle:
                 return # no rotation
             axis = Vec3([y, x, 0]).unit() # orthogonal to drag direction

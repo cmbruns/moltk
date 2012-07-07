@@ -36,6 +36,7 @@ class TeapotActor(Actor):
 class ShaderProgram:
     "Base class for shader programs."
     def __init__(self):
+        self.is_initialized = False
         self.previous_program = 0
         self.shader_program = 0
         self.vertex_shader = """
@@ -55,7 +56,9 @@ void main()
 }
 """
 
-    def init_gl(self):  
+    def init_gl(self):
+        if self.is_initialized:
+            return
         # print "creating shaders"
         self.vs = glCreateShader(GL_VERTEX_SHADER)
         self.fs = glCreateShader(GL_FRAGMENT_SHADER)
@@ -73,6 +76,7 @@ void main()
         glAttachShader(self.shader_program, self.vs)
         glAttachShader(self.shader_program, self.fs)
         glLinkProgram(self.shader_program)
+        self.is_initialized = True
 
     def __enter__(self):
         self.previous_program = glGetIntegerv(GL_CURRENT_PROGRAM)
@@ -213,25 +217,27 @@ void main()
 }
 """
 
+sphereImposterShaderProgram = SphereImposterShaderProgram()
 
 class SphereImposter(Actor):
-    def __init__(self, location=[0.0, 0.0, 0.0]):
+    def __init__(self, location=[0.0, 0.0, 0.0], radius = 1.0, color=[0.2, 0.2, 0.3]):
         Actor.__init__(self)
-        self.shader_program = SphereImposterShaderProgram()
+        self.shader_program = sphereImposterShaderProgram
         self.location = location[:]
-
-    def init_gl(self):
-        self.shader_program.init_gl()
+        self.radius = radius
+        self.color = color[:]
 
     def paint_gl(self):
         glPushMatrix()
         p = self.location
         glTranslate(p[0], p[1], p[2])
+        radius = self.radius
+        c = self.color
         with self.shader_program:
             # two triangles
-            radius = 1.0
             glBegin(GL_TRIANGLES)
             #
+            glColor3f(c[0], c[1], c[2])
             # Normals are not normals
             # Normal encodes quad corner direction in x,y, and radius in z
             glNormal3f(-1, -1, radius)
@@ -254,25 +260,27 @@ class FiveBallScene(Actor):
     def __init__(self):
         Actor.__init__(self)
         self.glut_sphere = GlutSphereActor()
-        self.sphere_imposter = SphereImposter()
+        self.color = [0.2, 0.2, 0.5]
+        self.sphere_imposter = SphereImposter(color=self.color)
         
     def init_gl(self):
         self.sphere_imposter.init_gl()
         
     def paint_gl(self):
-            glColor3f(0.2, 0.2, 0.5) # paint spheres blue
-            glPushMatrix()
-            glTranslate(-3.0, 0, 0)
-            for p in range(5):
-                # Leave a spot for shader sphere
-                if 3 != p:
-                    self.glut_sphere.paint_gl()
-                glTranslate(1.5, 0, 0)
-            glPopMatrix()
-            # TODO put shader sphere here
-            # glColor3f(0.8, 0.8, 0.2) # yellow
-            glPushMatrix()
+        c = self.color
+        glColor3f(c[0], c[1], c[2]) # paint spheres blue
+        glPushMatrix()
+        glTranslate(-3.0, 0, 0)
+        for p in range(5):
+            # Leave a spot for shader sphere
+            if 3 != p:
+                self.glut_sphere.paint_gl()
             glTranslate(1.5, 0, 0)
-            self.sphere_imposter.paint_gl()
-            glPopMatrix()
+        glPopMatrix()
+        # TODO put shader sphere here
+        # glColor3f(0.8, 0.8, 0.2) # yellow
+        glPushMatrix()
+        glTranslate(1.5, 0, 0)
+        self.sphere_imposter.paint_gl()
+        glPopMatrix()
 
