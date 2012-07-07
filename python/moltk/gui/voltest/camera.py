@@ -22,11 +22,11 @@ class CameraPosition(QtCore.QObject):
 
     @property
     def zNear(self):
-        return 0.7 * self.distance_to_focus
+        return 0.6 * self.distance_to_focus
     
     @property
     def zFar(self):
-        return 1.5 * self.distance_to_focus
+        return 2.0 * self.distance_to_focus
         
     @property
     def rotation(self):
