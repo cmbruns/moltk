@@ -11,8 +11,17 @@ class Actor(object):
 
 
 class GlutSphereActor(Actor):
+    def __init__(self, position=[0,0,0], radius=1.0):
+        self.position = position[:]
+        self.radius = radius
+        
     def paint_gl(self):
-        glutSolidSphere(1.0, 20, 20)
+        glMatrixMode(GL_MODELVIEW)
+        glPushMatrix()
+        p = self.position
+        glTranslate(p[0], p[1], p[2])
+        glutSolidSphere(self.radius, 20, 20)
+        glPopMatrix()
 
 
 class TeapotActor(Actor):
@@ -206,14 +215,18 @@ void main()
 
 
 class SphereImposter(Actor):
-    def __init__(self):
+    def __init__(self, location=[0.0, 0.0, 0.0]):
         Actor.__init__(self)
         self.shader_program = SphereImposterShaderProgram()
+        self.location = location[:]
 
     def init_gl(self):
         self.shader_program.init_gl()
 
     def paint_gl(self):
+        glPushMatrix()
+        p = self.location
+        glTranslate(p[0], p[1], p[2])
         with self.shader_program:
             # two triangles
             radius = 1.0
@@ -235,7 +248,7 @@ class SphereImposter(Actor):
             glNormal3f(-1,  1, radius)
             glVertex3f(0,0,0)
             glEnd()
-
+        glPopMatrix()
 
 class FiveBallScene(Actor):
     def __init__(self):
