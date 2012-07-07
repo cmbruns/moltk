@@ -15,6 +15,20 @@ class PyVolMainWindow(QMainWindow):
         self.ui.setupUi(self)
 
     @QtCore.Slot()
+    def on_actionSave_image_triggered(self):
+        print "save image"
+        file_name, type = QFileDialog.getSaveFileName(
+                self, 
+                "Save screen shot", 
+                None, 
+                self.tr("images(*.jpg *.tif)"))
+        if file_name == "":
+            return
+        image = self.ui.glCanvas.grabFrameBuffer()
+        print file_name
+        image.save(file_name)
+
+    @QtCore.Slot()
     def on_actionOpen_triggered(self):
         file_name, type = QFileDialog.getOpenFileName(
                 self, 

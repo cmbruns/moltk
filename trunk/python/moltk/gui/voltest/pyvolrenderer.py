@@ -18,11 +18,13 @@ class PyVolRenderer(glrenderer.GlRenderer):
         self.camera_position = CameraPosition()
         self.actors = []
         self.shader = sphereImposterShaderProgram
+        self.background_color = [0.8, 0.8, 1.0, 0.0] # sky blue
         
     def init_gl(self):
         # print "init_gl"
         glEnable(GL_DEPTH_TEST)
-        glClearColor(0.8, 0.8, 1.0, 0) # sky blue
+        bg = self.background_color
+        glClearColor(bg[0], bg[1], bg[2], bg[3])
         glShadeModel(GL_SMOOTH)
         glEnable(GL_COLOR_MATERIAL)
         glMaterialfv(GL_FRONT, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
@@ -46,6 +48,9 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glDrawBuffer(GL_BACK)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         self.shader.zNear = self.camera_position.zNear
+        self.shader.zFar = self.camera_position.zFar
+        self.shader.zFocus = self.camera_position.distance_to_focus
+        self.shader.background_color = self.background_color
         with self.camera_position:
             for actor in self.actors:
                 actor.paint_gl()
