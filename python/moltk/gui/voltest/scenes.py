@@ -81,10 +81,11 @@ void main()
     def __enter__(self):
         self.previous_program = glGetIntegerv(GL_CURRENT_PROGRAM)
         try:
-            glUseProgram(self.shader_program)   
+            glUseProgram(self.shader_program)
         except OpenGL.error.GLError:
             print glGetProgramInfoLog(self.shader_program)
             raise
+        return self
         
     def __exit__(self, type, value, tb):
         glUseProgram(self.previous_program)
@@ -102,15 +103,22 @@ void main()
 
 
 class SphereImposterShaderProgram(ShaderProgram):
+    def __enter__(self):
+        ShaderProgram.__enter__(self)
+        glUniform1f(glGetUniformLocation(self.shader_program, "zNear"), self.zNear)
+        return self
+        
     def __init__(self):
         ShaderProgram.__init__(self)
         self.vertex_shader = """
 // TODO should be uniform
 varying mat4 cameraToClipMatrix;
+uniform float zNear;
 
 varying vec4 position_in_eye;
 varying vec4 sphere_center_in_eye;
 varying float tangent_distance_squared; // precompute for use in ray casting
+varying float max_front_clip;
 void main()
 {
     // We store a quad as 4 points with the same vertex, but different normals.
@@ -137,6 +145,9 @@ void main()
     // Keep the quad oriented toward the eye by not rotating corner_offset.
     position_in_eye = quad_center_in_eye + corner_offset;
     cameraToClipMatrix = gl_ProjectionMatrix;
+    
+    vec4 v_max_front_clip = cameraToClipMatrix * (sphere_center_in_eye + vec4(0, 0, radius, 0));
+    max_front_clip = v_max_front_clip.z;       
 
     gl_Position = gl_ProjectionMatrix * position_in_eye; // in screen
 }
@@ -144,6 +155,7 @@ void main()
         self.fragment_shader = """
 // TODO should be uniform
 varying mat4 cameraToClipMatrix;
+varying float max_front_clip;
 
 varying vec4 position_in_eye;
 varying vec4 sphere_center_in_eye;
@@ -177,11 +189,11 @@ void main()
     vec3 normal_in_eye = normalize(surface_in_eye.xyz - sphere_center_in_eye.xyz);
     
     // Correct depth for Z buffer
-    if (depth <= 0.0) { // front clip bisects this sphere, show solid core
+    if (depth <= 0.01) { // front clip bisects this sphere, show solid core
         // clip to reveal a solid core
         // tiny offset so neighboring clipped spheres overlap correctly
-        float len2 = dot(position_in_eye.xy, position_in_eye.xy);
-        gl_FragDepth = 0.0 + 1e-6 * len2;
+        float rel_depth = 1.0 - depth/max_front_clip;
+        gl_FragDepth = 0.0 + 0.01 * rel_depth; // TODO overlap
         normal_in_eye = vec3(0, 0, 1); // slice it flat against screen
     }
     else {
@@ -229,15 +241,15 @@ class SphereImposter(Actor):
 
     def paint_gl(self):
         glPushMatrix()
+        c = self.color
         p = self.location
         glTranslate(p[0], p[1], p[2])
         radius = self.radius
-        c = self.color
         with self.shader_program:
+            glColor3f(c[0], c[1], c[2])
             # two triangles
             glBegin(GL_TRIANGLES)
             #
-            glColor3f(c[0], c[1], c[2])
             # Normals are not normals
             # Normal encodes quad corner direction in x,y, and radius in z
             glNormal3f(-1, -1, radius)

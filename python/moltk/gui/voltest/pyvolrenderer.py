@@ -34,9 +34,9 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glEnable(GL_LIGHTING)
         glEnable(GL_LIGHT0)
         glEnable(GL_CULL_FACE)
-        self.shader.init_gl()
         for actor in self.actors:
             actor.init_gl()
+        self.shader.init_gl()
 
     def resize_gl(self, w, h):
         self.camera_position.set_window_size_in_pixels(w, h)
@@ -45,6 +45,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
     def paint_gl(self):
         glDrawBuffer(GL_BACK)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        self.shader.zNear = self.camera_position.zNear
         with self.camera_position:
             for actor in self.actors:
                 actor.paint_gl()

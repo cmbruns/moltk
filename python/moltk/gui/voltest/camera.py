@@ -21,6 +21,14 @@ class CameraPosition(QtCore.QObject):
         self.distance_to_focus = 25.0 # changes with zoom level
 
     @property
+    def zNear(self):
+        return 0.7 * self.distance_to_focus
+    
+    @property
+    def zFar(self):
+        return 1.5 * self.distance_to_focus
+        
+    @property
     def rotation(self):
         return self._R_gf
     
@@ -39,20 +47,19 @@ class CameraPosition(QtCore.QObject):
         w = self.window_size_in_pixels[0]
         h = self.window_size_in_pixels[1]
         glViewport(0, 0, int(w), int(h)) # fill window
-        d = self.distance_to_focus
         aperture = (2.0 * 180.0 / pi *
                     abs(atan2(self.window_size_in_pixels[1] / 2.0, 
                               self.distance_to_screen_in_pixels)))
         gluPerspective (aperture, # vertical aperture angle in degrees
                         w / h, # aspect ratio
-                        0.2 * d, # near clip
-                        5 * d) # far clip
+                        self.zNear, # near clip
+                        self.zFar) # far clip
         glMatrixMode(GL_MODELVIEW)
         glPushMatrix()
         glLoadIdentity()
         
         f_g = self.focus_in_ground
-        c_f = Vec3([0, 0, d]) # camera in focus frame
+        c_f = Vec3([0, 0, self.distance_to_focus]) # camera in focus frame
         c_g = f_g + self.rotation * c_f # camera in ground_frame
         # For unrestricted rotation, rotate "up" vector too
         u_f = Vec3([0, 1, 0])
