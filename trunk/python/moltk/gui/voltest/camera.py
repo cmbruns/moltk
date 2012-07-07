@@ -18,7 +18,7 @@ class CameraPosition(QtCore.QObject):
         dt = QApplication.desktop()
         self.set_screen_size_in_pixels(dt.width(), dt.height())
         # Object/ground/gl-units measures:
-        self.distance_to_focus_in_ground = 25.0 # changes with zoom level
+        self.distance_to_focus = 25.0 # changes with zoom level
 
     @property
     def rotation(self):
@@ -39,7 +39,7 @@ class CameraPosition(QtCore.QObject):
         w = self.window_size_in_pixels[0]
         h = self.window_size_in_pixels[1]
         glViewport(0, 0, int(w), int(h)) # fill window
-        d = self.distance_to_focus_in_ground
+        d = self.distance_to_focus
         aperture = (2.0 * 180.0 / pi *
                     abs(atan2(self.window_size_in_pixels[1] / 2.0, 
                               self.distance_to_screen_in_pixels)))
@@ -51,15 +51,15 @@ class CameraPosition(QtCore.QObject):
         glPushMatrix()
         glLoadIdentity()
         
+        f_g = self.focus_in_ground
         c_f = Vec3([0, 0, d]) # camera in focus frame
-        c_g = self.rotation * c_f # camera in ground_frame
+        c_g = f_g + self.rotation * c_f # camera in ground_frame
         # For unrestricted rotation, rotate "up" vector too
         u_f = Vec3([0, 1, 0])
         u_g = self.rotation * u_f
         # Camera distance and focus position
         # Notice that all zooming is accomplished with camera position,
         # i.e. no glScaled(...) here
-        f_g = self.focus_in_ground
         gluLookAt(c_g.x, c_g.y, c_g.z, # camera in ground
                   f_g.x, f_g.y, f_g.z, # focus in ground
                   u_g.x, u_g.y, u_g.z) # up vector
@@ -83,12 +83,12 @@ class CameraPosition(QtCore.QObject):
     def increment_zoom(self, ratio):
         if ratio <= 0.0:
             return
-        self.distance_to_focus_in_ground /= ratio
+        self.distance_to_focus /= ratio
         
     @QtCore.Slot(int, int, int)
     def translate_pixel(self, x, y, z):
         # convert to ground coordinates
-        glunits_per_pixel = (self.distance_to_focus_in_ground / 
+        glunits_per_pixel = (self.distance_to_focus / 
                              self.distance_to_screen_in_pixels)
         dx = Vec3([x, y, z]) * glunits_per_pixel
         self.focus_in_ground += self.rotation * dx
