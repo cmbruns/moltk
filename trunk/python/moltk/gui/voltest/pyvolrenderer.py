@@ -4,6 +4,7 @@ Created on Jun 19, 2012
 @author: brunsc
 '''
 
+import stereo3d
 from scenes import sphereImposterShaderProgram
 from camera import CameraPosition
 from rotation import Rotation
@@ -49,9 +50,9 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         self.shader.zNear = self.camera_position.zNear
         self.shader.zFar = self.camera_position.zFar
-        self.shader.zFocus = self.camera_position.distance_to_focus
+        self.shader.zFocus = self.camera_position.zFocus
         self.shader.background_color = self.background_color
-        with self.camera_position:
+        for camera in stereo3d.Mono().views(self.camera_position):
             for actor in self.actors:
                 actor.paint_gl()
 
