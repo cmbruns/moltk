@@ -48,11 +48,12 @@ class PyVolRenderer(glrenderer.GlRenderer):
     def paint_gl(self):
         glDrawBuffer(GL_BACK)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        self.shader.zNear = self.camera_position.zNear
-        self.shader.zFar = self.camera_position.zFar
-        self.shader.zFocus = self.camera_position.zFocus
-        self.shader.background_color = self.background_color
-        for camera in stereo3d.Mono().views(self.camera_position):
+        for camera in stereo3d.RightLeft().views(self.camera_position):
+            self.shader.zNear = camera.zNear
+            self.shader.zFar = camera.zFar
+            self.shader.zFocus = camera.zFocus
+            self.shader.background_color = self.background_color
+            self.shader.eye_shift = camera.eye_shift_in_ground
             for actor in self.actors:
                 actor.paint_gl()
 
@@ -64,6 +65,11 @@ class PyVolRenderer(glrenderer.GlRenderer):
     @QtCore.Slot(Rotation)
     def increment_rotation(self, r):
         self.camera_position.increment_rotation(r)
+        self.update()
+        
+    @QtCore.Slot(int, int, int)
+    def center_pixel(self, x, y, z):
+        self.camera_position.center_pixel(x, y, z)
         self.update()
         
     @QtCore.Slot(int, int, int)

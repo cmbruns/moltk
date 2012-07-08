@@ -3,7 +3,7 @@ from PySide import QtCore
 from PySide.QtGui import QApplication
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from math import pi, atan2
+from math import pi, atan2, floor
 
 class CameraPosition(QtCore.QObject):
     """
@@ -54,11 +54,27 @@ class CameraPosition(QtCore.QObject):
         self.viewport_yrelstart = 0.0
         self.viewport_relwidth = 1.0
         self.viewport_relheight = 1.0
+        # big value for testing
         self.interocular_distance_in_meters = 0.062 # Probably close enough for anyone
         self.pixels_per_meter = 6621; # TODO - expose this
         self.interocular_distance_in_pixels = self.pixels_per_meter * self.interocular_distance_in_meters;
         self.eye_pos = 0.0 # -1.0 for left eye, +1.0 for right eye
 
+    @property
+    def zNear(self):
+        "distance to front clipping plane in camera frame"
+        return 0.5 * self.distance_to_focus
+    
+    @property
+    def zFar(self):
+        "distance to rear clipping plane in camera frame"
+        return 2.5 * self.distance_to_focus
+    
+    @property
+    def zFocus(self):
+        "distance to center of trackball rotation in camera frame"
+        return self.distance_to_focus
+        
     @property
     def glunits_per_pixel(self):
         return self.distance_to_focus / self.distance_to_screen_in_pixels
@@ -100,21 +116,6 @@ class CameraPosition(QtCore.QObject):
         return self.yFov * 180.0 / pi
 
     @property
-    def zNear(self):
-        "distance to front clipping plane in camera frame"
-        return 0.6 * self.distance_to_focus
-    
-    @property
-    def zFar(self):
-        "distance to rear clipping plane in camera frame"
-        return 2.0 * self.distance_to_focus
-    
-    @property
-    def zFocus(self):
-        "distance to center of trackball rotation in camera frame"
-        return self.distance_to_focus
-        
-    @property
     def rotation(self):
         return self._R_gf
     
@@ -123,22 +124,25 @@ class CameraPosition(QtCore.QObject):
         self._R_gf = r
         self.rotAngle, self.rotAxis = r.to_angle_axis()
         
+    @property
+    def eye_shift_in_ground(self):
+        return -0.5 * self.eye_pos * self.iod
+        
     def set_gl_projection(self):
         # http://www.orthostereo.com/geometryopengl.html
-        eye_shift_in_ground = 0.5 * self.eye_pos * self.iod
         glMatrixMode(GL_PROJECTION)
         bUseAsymmetricFrustum = True
         if bUseAsymmetricFrustum:
             topFrustum = 0.5 * self.zNear * self.viewport_height / self.distance_to_screen_in_pixels
             bottomFrustum = -topFrustum
             right = self.aspect_ratio * topFrustum
-            frustumShift = -eye_shift_in_ground * self.zNear / self.zFocus
+            frustumShift = self.eye_shift_in_ground * self.zNear / self.zFocus
             rightFrustum = right + frustumShift
             leftFrustum = -right + frustumShift
             glFrustum(leftFrustum, rightFrustum,
                       bottomFrustum, topFrustum,
                       self.zNear, self.zFar)
-            glTranslatef(-eye_shift_in_ground, 0, 0) # translate to cancel parallax
+            glTranslatef(self.eye_shift_in_ground, 0, 0) # translate to cancel parallax
         else:
             gluPerspective (self.yFov_degrees, # vertical aperture angle in degrees
                             self.aspect_ratio, # aspect ratio
@@ -198,6 +202,22 @@ class CameraPosition(QtCore.QObject):
     def translate_pixel(self, x, y, z):
         dx = Vec3([x, y, z]) * self.glunits_per_pixel
         self.focus_in_ground += self.rotation * dx
+        
+    @QtCore.Slot(int, int, int)
+    def center_pixel(self, x, y, z):
+        # If there are multiple viewports, which is this in?
+        relx = float(x) / self.window_size_in_pixels[0] / self.viewport_relwidth
+        vx = int(floor(relx)) # horizontal viewport index
+        x2 = int((relx - vx) * self.viewport_width)
+        cx = 0.5 * self.viewport_width
+        dx = x2 - cx
+        rely = float(y) / self.window_size_in_pixels[1] / self.viewport_relheight
+        vy = int(floor(rely))
+        y2 = int((rely - vy) * self.viewport_height)
+        cy = 0.5 * self.viewport_height
+        dy = cy - y2 # flip y
+        self.translate_pixel(dx, dy, 0)
+        
 
     @QtCore.Slot(int, int)
     def set_window_size_in_pixels(self, w, h):
