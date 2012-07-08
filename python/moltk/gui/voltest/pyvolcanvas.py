@@ -31,6 +31,7 @@ class PyVolCanvas(QGLWidget):
         self.trackball.rotation_incremented.connect(self.renderer.increment_rotation)
         self.trackball.zoom_incremented.connect(self.renderer.increment_zoom)
         self.trackball.pixel_translated.connect(self.renderer.translate_pixel)
+        self.trackball.pixel_centered.connect(self.renderer.center_pixel)
 
     def paintEvent(self, event):
         self.doneCurrent()

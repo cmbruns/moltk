@@ -17,6 +17,7 @@ class Trackball(QObject):
     rotation_incremented = QtCore.Signal(Rotation)
     zoom_incremented = QtCore.Signal(float)
     pixel_translated = QtCore.Signal(int, int, int)
+    pixel_centered = QtCore.Signal(int, int, int)
 
     def __init__(self, parent=None):
         QObject.__init__(self, parent)
@@ -54,9 +55,9 @@ class Trackball(QObject):
         
     def mouseDoubleClickEvent(self, event, windowSize):
         "center view when double click occurs"
-        dx = event.pos().x() - windowSize.width() / 2.0
-        dy = event.pos().y() - windowSize.height() / 2.0
-        self.pixel_translated.emit(dx, -dy, 0)
+        # dx = event.pos().x() - windowSize.width() / 2.0
+        # dy = event.pos().y() - windowSize.height() / 2.0
+        self.pixel_centered.emit(event.pos().x(), event.pos().y(), 0)
 
     def mousePressEvent(self, event):
         self.old_pos = None
