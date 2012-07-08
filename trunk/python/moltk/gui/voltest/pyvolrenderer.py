@@ -48,8 +48,10 @@ class PyVolRenderer(glrenderer.GlRenderer):
         
     def paint_gl(self):
         glDrawBuffer(GL_BACK)
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        glColorMask(True, True, True, True)
+        glClear(GL_COLOR_BUFFER_BIT)
         for camera in self.stereo_mode.views(self.camera_position):
+            glClear(GL_DEPTH_BUFFER_BIT)
             self.shader.zNear = camera.zNear
             self.shader.zFar = camera.zFar
             self.shader.zFocus = camera.zFocus

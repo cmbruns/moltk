@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pyvol.ui'
 #
-# Created: Sun Jul 08 22:34:53 2012
+# Created: Mon Jul 09 00:46:52 2012
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -74,13 +74,15 @@ class Ui_MainWindow(object):
         self.actionChecker_interleaved.setObjectName("actionChecker_interleaved")
         self.actionSwap_Eyes = QtGui.QAction(MainWindow)
         self.actionSwap_Eyes.setCheckable(True)
-        self.actionSwap_Eyes.setEnabled(False)
+        self.actionSwap_Eyes.setEnabled(True)
         self.actionSwap_Eyes.setObjectName("actionSwap_Eyes")
         self.actionRed_Cyan_anaglyph = QtGui.QAction(MainWindow)
-        self.actionRed_Cyan_anaglyph.setEnabled(False)
+        self.actionRed_Cyan_anaglyph.setCheckable(True)
+        self.actionRed_Cyan_anaglyph.setEnabled(True)
         self.actionRed_Cyan_anaglyph.setObjectName("actionRed_Cyan_anaglyph")
         self.actionGreen_Magenta_anaglyph = QtGui.QAction(MainWindow)
-        self.actionGreen_Magenta_anaglyph.setEnabled(False)
+        self.actionGreen_Magenta_anaglyph.setCheckable(True)
+        self.actionGreen_Magenta_anaglyph.setEnabled(True)
         self.actionGreen_Magenta_anaglyph.setObjectName("actionGreen_Magenta_anaglyph")
         self.actionQuadro_120_Hz = QtGui.QAction(MainWindow)
         self.actionQuadro_120_Hz.setEnabled(False)
@@ -119,7 +121,7 @@ class Ui_MainWindow(object):
         self.menuStereo_3D.setTitle(QtGui.QApplication.translate("MainWindow", "Stereo 3D", None, QtGui.QApplication.UnicodeUTF8))
         self.actionOpen.setText(QtGui.QApplication.translate("MainWindow", "Load molecule...", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSave_image.setText(QtGui.QApplication.translate("MainWindow", "Save image...", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionSet_size.setText(QtGui.QApplication.translate("MainWindow", "Set size...", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSet_size.setText(QtGui.QApplication.translate("MainWindow", "Set window size...", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAdd_bookmark.setText(QtGui.QApplication.translate("MainWindow", "Bookmark this view", None, QtGui.QApplication.UnicodeUTF8))
         self.actionMono_None.setText(QtGui.QApplication.translate("MainWindow", "Mono/None", None, QtGui.QApplication.UnicodeUTF8))
         self.actionRight_Left_cross_eye.setText(QtGui.QApplication.translate("MainWindow", "Right:Left cross-eye", None, QtGui.QApplication.UnicodeUTF8))

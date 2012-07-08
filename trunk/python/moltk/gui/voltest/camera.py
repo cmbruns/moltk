@@ -56,9 +56,10 @@ class CameraPosition(QtCore.QObject):
         self.viewport_relheight = 1.0
         # big value for testing
         self.interocular_distance_in_meters = 0.062 # Probably close enough for anyone
-        self.pixels_per_meter = 6621; # TODO - expose this
+        self.pixels_per_meter = 3724; # TODO - expose this
         self.interocular_distance_in_pixels = self.pixels_per_meter * self.interocular_distance_in_meters;
         self.eye_pos = 0.0 # -1.0 for left eye, +1.0 for right eye
+        self.swap_eyes = False
 
     @property
     def zNear(self):
@@ -126,7 +127,10 @@ class CameraPosition(QtCore.QObject):
         
     @property
     def eye_shift_in_ground(self):
-        return -0.5 * self.eye_pos * self.iod
+        shift = -0.5 * self.eye_pos * self.iod
+        if self.swap_eyes:
+            shift *= -1
+        return shift
         
     def set_gl_projection(self):
         # http://www.orthostereo.com/geometryopengl.html
