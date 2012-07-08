@@ -20,6 +20,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
         self.actors = []
         self.shader = sphereImposterShaderProgram
         self.background_color = [0.8, 0.8, 1.0, 0.0] # sky blue
+        self.stereo_mode = stereo3d.Mono()
         
     def init_gl(self):
         # print "init_gl"
@@ -48,7 +49,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
     def paint_gl(self):
         glDrawBuffer(GL_BACK)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        for camera in stereo3d.RightLeft().views(self.camera_position):
+        for camera in self.stereo_mode.views(self.camera_position):
             self.shader.zNear = camera.zNear
             self.shader.zFar = camera.zFar
             self.shader.zFocus = camera.zFocus

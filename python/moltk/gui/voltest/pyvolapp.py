@@ -1,9 +1,10 @@
+import stereo3d
 from rotation import Vec3
 from scenes import FiveBallScene, TeapotActor, SphereImposter, GlutSphereActor
 from pyvolrenderer import PyVolRenderer
 from pyvolcanvas import PyVolCanvas
 from pyvol_ui import Ui_MainWindow
-from PySide.QtGui import QApplication, QMainWindow, QFileDialog
+from PySide.QtGui import QApplication, QMainWindow, QFileDialog, QActionGroup
 from PySide import QtCore
 import sys
 
@@ -13,9 +14,53 @@ class PyVolMainWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        stereoActionGroup = QActionGroup(self)
+        stereoActionGroup.addAction(self.ui.actionMono_None)
+        stereoActionGroup.addAction(self.ui.actionRight_Left_cross_eye)
+        stereoActionGroup.addAction(self.ui.actionLeft_Right_parallel)
+        stereoActionGroup.addAction(self.ui.actionLeft_eye_view)
+        stereoActionGroup.addAction(self.ui.actionRight_eye_view)
+        stereoActionGroup.addAction(self.ui.actionRed_Cyan_anaglyph)
+        stereoActionGroup.addAction(self.ui.actionGreen_Magenta_anaglyph)
+        stereoActionGroup.addAction(self.ui.actionQuadro_120_Hz)
+        stereoActionGroup.addAction(self.ui.actionRow_interleaved)
+        stereoActionGroup.addAction(self.ui.actionColumn_interleaved)
+        stereoActionGroup.addAction(self.ui.actionChecker_interleaved)
 
-    @QtCore.Slot()
-    def on_actionSave_image_triggered(self):
+    def set_stereo_mode(self, mode, checked):
+        if checked:
+            self.ui.glCanvas.renderer.stereo_mode = mode
+        else:
+            # Turn off one stereo mode, turn on Mono
+            self.ui.glCanvas.renderer.stereo_mode = stereo3d.Mono()
+            self.ui.actionMono_None.setChecked(True)
+        self.ui.glCanvas.update()
+        
+    @QtCore.Slot(bool)
+    def on_actionMono_None_triggered(self, checked):
+        # If the user clicks on Mono, always use mono, even if it was already checked
+        self.set_stereo_mode(stereo3d.Mono(), checked)
+
+    @QtCore.Slot(bool)
+    def on_actionRight_Left_cross_eye_triggered(self, checked):
+        print "right left", checked
+        self.set_stereo_mode(stereo3d.RightLeft(), checked)
+
+    @QtCore.Slot(bool)
+    def on_actionLeft_Right_parallel_triggered(self, checked):
+        self.set_stereo_mode(stereo3d.LeftRight(), checked)
+
+    @QtCore.Slot(bool)
+    def on_actionLeft_eye_view_triggered(self, checked):
+        self.set_stereo_mode(stereo3d.Left(), checked)
+
+    @QtCore.Slot(bool)
+    def on_actionRight_eye_view_triggered(self, checked):
+        self.set_stereo_mode(stereo3d.Right(), checked)
+
+
+    @QtCore.Slot(bool)
+    def on_actionSave_image_triggered(self, checked):
         print "save image"
         file_name, type = QFileDialog.getSaveFileName(
                 self, 

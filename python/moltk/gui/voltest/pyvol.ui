@@ -110,27 +110,39 @@
    </property>
   </action>
   <action name="actionRight_Left_cross_eye">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Right:Left cross-eye</string>
    </property>
   </action>
   <action name="actionLeft_Right_parallel">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Left:Right parallel</string>
    </property>
   </action>
   <action name="actionLeft_eye_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Left eye view</string>
    </property>
   </action>
   <action name="actionRight_eye_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Right eye view</string>
    </property>
