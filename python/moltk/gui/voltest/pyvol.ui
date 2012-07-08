@@ -87,7 +87,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Set size...</string>
+    <string>Set window size...</string>
    </property>
   </action>
   <action name="actionAdd_bookmark">
@@ -176,23 +176,29 @@
     <bool>true</bool>
    </property>
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Swap Eyes</string>
    </property>
   </action>
   <action name="actionRed_Cyan_anaglyph">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Red:Cyan anaglyph</string>
    </property>
   </action>
   <action name="actionGreen_Magenta_anaglyph">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Green:Magenta anaglyph</string>

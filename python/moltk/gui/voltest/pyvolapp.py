@@ -58,6 +58,18 @@ class PyVolMainWindow(QMainWindow):
     def on_actionRight_eye_view_triggered(self, checked):
         self.set_stereo_mode(stereo3d.Right(), checked)
 
+    @QtCore.Slot(bool)
+    def on_actionRed_Cyan_anaglyph_triggered(self, checked):
+        self.set_stereo_mode(stereo3d.RedCyan(), checked)
+
+    @QtCore.Slot(bool)
+    def on_actionGreen_Magenta_anaglyph_triggered(self, checked):
+        self.set_stereo_mode(stereo3d.GreenMagenta(), checked)
+
+    @QtCore.Slot(bool)
+    def on_actionSwap_Eyes_triggered(self, checked):
+        self.ui.glCanvas.renderer.camera_position.swap_eyes = checked
+        self.ui.glCanvas.update()
 
     @QtCore.Slot(bool)
     def on_actionSave_image_triggered(self, checked):
