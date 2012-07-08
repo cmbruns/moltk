@@ -39,17 +39,159 @@
     <addaction name="actionOpen"/>
     <addaction name="actionSave_image"/>
    </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <widget class="QMenu" name="menuStereo_3D">
+     <property name="title">
+      <string>Stereo 3D</string>
+     </property>
+     <addaction name="actionMono_None"/>
+     <addaction name="separator"/>
+     <addaction name="actionRed_Cyan_anaglyph"/>
+     <addaction name="actionGreen_Magenta_anaglyph"/>
+     <addaction name="separator"/>
+     <addaction name="actionRight_Left_cross_eye"/>
+     <addaction name="actionLeft_Right_parallel"/>
+     <addaction name="actionLeft_eye_view"/>
+     <addaction name="actionRight_eye_view"/>
+     <addaction name="separator"/>
+     <addaction name="actionQuadro_120_Hz"/>
+     <addaction name="actionRow_interleaved"/>
+     <addaction name="actionColumn_interleaved"/>
+     <addaction name="actionChecker_interleaved"/>
+     <addaction name="separator"/>
+     <addaction name="actionSwap_Eyes"/>
+    </widget>
+    <addaction name="actionSet_size"/>
+    <addaction name="actionAdd_bookmark"/>
+    <addaction name="menuStereo_3D"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuView"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
    <property name="text">
-    <string>New molecule...</string>
+    <string>Load molecule...</string>
    </property>
   </action>
   <action name="actionSave_image">
    <property name="text">
     <string>Save image...</string>
+   </property>
+  </action>
+  <action name="actionSet_size">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Set size...</string>
+   </property>
+  </action>
+  <action name="actionAdd_bookmark">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Bookmark this view</string>
+   </property>
+  </action>
+  <action name="actionMono_None">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Mono/None</string>
+   </property>
+  </action>
+  <action name="actionRight_Left_cross_eye">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Right:Left cross-eye</string>
+   </property>
+  </action>
+  <action name="actionLeft_Right_parallel">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Left:Right parallel</string>
+   </property>
+  </action>
+  <action name="actionLeft_eye_view">
+   <property name="text">
+    <string>Left eye view</string>
+   </property>
+  </action>
+  <action name="actionRight_eye_view">
+   <property name="text">
+    <string>Right eye view</string>
+   </property>
+  </action>
+  <action name="actionRow_interleaved">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Row interleaved</string>
+   </property>
+  </action>
+  <action name="actionColumn_interleaved">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Column interleaved</string>
+   </property>
+  </action>
+  <action name="actionChecker_interleaved">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Checker interleaved</string>
+   </property>
+  </action>
+  <action name="actionSwap_Eyes">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Swap Eyes</string>
+   </property>
+  </action>
+  <action name="actionRed_Cyan_anaglyph">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Red:Cyan anaglyph</string>
+   </property>
+  </action>
+  <action name="actionGreen_Magenta_anaglyph">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Green:Magenta anaglyph</string>
+   </property>
+  </action>
+  <action name="actionQuadro_120_Hz">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Quadro 120 Hz</string>
    </property>
   </action>
  </widget>

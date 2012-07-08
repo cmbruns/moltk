@@ -21,6 +21,7 @@ class PyVolMainWindow(QMainWindow):
                 self, 
                 "Save screen shot", 
                 None, 
+                # PNG format silently does not work
                 self.tr("images(*.jpg *.tif)"))
         if file_name == "":
             return
