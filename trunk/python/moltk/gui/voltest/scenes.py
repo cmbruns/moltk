@@ -116,6 +116,7 @@ class SphereImposterShaderProgram(ShaderProgram):
     def __init__(self):
         ShaderProgram.__init__(self)
         self.vertex_shader = """
+#version 120
 // TODO should be uniform
 varying mat4 cameraToClipMatrix;
 uniform float zNear;
@@ -127,12 +128,18 @@ varying vec3 position_in_eye;
 varying vec3 sphere_center_in_eye;
 varying float tangent_distance_squared; // precompute for use in ray casting
 varying float max_front_clip;
+varying float radius_squared;
+varying float radius;
+varying float z_front; // positive distance from sphere center to front clip plane
+const float near_clip_zone = 0.005;
+const float max_radius = 2.0;
+
 void main()
 {
 
     // We store a quad as 4 points with the same vertex, but different normals.
     // Reconstruct the quad by adding the normal to the vertex.
-    float radius = gl_Normal.z;
+    radius = gl_Normal.z;
     vec4 sc = gl_ModelViewMatrix * gl_Vertex;
     vec3 sphere_center_in_camera = sc.xyz * 1.0/sc.w;
 
@@ -141,6 +148,11 @@ void main()
     vec3 rearmost_in_camera = sphere_center_in_camera - vec3(0, 0, radius);
     cameraToClipMatrix = gl_ProjectionMatrix;
     max_front_clip = (cameraToClipMatrix * vec4(frontmost_in_camera, 1)).z;
+    // Actual clip plane for spheres, including near_clip_zone
+    vec4 near2_clip = gl_ProjectionMatrix * vec4(0, 0, -zNear, 1);
+    near2_clip.z = near_clip_zone;
+    float zNear2 = -(gl_ProjectionMatrixInverse * near2_clip).z;
+    z_front = -sphere_center_in_camera.z - zNear;
     float max_rear_clip = (cameraToClipMatrix * vec4(rearmost_in_camera, 1)).z;
     // translate imposter plane to optimize clipped appearance
 
@@ -172,7 +184,8 @@ void main()
     float r = radius;
     float d2 = dot(sphere_center_in_eye, sphere_center_in_eye);
     float d = sqrt(d2);
-    tangent_distance_squared = d2 - radius*radius;
+    radius_squared = radius * radius;
+    tangent_distance_squared = d2 - radius_squared;
     float corner_scale = 1.05 * 1.41421356 * r*(d+relative_quad_position)/sqrt(tangent_distance_squared);
     corner_offset = corner_scale * corner_offset;
     // Keep the quad oriented toward the camera by not rotating corner_offset.
@@ -185,13 +198,21 @@ void main()
 }
 """
         self.fragment_shader = """
+#version 120
 // TODO cameraToClipMatrix should be uniform
 varying mat4 cameraToClipMatrix;
 uniform vec4 background_color;
+uniform float zNear;
 varying float max_front_clip;
 varying vec3 position_in_eye;
 varying vec3 sphere_center_in_eye;
 varying float tangent_distance_squared; // precompute for use in ray casting
+varying float radius_squared;
+varying float radius;
+varying float z_front; // distance from sphere center to front clip plane
+const float near_clip_zone = 0.005;
+const float max_radius = 4.0;
+
 void main()
 {
     // Ray casting for actual surface point
@@ -208,30 +229,32 @@ void main()
     }
     float alpha1 = (b - sqrt(det))/a;
     float alpha2 = (b + sqrt(det))/a;
-    vec3 surface_in_camera = alpha1 * position_in_eye.xyz;
+    vec3 surface_in_eye = alpha1 * position_in_eye.xyz;
     
     // cull depth
-    vec4 depth_vec = cameraToClipMatrix * vec4(surface_in_camera, 1);
+    vec4 depth_vec = cameraToClipMatrix * vec4(surface_in_eye, 1);
     float depth = ((depth_vec.z / depth_vec.w) + 1.0) * 0.5;
     if (depth >= 1.0)
         discard; // front of sphere is behind back clip plane
     
-    vec3 back_surface_in_camera = alpha2 * position_in_eye;
-    depth_vec = cameraToClipMatrix * vec4(back_surface_in_camera, 1);
+    vec3 back_surface_in_eye = alpha2 * position_in_eye;
+    depth_vec = cameraToClipMatrix * vec4(back_surface_in_eye, 1);
     float depth2 = ((depth_vec.z / depth_vec.w) + 1.0) * 0.5;
     if (depth2 <= 0.0)
         discard; // back of sphere is in front of front clip plane
     
-    vec3 normal_in_camera = normalize(surface_in_camera - sphere_center_in_eye);
+    vec3 surface_in_sphere = surface_in_eye - sphere_center_in_eye;
+    vec3 normal_in_camera = normalize(surface_in_sphere);
     
     // Correct depth for Z buffer
     // Use a finite near slice of the frustum to handle solid-core clip overlaps,
     // so two intersecting near-clipped spheres are segregated more gracefully.
-    const float near_clip_zone = 0.005;
     if (depth <= near_clip_zone) { // front clip bisects this sphere, show solid core
         // clip to reveal a solid core
         // tiny offset so neighboring clipped spheres overlap correctly
-        float rel_depth = 1.0 - depth/max_front_clip;
+        float m = radius * (-zNear - sphere_center_in_eye.z - 0.20) / surface_in_sphere.z;
+        float rel_depth = 1.0 - (radius*radius - m*m) / max_radius;
+        rel_depth = clamp(rel_depth, 0.0, 1.0);
         gl_FragDepth = 0.0 + near_clip_zone * rel_depth; // overlap
         normal_in_camera = vec3(0, 0, 1); // slice it flat against screen
     }
@@ -243,12 +266,12 @@ void main()
     // from http://www.davidcornette.com/glsl/glsl.html
     
     // TODO - distinguish sources at infinity from local sources
-    vec3 s = -normalize(surface_in_camera - gl_LightSource[0].position.xyz);
+    vec3 s = -normalize(surface_in_eye - gl_LightSource[0].position.xyz);
     vec3 lightvec_in_camera = s;
     
     vec3 n = normalize(normal_in_camera);
     vec3 r = normalize(-reflect(lightvec_in_camera, n));
-    vec3 v = normalize(-surface_in_camera.xyz);
+    vec3 v = normalize(-surface_in_eye.xyz);
     vec4 diffuse = gl_FrontMaterial.diffuse * max(0.0, dot(n, s)) * gl_LightSource[0].diffuse;
     
     // Use Lambertian shading model

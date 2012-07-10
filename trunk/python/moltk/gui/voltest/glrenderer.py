@@ -23,6 +23,7 @@ class GlRenderer(QObject):
         self.gl_widget = gl_widget
         gl_widget.paint_requested.connect(self._paint_gl)
         gl_widget.resize_requested.connect(self._resize_gl)
+        gl_widget.save_image_requested.connect(self.save_image)
         self.update_requested.connect(gl_widget.update)
         
     @QtCore.Slot()
@@ -54,6 +55,13 @@ class GlRenderer(QObject):
         self.gl_widget.swapBuffers()
         self.gl_widget.doneCurrent()
         self.paint_event_needs_flush = False
+
+    @QtCore.Slot(str)
+    def save_image(self, file_name):
+        self.gl_widget.makeCurrent()
+        image = self.gl_widget.grabFrameBuffer()
+        image.save(file_name)
+        print "saved", file_name
 
     def update(self):
         self.update_requested.emit()

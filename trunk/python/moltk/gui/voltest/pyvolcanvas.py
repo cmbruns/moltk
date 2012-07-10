@@ -49,6 +49,10 @@ class PyVolCanvas(QGLWidget):
 
     paint_requested = QtCore.Signal()
     resize_requested = QtCore.Signal(int, int)
+    save_image_requested = QtCore.Signal(str)
+    
+    def save_image(self, file_name):
+        self.save_image_requested.emit(file_name)
     
     # Delegate mouse events to trackball class
     def mouseMoveEvent(self, event):

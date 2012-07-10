@@ -64,7 +64,7 @@ class CameraPosition(QtCore.QObject):
     @property
     def zNear(self):
         "distance to front clipping plane in camera frame"
-        return 0.5 * self.distance_to_focus
+        return 0.6 * self.distance_to_focus
     
     @property
     def zFar(self):
