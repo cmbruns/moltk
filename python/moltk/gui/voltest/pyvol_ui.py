@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pyvol.ui'
 #
-# Created: Mon Jul 09 00:46:52 2012
+# Created: Tue Jul 10 02:24:12 2012
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -87,8 +87,11 @@ class Ui_MainWindow(object):
         self.actionQuadro_120_Hz = QtGui.QAction(MainWindow)
         self.actionQuadro_120_Hz.setEnabled(False)
         self.actionQuadro_120_Hz.setObjectName("actionQuadro_120_Hz")
+        self.actionSave_Lenticular_Series = QtGui.QAction(MainWindow)
+        self.actionSave_Lenticular_Series.setObjectName("actionSave_Lenticular_Series")
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionSave_image)
+        self.menuFile.addAction(self.actionSave_Lenticular_Series)
         self.menuStereo_3D.addAction(self.actionMono_None)
         self.menuStereo_3D.addSeparator()
         self.menuStereo_3D.addAction(self.actionRed_Cyan_anaglyph)
@@ -135,5 +138,6 @@ class Ui_MainWindow(object):
         self.actionRed_Cyan_anaglyph.setText(QtGui.QApplication.translate("MainWindow", "Red:Cyan anaglyph", None, QtGui.QApplication.UnicodeUTF8))
         self.actionGreen_Magenta_anaglyph.setText(QtGui.QApplication.translate("MainWindow", "Green:Magenta anaglyph", None, QtGui.QApplication.UnicodeUTF8))
         self.actionQuadro_120_Hz.setText(QtGui.QApplication.translate("MainWindow", "Quadro 120 Hz", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSave_Lenticular_Series.setText(QtGui.QApplication.translate("MainWindow", "Save Lenticular Series...", None, QtGui.QApplication.UnicodeUTF8))
 
 from pyvolcanvas import PyVolCanvas

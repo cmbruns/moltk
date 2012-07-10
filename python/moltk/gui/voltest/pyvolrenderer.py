@@ -46,20 +46,23 @@ class PyVolRenderer(glrenderer.GlRenderer):
         self.camera_position.set_window_size_in_pixels(w, h)
         self.update()
         
+    def render_scene(self, camera):
+        glClear(GL_DEPTH_BUFFER_BIT)
+        self.shader.zNear = camera.zNear
+        self.shader.zFar = camera.zFar
+        self.shader.zFocus = camera.zFocus
+        self.shader.background_color = self.background_color
+        self.shader.eye_shift = camera.eye_shift_in_ground
+        for actor in self.actors:
+            actor.paint_gl()
+
     def paint_gl(self):
         glDrawBuffer(GL_BACK)
         glColorMask(True, True, True, True)
         glClear(GL_COLOR_BUFFER_BIT)
         for camera in self.stereo_mode.views(self.camera_position):
-            glClear(GL_DEPTH_BUFFER_BIT)
-            self.shader.zNear = camera.zNear
-            self.shader.zFar = camera.zFar
-            self.shader.zFocus = camera.zFocus
-            self.shader.background_color = self.background_color
-            self.shader.eye_shift = camera.eye_shift_in_ground
-            for actor in self.actors:
-                actor.paint_gl()
-
+            self.render_scene(camera)
+                
     @QtCore.Slot(float)
     def increment_zoom(self, ratio):
         self.camera_position.increment_zoom(ratio)

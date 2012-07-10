@@ -30,6 +30,20 @@ class PyVolMainWindow(QMainWindow):
         stereoActionGroup.addAction(self.ui.actionColumn_interleaved)
         stereoActionGroup.addAction(self.ui.actionChecker_interleaved)
 
+    @QtCore.Slot(bool)
+    def on_actionSave_Lenticular_Series_triggered(self, checked):
+        file_name, type = QFileDialog.getSaveFileName(
+                self, 
+                "Save lenticular series", 
+                None, 
+                # PNG format silently does not work
+                self.tr("images(*.tif)"))
+        if file_name == "":
+            return
+        for i in range(18):
+            eye = (i - 8.5) * 0.5
+            print eye
+        
     def set_stereo_mode(self, mode, checked):
         if checked:
             self.ui.glCanvas.renderer.stereo_mode = mode
@@ -85,9 +99,7 @@ class PyVolMainWindow(QMainWindow):
                 self.tr("images(*.jpg *.tif)"))
         if file_name == "":
             return
-        image = self.ui.glCanvas.grabFrameBuffer()
-        print file_name
-        image.save(file_name)
+        image = self.ui.glCanvas.save_image(file_name)
 
     @QtCore.Slot()
     def on_actionOpen_triggered(self):
