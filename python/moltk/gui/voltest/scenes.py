@@ -231,12 +231,11 @@ void main()
     float alpha2 = (b + sqrt(det))/a;
     vec3 surface_in_eye = alpha1 * position_in_eye.xyz;
     
-    // cull depth
+    // cull by front and rear clip planes
     vec4 depth_vec = cameraToClipMatrix * vec4(surface_in_eye, 1);
     float depth = ((depth_vec.z / depth_vec.w) + 1.0) * 0.5;
     if (depth >= 1.0)
         discard; // front of sphere is behind back clip plane
-    
     vec3 back_surface_in_eye = alpha2 * position_in_eye;
     depth_vec = cameraToClipMatrix * vec4(back_surface_in_eye, 1);
     float depth2 = ((depth_vec.z / depth_vec.w) + 1.0) * 0.5;
@@ -262,40 +261,37 @@ void main()
         gl_FragDepth = depth;
     }
     
+    // Use Lambertian shading model
     // DIFFUSE
     // from http://www.davidcornette.com/glsl/glsl.html
-    
     // TODO - distinguish sources at infinity from local sources
     vec3 s = -normalize(surface_in_eye - gl_LightSource[0].position.xyz);
     vec3 lightvec_in_camera = s;
-    
     vec3 n = normalize(normal_in_camera);
     vec3 r = normalize(-reflect(lightvec_in_camera, n));
     vec3 v = normalize(-surface_in_eye.xyz);
     vec4 diffuse = gl_FrontMaterial.diffuse * max(0.0, dot(n, s)) * gl_LightSource[0].diffuse;
-    
-    // Use Lambertian shading model
-    vec4 specular = vec4(0,0,0,0);
     // SPECULAR
+    vec4 specular = vec4(0,0,0,0);
     if (gl_FrontMaterial.shininess != 0.0)
         specular = gl_LightSource[0].specular * 
             gl_FrontMaterial.specular * 
             // TODO - Seems I have to divide by 5 to get the same effect as fixed pipeline
             pow(max(0.0, dot(r, v)), 0.20 * gl_FrontMaterial.shininess);
-    
     // AMBIENT
     vec4 ambient =  gl_LightSource[0].ambient * gl_FrontMaterial.ambient;
-
     vec4 sceneColor = gl_FrontLightModelProduct.sceneColor;
     
     vec4 objectColor = sceneColor + ambient + diffuse + specular;
 
+    // FOG
     float fog_start = 0.6;
     vec4 fogColor = background_color;
     float fog_ratio = 0.0;
     if (depth > fog_start)
         fog_ratio = (fog_start - depth) / (fog_start - 1.0);
     fog_ratio = clamp(fog_ratio, 0.0, 1.0);
+
     gl_FragColor = mix(objectColor, fogColor, fog_ratio);
 }
 """
