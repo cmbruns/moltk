@@ -6,6 +6,7 @@ from pyvolcanvas import PyVolCanvas
 from pyvol_ui import Ui_MainWindow
 from PySide.QtGui import QApplication, QMainWindow, QFileDialog, QActionGroup
 from PySide import QtCore
+import platform
 import sys
 
 
@@ -14,7 +15,8 @@ class PyVolMainWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.menubar.setParent(None) # Show menu on mac
+        if platform.system() == "Darwin":
+            self.ui.menubar.setParent(None) # Show menu on mac
         stereoActionGroup = QActionGroup(self)
         stereoActionGroup.addAction(self.ui.actionMono_None)
         stereoActionGroup.addAction(self.ui.actionRight_Left_cross_eye)
