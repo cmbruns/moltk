@@ -1,7 +1,14 @@
 
 from OpenGL.GL import glColorMask, glPushAttrib, glPopAttrib, GL_COLOR_BUFFER_BIT
 
-class Mono:
+
+class Minimal:
+    def views(self, camera):
+        with camera:
+            yield camera
+
+
+class Mono(Minimal):
     def set_defaults(self, camera):
         camera.viewport_xrelstart = 0.0
         camera.viewport_relwidth = 1.0

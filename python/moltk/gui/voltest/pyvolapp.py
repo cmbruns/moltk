@@ -3,9 +3,11 @@ from rotation import Vec3
 from scenes import FiveBallScene, TeapotActor, SphereImposter, GlutSphereActor
 from pyvolrenderer import PyVolRenderer
 from pyvolcanvas import PyVolCanvas
+from size_dialog import SizeDialog
 from pyvol_ui import Ui_MainWindow
 from PySide.QtGui import QApplication, QMainWindow, QFileDialog, QActionGroup
-from PySide import QtCore
+from PySide import QtCore, QtGui
+from math import pi
 import platform
 import sys
 
@@ -31,6 +33,19 @@ class PyVolMainWindow(QMainWindow):
         stereoActionGroup.addAction(self.ui.actionChecker_interleaved)
 
     @QtCore.Slot(bool)
+    def on_actionSet_size_triggered(self, checked):
+        old_size = self.ui.glCanvas.size()
+        dialog = SizeDialog(self)
+        dialog.ui.widthBox.setValue(old_size.width())
+        dialog.ui.heightBox.setValue(old_size.height())
+        dialog.size_changed.connect(self.ui.glCanvas.resize)
+        dialog.exec_()
+        if dialog.result() == QtGui.QDialog.Accepted:
+            print "Accepted"
+        else:
+            self.ui.glCanvas.resize(old_size)
+
+    @QtCore.Slot(bool)
     def on_actionSave_Lenticular_Series_triggered(self, checked):
         file_name, type = QFileDialog.getSaveFileName(
                 self, 
@@ -40,9 +55,9 @@ class PyVolMainWindow(QMainWindow):
                 self.tr("images(*.tif)"))
         if file_name == "":
             return
-        for i in range(18):
-            eye = (i - 8.5) * 0.5
-            print eye
+        self.ui.glCanvas.save_lenticular_series(file_name=file_name, 
+                                                angle=15.0*pi/180.0, 
+                                                count=18)
         
     def set_stereo_mode(self, mode, checked):
         if checked:

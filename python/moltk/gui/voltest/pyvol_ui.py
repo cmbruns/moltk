@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pyvol.ui'
 #
-# Created: Tue Jul 10 02:24:12 2012
+# Created: Wed Jul 11 02:10:27 2012
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,6 +14,11 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtGui.QWidget(MainWindow)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
+        self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtGui.QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -40,7 +45,7 @@ class Ui_MainWindow(object):
         self.actionSave_image = QtGui.QAction(MainWindow)
         self.actionSave_image.setObjectName("actionSave_image")
         self.actionSet_size = QtGui.QAction(MainWindow)
-        self.actionSet_size.setEnabled(False)
+        self.actionSet_size.setEnabled(True)
         self.actionSet_size.setObjectName("actionSet_size")
         self.actionAdd_bookmark = QtGui.QAction(MainWindow)
         self.actionAdd_bookmark.setEnabled(False)

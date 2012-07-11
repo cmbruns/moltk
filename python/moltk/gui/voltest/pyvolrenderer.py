@@ -46,6 +46,11 @@ class PyVolRenderer(glrenderer.GlRenderer):
         self.camera_position.set_window_size_in_pixels(w, h)
         self.update()
         
+    def render_background(self):
+        glDrawBuffer(GL_BACK)
+        glColorMask(True, True, True, True)
+        glClear(GL_COLOR_BUFFER_BIT)        
+        
     def render_scene(self, camera):
         glClear(GL_DEPTH_BUFFER_BIT)
         self.shader.zNear = camera.zNear
@@ -57,9 +62,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
             actor.paint_gl()
 
     def paint_gl(self):
-        glDrawBuffer(GL_BACK)
-        glColorMask(True, True, True, True)
-        glClear(GL_COLOR_BUFFER_BIT)
+        self.render_background()
         for camera in self.stereo_mode.views(self.camera_position):
             self.render_scene(camera)
                 
