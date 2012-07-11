@@ -105,6 +105,7 @@ void main()
 class SphereImposterShaderProgram(ShaderProgram):
     def __enter__(self):
         ShaderProgram.__enter__(self)
+        # print self.zNear, type(self.zNear), self.shader_program, glGetUniformLocation(self.shader_program, "zNear")
         glUniform1f(glGetUniformLocation(self.shader_program, "zNear"), self.zNear)
         glUniform1f(glGetUniformLocation(self.shader_program, "zFar"), self.zFar)
         glUniform1f(glGetUniformLocation(self.shader_program, "eye_shift"), self.eye_shift)
