@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pyvol.ui'
 #
-# Created: Wed Jul 11 02:10:27 2012
+# Created: Fri Jul 13 02:14:21 2012
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,6 +36,8 @@ class Ui_MainWindow(object):
         self.menuView.setObjectName("menuView")
         self.menuStereo_3D = QtGui.QMenu(self.menuView)
         self.menuStereo_3D.setObjectName("menuStereo_3D")
+        self.menuBookmarks = QtGui.QMenu(self.menuView)
+        self.menuBookmarks.setObjectName("menuBookmarks")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -94,6 +96,14 @@ class Ui_MainWindow(object):
         self.actionQuadro_120_Hz.setObjectName("actionQuadro_120_Hz")
         self.actionSave_Lenticular_Series = QtGui.QAction(MainWindow)
         self.actionSave_Lenticular_Series.setObjectName("actionSave_Lenticular_Series")
+        self.actionAdd_new_bookmark = QtGui.QAction(MainWindow)
+        self.actionAdd_new_bookmark.setObjectName("actionAdd_new_bookmark")
+        self.actionGo_to_previous_bookmark = QtGui.QAction(MainWindow)
+        self.actionGo_to_previous_bookmark.setObjectName("actionGo_to_previous_bookmark")
+        self.actionGo_to_next_bookmark = QtGui.QAction(MainWindow)
+        self.actionGo_to_next_bookmark.setObjectName("actionGo_to_next_bookmark")
+        self.actionClear_all_bookmarks = QtGui.QAction(MainWindow)
+        self.actionClear_all_bookmarks.setObjectName("actionClear_all_bookmarks")
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionSave_image)
         self.menuFile.addAction(self.actionSave_Lenticular_Series)
@@ -113,9 +123,14 @@ class Ui_MainWindow(object):
         self.menuStereo_3D.addAction(self.actionChecker_interleaved)
         self.menuStereo_3D.addSeparator()
         self.menuStereo_3D.addAction(self.actionSwap_Eyes)
-        self.menuView.addAction(self.actionSet_size)
-        self.menuView.addAction(self.actionAdd_bookmark)
+        self.menuBookmarks.addAction(self.actionAdd_new_bookmark)
+        self.menuBookmarks.addAction(self.actionGo_to_previous_bookmark)
+        self.menuBookmarks.addAction(self.actionGo_to_next_bookmark)
+        self.menuBookmarks.addAction(self.actionClear_all_bookmarks)
+        self.menuBookmarks.addSeparator()
+        self.menuView.addAction(self.menuBookmarks.menuAction())
         self.menuView.addAction(self.menuStereo_3D.menuAction())
+        self.menuView.addAction(self.actionSet_size)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuView.menuAction())
 
@@ -127,6 +142,7 @@ class Ui_MainWindow(object):
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuView.setTitle(QtGui.QApplication.translate("MainWindow", "View", None, QtGui.QApplication.UnicodeUTF8))
         self.menuStereo_3D.setTitle(QtGui.QApplication.translate("MainWindow", "Stereo 3D", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuBookmarks.setTitle(QtGui.QApplication.translate("MainWindow", "Bookmarks", None, QtGui.QApplication.UnicodeUTF8))
         self.actionOpen.setText(QtGui.QApplication.translate("MainWindow", "Load molecule...", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSave_image.setText(QtGui.QApplication.translate("MainWindow", "Save image...", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSet_size.setText(QtGui.QApplication.translate("MainWindow", "Set window size...", None, QtGui.QApplication.UnicodeUTF8))
@@ -144,5 +160,12 @@ class Ui_MainWindow(object):
         self.actionGreen_Magenta_anaglyph.setText(QtGui.QApplication.translate("MainWindow", "Green:Magenta anaglyph", None, QtGui.QApplication.UnicodeUTF8))
         self.actionQuadro_120_Hz.setText(QtGui.QApplication.translate("MainWindow", "Quadro 120 Hz", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSave_Lenticular_Series.setText(QtGui.QApplication.translate("MainWindow", "Save Lenticular Series...", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAdd_new_bookmark.setText(QtGui.QApplication.translate("MainWindow", "Add new bookmark", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAdd_new_bookmark.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+D", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionGo_to_previous_bookmark.setText(QtGui.QApplication.translate("MainWindow", "Go to previous bookmark", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionGo_to_previous_bookmark.setShortcut(QtGui.QApplication.translate("MainWindow", "PgUp", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionGo_to_next_bookmark.setText(QtGui.QApplication.translate("MainWindow", "Go to next bookmark", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionGo_to_next_bookmark.setShortcut(QtGui.QApplication.translate("MainWindow", "PgDown", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionClear_all_bookmarks.setText(QtGui.QApplication.translate("MainWindow", "Clear all bookmarks", None, QtGui.QApplication.UnicodeUTF8))
 
 from pyvolcanvas import PyVolCanvas

@@ -71,9 +71,19 @@
      <addaction name="separator"/>
      <addaction name="actionSwap_Eyes"/>
     </widget>
-    <addaction name="actionSet_size"/>
-    <addaction name="actionAdd_bookmark"/>
+    <widget class="QMenu" name="menuBookmarks">
+     <property name="title">
+      <string>Bookmarks</string>
+     </property>
+     <addaction name="actionAdd_new_bookmark"/>
+     <addaction name="actionGo_to_previous_bookmark"/>
+     <addaction name="actionGo_to_next_bookmark"/>
+     <addaction name="actionClear_all_bookmarks"/>
+     <addaction name="separator"/>
+    </widget>
+    <addaction name="menuBookmarks"/>
     <addaction name="menuStereo_3D"/>
+    <addaction name="actionSet_size"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -222,6 +232,35 @@
   <action name="actionSave_Lenticular_Series">
    <property name="text">
     <string>Save Lenticular Series...</string>
+   </property>
+  </action>
+  <action name="actionAdd_new_bookmark">
+   <property name="text">
+    <string>Add new bookmark</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionGo_to_previous_bookmark">
+   <property name="text">
+    <string>Go to previous bookmark</string>
+   </property>
+   <property name="shortcut">
+    <string>PgUp</string>
+   </property>
+  </action>
+  <action name="actionGo_to_next_bookmark">
+   <property name="text">
+    <string>Go to next bookmark</string>
+   </property>
+   <property name="shortcut">
+    <string>PgDown</string>
+   </property>
+  </action>
+  <action name="actionClear_all_bookmarks">
+   <property name="text">
+    <string>Clear all bookmarks</string>
    </property>
   </action>
  </widget>
