@@ -5,6 +5,10 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from math import pi, atan2, floor
 
+# Need old-style State class to be able to add random attributes
+class State:
+    pass
+
 class CameraPosition(QtCore.QObject):
     """
     Values can appear in various reference frames.  Each frame has 
@@ -64,12 +68,12 @@ class CameraPosition(QtCore.QObject):
     @property
     def zNear(self):
         "distance to front clipping plane in camera frame"
-        return 0.6 * self.distance_to_focus
+        return 0.3 * self.distance_to_focus
     
     @property
     def zFar(self):
         "distance to rear clipping plane in camera frame"
-        return 2.5 * self.distance_to_focus
+        return 3.0 * self.distance_to_focus
     
     @property
     def zFocus(self):
@@ -132,6 +136,23 @@ class CameraPosition(QtCore.QObject):
             shift *= -1
         return shift
         
+    @property
+    def state(self):
+        "Essential state for restoring previous camera settings.  Viewpoint but not window size"
+        state = State()
+        state.rotation = self.rotation
+        state.focus = self.focus_in_ground
+        # window size affects relative zoom
+        state.zFocus_vheight = self.zFocus * self.viewport_height
+        return state
+    
+    @state.setter
+    def state(self, s):
+        self.rotation = s.rotation
+        self.focus_in_ground = s.focus
+        # window height affects zoom/distance_to_focus
+        self.distance_to_focus = s.zFocus_vheight / self.viewport_height
+    
     def set_gl_projection(self):
         # http://www.orthostereo.com/geometryopengl.html
         glMatrixMode(GL_PROJECTION)

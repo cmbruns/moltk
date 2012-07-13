@@ -286,7 +286,7 @@ void main()
     vec4 objectColor = sceneColor + ambient + diffuse + specular;
 
     // FOG
-    float fog_start = 0.6;
+    float fog_start = 0.80;
     vec4 fogColor = background_color;
     float fog_ratio = 0.0;
     if (depth > fog_start)
