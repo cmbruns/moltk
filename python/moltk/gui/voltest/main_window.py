@@ -35,6 +35,12 @@ class MainWindow(QMainWindow):
         return self.ui.glCanvas.renderer.camera_position
 
     @QtCore.Slot(bool)
+    def on_actionPlay_movie_triggered(self, checked):
+        for frame in self.bookmarks.play():
+            self.camera.state = frame.camera_state
+            self.ui.glCanvas.update()
+
+    @QtCore.Slot(bool)
     def on_actionAdd_new_bookmark_triggered(self, checked):
         self.bookmarks.append(KeyFrame(self.camera.state))
         self.statusBar().showMessage("Added bookmark number " + str(self.bookmarks.current_key_frame_index + 1), 2000)

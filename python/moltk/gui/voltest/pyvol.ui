@@ -80,6 +80,7 @@
      <addaction name="actionGo_to_next_bookmark"/>
      <addaction name="actionClear_all_bookmarks"/>
      <addaction name="separator"/>
+     <addaction name="actionPlay_movie"/>
     </widget>
     <addaction name="menuBookmarks"/>
     <addaction name="menuStereo_3D"/>
@@ -261,6 +262,11 @@
   <action name="actionClear_all_bookmarks">
    <property name="text">
     <string>Clear all bookmarks</string>
+   </property>
+  </action>
+  <action name="actionPlay_movie">
+   <property name="text">
+    <string>Play movie</string>
    </property>
   </action>
  </widget>

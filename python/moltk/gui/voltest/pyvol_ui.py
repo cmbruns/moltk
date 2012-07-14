@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pyvol.ui'
 #
-# Created: Fri Jul 13 02:14:21 2012
+# Created: Sat Jul 14 15:10:29 2012
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -104,6 +104,8 @@ class Ui_MainWindow(object):
         self.actionGo_to_next_bookmark.setObjectName("actionGo_to_next_bookmark")
         self.actionClear_all_bookmarks = QtGui.QAction(MainWindow)
         self.actionClear_all_bookmarks.setObjectName("actionClear_all_bookmarks")
+        self.actionPlay_movie = QtGui.QAction(MainWindow)
+        self.actionPlay_movie.setObjectName("actionPlay_movie")
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionSave_image)
         self.menuFile.addAction(self.actionSave_Lenticular_Series)
@@ -128,6 +130,7 @@ class Ui_MainWindow(object):
         self.menuBookmarks.addAction(self.actionGo_to_next_bookmark)
         self.menuBookmarks.addAction(self.actionClear_all_bookmarks)
         self.menuBookmarks.addSeparator()
+        self.menuBookmarks.addAction(self.actionPlay_movie)
         self.menuView.addAction(self.menuBookmarks.menuAction())
         self.menuView.addAction(self.menuStereo_3D.menuAction())
         self.menuView.addAction(self.actionSet_size)
@@ -167,5 +170,6 @@ class Ui_MainWindow(object):
         self.actionGo_to_next_bookmark.setText(QtGui.QApplication.translate("MainWindow", "Go to next bookmark", None, QtGui.QApplication.UnicodeUTF8))
         self.actionGo_to_next_bookmark.setShortcut(QtGui.QApplication.translate("MainWindow", "PgDown", None, QtGui.QApplication.UnicodeUTF8))
         self.actionClear_all_bookmarks.setText(QtGui.QApplication.translate("MainWindow", "Clear all bookmarks", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionPlay_movie.setText(QtGui.QApplication.translate("MainWindow", "Play movie", None, QtGui.QApplication.UnicodeUTF8))
 
 from pyvolcanvas import PyVolCanvas
