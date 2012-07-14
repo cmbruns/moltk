@@ -11,6 +11,7 @@ class Movie():
         self._focusy = []
         self._focusz = []
         self._zfv = []
+        self._quat = []
         self.current_key_frame_index = None
         self.frames_per_second = frames_per_second
         self.spline = CatmullRomSpline()
@@ -24,6 +25,7 @@ class Movie():
         self._focusy.append(key_frame.camera_state.focus.y)
         self._focusz.append(key_frame.camera_state.focus.z)
         self._zfv.append(key_frame.camera_state.zFocus_vheight)
+        self._quat.append(key_frame.camera_state.rotation.to_quaternion())
         self.current_key_frame_index = len(self._key_frames) - 1
         
     def increment(self):
@@ -45,6 +47,11 @@ class Movie():
     def clear(self):
         self.current_key_frame_index = None
         self._key_frames[:] = []
+        self._focusx = []
+        self._focusy = []
+        self._focusz = []
+        self._zfv = []
+        self._quat = []
 
     def play(self, doLoop=False):
         time = 0.0 # seconds
@@ -73,13 +80,16 @@ class Movie():
                             self._focusz, 
                             interpolation_parameter,
                             doLoop)
+                camera_state.focus= Vec3([focus_x, focus_y, focus_z])
                 camera_state.zFocus_vheight = self.spline.interpolate_sequence(
                             self._zfv,
                             interpolation_parameter,
                             doLoop)
-                # TODO rotation
-                camera_state.rotation = kf.camera_state.rotation
-                camera_state.focus= Vec3([focus_x, focus_y, focus_z])
+                quat = self.spline.interpolate_quaternion_sequence(
+                            self._quat,
+                            interpolation_parameter,
+                            doLoop)
+                camera_state.rotation = quat.to_rotation()
                 while timer.elapsed() < time*1000.0:
                     # TODO - use threading instead
                     QCoreApplication.processEvents()

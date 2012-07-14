@@ -4,7 +4,7 @@ Created on Jun 20, 2012
 @author: brunsc
 '''
 
-from math import cos, sin, sqrt, atan2, pi
+from math import cos, sin, sqrt, atan2, pi, acos
 from sys import float_info
 from PySide.QtCore import QObject
 
@@ -131,6 +131,11 @@ class Quaternion:
     def __getitem__(self, key):
         return self._q[key]
     
+    def to_rotation(self):
+        result = Rotation()
+        result.set_from_quaternion(self)
+        return result
+        
     def to_angle_axis(self):
         ca2  = self[0]            # cos(a/2)
         sa2v = self[1:4]          # sin(a/2) * v
@@ -153,6 +158,42 @@ class Quaternion:
         # Return (angle/axis)
         return [angle, axis]
     
+    def dot(self, rhs):
+        return sum([self[i]*rhs[i] for i in range(4)])
+        
+    def slerp(qA, qB, alpha, spin=0.0):
+        """
+        Spherical linear interpolation of quaternions.
+        From page 448 of "Visualizing Quaternions" by Andrew J. Hanson
+        (mmmbop)
+        """
+        # self is qA
+        cos_t = qA.dot(qB)
+        # If qB is on opposite hemisphere from qA, use -qB instead
+        if cos_t < 0.0:
+            cos_t = -cos_t
+            bFlip = True
+        else:
+            bFlip = False
+        # If qB is the same as qA (within precision)
+        # just linear interpolate between qA and qB.
+        # Can't do spins, since we don't know what direction to spin.
+        if (1.0 - cos_t) < 1e-7:
+            beta = 1.0 - alpha
+        else: # normal case
+            theta = acos(cos_t)
+            phi = theta + spin * pi
+            sin_t = sin(theta)
+            beta = sin(theta - alpha * phi) / sin_t
+            alpha = sin(alpha * phi) / sin_t
+        if bFlip:
+            alpha = -alpha
+        # interpolate
+        qOut = [(beta*qA[i] + alpha*qB[i]) for i in range(4)]
+        # scale to unit length (1.0)
+        scale = 1.0 / sqrt(sum([qOut[i]*qOut[i] for i in range(4)]))
+        return Quaternion( components=[scale*qOut[i] for i in range(4)] ) 
+
 
 class CoordinateAxis:
     def __init__(self, index):
@@ -246,9 +287,9 @@ class Rotation(object):
         q00=q[0]*q[0]; q11=q[1]*q[1]; q22=q[2]*q[2]; q33=q[3]*q[3]
         q01=q[0]*q[1]; q02=q[0]*q[2]; q03=q[0]*q[3]
         q12=q[1]*q[2]; q13=q[1]*q[3]; q23=q[2]*q[3]
-        self._rows = ((q00+q11-q22-q33,   2*(q12-q03),   2*(q13+q02)),
-                      ( 2*(q12+q03) , q00-q11+q22-q33,   2*(q23-q01)),
-                      ( 2*(q13-q02) ,   2*(q23+q01)  , q00-q11-q22+q33))
+        self._rows = ((q00+q11-q22-q33,   2.0*(q12-q03),   2.0*(q13+q02)),
+                      ( 2.0*(q12+q03) , q00-q11+q22-q33,   2.0*(q23-q01)),
+                      ( 2.0*(q13-q02) ,   2.0*(q23+q01)  , q00-q11-q22+q33))
         return self
         
     def set_from_angle_about_unit_vector(self, angle, unit_vector):
