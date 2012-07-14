@@ -5,9 +5,12 @@ from movie import Movie, KeyFrame
 import stereo3d
 from rotation import Vec3
 from PySide import QtCore
-from PySide.QtGui import QMainWindow, QFileDialog, QActionGroup
-import platform
+from PySide.QtGui import *
+from PySide.QtCore import QCoreApplication, Qt
 from math import pi
+import re
+import platform
+import os
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -29,14 +32,36 @@ class MainWindow(QMainWindow):
         stereoActionGroup.addAction(self.ui.actionRow_interleaved)
         stereoActionGroup.addAction(self.ui.actionColumn_interleaved)
         stereoActionGroup.addAction(self.ui.actionChecker_interleaved)
+        # size dialog
+        self.size_dialog = SizeDialog(self)
+        self.size_dialog.size_changed.connect(self.resize_canvas)
+        self.size_dialog.ui.comboBox.activated[str].connect(self.parse_size_box_string)
+        # print QImageWriter.supportedImageFormats()
 
     @property
     def camera(self):
         return self.ui.glCanvas.renderer.camera_position
 
+    @QtCore.Slot(int, int)
+    def resize_canvas(self, w, h):
+        dx = w - self.ui.glCanvas.width()
+        dy = h - self.ui.glCanvas.height()
+        x2 = self.width() + dx
+        y2 = self.height() + dy
+        self.resize(x2, y2)
+        
+    @QtCore.Slot(str)
+    def parse_size_box_string(self, value):
+        match = re.search('(\d+)x(\d+)', value)
+        if match:
+            w = int(match.group(1))
+            h = int(match.group(2))
+            self.size_dialog.ui.widthBox.setValue(w)
+            self.size_dialog.ui.heightBox.setValue(h)
+        
     @QtCore.Slot(bool)
     def on_actionPlay_movie_triggered(self, checked):
-        for frame in self.bookmarks.play():
+        for frame in self.bookmarks.play(real_time=True):
             self.camera.state = frame.camera_state
             self.ui.glCanvas.update()
 
@@ -68,16 +93,47 @@ class MainWindow(QMainWindow):
     @QtCore.Slot(bool)
     def on_actionSet_size_triggered(self, checked):
         old_size = self.ui.glCanvas.size()
-        dialog = SizeDialog(self)
+        dialog = self.size_dialog
+        dialog.blockSignals(True)
         dialog.ui.widthBox.setValue(old_size.width())
         dialog.ui.heightBox.setValue(old_size.height())
-        dialog.size_changed.connect(self.ui.glCanvas.resize)
+        dialog.blockSignals(False)
         dialog.exec_()
-        if dialog.result() == QtGui.QDialog.Accepted:
+        if dialog.result() == QDialog.Accepted:
             print "Accepted"
         else:
-            self.ui.glCanvas.resize(old_size)
+            self.resize_canvas(old_size.width(), old_size.height())
 
+    @QtCore.Slot(bool)
+    def on_actionSave_movie_triggered(self, checked):
+        if len(self.bookmarks) < 1:
+            QMessageBox.warning(self, "No key frames found", 
+                                """You must create some bookmarks(key frames)
+before you can save a movie.""")
+            return
+        base_file_name, type = QFileDialog.getSaveFileName(
+                self, 
+                "Save movie frame images", 
+                None, 
+                # PNG format silently does not work
+                self.tr("images(*.ppm *.tif *.jpg)"))
+        if base_file_name == "":
+            return
+        frame_number = 0
+        froot, fext = os.path.splitext(base_file_name)
+        for frame in self.bookmarks.play(real_time=False):
+            num_string = '_%03d' % (frame_number + 1)
+            file_name = froot + num_string + fext
+            self.camera.state = frame.camera_state
+            # TODO - potential OpenGL thread problems
+            self.ui.glCanvas.update()
+            self.ui.glCanvas.repaint()
+            QCoreApplication.processEvents() # To avoid locking up the application
+            image = self.ui.glCanvas.grabFrameBuffer()
+            print file_name
+            image.save(file_name)
+            frame_number += 1
+        
     @QtCore.Slot(bool)
     def on_actionSave_Lenticular_Series_triggered(self, checked):
         file_name, type = QFileDialog.getSaveFileName(

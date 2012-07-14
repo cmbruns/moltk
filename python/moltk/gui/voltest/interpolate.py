@@ -1,13 +1,13 @@
 from math import floor
 
 class CatmullRomSpline:
-    def _compute_sequence_indices(self, sequence, index, doLoop):
+    def _compute_sequence_indices(self, sequence, index, do_loop):
         vals = []
         i1 = int(floor(index))
         for di in [-1, 0, 1, 2]:
             i = i1 + di
             # ensure index is within range
-            if doLoop: # interpolate between final and first elements
+            if do_loop: # interpolate between final and first elements
                 while i < 0:
                     i += len(sequence)
                 while i >= (len(sequence)):
@@ -20,13 +20,13 @@ class CatmullRomSpline:
             vals.append(sequence[i])
         return vals
     
-    def interpolate_sequence(self, sequence, index, doLoop=False):
-        vals = self._compute_sequence_indices(sequence, index, doLoop)
+    def interpolate_sequence(self, sequence, index, do_loop=False):
+        vals = self._compute_sequence_indices(sequence, index, do_loop)
         i1 = int(floor(index))
         return self.interpolate(vals[0], vals[1], vals[2], vals[3], float(index) - i1)
     
-    def interpolate_quaternion_sequence(self, sequence, index, doLoop=False):
-        vals = self._compute_sequence_indices(sequence, index, doLoop)
+    def interpolate_quaternion_sequence(self, sequence, index, do_loop=False):
+        vals = self._compute_sequence_indices(sequence, index, do_loop)
         i1 = int(floor(index))
         return self.interpolate_quaternion(vals[0], vals[1], vals[2], vals[3], float(index) - i1)
     

@@ -15,7 +15,43 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QComboBox" name="comboBox"/>
+    <widget class="QComboBox" name="comboBox">
+     <item>
+      <property name="text">
+       <string>Choose resolution</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1080p: 1920x1080 (HDTV)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>720p: 1280x720 (HDTV)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>480p: 854x480 (youtube)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>720x480 (DVD NTSC)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>360p: 640x360</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>240p: 426x240</string>
+      </property>
+     </item>
+    </widget>
    </item>
    <item>
     <widget class="QFrame" name="frame">

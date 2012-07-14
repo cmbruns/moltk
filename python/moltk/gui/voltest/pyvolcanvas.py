@@ -6,7 +6,8 @@ Created on Jun 19, 2012
 
 from trackball import Trackball
 from PySide.QtOpenGL import QGLWidget, QGLFormat
-from PySide.QtCore import QThread, QCoreApplication
+from PySide.QtCore import *
+from PySide.QtGui import *
 from PySide import QtCore
 
 class PyVolCanvas(QGLWidget):
@@ -19,6 +20,7 @@ class PyVolCanvas(QGLWidget):
         self.opengl_thread = QThread()
         QCoreApplication.instance().aboutToQuit.connect(self.clean_up_before_quit)
         self.trackball = Trackball()
+        self.preferredSize = None
         
     # delegate opengl tasks to separate non-qt-gui Renderer object
     def set_gl_renderer(self, renderer):
@@ -42,6 +44,16 @@ class PyVolCanvas(QGLWidget):
         sz = event.size()
         self.resize_requested.emit(sz.width(), sz.height())
         
+    def sizeHint(self):
+        if self.preferredSize is None:
+            return QGLWidget.sizeHint(self)
+        return self.preferredSize
+        
+    @QtCore.Slot(int, int)
+    def special_resize(self, w, h):
+        self.preferredSize = QSize(w, h)
+        self.resize(w, h)
+
     @QtCore.Slot()
     def clean_up_before_quit(self):
         self.opengl_thread.quit()
