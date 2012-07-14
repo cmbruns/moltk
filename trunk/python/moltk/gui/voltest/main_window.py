@@ -1,6 +1,7 @@
 from pyvol_ui import Ui_MainWindow
 from size_dialog import SizeDialog
 from scenes import SphereImposter, GlutSphereActor
+from movie import Movie, KeyFrame
 import stereo3d
 from rotation import Vec3
 from PySide import QtCore
@@ -15,8 +16,7 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         if platform.system() == "Darwin":
             self.ui.menubar.setParent(None) # Show menu on mac
-        self.bookmarks = []
-        self.current_bookmark_index = 0
+        self.bookmarks = Movie()
         stereoActionGroup = QActionGroup(self)
         stereoActionGroup.addAction(self.ui.actionMono_None)
         stereoActionGroup.addAction(self.ui.actionRight_Left_cross_eye)
@@ -30,36 +30,34 @@ class MainWindow(QMainWindow):
         stereoActionGroup.addAction(self.ui.actionColumn_interleaved)
         stereoActionGroup.addAction(self.ui.actionChecker_interleaved)
 
+    @property
+    def camera(self):
+        return self.ui.glCanvas.renderer.camera_position
+
     @QtCore.Slot(bool)
     def on_actionAdd_new_bookmark_triggered(self, checked):
-        self.bookmarks.append(self.ui.glCanvas.renderer.camera_position.state)
-        self.current_bookmark_index = len(self.bookmarks)
-        self.statusBar().showMessage("Added bookmark number " + str(self.current_bookmark_index), 2000)
+        self.bookmarks.append(KeyFrame(self.camera.state))
+        self.statusBar().showMessage("Added bookmark number " + str(self.bookmarks.current_key_frame_index + 1), 2000)
 
     @QtCore.Slot(bool)
     def on_actionGo_to_previous_bookmark_triggered(self, checked):
         if len(self.bookmarks) < 1:
             return
-        self.current_bookmark_index -= 1;
-        if self.current_bookmark_index < 0:
-            self.current_bookmark_index = len(self.bookmarks) - 1
-        self.ui.glCanvas.renderer.camera_position.state = self.bookmarks[self.current_bookmark_index]
+        self.bookmarks.decrement()
+        self.camera.state = self.bookmarks.current_key_frame.camera_state
         self.ui.glCanvas.update()
         
     @QtCore.Slot(bool)
     def on_actionGo_to_next_bookmark_triggered(self, checked):
         if len(self.bookmarks) < 1:
             return
-        self.current_bookmark_index += 1;
-        if self.current_bookmark_index >= len(self.bookmarks):
-            self.current_bookmark_index = 0
-        self.ui.glCanvas.renderer.camera_position.state = self.bookmarks[self.current_bookmark_index]
+        self.bookmarks.increment()
+        self.camera.state = self.bookmarks.current_key_frame.camera_state
         self.ui.glCanvas.update()
         
     @QtCore.Slot(bool)
     def on_actionClear_all_bookmarks_triggered(self, checked):
-        self.bookmarks = []
-        self.current_bookmark_index = 0
+        self.bookmarks.clear()
         
     @QtCore.Slot(bool)
     def on_actionSet_size_triggered(self, checked):
@@ -129,7 +127,7 @@ class MainWindow(QMainWindow):
 
     @QtCore.Slot(bool)
     def on_actionSwap_Eyes_triggered(self, checked):
-        self.ui.glCanvas.renderer.camera_position.swap_eyes = checked
+        self.camera.swap_eyes = checked
         self.ui.glCanvas.update()
 
     @QtCore.Slot(bool)
