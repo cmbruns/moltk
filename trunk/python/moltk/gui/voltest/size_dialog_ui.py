@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'size_dialog.ui'
 #
-# Created: Wed Jul 11 01:57:48 2012
+# Created: Sat Jul 14 19:37:58 2012
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,6 +17,13 @@ class Ui_windowSizeDialog(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.comboBox = QtGui.QComboBox(windowSizeDialog)
         self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
         self.verticalLayout.addWidget(self.comboBox)
         self.frame = QtGui.QFrame(windowSizeDialog)
         self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
@@ -59,6 +66,13 @@ class Ui_windowSizeDialog(object):
 
     def retranslateUi(self, windowSizeDialog):
         windowSizeDialog.setWindowTitle(QtGui.QApplication.translate("windowSizeDialog", "Enter size of display window", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(0, QtGui.QApplication.translate("windowSizeDialog", "Choose resolution", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(1, QtGui.QApplication.translate("windowSizeDialog", "1080p: 1920x1080 (HDTV)", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(2, QtGui.QApplication.translate("windowSizeDialog", "720p: 1280x720 (HDTV)", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(3, QtGui.QApplication.translate("windowSizeDialog", "480p: 854x480 (youtube)", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(4, QtGui.QApplication.translate("windowSizeDialog", "720x480 (DVD NTSC)", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(5, QtGui.QApplication.translate("windowSizeDialog", "360p: 640x360", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(6, QtGui.QApplication.translate("windowSizeDialog", "240p: 426x240", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("windowSizeDialog", "Width", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("windowSizeDialog", "x", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("windowSizeDialog", "Height", None, QtGui.QApplication.UnicodeUTF8))

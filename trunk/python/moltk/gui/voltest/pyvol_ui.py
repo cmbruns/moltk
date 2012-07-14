@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pyvol.ui'
 #
-# Created: Sat Jul 14 15:10:29 2012
+# Created: Sat Jul 14 20:51:03 2012
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,7 +14,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtGui.QWidget(MainWindow)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
@@ -106,9 +106,13 @@ class Ui_MainWindow(object):
         self.actionClear_all_bookmarks.setObjectName("actionClear_all_bookmarks")
         self.actionPlay_movie = QtGui.QAction(MainWindow)
         self.actionPlay_movie.setObjectName("actionPlay_movie")
+        self.actionSave_movie = QtGui.QAction(MainWindow)
+        self.actionSave_movie.setObjectName("actionSave_movie")
         self.menuFile.addAction(self.actionOpen)
+        self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave_image)
         self.menuFile.addAction(self.actionSave_Lenticular_Series)
+        self.menuFile.addAction(self.actionSave_movie)
         self.menuStereo_3D.addAction(self.actionMono_None)
         self.menuStereo_3D.addSeparator()
         self.menuStereo_3D.addAction(self.actionRed_Cyan_anaglyph)
@@ -125,12 +129,12 @@ class Ui_MainWindow(object):
         self.menuStereo_3D.addAction(self.actionChecker_interleaved)
         self.menuStereo_3D.addSeparator()
         self.menuStereo_3D.addAction(self.actionSwap_Eyes)
+        self.menuBookmarks.addAction(self.actionPlay_movie)
+        self.menuBookmarks.addSeparator()
         self.menuBookmarks.addAction(self.actionAdd_new_bookmark)
         self.menuBookmarks.addAction(self.actionGo_to_previous_bookmark)
         self.menuBookmarks.addAction(self.actionGo_to_next_bookmark)
         self.menuBookmarks.addAction(self.actionClear_all_bookmarks)
-        self.menuBookmarks.addSeparator()
-        self.menuBookmarks.addAction(self.actionPlay_movie)
         self.menuView.addAction(self.menuBookmarks.menuAction())
         self.menuView.addAction(self.menuStereo_3D.menuAction())
         self.menuView.addAction(self.actionSet_size)
@@ -171,5 +175,6 @@ class Ui_MainWindow(object):
         self.actionGo_to_next_bookmark.setShortcut(QtGui.QApplication.translate("MainWindow", "PgDown", None, QtGui.QApplication.UnicodeUTF8))
         self.actionClear_all_bookmarks.setText(QtGui.QApplication.translate("MainWindow", "Clear all bookmarks", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPlay_movie.setText(QtGui.QApplication.translate("MainWindow", "Play movie", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSave_movie.setText(QtGui.QApplication.translate("MainWindow", "Save movie...", None, QtGui.QApplication.UnicodeUTF8))
 
 from pyvolcanvas import PyVolCanvas
