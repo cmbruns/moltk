@@ -42,6 +42,10 @@ class MainWindow(QMainWindow):
     def camera(self):
         return self.ui.glCanvas.renderer.camera_position
 
+    @QtCore.Slot(bool)
+    def on_actionQuit_triggered(self, checked):
+        self.close()
+        
     @QtCore.Slot(int, int)
     def resize_canvas(self, w, h):
         dx = w - self.ui.glCanvas.width()
