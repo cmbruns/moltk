@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pyvol.ui'
 #
-# Created: Sat Jul 14 20:51:03 2012
+# Created: Sun Jul 15 02:47:18 2012
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -108,11 +108,16 @@ class Ui_MainWindow(object):
         self.actionPlay_movie.setObjectName("actionPlay_movie")
         self.actionSave_movie = QtGui.QAction(MainWindow)
         self.actionSave_movie.setObjectName("actionSave_movie")
+        self.actionQuit = QtGui.QAction(MainWindow)
+        self.actionQuit.setMenuRole(QtGui.QAction.QuitRole)
+        self.actionQuit.setObjectName("actionQuit")
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave_image)
         self.menuFile.addAction(self.actionSave_Lenticular_Series)
         self.menuFile.addAction(self.actionSave_movie)
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionQuit)
         self.menuStereo_3D.addAction(self.actionMono_None)
         self.menuStereo_3D.addSeparator()
         self.menuStereo_3D.addAction(self.actionRed_Cyan_anaglyph)
@@ -176,5 +181,6 @@ class Ui_MainWindow(object):
         self.actionClear_all_bookmarks.setText(QtGui.QApplication.translate("MainWindow", "Clear all bookmarks", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPlay_movie.setText(QtGui.QApplication.translate("MainWindow", "Play movie", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSave_movie.setText(QtGui.QApplication.translate("MainWindow", "Save movie...", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionQuit.setText(QtGui.QApplication.translate("MainWindow", "Quit", None, QtGui.QApplication.UnicodeUTF8))
 
 from pyvolcanvas import PyVolCanvas
