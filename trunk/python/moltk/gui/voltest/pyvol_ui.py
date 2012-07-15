@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pyvol.ui'
 #
-# Created: Sun Jul 15 03:06:32 2012
+# Created: Sun Jul 15 16:04:42 2012
 #      by: pyside-uic 0.2.14 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -111,11 +111,19 @@ class Ui_MainWindow(object):
         self.actionQuit = QtGui.QAction(MainWindow)
         self.actionQuit.setMenuRole(QtGui.QAction.QuitRole)
         self.actionQuit.setObjectName("actionQuit")
+        self.actionMeasure_fps = QtGui.QAction(MainWindow)
+        self.actionMeasure_fps.setObjectName("actionMeasure_fps")
+        self.actionSave_movie_script = QtGui.QAction(MainWindow)
+        self.actionSave_movie_script.setObjectName("actionSave_movie_script")
+        self.actionLoad_movie_script = QtGui.QAction(MainWindow)
+        self.actionLoad_movie_script.setObjectName("actionLoad_movie_script")
         self.menuFile.addAction(self.actionOpen)
+        self.menuFile.addAction(self.actionLoad_movie_script)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave_image)
         self.menuFile.addAction(self.actionSave_Lenticular_Series)
         self.menuFile.addAction(self.actionSave_movie)
+        self.menuFile.addAction(self.actionSave_movie_script)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionQuit)
         self.menuStereo_3D.addAction(self.actionMono_None)
@@ -135,6 +143,7 @@ class Ui_MainWindow(object):
         self.menuStereo_3D.addSeparator()
         self.menuStereo_3D.addAction(self.actionSwap_Eyes)
         self.menuBookmarks.addAction(self.actionPlay_movie)
+        self.menuBookmarks.addAction(self.actionMeasure_fps)
         self.menuBookmarks.addSeparator()
         self.menuBookmarks.addAction(self.actionAdd_new_bookmark)
         self.menuBookmarks.addAction(self.actionGo_to_previous_bookmark)
@@ -180,7 +189,10 @@ class Ui_MainWindow(object):
         self.actionGo_to_next_bookmark.setShortcut(QtGui.QApplication.translate("MainWindow", "PgDown", None, QtGui.QApplication.UnicodeUTF8))
         self.actionClear_all_bookmarks.setText(QtGui.QApplication.translate("MainWindow", "Clear all bookmarks", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPlay_movie.setText(QtGui.QApplication.translate("MainWindow", "Play movie", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionSave_movie.setText(QtGui.QApplication.translate("MainWindow", "Save movie...", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSave_movie.setText(QtGui.QApplication.translate("MainWindow", "Save movie frames...", None, QtGui.QApplication.UnicodeUTF8))
         self.actionQuit.setText(QtGui.QApplication.translate("MainWindow", "Quit", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionMeasure_fps.setText(QtGui.QApplication.translate("MainWindow", "Measure fps", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSave_movie_script.setText(QtGui.QApplication.translate("MainWindow", "Save movie script...", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionLoad_movie_script.setText(QtGui.QApplication.translate("MainWindow", "Load movie script...", None, QtGui.QApplication.UnicodeUTF8))
 
 from pyvolcanvas import PyVolCanvas

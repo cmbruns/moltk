@@ -43,10 +43,12 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen"/>
+    <addaction name="actionLoad_movie_script"/>
     <addaction name="separator"/>
     <addaction name="actionSave_image"/>
     <addaction name="actionSave_Lenticular_Series"/>
     <addaction name="actionSave_movie"/>
+    <addaction name="actionSave_movie_script"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -80,6 +82,7 @@
       <string>Bookmarks</string>
      </property>
      <addaction name="actionPlay_movie"/>
+     <addaction name="actionMeasure_fps"/>
      <addaction name="separator"/>
      <addaction name="actionAdd_new_bookmark"/>
      <addaction name="actionGo_to_previous_bookmark"/>
@@ -275,7 +278,7 @@
   </action>
   <action name="actionSave_movie">
    <property name="text">
-    <string>Save movie...</string>
+    <string>Save movie frames...</string>
    </property>
   </action>
   <action name="actionQuit">
@@ -284,6 +287,21 @@
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
+   </property>
+  </action>
+  <action name="actionMeasure_fps">
+   <property name="text">
+    <string>Measure fps</string>
+   </property>
+  </action>
+  <action name="actionSave_movie_script">
+   <property name="text">
+    <string>Save movie script...</string>
+   </property>
+  </action>
+  <action name="actionLoad_movie_script">
+   <property name="text">
+    <string>Load movie script...</string>
    </property>
   </action>
  </widget>

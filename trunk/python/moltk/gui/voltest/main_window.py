@@ -6,7 +6,7 @@ import stereo3d
 from rotation import Vec3
 from PySide import QtCore
 from PySide.QtGui import *
-from PySide.QtCore import QCoreApplication, Qt
+from PySide.QtCore import *
 from math import pi
 import re
 import platform
@@ -42,6 +42,66 @@ class MainWindow(QMainWindow):
     def camera(self):
         return self.ui.glCanvas.renderer.camera_position
 
+    @QtCore.Slot(bool)
+    def on_actionLoad_movie_script_triggered(self, checked):
+        self.bookmarks.clear()
+        file_name, type = QFileDialog.getOpenFileName(self, 
+                                                "Open movie script file",
+                                                None, # TODO directory
+                                                self.tr("XML files (*.xml)"))
+        if file_name == "":
+            return
+        print file_name;
+        file = QFile(file_name)
+        if file.open(QIODevice.ReadOnly):
+            reader = QXmlStreamReader(file)
+            while (not reader.atEnd()) and (not reader.hasError()):
+                token = reader.readNext()
+                if token == QXmlStreamReader.StartElement:
+                    if reader.name() == "cinemol_movie_script":
+                        self.bookmarks.read_xml(reader)
+            if reader.hasError():
+                print "Error reading xml file"
+            else:
+                self.statusBar().showMessage("Loaded movie script file" + file_name, 5000)
+            file.close()
+    
+    @QtCore.Slot(bool)
+    def on_actionSave_movie_script_triggered(self, checked):
+        if len(self.bookmarks) < 1:
+            QMessageBox.warning(self, "No key frames found", 
+                                """You must create some bookmarks(key frames)
+before you can save a movie script.""")
+            return
+        file_name, type = QFileDialog.getSaveFileName(
+                self, 
+                "Save movie script file", 
+                None,
+                self.tr("XML files (*.xml)"))
+        if file_name == "":
+            return
+        file = QFile(file_name)
+        if file.open(QIODevice.WriteOnly):
+            writer = QXmlStreamWriter(file)
+            writer.setAutoFormatting(True)
+            writer.setAutoFormattingIndent(2)
+            writer.writeStartDocument()
+            self.bookmarks.write_xml(writer)
+            writer.writeEndDocument()
+            file.close()
+            self.statusBar().showMessage("Saved movie script file" + file_name, 5000)
+        
+    @QtCore.Slot(bool)
+    def on_actionMeasure_fps_triggered(self, checked):
+        self.ui.glCanvas.renderer.restart_fps()
+        for frame in self.bookmarks.play(real_time=False):
+            self.camera.state = frame.camera_state
+            # self.ui.glCanvas.update()
+            self.ui.glCanvas.repaint()
+            # QCoreApplication.processEvents() # To avoid locking up the application
+        fps = self.ui.glCanvas.renderer.fps()
+        self.statusBar().showMessage("Frames per second = %f" % fps, 0)
+    
     @QtCore.Slot(bool)
     def on_actionQuit_triggered(self, checked):
         self.close()

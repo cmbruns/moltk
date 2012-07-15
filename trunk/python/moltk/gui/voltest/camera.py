@@ -1,5 +1,6 @@
 from rotation import *
 from PySide import QtCore
+from PySide.QtCore import QXmlStreamReader
 from PySide.QtGui import QApplication
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -7,7 +8,35 @@ from math import pi, atan2, floor
 
 # Need old-style State class to be able to add random attributes
 class State:
-    pass
+    def write_xml(self, writer):
+        s = self
+        writer.writeStartElement("camera_position")
+        writer.writeAttribute("focus_x", str(s.focus.x))
+        writer.writeAttribute("focus_y", str(s.focus.y))
+        writer.writeAttribute("focus_z", str(s.focus.z))
+        writer.writeAttribute("zFocus_vheight", str(self.zFocus_vheight))
+        quat = s.rotation.to_quaternion()
+        writer.writeAttribute("quat_w", str(quat.w))
+        writer.writeAttribute("quat_x", str(quat.x))
+        writer.writeAttribute("quat_y", str(quat.y))
+        writer.writeAttribute("quat_z", str(quat.z))
+        writer.writeEndElement()
+
+    def read_xml(self, reader):
+        fx = float(reader.attributes().value("focus_x"))
+        fy = float(reader.attributes().value("focus_y"))
+        fz = float(reader.attributes().value("focus_z"))
+        self.focus = Vec3([fx, fy, fz])
+        self.zFocus_vheight = float(reader.attributes().value("zFocus_vheight"))
+        qw = float(reader.attributes().value("quat_w"))
+        qx = float(reader.attributes().value("quat_x"))
+        qy = float(reader.attributes().value("quat_y"))
+        qz = float(reader.attributes().value("quat_z"))
+        self.rotation = Quaternion(components=[qw,qx,qy,qz]).to_rotation()
+        reader.readNext()
+        while not reader.tokenType() == QXmlStreamReader.EndElement:
+            reader.readNext()
+
 
 class CameraPosition(QtCore.QObject):
     """
@@ -152,7 +181,7 @@ class CameraPosition(QtCore.QObject):
         self.focus_in_ground = s.focus
         # window height affects zoom/distance_to_focus
         self.distance_to_focus = s.zFocus_vheight / self.viewport_height
-    
+
     def set_gl_projection(self):
         # http://www.orthostereo.com/geometryopengl.html
         glMatrixMode(GL_PROJECTION)
