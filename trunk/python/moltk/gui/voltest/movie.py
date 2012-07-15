@@ -59,13 +59,14 @@ class Movie():
         timer.restart()
         dtime = 1.0 / self.frames_per_second
         key_frame_number = 0
+        frame_number = 0
         for kf in self._key_frames:
             self.current_key_frame_index = key_frame_number
             key_frame_time = 0.0
             while key_frame_time < kf.time_to_next_frame:
                 # Drop frames if we are going too slow
-                if real_time and (timer.elapsed() - 200) > time*1000.0:
-                    continue
+                # if real_time and (timer.elapsed() - 200) > time*1000.0:
+                #     continue
                 tf = key_frame_time / kf.time_to_next_frame
                 interpolation_parameter = tf + key_frame_number
                 camera_state = camera.State()
@@ -95,9 +96,13 @@ class Movie():
                     while timer.elapsed() < time*1000.0:
                         # TODO - use threading instead
                         QCoreApplication.processEvents()
-                yield KeyFrame(camera_state)
+                frame = KeyFrame(camera_state)
+                frame.frame_number = frame_number + 1
+                frame.key_frame_number = key_frame_number + 1
+                yield frame
                 key_frame_time += dtime
                 time += dtime
+                frame_number += 1
                 if (not do_loop) and (key_frame_number == len(self._key_frames) - 1):
                     return # Don't go past final frame
             key_frame_number += 1

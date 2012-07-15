@@ -63,12 +63,21 @@ class MainWindow(QMainWindow):
     def on_actionPlay_movie_triggered(self, checked):
         for frame in self.bookmarks.play(real_time=True):
             self.camera.state = frame.camera_state
+            self.statusBar().showMessage("Bookmark " + 
+                                         str(frame.key_frame_number) + 
+                                         "; movie frame " + 
+                                         str(frame.frame_number),
+                                         500)
             self.ui.glCanvas.update()
+        self.statusBar().showMessage("Finished playing movie", 
+                                     1000)
 
     @QtCore.Slot(bool)
     def on_actionAdd_new_bookmark_triggered(self, checked):
         self.bookmarks.append(KeyFrame(self.camera.state))
-        self.statusBar().showMessage("Added bookmark number " + str(self.bookmarks.current_key_frame_index + 1), 2000)
+        self.statusBar().showMessage("Added bookmark number " 
+                                     + str(self.bookmarks.current_key_frame_index + 1), 
+                                     4000)
 
     @QtCore.Slot(bool)
     def on_actionGo_to_previous_bookmark_triggered(self, checked):
@@ -77,6 +86,9 @@ class MainWindow(QMainWindow):
         self.bookmarks.decrement()
         self.camera.state = self.bookmarks.current_key_frame.camera_state
         self.ui.glCanvas.update()
+        self.statusBar().showMessage("Back to bookmark " 
+                                     + str(self.bookmarks.current_key_frame_index + 1), 
+                                     1000)
         
     @QtCore.Slot(bool)
     def on_actionGo_to_next_bookmark_triggered(self, checked):
@@ -85,10 +97,15 @@ class MainWindow(QMainWindow):
         self.bookmarks.increment()
         self.camera.state = self.bookmarks.current_key_frame.camera_state
         self.ui.glCanvas.update()
+        self.statusBar().showMessage("Forward to bookmark " 
+                                     + str(self.bookmarks.current_key_frame_index + 1), 
+                                     1000)
         
     @QtCore.Slot(bool)
     def on_actionClear_all_bookmarks_triggered(self, checked):
         self.bookmarks.clear()
+        self.statusBar().showMessage("All bookmarks deleted!",
+                                     5000)
         
     @QtCore.Slot(bool)
     def on_actionSet_size_triggered(self, checked):
@@ -130,9 +147,12 @@ before you can save a movie.""")
             self.ui.glCanvas.repaint()
             QCoreApplication.processEvents() # To avoid locking up the application
             image = self.ui.glCanvas.grabFrameBuffer()
-            print file_name
+            self.statusBar().showMessage("Saving frame " + file_name,
+                                         500)
             image.save(file_name)
             frame_number += 1
+        self.statusBar().showMessage("Done saving movie frames.",
+                                     5000)
         
     @QtCore.Slot(bool)
     def on_actionSave_Lenticular_Series_triggered(self, checked):
@@ -147,6 +167,8 @@ before you can save a movie.""")
         self.ui.glCanvas.save_lenticular_series(file_name=file_name, 
                                                 angle=15.0*pi/180.0, 
                                                 count=18)
+        self.statusBar().showMessage("Done saving lenticular series.",
+                                     5000)
         
     def set_stereo_mode(self, mode, checked):
         if checked:
@@ -243,6 +265,7 @@ before you can save a movie.""")
         if len(atoms) > 0:
             ren = self.ui.glCanvas.renderer
             ren.actors = []
+            self.bookmarks.clear()
             atom_count = 0
             for atom in atoms:
                 atom_count += 1
@@ -262,4 +285,7 @@ before you can save a movie.""")
             ren.camera_position.focus_in_ground = new_focus
             ren.camera_position.distance_to_focus = 4.0 * (max - min).norm()            
             ren.update()
+        self.statusBar().showMessage("Finished loading PDB file " + file_name,
+                             5000)
+
             
