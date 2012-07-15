@@ -5,7 +5,7 @@ Created on Jun 19, 2012
 '''
 
 import stereo3d
-from PySide.QtCore import QObject
+from PySide.QtCore import QObject, QElapsedTimer
 from PySide import QtCore
 from OpenGL.GL import glViewport
 from math import pi, atan2
@@ -21,6 +21,16 @@ class GlRenderer(QObject):
         self.gl_widget = None
         self.b_is_initialized = False
         self.paint_event_needs_flush = False
+        self.timer = QElapsedTimer()
+        self.timer.restart()
+        self.frame_count = 0
+        
+    def restart_fps(self):
+        self.frame_count = 0
+        self.timer.restart()
+        
+    def fps(self):
+        return 1000.0 * float(self.frame_count) / float(self.timer.elapsed())
         
     def set_gl_widget(self, gl_widget):
         self.gl_widget = gl_widget
@@ -57,6 +67,7 @@ class GlRenderer(QObject):
             self.b_is_initialized = True
         self.paint_gl()
         self.gl_widget.swapBuffers()
+        self.frame_count += 1
         self.gl_widget.doneCurrent()
         self.paint_event_needs_flush = False
 
