@@ -5,7 +5,7 @@ Created on Jun 19, 2012
 '''
 
 import stereo3d
-from scenes import sphereImposterShaderProgram
+from shader import sphereImposterShaderProgram
 from camera import CameraPosition
 from rotation import Rotation
 import glrenderer
