@@ -1,6 +1,7 @@
 from pyvol_ui import Ui_MainWindow
 from size_dialog import SizeDialog
-from scenes import SphereImposter, GlutSphereActor
+from shader import SphereImposter, SphereImposterArray
+from scenes import GlutSphereActor
 from movie import Movie, KeyFrame
 import stereo3d
 from rotation import Vec3
@@ -309,6 +310,7 @@ before you can save a movie.""")
                     y = float(line[38:46])
                     z = float(line[46:54])
                     atom = Vec3([x, y, z])
+                    atom.center = Vec3([x, y, z])
                     atom.name = line[12:16]
                     atom.color = [0.5, 0, 0.5]
                     atom.radius = 1.0
@@ -327,9 +329,13 @@ before you can save a movie.""")
                     atoms.append(atom)
         print len(atoms), "atoms found"
         if len(atoms) > 0:
+            sphere_array = SphereImposterArray(atoms)
             ren = self.ui.glCanvas.renderer
             ren.actors = []
             self.bookmarks.clear()
+            do_use_array = True
+            if do_use_array:
+                ren.actors.append(sphere_array)
             atom_count = 0
             for atom in atoms:
                 atom_count += 1
@@ -343,7 +349,8 @@ before you can save a movie.""")
                             max[i] = atom[i]
                         if atom[i] < min[i]:
                             min[i] = atom[i]
-                ren.actors.append(SphereImposter(atom, radius=atom.radius, color=atom.color))
+                if not do_use_array:
+                    ren.actors.append(SphereImposter(atom, radius=atom.radius, color=atom.color))
             # center on molecule
             new_focus = 0.5 * (min + max)
             ren.camera_position.focus_in_ground = new_focus
