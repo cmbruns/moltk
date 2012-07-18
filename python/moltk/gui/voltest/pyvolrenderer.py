@@ -5,6 +5,7 @@ Created on Jun 19, 2012
 '''
 
 import stereo3d
+from skybox import SkyBox
 from shader import sphereImposterShaderProgram
 from camera import CameraPosition
 from rotation import Rotation
@@ -12,6 +13,7 @@ import glrenderer
 from PySide import QtCore
 from OpenGL.GL import *
 from OpenGL.GLU import *
+from OpenGL.GL.ARB.seamless_cube_map import *
 
 class PyVolRenderer(glrenderer.GlRenderer):
     def __init__(self):
@@ -21,9 +23,13 @@ class PyVolRenderer(glrenderer.GlRenderer):
         self.shader = sphereImposterShaderProgram
         self.background_color = [0.8, 0.8, 1.0, 0.0] # sky blue
         self.stereo_mode = stereo3d.Mono()
+        self.sky_box = SkyBox()
         
     def init_gl(self):
         # print "init_gl"
+        if glInitSeamlessCubeMapARB():
+            glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS)
+            print "seamlesss"
         glEnable(GL_DEPTH_TEST)
         bg = self.background_color
         glClearColor(bg[0], bg[1], bg[2], bg[3])
@@ -38,6 +44,7 @@ class PyVolRenderer(glrenderer.GlRenderer):
         glEnable(GL_LIGHTING)
         glEnable(GL_LIGHT0)
         glEnable(GL_CULL_FACE)
+        self.sky_box.init_gl()
         for actor in self.actors:
             actor.init_gl()
         self.shader.init_gl()
@@ -49,10 +56,11 @@ class PyVolRenderer(glrenderer.GlRenderer):
     def render_background(self):
         glDrawBuffer(GL_BACK)
         glColorMask(True, True, True, True)
-        glClear(GL_COLOR_BUFFER_BIT)        
+        glClear(GL_COLOR_BUFFER_BIT)
         
     def render_scene(self, camera):
         glClear(GL_DEPTH_BUFFER_BIT)
+        self.sky_box.paint_gl(camera)
         self.shader.zNear = camera.zNear
         self.shader.zFar = camera.zFar
         self.shader.zFocus = camera.zFocus
