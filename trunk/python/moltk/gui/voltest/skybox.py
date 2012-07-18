@@ -5,6 +5,7 @@ from PySide.QtGui import QImage
 from PySide.QtOpenGL import QGLWidget
 from OpenGL.GL import *
 import numpy
+from math import sqrt
 
 class SkyBoxShaderProgram(shader.ShaderProgram):
     def __init__(self):
@@ -16,9 +17,11 @@ uniform float eye_shift;
 void main()
 {
     gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-    position = gl_Vertex;
-    position.x += eye_shift;
-}       
+    vec4 eye_position_in_camera = vec4(-eye_shift, 0, 0, 0); // compensate for parallax asymmetric frustum shift for stereo 3D
+    position = gl_ModelViewMatrix * gl_Vertex - eye_position_in_camera;
+    position.y *= -1; // put sun at top
+    position.x *= -1; // keep coordinate frame right handed
+}
 """
         self.fragment_shader = """
 varying vec4 position;
@@ -26,8 +29,7 @@ uniform samplerCube skybox;
 uniform float eye_shift;
 void main()
 {
-    vec3 tex_coord = -position.xyz;
-    vec4 box_color = textureCube(skybox, tex_coord);
+    vec4 box_color = textureCube(skybox, position.xyz);
     gl_FragColor = box_color;
 }
 """
@@ -99,20 +101,43 @@ class SkyBox:
         glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_REPEAT)
         glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
         glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR) 
-        # remove camera rotation
-        old_rotation = camera.rotation
-        camera.rotation = Rotation()
-        with camera:
-            z = 0.5 * (camera.zNear - camera.zFar)
-            w = 10*camera.zFar;
-            with self.shader:
-                glUniform1i(self.shader.skybox, 0)
-                glUniform1f(self.shader.eye_shift, camera.eye_shift_in_ground)
-                glBegin(GL_QUADS)
-                glVertex3d( w,  w, z)
-                glVertex3d(-w,  w, z)
-                glVertex3d(-w, -w, z)
-                glVertex3d( w, -w, z)
-                glEnd()
-        camera.rotation = old_rotation
+        # Construct a giant cube, almost as big as possible without clipping
+        max_coord = 1.0 / sqrt(2.0) * 0.5 * camera.zFar
+        m = max_coord
+        with self.shader:
+            glUniform1i(self.shader.skybox, 0)
+            glUniform1f(self.shader.eye_shift, camera.eye_shift_in_ground)
+            glBegin(GL_QUADS)
+            # front
+            glVertex3f( m,  m, -m)
+            glVertex3f(-m,  m, -m)
+            glVertex3f(-m, -m, -m)
+            glVertex3f( m, -m, -m)
+            # back
+            glVertex3f( m,  m,  m)
+            glVertex3f( m, -m,  m)
+            glVertex3f(-m, -m,  m)
+            glVertex3f(-m,  m,  m)
+            # right
+            glVertex3f( m,  m,  m)
+            glVertex3f( m,  m, -m)
+            glVertex3f( m, -m, -m)
+            glVertex3f( m, -m,  m)
+            # left
+            glVertex3f(-m,  m,  m)
+            glVertex3f(-m, -m,  m)
+            glVertex3f(-m, -m, -m)
+            glVertex3f(-m,  m, -m)
+            # down
+            glVertex3f( m, -m,  m)
+            glVertex3f( m, -m, -m)
+            glVertex3f(-m, -m, -m)
+            glVertex3f(-m, -m,  m)
+            # up
+            glVertex3f( m,  m,  m)
+            glVertex3f(-m,  m,  m)
+            glVertex3f(-m,  m, -m)
+            glVertex3f( m,  m, -m)
+            #
+            glEnd()
         glPopAttrib()
