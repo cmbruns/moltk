@@ -1,6 +1,6 @@
 from pyvol_ui import Ui_MainWindow
 from size_dialog import SizeDialog
-from shader import SphereImposter, SphereImposterArray
+from imposter import SphereImposterArray
 from scenes import GlutSphereActor
 from movie import Movie, KeyFrame
 import stereo3d

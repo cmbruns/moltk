@@ -1,5 +1,4 @@
 from main_window import MainWindow
-from shader import SphereImposter
 from scenes import FiveBallScene, TeapotActor, GlutSphereActor
 from pyvolrenderer import PyVolRenderer
 from PySide.QtGui import QApplication
