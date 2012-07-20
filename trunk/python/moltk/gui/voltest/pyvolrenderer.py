@@ -6,7 +6,7 @@ Created on Jun 19, 2012
 
 import stereo3d
 from skybox import SkyBox
-from shader import sphereImposterShaderProgram
+from imposter import sphereImposterShaderProgram
 from camera import CameraPosition
 from rotation import Rotation
 import glrenderer
