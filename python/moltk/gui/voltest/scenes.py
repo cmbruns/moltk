@@ -1,5 +1,5 @@
 from actor import Actor
-from imposter import SphereImposterArray, VertexArrayTest
+from imposter import SphereImposterArray, CylinderImposterArray
 from rotation import Vec3
 from OpenGL.GL import *
 from OpenGL.GLUT import *
@@ -34,7 +34,7 @@ class GlutCylinderActor(Actor):
         glMatrixMode(GL_MODELVIEW)
         glPushMatrix()
         p = self.position
-        glTranslate(p[0], p[1], p[2])
+        glTranslate(p[0], p[1], p[2] - self.height/2.0)
         gluCylinder(self.quadric, self.radius, self.radius, self.height, 20, 20)
         glPopMatrix()
 
@@ -60,10 +60,16 @@ class FiveBallScene(Actor):
         sphere.color = self.color
         # self.sphere_array = VertexArrayTest()
         self.sphere_array = SphereImposterArray([sphere,])
+        cylinder = Vec3([0,0,0])
+        cylinder.center = Vec3([0,0,0])
+        cylinder.radius = 1.0
+        cylinder.height = 2.0
+        self.cylinder_array = CylinderImposterArray([cylinder,])
         
     def init_gl(self):
         self.sphere_array.init_gl()
         self.glut_cylinder.init_gl()
+        self.cylinder_array.init_gl()
         
     def paint_gl(self):
         c = self.color
@@ -83,9 +89,15 @@ class FiveBallScene(Actor):
         for p in range(5):
             # TODO Leave a spot for shader cylinder
             if 3 == p:
-                # self.glut_cylinder.paint_gl()
-                pass
+                self.cylinder_array.paint_gl()
             else:
                 self.glut_cylinder.paint_gl()
+            glTranslate(1.5, 0, 0)
+        glPopMatrix()
+        glPushMatrix()
+        glTranslate(-3.0, 4.0, 0)
+        for p in range(5):
+            # TODO Leave a spot for shader cylinder
+            self.glut_cylinder.paint_gl()
             glTranslate(1.5, 0, 0)
         glPopMatrix()

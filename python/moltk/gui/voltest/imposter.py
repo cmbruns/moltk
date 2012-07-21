@@ -1,4 +1,5 @@
 from shader import ShaderProgram
+import shader
 from OpenGL.GL import *
 import numpy
 from math import pi, cos, sin
@@ -206,6 +207,9 @@ void main()
 sphereImposterShaderProgram = SphereImposterShaderProgram()
         
 
+cylinderImposterShaderProgram = shader.GreenShaderProgram()
+
+
 class VertexArrayTest:
     def __init__(self):
         # self.vertex_array = numpy.array([1.0,1.0,0.0,1.0, -1.0,1.0,0.0,1.0, -1.0,-1.0,0.0,1.0], dtype='float32')
@@ -257,6 +261,13 @@ class VertexArrayTest:
             glPopClientAttrib()
             
 
+class ImposterQuadArray:
+    def __init__(self):
+        self.vertex_count = 4 # one quadrilateral per sphere
+        self.triangle_count = self.vertex_count - 2
+       
+    
+    
 class SphereImposterArray:
     def __init__(self, spheres):
         self.vertex_count = 4 # one quadrilateral per sphere
@@ -379,4 +390,22 @@ class CylinderImposterShaderProgram(ShaderProgram):
 
 
 class CylinderImposterArray:
-    pass # TODO
+    def __init__(self, cylinders):
+        self.cylinders = cylinders
+    
+    def init_gl(self):
+        cylinderImposterShaderProgram.init_gl()
+
+    def paint_gl(self):
+        with cylinderImposterShaderProgram:
+            for c in self.cylinders:
+                glBegin(GL_TRIANGLES)
+                glVertex3f(c.radius,0,-c.height/2.0)
+                glVertex3f(-c.radius,0, c.height/2.0)
+                glVertex3f(c.radius,0, c.height/2.0)
+                glVertex3f(c.radius,0,-c.height/2.0)
+                glVertex3f(-c.radius,0, -c.height/2.0)
+                glVertex3f(-c.radius,0, c.height/2.0)
+                # TODO
+                glEnd()
+   
